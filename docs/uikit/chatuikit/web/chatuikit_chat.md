@@ -300,7 +300,7 @@ const ChatContainer = () => {
 
   // 实现发送自定义消息
   const sendCustomMessage = () => {
-    const customMsg = EasemobChat.message.create({
+    const customMsg = ChatSDK.message.create({
       type: "custom",
       to: "targetId", //消息接收方：单聊为对端用户 ID，群聊为群组 ID。
       chatType: "singleChat",
