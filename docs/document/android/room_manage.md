@@ -175,7 +175,7 @@ public interface EMChatRoomChangeListener {
     // 有用户加入聊天室。聊天室的所有成员（除新成员外）会收到该事件。
     void onMemberJoined(final String roomId, final String participant);
 
-    // 有成员主动退出聊天室。聊天室的所有成员（除退出的成员）会收到该事件。
+    // 有成员主动退出或被移出聊天室。聊天室的所有成员（除退出的成员）会收到该事件。
     void onMemberExited(final String roomId, final String roomName, final String participant);
 
     /**
