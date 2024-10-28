@@ -91,6 +91,28 @@
 
 ### 设置附件消息
 
+#### 设置类似微信样式
+
+若实现发送附件消息时弹出类似微信样式的弹窗，可进行如下设置：
+
+```Swift 
+    Appearance.chat.messageAttachmentMenuStyle = .followInput
+```
+
+效果图如下所示：
+
+![img](/images/uikit/chatuikit/ios/configurationitem/chat/msgmenu_style1_onlight@3x.png)
+
+#### 设置仿系统 UIActionSheet 样式
+
+若实现消息长按后弹出仿系统 `UIActionSheet` 样式的弹窗，可进行如下设置：
+
+```Swift 
+    Appearance.chat.messageAttachmentMenuStyle = .actionSheet
+```
+
+![img](/images/uikit/chatuikit/ios/configurationitem/chat/msgmenu_style2_onlight@3x.png)
+
 - 设置语音消息录制的最大时长
 
 你可以通过 `Appearance.chat.audioDuration = value` 设置聊天页面语音消息录制的最大时长，默认为 60 秒。
@@ -117,7 +139,7 @@
   - `Appearance.chat.imagePlaceHolder = value`：聊天页面图片消息占位图。
 
   - `Appearance.chat.videoPlaceHolder = value`：聊天页面视频消息占位图。
-
+  
 ### 设置消息撤回时间
 
 你可以通过 `Appearance.chat.recallExpiredTime = value` 设置聊天页面消息撤回的有效时间，默认为 120 秒。
@@ -160,6 +182,30 @@ override func filterMessageActions(message: MessageEntity) -> [ActionSheetItemPr
 ```
 
 ![img](/images/uikit/chatuikit/ios/configurationitem/chat/Appearance_chat_messageLongPressedActions.png)
+
+#### 设置类似微信样式
+
+若实现消息长按后弹出类似微信样式的弹窗，可进行如下设置：
+
+```Swift 
+    Appearance.chat.messageLongPressMenuStyle = .withArrow
+```
+
+效果图如下所示：
+
+![img](/images/uikit/chatuikit/ios/configurationitem/chat/attmsg_style1_onlight@3x.png)
+
+#### 设置仿系统 UIActionSheet 样式
+
+若实现消息长按后弹出仿系统 `UIActionSheet` 样式的弹窗，可进行如下设置：
+
+```Swift 
+    Appearance.chat.messageLongPressMenuStyle = .actionSheet
+```
+
+效果图如下所示：
+
+![img](/images/uikit/chatuikit/ios/configurationitem/chat/attmsg_style2_onlight@3x.png)
 
 ## 设置聊天页面输入框
 
