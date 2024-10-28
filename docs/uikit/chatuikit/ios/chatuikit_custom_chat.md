@@ -101,7 +101,7 @@
 
 效果图如下所示：
 
-![img](/images/uikit/chatuikit/ios/configurationitem/chat/msgmenu_style1_onlight@3x.png)
+![img](/images/uikit/chatuikit/ios/configurationitem/chat/attmsg_style1_onlight@3x.png)
 
 #### 设置仿系统 UIActionSheet 样式
 
@@ -111,7 +111,9 @@
     Appearance.chat.messageAttachmentMenuStyle = .actionSheet
 ```
 
-![img](/images/uikit/chatuikit/ios/configurationitem/chat/msgmenu_style2_onlight@3x.png)
+![img](/images/uikit/chatuikit/ios/configurationitem/chat/attmsg_style2_onlight@3x.png)
+
+#### 设置附件消息相关的配置项
 
 - 设置语音消息录制的最大时长
 
@@ -193,7 +195,7 @@ override func filterMessageActions(message: MessageEntity) -> [ActionSheetItemPr
 
 效果图如下所示：
 
-![img](/images/uikit/chatuikit/ios/configurationitem/chat/attmsg_style1_onlight@3x.png)
+![img](/images/uikit/chatuikit/ios/configurationitem/chat/msgmenu_style1_onlight@3x.png)
 
 #### 设置仿系统 UIActionSheet 样式
 
@@ -205,7 +207,7 @@ override func filterMessageActions(message: MessageEntity) -> [ActionSheetItemPr
 
 效果图如下所示：
 
-![img](/images/uikit/chatuikit/ios/configurationitem/chat/attmsg_style2_onlight@3x.png)
+![img](/images/uikit/chatuikit/ios/configurationitem/chat/msgmenu_style2_onlight@3x.png)
 
 ## 设置聊天页面输入框
 
