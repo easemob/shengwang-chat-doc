@@ -32,8 +32,8 @@
 | getMessage      | 根据消息 ID 获取已读的消息。       | 
 | getAllMessages      | 获取该会话当前内存中的所有消息。       | 
 | removeMessage      | 删除本地数据库中的一条指定消息。       |      
-| getLastMessage      | 获取会话中的最新一条消息。       | 
-| getLatestMessageFromOthers | 获取会话中收到的最新一条消息。       |      
+| getLastMessage      | 获取会话中的最新一条消息。该消息可能是当前用户发送的，也可能是对端用户发送。  | 
+| getLatestMessageFromOthers | 获取会话中收到的最新一条消息，即当前用户收到的对端用户发送的最新消息。 |      
 | clear      | 清除会话中的所有消息。只清除内存的，不清除本地数据库的消息。       | 
 | clearAllMessages      | 清除内存和数据库中指定会话中的消息。       |      
 | setExtField      | 设置会话的扩展字段。       | 

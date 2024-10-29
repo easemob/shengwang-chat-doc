@@ -235,7 +235,7 @@ try {
 
 #### 开启聊天室全员禁言
 
-仅聊天室所有者和管理员可以调用 `EMChatRoomManager#muteAllChatRoomMembers` 方法开启全员禁言。全员禁言开启后不会在一段时间内自动解除禁言，需要调用 `unmuteAllMembers` 方法解除全员禁言。
+仅聊天室所有者和管理员可以调用 `EMChatRoomManager#muteAllChatRoomMembers` 方法开启全员禁言。全员禁言开启后不会在一段时间内自动解除禁言，需要调用 `EMChatRoomManager#unMuteAllChatRoomMembers` 方法解除全员禁言。
 
 全员禁言开启后，除了在白名单中的成员，其他成员不能发言。调用成功后，聊天室成员会收到 `EMChatRoomEventHandler#onAllChatRoomMemberMuteStateChanged` 事件。
 
