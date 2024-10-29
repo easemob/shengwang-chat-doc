@@ -22,7 +22,7 @@
 
 `EaseChatUIKit` 中携带的 `Ease` 前缀的类的名称均去掉了 `Ease` 前缀，具体变更如下表所示：
 
-| UIKit 中的类名      | 变更 | 
+| UIKit 变更项      | 类名变更 | 
 | :--------- | :----- | 
 | 版本号变量名  | `EaseChatUIKit_VERSION` -> `ChatUIKit_VERSION`  | 
 | option 类名 | `EaseChatUIKitOptions` -> `ChatUIKitOptions`       | 
