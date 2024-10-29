@@ -29,8 +29,8 @@
 | searchMessagesBetweenTime(startTimestamp: number, endTimestamp: number, maxCount: number)      | 从本地数据库中搜索指定时间段内发送或接收的一定数量的消息。       | 
 | getMessage      | 根据消息 ID 获取已读的消息。       | 
 | removeMessage      | 删除本地数据库中的一条指定消息。       |      
-| getLatestMessage      | 获取会话中的最新一条消息。       | 
-| getLatestMessageFromOthers | 获取会话中收到的最新一条消息。       |      
+| getLatestMessage      | 获取会话中的最新一条消息。该消息可能是当前用户发送的，也可能是对端用户发送。  | 
+| getLatestMessageFromOthers | 获取会话中收到的最新一条消息，即当前用户收到的对端用户发送的最新消息。 |      
 | clearAllMessages      | 清除内存和数据库中指定会话中的消息。       |      
 | setExtField      | 设置会话的扩展字段。       | 
 | getExtField      | 获取会话的扩展字段。       |      

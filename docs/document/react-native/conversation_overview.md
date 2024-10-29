@@ -24,8 +24,8 @@
 | getUnreadCount  | 获取会话的未读消息数量。    |
 | getMessageCount  | 获取会话中的消息数量。   |
 | getLatestMessage  | 获取指定会话的最新消息。   |
-| getLatestReceivedMessage  | 获取指定会话中最近接收到的消息。   |
-| setConversationExtension  | 设置指定会话的自定义扩展信息。   |
+| getLatestReceivedMessage  | 获取会话中的最新一条消息。该消息可能是当前用户发送的，也可能是对端用户发送。 |
+| setConversationExtension  | 获取会话中收到的最新一条消息，即当前用户收到的对端用户发送的最新消息。 |
 | markMessageAsRead  | 标记指定消息为已读。   |
 | markAllMessagesAsRead  | 标记所有消息为已读。   |
 | updateMessage  | 更新本地数据库的指定消息。   |
