@@ -10,6 +10,7 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import 'instantsearch.css/themes/algolia-min.css'
 import InstantSearch from 'vue-instantsearch/vue3/es/index.js'
+import BiliBiliPlayer from './components/BiliBili.vue'
 
 export default defineClientConfig({
   enhance({ app, router, siteData }) {
@@ -19,6 +20,7 @@ export default defineClientConfig({
     app.component('Link', Link)
     app.component('ImageGallery', ImageGallery)
     app.component('ImageItem', ImageItem)
+    app.component('BiliBiliPlayer', BiliBiliPlayer)
     app.use(InstantSearch)
   },
   setup() {},
