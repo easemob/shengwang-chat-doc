@@ -346,7 +346,7 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 | `membersonly`         | Bool   | 否       | 加入群组是否需要群主或者群管理员审批：<br/> - `true`：是；<br/> - `false`：否。    |
 | `allowinvites`        | Bool   | 否       | 是否允许群成员邀请别人加入此群：<br/> - `true`：允许群成员邀请人加入此群；<br/> - `false`：只有群主或群管理员才可以邀请用户入群。 |
 | `invite_need_confirm` | Bool   | 否       | 受邀人加入群组前是否需接受入群邀请：<br/> - `true`：需受邀人确认入群邀请；<br/> - `false`：受邀人直接加入群组，无需确认入群邀请。 |
-| `custom`              | String | 否       | 群组扩展信息，例如可以给群组添加业务相关的标记，不要超过 1,024 字符。  |
+| `custom`              | String | 否       | 群组扩展信息，例如可以给群组添加业务相关的标记，不要超过 8 KB。  |
 | `public`              | Bool   | 否       | 是否是公开群。<br/> - `true`：公开群；<br/> - `false`：私有群。                                                                   |
 
 #### HTTP 响应
@@ -771,7 +771,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 |  - `disabled`           | Bool   | 群组是否为禁用状态：<br/> - `true`：群组被禁用；<br/> - `false`：群组为启用状态。          |
 |  - `mute`               | Bool   | 是否处于全员禁言状态。<br/> - `true`：是； <br/> - （默认）`false`：否。       |
 |  - `public`             | Bool   | 是否是公开群：<br/> - `true`：公开群；<br/> - `false`：私有群。    |
-|  - `custom`             | String | 群组扩展信息，例如，可以给群组添加业务相关的标记，不要超过 1,024 字符。     |
+|  - `custom`             | String | 群组扩展信息，例如，可以给群组添加业务相关的标记，不要超过 8 KB。     |
 
 其他字段及描述详见 [公共参数](#公共参数)。
 
