@@ -19,6 +19,36 @@ export const zhSidebar = sidebar({
       text: "产品简介",
       children: [
         { text: "产品概述", link: "introduction.html" },
+        { text: "特性介绍",
+          children: [
+            { text: "消息", 
+              children: [
+                { text: "消息概述", link: "product_message_overview.html" },
+                { text: "消息格式", link: "product_message_format.html" },
+              ],
+            },
+            { text: "用户账号", 
+              children: [
+                { text: "用户注册与登录", link: "product_user_registration_login.html" },
+                { text: "在线状态管理", link: "product_user_presence.html" },
+              ],
+            },
+            { text: "用户属性与用户关系", 
+              children: [
+                { text: "用户属性", link: "product_user_attribute.html" },
+                { text: "用户关系", link: "product_user_relationship.html" },
+              ],
+            },
+            { text: "群组", 
+              children: [
+                { text: "群组概述", link: "product_group_overview.html" },
+                { text: "子区", link: "product_thread_overview.html" },
+              ],
+            },
+            { text: "聊天室", link: "product_chatroom_overview.html" },
+            { text: "离线推送", link: "product_offline_push_overview.html" },
+          ], 
+        },
         { text: "数据中心", link: "data_center.html" },
         { text: "产品动态", link: "product_dynamics.html" },
         { text: "IM 产品使用限制", link: "limitation.html" },
