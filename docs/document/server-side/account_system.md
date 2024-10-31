@@ -97,6 +97,7 @@ POST https://{host}/{org_name}/{app_name}/users
 ##### 请求示例
 
 ```shell
+## 无需传入 token
 curl -X POST -i "https://XXXX.com/XXXX-demo/XXXX/users" -d '{"username":"user1","password":"123","nickname":"testuser"}'
 ```
 

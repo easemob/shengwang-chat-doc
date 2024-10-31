@@ -1,6 +1,6 @@
  # 离线推送的消息扩展说明
 
-环信即时通讯 IM 支持 APNs 推送和 Android 厂商离线推送，包括华为、荣耀、FCM、小米、魅族、OPPO 和 vivo。使用离线推送时，你可以通过消息扩展字段实现推送相应功能，例如设置推送模板中的推送标题和内容、设置仅接受提及（`@`）某些用户的推送通知等。
+环信即时通讯 IM 支持 APNs 推送和 Android 厂商离线推送，包括华为、荣耀、FCM、小米、魅族、OPPO 和 vivo。使用离线推送时，你可以通过消息扩展字段实现推送相应功能，例如，设置推送模板中的推送标题和内容、设置仅接收提及（`@`）某些用户的推送通知等。
 
 ## 推送扩展字段
 
@@ -143,9 +143,9 @@
             },
             "fcm_channel_id": "",
             "honor_click_action": "",
-            "honor_importance": ""
-            "honor_target_user_type": 0
-            "huawei_target_user_type": 0
+            "honor_importance": "",
+            "honor_target_user_type": 0,
+            "huawei_target_user_type": 0,
             "huawei_category": "",
             "huawei_receipt_id": "",
             "huawei_click_action": "",

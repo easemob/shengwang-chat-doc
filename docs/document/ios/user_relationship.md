@@ -98,7 +98,7 @@ if (!aError) {
 }];
 ```
 
-当你同意或者拒绝后，对方会通过好友事件回调，收到 `friendRequestDidApprove` 或者 `friendRequestDidDecline`。
+当你同意或者拒绝后，对方会通过好友事件回调，收到 `friendRequestDidApproveByUser` 或者 `friendRequestDidDeclineByUser`。
 
 示例代码如下：
 
@@ -130,7 +130,7 @@ if (!aError) {
 }];
 ```
 
-调用 `deleteContact` 删除好友后，用户 A，B 都会收到 `onContactDeleted` 回调，示例代码如下：
+调用 `deleteContact` 删除好友后，用户 A，B 都会收到 `friendshipDidRemoveByUser` 回调，示例代码如下：
 
 ```objectivec
 // 好友已被删除。
