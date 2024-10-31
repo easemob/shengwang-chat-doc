@@ -2,7 +2,7 @@
 
 用户在线状态（即 Presence）包含用户的在线、离线和自定义状态。
 
-## 在线和离线
+## 用户在线状态类型
 
 ### 在线
 
@@ -43,7 +43,7 @@
 
 ### 状态变更感知的实时性
 
-#### Android/iOS/HarmonyOS 
+#### Android/iOS/HarmonyOS/Flutter/React Native 
 
 用户可实时感知用户状态变化：
 
