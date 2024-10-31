@@ -81,7 +81,7 @@ WebIM.conn = new WebIM.connection({
 });
 ```
 
-IM 基本功能，请参考 [消息管理](/document/web/message_overview.html)。
+IM 基本功能，请参考 [消息管理](/product/product_message_overview.html)。
 
 ## 打包发布
 

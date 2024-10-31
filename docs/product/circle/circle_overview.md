@@ -187,7 +187,7 @@
 
 ### 消息管理
 
-消息相关功能可参考官网 [消息管理](/document/android/message_overview.html) 文档，目前不支持已读或未读回执。
+消息相关功能可参考官网 [消息管理](/product/product_message_overview.html) 文档，目前不支持已读或未读回执。
 
 |功能|描述|
 | :- | :- |

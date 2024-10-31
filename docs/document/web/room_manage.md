@@ -6,7 +6,7 @@
 
 本文介绍如何使用环信即时通讯 IM SDK 在实时互动 app 中创建和管理聊天室，并实现聊天室的相关功能。
 
-消息内容详见 [消息管理](message_overview.html)。
+消息内容详见 [消息管理](/product/product_message_overview.html)。
 
 ## 技术原理
 
