@@ -15,7 +15,7 @@
 |  Android            | - Google FCM <br/> - 华为  <br/> - 荣耀 <br/> - OPPO  <br/> - VIVO  <br/> - 小米  <br/> - 魅族  | 各推送服务的集成以及推送设置，详见 [Android 推送文档](/document/android/push/push_overview.html)。                                    |
 |  iOS            | APNs         | APNs 推送服务的集成以及推送设置，详见 [APNs 推送文档](/document/ios/push/push_overview.html)。                                  |
 |  uni-app            | uni-app SDK 支持推送插件 `EMPushUniPlugin`。         | 推送插件相关描述，详见 [uni-app 推送插件](/document/applet/push/uniapp_push.html)                               |
-|  React Native            | React Native SDK 支持离线推送配置。| 详见 [React Native 离线推送文档](/document/react-native/push/push_easemob_console.html)。  |
+|  React Native            | React Native SDK 支持离线推送配置。| 详见 [React Native 离线推送文档](/document/react-native/push/push_overview.html)。  |
 
 :::tip
 环信 IM Web SDK 本身不支持离线推送，只支持对移动端离线推送进行配置。具体设置，详见 [Web 离线推送文档](/document/web/push/push_overview.html)。
