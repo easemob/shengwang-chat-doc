@@ -1,6 +1,8 @@
 # 设置推送扩展功能
 
-你可以实现推送扩展功能，包括设置自定义推送字段、仅对群组中某些成员推送通知、设置通知栏折叠、强制推送和发送静默消息。
+你可以利用扩展字段实现自定义推送设置，本文以强制推送和发送静默消息为例介绍如何实现推送扩展功能。
+
+对于推送扩展字段，详见[离线推送扩展字段文档](/document/server-side/push_extension.html)。
 
 ## 设置自定义推送字段
 
@@ -53,72 +55,6 @@ EMClient.getInstance().chatManager().sendMessage(message);
 | `key1`/`key2`    | 自定义消息推送扩展的具体内容。 |
 
 应用端解析自定义字段，参见 [解析收到的推送字段](push_parsing.html)。
-
-## 设置某些群成员收到推送通知 
-
-在离线推送免打扰模式下，若你在群组中发送消息时只希望某些群成员收到离线推送通知，可通过设置消息扩展字段实现。
-
-```java
-// 本示例以文本消息为例，图片和文件等消息类型的设置方法相同。
-EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
-// 设置自定义推送字段。
-JSONObject extObject = new JSONObject();
-try {
-    extObject.put("em_at_list", value); 
-} catch (JSONException e) {
-    e.printStackTrace();
-}
-// 将推送扩展设置到消息中。
-message.setAttribute("em_apns_ext", extObject);
-```
-
-该扩展字段的数据结构如下：
-
-```json
-{
-    "em_apns_ext": {
-        "em_at_list": "All"
-    }
-}
-```
-
-| 参数             | 描述               |
-| :--------------- | :----------------- |
-| `em_apns_ext`    | 内置的推送扩展字段。 |
-| `em_at_list`          | 用户添加的自定义 key。`value` 为字段的值，为数组类型，表示接收推送通知的群成员的用户 ID，设置为 `All` 表示向所有群成员推送通知。  |
-
-## 设置通知栏折叠 
-
-你可以将通知栏中的多条消息折叠起来，示例代码如下：
-
-```java
-// 本示例以文本消息为例，图片和文件等消息类型的设置方法相同。
-EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
-// 设置自定义推送字段。
-JSONObject extObject = new JSONObject();
-try {
-    extObject.put("em_push_collapse_key", "collapseKey"); 
-} catch (JSONException e) {
-    e.printStackTrace();
-}
-// 将推送扩展设置到消息中。
-message.setAttribute("em_apns_ext", extObject);
-```
-
-通知栏折叠字段的数据结构如下：
-
-```json
-{
-    "em_apns_ext": {
-        "em_push_collapse_key": "collapseKey"
-    }
-}
-```
-
-| 参数             | 描述               |
-| :--------------- | :----------------- |
-| `em_apns_ext`    | 内置的推送扩展字段。 |
-| `em_push_collapse_key`   | 指定一组可折叠的消息（例如，含有 collapse_key: “Updates Available”），以便恢复传送时只发送最后一条消息，从而避免设备恢复在线状态或变为活跃状态时重复发送过多相同的消息。   |
 
 ## 强制推送
 
