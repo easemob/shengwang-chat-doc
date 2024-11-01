@@ -30,11 +30,11 @@
 
 1. 用户 ID + 密码
 
-[img](/images/product/login_userid_pwd.png)
+![img](/images/product/login_userid_pwd.png)
 
 2. 用户 ID + Token
 
-[img](/images/product/login_userid_token.png)
+![img](/images/product/login_userid_token.png)
 
 :::tip
 1. 关于获取 token，详见[获取 App Token](/document/server-side/easemob_app_token.html)和[获取 User Token](/document/server-side/easemob_user_token.html)。
