@@ -300,9 +300,9 @@
 
 - [开通配置环信即时通讯 IM 服务](/product/enable_and_configure_IM.html)
 - [环信即时通讯 IM Unity 快速入门](quickstart.html)
-- [消息管理 Unity](message_overview.html)
-- [群组 Unity](group_overview.html)
-- [聊天室 Unity](room_overview.html)
+- [消息管理 Unity](message_send_receive.html)
+- [群组 Unity](group_manage.html)
+- [聊天室 Unity](room_manage.html)
 - [在线状态订阅 Unity](presence.html)
 - [消息表情回复 Unity](reaction.html)
 - [管理子区 Unity](thread.html)

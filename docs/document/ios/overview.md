@@ -64,6 +64,8 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 - 用户 ID + 密码
 - 用户 ID + token
 
+用户登录流程详见[用户注册与登录的产品说明文档](/product/product_user_registration_login.html)。
+
 ### 手动登录
 
 登录时传入的用户 ID 必须为 String 类型，支持的字符集详见[用户注册的 RESTful 接口](/document/server-side/account_system.html#注册用户)。

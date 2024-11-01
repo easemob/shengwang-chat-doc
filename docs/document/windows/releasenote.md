@@ -278,7 +278,7 @@
 
 - [开通配置环信即时通讯 IM 服务](/product/enable_and_configure_IM.html)
 - [环信即时通讯 IM Windows 快速入门](quickstart.html)
-- [消息管理 Windows](message_overview.html)
-- [群组 Windows](group_overview.html)
-- [聊天室 Windows](room_overview.html)
+- [消息管理 Windows](message_send_receive.html)
+- [群组 Windows](group_manage.html)
+- [聊天室 Windows](room_manage.html)
 - [Windows API Reference](apireference.html)
