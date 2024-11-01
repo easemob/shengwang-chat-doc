@@ -111,6 +111,8 @@ ChatClient.getInstance()
 
 调用登录接口后，收到 `onConnected` 回调表明 SDK 与环信服务器连接成功。
 
+用户登录流程详见[用户注册与登录的产品说明文档](/product/product_user_registration_login.html)。
+
 ### 手动登录
 
 **用户 ID +密码** 登录是传统的登录方式。用户名和密码都是你的终端用户自行决定，密码需要符合密码规则要求。
