@@ -28,11 +28,11 @@
 
 ## 登录流程
 
-1. 用户 ID + 密码
+- 用户 ID + 密码
 
 ![img](/images/product/login_userid_pwd.png)
 
-2. 用户 ID + Token
+- 用户 ID + Token
 
 ![img](/images/product/login_userid_token.png)
 
