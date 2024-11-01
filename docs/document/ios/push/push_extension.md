@@ -1,6 +1,8 @@
 # 设置推送扩展
 
-你可以利用扩展字段实现自定义推送设置，包括自定义铃声、强制推送、发送静默消息以及富文本推送功能。
+你可以利用扩展字段实现自定义推送设置，本文以强制推送、发送静默消息和富文本推送为例介绍如何实现推送扩展功能。
+
+对于推送扩展字段，详见[离线推送扩展字段文档](/document/server-side/push_extension.html)。
 
 ## 自定义推送字段
 
@@ -49,63 +51,6 @@ message.chatType = EMChatTypeChat;
 | `t`     | 消息接收方 ID。 |
 | `e`     | 自定义信息。    |
 | `m`     | 消息 ID。       |
-
-## 设置某些群成员收到推送通知 
-
-在离线推送免打扰模式下，若你在群组中发送消息时只希望某些群成员收到离线推送通知，可通过设置消息扩展字段实现。
-
-```Objective-C
-EMTextMessageBody* body = [[EMTextMessageBody alloc] initWithText:@"hello"];
-    EMChatMessage* msg = [[EMChatMessage alloc] initWithConversationID:@"groupId" body:body ext:nil];
-    // 推送给群中所有成员时，设置为 `All`。
-    msg.ext = @{@"em_apns_ext":@{@"em_at_list":@"All"}};
-    //推送给指定群成员,设置为成员列表。
-    msg.ext = @{@"em_apns_ext":@{@"em_at_list":@[@"userId1",@"userId2"]}};
-    message.chatType = EMChatTypeGroupChat; 
-    [EMClient.sharedClient.chatManager sendMessage:msg progress:nil completion:nil];
-```
-
-该扩展字段的数据结构如下：
-
-```json
-{
-    "em_apns_ext": {
-        "em_at_list": "All"
-    }
-}
-```
-
-| 参数             | 描述               |
-| :--------------- | :----------------- |
-| `em_apns_ext`    | 内置的推送扩展字段。 |
-| `em_at_list`          | 内置的扩展字段 key，对应的 value 为数组类型，表示接收推送通知的群成员的用户 ID，设置为 `All` 表示向所有群成员推送通知。  |
-
-## 设置通知栏折叠 
-
-你可以将通知栏中的多条消息折叠起来，示例代码如下：
-
-```Objective-C
-EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"test"];
-EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:conversationId body:body ext:nil];
-message.ext = @{@"em_apns_ext":@{@"em_push_collapse_key":@"collapseKey"}};
-
-[EMClient.sharedClient.chatManager sendMessage:message progress:nil completion:nil];
-```
-
-通知栏折叠字段的数据结构如下：
-
-```json
-{
-    "em_apns_ext": {
-        "em_push_collapse_key": "collapseKey"
-    }
-}
-```
-
-| 参数             | 描述               |
-| :--------------- | :----------------- |
-| `em_apns_ext`    | 内置的消息扩展字段。  |
-| `em_push_collapse_key`   | 指定一组可折叠的消息（例如，含有 collapse_key: “Updates Available”），以便恢复传送时只发送最后一条消息，从而避免设备恢复在线状态或变为活跃状态时重复发送过多相同的消息。   |
 
 ## 自定义铃声
 
