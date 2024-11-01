@@ -8,7 +8,7 @@
 
 聊天室的使用限制视不同套餐版本而定，请参见[使用限制](/product/limitation.html)。
 
-本文介绍聊天室管理功能，如需查看消息相关内容，参见[消息管理](/product/product_message_overview.html)。
+本文介绍聊天室管理功能，如需查看消息相关内容，参见[消息管理](message_overview.html)。
 
 ### 群组与聊天室的区别
 

@@ -53,7 +53,7 @@ error.type === statusCode.WEBIM_CONNCTION_USER_NOT_ASSIGN_ERROR 其中 `error` �
 | 508    | MESSAGE_MODERATION_BLOCKED                     | 第三方内容审核服务的消息审核结果为“拒绝”时提示该错误。          |
 | 509    | MESSAGE_CURRENT_LIMITING                       | 单个用户 ID 发送消息超出频率限制。默认情况下，SDK 对单个用户 ID 发送群消息未做频率限制。如果你联系了环信商务设置了该限制，一旦在在单聊、群聊或聊天室中单个用户的消息发送频率超过设定的上限，则会提示该错误。 |
 | 510    | MESSAGE_WEBSOCKET_DISCONNECTED                 | 消息发送失败，例如网络断开、重连失败等情况下导致发送失败。  |
-| 511    | MESSAGE_SIZE_LIMIT                 | 消息体大小超过限制。关于各端消息体大小的限制，详见[消息管理概述中的描述](/product/product_message_overview.html#消息类型)。|
+| 511    | MESSAGE_SIZE_LIMIT                 | 消息体大小超过限制。关于各端消息体大小的限制，详见[消息管理概述中的描述](message_overview.html#消息类型)。|
 | 512    | MESSAGE_SEND_TIMEOUT                 | 发送消息超时。例如，发消息时连接断开，会提示该错误。|
 | 601    | GROUP_ALREADY_JOINED                           | 已在群组内：当前用户已在该群组中。                           |
 | 602    | GROUP_NOT_JOINED                               | 不在群组内：用户发送群消息或进行群操作时未加入该群组。                   |

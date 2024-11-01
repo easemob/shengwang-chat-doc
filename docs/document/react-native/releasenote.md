@@ -382,7 +382,7 @@
 
 - [开通配置环信即时通讯 IM 服务](/product/enable_and_configure_IM.html)
 - [环信即时通讯 IM React-Native 快速开始](quickstart.html)
-- [消息管理 React Native](/product/product_message_overview.html)
+- [消息管理 React Native](message_overview.html)
 - [群组](group_overview.html)
 - [聊天室](room_overview.html)
 - [用户在线状态订阅 Presence](presence.html)
