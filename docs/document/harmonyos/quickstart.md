@@ -13,7 +13,7 @@
 
 ## 前提条件
 
-- DevEco Studio NEXT Developer Beta2（5.0.3.502）及以上；
+- DevEco Studio NEXT Release（5.0.3.900）及以上；
 - HarmonyOS SDK API 12 及以上；
 - 有效的环信即时通讯 IM 开发者账号和 App key，见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
 
@@ -36,7 +36,7 @@
 
 4. 点击 **Finish**。根据屏幕提示，安装所需插件。
 
-上述步骤使用 **DevEco Studio NEXT Developer Beta2（5.0.3.502）** 示例。
+上述步骤使用 **DevEco Studio NEXT Release（5.0.3.900）** 示例。
 
 ### 2. 在工程 `build-profile.json5` 中设置支持字节码 HAR 包。
 
