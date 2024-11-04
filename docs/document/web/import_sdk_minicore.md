@@ -21,6 +21,7 @@ miniCore 是一个基座，支持登录登出和发送消息等[基础功能](ht
 | 子区             | import \* as threadPlugin from "easemob-websdk/thread/thread";    | miniCore.usePlugin(threadPlugin, "thread");           |
 | 翻译             | import \* as translationPlugin from "easemob-websdk/translation/translation"; | miniCore.usePlugin(translationPlugin, "translation"); |
 | 在线状态订阅     | import \* as presencePlugin from "easemob-websdk/presence/presence";   | miniCore.usePlugin(presencePlugin, "presence");       |
+| 会话免打扰     |  import \* as silentPlugin from "easemob-websdk/silent/silent";          | miniCore.usePlugin(silentPlugin, "silent");       |
 
 ## 按需导入 SDK 模块
 
