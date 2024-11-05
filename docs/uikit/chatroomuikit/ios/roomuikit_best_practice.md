@@ -1,5 +1,7 @@
 # 最佳实践
 
+若要了解以上最佳实践的详情，请访问 [GitHub 仓库](https://github.com/easemob/ChatroomDemo/tree/dev/iOS/ChatroomDemo)。
+
 ## 初始化 ChatroomUIKit
 
 初始化是使用 ChatroomUIKit 的必要步骤，需在所有接口方法调用前完成。
@@ -72,6 +74,3 @@ addSubView(roomView)
 ChatroomUIKitClient.shared.registerRoomEventsListener(self)
 ```
 
-## 参考
-
-若要了解以上最佳实践的详情，请访问 [GitHub 仓库](https://github.com/easemob/ChatroomDemo/tree/dev/iOS/ChatroomDemo)。

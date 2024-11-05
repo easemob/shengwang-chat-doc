@@ -85,3 +85,5 @@ let roomView = ChatroomUIKitClient.shared.launchRoomView(roomId: "Chat room ID",
 点击屏幕下方的 `说点什么` 按钮唤起键盘，输入消息内容，点击 **发送** 按钮，发送消息。
 
 ![img](/images/uikit/chatroomios/click_chat.png =500x500)
+
+上图为聊天室 Demo 显示的内容，如果要实现类似的样式，可以点击[这里](https://github.com/easemob/ChatroomDemo/tree/dev/iOS/ChatroomDemo)。 
