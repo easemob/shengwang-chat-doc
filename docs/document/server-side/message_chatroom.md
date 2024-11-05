@@ -1169,7 +1169,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 | 400      | message_send_error | message is too large | 请求体内容中 `body` 和 `ext` 字段的内容过大。 | 限制 `body` 和 `ext` 字段的内容。 |
 | 403      | message_send_error | message send reach limit  | 消息发送频率超出限制(默认 1 秒内只允许发送 100 条聊天室消息)。 | 限制消息发送频率，详见[文档说明](message_group.html#发送定向消息)。  |
 
-1. 对于聊天室广播消息，如果返回的 HTTP 状态码非 `200`，表示请求失败。除了发送普通消息的常见错误码，还可能提示以下错误码：
+3. 对于聊天室广播消息，如果返回的 HTTP 状态码非 `200`，表示请求失败。除了发送普通消息的常见错误码，还可能提示以下错误码：
 
 | HTTP 状态码 | 错误类型   | 错误提示      | 可能原因    | 处理建议     |
 |:---------|:-------------------|:-----------------|:-----------|:----------|
