@@ -8,11 +8,7 @@
 
 ## 设置底部弹窗页面样式
 
-1. `Appearance.pageContainerTitleBarItemWidth = value`：底部弹窗页面标题栏的宽度。若要配置，请在 Xcode 中的文件中搜索 `PageContainerTitleBar.swift`。
-
-![img](/images/uikit/chatuikit/ios/configurationitem/common/Appearance_pageContainerTitleBarItemWidth.png) 
-
-2. `Appearance.pageContainerConstraintsSize = value`：底部弹窗页面的宽度和高度。主要使用类在 Xcode 中查找到 `PageContainersDialogController.swift` 查看该属性。
+`Appearance.pageContainerConstraintsSize = value`：底部弹窗页面的宽度和高度。主要使用类在 Xcode 中查找到 `PageContainersDialogController.swift` 查看该属性。
 
 ![img](/images/uikit/chatuikit/ios/configurationitem/common/Appearance_pageContainerConstraintsSize.png)
 
