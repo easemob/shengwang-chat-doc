@@ -109,6 +109,14 @@
 
 ![img](/images/product/message/message_receipt.png)
 
+## 设置通过 RESTful API 发送的消息写入会话列表
+
+通过 RESTful 接口发送的消息默认不写入会话列表，若需要此类消息写入会话列表，需要开通。
+
+在环信即时通讯云的左侧导航栏中，选择 **即时通讯** > **功能配置** > **功能配置总览**。在 **功能配置总览** 页面的 **基础功能** 页签下，搜索找到**rest发消息写会话列表**，然后点击**设置**。
+
+![img](/images/product/enable_and_configure/message_rest_conversation.png)
+
 ## 配置推送证书
 
 使用离线推送通知之前，需完成各平台的证书配置。当前支持以下平台：苹果 APNs、谷歌 FCM、华为、小米、OPPO、VIVO 和魅族。
