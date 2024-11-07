@@ -501,6 +501,6 @@ itemBuilder: (context, model) {
       );
     },
   );
-},
+}
 ```
 
