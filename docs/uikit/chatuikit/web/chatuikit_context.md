@@ -2,7 +2,7 @@
 
 <Toc />
 
-聊天 UIKit 的内部 state 据全部存储在 rootStore，rootStore 数据更新会驱动各个组件更新 UI。你可以使用 rootStore 上的数据，也可以调用 UIKit 提供的方法来更新数据。
+聊天 UIKit 的内部 state 数据全部存储在 rootStore，rootStore 数据更新会驱动各个组件更新 UI。你可以使用 rootStore 上的数据，也可以调用 UIKit 提供的方法来更新数据。
 
 rootStore 包含以下数据模块:
 

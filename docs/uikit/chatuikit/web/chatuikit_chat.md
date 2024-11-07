@@ -125,7 +125,7 @@ const ChatContainer = () => {
           content: 'SELECT',
         },
         {
-          // 展示消息固定
+          // 展示消息置顶
           content: 'PIN',
         },
         {
@@ -194,7 +194,7 @@ const ChatContainer = () => {
             sendButtonIcon={<Icon type="AIR_PLANE" />} // 发送按钮 Icon
             row={1} // Input 行数
             placeHolder="请输入内容" // 默认占位符
-            enabledMention={true} // 是否开启@功能
+            enabledMention={true} // 是否开启群 @ 功能
             onSendMessage={message => {}} //发送消息的回调
             onBeforeSendMessage={message => {}} // 消息发送前回调，该回调返回 promise，如果返回的 promise 的状态为已解决（resolved），则发送消息；如果返回的 promise 的状态为已失败（rejected），则不发送消息。
           />
