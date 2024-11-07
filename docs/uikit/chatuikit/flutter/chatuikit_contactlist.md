@@ -29,7 +29,7 @@ Widget build(BuildContext context) {
 | final ChatUIKitAppBar? appBar | 自定义消息页面 AppBar。如不设置会使用默认的。|
 | final bool enableAppBar | 是否开启 AppBar。默认开启，关闭后将不再显示 AppBar，传入的 AppBar 也不再生效。| 
 | final String? title | 默认 AppBar 展示的标题信息。如果使用自定义了 AppBar 或者 `enableAppBar = false`, 则不生效。|
-| final void Function(List&lt;ContactItemModel&gt; data)? onSearchTap | 联系人列表搜索点击事件回调。点击后会把当前所有的恋人回调出来，如果不设置会有默认实现。|
+| final void Function(List&lt;ContactItemModel&gt; data)? onSearchTap | 联系人列表搜索点击事件回调。点击后会把当前所有的联系人回调出来，如果不设置会有默认实现。|
 | final bool enableSearchBar | 是否显示联系人搜索框，默认为 `true`。|
 | final String? searchHideText | 搜索框中默认展示的文字内容。|
 | final List&lt;ChatUIKitListViewMoreItem&gt;? beforeItems | 展示在联系人列表前面的 widget，设置后将不再显示好友申请和群组列表的入口。|
