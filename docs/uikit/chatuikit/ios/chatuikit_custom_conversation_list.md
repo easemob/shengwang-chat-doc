@@ -192,17 +192,7 @@
 
 - `swipeAction`：滑动事件。
 
-- `longPressed`：长按事件。
-
 - `didSelected`：点击事件。
-
-以下示例代码为会话长按事件：
-
-```Swift    
-ComponentViewsActionHooker.shared.conversation.longPressed = { [weak self] indexPath,info in 
-    //Process you business logic.
-}
-```
 
 ## 会话列表页面其他设置
 
