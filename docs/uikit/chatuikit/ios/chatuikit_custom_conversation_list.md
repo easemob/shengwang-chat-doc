@@ -173,7 +173,7 @@
         }
 ```
 
-![img](/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_swipe_right_more.png)
+![img](/images/uikit/chatuikit/ios/conversation_more.png)
 
 ### 设置会话时间
 
