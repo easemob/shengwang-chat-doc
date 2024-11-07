@@ -5,7 +5,7 @@
 - 点击搜索按钮，跳转到搜索页面，搜索会话。
 - 点击会话列表项，跳转到会话详情页面。
 - 点击导航栏的扩展按钮，选择新会话，创建新会话。
-- 左滑、右滑或长按会话触发会话拓展功能菜单，可进行删除会话、置顶会话、消息免打扰操作。
+- 左滑或右滑会话，可进行删除会话、置顶会话、消息免打扰和标记回话已读。
 
 单条会话展示会话名称、最后一条消息、最后一条消息的时间以及置顶和禁言状态等。
 
@@ -173,7 +173,7 @@
         }
 ```
 
-![img](/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_swipe_right_more.png)
+![img](/images/uikit/chatuikit/ios/conversation_more.png)
 
 ### 设置会话时间
 
@@ -192,17 +192,7 @@
 
 - `swipeAction`：滑动事件。
 
-- `longPressed`：长按事件。
-
 - `didSelected`：点击事件。
-
-以下示例代码为会话长按事件：
-
-```Swift    
-ComponentViewsActionHooker.shared.conversation.longPressed = { [weak self] indexPath,info in 
-    //Process you business logic.
-}
-```
 
 ## 会话列表页面其他设置
 
