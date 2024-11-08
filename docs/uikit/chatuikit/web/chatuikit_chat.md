@@ -218,7 +218,7 @@ import { Chat, Icon, MessageInput } from 'easemob-chat-uikit';
 import 'easemob-chat-uikit/style.css';
 
 const ChatContainer = () => {
-  // 在消息输入框中添加图标
+  // 自定义要添加的图标
   const CustomIcon = {
     visible: true,
     name: 'CUSTOM',

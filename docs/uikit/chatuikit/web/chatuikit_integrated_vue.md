@@ -117,7 +117,7 @@ export default defineConfig({
 代码如下：
 
 ```jsx
-// react_app/chat.jsx 导入组件
+// 导入 UIKit 到 react_app/chat.jsx 文件
 import { UIKitProvider, Chat, ConversationList } from "easemob-chat-uikit";
 // 引入 UIKit 样式
 import 'easemob-chat-uikit/style.css'
