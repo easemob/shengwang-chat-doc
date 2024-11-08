@@ -375,7 +375,7 @@ $cvs-item-time-margin-bottom: 9px;
 	  <tr>
 		<td style=font-size:15px>onSearch</td>
         <td style=font-size:15px>(e: React.ChangeEvent&lt;HTMLInputElement&gt;) => boolean</td>
-		<td style=font-size:15px> 搜索输入框的 change 事件，当函数返回 false 时，会组织默认的搜索行为，你可以使用自己的搜索条件来搜索</td>
+		<td style=font-size:15px> 搜索输入框的 change 事件，当函数返回 false 时，会阻止默认的搜索行为，你可以使用自己的搜索条件来搜索</td>
 	  </tr> 
     </tr>
 </table>
