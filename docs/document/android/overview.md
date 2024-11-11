@@ -230,7 +230,7 @@ EMClient.getInstance().removeConnectionListener(connectionListener);
 - `USER_KICKED_BY_CHANGE_PASSWORD=216`: 由于密码变更被踢下线
 - `USER_KICKED_BY_OTHER_DEVICE=217`: 由于其他设备登录被踢下线
 - `USER_DEVICE_CHANGED=220`: 和上次设备不同导致下线
-- `SERVER_SERVING_DISABLED=305`: 服务器服务停止
+- `SERVER_SERVICE_RESTRICTED=305`: Chat 功能限制
 
 以上参数具体可以参考 [EMError](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html) 对应说明。
 
