@@ -1937,7 +1937,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/white/users/{u
 | `data` | JSON Array | 响应数据。|
 |  - `result`  | Bool   | 移除结果：<br/> - `true`：移除成功；<br/> - `false`：移除失败。                          |
 |  - `action`  | String | 执行的操作。在该响应中，该字段的值为 `remove_user_whitelist`，表示将成员移出群组白名单。 |
-|  - `user`    | String | 移除群组白名单的用户 ID，多个用户 ID 以英文逗号（","）分隔。                                                  |
+|  - `user`    | String | 移除群组白名单的用户 ID。                                                  |
 |  - `groupid` | String | 群组 ID。                                                                                |
 
 其他字段及描述详见 [公共参数](#公共参数)。
