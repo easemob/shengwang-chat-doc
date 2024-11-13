@@ -340,6 +340,7 @@ const documentSidebar = [
           { text: '发送聊天室消息', link: 'message_chatroom.html' },
           { text: '上传和下载文件', link: 'message_download.html' },
           { text: '获取历史消息记录', link: 'message_historical.html' },
+          { text: '设置指定消息附件的存储方式', link: 'message_attachment_storage.html' },
           { text: '撤回消息和单向删除会话', link: 'message_recall.html' },
           { text: '单向删除漫游消息', link: 'message_delete.html' },
           { text: '修改文本或自定义消息', link: 'message_modify_text_custom.html' },
