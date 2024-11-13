@@ -4,7 +4,7 @@
 
 ### 修复
 
-- 页面布局问题。详见 `GestureHandlerRootView` 相关内容。
+- 页面布局问题。详见 [GestureHandlerRootView](https://github.com/software-mansion/react-native-gesture-handler) 相关内容。
 
 ## 版本 2.4.0
 
