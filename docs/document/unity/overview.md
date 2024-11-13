@@ -237,7 +237,7 @@ SDKClient.Instance.DeleteConnectionDelegate(connectionDelegate);
 - `USER_LOGIN_ANOTHER_DEVICE=206`: 用户已经在其他设备登录
 - `USER_REMOVED=207`: 用户账户已经被移除
 - `USER_BIND_ANOTHER_DEVICE=213`: 用户已经绑定其他设备
-- `SERVER_SERVICE_RESTRICTED=305`: Chat 功能限制
+- `SERVER_SERVING_DISABLED=305`: 服务器服务停止
 - `USER_LOGIN_TOO_MANY_DEVICES=214`: 用户登录设备超出数量限制
 - `USER_KICKED_BY_CHANGE_PASSWORD=216`: 由于密码变更被踢下线
 - `USER_KICKED_BY_OTHER_DEVICE=217`: 由于其他设备登录被踢下线
