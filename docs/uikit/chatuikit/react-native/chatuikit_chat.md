@@ -383,6 +383,94 @@ export function ConversationDetailScreen(props: Props) {
 }
 ```
 
+### 自定义消息上下文菜单样式
+
+`messageMenuStyle` 支持三种模式: `bottom-sheet`、`context` 和 `custom`。`bottom-sheet` 模式通过页面组件底部弹出菜单，`context` 模式类似微信，通过消息位置和点击位置弹出菜单，`custom` 模式通过用户自定组件实现，需要遵守 `MessageCustomLongPressMenu` 约束。
+
+`custom` 模式示例代码如下：
+
+1. 在全局设置属性 `Container.messageMenuStyle` 为 `custom`。其他模式不需要用户设置 `MessageCustomLongPressMenu`。
+
+```
+export function App() {
+  return (
+    <UIKitContainer messageMenuStyle={'custom'}>
+      {/* sub component */}
+    </UIKitContainer>
+  );
+}
+```
+
+2. 在 `ConversationDetail` 组件中设置属性 `MessageCustomLongPressMenu`。
+
+```
+export const MyMessageContextNameMenu = React.forwardRef<
+  ContextNameMenuRef,
+  ContextNameMenuProps
+>(function (
+  props: ContextNameMenuProps,
+  ref?: React.ForwardedRef<ContextNameMenuRef>
+) {
+  const {} = props;
+  React.useImperativeHandle(
+    ref,
+    () => {
+      return {
+        startShow: () => {},
+        startHide: (_onFinished?: () => void) => {},
+        startShowWithInit: (_initItems: InitMenuItemsType[], _?: any) => {},
+        startShowWithProps: (_props: ContextNameMenuProps) => {},
+        getData: () => {
+          return undefined;
+        },
+      };
+    },
+    []
+  );
+  ref;
+  return <View style={{ width: 100, height: 44, backgroundColor: 'red' }} />;
+});
+
+type Props = NativeStackScreenProps<RootScreenParamsList>;
+export function MyConversationDetailScreen(props: Props) {
+  const { route } = props;
+
+  return (
+    <SafeAreaViewFragment>
+      <ConversationDetail
+        MessageCustomLongPressMenu={MyMessageContextNameMenu}
+      />
+    </SafeAreaViewFragment>
+  );
+}
+```
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/chat/Appearance_chat_messageLongPressedActions.png" title="bottom-sheet" />
+  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/chat/msgmenu_style1_onlight@3x.png" title="context" />
+</ImageGallery>
+
+### 自定义发送消息附件菜单样式
+
+`messageInputBarStyle` 支持两种模式: `bottom-sheet` 和 `extension`。`bottom-sheet` 模式通过页面组件底部弹出菜单， `context` 模式通过布局组件实现。
+
+在全局通过设置属性 `Container.messageInputBarStyle` 属性决定菜单样式。
+
+```
+export function App() {
+  return (
+    <UIKitContainer messageInputBarStyle={'extension'}>
+      {/* sub component */}
+    </UIKitContainer>
+  );
+}
+```
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/chat/attmsg_style2_onlight@3x.png" title="bottom-sheet" />
+  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/chat/attmsg_style1_onlight@3x.png" title="context" />
+</ImageGallery>
+
 ### 事件通知
 
 事件通知在列表中已经实现，收到对应事件会更新列表。通常情况下，不需要开发者关注。

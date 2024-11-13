@@ -1,5 +1,24 @@
 # React Native 单群聊 UIKit 更新日志
 
+## 版本 2.4.1
+
+### 修复
+
+- 页面布局问题。详见 [GestureHandlerRootView](https://github.com/software-mansion/react-native-gesture-handler) 相关内容。
+
+## 版本 2.4.0
+
+### 新增特性
+
+- [新增消息上下文菜单样式，原来的样式和新增样式可选](chatuikit_chat.html#自定义消息上下文菜单样式)。
+- [新增消息发送附件菜单样式，原来的样式和新增样式可选](chatuikit_chat.html#自定义发送消息附件菜单样式)。
+
+### 优化
+
+- 更新 example 项目，支持 dev 模式。对于 dev 模式，可通过用户 ID 和密码登录。
+- dev 模式，需要连续点击 demo 版本号进行切换。
+- 支持 eas 云构建。
+
 ## 版本 V2.3
 
 ### 新增特性
