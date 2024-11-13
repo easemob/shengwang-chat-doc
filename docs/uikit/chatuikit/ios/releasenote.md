@@ -2,7 +2,7 @@
 
 ## 版本 4.10.1
 
-修复了 Xcode16 以下 build 时关键字 @retroactive 报错问题。
+修复了 Xcode16 以下版本 build 时关键字 @retroactive 报错问题。
 
 ## 版本 4.10.0
 
