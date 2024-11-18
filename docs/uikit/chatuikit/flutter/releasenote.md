@@ -4,8 +4,8 @@
 
 ### 新增特性
 
-- [消息长按菜单样式新增微信风格样式](chatuikit_custom_chat.html#设置消息长按后显示的操作)；
-- [发送附件消息菜单新增微信风格样式](chatuikit_custom_chat.html#设置附件消息)。
+- [消息长按菜单样式新增微信风格样式](chatuikit_custom_chat.html#自定义消息长按后显示的操作)；
+- [发送附件消息菜单新增微信风格样式](chatuikit_custom_chat.html#自定义消息上下文菜单样式)。
 
 ### 优化
 

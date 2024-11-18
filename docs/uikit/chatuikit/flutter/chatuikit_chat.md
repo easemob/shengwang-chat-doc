@@ -199,7 +199,7 @@ ChatUIKitSettings.messageAttachmentMenuStyle = ChatUIKitMessageAttachmentMenuSty
   <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/chat/msgmenu_style1_onlight@3x.png" title="context" />
 </ImageGallery>
 
-### 设置消息长按后显示的操作
+### 自定义消息长按后显示的操作
 
 1. 若实现消息长按后弹出类似微信样式的弹窗，可进行如下设置：
 
