@@ -127,7 +127,7 @@ class ChatUIKitProfile {
 
 ```
 
-头像昵称信息在 `ChatUIKit` 中显示时，`ChatUIKitProvider` 会从你传入的数据中获取。如果没有获取到，`ChatUIKitProvider` 还会通过 `ChatUIKitProviderProfileHandler` 向你要数据。如果你将所需的 `ChatUIKitProfile` 返回，`ChatUIKitProvider` 会缓存你返回的 `ChatUIKitProfile`，从而减少向你请求的次数。如果你没有返回，`ChatUIKitProvider` 下次用到时还会继续向你要数据。
+头像昵称信息在 `ChatUIKit` 中显示时，`ChatUIKitProvider` 会从你传入的数据中获取。如果没有获取到，`ChatUIKitProvider` 还会通过 `ChatUIKitProviderProfileHandler` 向你要数据。如果你将所需的 `ChatUIKitProfile` 返回，`ChatUIKitProvider` 会缓存你返回的 `ChatUIKitProfile`，从而减少向你请求的次数。如果你没有返回，`ChatUIKitProvider` 下次用到时还会继续向要数据。
 
 ## 设置用户信息
 

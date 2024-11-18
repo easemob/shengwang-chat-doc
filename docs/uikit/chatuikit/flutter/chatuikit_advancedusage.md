@@ -137,9 +137,9 @@ Widget build(BuildContext context) {
 
 ```dart
 ChatUIKitTimeFormatter.instance.formatterHandler = (context, type, time) {
-  if (type == ChatUIKitTimeType.conversation) { // 会话列表使用的时间，需要根据 time 返回时间，如 ’xx月xx日 xx:xx‘
+  if (type == ChatUIKitTimeType.conversation) { // 会话列表使用的时间，需要根据 time 返回完整时间内容，格式为 xx月xx日 HH:mm。
     return '...';
-  } else if (type == ChatUIKitTimeType.message) { // 消息使用的时间格式, 需要根据 time 返回时间，如 ’xx月xx日 xx:xx‘
+  } else if (type == ChatUIKitTimeType.message) { // 消息使用的时间格式, 需要根据 time 返回完整时间内容，格式为 xx月xx日 HH:mm。
     return '...';
   }
   return null; // 如果返回 null，则表示不做更改。
@@ -501,6 +501,6 @@ itemBuilder: (context, model) {
       );
     },
   );
-}
+},
 ```
 

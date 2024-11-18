@@ -2,6 +2,10 @@
 
 <Toc />
 
+## 版本 V4.8.2 2024-11-18
+
+- 修复 ios `EMChatManager.searchMsgsByOptions` 和 `EMConversation.searchMsgsByOptions` 方法类型不准的问题。
+
 ## 版本 V4.8.1 2024-10-15
 
 #### 新增特性
