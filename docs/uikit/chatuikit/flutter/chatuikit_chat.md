@@ -213,4 +213,9 @@ ChatUIKitSettings.messageLongPressMenuStyle = ChatUIKitMessageLongPressMenuStyle
 ChatUIKitSettings.messageLongPressMenuStyle = ChatUIKitMessageLongPressMenuStyle.bottomSheet;
 ```
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/chat/attmsg_style2_onlight@3x.png" title="bottom-sheet" />
+  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/chat/attmsg_style1_onlight@3x.png" title="context" />
+</ImageGallery>
+
 
