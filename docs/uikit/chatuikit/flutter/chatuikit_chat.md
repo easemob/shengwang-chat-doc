@@ -45,26 +45,26 @@ Widget build(BuildContext context) {
 | final ChatUIKitAppBarModel? appBarModel | 自定义消息页面 AppBar, 如不设置会使用默认的。|
 | final bool enableAppBar | 是否开启 AppBar，默认开启，关闭后将不再显示 AppBar，传入的 AppBar 也不再生效。|
 | final Widget? inputBar | 自定义输入组件。如不设置会使用默认的 `ChatUIKitInputBar`。|
-| final CustomTextEditingController? inputBarTextEditingController | `inputBar` 控制器。如果自定义了 `inputBar` 此处设置将不生效。|
-| final bool showMessageItemAvatar | 是否显示头像。|
-| final bool showMessageItemNickname | 是否显示昵称。|
-| final MessageItemTapHandler? onItemTap | 消息点击事件，默认会处理视频、图片、音频类型消息。自定义时如果需要拦截点击，返回 `true`, 如果不拦截，返回 `false`。|
-| final MessageItemTapHandler? onDoubleTap | 消息双击事件，默认没有实现。自定义时如果需要拦截点击，返回 `true`, 如果不拦截，返回 `false`。|
+| final MessageItemShowHandler showMessageItemAvatar | 是否显示头像。|
+| final MessageItemShowHandler showMessageItemNickname | 是否显示昵称。|
+| final MessageItemGlobalPositionTapHandler? onItemTap | 消息点击事件，默认会处理视频、图片、音频类型消息。自定义时如果需要拦截点击，返回 `true`, 如果不拦截，返回 `false`。|
+| final MessageItemGlobalPositionTapHandler? onDoubleTap | 消息双击事件，默认没有实现。自定义时如果需要拦截点击，返回 `true`, 如果不拦截，返回 `false`。|
 | final MessageItemTapHandler? onAvatarTap | 头像点击事件，默认会跳转到消息发送方的联系人详情页。如果发送方不是好友，则调到添加好友详情页，自定义时如果需要拦截点击，返回 `true`；如果不拦截，返回 `false`。|
 | final MessageItemTapHandler? onAvatarLongPress | 头像长按事件，默认没有实现。自定义时如果需要拦截点击，返回 `true`；如果不拦截，返回 `false`。|
 | final MessageItemTapHandler? onNicknameTap | 昵称长按事件，默认没有实现。自定义时如果需要拦截点击，返回 `true`, 如果不拦截，返回 `false`。|
 | final MessageItemBuilder? itemBuilder | 消息 item 自定义 builder。如果需要重写消息样式(包括头像，昵称，消息气泡, 消息引用等所有样式)，在此处实现。|
 | final MessageItemBuilder? alertItemBuilder | 提示消息 item 自定义 builder。如果需要重写提示消息样式，在此处实现。|
-| final List&lt;ChatUIKitBottomSheetAction&gt;? morePressActions | 默认 `inputBar` 中提供的 更多按钮菜单项。如不设置会使用默认菜单。自定义 `inputBar` 后不生效。|
+| final List&lt;ChatUIKitEventAction&gt;? morePressActions | 默认 `inputBar` 中提供的 更多按钮菜单项。如不设置会使用默认菜单。自定义 `inputBar` 后不生效。|
 | final MessagesViewMorePressHandler? onMoreActionsItemsHandler | 点击默认 `inputBar` 时回调，可以返回一个新的菜单列表。如返回 `null` 或不实现，则使用 `morePressActions` 中设置的内容。|
 | final MessagesViewItemLongPressHandler? onItemLongPressHandler | 消息长按菜单项时回调，可以返回一个新的菜单列表。如返回 `null` 或不实现，则使用 `longPressActions` 中设置的内容。|
 | final bool? forceLeft | 强制所有消息在左侧。|
 | final Widget? emojiWidget | 表情 widget，如果不设置则使用默认的。|
-| final MessageItemBuilder? replyBarBuilder | 自定义 `replyBar` 组件, 用于在消息引用时临时在输入框上方展示消息内容，如不设置会使用默认的 `ChatUIKitReplyBar`。|
+| final Widget? Function(BuildContext context, MessageModel replyMessage)? replyBarBuilder | 自定义 `replyBar` 组件, 用于在消息引用时临时在输入框上方展示消息内容，如不设置会使用默认的 `ChatUIKitReplyBar`。|
 | final Widget Function(BuildContext context, QuoteModel model)? quoteBuilder | 自定义消息引用在展示时的样式。如不设置则使用默认样式。|
 | final MessageItemTapHandler? onErrorBtnTapHandler | 错误消息点击事件，如果设置后将会替换默认的错误消息点击事件。如果不处理可以返回 `false`。默认行为为重新发送消息。|
 | final MessageItemBubbleBuilder? bubbleBuilder | 消息气泡。如果需要自定义消息气泡需要在此处实现，如果不设置则默认使用 `ChatUIKitMessageListViewBubble`。|
-| final MessageBubbleContentBuilder? bubbleContentBuilder | 消息气泡内容。如果需要自定义实现气泡内容需要在此处实现，如果不设置则使用默认。|
+| final MessageItemBuilder? bubbleContentBuilder | 消息气泡内容。如果需要自定义实现气泡内容需要在此处实现，如果不设置则使用默认。|
+| final ChatUIKitKeyboardPanelController? inputController | 输入框控制器，如果设置后将会替换默认的输入框控制器。详细参考 `ChatUIKitKeyboardPanelController`。 |
 | final String? attributes | 扩展参数，会传入到下一个页面。|
 | final Widget? multiSelectBottomBar | 多选时显示的 bottom bar。 |
 | final MessageReactionItemTapHandler? onReactionItemTap | 表情回复 Reaction 点击事件，如果设置后将会替换默认的反应点击事件。| 

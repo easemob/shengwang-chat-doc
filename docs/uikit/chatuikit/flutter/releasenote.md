@@ -1,5 +1,12 @@
 # Flutter 单群聊 UIKit 更新日志
 
+## 版本 2.1.0
+
+- 修改 `ChatUIKitBottomSheetItem` 为 `ChatUIKitEventAction`;
+- 依赖 im sdk 升级为 `im_flutter_sdk: 4.8.2`;
+- 依赖 flutter 版本升级为 `3.19.0`
+- 修改 主题 设置方式；
+
 ## 版本 2.0.3
 
 - 优化会话列表展示逻辑。

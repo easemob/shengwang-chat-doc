@@ -15,7 +15,7 @@
 ```yaml
 environment:
   sdk: '>=3.0.0 <4.0.0'
-  flutter: ">=3.3.0"
+  flutter: ">=3.19.0"
 ```
 
 2. 你需要添加权限：
@@ -57,30 +57,8 @@ flutter pub add em_chat_uikit
 flutter pub get
 ```
 
-### 第三步 添加主题
 
-打开新建的项目(此处使用的 IDE 是 `vscode`), 添加 `ChatUIKitTheme` 主题依赖。
-
-需要确保主题 `ChatUIKitTheme` 是 `ChatUIKit` 中所有组件的父组件，建议放在 `MyApp` 中，保证始终生效。
-
-```dart
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      ...
-      // 新添加的代码
-      builder: (context, child) {
-        return ChatUIKitTheme(child: child!);
-      },
-    );
-  }
-}
-```
-
-### 第四步 初始化
+### 第三步 初始化
 
 初始化 `ChatUIKit`，其中 `appkey` 需要替换为你自己的 App Key。
 
@@ -100,7 +78,7 @@ void main() {
 
 ```
 
-### 第五步 登录
+### 第四步 登录
 
 `ChatUIKit` 提供以下两种登录方法：用户 ID 和密码以及用户 ID 和 token。
 
@@ -124,7 +102,7 @@ ChatUIKit.instance.loginWithPassword(userId: userId, password: password);
 ChatUIKit.instance.loginWithToken(userId: userId, token: token);
 ```
 
-### 第六步 添加聊天页面
+### 第五步 添加聊天页面
 
 登录后显示聊天页面。
 
@@ -138,7 +116,7 @@ ChatUIKit.instance.loginWithToken(userId: userId, token: token);
   }
 ```
 
-### 第七步 发送第一条消息
+### 第六步 发送第一条消息
 
 在聊天页面下方输入消息，然后点击**发送**按钮发送消息。
 
@@ -176,12 +154,6 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      builder: (context, child) {
-        return ChatUIKitTheme(
-          color: ChatUIKitColor.light(),
-          child: child!,
-        );
-      },
       onGenerateRoute: (settings) {
         return null;
       },
