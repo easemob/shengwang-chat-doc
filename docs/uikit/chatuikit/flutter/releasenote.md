@@ -2,10 +2,17 @@
 
 ## 版本 2.1.0
 
-- 修改 `ChatUIKitBottomSheetItem` 为 `ChatUIKitEventAction`;
-- 依赖 im sdk 升级为 `im_flutter_sdk: 4.8.2`;
-- 依赖 flutter 版本升级为 `3.19.0`
-- 修改 主题 设置方式；
+### 新增特性
+
+- [消息长按菜单样式新增微信风格样式](chatuikit_custom_chat.html#设置消息长按后显示的操作)；
+- [发送附件消息菜单新增微信风格样式](chatuikit_custom_chat.html#设置附件消息)。
+
+### 优化
+
+- 修改 `ChatUIKitBottomSheetItem` 为 `ChatUIKitEventAction`；
+- 依赖 IM SDK 升级为 `im_flutter_sdk: 4.8.2`；
+- 依赖 Flutter 版本升级为 `3.19.0`；
+- 修改主题设置方式。
 
 ## 版本 2.0.3
 
