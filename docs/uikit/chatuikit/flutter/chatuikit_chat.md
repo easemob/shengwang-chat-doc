@@ -177,3 +177,40 @@ enum ChatUIKitTimeType { conversation, message, messagePinTime }
 ```
 
 - `time` 为时间戳。
+
+
+### 自定义消息上下文菜单样式
+
+1. 设置类似微信样式
+
+若实现发送附件消息时弹出类似微信样式的弹窗，可进行如下设置：
+
+```dart
+ChatUIKitSettings.messageAttachmentMenuStyle = ChatUIKitMessageAttachmentMenuStyle.menu;
+```
+2. 设置仿系统 `BottomSheet` 样式：
+
+```dart
+ChatUIKitSettings.messageAttachmentMenuStyle = ChatUIKitMessageAttachmentMenuStyle.bottomSheet;
+```
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/chat/Appearance_chat_messageLongPressedActions.png" title="bottom-sheet" />
+  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/chat/msgmenu_style1_onlight@3x.png" title="context" />
+</ImageGallery>
+
+### 设置消息长按后显示的操作
+
+1. 若实现消息长按后弹出类似微信样式的弹窗，可进行如下设置：
+
+```dart
+ChatUIKitSettings.messageLongPressMenuStyle = ChatUIKitMessageLongPressMenuStyle.popupMenu;
+```
+
+2. 设置仿系统 `BottomSheet` 样式：
+
+```dart
+ChatUIKitSettings.messageLongPressMenuStyle = ChatUIKitMessageLongPressMenuStyle.bottomSheet;
+```
+
+
