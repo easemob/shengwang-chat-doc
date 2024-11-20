@@ -331,7 +331,6 @@ const documentSidebar = [
     text: '服务端 REST API',
     children: [
       { text: '即时通讯 REST API 概览', link: 'overview.html' },
-      { text: '用户体系管理', link: 'account_system.html' },
       { 
         text: '消息管理', 
         children: [
@@ -345,12 +344,9 @@ const documentSidebar = [
           { text: '单向删除漫游消息', link: 'message_delete.html' },
           { text: '修改文本或自定义消息', link: 'message_modify_text_custom.html' },
           { text: '获取离线消息数据', link: 'message_offline.html' },
-          { text: '用户收藏', link: 'favorite.html'},
           { text: '导入消息', link: 'message_import.html' }
         ]
       },
-      { text: '用户属性', link: 'userprofile.html' },
-      { text: '用户关系管理', link: 'user_relationship.html' },
       { 
         text: '群组',
         children: [
@@ -369,7 +365,16 @@ const documentSidebar = [
           { text: '管理聊天室成员', link: 'chatroom_member.html' }
         ]
       },
-      { text: '在线状态订阅', link: 'presence.html' },
+      { 
+        text: '用户相关',
+        children: [
+          { text: '用户体系管理', link: 'account_system.html' },
+          { text: '用户属性', link: 'userprofile.html' },
+          { text: '用户状态订阅', link: 'presence.html' },
+          { text: '用户收藏', link: 'favorite.html'},
+          { text: '用户关系管理', link: 'user_relationship.html' }
+        ]
+      },
       { text: '消息表情回复', link: 'reaction.html' },
       { 
         text: '离线推送',
