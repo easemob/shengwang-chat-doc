@@ -24,14 +24,14 @@ Server SDK 提供了用户、消息、群组、聊天室等资源的操作管理
 <dependency>
     <groupId>com.easemob.im</groupId>
     <artifactId>im-sdk-core</artifactId>
-    <version>0.8.55</version>
+    <version>0.8.56</version>
 </dependency>
 ```
 
 如果你的项目使用 Gradle 构建，可以在 build.gradle 中添加下面代码：
 
 ```gradle
-implementation 'com.easemob.im:im-sdk-core:0.8.55'
+implementation 'com.easemob.im:im-sdk-core:0.8.56'
 ```
 
 ### 使用
@@ -236,10 +236,16 @@ EMProperties properties = EMProperties.builder()
 
 ## 更新日志
 
+### V0.8.56 2024-11-20
+
+1. 创建用户修改密码长度限制。
+
+以上更新内容请到 UserApi 中查看。
+
 ### V0.8.55 2024-09-09
 
-1.增加 Presence 功能。
-2.更新 javadoc sdk 文档。
+1. 增加 Presence 功能。
+2. 更新 javadoc sdk 文档。
 
 以上更新内容请到 PresenceApi 中查看。
 
