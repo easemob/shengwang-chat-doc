@@ -23,14 +23,14 @@ Server SDK 2.0 提供了用户、消息、群组、聊天室等资源的操作�
 <dependency>
     <groupId>com.easemob.im</groupId>
     <artifactId>im-sdk-core</artifactId>
-    <version>1.0.9</version>
+    <version>1.0.11</version>
 </dependency>
 ```
 
 如果你的项目使用 Gradle 构建，可以在 build.gradle 中添加下面代码：
 
 ```gradle
-implementation 'com.easemob.im:im-sdk-core:1.0.9'
+implementation 'com.easemob.im:im-sdk-core:1.0.11'
 ```
 
 ### 使用
@@ -205,11 +205,18 @@ try {
 
 ## 更新日志
 
-V1.0.10 2024-09-21
-1.增加[根据消息 ID 单向删除单聊漫游消息](message_delete.html#根据消息-id-单向删除单聊漫游消息)功能。
-2.增加[根据消息 ID 单向删除群聊漫游消息](message_delete.html#根据消息-id-单向删除群聊漫游消息)功能。
-3.增加根据指定 ID 创建聊天室的功能。
-4.增加根据指定 ID 创建群组的功能
+### V1.0.11 2024-11-20
+
+1. 增加 '批量设置群成员自定义属性' 功能。
+
+以上更新内容请到 MetadataApi 中查看。
+
+### V1.0.10 2024-09-21
+
+1. 增加[根据消息 ID 单向删除单聊漫游消息](message_delete.html#根据消息-id-单向删除单聊漫游消息)功能。
+2. 增加[根据消息 ID 单向删除群聊漫游消息](message_delete.html#根据消息-id-单向删除群聊漫游消息)功能。
+3. 增加根据指定 ID 创建聊天室的功能。
+4. 增加根据指定 ID 创建群组的功能。
 
 以上更新内容请到 MessageApi、RoomApi、GroupApi 中查看。
 

@@ -345,6 +345,7 @@ const documentSidebar = [
           { text: '单向删除漫游消息', link: 'message_delete.html' },
           { text: '修改文本或自定义消息', link: 'message_modify_text_custom.html' },
           { text: '获取离线消息数据', link: 'message_offline.html' },
+          { text: '用户收藏', link: 'favorite.html'},
           { text: '导入消息', link: 'message_import.html' }
         ]
       },

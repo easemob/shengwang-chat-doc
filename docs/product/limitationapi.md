@@ -82,8 +82,12 @@
 | 单向清空指定用户的漫游消息 | POST  | /{org_name}/{app_name}/rest/message/roaming/user/{userId}/delete/all | 100 次/秒/App Key  |
 | 单向清空单聊会话某个时间点及之前的漫游消息 | POST  | /{org_name}/{app_name}/rest/message/roaming/chat/user/{userId}/time?userId={userId}&delTime={delTime} | 100 次/秒/App Key  |
 | 单向清空群组或聊天室会话某个时间点及之前的漫游消息 | POST  | /{org_name}/{app_name}/rest/message/roaming/group/user/{userId}/time?groupId={groupId}&delTime={delTime} | 100 次/秒/App Key  |
-| * 导入单聊消息 | POST  | /{org_name}/{app_name}/messages/users/import | 100 条/秒/App Key                                          |
-| * 导入群聊消息 | POST  | /{org_name}/{app_name}/messages/chatgroups/import | 100 条/秒/App Key                                    |
+| 导入单聊消息 | POST  | /{org_name}/{app_name}/messages/users/import | 100 条/秒/App Key                                          |
+| 分页获取用户收藏 | GET  | /{org_name}/{app_name}/users/{username}/collections | 100 条/秒/App Key  |
+| 添加一条收藏 | POST  | /{org_name}/{app_name}/users/{username}/collections | 100 条/秒/App Key  |
+| 批量添加用户收藏 | POST  | /{org_name}/{app_name}/collections | 100 条/秒/App Key                                    |
+| 修改用户收藏的扩展信息 | PUT  | /{org_name}/{app_name}/users/{username}/collections/{collectionId} | 100 条/秒/App Key  |
+| 删除用户收藏 | DELETE  | /{org_name}/{app_name}/users/{username}/collections | 100 条/秒/App Key  |
 
 ## 用户属性
 
