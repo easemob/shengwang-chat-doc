@@ -118,7 +118,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 关于其他错误，你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 获取指定离线消息的投递状态
+## 获取指定离线消息的投递状态
 
 获取用户的指定离线消息的投递状态，即查看该消息是否已投递。
 

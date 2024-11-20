@@ -94,8 +94,8 @@
 
 <ImageGallery :columns="3">
   <ImageItem src="/images/uikit/chatuikit/ios/chat_detail.png" title="聊天页面" />
-  <ImageItem src="/images/uikit/chatuikit/ios/message_types.png" title="发送多种类型的消息" />
-  <ImageItem src="/images/uikit/chatuikit/ios/message_longpress.png" title="消息长按操作" />
+  <ImageItem src="/images/uikit/chatuikit/ios/message_types_2.png" title="发送多种类型的消息" />
+  <ImageItem src="/images/uikit/chatuikit/ios/message_longpress_2.png" title="消息长按操作" />
   <ImageItem src="/images/uikit/chatuikit/ios/message_reply.png" title="消息引用" />
   <ImageItem src="/images/uikit/chatuikit/ios/message_deliveryreceipt.png" title="已发送回执" />
   <ImageItem src="/images/uikit/chatuikit/ios/message_readreceipt.png" title="已读回执" />

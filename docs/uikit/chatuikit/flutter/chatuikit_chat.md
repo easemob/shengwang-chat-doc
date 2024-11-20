@@ -195,8 +195,8 @@ ChatUIKitSettings.messageAttachmentMenuStyle = ChatUIKitMessageAttachmentMenuSty
 ```
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/chat/Appearance_chat_messageLongPressedActions.png" title="bottom-sheet" />
-  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/chat/msgmenu_style1_onlight@3x.png" title="context" />
+  <ImageItem src="/images/uikit/chatuikit/ios/message_types_1.png" title="BottomSheet" />
+  <ImageItem src="/images/uikit/chatuikit/ios/message_types_2.png" title="类似微信样式" />
 </ImageGallery>
 
 ### 自定义消息长按后显示的操作
@@ -214,8 +214,7 @@ ChatUIKitSettings.messageLongPressMenuStyle = ChatUIKitMessageLongPressMenuStyle
 ```
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/chat/attmsg_style2_onlight@3x.png" title="bottom-sheet" />
-  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/chat/attmsg_style1_onlight@3x.png" title="context" />
+  <ImageItem src="/images/uikit/chatuikit/ios/message_longpress_1.png" title="BottomSheet" />
+  <ImageItem src="/images/uikit/chatuikit/ios/message_longpress_2.png" title="类似微信样式" />
 </ImageGallery>
-
 

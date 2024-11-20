@@ -952,7 +952,6 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/deactivate
 
 | 参数            | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :------- | :------------- |
-| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
@@ -977,7 +976,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/deactivate
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/deactivate'
+curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/deactivate'
 ```
 
 ##### 响应示例
@@ -1031,7 +1030,6 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/activate
 
 | 参数            | 类型   | 是否必需 | 描述         |
 | :-------------- | :----- | :------- | :--------------- |
-| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
@@ -1056,7 +1054,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/activate
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/activate'
+curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/activate'
 ```
 
 ##### 响应示例
@@ -1367,7 +1365,11 @@ POST https://{host}/{org_name}/{app_name}/users/batch/status
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST https://XXXX/XXXX/chatdemoui/users/batch/status -H 'Authorization: Bearer <YourAppToken>' -H 'Content-Type: application/json' -d '{"usernames":["user1","user2"]}'
+curl -X POST https://XXXX/XXXX/chatdemoui/users/batch/status \
+-H 'Accept: application/json'  \
+-H 'Authorization: Bearer <YourAppToken>'  \
+-H 'Content-Type: application/json'  \
+-d '{"usernames":["user1","user2"]}'
 ```
 
 ##### 响应示例

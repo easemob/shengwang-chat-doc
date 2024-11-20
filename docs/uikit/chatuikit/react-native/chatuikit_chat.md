@@ -446,13 +446,13 @@ export function MyConversationDetailScreen(props: Props) {
 ```
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/chat/Appearance_chat_messageLongPressedActions.png" title="bottom-sheet" />
-  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/chat/msgmenu_style1_onlight@3x.png" title="context" />
+  <ImageItem src="/images/uikit/chatuikit/ios/message_longpress_1.png" title="bottom-sheet" />
+  <ImageItem src="/images/uikit/chatuikit/ios/message_longpress_2.png" title="context" />
 </ImageGallery>
 
 ### 自定义发送消息附件菜单样式
 
-`messageInputBarStyle` 支持两种模式: `bottom-sheet` 和 `extension`。`bottom-sheet` 模式通过页面组件底部弹出菜单， `context` 模式通过布局组件实现。
+`messageInputBarStyle` 支持两种模式: `bottom-sheet` 和 `extension`。`bottom-sheet` 模式通过页面组件底部弹出菜单， `extension` 模式通过布局组件实现。
 
 在全局通过设置属性 `Container.messageInputBarStyle` 属性决定菜单样式。
 
@@ -467,8 +467,8 @@ export function App() {
 ```
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/chat/attmsg_style2_onlight@3x.png" title="bottom-sheet" />
-  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/chat/attmsg_style1_onlight@3x.png" title="context" />
+  <ImageItem src="/images/uikit/chatuikit/ios/message_types_1.png" title="bottom-sheet" />
+  <ImageItem src="/images/uikit/chatuikit/ios/message_types_2.png" title="extension" />
 </ImageGallery>
 
 ### 事件通知
