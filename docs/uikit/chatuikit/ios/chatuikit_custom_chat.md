@@ -91,27 +91,24 @@
 
 ### 设置附件消息
 
-#### 设置类似微信样式
+### 设置发送附件消息弹窗样式
 
-若实现发送附件消息时弹出类似微信样式的弹窗，可进行如下设置：
+1. 若实现发送附件消息时弹出类似微信样式的弹窗，可进行如下设置：
 
 ```Swift 
     Appearance.chat.messageAttachmentMenuStyle = .followInput
 ```
 
-效果图如下所示：
-
-![img](/images/uikit/chatuikit/ios/configurationitem/chat/attmsg_style1_onlight@3x.png)
-
-#### 设置仿系统 UIActionSheet 样式
-
-若实现消息长按后弹出仿系统 `UIActionSheet` 样式的弹窗，可进行如下设置：
+2. 若实现消息长按后弹出仿系统 `UIActionSheet` 样式的弹窗，可进行如下设置：
 
 ```Swift 
     Appearance.chat.messageAttachmentMenuStyle = .actionSheet
 ```
 
-![img](/images/uikit/chatuikit/ios/configurationitem/chat/attmsg_style2_onlight@3x.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/message_types_1.png" title="UIActionSheet" />
+  <ImageItem src="/images/uikit/chatuikit/ios/message_types_2.png" title="类似微信样式" />
+</ImageGallery>
 
 #### 设置附件消息相关的配置项
 
@@ -185,21 +182,13 @@ override func filterMessageActions(message: MessageEntity) -> [ActionSheetItemPr
 
 ![img](/images/uikit/chatuikit/ios/configurationitem/chat/Appearance_chat_messageLongPressedActions.png)
 
-#### 设置类似微信样式
-
-若实现消息长按后弹出类似微信样式的弹窗，可进行如下设置：
+1. 若实现消息长按后弹出类似微信样式的弹窗，可进行如下设置：
 
 ```Swift 
     Appearance.chat.messageLongPressMenuStyle = .withArrow
 ```
 
-效果图如下所示：
-
-![img](/images/uikit/chatuikit/ios/configurationitem/chat/msgmenu_style1_onlight@3x.png)
-
-#### 设置仿系统 UIActionSheet 样式
-
-若实现消息长按后弹出仿系统 `UIActionSheet` 样式的弹窗，可进行如下设置：
+2. 若实现消息长按后弹出仿系统 `UIActionSheet` 样式的弹窗，可进行如下设置：
 
 ```Swift 
     Appearance.chat.messageLongPressMenuStyle = .actionSheet
@@ -207,7 +196,10 @@ override func filterMessageActions(message: MessageEntity) -> [ActionSheetItemPr
 
 效果图如下所示：
 
-![img](/images/uikit/chatuikit/ios/configurationitem/chat/msgmenu_style2_onlight@3x.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/message_longpress_1.png" title="UIActionSheet" />
+  <ImageItem src="/images/uikit/chatuikit/ios/message_longpress_2.png" title="类似微信样式" />
+</ImageGallery>
 
 ## 设置聊天页面输入框
 
