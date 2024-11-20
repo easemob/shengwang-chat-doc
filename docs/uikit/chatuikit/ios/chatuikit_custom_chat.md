@@ -180,7 +180,9 @@ override func filterMessageActions(message: MessageEntity) -> [ActionSheetItemPr
         }
 ```
 
-![img](/images/uikit/chatuikit/ios/configurationitem/chat/Appearance_chat_messageLongPressedActions.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/message_longpress_1.png" />
+</ImageGallery>
 
 1. 若实现消息长按后弹出类似微信样式的弹窗，可进行如下设置：
 
