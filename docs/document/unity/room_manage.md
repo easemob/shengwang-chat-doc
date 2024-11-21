@@ -16,7 +16,6 @@
 - 从服务器获取聊天室列表
 - 加入聊天室
 - 获取聊天室详情
-- 退出聊天室
 - 解散聊天室
 - 监听聊天室事件
 - 实时更新聊天室成员人数
@@ -105,33 +104,6 @@ SDKClient.Instance.RoomManager.FetchRoomInfoFromServer(roomId, new ValueCallBack
   }
 ));
 ```
-
-### 退出聊天室
-
-聊天室所有成员均可以调用 `LeaveRoom` 方法退出当前聊天室。成员退出聊天室时，其他成员收到 `OnMemberExitedFromRoom` 回调。
-
-示例代码如下：
-
-```csharp
-SDKClient.Instance.RoomManager.LeaveRoom(roomId, new CallBack(
-    onSuccess: () => {
-    },
-    onError: (code, desc) => {
-    }
-));
-```
-
-退出聊天室时，SDK 默认删除该聊天室的所有本地消息，若要保留这些消息，可在 SDK 初始化时将 `Options#DeleteMessagesAsExitRoom` 设置为 `false`。
-
-示例代码如下：
-
-```csharp
-Options options = new Options();
-options. DeleteMessagesAsExitRoom = false;
-```
-
-与群主无法退出群组不同，聊天室所有者可以离开聊天室，离开后重新进入聊天室仍是该聊天室的所有者。若 `Options#IsRoomOwnerLeaveAllowed
-` 参数在初始化时设置为 `true` 时，聊天室所有者可以离开聊天室；若该参数设置为 `false`，聊天室所有者调用 `LeaveRoom` 方法离开聊天室时会提示错误 706。
 
 ### 解散聊天室
 

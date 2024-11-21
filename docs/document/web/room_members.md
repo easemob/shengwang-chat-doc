@@ -44,7 +44,7 @@ conn.listChatRoomMembers(option).then(res => console.log(res))
 
 ### 退出聊天室
 
-#### 成员主动退出聊天室
+#### 主动退出
 
 聊天室所有成员均可以调用 `leaveChatRoom` 退出当前聊天室。成员退出聊天室时，其他成员收到 `memberAbsence` 事件。与群主无法退出群组不同，聊天室所有者可以离开聊天室，退出后重新进入仍是该聊天室的所有者。
 
@@ -57,7 +57,7 @@ let option = {
 conn.leaveChatRoom(option).then(res => console.log(res))
 ```
 
-#### 成员被移出聊天室
+#### 被移出
 
 仅聊天室所有者和聊天室管理员可以调用 `removeChatRoomMember` 方法将指定的单个成员移出聊天室。被踢出聊天室后，被踢成员会收到 `removeMember` 事件，其他成员会收到 `memberAbsence` 事件。被移出聊天室后，该用户还可以再次加入聊天室。
 
@@ -70,6 +70,15 @@ let option = {
 };
 conn.removeChatRoomMember(option).then(res => console.log(res))
 ```
+
+#### 离线后自动退出
+
+由于网络等原因，聊天室中的成员离线超过 2 分钟会自动退出聊天室。若需调整该时间，需联系环信商务。
+
+不过，以下两种情况除外：
+
+- 聊天室白名单中的成员（聊天室所有者和管理员默认加入白名单）。
+- [调用 RESTful API 创建聊天室](/document/server-side/chatroom_manage.html#创建聊天室)时拉入的用户从未登录过。
 
 ### 管理聊天室黑名单
 

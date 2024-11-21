@@ -16,7 +16,6 @@
 - 从服务器获取聊天室列表
 - 加入聊天室
 - 获取聊天室详情
-- 退出聊天室
 - 解散聊天室
 - 监听聊天室事件
 - 实时更新聊天室成员人数
@@ -93,32 +92,6 @@ extension ViewController: EMChatroomManagerDelegate {
 // 异步方法
 EMChatroom *chatroom = [[EMClient sharedClient].roomManager getChatroomSpecificationFromServerWithId:@“chatroomId” completion:nil];
 ```
-
-### 退出聊天室
-
-聊天室所有成员均可以调用 `leaveChatroom` 方法退出指定聊天室。成员退出聊天室时，其他成员收到 `userDidLeaveChatroom` 回调。
-
-示例代码如下：
-
-```objectivec
-// 异步方法
-[[EMClient sharedClient].roomManager leaveChatroom:@"aChatroomId" completion:nil];
-```
-
-退出聊天室时，SDK 默认删除该聊天室所有本地消息，若要保留这些消息，可在 SDK 初始化时将 `isDeleteMessagesWhenExitChatRoom` 设置为 `NO`。
-
-```objectivec
-@property (nonatomic, assign) BOOL isDeleteMessagesWhenExitChatRoom;
-```
-
-示例代码如下：
-
-```objectivec
-EMOptions *retOpt = [EMOptions optionsWithAppkey:@"appkey"];
-retOpt.isDeleteMessagesWhenExitChatRoom = NO;
-```
-
-与群主无法退出群组不同，聊天室所有者可以离开聊天室，重新进入聊天室仍是该聊天室的所有者。若 `EMOptions#canChatroomOwnerLeave` 参数在初始化时设置为 `YES` 时，聊天室所有者可以离开聊天室；若该参数设置为 `NO`，聊天室所有者调用 `leaveChatroom` 方法离开聊天室时会提示错误 706 `EMErrorChatroomOwnerNotAllowLeave`。
 
 ### 解散聊天室
 
