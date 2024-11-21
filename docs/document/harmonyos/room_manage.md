@@ -16,7 +16,6 @@
 - 从服务器获取聊天室列表
 - 加入聊天室
 - 获取聊天室详情
-- 退出聊天室
 - 解散聊天室
 - 监听聊天室事件
 
@@ -70,29 +69,6 @@ ChatClient.getInstance().chatroomManager()?.joinChatroom(chatroomId, leaveOtherR
   // failure logic
 });
 ```
-
-### 退出聊天室
-
-聊天室所有成员均可以调用 `leaveChatroom` 方法退出当前聊天室。成员退出聊天室时，其他成员收到 `onMemberExited` 回调。
-
-示例代码如下：
-
-```TypeScript
-ChatClient.getInstance().chatroomManager()?.leaveChatroom(chatRoomId).then(()=> {
-    // success logic
-});
-```
-
-退出聊天室时，SDK 默认删除该聊天室所有本地消息，若要保留这些消息，可在 SDK 初始化时将 `ChatOptions#setDeleteMessagesOnLeaveChatroom` 设置为 `false`。
-
-示例代码如下：
-
-```TypeScript
-let options = new ChatOptions();
-options.setDeleteMessagesOnLeaveChatroom(false);
-```
-
-与群主无法退出群组不同，聊天室所有者可以离开聊天室，重新进入聊天室仍是该聊天室的所有者。若 `ChatOptions#canChatroomOwnerLeave` 参数在初始化时设置为 `true` 时，聊天室所有者可以离开聊天室；若该参数设置为 `false`，聊天室所有者调用 `leaveChatRoom` 方法离开聊天室时会提示错误 706 `ChatError#CHATROOM_OWNER_NOT_ALLOW_LEAVE`。
 
 ### 监听聊天室事件
 

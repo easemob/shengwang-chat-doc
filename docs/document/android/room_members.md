@@ -9,7 +9,7 @@
 环信即时通讯 IM SDK 提供 `EMChatRoomManager` 类 和 `EMChatRoom` 类，支持对聊天室成员的管理，包括获取、添加和移出聊天室成员等，主要方法如下：
 
 - 获取聊天室成员列表
-- 将成员移出聊天室
+- 退出聊天室
 - 管理聊天室黑名单
 - 管理聊天室白名单
 - 管理聊天室禁言列表
@@ -42,7 +42,31 @@
 public EMCursorResult<String> fetchChatRoomMembers(String chatRoomId, String cursor, int pageSize);
 ```
 
-### 将成员移出聊天室
+### 退出聊天室
+
+#### 主动退出
+
+聊天室所有成员均可以调用 `leaveChatRoom` 方法退出当前聊天室。成员退出聊天室时，其他成员收到 `onMemberExited` 回调。
+
+示例代码如下：
+
+```java
+// 异步方法。
+EMClient.getInstance().chatroomManager().leaveChatRoom(chatRoomId);
+```
+
+退出聊天室时，SDK 默认删除该聊天室所有本地消息，若要保留这些消息，可在 SDK 初始化时将 `com.hyphenate.chat.EMOptions#setDeleteMessagesAsExitChatRoom` 设置为 `false`。
+
+示例代码如下：
+
+```java
+EMOptions options = new EMOptions();
+options.setDeleteMessagesAsExitChatRoom(false);
+```
+
+与群主无法退出群组不同，聊天室所有者可以离开聊天室，重新进入聊天室仍是该聊天室的所有者。若 `EMOptions#allowChatroomOwnerLeave` 参数在初始化时设置为 `true` 时，聊天室所有者可以离开聊天室；若该参数设置为 `false`，聊天室所有者调用 `leaveChatRoom` 方法离开聊天室时会提示错误 706 `CHATROOM_OWNER_NOT_ALLOW_LEAVE`。
+
+#### 被移出
 
 仅聊天室所有者和管理员可调用 `EMChatRoomManager#removeChatRoomMembers` 方法将单个或多个成员移出聊天室。
 
@@ -57,6 +81,15 @@ public EMCursorResult<String> fetchChatRoomMembers(String chatRoomId, String cur
 // 异步方法为 asyncRemoveChatRoomMembers(String, List, EMValueCallBack)。
 EMClient.getInstance().chatroomManager().removeChatRoomMembers(chatRoomId, members);
 ```
+
+#### 离线后自动退出
+
+由于网络等原因，聊天室中的成员离线超过 2 分钟会自动退出聊天室。若需调整该时间，需联系环信商务。
+
+不过，以下两种情况除外：
+
+- 聊天室白名单中的成员（聊天室所有者和管理员默认加入白名单）。
+- [调用 RESTful API 创建聊天室](/document/server-side/chatroom_manage.html#创建聊天室)时拉入的用户从未登录过。
 
 ### 管理聊天室黑名单
 

@@ -68,27 +68,24 @@ do {
 } while (result && result.list < pageSize);
 ```
 
-2. 调用 `joinPublicGroup` 或 `requestToJoinPublicGroup` 方法传入群组 ID，申请加入对应群组。
+2. 调用 `requestToJoinPublicGroup` 方法传入群组 ID，申请加入对应公开群组。
 
-- 调用 `joinPublicGroup` 方法加入无需群主或管理员审批的公开群，即 `EMGroupStyle` 为 `EMGroupStylePublicOpenJoin`。申请人不会收到任何回调，其他群成员会收到 `EMGroupManagerDelegate#userDidJoinGroup` 回调。
-
-示例代码如下：
-
-```objective-c
-// 异步方法
-[[EMClient sharedClient].groupManager joinPublicGroup:@"groupId" completion:^(EMGroup *aGroup, EMError *aError) {
- }];
-```
-
-- 调用 `requestToJoinPublicGroup` 方法加入需要群主或管理员审批的公开群，即 `EMGroupStyle` 为 `EMGroupStylePublicJoinNeedApproval`。示例代码如下：
+- 如果公开群无需群主或管理员审批，即 `EMGroupStyle` 为 `EMGroupStylePublicOpenJoin`，申请人会直接加入群组，其他群成员会收到 `EMGroupManagerDelegate#userDidJoinGroup` 回调。
+- 如果公开群需要群主或管理员审批，即 `EMGroupStyle` 为 `EMGroupStylePublicJoinNeedApproval`，申请人不会直接加入群组，群主和群管理员收到 `EMGroupManagerDelegate#joinGroupRequestDidReceive` 回调。待群主或管理员同意入群申请后，申请人会收到joinGroupRequestDidApprove的回调。示例代码如下：
 
 ```objective-c
 // 异步方法
 [[EMClient sharedClient].groupManager requestToJoinPublicGroup:@"groupId" message:nil completion:^(EMGroup *aGroup1, EMError *aError) {
-}];
+        if (aError == nil) {
+            if (aGroup1.setting.style == EMGroupStylePublicOpenJoin) {
+                // 已直接加入公开群组
+            }
+            if (aGroup1.setting.style == EMGroupStylePublicJoinNeedApproval) {
+                // 不能直接加入群组，群主和群管理员收到 `EMGroupManagerDelegate#joinGroupRequestDidReceive` 回调。待群主或管理员同意入群申请后，申请人会收到joinGroupRequestDidApprove的回调
+            }
+        }
+    }];
 ```
-
-群主或群管理员收到 `EMGroupManagerDelegate#joinGroupRequestDidReceive` 回调。
 
 - 若同意加入群组，需要调用 `approveJoinGroupRequest` 方法。
 
