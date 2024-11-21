@@ -86,7 +86,7 @@ EMClient.getInstance().chatroomManager().removeChatRoomMembers(chatRoomId, membe
 
 由于网络等原因，聊天室中的成员离线超过 2 分钟会自动退出聊天室。若需调整该时间，需联系环信商务。
 
-不过，以下两种情况除外：
+以下两类成员即使离线也不会退出聊天室：
 
 - 聊天室白名单中的成员（聊天室所有者和管理员默认加入白名单）。
 - [调用 RESTful API 创建聊天室](/document/server-side/chatroom_manage.html#创建聊天室)时拉入的用户从未登录过。
