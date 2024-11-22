@@ -38,12 +38,12 @@ ChatClient.getInstance().pushManager()?.updatePushDisplayStyle(displayStyle).the
 
 ## 使用推送模板
 
-你可以使用推送模板设置推送标题和内容。推送模板包括默认推送模板 `default` 和自定义推送模板，你可以通过以下两种方式设置：
+推送模板主要用于服务器提供的默认配置不满足你的需求时，可使你设置全局范围的推送标题和推送内容。例如，服务器提供的默认设置为中文和英文的推送标题和内容，你若需要使用韩语或日语的推送标题和内容，则可以设置对应语言的推送模板。推送模板包括默认推送模板 `default` 和自定义推送模板。对于群组消息，你可以使用定向模板将离线通知只发送给特定用户，或向某些用户推送与其他用户不同的离线通知。
+
+你可以通过以下两种方式设置：
 
 - [调用 REST API 配置](/document/server-side/push.html#使用推送模板)。
 - 在[环信即时通讯云控制台](https://console.easemob.com/user/login)设置推送模板，详见[控制台文档](/product/enable_and_configure_IM.html#配置推送模板)。
-
-对于群组消息，你可以使用定向模板将离线通知只发送给特定用户，或向某些用户推送与其他用户不同的离线通知。
 
 使用推送模板有以下优势：
 
@@ -61,6 +61,12 @@ ChatClient.getInstance().pushManager()?.updatePushDisplayStyle(displayStyle).the
 2. 发送消息时使用默认模板：若有默认模板 `default`，发消息时无需指定。
 3. 接收方设置了推送模板。
 4. 发送消息时通过消息扩展字段指定模板名称。
+
+:::tip
+1. 设置推送模板为推送的高级功能，使用前需要在[环信即时通讯控制台](https://console.easemob.com/user/login)的**即时通讯 > 功能配置 > 功能配置总览**页面激活推送高级功能。如需关闭推送高级功能必须联系商务，因为该操作会删除所有相关配置。
+
+2. 推送模板相关的数据结构，详见[推送扩展字段](/server-side/push_extension.html)。
+:::
 
 #### **发送消息时使用推送模板**
 
