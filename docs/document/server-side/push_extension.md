@@ -1,4 +1,4 @@
- # 离线推送的消息扩展说明
+# 离线推送的消息扩展说明
 
 环信即时通讯 IM 支持 APNs 推送和 Android 厂商离线推送，包括华为、荣耀、FCM、小米、魅族、OPPO 和 vivo。使用离线推送时，你可以通过消息扩展字段实现推送相应功能，例如，设置推送模板中的推送标题和内容、设置仅接收提及（`@`）某些用户的推送通知等。
 
@@ -34,6 +34,18 @@
 | `name`         | String       | 推送模板名称。                                                 |
 | `title_args`   | `List<String>` | 推送模板标题参数，内置参数：发送方昵称 `{$fromNickname}`。      |
 | `content_args` | `List<String>` | 推送模板内容参数，内置参数：消息内容 `{$msg}`，如果开通了翻译，消息内容会跟随翻译结果显示。 |
+| `directed_template` | Object        | 定向推送模板。其中的字段如下表所示。    |
+
+定向模板中的字段：
+
+| 字段           | 类型          | 作用             |
+| -------------- | ------------- | ---------------- |
+| `target`       | Array<String> | 用户 ID 列表，传入的用户 ID 必须为全部小写，否则不生效。     |
+| `name`         | String        | 推送模板名称。     |
+| `title_args`   | Array<String> | 推送模板标题。 |
+| `content_args` | Array<String> | 推送模板内容。 |
+
+关于如何使用定向模板，详见[使用示例](#使用定向模板)。
 
 关于 `title_args` 和 `content_args` 字段的设置，详见[推送模板文档](push.html#使用推送模板)。
 
@@ -88,6 +100,8 @@
 | `receipt_id`      | String  | 回执 ID。                                |
 
 ## 示例
+
+### 离线推送相关的扩展字段
 
 离线推送的消息扩展字段如下所示：
 
@@ -170,8 +184,85 @@
 }
 ```
 
+### 使用定向模板
 
+下面介绍如何使用定向模板实现群组 @ 消息的自定义推送通知：
 
+1. 创建针对群 @ 用户的推送模板。
+
+```json
+{
+    "name": "at_push_template",
+    "title_pattern": "{0}",
+    "content_pattern": "{0}:{1}"
+}
+```
+
+2. 在群组中发送 @ 消息时使用定向推送模板。例如，在群组中 @ `hxtest`。
+
+```json
+{
+    "em_push_template": {
+        "name": "at_push_template",
+        "title_args": [
+            "群组名"
+        ],
+        "content_args": [
+            "张三",
+            "发来一条消息"
+        ],
+        "directed_template": {
+            "target": [
+                "hxtest"
+            ],
+            "name": "at_push_template",
+            "title_args": [
+                "群组名"
+            ],
+            "content_args": [
+                "张三",
+                "在群里@了你"
+            ]
+        }
+    }
+}
+```
+
+另外，对于被提及的用户之外的其他用户，推送内容也并非一定要用模板，也可用推送扩展字段自定义标题和内容：
+
+```json
+{
+    "em_push_template": {
+        "directed_template": {
+            "target": [
+                "hxtest"
+            ],
+            "name": "at_push_template",
+            "title_args": [
+                "群组名"
+            ],
+            "content_args": [
+                "张三",
+                "在群里@了你"
+            ]
+        }
+    },
+    "em_push_ext": {
+        "title": "群组名",
+        "content": "张三:发来一条消息"
+    }
+}
+```
+
+3. 推送通知内容显示。
+
+群组被 @ 的用户收到的通知如下图所示：
+
+![img](/images/server-side/push_@.png)
+
+群组中其他用户收到的通知如下图所示：
+
+![img](/images/server-side/push_other.png)
 
 
 
