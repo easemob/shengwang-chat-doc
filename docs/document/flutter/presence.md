@@ -15,7 +15,7 @@
 - `publishPresence`：发布自定义在线状态；
 - `subscribe`：订阅用户的在线状态；
 - `onPresenceStatusChanged` 被订阅用户的在线状态变更时，订阅者收到监听回调；
-- `unSubscribe`：无需关注用户的在线状态时，取消订阅；
+- `unsubscribe`：无需关注用户的在线状态时，取消订阅；
 - `fetchSubscribedMembers` 获取订阅列表；
 - `fetchPresenceStatus` 获取指定用户状态；
 
@@ -105,12 +105,12 @@ try {
 
 ### 取消订阅指定用户的在线状态
 
-若取消指定用户的在线状态订阅，可调用 `EMPresenceManager#unSubscribe` 方法，示例代码如下：
+若取消指定用户的在线状态订阅，可调用 `EMPresenceManager#unsubscribe` 方法，示例代码如下：
 
 ```dart
 // members: 将要取消订阅的用户列表
 try {
-  await EMClient.getInstance.presenceManager.unSubscribe(
+  await EMClient.getInstance.presenceManager.unsubscribe(
     members: members,
   );
 } on EMError catch (e) {
