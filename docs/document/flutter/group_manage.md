@@ -107,11 +107,9 @@ try {
 
 1. 调用 `EMGroupManager#fetchPublicGroupsFromServer` 方法从服务器获取公开群列表，查询到想要加入的群组 ID。
 2. 根据加群是否需要验证，调用不同的方法：
+   
   - 若无需验证，调用 `EMGroupManager#joinPublicGroup` 方法传入群组 ID，申请加入对应群组。
-  - 若需要验证，调用 `requestToJoinPublicGroup` 方法传入群组 ID，申请加入对应群组。
-
-示例代码如下：
-
+  
 ```dart
 // 获取公开群组列表
 try {
@@ -125,6 +123,22 @@ try {
   await EMClient.getInstance.groupManager.joinPublicGroup(groupId);
 } on EMError catch (e) {
 }
+```
+
+若需要验证，调用 `requestToJoinPublicGroup` 方法传入群组 ID，申请加入对应群组。
+
+```dart
+// 获取公开群组列表
+try {
+  EMCursorResult<EMGroupInfo> result =
+      await EMClient.getInstance.groupManager.fetchPublicGroupsFromServer();
+} on EMError catch (e) {
+}
+
+// 申请加入群组
+try {
+    await EMClient.getInstance.groupManager.requestToJoinPublicGroup('groupId');
+  } on EMError catch (e) {}
 ```
 
 ### 退出群组
