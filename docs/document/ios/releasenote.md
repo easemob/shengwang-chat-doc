@@ -2,6 +2,12 @@
 
 <Toc />
 
+## 版本 V4.10.2 Dev 2024-11-22（开发版）
+
+### 修复
+
+修复调用 [EMPushManager#getSilentModeForConversations:completion:](/document/ios/push/push_notification_mode_dnd.html#获取单个会话的推送通知设置) 方法获取会话的免打扰状态失败的问题。
+
 ## 版本 V4.10.1 Dev 2024-10-28（开发版）
 
 ### 修复
