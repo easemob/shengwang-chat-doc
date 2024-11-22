@@ -34,7 +34,7 @@
 | `name`         | String       | 推送模板名称。                                                 |
 | `title_args`   | `List<String>` | 推送模板标题参数，内置参数：发送方昵称 `{$fromNickname}`。      |
 | `content_args` | `List<String>` | 推送模板内容参数，内置参数：消息内容 `{$msg}`，如果开通了翻译，消息内容会跟随翻译结果显示。 |
-| `directed_template` | Object        | 定向推送模板。其中的字段如下表所示。    |
+| `directed_template` | Object        | 定向推送模板。此类模板适用于群组消息的离线推送，其中的字段如下表所示。    |
 
 定向模板中的字段：
 
