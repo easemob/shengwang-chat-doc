@@ -2,7 +2,7 @@
 
 本文以红包消息为例介绍如何添加一种新类型的自定义消息 Cell。
 
-## 继承自定义消息 Cell
+## 步骤一 继承自定义消息 Cell
 
 根据需求继承 `EaseChatUIKit` 中的自定义消息 Cell。
 
@@ -33,7 +33,7 @@ class RedPackageCell: CustomMessageCell {
 
 ```
 
-## 继承 Cell 的渲染模型
+## 步骤二 继承 Cell 的渲染模型
 
 根据需求继承 `EaseChatUIKit` 中的 Cell 的渲染模型 `MessageEntity`，并指定气泡大小，其中 `redPackageIdentifier` 为红包的自定义消息的 `event` 事件。
 
@@ -68,7 +68,7 @@ final class MineMessageEntity: MessageEntity {
 }
 ```
 
-## 添加附件消息类型
+## 步骤三 添加附件消息类型
 
 添加附件消息的类型，例如，增加红包消息。
 
@@ -78,7 +78,7 @@ final class MineMessageEntity: MessageEntity {
         Appearance.chat.inputExtendActions.append(redPackage)
 ```
 
-## 处理新增的附件消息类型的点击事件
+## 步骤四 处理新增的附件消息类型的点击事件
 
 继承 `MessageListController`，处理新增的附件消息类型的点击事件。
 
@@ -109,7 +109,7 @@ let redPackageIdentifier = "redPackage"
 
 ![img](/images/uikit/chatuikit/ios/configurationitem/chat/red_package_attachment.png =350x750)
 
-## 增加发送新类型附件消息的方法
+## 步骤五 增加发送新类型附件消息的方法
 
 在 `EaseChatUIKit` 的 `MessageListViewModel` 中增加发送红包消息的方法。
 
@@ -145,7 +145,7 @@ extension MessageListViewModel {
 
 ![img](/images/uikit/chatuikit/ios/configurationitem/chat/red_package_send.png =350x750)
 
-## 注册继承的对象
+## 步骤六 注册继承的对象
 
 将上述继承的对象初始化后，在 `EaseChatUIKit` 中进行注册。
 
