@@ -1,8 +1,10 @@
-# 实现新类型自定义消息 Cell
+# 实现新类型的自定义消息 Cell
 
 本文以红包消息为例介绍如何添加一种新类型的自定义消息 Cell。
 
-1. 根据需求继承 `EaseChatUIKit` 中的自定义消息 Cell。
+## 步骤一 继承自定义消息 Cell
+
+根据需求继承 `EaseChatUIKit` 中的自定义消息 Cell。
 
 ```Swift
 import UIKit
@@ -31,7 +33,9 @@ class RedPackageCell: CustomMessageCell {
 
 ```
 
-2. 根据需求继承 `EaseChatUIKit` 中的 Cell 的渲染模型 `MessageEntity`，并指定气泡大小，其中 `redPackageIdentifier` 为红包的自定义消息的 event事件。
+## 步骤二 继承 Cell 的渲染模型
+
+根据需求继承 `EaseChatUIKit` 中的 Cell 的渲染模型 `MessageEntity`，并指定气泡大小，其中 `redPackageIdentifier` 为红包的自定义消息的 `event` 事件。
 
 ```Swift
 import UIKit
@@ -64,9 +68,9 @@ final class MineMessageEntity: MessageEntity {
 }
 ```
 
-3. 添加发送附件消息的类型。
+## 步骤三 添加附件消息类型
 
-例如，增加发送红包消息。
+添加附件消息的类型，例如，增加红包消息。
 
 ```Swift
         
@@ -74,7 +78,9 @@ final class MineMessageEntity: MessageEntity {
         Appearance.chat.inputExtendActions.append(redPackage)
 ```
 
-4. 在继承的 `MessageListController` 处理新增的附件消息类型的点击。
+## 步骤四 处理新增的附件消息类型的点击事件
+
+继承 `MessageListController`，处理新增的附件消息类型的点击事件。
 
 ```Swift
 class CustomMessageListController: MessageListController {
@@ -101,9 +107,11 @@ let redPackageIdentifier = "redPackage"
 
 ```
 
-![img](/images/uikit/chatuikit/ios/configurationitem/chat/red_package_attachment.png)
+![img](/images/uikit/chatuikit/ios/configurationitem/chat/red_package_attachment.png =350x750)
 
-5. 给 `EaseChatUIKit` 中的 `MessageListViewModel` 增加发送红包消息的方法。
+## 步骤五 增加发送新类型附件消息的方法
+
+在 `EaseChatUIKit` 的 `MessageListViewModel` 中增加发送红包消息的方法。
 
 ```Swift
 extension MessageListViewModel {
@@ -135,9 +143,11 @@ extension MessageListViewModel {
 
 ```
 
-![img](/images/uikit/chatuikit/ios/configurationitem/chat/red_package_send.png)
+![img](/images/uikit/chatuikit/ios/configurationitem/chat/red_package_send.png =350x750)
 
-6. 将上述继承的对象初始化后，在 `EaseChatUIKit`中进行注册。
+## 步骤六 注册继承的对象
+
+将上述继承的对象初始化后，在 `EaseChatUIKit` 中进行注册。
 
 ```Swift
         
@@ -147,7 +157,10 @@ extension MessageListViewModel {
         ComponentsRegister.shared.registerCustomizeCellClass(cellType: RedPackageCell.self)
 ```
 
-- 这里 `ComponentsRegister.shared.Conversation = MineConversationInfo.self` 是为了修改自定义消息在会话列表中。会话收到新消息时显示的内容这里暂定为显示 "[红包]"，示例代码如下，主要更改在非文本消息类型的 `else` 中根据自定义消息的 `event` 显示对应的内容。
+这里的 `ComponentsRegister.shared.Conversation = MineConversationInfo.self` 用于在会话列表中展示收到的新类型的自定义消息内容。
+
+例如，在以下示例代码中，会话中收到新消息时显示为 "[红包]"，主要调整了在非文本消息类型的 `else` 中根据自定义消息的 `event` 显示对应的内容。
+  
 ```Swift
 import UIKit
 import EaseChatUIKit
@@ -222,4 +235,4 @@ final class MineConversationInfo: ConversationInfo {
 
 ```
 
-![img](/images/uikit/chatuikit/ios/configurationitem/chat/red_package_receive.png)
+![img](/images/uikit/chatuikit/ios/configurationitem/chat/red_package_receive.png =350x750)
