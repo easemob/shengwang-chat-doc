@@ -202,6 +202,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 400     | illegal_argument | announcement is null | 没有传递公告内容。 | 需传递公告内容。 |
+| 403     | group_announce_violation | group announcement is violation, please change it. | 群公告不合法。 | 使用合法的群公告。 |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 | 404     | resource_not_found | grpID XX does not exist! | 群组不存在。 | 使用合法的群 ID。 |
 | 403     | FORBIDDEN | announce info length exceeds limit! | 设置公告长度超限制。 | 设置较短的公告 |

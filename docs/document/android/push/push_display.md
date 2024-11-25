@@ -81,7 +81,7 @@ EMPushManager.DisplayStyle style = pushConfigs.getDisplayStyle();
 :::tip
 1. 设置推送模板为推送的高级功能，使用前需要在[环信即时通讯控制台](https://console.easemob.com/user/login)的**即时通讯 > 功能配置 > 功能配置总览**页面激活推送高级功能。如需关闭推送高级功能必须联系商务，因为该操作会删除所有相关配置。
 
-2. 推送模板相关的数据结构，详见[推送扩展字段](https://doc.easemob.com/document/server-side/push_extension.html)。
+2. 推送模板相关的数据结构，详见[推送扩展字段](/document/server-side/push_extension.html)。
 :::
 
 ### 发消息时使用推送模板

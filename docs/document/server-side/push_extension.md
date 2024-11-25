@@ -40,10 +40,10 @@
 
 | 字段           | 类型          | 作用             |
 | -------------- | ------------- | ---------------- |
-| `target`       | Array<String> | 用户 ID 列表，传入的用户 ID 必须为全部小写，否则不生效。     |
+| `target`       | `Array<String>` | 用户 ID 列表，传入的用户 ID 必须为全部小写，否则不生效。     |
 | `name`         | String        | 推送模板名称。     |
-| `title_args`   | Array<String> | 推送模板标题。 |
-| `content_args` | Array<String> | 推送模板内容。 |
+| `title_args`   | `Array<String>` | 推送模板标题。 |
+| `content_args` | `Array<String>` | 推送模板内容。 |
 
 关于如何使用定向模板，详见[使用示例](#使用定向模板)。
 
