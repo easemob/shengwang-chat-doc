@@ -54,7 +54,13 @@ const chatUikitSidebar = [
     children: [
       { text: '主题', link: 'chatuikit_theme.html' },
       { text: '会话列表', link: 'chatuikit_custom_conversation_list.html' },
-      { text: '消息', link: 'chatuikit_custom_chat.html' },
+      { text: '消息', 
+        collapsible: true,
+        children: [
+          { text: '自定义聊天页面', link: 'chatuikit_custom_chat.html' },
+          { text: '实现新类型自定义消息 Cell', link: 'chatuikit_custom_cell.html' }
+        ], 
+      },
       { text: '通讯录', link: 'chatuikit_custom_contact_list.html' },
       { text: '联系人详情', link: 'chatuikit_custom_contact_details.html' },
       { text: '群详情', link: 'chatuikit_custom_group_details.html' },
