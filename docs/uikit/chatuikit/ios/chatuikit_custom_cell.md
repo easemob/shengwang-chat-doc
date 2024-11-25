@@ -2,8 +2,6 @@
 
 本文以红包消息为例介绍如何添加一种新类型的自定义消息 Cell。
 
-![img](/images/uikit/chatuikit/ios/configurationitem/chat/red_package_receive.png)
-
 1. 根据需求继承 `EaseChatUIKit` 中的自定义消息 Cell。
 
 ```Swift
