@@ -424,7 +424,6 @@ curl -X PUT -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 | 403     | group_name_violation | XX is violation, please change it. | 群组名称不合法。 | 使用合法的群组名称。 |
-| 403     | group_announce_violation | group announcement is violation, please change it. | 群公告不合法。 | 使用合法的群公告。 |
 | 404     | resource_not_found | grpID XX does not exist! | 群组不存在。 | 使用合法的群 ID。 |
 | 400     | invalid_parameter                  | "some of [groupid] are not valid fields"  | 修改的群组信息时，传入的参数不支持，例如修改 `groupid`。| 
 
