@@ -33,7 +33,7 @@
 | * 强制用户从单设备下线 | DELETE | /{org_name}/{app_name}/users/{username}/disconnect/{resourceId} | 100 次/秒/App Key |
 | * 获取指定账号的在线登录设备列表    | GET  | /{org_name}/{app_name}/users/{username}/resources | 100 次/秒/App Key  |
 
-## 消息推送
+## 离线推送
 
 | RESTful API 接口        | 方法 | 接口 URL           | 接口最高调用频率（默认值） |
 | :----------- | :--- | :------------- | :----------- |
