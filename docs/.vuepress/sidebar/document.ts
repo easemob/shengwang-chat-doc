@@ -354,6 +354,7 @@ const documentSidebar = [
           { text: '管理群组', link: 'group_manage.html' },
           { text: '管理群组文件', link: 'group_file.html' },
           { text: '管理群组成员', 
+            collapsible: true,
             children: [
               { text: '获取成员列表', link: 'group_member_obtain.html' },
               { text: '添加/移除成员', link: 'group_member_add_delete.html' },
@@ -374,6 +375,7 @@ const documentSidebar = [
           { text: '管理聊天室', link: 'chatroom_manage.html' },
           { text: '管理聊天室属性', link: 'chatroom_attribute.html' },
           { text: '管理聊天室成员', 
+            collapsible: true,
             children: [
               { text: '获取成员列表', link: 'chatroom_member_obtain.html' },
               { text: '添加/移除成员', link: 'chatroom_member_add_delete.html' },
