@@ -280,7 +280,7 @@ POST https://{host}/{org_name}/{app_name}/collections
 | - `data`   | String | 是       | 收藏内容。     |
 | - `type` | Int | 是       | 收藏类型。 |
 | - `ext` | String | 是       | 收藏的扩展信息。 |
-| - `createdAt` | Int | 是       | 收藏的添加时间。 |
+| - `createdAt` | Long | 是       | 收藏的添加时间。 |
 | `username`  | String | 是       | 为哪个用户添加收藏。  |
 
 #### HTTP 响应
@@ -397,8 +397,8 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}/collections/{collectio
 | `type` | Int  | 收藏类型。  |
 | `data` | String     | 收藏内容。           |
 | `ext`  | String  | 收藏的扩展信息。     |
-| `createdAt` | Int  | 收藏创建时间。            |
-| `updatedAt` | Int  | 收藏更新时间。            |
+| `createdAt` | Long  | 收藏创建时间。            |
+| `updatedAt` | Long  | 收藏更新时间。            |
 
 响应字段及说明详见 [公共参数](#公共参数)。
 
