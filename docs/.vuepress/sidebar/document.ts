@@ -353,7 +353,17 @@ const documentSidebar = [
         children: [
           { text: '管理群组', link: 'group_manage.html' },
           { text: '管理群组文件', link: 'group_file.html' },
-          { text: '管理群组成员', link: 'group_member.html' },
+          { text: '管理群组成员', 
+            children: [
+              { text: '获取成员列表', link: 'group_member_obtain.html' },
+              { text: '添加/移除成员', link: 'group_member_add_delete.html' },
+              { text: '管理群成员自定义属性', link: 'group_member_attribute.html' },
+              { text: '管理群主/管理员', link: 'group_member_admin.html' },
+              { text: '管理禁言', link: 'group_member_mutelist.html' },
+              { text: '管理白名单', link: 'group_member_allowlist.html' },
+              { text: '管理黑名单', link: 'group_member_blocklist.html' }
+            ]  
+          },
           { text: '管理子区', link: 'group_thread.html' }
         ]
       },
@@ -363,7 +373,17 @@ const documentSidebar = [
           { text: '管理超级管理员', link: 'chatroom_superadmin.html' },
           { text: '管理聊天室', link: 'chatroom_manage.html' },
           { text: '管理聊天室属性', link: 'chatroom_attribute.html' },
-          { text: '管理聊天室成员', link: 'chatroom_member.html' }
+          { text: '管理聊天室成员', 
+            children: [
+              { text: '获取成员列表', link: 'chatroom_member_obtain.html' },
+              { text: '添加/移除成员', link: 'chatroom_member_add_delete.html' },
+              { text: '管理聊天室所有者/管理员', link: 'chatroom_member_admin.html' },
+              { text: '管理禁言', link: 'chatroom_member_mutelist.html' },
+              { text: '管理用户标签及禁言', link: 'chatroom_label_mute.html' },
+              { text: '管理白名单', link: 'chatroom_member_allowlist.html' },
+              { text: '管理黑名单', link: 'chatroom_member_blocklist.html' }
+            ]  
+          }
         ]
       },
       { 
@@ -372,7 +392,8 @@ const documentSidebar = [
           { text: '用户体系管理', link: 'account_system.html' },
           { text: '用户属性', link: 'userprofile.html' },
           { text: '用户状态订阅', link: 'presence.html' },
-          // { text: '用户收藏', link: 'favorite.html'},
+          { text: '用户全局禁言', link: 'user_global_mute.html' },
+          { text: '用户收藏', link: 'user_favorite.html'},
           { text: '用户关系管理', link: 'user_relationship.html' }
         ]
       },
