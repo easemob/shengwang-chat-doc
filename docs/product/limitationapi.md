@@ -205,6 +205,9 @@
 | 禁言聊天室全体成员    |    POST  | /{org_name}/{app_name}/chatrooms/{chatroom_id}/ban            | 100 次/秒/App Key  |
 | 解除聊天室禁言成员   |  DELETE     | /{org_name}/{app_name}/chatrooms/{chatroom_id}/mute/{member1}(,{member2},…)  | 100 次/秒/App Key      |
 | 解除聊天室全员禁言    |  DELETE     | /{org_name}/{app_name}/chatrooms/{chatroom_id}/ban            | 100 次/秒/App Key   |
+| 按聊天室用户标签禁言    |  PUT     | /{org_name}/{app_name}/chatrooms/{chatroom_id}/tag/mute    | 100 次/秒/App Key   |
+| 设置用户在聊天室中的标签    |  PUT     | /{org_name}/{app_name}/chatrooms/{chatroom_id}/users/{username}/tag    | 100 次/秒/App Key   |
+| 获取用户聊天室标签    |  GET     | /{org_name}/{app_name}/chatrooms/{chatroom_id}/users/{username}/tag    | 100 次/秒/App Key   |
 | 获取超级管理员列表   |   GET    | /{org_name}/{app_name}/chatrooms/super_admin                  | 100 次/秒/App Key  |
 | 添加超级管理员   |    POST    | /{org_name}/{app_name}/chatrooms/super_admin                  | 100 次/秒/App Key   |
 | 移除超级管理员    |  DELETE    | /{org_name}/{app_name}/chatrooms/super_admin/{superAdmin}     | 100 次/秒/App Key  |

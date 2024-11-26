@@ -392,7 +392,8 @@ const documentSidebar = [
           { text: '用户体系管理', link: 'account_system.html' },
           { text: '用户属性', link: 'userprofile.html' },
           { text: '用户状态订阅', link: 'presence.html' },
-          { text: '用户收藏', link: 'favorite.html'},
+          { text: '用户全局禁言', link: 'user_global_mute.html' },
+          { text: '用户收藏', link: 'user_favorite.html'},
           { text: '用户关系管理', link: 'user_relationship.html' }
         ]
       },
