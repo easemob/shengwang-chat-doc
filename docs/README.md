@@ -816,7 +816,7 @@ projects:
                 link: /document/electron/group.html#群成员管理 
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/group_member.html#管理群组成员   
+                link: /document/server-side/group_member_obtain.html#管理群组成员   
           - text: 管理群组属性
             desc: 支持修改群组名称及描述、获取和更新群组公告、管理群共享文件和更新群扩展字段。
             sdks:
@@ -924,7 +924,7 @@ projects:
                 link: /document/electron/chatroom.html#加入聊天室
               - icon: /sdk/rest.svg
                 text: REST
-                link: /document/server-side/chatroom_member.html#管理聊天室成员
+                link: /document/server-side/chatroom_member_obtain.html#管理聊天室成员
           - text: 管理聊天室属性
             desc: 管理聊天室基本属性，包括聊天室名称、描述和公告，以及自定义属性。
             sdks:
