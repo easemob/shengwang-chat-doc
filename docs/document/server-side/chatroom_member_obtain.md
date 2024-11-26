@@ -32,13 +32,13 @@
 
 可以分页获取聊天室成员列表。
 
-#### HTTP 请求
+### HTTP 请求
 
 ```http
 GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/users?pagenum={N}&pagesize={N}
 ```
 
-##### 路径参数
+#### 路径参数
 
 | 参数          | 类型   | 是否必需 | 描述  |
 | :------------ | :----- | :------- | :---------------- |
@@ -47,22 +47,22 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/users?pagenum={
 | `app_name`    | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
 | `chatroom_id` | String | 是       | 聊天室 ID。  |
 
-##### 查询参数
+#### 查询参数
 
 | 参数       | 类型 | 是否必需 | 描述                                                           |
 | :--------- | :--- | :------- | :------------------------------------------------------------- |
 | `pagenum`  | Int  | 否       | 查询页码。默认值为 `1`。                                         |
 | `pagesize` | Int  | 否       | 每页显示的聊天室成员数量。默认值为 1000。取值范围为 [0,1000]。若传入的值超过了 1000，则返回 1000 个聊天室成员。 |
 
-##### 请求 header
+#### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述                                  |
 | :-------------- | :----- | :------- | :--------------------------------- |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-#### HTTP 响应
+### HTTP 响应
 
-##### 响应 body
+#### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -88,9 +88,9 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/users?pagenum={
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-#### 示例
+### 示例
 
-##### 请求示例
+#### 请求示例
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
@@ -98,7 +98,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/users?pagenum={
 curl -X GET https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/users?pagenum=2&pagesize=2 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
-##### 响应示例
+#### 响应示例
 
 ```json
 {
@@ -126,7 +126,7 @@ curl -X GET https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/users?pagenum=2&pagesize=2
 }
 ```
 
-#### 错误码
+### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
