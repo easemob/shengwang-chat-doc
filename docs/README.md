@@ -1126,6 +1126,18 @@ projects:
               - icon: /sdk/rest.svg
                 text: REST
                 link: /document/server-side/presence.html
+          - text: 用户全局禁言
+            desc: 设置单个用户 ID 的单聊、群组或聊天室消息的全局禁言。设置成功后，该用户将无法在对应的单聊、群组或聊天室中发送消息。
+            sdks:
+              - icon: /sdk/rest.svg
+                text: REST
+                link: /document/server-side/user_global_mute.html 
+          - text: 用户收藏
+            desc: 支持收藏聊天过程中发送成功的各类消息或你的其他自定义内容。这些收藏的内容永久保存，你可以随时查看。
+            sdks:
+              - icon: /sdk/rest.svg
+                text: REST
+                link: /document/server-side/user_favorite.html                 
           - text: 多设备登录
             desc: 同一账号在多个设备上登录，所有已登录的设备之间可以同步消息、好友和群组相关操作、子区操作以及会话操作。
             sdks:
