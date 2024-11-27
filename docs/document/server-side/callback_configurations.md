@@ -35,7 +35,7 @@ app 的响应内容不能超过 1,000 个字符。
 
 | content_type         | payload 中类型                | 触发事件           |
 | :----------- | :---------------------------- | :----------------- |
-| chat:user:*         | -                          | 单聊中发送任何消息     |
+| chat:user:*         | -                          | 单聊中发送任何类型的消息     |
 | chat:user:text     | {“bodies”:{“type”:“txt”}}     | 单聊中发送文本消息   |
 | chat:user:image     | {“bodies”:{“type”:“img”}}     | 单聊中发送图片消息   |
 | chat:user:voice   | {“bodies”:{“type”:“audio”}}   | 单聊中发送语音消息   |
@@ -218,7 +218,7 @@ payload 示例：
 | `summary`        | String | 合并消息的概要。                |
 | `title`        | String | 合并消息的标题。                |
 | `url`        | String | 合并消息的附件的 URL 地址。你可以访问该 URL 下载该附件。                |
-| `ext`        | String | 合并消息的扩展信息。                |
+| `ext`        | JSON | 合并消息的扩展信息。                |
 | `from`        | String | 合并消息的发送方的用户 ID。                |
 | `to`        | String | 接收方的用户 ID。                |
 | `type`        | String | 会话类型：<br/> - `chat`: 单聊；<br/> - `groupchat`: 群聊；<br/> - `chatroom`: 聊天室。              |
@@ -351,16 +351,16 @@ payload 之外的字段如下表所示：
 | content_type             | payload 中类型                | 触发事件             |
 | :--------------- | :---------------------------- | :------------------- |
 | chat:room:*         | -                             | 聊天室中发送任何类型的消息     |
-| chat:room:text     | {“bodies”:{“type”:“txt”}}     | 聊天室中发文本消息   |
-| chat:room:image    | {“bodies”:{“type”:“img”}}     | 聊天室中发图片消息   |
-| chat:room:voice   | {“bodies”:{“type”:“audio”}}   | 聊天室中发语音消息   |
-| chat:room:location     | {“bodies”:{“type”:“loc”}}     | 聊天室中发位置消息   |
-| chat:room:video   | {“bodies”:{“type”:“video”}}   | 聊天室中发视频消息   |
-| chat:room:file    | {“bodies”:{“type”:“file”}}    | 聊天室中发文件消息   |
-| chat:room:command     | {“bodies”:{“type”:“cmd”}}     | 聊天室中发命令消息   |
-| chat:room:custom  | {“bodies”:{“type”:“custom”}}  | 聊天室中发自定义消息 |
-| chat:room:combine  | {“bodies”:{“type”:“txt”,“subType”:“sub_combine”}}  | 聊天室中发自定义消息 |
-| chat:room:unknown | {“bodies”:{“type”:“unknown”}} | 聊天室中发未知消息   |
+| chat:room:text     | {“bodies”:{“type”:“txt”}}     | 聊天室中发送文本消息   |
+| chat:room:image    | {“bodies”:{“type”:“img”}}     | 聊天室中发送图片消息   |
+| chat:room:voice   | {“bodies”:{“type”:“audio”}}   | 聊天室中发送语音消息   |
+| chat:room:location     | {“bodies”:{“type”:“loc”}}     | 聊天室中发送位置消息   |
+| chat:room:video   | {“bodies”:{“type”:“video”}}   | 聊天室中发送视频消息   |
+| chat:room:file    | {“bodies”:{“type”:“file”}}    | 聊天室中发送文件消息   |
+| chat:room:command     | {“bodies”:{“type”:“cmd”}}     | 聊天室中发送命令消息   |
+| chat:room:custom  | {“bodies”:{“type”:“custom”}}  | 聊天室中发送自定义消息 |
+| chat:room:combine  | {“bodies”:{“type”:“txt”,“subType”:“sub_combine”}}  | 聊天室中发送合并消息 |
+| chat:room:unknown | {“bodies”:{“type”:“unknown”}} | 聊天室中发送未知消息   |
 
 #### 回调请求的包体示例
 
