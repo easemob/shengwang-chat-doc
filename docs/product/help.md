@@ -22,10 +22,6 @@
 
 ![](/images/product/help-ticket2.jpeg)
 
-## FAQ 帮助中心
-
-[环信 FAQ 帮助中心](https://faq.easemob.com/)提供各客户端、RESTful API、环信控制台以及商务相关的常见问题，您在遇到问题时可以查看，快速找到答案。
-
 ## IM Geek 社区
 
 [IM Geek 开发者社区](https://www.imgeek.net) 中的环信专区/环信技术交流板块提供了集成常见问题的讨论和解答，供您参考。您也可以登录该社区后，在导航栏点击 **发起** > **问题**发帖提问，我们的技术和服务人员会及时解答您的疑问！
