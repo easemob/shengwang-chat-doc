@@ -44,7 +44,7 @@ app 的响应内容不能超过 1,000 个字符。
 | chat:user:file    | {“bodies”:{“type”:“file”}}    | 单聊中发送文件消息   |
 | chat:user:command     | {“bodies”:{“type”:“cmd”}}     | 单聊中发送命令消息   |
 | chat:user:custom  | {“bodies”:{“type”:“custom”}}  | 单聊中发送自定义消息 |
-| chat:user:combine  | {“bodies”:{“subType”:“sub_combine”}}  | 单聊中发送合并消息 | 
+| chat:user:combine  | {“bodies”:{“type”:“txt”,“subType”:“sub_combine”}}  | 单聊中发送合并消息 | 
 | chat:user:unknown | {“bodies”:{“type”:“unknown”}} | 单聊中发送未知消息   |
 
 #### 回调请求的包体示例
@@ -212,29 +212,45 @@ payload 示例：
 | `combineLevel`  | Int   | 合并消息的嵌套层级数。 |
 | `file_length` | Int | 合并消息附件的大小，单位为字节。               |
 | `filename`        | String | 合并消息的附件名称。     |
+| `msg`        | String | 合并消息的兼容文本。当支持合并消息的 SDK 向不支持合并消息的低版本 SDK 发送消息时，低版本的 SDK 会将该属性解析为文本消息的消息内容。      |
 | `secret`        | String | 合并消息附件的访问密钥。如果[文件上传](message_download.html#上传文件) 时设置了文件访问限制，则该字段存在。  |
 | `subType`        | String | 消息类型。合并消息为 `sub_combine`。       |
 | `summary`        | String | 合并消息的概要。                |
 | `title`        | String | 合并消息的标题。                |
 | `url`        | String | 合并消息的附件的 URL 地址。你可以访问该 URL 下载该附件。                |
+| `ext`        | String | 合并消息的扩展信息。                |
+| `from`        | String | 合并消息的发送方的用户 ID。                |
+| `to`        | String | 接收方的用户 ID。                |
+| `type`        | String | 会话类型：<br/> - `chat`: 单聊；<br/> - `groupchat`: 群聊；<br/> - `chatroom`: 聊天室。              |
 
 例如，下面示例为源消息包括文本、图片和文件消息的合并消息格式：
 
 ```json
-"bodies": 
-[
-   {
-      "combineLevel": 1,
-      "file_length": 550,
-      "filename": "17289718748990036",
-      "secret": "a_OTmoq6Ee-CygH0PRzcUyFniZDmSsX1ur0j-9RtCj3tK6Gr",
-      "subType": "sub_combine",
-      "summary": ":yyuu\n:[图片]\n:[文件]\n",
-      "title": "聊天记录",
-      "url": "https://XXXX/XXXX/XXXX/chatfiles/6bf39390-8aba-11ef-a8ae-6f545c50ca23"
+  "payload": {
+        "bodies": [
+            {
+                "combineLevel": 1,
+                "file_length": 1059,
+                "filename": "17326799853580001",
+                "msg": "当前版本过低，无法展示对应内容。",
+                "secret": "CeycYKx0Ee-I3fU0d5v4X9BduteO1RZNVsePAgkDQ9sxoVJM",
+                "subType": "sub_combine",
+                "summary": "wzy1: 你在哪里？\nwzy1: 你在哪里？\nwzy1: 你在哪里？",
+                "title": "聊天记录",
+                "type": "txt",
+                "url": "https://a1-hsb.easemob.com/easemob-demo/testy/chatfiles/09ec7550-ac74-11ef-83ce-4719989e3c82"
+            }
+        ],
+        "ext": {
+            "ease_chat_uikit_user_info": {
+                "nickname": "公子小白有点黑"
+            }
+        },
+        "from": "user1",
+        "to": "user2",
+        "type": "chat"
     }
-]
-```
+```        
 
 ### 发送单聊消息已读回执
 
