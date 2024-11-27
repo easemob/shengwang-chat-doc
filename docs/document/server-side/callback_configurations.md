@@ -305,7 +305,7 @@ payload 示例：
 | chat:group:file    | {“bodies”:{“type”:“file”}}    | 群组中发送文件消息   |
 | chat:group:command     | {“bodies”:{“type”:“cmd”}}     | 群聊中发送命令消息   |
 | chat:group:custom  | {“bodies”:{“type”:“custom”}}  | 群组中发送自定义消息 |
-| chat:group:combine  | {“bodies”:{“subType”:“sub_combine”}}  | 群组中发送合并消息 |
+| chat:group:combine  | {“bodies”:{“type”:“txt”,“subType”:“sub_combine”}}  | 群组中发送合并消息 |
 | chat:group:unknown | {“bodies”:{“type”:“unknown”}} | 群组中发送未知消息   |
 
 #### 回调请求的包体示例
@@ -359,7 +359,7 @@ payload 之外的字段如下表所示：
 | chat:room:file    | {“bodies”:{“type”:“file”}}    | 聊天室中发文件消息   |
 | chat:room:command     | {“bodies”:{“type”:“cmd”}}     | 聊天室中发命令消息   |
 | chat:room:custom  | {“bodies”:{“type”:“custom”}}  | 聊天室中发自定义消息 |
-| chat:room:combine  | {“bodies”:{“subType”:“sub_combine”}}  | 聊天室中发自定义消息 |
+| chat:room:combine  | {“bodies”:{“type”:“txt”,“subType”:“sub_combine”}}  | 聊天室中发自定义消息 |
 | chat:room:unknown | {“bodies”:{“type”:“unknown”}} | 聊天室中发未知消息   |
 
 ### 回调请求的包体示例
@@ -397,6 +397,8 @@ payload 之外的字段如下表所示：
 | :------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_发送的消息的 ID”。 | 
 | `msg_id`    | String   | 发送的消息 ID。 | 
+
+聊天室消息的 payload 与单聊消息相同，详见[发送单聊消息](#发送单聊消息)。
 
 ## 消息撤回
 
