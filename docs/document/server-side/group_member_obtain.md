@@ -53,7 +53,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users?pagenum={N}
 | :--------- | :--- | :------- | :------------------- |
 | `pagenum`  | Int  | 否       | 当前页码。默认从第 1 页开始获取。                           |
 | `pagesize` | Int  | 否       | 每页期望返回的群组成员数量。取值范围为 [1,1000]。默认为 `1000`。若传入的值大于 `1000`，则获取 1000 个群组成员。 |
-| `joined_time` | Bool  | 否       | 是否需返回用户加入群组的时间：<br/> - `true`：返回 <br/> - `false`：不返回 |
+| `joined_time` | Bool  | 否       | 是否需返回用户加入群组的时间：<br/> - `true`：返回 <br/> - （默认）`false`：不返回 |
 
 #### 请求 header
 
@@ -79,6 +79,8 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users?pagenum={N}
 | `entities`           | JSON   | 响应实体。  |
 | `data` | JSON Array | 群组成员信息。  |
 | `data.owner`  | String | 群主的用户 ID。例如：{“owner”: “user1”}。   |
+| `data.admin`  | String | 群组管理员的用户 ID。例如：{“admin”: “user2”}。   |
+| `data.member`  | String | 群组普通成员的用户 ID。例如：{“member”: “user3”}。   |
 | `data.joined_time` | String | 加入群组的时间。 |
 | `timestamp`          | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。   |
 | `duration`           | Long   | 从发送 HTTP 请求到响应的时长，单位为毫秒。     |
@@ -97,7 +99,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/users?pagenum={N}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/users?pagesize=1000&pagenum=1&joined_time=true'  \
+curl -X GET HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/users?pagesize=1000&pagenum=1&joined_time=true'   \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
@@ -106,8 +108,11 @@ curl -X GET HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/users?pagesize=1000&pagenu
 ```json
 {
   "action": "get",
-  "application": "52XXXXf0",
+  "application": "cc7380d5-XXXX-XXXX-a93e-51d6d590b475",
   "params": {
+    "joined_time": [
+        "true"
+    ],
     "pagesize": ["2"],
     "pagenum": ["2"]
   },
@@ -115,17 +120,23 @@ curl -X GET HTTP://XXXX/XXXX/XXXX/chatgroups/10XXXX85/users?pagesize=1000&pagenu
   "entities": [],
   "data": [
     {
-      "owner": "user1"
+          "owner": "user1",
+          "joined_time": 1732524850107
     },
     {
-      "member": "user2"
+          "admin": "user",
+          "joined_time": 173252433307
+    },
+    {
+          "member": "user3",
+          "joined_time": 173252433456
     }
   ],
   "timestamp": 1489074511416,
   "duration": 0,
   "organization": "XXXX",
   "applicationName": "testapp",
-  "count": 2
+  "count": 1
 }
 ```
 

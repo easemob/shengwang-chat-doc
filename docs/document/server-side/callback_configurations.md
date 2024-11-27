@@ -2,19 +2,17 @@
 
 <Toc />
 
-通过回调过滤规则的设置，可以根据需求选择回调中的有用信息。在环信管理后台设置发送后回调规则后，默认会回调所有事件信息，如需单独设置特定类型不回调，请联系环信商务经理。
-
-## 从环信服务器向你的应用服务器发送请求
-
-请求采用 POST 方式，支持 HTTP/HTTPS，正文部分为 JSON 格式的字符串，字符集为 UTF-8。
+你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)[设置发送后回调规则](/product/enable_and_configure_IM.html#配置回调规则)，选择所需的事件类型。规则设置后，环信服务器向你的应用服务器发送回调请求，请求采用 POST 方式，支持 HTTP/HTTPS，正文部分为 JSON 格式的字符串，字符集为 UTF-8。
 
 回调时，会对发送的正文做 MD5 签名。 环信 IM 使用的 MD5 为 `org.apache.commons.codec.digest.DigestUtils#md5Hex`。
 
 app 的响应内容不能超过 1,000 个字符。
 
-## 回调事件
+## 发送消息事件
 
-### 回调内容中单聊、群聊、聊天室事件的公共参数描述
+### 公共参数
+
+单聊、群聊、聊天室中发消息回调的公共参数如下表所示：
 
 | 参数 | 类型   | 描述 |
 | :---------------- | :----- |:------------------------------------------------------------------|
@@ -31,34 +29,36 @@ app 的响应内容不能超过 1,000 个字符。
 | `security`        | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。 Secret 见 Console 后台回调规则。     |
 | `appkey`          | String | 你在环信管理后台注册的应用唯一标识。        |
 | `host`            | String | 服务器名称。              |
+| `content_type`            | String | 消息类型：<br/> - `chat:user:*`：单聊消息  <br/> - `chat:group:*`：群组消息   <br/> - `chat:room:*`：聊天室消息  <br/>  文本、图片、音视频等消息对应的参数值，详见[发送单聊消息](#发送单聊消息)、[发送群组消息](#发送群组消息)和[发送聊天室消息](#发送聊天室消息)章节。   |
 
-### 单聊
+### 发送单聊消息
 
-| 事件         | payload 中类型                | 触发事件           |
+| content_type         | payload 中类型                | 触发事件           |
 | :----------- | :---------------------------- | :----------------- |
-| chat         | -                             | 单聊中所有事件     |
-| chat:txt     | {“bodies”:{“type”:“txt”}}     | 单聊中发文本消息   |
-| chat:img     | {“bodies”:{“type”:“img”}}     | 单聊中发图片消息   |
-| chat:audio   | {“bodies”:{“type”:“audio”}}   | 单聊中发语音消息   |
-| chat:loc     | {“bodies”:{“type”:“loc”}}     | 单聊中发位置消息   |
-| chat:video   | {“bodies”:{“type”:“video”}}   | 单聊中发视频消息   |
-| chat:file    | {“bodies”:{“type”:“file”}}    | 单聊中发文件消息   |
-| chat:cmd     | {“bodies”:{“type”:“cmd”}}     | 单聊中发命令消息   |
-| chat:custom  | {“bodies”:{“type”:“custom”}}  | 单聊中发自定义消息 |
-| chat:unknown | {“bodies”:{“type”:“unknown”}} | 单聊中发未知消息   |
+| chat:user:*         | -                          | 单聊中发送任何消息     |
+| chat:user:text     | {“bodies”:{“type”:“txt”}}     | 单聊中发送文本消息   |
+| chat:user:image     | {“bodies”:{“type”:“img”}}     | 单聊中发送图片消息   |
+| chat:user:voice   | {“bodies”:{“type”:“audio”}}   | 单聊中发送语音消息   |
+| chat:user:location     | {“bodies”:{“type”:“loc”}}     | 单聊中发送位置消息   |
+| chat:user:video   | {“bodies”:{“type”:“video”}}   | 单聊中发送视频消息   |
+| chat:user:file    | {“bodies”:{“type”:“file”}}    | 单聊中发送文件消息   |
+| chat:user:command     | {“bodies”:{“type”:“cmd”}}     | 单聊中发送命令消息   |
+| chat:user:custom  | {“bodies”:{“type”:“custom”}}  | 单聊中发送自定义消息 |
+| chat:user:combine  | {“bodies”:{“subType”:“sub_combine”}}  | 单聊中发送合并消息 | 
+| chat:user:unknown | {“bodies”:{“type”:“unknown”}} | 单聊中发送未知消息   |
 
-#### 单聊 payload 中消息的字段解释及回调请求的包体示例
+#### 回调请求的包体示例
 
-##### 文字以及透传消息
+##### 文本和命令消息
 
 | 字段     | 数据类型 | 描述                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
 | `ext`    | object   | 消息扩展字段。                                             |
 | `bodies` | object   | 该回调的主体内容，包含以下两个字段 `msg`，`type`。           |
 | `msg`    | String    | 消息内容。                                                   |
-| `type`   | String   | 消息类型，包括：<br/> - 文本消息：`txt`；<br/> - 图片消息：`img`；<br/> - 语音消息：`audio`；<br/> - 位置消息：`loc`；<br/> - 视频消息：`video` ；<br/> - 文件消息：`file`；<br/> - 命令消息：`cmd`； <br/> - 自定义消息：`custom`；<br/> - 未知消息：`unknown`。 |
+| `type`   | String   | 消息类型：<br/> - 文本消息：`txt` <br/> - 命令消息：`cmd` |
 
-回调请求中 payload 示例：
+下面的示例以文本消息为例展示回调请求中 payload：
 
 ```json
 "payload":{
@@ -76,9 +76,9 @@ app 的响应内容不能超过 1,000 个字符。
 | `filename`    | String | 图片名称。                                                   |
 | `secret`      | String | 成功上传文件后返回的 `secret`。                              |
 | `file_length` | Int    | 图片文件大小（单位：字节）。                                 |
-| `size`        | Json   | 图片尺寸；`height`：高度，`width`：宽度。                    |
-| `url`         | String | 域名 /orgname/appname/chatfiles/ 成功上传文件返回的 UUID。参考请求示例。 |
-| `type`        | String | 消息类型，包括：<br/> - 文本消息：`txt`；<br/> - 图片消息：`img`；<br/> - 语音消息：`audio`；<br/> - 位置消息：`loc`；<br/> - 视频消息：`video` ；<br/> - 文件消息：`file`；<br/> - 命令消息：`cmd`； <br/> - 自定义消息：`custom`；<br/> - 未知消息：`unknown`。 |
+| `size`        | Json   | 图片尺寸：`height`：高度，`width`：宽度。                    |
+| `url`         | String | 域名 `/orgname/appname/chatfiles/` 成功上传文件返回的 UUID。参考请求示例。 |
+| `type`        | String | 消息类型：`img` |
 
 payload 示例：
 
@@ -96,16 +96,17 @@ payload 示例：
 }
 ```
 
-##### 语音消息 payload 字段
+##### 语音消息
 
 | 字段          | 类型   | 描述                                                        |
 | :------------ | :----- | :----------------------------------------------------------- |
-| `ext`         | Json   | 消息扩展字段。                                             |
+| `ext`         | JSON   | 消息扩展字段。                                             |
 | `filename`    | String | 文件名称。                                                   |
 | `secret`      | String | 成功上传文件后返回的 secret。                                |
 | `file_length` | Long   | 语音文件大小（单位：字节）。                                 |
 | `Length`      | Int    | 语音时间（单位：秒）。                                       |
 | `url`         | String | 域名 `/org_name/app_name/chatfiles/` 成功上传文件返回的 UUID。 |
+| `type`        | String | 消息类型：`audio` |
 
 回调请求的包体示例：
 
@@ -127,16 +128,16 @@ payload 示例：
 
 | 字段           | 类型   | 描述                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
-| `ext`          | Json   | 消息扩展字段。                                             |
+| `ext`          | JSON   | 消息扩展字段。                                             |
 | `bodies`       | object | 该回调的主体内容，包含以下字段 `thumb_secret`、`thumb`、`filename`，`secret`，`file_length`，`size`，`url`，`type`。 |
 | `thumb_secret` | String | 成功上传视频缩略图后返回的 secret。                          |
 | `filename`     | String | 文件名称。                                                   |
-| `size`         | Json   | 缩略图图片尺寸；`height`：高度，`width`：宽度。              |
+| `size`         | JSON   | 缩略图图片尺寸：`height`：高度，`width`：宽度。              |
 | `thumb`        | String | 成功上传视频缩略图返回的 UUID。                              |
 | `secret`       | String | 成功上传视频文件后返回的 secret。                            |
 | `length`       | Int    | 视频播放长度。                                               |
 | `file_length`  | Long   | 视频文件大小，单位为字节。                                 |
-| `type`         | String | 消息类型，包括：<br/> - 文本消息：`txt`；<br/> - 图片消息：`img`；<br/> - 语音消息：`audio`；<br/> - 位置消息：`loc`；<br/> - 视频消息：`video` ；<br/> - 文件消息：`file`；<br/> - 命令消息：`cmd`； <br/> - 自定义消息：`custom`；<br/> - 未知消息：`unknown`。 |
+| `type`         | String | 消息类型：`video`    |
 | `url`          | String | 视频文件的 URL 地址，格式为 `https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`，其中 `file_uuid` 为视频文件 ID。成功上传视频文件后，从文件上传的响应 body 中获取。  |
 
 payload 示例：
@@ -187,10 +188,10 @@ payload 示例：
 
 | 参数          | 类型 | 描述                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
-| `customEvent` | String   | 用户自定义的事件类型，必须是 string，值必须满足正则表达式。 [a-zA-Z0-9-_/.]{1,32}，最短 1 个字符 最长 32 个字符。 |
+| `customEvent` | String   | 用户自定义的事件类型，必须是 String，值必须满足正则表达式。 [a-zA-Z0-9-_/.]{1,32}，最短 1 个字符 最长 32 个字符。 |
 | `customExts`/`v2:customExts`  | Array/JSON     | 用户自定义的事件属性。该参数为可选，不需要可以不传。<br/> - `customExts` 为旧版参数，数组类型，最多可包含 16 个元素。<br/> - `v2:customExts` 为新版参数，Map<String,String> 类型，最多可以包含 16 个元素。推荐使用该新版参数。 |
 | `from`        | String   | 表示消息发送者;无此字段 Server 会默认设置为 “from”:“admin”，有 from 字段但值为空串 (“”) 时请求失败。 |
-| `ext`         | Json     | 扩展属性，支持 app 自定义内容。可以没有这个字段；但是如果有，值不能是 “ext:null” 这种形式，否则会发生错误。 |
+| `ext`         | JSON     | 扩展属性，支持 app 自定义内容。可以没有这个字段；但是如果有，值不能是 “ext:null” 这种形式，否则会发生错误。 |
 
 ```json
 "payload": {
@@ -204,7 +205,38 @@ payload 示例：
 }
 ```
 
-#### 发送单聊消息已读回执
+##### 合并消息
+
+| 参数          | 类型   | 描述                                             |
+| :------------ | :----- | :----------------------------------------------- |
+| `combineLevel`  | Int   | 合并消息的嵌套层级数。 |
+| `file_length` | Int | 合并消息附件的大小，单位为字节。               |
+| `filename`        | String | 合并消息的附件名称。     |
+| `secret`        | String | 合并消息附件的访问密钥。如果[文件上传](message_download.html#上传文件) 时设置了文件访问限制，则该字段存在。  |
+| `subType`        | String | 消息类型。合并消息为 `sub_combine`。       |
+| `summary`        | String | 合并消息的概要。                |
+| `title`        | String | 合并消息的标题。                |
+| `url`        | String | 合并消息的附件的 URL 地址。你可以访问该 URL 下载该附件。                |
+
+例如，下面示例为源消息包括文本、图片和文件消息的合并消息格式：
+
+```json
+"bodies": 
+[
+   {
+      "combineLevel": 1,
+      "file_length": 550,
+      "filename": "17289718748990036",
+      "secret": "a_OTmoq6Ee-CygH0PRzcUyFniZDmSsX1ur0j-9RtCj3tK6Gr",
+      "subType": "sub_combine",
+      "summary": ":yyuu\n:[图片]\n:[文件]\n",
+      "title": "聊天记录",
+      "url": "https://XXXX/XXXX/XXXX/chatfiles/6bf39390-8aba-11ef-a8ae-6f545c50ca23"
+    }
+]
+```
+
+### 发送单聊消息已读回执
 
 回调请求主要字段含义：
 
@@ -244,22 +276,23 @@ payload 示例：
 }
 ```
 
-### 群聊
+## 发送群组消息
 
-| 事件              | payload 中类型                | 触发事件           |
+| content_type             | payload 中类型                | 触发事件           |
 | :---------------- | :---------------------------- | :----------------- |
-| groupchat         | -                             | 群聊中所有事件     |
-| groupchat:txt     | {“bodies”:{“type”:“txt”}}     | 群聊中发文本消息   |
-| groupchat:img     | {“bodies”:{“type”:“img”}}     | 群聊中发图片消息   |
-| groupchat:audio   | {“bodies”:{“type”:“audio”}}   | 群聊中发语音消息   |
-| groupchat:loc     | {“bodies”:{“type”:“loc”}}     | 群聊中发位置消息   |
-| groupchat:video   | {“bodies”:{“type”:“video”}}   | 群聊中发视频消息   |
-| groupchat:file    | {“bodies”:{“type”:“file”}}    | 群聊中发文件消息   |
-| groupchat:cmd     | {“bodies”:{“type”:“cmd”}}     | 群聊中发命令消息   |
-| groupchat:custom  | {“bodies”:{“type”:“custom”}}  | 群聊中发自定义消息 |
-| groupchat:unknown | {“bodies”:{“type”:“unknown”}} | 群聊中发未知消息   |
+| chat:group:*        | -                             | 群组中发送任何类型的消息     |
+| chat:group:text     | {“bodies”:{“type”:“txt”}}     | 群组中发送文本消息   |
+| chat:group:image     | {“bodies”:{“type”:“img”}}     | 群组中发送图片消息   |
+| chat:group:voice   | {“bodies”:{“type”:“audio”}}   | 群组中发送语音消息   |
+| chat:group:location    | {“bodies”:{“type”:“loc”}}     | 群组中发送位置消息   |
+| chat:group:video   | {“bodies”:{“type”:“video”}}   | 群组中发送视频消息   |
+| chat:group:file    | {“bodies”:{“type”:“file”}}    | 群组中发送文件消息   |
+| chat:group:command     | {“bodies”:{“type”:“cmd”}}     | 群聊中发送命令消息   |
+| chat:group:custom  | {“bodies”:{“type”:“custom”}}  | 群组中发送自定义消息 |
+| chat:group:combine  | {“bodies”:{“subType”:“sub_combine”}}  | 群组中发送合并消息 |
+| chat:group:unknown | {“bodies”:{“type”:“unknown”}} | 群组中发送未知消息   |
 
-#### 群聊中发送消息 payload 中的字段解释
+### 回调请求的包体示例
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
@@ -295,22 +328,25 @@ payload 之外的字段如下表所示：
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_发送的消息的 ID”。 | 
 | `msg_id`    | String   | 发送的消息 ID。 | 
 
-### 聊天室
+群组消息的 payload 与单聊消息相同，详见[发送单聊消息](#发送单聊消息)。
 
-| 事件             | payload 中类型                | 触发事件             |
+## 发送聊天室消息
+
+| content_type             | payload 中类型                | 触发事件             |
 | :--------------- | :---------------------------- | :------------------- |
-| chatroom         | -                             | 聊天室中所有事件     |
-| chatroom:txt     | {“bodies”:{“type”:“txt”}}     | 聊天室中发文本消息   |
-| chatroom:img     | {“bodies”:{“type”:“img”}}     | 聊天室中发图片消息   |
-| chatroom:audio   | {“bodies”:{“type”:“audio”}}   | 聊天室中发语音消息   |
-| chatroom:loc     | {“bodies”:{“type”:“loc”}}     | 聊天室中发位置消息   |
-| chatroom:video   | {“bodies”:{“type”:“video”}}   | 聊天室中发视频消息   |
-| chatroom:file    | {“bodies”:{“type”:“file”}}    | 聊天室中发文件消息   |
-| chatroom:cmd     | {“bodies”:{“type”:“cmd”}}     | 聊天室中发命令消息   |
-| chatroom:custom  | {“bodies”:{“type”:“custom”}}  | 聊天室中发自定义消息 |
-| chatroom:unknown | {“bodies”:{“type”:“unknown”}} | 聊天室中发未知消息   |
+| chat:room:*         | -                             | 聊天室中发送任何类型的消息     |
+| chat:room:text     | {“bodies”:{“type”:“txt”}}     | 聊天室中发文本消息   |
+| chat:room:image    | {“bodies”:{“type”:“img”}}     | 聊天室中发图片消息   |
+| chat:room:voice   | {“bodies”:{“type”:“audio”}}   | 聊天室中发语音消息   |
+| chat:room:location     | {“bodies”:{“type”:“loc”}}     | 聊天室中发位置消息   |
+| chat:room:video   | {“bodies”:{“type”:“video”}}   | 聊天室中发视频消息   |
+| chat:room:file    | {“bodies”:{“type”:“file”}}    | 聊天室中发文件消息   |
+| chat:room:command     | {“bodies”:{“type”:“cmd”}}     | 聊天室中发命令消息   |
+| chat:room:custom  | {“bodies”:{“type”:“custom”}}  | 聊天室中发自定义消息 |
+| chat:room:combine  | {“bodies”:{“subType”:“sub_combine”}}  | 聊天室中发自定义消息 |
+| chat:room:unknown | {“bodies”:{“type”:“unknown”}} | 聊天室中发未知消息   |
 
-#### 聊天室中发送消息 payload 中的字段解释
+### 回调请求的包体示例
 
 | 字段     | 数据类型 | 含义                                                         |
 | :------- | :------- | :----------------------------------------------------------- |
@@ -346,7 +382,7 @@ payload 之外的字段如下表所示：
 | `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_发送的消息的 ID”。 | 
 | `msg_id`    | String   | 发送的消息 ID。 | 
 
-### 消息撤回
+## 消息撤回
 
 | 事件   | payload 中类型 | 触发事件       |
 | :----- | :------------- | :------------- |
@@ -402,7 +438,7 @@ payload 中字段含义：
 }
 ```
 
-### 群组和聊天室操作
+## 群组和聊天室操作
 
 | 事件                       | payload 中类型                         | 群聊触发事件                                   | 聊天室触发事件         |
 | :------------------------- | :------------------------------------- | :--------------------------------------------- | :--------------------- |
@@ -441,7 +477,7 @@ payload 中字段含义：
 | muc:delete_metadata | {“operation”:“delete_metadata”} | 不支持| 删除聊天室自定义属性。|
 | muc:group_member_metadata_update | {“operation”:“group_member_metadata_update”} | 设置群成员的自定义属性 | 不支持 |
 
-#### 创建群组
+### 创建群组
 
 payload 字段含义：
 
@@ -490,7 +526,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 解散群/聊天室
+### 解散群/聊天室
 
 payload 字段含义：
 
@@ -572,7 +608,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 用户申请加入群
+### 用户申请加入群
 
 payload 字段含义：
 
@@ -621,7 +657,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 同意成员加群申请
+### 同意成员加群申请
 
 payload 字段含义：
 
@@ -669,7 +705,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 邀请新用户进群
+### 邀请新用户进群
 
 payload 字段含义：
 
@@ -718,7 +754,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 受邀用户同意入群
+### 受邀用户同意入群
 
 payload 字段含义：
 
@@ -767,7 +803,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 受邀用户拒绝入群
+### 受邀用户拒绝入群
 
 payload 字段含义：
 
@@ -816,7 +852,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 踢出群/聊天室
+### 踢出群/聊天室
 
 payload 字段含义：
 
@@ -890,7 +926,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 添加成员至群组黑名单
+### 添加成员至群组黑名单
 
 payload 字段含义：
 
@@ -939,7 +975,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 将成员从群组黑名单中移除
+### 将成员从群组黑名单中移除
 
 payload 字段含义：
 
@@ -988,7 +1024,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 群/聊天室信息修改
+### 群/聊天室信息修改
 
 payload 字段含义：
 
@@ -1063,7 +1099,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 屏蔽群组
+### 屏蔽群组
 
 payload 字段含义：
 
@@ -1112,7 +1148,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 解除屏蔽群组
+### 解除屏蔽群组
 
 payload 字段含义：
 
@@ -1161,7 +1197,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 有新成员加入了群组或聊天室
+### 有新成员加入了群组或聊天室
 
 payload 字段含义：
 
@@ -1226,7 +1262,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 有成员离开了群组或聊天室
+### 有成员离开了群组或聊天室
 
 payload 字段含义：
 
@@ -1291,7 +1327,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 成员主动退出群/成员主动离开聊天室
+### 成员主动退出群/成员主动离开聊天室
 
 payload 字段含义：
 
@@ -1365,7 +1401,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 转让群
+### 转让群
 
 payload 字段含义：
 
@@ -1412,7 +1448,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 添加群/聊天室管理员
+### 添加群/聊天室管理员
 
 payload 字段含义：
 
@@ -1487,7 +1523,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 删除群/聊天室管理员
+### 删除群/聊天室管理员
 
 payload 字段含义：
 
@@ -1562,7 +1598,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 将群/聊天室成员禁言
+### 将群/聊天室成员禁言
 
 payload 字段含义：
 
@@ -1638,7 +1674,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 将群/聊天室成员解除禁言
+### 将群/聊天室成员解除禁言
 
 payload 字段含义：
 
@@ -1713,7 +1749,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 更新群/聊天室公告
+### 更新群/聊天室公告
 
 payload 字段含义：
 
@@ -1790,7 +1826,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 删除群/聊天室公告
+### 删除群/聊天室公告
 
 payload 字段含义：
 
@@ -1867,7 +1903,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 上传群共享文件
+### 上传群共享文件
 
 payload 字段含义：
 
@@ -1929,7 +1965,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 删除群共享文件
+### 删除群共享文件
 
 payload 字段含义：
 
@@ -1978,7 +2014,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 添加用户进群/聊天室白名单
+### 添加用户进群/聊天室白名单
 
 payload 字段含义：
 
@@ -2052,7 +2088,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 将用户移出群/聊天室白名单
+### 将用户移出群/聊天室白名单
 
 payload 字段含义：
 
@@ -2126,7 +2162,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 群/聊天室全局禁言
+### 群/聊天室全局禁言
 
 payload 字段含义：
 
@@ -2200,7 +2236,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 解除群/聊天室全局禁言
+### 解除群/聊天室全局禁言
 
 payload 字段含义：
 
@@ -2274,7 +2310,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 设置/更新聊天室自定义属性
+### 设置/更新聊天室自定义属性
 
 payload 字段含义：
 
@@ -2329,7 +2365,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 删除聊天室自定义属性
+### 删除聊天室自定义属性
 
 payload 字段含义：
 
@@ -2384,7 +2420,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-#### 设置群成员的自定义属性
+### 设置群成员的自定义属性
 
 payload 字段含义：
 
@@ -2439,7 +2475,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-### 好友关系操作
+## 好友关系操作
 
 | 事件                  | payload 中类型                 | 触发事件             |
 | :-------------------- | :----------------------------- | :------------------- |
@@ -2451,7 +2487,7 @@ payload 之外的字段如下表所示：
 | `roster:ban`            | `{“operation”:“ban”}`           | 拉黑好友             |
 | `roster:allow`          | `{“operation”:“allow”}`          | 解除拉黑好友         |
 
-#### 添加好友
+### 添加好友
 
 payload 字段含义：
 
@@ -2488,7 +2524,7 @@ payload 示例：
     }
 ```
 
-#### 删除好友
+### 删除好友
 
 payload 字段含义：
 
@@ -2525,7 +2561,7 @@ payload 示例：
     }
 ```
 
-#### 同意好友申请
+### 同意好友申请
 
 用户发送好友申请后，对方用户同意加好友后会收到服务器发送的该事件。
 
@@ -2564,7 +2600,7 @@ payload 之外的字段如下表所示：
     }
 ```
 
-#### 拒绝好友申请
+### 拒绝好友申请
 
 用户发送好友申请后，对方用户拒绝添加好友后会收到服务器发送的该事件。
 
@@ -2603,7 +2639,7 @@ payload 之外的字段如下表所示：
     }
 ```
 
-#### 拉黑好友
+### 拉黑好友
 
 payload 字段含义：
 
@@ -2644,7 +2680,7 @@ payload 示例：
 ```
 
 
-#### 解除拉黑好友
+### 解除拉黑好友
 
 payload 字段含义：
 
@@ -2684,7 +2720,7 @@ payload 之外的字段如下表所示：
 }
 ```
 
-### 用户登入登出
+## 用户登入登出
 
 app 用户状态分为在线和离线两种，即用户已连接到环信即时通讯 IM 服务器即为在线，与环信即时通讯 IM 服务器断开连接即为离线。用户登入和登出即时通讯 IM 会导致在线状态发生变化。某些情况下，例如，进入隧道等特殊网络情况，依赖心跳超时，用户进入离线状态最长会有 5 分钟延时。
 
@@ -2707,7 +2743,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 | `userStatus:logout`   | `{“status”:“offline”,”reason“:“logout”}`   | 用户登出             |
 | `userStatus:replaced` | `{“status”:“offline”,”reason“:“replaced”}` | 用户被踢            |
 
-#### 用户登录
+### 用户登录
 
 回调请求主要字段含义：
 
@@ -2743,7 +2779,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 }
 ```
 
-#### 用户登出
+### 用户登出
 
 回调请求主要字段含义：
 
@@ -2779,7 +2815,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 }
 ```
 
-#### 用户登出（被其他设备踢掉）
+### 用户登出（被其他设备踢掉）
 
 回调请求主要字段含义：
 
@@ -2815,7 +2851,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 }
 ```
 
-### 离线推送
+## 离线推送
 
 回调请求主要字段含义：
 
@@ -2969,7 +3005,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 }
 ```
 
-### 敏感词监测
+## 敏感词监测
 
 回调请求主要字段含义：
 
@@ -3057,7 +3093,7 @@ app 用户状态分为在线和离线两种，即用户已连接到环信即时�
 }
 ```
 
-### Reaction 回调事件
+## Reaction 回调事件
 
 若对消息中的表情回复 Reaction 进行了操作，环信服务器会向你的 app server 发送回调请求。
 
@@ -3151,7 +3187,7 @@ Reaction 回调请求中的字段含义如下表所示：
 }
 ```
 
-### Thread 回调事件
+## Thread 回调事件
 
 若对 Thread 中的一条消息进行相关操作，包括发送、撤回或修改，环信服务器会向你的 app server 发送回调请求。
 
