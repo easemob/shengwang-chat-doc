@@ -243,9 +243,9 @@ curl -X POST https://XXX/XXX/XXX/users/{username}/collections
 
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
 | :----------- | :--- | :------------- | :----------- | :----------- |
-| 400         | illegal_argument  | username XXX is not legal   | 用户名不合法。  | 查看注册用户名[规范](account_system.html#开放注册单个用户)。 |
+| 400         | illegal_argument  | username XXX is not legal   | 用户 ID 不合法。  | 查看注册用户名[规范](account_system.html#开放注册单个用户)。 |
 
-关于其他错误，你可以参考 [错误码](#错误码) 了解可能的原因。
+关于其他错误，你可以参考 [错误码](error.html) 了解可能的原因。
 
 ## 批量添加用户收藏
 
@@ -346,9 +346,9 @@ curl -X POST https://XXX/XXX/XXX/collections
 
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
 | :----------- | :--- | :------------- | :----------- | :----------- |
-| 400         | illegal_argument  | username XXX is not legal   | 用户名不合法。  | 查看注册用户名[规范](account_system.html#开放注册单个用户)。 |
+| 400         | illegal_argument  | username XXX is not legal   | 用户 ID 不合法。  | 查看注册用户名[规范](account_system.html#开放注册单个用户)。 |
 
-关于其他错误，你可以参考 [错误码](#错误码) 了解可能的原因。
+关于其他错误，你可以参考 [错误码](error.html) 了解可能的原因。
 
 ## 修改用户收藏的扩展信息
 
@@ -440,9 +440,9 @@ curl -X PUT https://XXX/XXX/XXX/users/{username}/collections/{collectionId} \
 
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
 | :----------- | :--- | :------------- | :----------- | :----------- |
-| 400         | illegal_argument  | username XXX is not legal   | 用户名不合法。  | 查看注册用户名[规范](account_system.html#开放注册单个用户)。 |
+| 400         | illegal_argument  | username XXX is not legal   | 用户 ID 不合法。  | 查看注册用户名[规范](account_system.html#开放注册单个用户)。 |
 
-关于其他错误，你可以参考 [错误码](#错误码) 了解可能的原因。
+关于其他错误，你可以参考 [错误码](error.html) 了解可能的原因。
 
 
 ## 删除用户收藏
@@ -524,10 +524,10 @@ curl -X DELETE https://XXX/XXX/XXX/users/{username}/collections \
 
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
 | :----------- | :--- | :------------- | :----------- | :----------- |
-| 400         | illegal_argument  | username XXX is not legal   | 用户名不合法。  | 查看注册用户名[规范](account_system.html#开放注册单个用户)。 |
+| 400         | illegal_argument  | username XXX is not legal   | 用户 ID 不合法。  | 查看注册用户名[规范](account_system.html#开放注册单个用户)。 |
 | 400         |     | user collection not found  | 用户收藏找不到。  | 对 `collection_ids` 参数传入存在的用户收藏 ID。        |
 
-关于其他错误，你可以参考 [错误码](#错误码) 了解可能的原因。
+关于其他错误，你可以参考 [错误码](error.html) 了解可能的原因。
 
 
 
