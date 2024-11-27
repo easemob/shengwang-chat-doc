@@ -44,7 +44,7 @@ app 的响应内容不能超过 1,000 个字符。
 | chat:user:file    | {“bodies”:{“type”:“file”}}    | 单聊中发送文件消息   |
 | chat:user:command     | {“bodies”:{“type”:“cmd”}}     | 单聊中发送命令消息   |
 | chat:user:custom  | {“bodies”:{“type”:“custom”}}  | 单聊中发送自定义消息 |
-| chat:user:combine  | {“bodies”:{“type”:“txt”,“subType”:“sub_combine”}}  | 单聊中发送合并消息 | 
+| chat:user:txt  | {“bodies”:{“type”:“txt”,“subType”:“sub_combine”}}  | 单聊中发送合并消息 | 
 | chat:user:unknown | {“bodies”:{“type”:“unknown”}} | 单聊中发送未知消息   |
 
 #### 回调请求的包体示例
@@ -305,7 +305,7 @@ payload 示例：
 | chat:group:file    | {“bodies”:{“type”:“file”}}    | 群组中发送文件消息   |
 | chat:group:command     | {“bodies”:{“type”:“cmd”}}     | 群聊中发送命令消息   |
 | chat:group:custom  | {“bodies”:{“type”:“custom”}}  | 群组中发送自定义消息 |
-| chat:group:combine  | {“bodies”:{“type”:“txt”,“subType”:“sub_combine”}}  | 群组中发送合并消息 |
+| chat:group:txt  | {“bodies”:{“type”:“txt”,“subType”:“sub_combine”}}  | 群组中发送合并消息 |
 | chat:group:unknown | {“bodies”:{“type”:“unknown”}} | 群组中发送未知消息   |
 
 #### 回调请求的包体示例
@@ -359,7 +359,7 @@ payload 之外的字段如下表所示：
 | chat:room:file    | {“bodies”:{“type”:“file”}}    | 聊天室中发送文件消息   |
 | chat:room:command     | {“bodies”:{“type”:“cmd”}}     | 聊天室中发送命令消息   |
 | chat:room:custom  | {“bodies”:{“type”:“custom”}}  | 聊天室中发送自定义消息 |
-| chat:room:combine  | {“bodies”:{“type”:“txt”,“subType”:“sub_combine”}}  | 聊天室中发送合并消息 |
+| chat:room:txt  | {“bodies”:{“type”:“txt”,“subType”:“sub_combine”}}  | 聊天室中发送合并消息 |
 | chat:room:unknown | {“bodies”:{“type”:“unknown”}} | 聊天室中发送未知消息   |
 
 #### 回调请求的包体示例
