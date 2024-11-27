@@ -381,7 +381,7 @@ const documentSidebar = [
               { text: '添加/移除成员', link: 'chatroom_member_add_delete.html' },
               { text: '管理聊天室所有者/管理员', link: 'chatroom_member_admin.html' },
               { text: '管理禁言', link: 'chatroom_member_mutelist.html' },
-              { text: '管理用户标签及禁言', link: 'chatroom_label_mute.html' },
+              // { text: '管理用户标签及禁言', link: 'chatroom_label_mute.html' },
               { text: '管理白名单', link: 'chatroom_member_allowlist.html' },
               { text: '管理黑名单', link: 'chatroom_member_blocklist.html' }
             ]  
