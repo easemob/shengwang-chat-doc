@@ -63,7 +63,7 @@
 
 ## 聊天室事件回调
 
-你可以实现发送后回调，使环信 IM 服务器将聊天室事件同步给你的应用服务器。若聊天室内发生新成员加入、退出、被添加到禁言列表、黑名单列表等相关操作时，环信 IM 服务器向应用服务器发起 HTTP/HTTPS POST 请求，同步所发生的事件，详见[聊天室事件回调文档](/document/server-side/callback_configurations.html#聊天室)。
+你可以实现发送后回调，使环信 IM 服务器将聊天室事件同步给你的应用服务器。若聊天室内发生新成员加入、退出、被添加到禁言列表、黑名单列表等相关操作时，环信 IM 服务器向应用服务器发起 HTTP/HTTPS POST 请求，同步所发生的事件，详见[聊天室事件回调文档](/document/server-side/callback_group_room_create.html)。
 
 ## 聊天室限制
 
