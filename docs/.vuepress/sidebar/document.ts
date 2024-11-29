@@ -431,15 +431,18 @@ const documentSidebar = [
     children: [
       { text: '设置回调', link: 'callback.html' },
       { text: '发送后回调事件',
+        collapsible: true,
         children: [
           { text: '用户登入/登出', link: 'callback_login_logout.html' },
           { text: '发送消息', link: 'callback_message_send.html' },
           { text: '发送单聊消息已读回执', link: 'callback_single_read_ack.html' },
           { text: '撤回消息', link: 'callback_message_recall.html' },
           { text: '群组/聊天室操作（新）', 
+            collapsible: true,
             children: [
               { text: '创建群组/聊天室', link: 'callback_group_room_create.html' },
-              { text: '更新群组/聊天室', 
+              { text: '更新群组/聊天室',
+                collapsible: true,
                 children: [
                   { text: '更新群组_聊天室信息', link: 'callback_group_room_info.html' },
                   { text: '变更群主/聊天室所有者', link: 'callback_group_room_owner.html' },
