@@ -415,7 +415,7 @@ const documentSidebar = [
     children: [
       { text: 'Java Server SDK 2.0', link: 'java_server_sdk_2.0.html' },
       { text: 'Java Server SDK 1.0', link: 'java_server_sdk.html' },
-      { text: 'PHP Server SDK', link: 'php_server_sdk.html' },
+      { text: 'PHP Server SDK', link: 'php_server_sdk.html' }
     ],
     only: ['server-side']
   },
@@ -430,7 +430,47 @@ const documentSidebar = [
     text: '设置回调',
     children: [
       { text: '设置回调', link: 'callback.html' },
-      { text: '发送后回调-事件回调', link: 'callback_configurations.html' }
+      { text: '发送后回调事件',
+        collapsible: true,
+        children: [
+          { text: '用户登入/登出', link: 'callback_login_logout.html' },
+          { text: '发送消息', link: 'callback_message_send.html' },
+          { text: '发送单聊消息已读回执', link: 'callback_single_read_ack.html' },
+          { text: '撤回消息', link: 'callback_message_recall.html' },
+          { text: '群组/聊天室操作（新）', 
+            collapsible: true,
+            children: [
+              { text: '创建群组/聊天室', link: 'callback_group_room_create.html' },
+              { text: '更新群组/聊天室',
+                collapsible: true,
+                children: [
+                  { text: '更新群组_聊天室信息', link: 'callback_group_room_info.html' },
+                  { text: '变更群主/聊天室所有者', link: 'callback_group_room_owner.html' },
+                  { text: '设置/更新公告', link: 'callback_group_room_announcement.html' },
+                  { text: '封禁/解禁群组', link: 'callback_group_ban.html' },
+                  { text: '全员禁言', link: 'callback_group_room_muteall.html' }
+                ]
+              },
+              { text: '删除群组/聊天室', link: 'callback_group_room_delete.html' },
+              { text: '屏蔽/解除屏蔽群组', link: 'callback_group_block.html' },
+              { text: '上传/删除群共享文件', link: 'callback_group_shared_file.html' },
+              { text: '用户加入', link: 'callback_group_room_join.html' },
+              { text: '成员离开', link: 'callback_group_room_leave.html' },
+              { text: '添加/移除管理员', link: 'callback_group_room_admin.html' },
+              { text: '加入/移出禁言列表', link: 'callback_group_room_mute.html' },
+              { text: '添加/移出白名单', link: 'callback_group_room_allowlist.html' },
+              { text: '加入/移出黑名单', link: 'callback_group_room_blocklist.html' },
+              { text: '添加/移除聊天室超级管理员', link: 'callback_room_superadmin.html' }
+            ]
+          },
+          { text: '群组/聊天室操作（旧）', link: 'callback_group_room_old.html' },
+          { text: '用户关系操作', link: 'callback_contact.html' },
+          { text: '离线推送', link: 'callback_offline_push.html' },
+          { text: 'Reaction', link: 'callback_reaction.html' },
+          { text: 'Thread', link: 'callback_thread.html' },
+          { text: '敏感词监测', link: 'callback_sensitive_word.html' }
+        ]
+      }
     ],
     only: ['server-side']
   }
