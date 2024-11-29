@@ -23,8 +23,8 @@ Android 中错误码的类为 `EMError`。
 | 103    |           INVALID_URL           | URL 不正确：该错误码已废弃。                 |
 | 104    |          INVALID_TOKEN          | 用户 token 不正确：登录时提供的 token 为空或不正确。     |
 | 105    |       USER_NAME_TOO_LONG        | 用户 ID 过长：用户 ID 长度不能超过 64 字节。  |
-| 108    |          TOKEN_EXPIRED          | 声网 token 已过期：超出声网 token 有效期时间。        |
-| 109    |        TOKEN_WILL_EXPIRE        | 声网 token 即将过期：超出声网 token 有效期一半时间时会开始回调此错误码。 |
+| 108    |          TOKEN_EXPIRED          | 用户 token 已过期：超出 token 有效期时间。        |
+| 109    |        TOKEN_WILL_EXPIRE        | 用户 token 即将过期：超出 token 有效期一半时间时会开始回调此错误码。 |
 | 110    |          INVALID_PARAM          | 参数无效。                          |
 | 200    |       USER_ALREADY_LOGIN        | 用户已登录：该用户 ID 已经登录。            |
 | 201    |         USER_NOT_LOGIN          | 用户未登录：例如，如果未登录成功时发送消息或者使用群组操作的 API，SDK 会提示该错误。 |

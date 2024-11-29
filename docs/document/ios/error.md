@@ -25,8 +25,8 @@ iOS 的错误码只有当操作出错的时候才会有返回值，否则返回 
 | 103    |          EMErrorInvalidURL          | URL 不正确，该错误码已废弃。                                 |
 | 104    |          EMErrorInvalidToken        | 用户 token 不正确：登录时提供的 token 为空或不正确。                                |
 | 105    |       EMErrorUsernameTooLong        | 用户 ID 过长：用户 ID 长度不能超过 64 字节。  |
-| 108    |       EMErrorTokenExpire     | 声网 token 已过期：超出声网 token 有效期时间。        |
-| 109    |       EMErrorTokeWillExpire      | 声网 token 即将过期：超出声网 token 有效期一半时间时会开始回调此错误码。 |
+| 108    |       EMErrorTokenExpire     | 用户 token 已过期：超出用户 token 有效期时间。        |
+| 109    |       EMErrorTokeWillExpire      | 用户 token 即将过期：超出 token 有效期一半时间时会开始回调此错误码。 |
 | 110    |       EMErrorInvalidParam        | 参数无效。  |
 | 200    |     EMErrorUserAlreadyLoginSame     | 当前用户已经登录：该用户 ID 已经登录。 |
 | 201    |         EMErrorUserNotLogin         | 用户未登录：例如，如果未登录成功时调用发送消息或群组操作的 API 会提示该错误。 |

@@ -44,8 +44,8 @@ SDKClient.Instance.Login(username, passwd,
 | 102    | INVALID_PASSWORD                      | 用户密码不正确：登录时提供的密码为空或不正确。  |
 | 104    | INVALID_TOKEN                         | 登录时提供的 token 为空或不正确。     |
 | 105    | USER_NAME_TOO_LONG                    | 用户 ID 过长：用户名长度限制 64 个字节。                                                                                                                                                |
-| 108    | TOKEN_EXPIRED                         | 声网 token 已过期：超出声网 token 有效期时间。       |
-| 109    | TOKEN_WILL_EXPIRE                     | 声网 token 即将过期：超出声网 token 有效期一半时间时会开始回调此错误码。        |
+| 108    | TOKEN_EXPIRED                         | 用户 token 已过期：超出 token 有效期时间。       |
+| 109    | TOKEN_WILL_EXPIRE                     | 用户 token 即将过期：超出 token 有效期一半时间时会开始回调此错误码。        |
 | 200    | USER_ALREADY_LOGIN                    | 用户已经登录：同一个用户 ID 已经登录。                                                                                                                                                |
 | 201    | USER_NOT_LOGIN                        | 用户未登录：例如，如果未登录成功时发送消息，或者使用群组操作的 API，SDK 会提示该错误。                                                                                                      |
 | 202    | USER_AUTHENTICATION_FAILED            | 用户鉴权失败：<br/> - 若使用用户 ID 和密码登录，用户 ID 或密码不正确时会上报改错误；<br/> - 若使用用户 ID 和用户 token 登录，一般为用户 token 无效或已过期。 |
