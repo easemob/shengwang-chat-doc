@@ -2,6 +2,8 @@
 
 若对 Thread 中的一条消息进行相关操作，包括发送、撤回或修改，环信服务器会向你的 app server 发送回调请求。
 
+## 回调请求的字段描述
+
 Thread 回调请求中的字段含义如下表所示：
 
 | 字段                 | 数据类型 | 含义                              |
@@ -41,7 +43,7 @@ Thread 回调请求中的字段含义如下表所示：
 | `payload.data.last_message.payload.to`   | String    | Thread 中最新一条消息的接收方，即 Thread ID。  |
 | `payload.data.last_message.payload.type`   | String  | 群聊，固定为 `groupchat`。 |
 
-回调请求示例：
+## 回调请求示例
 
 ```json
 {

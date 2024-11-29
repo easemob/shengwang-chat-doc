@@ -4,6 +4,8 @@
 
 Reaction 回调请求中主要包含消息中的 Reaction 的信息（即 Reaction 数量和添加 Reaction 的用户列表）以及被操作的 Reaction 的相关信息（即被操作的 Reaction、执行操作的用户列表和用户数量以及 Reaction 操作类型）。
 
+## 回调请求的字段描述
+
 Reaction 回调请求中的字段含义如下表所示：
 
 | 字段             | 数据类型   | 含义             |
@@ -34,6 +36,8 @@ Reaction 回调请求中的字段含义如下表所示：
 | `payload.data.reactions.op.count`  | List | 表情操作人数。 |
 | `payload.data.reactions.op.reactionType`  | String| Reaction 当前操作类型。`create` 为添加 Reaction。 |
 | `payload.data.reactions.op.operator`    | String | Reaction 当前操作人。 ｜
+
+## 回调请求示例
 
 例如，在下面回调请求示例中，消息 ID 为 `99XXXX32` 的消息，当前存在 Reaction `test`，用户 `user2` 添加了 Reaction `test-1`，则 Chat 服务器会向你的 app server 发送回调：
 

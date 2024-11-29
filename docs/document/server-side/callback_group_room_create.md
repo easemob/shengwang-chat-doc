@@ -1,5 +1,4 @@
-# 创建群组/聊天室事件  // TODO：这些事件名称需要跟 Console 上的
-
+# 创建群组/聊天室事件 
 成功创建群组或聊天室后，环信服务器会按照[发送后回调规则](/product/enable_and_configure_IM.html#配置回调规则)向你的 App Server 发送回调请求，App Server 可通过该回调查看创建的群组/聊天室的信息，进行数据同步。
 
 :::tip
@@ -12,7 +11,7 @@
 
 1. 客户端创建了群组/聊天室。
 2. 调用 RESTful API 创建了群组/聊天室。
-3. 在[环信控制台](https://console.easemob.com/user/login)上创建了群组/聊天室。  // TODO：添加如何在控制台创建群组/聊天室，然后在这里添加链接。
+3. 在[环信控制台](https://console.easemob.com/user/login)上创建了群组/聊天室。 
 
 ## 回调请求
 
