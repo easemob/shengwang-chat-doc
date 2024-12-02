@@ -64,6 +64,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/presence/{resource}/{
 | 参数            | 类型   | 是否必需 | 描述                       | 
 | :-------------- | :----- | :------------ | :------- |
 | `Content-Type`  | String | 是    | 内容类型：`application/json`。                               | 
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                      |
 | `Authorization` | String | 是    | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 
 
 #### 请求体 body
@@ -94,6 +95,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/presence/{resource}/{
 curl -X POST 'a1-test.easemob.com:8089/5101220107132865/test/users/c1/presence/android/0' \
 -H 'Authorization: Bearer YWMtnjEbUopPEeybKGMmN0wpeZsaLSh8UEgpirS4wNAM_qx8oS2wik8R7LE4Rclv5hu9AwMAAAF-4tr__wBPGgDWGAeO86wl2lHGeTnU030fpWuEDR015Vk6ULWGYGKccA' \
 -H 'Content-Type: application/json' \
+-H 'Accept: application/json'
 -d '{"ext":"123"}'
 ```
 
@@ -140,6 +142,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/presence/{expiry}
 | 参数            | 类型  | 是否必需 | 描述                  | 
 | :-------------- | :----- | :------------------------- | :------- |
 | `Content-Type`  | String | 是   | 内容类型：`application/json`。                  |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                      |
 | `Authorization` | String | 是   | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。      |
 
 #### 请求 body
@@ -175,6 +178,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/presence/{expiry}
 curl -X POST 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presence/1000' \
 -H 'Authorization: Bearer YWMtnjEbUopPEeybKGMmN0wpeZsaLSh8UEgpirS4wNAM_qx8oS2wik8R7LE4Rclv5hu9AwMAAAF-4tr__wBPGgDWGAeO86wl2lHGeTnU030fpWuEDR015Vk6ULWGYGKccA' \
 -H 'Content-Type: application/json' \
+-H 'Accept: application/json'
 -d '{"usernames":["c2","c3"]}'
 ```
 
@@ -241,6 +245,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/presence
 | 参数            | 类型  | 是否必需 | 描述               |
 | :-------------- | :----- | :----------------- | :------- |
 | `Content-Type`  | String | 是  | 内容类型。请填 `application/json`。         |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                      |
 | `Authorization` | String | 是  | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 | 
 
 #### 请求 body
@@ -275,6 +280,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/presence
 curl -X POST 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presence' \
 -H 'Authorization: Bearer YWMtnjEbUopPEeybKGMmN0wpeZsaLSh8UEgpirS4wNAM_qx8oS2wik8R7LE4Rclv5hu9AwMAAAF-4tr__wBPGgDWGAeO86wl2lHGeTnU030fpWuEDR015Vk6ULWGYGKccA' \
 -H 'Content-Type: application/json' \
+-H 'Accept: application/json'
 -d '{"usernames":["c2","c3"]}'
 ```
 
@@ -407,6 +413,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{username}/presence
 | 参数            | 类型   | 是否必需 | 描述         | 
 | :-------------- | :----- | :-------------------------- | :------- |
 | `Content-Type`  | String | 是    | 内容类型。请填 `application/json`。                                   |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                      |
 | `Authorization` | String | 是    | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 ### 请求 body
 
@@ -434,6 +441,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{username}/presence
 curl -X DELETE 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presence' \
 -H 'Authorization: Bearer YWMtnjEbUopPEeybKGMmN0wpeZsaLSh8UEgpirS4wNAM_qx8oS2wik8R7LE4Rclv5hu9AwMAAAF-4tr__wBPGgDWGAeO86wl2lHGeTnU030fpWuEDR015Vk6ULWGYGKccA' \
 -H 'Content-Type: application/json' \
+-H 'Accept: application/json'  \
 -d '["c1"]'
 ```
 
@@ -486,6 +494,7 @@ GET https://{host}/{org_name}/{app_name}/users/{uid}/presence/sublist?pageNum={p
 | 参数            | 类型   | 是否必需 | 描述                                                         |
 | :-------------- | :----- | :------- | :----------------------------------------------------------- |
 | `Content-Type`  | String | 是     | 内容类型：`application/json`。                               |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                      |
 | `Authorization` | String | 是     | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 ### HTTP 响应
@@ -512,6 +521,7 @@ GET https://{host}/{org_name}/{app_name}/users/{uid}/presence/sublist?pageNum={p
 curl -X GET 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presence/sublist?pageNum=1&pageSize=100' \
 -H 'Authorization: Bearer YWMtnjEbUopPEeybKGMmN0wpeZsaLSh8UEgpirS4wNAM_qx8oS2wik8R7LE4Rclv5hu9AwMAAAF-4tr__wBPGgDWGAeO86wl2lHGeTnU030fpWuEDR015Vk6ULWGYGKccA' \
 -H 'Content-Type: application/json'
+-H 'Accept: application/json'
 ```
 
 #### 响应示例

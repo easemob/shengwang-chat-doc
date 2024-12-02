@@ -71,6 +71,7 @@ POST https://{host}/{org_name}/{app_name}/mutes
 | 参数            | 类型   | 是否必需 | 描述          |
 | :-------------- | :----- | :------- | :----------------------------- |
 | `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。     |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                      |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 ##### 请求 body
@@ -107,6 +108,7 @@ POST https://{host}/{org_name}/{app_name}/mutes
 curl -L -X POST 'https://XXXX/XXXX/XXXX/mutes' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
+-H 'Accept: application/json'  \
 --data-raw '{
     "username": "zs1",
     "chat": 100,
@@ -157,13 +159,18 @@ GET https://{host}/{org_name}/{app_name}/mutes/{username}
 
 ##### 路径参数
 
-参数及说明详见 [公共参数](#公共参数)。
+| 参数        | 类型   | 是否必需 | 描述   |
+| :---------- | :----- | :------- | :----------------------- |
+| `username`  | String | 是       | 要查询哪个用户的全局禁言详情。  |
+
+其他参数及说明详见 [公共参数](#公共参数)。
 
 ##### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| 参数            | 类型   | 是否必需 | 描述           |
+| :-------------- | :----- | :------- | :------------------------------------------------------ |
 | `Content-Type`  | String | 是       | 内容类型，请填 `application/json`。                                                                                  |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                      |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 #### HTTP 响应
@@ -194,7 +201,8 @@ GET https://{host}/{org_name}/{app_name}/mutes/{username}
 
 curl -L -X GET 'https://XXXX/XXXX/XXXX/mutes/zs1' \
 -H 'Authorization: Bearer <YourAppToken>' \
--H 'Content-Type: application/json'
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json'  \
 ```
 
 ##### 响应示例
@@ -257,6 +265,7 @@ GET https://{host}/{org_name}/{app_name}/mutes
 | 参数            | 类型   | 是否必需 | 描述                                     |
 | :-------------- | :----- | :------- | :--------------------------------------- |
 | `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。      |
+| `Accept`        | String | 是       | 内容类型。请填 `application/json`。                      |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 #### HTTP 响应
@@ -287,7 +296,8 @@ GET https://{host}/{org_name}/{app_name}/mutes
 
 curl -L -X GET 'https://XXXX/XXXX/XXXX/mutes?pageNum=1&pageSize=10' \
 -H 'Authorization: Bearer <YourAppToken>' \
--H 'Content-Type: application/json'
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json'  \
 ```
 
 ##### 响应示例
