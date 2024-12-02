@@ -2,7 +2,9 @@
 
 你可以配置联系人详情页面的标题栏和中间的按钮等。
 
-![img](/images/uikit/chatuikit/android/custom_contact_details.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/custom_contact_details.png" title="联系人详情页面" />
+</ImageGallery>
 
 ## 设置标题栏
 

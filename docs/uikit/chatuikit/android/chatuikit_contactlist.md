@@ -6,7 +6,9 @@
 
 昵称在中文或者英文的情况下可以实现按首字母分类。
 
-![img](/images/uikit/chatuikit/android/page_contact_list.png =400x850) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/page_contact_list.png" title="通讯录" />
+</ImageGallery>
 
 ## 使用示例
 
@@ -29,7 +31,9 @@ class ContactListActivity: AppCompactActivity() {
 
 你可以设置联系人页面标题栏、联系人列表 Header 和联系人列表条目。
 
-![img](/images/uikit/chatuikit/android/custom_contact_list.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/custom_contact_list.png" title="联系人列表页面" />
+</ImageGallery>
 
 ### 通过 EaseContactsListFragment.Builder 自定义
 
@@ -158,7 +162,9 @@ builder.setCustomAdapter(CustomContactListAdapter)
 builder.setSearchType(EaseSearchType.SELECT_USER)  
 ```
 
-![img](/images/uikit/chatuikit/android/contactlist_configurable.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/contactlist_configurable.png" title="设置成可选择的联系人列表" />
+</ImageGallery>
 
 ### 设置联系人头像样式
 
@@ -173,6 +179,12 @@ builder.setSearchType(EaseSearchType.SELECT_USER)
     <!-- Set default avatar border color -->
     <color name="ease_avatar_border_color">@color/ease_color_primary</color>
 ```
+
+<ImageGallery :columns="3">
+  <ImageItem src="/images/uikit/chatuikit/android/contactlist_avatar_squar.png" title="方形头像" />
+  <ImageItem src="/images/uikit/chatuikit/android/contactlist_avatar_circle.png" title="圆形头像" />
+  <ImageItem src="/images/uikit/chatuikit/android/contactlist_avatar_no.png" title="没有头像" />
+</ImageGallery>
 
 ## 事件监听
 
