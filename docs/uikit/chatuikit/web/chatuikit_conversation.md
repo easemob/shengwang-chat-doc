@@ -14,7 +14,9 @@
 
 会话列表相关功能，详见[功能介绍文档](chatfeature_conversation.html)。
 
-![img](/images/uikit/chatuikit/web/conversation_list.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/conversation_list.png" title="会话列表页面" />
+</ImageGallery>
 
 ## 使用示例
 
@@ -108,6 +110,11 @@ const Conversation = () => {
 ![img](/images/uikit/chatuikit/web/cvs-header2.png)
 
 ## 自定义会话列表项
+
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/custom_list_item.png" title="会话列表项" />
+</ImageGallery>
 
 ### 设置用户昵称
 

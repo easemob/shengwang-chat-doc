@@ -10,7 +10,9 @@
 
 消息相关功能，详见[功能介绍文档](chatfeature_message.html)。
 
-![img](/images/uikit/chatuikit/web/chat.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/chat.png" title="聊天页面" />
+</ImageGallery>
 
 ## 使用示例
 
@@ -243,7 +245,9 @@ const ChatContainer = () => {
 };
 ```
 
-![img](/images/uikit/chatuikit/web/editor2.png =500x650)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/chat_input_bar.png" title="会话列表页面" />
+</ImageGallery>
 
 ### 实现发送自定义消息
 
