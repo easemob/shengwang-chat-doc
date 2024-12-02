@@ -137,7 +137,7 @@
 你可以利用 `Appearance.conversation.rowHeight = value` 设置会话列表项（会话列表  Cell）的高度。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_rowHeight.png" title="会话列表项的高度" /> // TODO
+  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_rowHeight.png" title="会话列表项的高度" />
 </ImageGallery>
 
 ### 设置会话头像
@@ -150,7 +150,7 @@
 
 你可以利用 `Appearance.conversation.singlePlaceHolder = value` 设置会话列表中单聊会话头像占位图和群聊会话头像占位图。
 
-![img](/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_placeHolder.png)  // TODO
+![img](/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_placeHolder.png)
 
 ### 设置会话列表项左滑和右滑菜单项
 
