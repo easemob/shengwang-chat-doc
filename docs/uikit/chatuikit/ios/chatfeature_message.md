@@ -58,7 +58,7 @@ Appearance.chat.contentStyle: [MessageContentDisplayStyle] = [.withReply,.withAv
 
 ## 消息编辑
 
-消息编辑是指用户可以编辑一条已发送的消息。消息编辑可以帮助用户纠正错误，或添加新信息。
+消息编辑是指用户可以编辑一条已发送的消息。消息编辑可以帮助用户纠正错误，或添加新信息。无论单聊还是群组聊天，该特性只支持用户编辑自己发送的消息，不能编辑其他用户发送的消息。
 
 ![img](/images/uikit/chatuikit/feature/message/message_edit.png) 
 
