@@ -627,7 +627,7 @@ builder.setCustomAdapter(CustomMessageAdapter())
 ```
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/custom_message_date.png" title="消息格式" />
+  <ImageItem src="/images/uikit/chatuikit/android/custom_message_date.png" title="设置消息日期" />
 </ImageGallery>
 
 #### 设置消息撤回时间

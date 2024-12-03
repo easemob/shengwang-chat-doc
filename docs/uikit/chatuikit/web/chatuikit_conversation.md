@@ -116,7 +116,7 @@ const Conversation = () => {
   <ImageItem src="/images/uikit/chatuikit/web/custom_list_item.png" title="会话列表项" />
 </ImageGallery>
 
-### 设置用户昵称
+### 设置用户头像
 
 - 使用 `renderItem` 方法渲染每个会话条目。
 - 使用 `ConversationItem` 组件的属性自定义组件。
@@ -234,7 +234,7 @@ const Conversation = () => {
 />
 ```
 
-### 添加和置顶会话
+### 自定义会话操作
 
 `conversationStore` 提供的方法，例如:
 

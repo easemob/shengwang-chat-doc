@@ -72,8 +72,7 @@
 ```
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_list_more1.png" title="更多会话操作的样式一" />
-  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_list_more2.png" title="更多会话操作的样式二" />
+  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_list_more1.png" title="更多会话操作" />
 </ImageGallery>
 
 ### 设置点击监听事件

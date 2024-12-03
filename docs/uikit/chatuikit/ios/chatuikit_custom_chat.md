@@ -93,7 +93,9 @@
 - `Appearance.chat.dateFormatToday = "HH:mm"`：设置聊天页面消息的当日格式
 - `Appearance.chat.dateFormatOtherDay = "MM-dd HH:mm"` 设置聊天页面消息的当日之外的日期格式。
 
-![img](/images/uikit/chatuikit/ios/configurationitem/chat/Appearance_chat_dateFormat.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/custom_message_date.png" title="设置消息日期" />
+</ImageGallery>
 
 ### 设置附件消息
 
