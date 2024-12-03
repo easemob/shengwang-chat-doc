@@ -210,7 +210,7 @@ EMClient.getInstance().chatroomManager().removeFromChatRoomWhiteList(chatRoomId,
 
 #### 添加成员至聊天室禁言列表
 
-仅聊天室所有者和管理员可以调用 `EMChatRoomManager#muteChatRoomMembers` 方法将指定成员添加至聊天室禁言列表，操作者外其他成员收到 `EMChatRoomChangeListener#onMuteListAdded` 回调。
+仅聊天室所有者和管理员可以调用 `EMChatRoomManager#muteChatRoomMembers` 方法将指定成员添加至聊天室禁言列表。被禁言的成员和其他未操作的聊天室管理员或聊天室所有者收到 `EMChatRoomChangeListener#onMuteListAdded` 回调。
 
 :::notice
 聊天室所有者可禁言聊天室所有成员，聊天室管理员可禁言聊天室普通成员。
@@ -227,7 +227,7 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().muteChatRoomMembe
 
 #### 将成员移出聊天室禁言列表
 
-仅聊天室所有者和管理员可以调用 `EMChatRoomManager#unMuteChatRoomMembers` 方法将成员移出聊天室禁言列表。被解除禁言后，其他成员收到 `EMChatRoomChangeListener#onMuteListRemoved` 回调。
+仅聊天室所有者和管理员可以调用 `EMChatRoomManager#unMuteChatRoomMembers` 方法将成员移出聊天室禁言列表。被解除禁言的成员和其他未操作的聊天室管理员或聊天室所有者收到 `EMChatRoomChangeListener#onMuteListRemoved` 回调。
 
 :::notice
 聊天室所有者可对聊天室所有成员解除禁言，聊天室管理员可对聊天室普通成员解除禁言。

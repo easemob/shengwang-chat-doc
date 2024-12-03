@@ -2,6 +2,22 @@
 
 <Toc />
 
+## 版本 V4.11.0 Dev 2024-12-3（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增[拉取服务器漫游消息](message_retrieve.html#从服务器获取指定会话的消息)时会读取服务端的消息已读和送达状态。该功能只适用于单聊消息，默认关闭，如果需要，请联系环信商务开通。
+- [IM SDK] 聊天室禁言回调 `muteMember` 新增 `muteTimestamp` 参数，表示禁言过期时间。
+- [IM SDK] 群组/聊天室禁言事件 `muteMember` 新增 `userId` 字段，表示被禁言的成员。
+
+### 优化
+
+[IM SDK] SDK 的 message 对象中新增 `parseDownloadResponse`、`download` 方法。目前，SDK 的 utils 对象和 message 对象中均包含 `parseDownloadResponse`、`download` 方法。
+
+### 修复
+
+[IM SDK] 修复消息置顶事件 `onMessagePinEvent` 中的 `conversationId` 参数值错误的问题。
+
 ## 版本 V4.10.0 2024-10-11（开发版）
 
 ### 新增特性

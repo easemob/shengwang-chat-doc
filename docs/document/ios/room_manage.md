@@ -167,9 +167,8 @@ SDK 中提供了聊天室事件的监听接口。你可以通过注册聊天室�
 // 有成员被加入禁言列表。被禁言的成员会收到该事件。
 
 - (void)chatroomMuteListDidUpdate:(EMChatroom *)aChatroom
-      addedMutedMembers:(NSArray *)aMutes
-             muteExpire:(NSInteger)aMuteExpire {
-  }
+                addedMutedMembers:(NSDictionary<NSString *,NSNumber*> *)aMutes {
+}
 
 // 有成员被移除禁言列表。被解除禁言的成员会收到该事件。
 - (void)chatroomMuteListDidUpdate:(EMChatroom *)aChatroom
