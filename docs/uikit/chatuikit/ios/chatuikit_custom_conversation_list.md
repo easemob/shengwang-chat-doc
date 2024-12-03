@@ -16,7 +16,9 @@
 
 你可以配置会话列表页面的导航栏、会话列表项。详见 [ConversationListController.swift](https://github.com/easemob/easemob-uikit-ios/blob/main/Sources/EaseChatUIKit/Classes/UI/Components/Conversation/Controllers/ConversationListController.swift)。
 
-![img](/images/uikit/chatuikit/ios/custom_conversation_list.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/custom_conversation_list.png" title="会话列表" />
+</ImageGallery>
 
 ## 自定义导航栏
 
@@ -45,6 +47,11 @@
 
 你可以设置 `hiddenAvatar` 参数确定是否显示导航栏左侧的头像。若修改导航头像，可通过 `self.navigation.avatarURL = "https://xxx.xxx.xxx"` 实现。
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/conversation_list_avatar.png" title="会话列表有头像" />
+  <ImageItem src="/images/uikit/chatuikit/ios/conversation_list_noavatar.png" title="会话列表无头像" />
+</ImageGallery>
+
 ### 设置中部标题
 
 对于导航标题内容，可设置 `self.navigation.title = "Chats".chat.localize`，子标题可设置 `self.navigation.subtitle = "xxx"`。若导航的标题和子标题均需修改，需先修改子标题，再修改标题，旨在更新导航中对应的布局位置。
@@ -63,7 +70,10 @@
      //删除菜单项
      Appearance.conversation.listMoreActions.removeAll { $0. tag == "you want remove" }
 ```
-![img](/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_list_more.png)
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_list_more1.png" title="更多会话操作" />
+</ImageGallery>
 
 ### 设置点击监听事件
 
@@ -116,11 +126,18 @@
 
 若要修改之前的逻辑，则需复制之前的 `refresh` 方法的代码进行修改，无需调用 `super.xxxx`。初始化方法以及部分 UI 创建的方法均可以重载。
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/conversation_list_complete.png" title="会话列表完整展示" />
+  <ImageItem src="/images/uikit/chatuikit/ios/conversation_list_noavatarsubtitle.png" title="会话列表无头像、无最新消息" />
+</ImageGallery>
+
 ### 设置会话列表项的高度
 
 你可以利用 `Appearance.conversation.rowHeight = value` 设置会话列表项（会话列表  Cell）的高度。
 
-![img](/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_rowHeight.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_rowHeight.png" title="会话列表项的高度" />
+</ImageGallery>
 
 ### 设置会话头像
 
@@ -145,7 +162,9 @@
      Appearance.conversation.swipeLeftActions.removeAll { $0 == .more }
 ```
 
-![img](/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_swipeLeftActions.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_swipeLeftActions.png" title="会话左滑和右滑" />
+</ImageGallery>
 
 ### 设置更多会话操作
 
@@ -173,7 +192,9 @@
         }
 ```
 
-![img](/images/uikit/chatuikit/ios/conversation_more.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/conversation_more.png" title="更多会话操作" />
+</ImageGallery>
 
 ### 设置会话时间
 
@@ -182,7 +203,10 @@
 - `Appearance.conversation.dateFormatToday = value`：设置当日的会话时间，格式为“小时：分钟”，即 "HH:mm"。
 - `Appearance.conversation.dateFormatOtherDay = value`：设置当日之外的日期，格式为 "MM/dd"。
 
-![img](/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_dateFormat.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_dateFormat.png" title="会话时间" />
+</ImageGallery>
+
 
 ## 拦截原有组件点击事件
 

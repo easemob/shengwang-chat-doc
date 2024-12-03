@@ -454,7 +454,6 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users
 
 | 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
 | :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
-| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
@@ -481,6 +480,7 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -X GET 'https://XXXX/XXXX/XXXX/users/user1/contacts/users' \
+-H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
@@ -763,7 +763,7 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users?pag
 | 字段    | 类型  | 描述         |
 | :------ | :---- | :----------------------- |
 | `data`  | Array | 获取的黑名单列表，例如 ["user1", "user2"]。 |
-| `count` | Int   | 黑名单上用户的数量。                        |
+| `count` | Int   | 获取的黑名单上的用户数量。                        |
 
 其他字段及描述详见[公共参数](#公共参数)。
 

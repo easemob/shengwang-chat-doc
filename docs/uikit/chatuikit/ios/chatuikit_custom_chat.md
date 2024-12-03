@@ -11,11 +11,17 @@
 
 你可以配置聊天页面的导航栏、消息列表项、输入框和跳转事件等。详见 [MessageListController.swift](https://github.com/easemob/easemob-uikit-ios/blob/main/Sources/EaseChatUIKit/Classes/UI/Components/Chat/Controllers/MessageListController.swift)。
 
-![img](/images/uikit/chatuikit/ios/custom_chat.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/custom_chat.png" title="聊天页面" />
+</ImageGallery>
 
 ## 自定义导航栏
 
 聊天页面、会话列表页面、联系人列表页面、群详情页面和联系人详情页面的导航栏均使用 `EaseChatNavigationBar`。如果聊天页面（`MessageListController.swift`）的导航栏不满足需求，建议自定义导航栏，重载方法传入自定义的导航类。关于导航栏中的标题、头像、背景色、导航栏右侧按钮的显示图片和左侧的头像，详见[自定义会话列表页面的导航栏](chatuikit_custom_conversation_list.html#自定义导航栏)。
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/custom_chat_navigation.png" title="导航栏配置" />
+</ImageGallery>
 
 ## 自定义消息列表项
 
@@ -87,7 +93,9 @@
 - `Appearance.chat.dateFormatToday = "HH:mm"`：设置聊天页面消息的当日格式
 - `Appearance.chat.dateFormatOtherDay = "MM-dd HH:mm"` 设置聊天页面消息的当日之外的日期格式。
 
-![img](/images/uikit/chatuikit/ios/configurationitem/chat/Appearance_chat_dateFormat.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/custom_message_date.png" title="设置消息日期" />
+</ImageGallery>
 
 ### 设置附件消息
 
@@ -221,7 +229,9 @@ override func filterMessageActions(message: MessageEntity) -> [ActionSheetItemPr
         }
 ```
 
-![img](/images/uikit/chatuikit/ios/configurationitem/chat/Appearance_chat_input.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/custom_chat_input_bar.png" title="聊天页面输入框配置" />
+</ImageGallery>
 
 ## 设置消息举报功能
 

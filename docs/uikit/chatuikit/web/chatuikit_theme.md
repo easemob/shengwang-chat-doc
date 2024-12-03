@@ -6,11 +6,15 @@
 
 - 浅色主题
 
-![img](/images/uikit/chatuikit/web/light_mode.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/light_mode.png" title="浅色主题" />
+</ImageGallery>
 
 - 深色主题
 
-![img](/images/uikit/chatuikit/web/dark_mode.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/dark_mode.png" title="深色主题" />
+</ImageGallery>
 
 ## 切换内置主题
 

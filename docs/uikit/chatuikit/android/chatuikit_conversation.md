@@ -16,7 +16,9 @@
 
 会话列表相关功能，详见[功能介绍文档](chatfeature_conversation.html)。
 
-![img](/images/uikit/chatuikit/android/page_conversation.png =400x840) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/page_conversation.png" title="会话列表" />
+</ImageGallery>
 
 ## 使用示例
 
@@ -39,7 +41,9 @@ class ConversationListActivity: AppCompactActivity() {
 
 你可以配置会话列表页面的标题栏、会话列表项。
 
-![img](/images/uikit/chatuikit/android/custom_conversation_list.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/custom_conversation_list.png" title="会话列表" />
+</ImageGallery>
 
 ### 通过 EaseConversationListFragment.Builder 自定义设置
 
@@ -114,7 +118,11 @@ builder.setCustomAdapter(customConversationListAdapter);
 builder.setCustomFragment(customConversationListFragment);
 ```
 
-![img](/images/uikit/chatuikit/android/conversation_list_custom.png)
+<ImageGallery :columns="3">
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_list_custom_all.png" title="会话列表完整展示" />
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_list_custom_noavatar.png" title="会话列表无头像" />
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_list_custom_noavatarsutbtitle.png" title="会话列表无头像、无最新消息" />
+</ImageGallery>
 
 ### 设置标题栏
 
@@ -303,7 +311,9 @@ EaseIM.setCustomActivityRoute(object : EaseCustomActivityRoute {
 
 `EaseConversationListFragment` 中默认实现会话免打扰、会话置顶、会话已读和会话删除功能。
 
-![img](/images/uikit/chatuikit/android/cvs-action.png =350x600)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_long_press.png" title="会话长按显示的操作" />
+</ImageGallery>
 
 ### 免打扰
 

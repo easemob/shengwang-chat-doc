@@ -180,7 +180,7 @@ GET https://{host}/{org_name}/{app_name}/metadata/user/{username}
 
 | 参数    | 类型   | 是否必需 | 描述      |
 | :-------------- | :----- | :------- | :---------- |
-| `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。    |
+| `Accept`        | String | 是                                       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 ### HTTP 响应
@@ -204,7 +204,7 @@ GET https://{host}/{org_name}/{app_name}/metadata/user/{username}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Content-Type: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/metadata/user/user1'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/metadata/user/user1'
 ```
 
 #### 响应示例
@@ -254,6 +254,7 @@ POST https://{host}/{org_name}/{app_name}/metadata/user/get
 | 参数            | 类型   | 是否必需<div style="width: 80px;"></div> | 描述     |
 | :-------------- | :----- | :--------------------- | :--------------- |
 | `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。    |
+| `Accept`        | String | 是                                       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是         | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 #### 请求 body
@@ -284,7 +285,10 @@ POST https://{host}/{org_name}/{app_name}/metadata/user/get
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{
+curl -X POST -H 'Content-Type: application/json' \
+-H 'Accept: application/json'  \
+-H 'Authorization: Bearer <YourAppToken>' \
+-d '{
   "properties": [
     "avatarurl",
     "ext",
@@ -354,6 +358,7 @@ GET https://{host}/{org_name}/{app_name}/metadata/user/capacity
 
 | 参数            | 类型   | 是否必需 | 描述           |
 | :-------------- | :----- | :------- | :----------------------------------------- |
+| `Accept`        | String | 是                                       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
 ### HTTP 响应
@@ -377,7 +382,7 @@ GET https://{host}/{org_name}/{app_name}/metadata/user/capacity
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/metadata/user/capacity'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/metadata/user/capacity'
 ```
 
 #### 响应示例
@@ -443,7 +448,7 @@ DELETE https://{host}/{org_name}/{app_name}/metadata/user/{username}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/metadata/user/user1'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/metadata/user/user1'
 ```
 
 #### 响应示例
