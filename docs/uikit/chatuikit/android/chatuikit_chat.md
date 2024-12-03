@@ -387,7 +387,7 @@ override fun onDismiss() {
 | chatTopExtendMenu        | 获取顶部扩展功能接口。                                            |
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/custom_chat_input_bar.png" title="会话列表" />
+  <ImageItem src="/images/uikit/chatuikit/android/custom_chat_input_bar.png" title="设置输入菜单" />
 </ImageGallery>
 
 - 获取输入菜单项对象：
