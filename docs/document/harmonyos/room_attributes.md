@@ -12,7 +12,8 @@
 
 - 获取和更新聊天室基本属性；
 - 获取聊天室自定义属性；
-- 设置、获取和删除聊天室自定义属性。
+- 设置和更新/强制设置和更新聊天室自定义属性。
+- 删除/强制删除聊天室自定义属性。
 
 ## 前提条件
 
@@ -98,9 +99,9 @@ ChatClient.getInstance().chatroomManager()?.fetchChatroomAttributes(chatroomId).
 })
 ```
 
-#### 设置聊天室自定义属性
+#### 设置/更新聊天室自定义属性
 
-聊天室成员可以调用 `setChatroomAttributes` 方法设置单个聊天室自定义属性。该方法只可添加新自定义属性字段和更新自己设置的现有属性。设置后，其他聊天室成员收到 `onAttributesUpdate` 回调。
+聊天室成员可以调用 `setChatroomAttributes` 方法设置或更新单个聊天室自定义属性。该方法只可添加新自定义属性字段和更新自己设置的现有属性。设置后，其他聊天室成员收到 `onAttributesUpdate` 回调。
 
 示例代码如下：
 
