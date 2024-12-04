@@ -233,7 +233,7 @@ conn.muteChatRoomMember(option).then(res => console.log(res))
 仅聊天室所有者和管理员可调用 `unmuteChatRoomMember` 方法将一组成员解除禁言。
 
 :::notice
-聊天室所有者可对聊天室所有成员解除禁言，聊天室管理员可对聊天室普通成员解除禁言。被解除禁言的成员和其他未操作的聊天室管理员或聊天室所有者收到 `removeMute` 事件。
+聊天室所有者可对聊天室所有成员解除禁言，聊天室管理员可对聊天室普通成员解除禁言。被解除禁言的成员和其他未操作的聊天室管理员或聊天室所有者收到 `unmuteMember` 事件。
 :::
 
 示例代码如下：
