@@ -2,6 +2,55 @@
 
 <Toc />
 
+## 版本 V4.11.0 Dev 2024-12-3（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增[拉取服务器漫游消息](message_retrieve.html#从服务器获取指定会话的消息)时会读取服务端的消息已读和送达状态。该功能只适用于单聊消息，默认关闭，如果需要，请联系环信商务开通。 
+- [IM SDK] 聊天室成员禁言回调：
+  - 新增聊天室禁言回调 `EMChatroomManagerDelegate#chatroomMuteListDidUpdate:addedMutedMembers:`，在回调中使用 `(NSDictionary<NSString *,NSNumber*> *)aMutes` 参数表示禁言到期时间戳。
+  - 废弃原来的回调 `EMChatroomManagerDelegate#chatroomMuteListDidUpdate:addedMutedMembers:muteExpire:`。
+- [IM SDK] 新增 Crash 上报能力：当 SDK 发生 Crash 时，会在下次启动后上报 Crash 信息。
+
+### 修复
+
+- [IM SDK] 修复极端情况下因网络异常导致的 Crash。
+
+### 优化
+
+- [IM SDK] 将 4.0.0 版本之前标为废弃的 API 删除。
+
+### 注意
+
+由于 Crash 上报使用了 `aosl.xcframework` 库，如果同时集成了 `HyphenateChat 4.11.0` 和 `AgoraRtcEngine_iOS 4.3.0-4.4.1` 的版本，会有 AOSL 库冲突的问题，执行 `pod install` 时会出现如下报错：
+```
+[!] The 'Pods-EaseChatDemo' target has frameworks with conflicting names: aosl.xcframework.
+```
+
+要修复该问题，需要修改 `Podfile` 文件，添加如下脚本：
+
+```ruby
+pre_install do |installer|
+  # 定义 AgoraRtcEngine_iOS framework 的路径
+  rtc_pod_path = File.join(installer.sandbox.root, 'AgoraRtcEngine_iOS')
+
+  # aosl.xcframework 的完整路径
+  aosl_xcframework_path = File.join(rtc_pod_path, 'aosl.xcframework')
+
+  # 检查文件是否存在，如果存在则删除
+  if File.exist?(aosl_xcframework_path)
+    puts "Deleting aosl.xcframework from #{aosl_xcframework_path}"
+    FileUtils.rm_rf(aosl_xcframework_path)
+  else
+    puts "aosl.xcframework not found, skipping deletion."
+  end
+end
+```
+然后重新执行 `pod install`。
+
+详情请点击[这里](https://doc.shengwang.cn/faq/integration-issues/rtm2-rtc-integration-issue)。
+
+
 ## 版本 V4.10.2 Dev 2024-11-22（开发版）
 
 ### 修复

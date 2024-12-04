@@ -2,6 +2,20 @@
 
 <Toc />
 
+## 版本 V4.11.0 Dev 2024-12-3（开发版）
+
+### 新增特性
+
+- [IM SDK] 新增[拉取服务器漫游消息](message_retrieve.html#从服务器获取指定会话的消息)时会读取服务端的消息已读和送达状态。该功能只适用于单聊消息，默认关闭，如果需要，请联系环信商务开通。 
+- [IM SDK] 聊天室成员禁言回调：
+  - 新增聊天室禁言回调 `EMChatRoomChangeListener#onMuteListAdded(java.lang.String, java.util.Map<java.lang.String,java.lang.Long>)`，在回调中使用 `Map<String,Long> muteInfo` 参数表示被禁言的用户 ID 和禁言到期时间戳。
+  - 废弃原来的回调 `EMChatRoomChangeListener#onMuteListAdded(java.lang.String, java.util.List<java.lang.String>, long)`。
+- [IM SDK] 新增 Native Crash 上报能力：当 SDK native 层代码发生 Crash 时，会在下次启动后上报 Crash 信息。
+
+### 修复
+
+- [IM SDK] 修复极端情况下因网络异常导致的 Crash。
+
 ## 版本 V4.10.3 Dev 2024-11-25（开发版）
 
 ### 修复

@@ -165,7 +165,7 @@ public interface EMChatRoomChangeListener {
     void onRemovedFromChatRoom(final int reason, final String roomId, final String roomName, final String participant);
 
     // 有成员被加入禁言列表。被添加的成员收到该事件。
-    void onMuteListAdded(final String chatRoomId, final List<String> mutes, final long expireTime);
+    void onMuteListAdded(final String chatRoomId, Map<String,Long> muteInfo);
 
     // 有成员被移出禁言列表。被解除禁言的成员会收到该事件。
     void onMuteListRemoved(final String chatRoomId, final List<String> mutes);
