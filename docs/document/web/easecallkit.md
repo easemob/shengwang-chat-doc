@@ -116,8 +116,6 @@ CallKit.startCall(options);
 
 ![img](/images/web/callkit_single_invite.png)
 
-[img 1]
-
 ### 收到通话邀请
 
 通话邀请发送后，如果被叫方在线且可以通话，将通过 `onInvite` 回调收到邀请。你可以弹出一个用户界面，让被叫方在该回调中接受或拒绝邀请。
