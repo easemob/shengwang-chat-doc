@@ -153,7 +153,7 @@ const App = () => {
       onMessagesRead: messages => {},
       onGroupMessageRead: groupMessageAcks => {},
       onMessagesDelivered: messages => {},
-      onMessagesRecalled: messages => {},
+      onMessagesRecalledInfo: messages => {},
       onConversationsUpdate: () => {},
       onConversationRead: (from, to) => {},
     };

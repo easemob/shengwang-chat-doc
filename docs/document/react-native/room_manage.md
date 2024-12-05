@@ -188,16 +188,14 @@ const roomListener: ChatRoomEventListener = new (class
     );
   }
   // 有成员被加入禁言列表。被添加的成员收到该事件。
-  onMuteListAdded(params: {
+  onMuteListAddedV2(params: {
     roomId: string;
-    mutes: string[];
-    expireTime?: string | undefined;
+    mutes: Record<string, number>;
   }): void {
     console.log(
-      `onMuteListAdded:`,
+      'onMuteListAddedV2:',
       params.roomId,
-      params.mutes,
-      params.expireTime
+      params.mutes
     );
   }
   // 有成员被移出禁言列表。被解除禁言的成员会收到该事件。

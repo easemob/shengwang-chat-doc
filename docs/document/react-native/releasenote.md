@@ -2,6 +2,19 @@
 
 <Toc />
 
+## 版本 V1.7.0 2024-12-5
+
+### 新增特性
+
+- 依赖的原生 SDK 升级到版本：iOS 4.11.0 和 Android 4.11.0。
+- 更新服务器连接状态监听器 `ChatConnectEventListener`，新增 `onOfflineMessageSyncStart` 和 `onOfflineMessageSyncFinish` 事件，表示[从服务器拉取离线消息的开始和结束](overview.html#连接状态相关)。
+- 新增 `ChatManager#getMessageCount` 方法，用于获取数据库中的消息总数。
+  
+### 优化
+
+- 更新聊天室监听器 `ChatRoomEventListener`, 作废 `onMuteListAdded`，替换为 `onMuteListAddedV2`。
+- 更新消息监听器 `ChatMessageEventListener`, 移除作废的接口 `onMessagesRecalled`。
+
 ## 版本 V1.6.1 2024-9-12
 
 ### 修复
