@@ -10,31 +10,31 @@
 
 ```
 └── easeui
-    ├── EaseIM                                   // UIKit SDK 入口
-    ├── EaseIMConfig                             // UIKit SDK 配置类
+    ├── ChatUIKitClient                                   // UIKit SDK 入口
+    ├── ChatUIKitConfig                             // UIKit SDK 配置类
     ├── feature                                  // UIKit 功能模块
     │   ├── chat                                   // 聊天功能模块
     │   │   ├── activities                            // 聊天功能模块的 Activity 文件夹
-    │   │   │   └── EaseChatActivity                    // UIKit 内置的聊天界面
+    │   │   │   └── UIKitChatActivity                    // UIKit 内置的聊天界面
     │   │   ├── adapter                               // 聊天功能模块的适配器文件夹
-    │   │   │   └── EaseMessagesAdapter                 // 聊天功能模块的消息列表适配器
+    │   │   │   └── ChatUIKitMessagesAdapter                 // 聊天功能模块的消息列表适配器
     │   │   ├── reply                                 // 聊天功能模块的回复功能相关
     │   │   ├── report                                // 聊天功能模块的举报消息功能相关
     │   │   ├── viewholders                           // 聊天功能模块的消息类型 ViewHolder
     │   │   ├── widgets                               // 聊天功能模块的自定义 View
-    │   │   └── EaseChatFragment                      // UIKit 内提供的聊天 Fragment
+    │   │   └── UIKitChatFragment                      // UIKit 内提供的聊天 Fragment
     │   ├── conversation                           // 会话列表功能模块
     │   │   ├── adapter                               // 会话列表功能模块的适配器文件夹
-    │   │   │   └── EaseConversationListAdapter         // 会话列表功能模块的会话列表适配器
+    │   │   │   └── ChatUIKitConversationListAdapter         // 会话列表功能模块的会话列表适配器
     │   │   ├── viewholders                           // 会话列表功能模块的会话类型 ViewHolder
     │   │   ├── widgets                               // 会话列表功能模块的自定义 View
-    │   │   └── EaseConversationListFragment          // UIKit 内提供的会话列表 Fragment
+    │   │   └── ChatUIKitConversationListFragment          // UIKit 内提供的会话列表 Fragment
     │   ├── contact                                // 联系人列表功能模块
     │   │   ├── adapter                               // 联系人列表功能模块的适配器文件夹
-    │   │   │   └── EaseContactListAdapter              // 联系人列表功能模块的联系人列表适配器
+    │   │   │   └── ChatUIKitContactListAdapter              // 联系人列表功能模块的联系人列表适配器
     │   │   ├── viewholders                           // 联系人列表功能模块的联系人相关 ViewHolder
     │   │   ├── widgets                               // 联系人列表功能模块的自定义 View
-    │   │   └── EaseContactsListFragment              // UIKit 内提供的联系人列表 Fragment
+    │   │   └── ChatUIKitContactsListFragment              // UIKit 内提供的联系人列表 Fragment
     │   └── group                                  // 群组功能模块
     ├── repository                               // UIKit SDK 数据仓库
     ├── viewmodel                                // UIKit SDK ViewModel

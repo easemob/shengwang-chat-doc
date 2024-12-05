@@ -57,7 +57,7 @@
 在 app 项目 build.gradle.kts 中添加以下依赖：
 
 ```kotlin
-implementation("io.hyphenate:ease-chat-kit:4.7.0")
+implementation("io.hyphenate:ease-chat-kit:4.11.1")
 ```
 
 **本地依赖**
@@ -181,24 +181,34 @@ implementation(project(mapOf("path" to ":ease-im-kit")))
 ```kotlin
 package com.easemob.quickstart
 
-import android.content.Context
-import androidx.appcompat.app.AppCompactActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import com.easemob.quickstart.databinding.ActivityMainBinding
-import com.hyphenate.easeui.EaseIM
-import com.hyphenate.easeui.common.ChatConnectionListener
+import com.hyphenate.easeui.ChatUIKitClient
 import com.hyphenate.easeui.common.ChatLog
 import com.hyphenate.easeui.common.ChatOptions
-import com.hyphenate.easeui.feature.messages.EaseChatType
-import com.hyphenate.easeui.feature.messages.activities.EaseChatActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.hyphenate.easeui.common.extensions.showToast
+import com.hyphenate.easeui.feature.chat.enums.ChatUIKitType
+import com.hyphenate.easeui.feature.chat.activities.UIKitChatActivity
+import com.hyphenate.easeui.interfaces.ChatUIKitConnectionListener
 
-class MainActivity : AppCompactActivity(), ChatConnectionListener {
+class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+
+    private val connectListener by lazy {
+        object : ChatUIKitConnectionListener() {
+            override fun onConnected() {}
+
+            override fun onDisconnected(errorCode: Int) {}
+
+            override fun onLogout(errorCode: Int, info: String?) {
+                super.onLogout(errorCode, info)
+                showToast("You have been logged out, please log in again!")
+                ChatLog.e(TAG, "")
+            }
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -208,8 +218,8 @@ class MainActivity : AppCompactActivity(), ChatConnectionListener {
 
     private fun initSDK() {
         val appkey = getString(R.string.app_key)
-        if (appkey.isNullOrEmpty()) {
-            showToast("You should set your AppKey first!")
+        if (appkey.isEmpty()) {
+            applicationContext.showToast("You should set your AppKey first!")
             ChatLog.e(TAG, "You should set your AppKey first!")
             return
         }
@@ -221,12 +231,12 @@ class MainActivity : AppCompactActivity(), ChatConnectionListener {
             // 设置是否需要接收方发送已达回执。默认为 `false`，即不需要。
             this.requireDeliveryAck = true
         }.let {
-            EaseIM.init(applicationContext, it)
+            ChatUIKitClient.init(applicationContext, it)
         }
     }
 
     private fun initListener() {
-        EaseIM.subscribeConnectionDelegates(this)
+        ChatUIKitClient.addConnectionListener(connectListener)
     }
 
     fun login(view: View) {
@@ -237,12 +247,12 @@ class MainActivity : AppCompactActivity(), ChatConnectionListener {
             ChatLog.e(TAG, "Username or password cannot be empty!")
             return
         }
-        if (!EaseIM.isInited()) {
+        if (!ChatUIKitClient.isInited()) {
             showToast("Please init first!")
             ChatLog.e(TAG, "Please init first!")
             return
         }
-        EaseIM.login(username, password
+        ChatUIKitClient.login(username, password
             , onSuccess = {
                 showToast("Login successfully!")
                 ChatLog.e(TAG, "Login successfully!")
@@ -254,19 +264,19 @@ class MainActivity : AppCompactActivity(), ChatConnectionListener {
     }
 
     fun logout(view: View) {
-        if (!EaseIM.isInited()) {  
+        if (!ChatUIKitClient.isInited()) {
             showToast("Please init first!")
             ChatLog.e(TAG, "Please init first!")
             return
         }
-        EaseIM.logout(false
+        ChatUIKitClient.logout(false
             , onSuccess = {
                 showToast("Logout successfully!")
                 ChatLog.e(TAG, "Logout successfully!")
             }
         )
     }
-// 跳转到聊天页面
+    // 跳转到聊天页面
     fun startChat(view: View) {
         val username = binding.etPeerId.text.toString().trim()
         if (username.isEmpty()) {
@@ -274,27 +284,19 @@ class MainActivity : AppCompactActivity(), ChatConnectionListener {
             ChatLog.e(TAG, "Peer id cannot be empty!")
             return
         }
-        if (!EaseIM.isLoggedIn()) {
+        if (!ChatUIKitClient.isLoggedIn()) {
             showToast("Please login first!")
             ChatLog.e(TAG, "Please login first!")
             return
-        }// 对于群聊，`username` 替换为群组 ID，`EaseChatType.SINGLE_CHAT` 替换为 `EaseChatType.GROUP_CHAT`。
-        EaseChatActivity.actionStart(this, username, EaseChatType.SINGLE_CHAT)
-    }
-
-    override fun onConnected() {}
-
-    override fun onDisconnected(errorCode: Int) {}
-
-    override fun onLogout(errorCode: Int, info: String?) {
-        super.onLogout(errorCode, info)
-        showToast("You have been logged out, please log in again!")
-        ChatLog.e(TAG, "")
+        }
+        // 对于群聊，`username` 替换为群组 ID，`ChatUIKitType.SINGLE_CHAT` 替换为 `ChatUIKitType.GROUP_CHAT`。
+        UIKitChatActivity.actionStart(this, username, ChatUIKitType.SINGLE_CHAT)
     }
 
     override fun onDestroy() {
+        ChatUIKitClient.removeConnectionListener(connectListener)
+        ChatUIKitClient.releaseGlobalListener()
         super.onDestroy()
-        EaseIM.unsubscribeConnectionDelegates(this)
     }
 
     companion object {

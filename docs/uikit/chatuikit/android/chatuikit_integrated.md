@@ -53,20 +53,20 @@ implementation(project(mapOf("path" to ":ease-im-kit")))
 
 ### 创建聊天页面
 
-- 使用 `EaseChatActivity`
+- 使用 `UIKitChatActivity`
 
-单群聊 UIKit 提供 `EaseChatActivity` 页面，调用 `EaseChatActivity#actionStart` 方法即可，示例代码如下：
+单群聊 UIKit 提供 `UIKitChatActivity` 页面，调用 `UIKitChatActivity#actionStart` 方法即可，示例代码如下：
 
 ```kotlin
 // conversationId: 单聊会话为对端用户 ID，群聊会话为群组 ID。
-// chatType：单聊为 EaseChatType#SINGLE_CHAT，群聊为 EaseChatType#GROUP_CHAT。
-EaseChatActivity.actionStart(mContext, conversationId, chatType)
+// chatType：单聊为 ChatUIKitType#SINGLE_CHAT，群聊为 ChatUIKitType#GROUP_CHAT。
+UIKitChatActivity.actionStart(mContext, conversationId, chatType)
 ```
-`EaseChatActivity` 页面主要进行权限的请求，比如相机权限，语音权限等。
+`UIKitChatActivity` 页面主要进行权限的请求，比如相机权限，语音权限等。
 
-- 使用 `EaseChatFragment`
+- 使用 `UIKitChatFragment`
 
-开发者也可以使用单群聊 UIKit 提供的 `EaseChatFragment` 创建聊天页面，示例代码如下：
+开发者也可以使用单群聊 UIKit 提供的 `UIKitChatFragment` 创建聊天页面，示例代码如下：
 
 ```kotlin
 class ChatActivity: AppCompactActivity() {
@@ -74,8 +74,8 @@ class ChatActivity: AppCompactActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
         // conversationID: 1v1 is peer's userID, group chat is groupID
-        // chatType can be EaseChatType#SINGLE_CHAT, EaseChatType#GROUP_CHAT
-        EaseChatFragment.Builder(conversationId, chatType)
+        // chatType can be ChatUIKitType#SINGLE_CHAT, ChatUIKitType#GROUP_CHAT
+        UIKitChatFragment.Builder(conversationId, chatType)
                         .build()?.let { fragment ->
                             supportFragmentManager.beginTransaction()
                                 .replace(R.id.fl_fragment, fragment).commit()
@@ -86,7 +86,7 @@ class ChatActivity: AppCompactActivity() {
 
 ### 创建会话列表页面
 
-单群聊 UIKit 提供 `EaseConversationListFragment`，添加到 Activity 中即可使用。
+单群聊 UIKit 提供 `ChatUIKitConversationListFragment`，添加到 Activity 中即可使用。
 
 示例如下：
 
@@ -96,7 +96,7 @@ class ConversationListActivity: AppCompactActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_conversation_list)
 
-        EaseConversationListFragment.Builder()
+        ChatUIKitConversationListFragment.Builder()
                         .build()?.let { fragment ->
                             supportFragmentManager.beginTransaction()
                                 .replace(R.id.fl_fragment, fragment).commit()
@@ -107,7 +107,7 @@ class ConversationListActivity: AppCompactActivity() {
 
 ### 创建联系人列表页面
 
-单群聊 UIKit 提供 `EaseContactsListFragment`，添加到 Activity 中即可使用。
+单群聊 UIKit 提供 `ChatUIKitContactsListFragment`，添加到 Activity 中即可使用。
 
 示例如下：
 
@@ -117,7 +117,7 @@ class ContactListActivity: AppCompactActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact_list)
 
-        EaseContactsListFragment.Builder()
+        ChatUIKitContactsListFragment.Builder()
                         .build()?.let { fragment ->
                             supportFragmentManager.beginTransaction()
                                 .replace(R.id.fl_fragment, fragment).commit()
