@@ -109,8 +109,8 @@ ChatClient.getInstance().chatManager.removeAllMessageListener();
 ```typescript
 // 继承并实现 `ChatMessageEventListener`
 class ChatMessageEvent implements ChatMessageEventListener {
-  onMessagesRecalledInfo(messages: ChatMessage[]): void {
-    console.log(`onMessagesRecalledInfo: `, messages);
+  onMessagesRecalledInfo(infos: ChatRecalledMessageInfo[]): void {
+    console.log(onMessagesRecalledInfo: , infos);
   }
   onChatMessageThreadUpdated(msgThread: ChatMessageThreadEvent): void {
     console.log(`onChatMessageThreadUpdated: `, msgThread);
