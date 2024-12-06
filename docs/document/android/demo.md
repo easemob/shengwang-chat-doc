@@ -75,6 +75,8 @@
 
 ## 部分 UI 展示
 
-![会话列表](/images/android/app-demo-ui-1.jpeg)
-![联系人列表](/images/android/app-demo-ui-2.jpeg)
-![聊天页面](/images/android/app-demo-ui-3.jpeg)
+<ImageGallery :columns="3">
+  <ImageItem src="/images/uikit/chatuikit/android/main_chat.png" title="聊天页面" />
+  <ImageItem src="/images/uikit/chatuikit/android/main_conversation_list.png" title="会话列表" />
+  <ImageItem src="/images/uikit/chatuikit/android/main_contact_list.png" title="通讯录" />
+</ImageGallery>
