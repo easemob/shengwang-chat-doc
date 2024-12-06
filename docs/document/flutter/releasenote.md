@@ -2,6 +2,15 @@
 
 <Toc />
 
+## 版本 4.10.0 2024-12-05
+
+- 修复 `fetchSilentModeForConversations` 方法获取会话的免打扰状态失败的问题。
+- 修复 iOS `applicationDidEnterBackground` 和 `applicationWillEnterForeground` 不执行的问题。
+
+## 版本 4.8.2+1
+
+- 修复 Android 端可能出现的消息格式转换失败。
+
 ## 版本 V4.8.2 2024-11-18
 
 - 修复 ios `EMChatManager.searchMsgsByOptions` 和 `EMConversation.searchMsgsByOptions` 方法类型不准的问题。

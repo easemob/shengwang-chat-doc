@@ -4,7 +4,6 @@
 
 本文介绍如何快速集成环信即时通讯 IM Android SDK 实现单聊。
 
-
 ## 实现原理
 
 下图展示在客户端发送和接收一对一文本消息的工作流程。
@@ -116,7 +115,9 @@ implementation 'io.hyphenate:hyphenate-sdk-lite:3.7.5' // 精简版，只包含I
 
 #### 方法三：动态加载 .so 库文件
 
-为了减少应用安装包的大小，SDK 提供了 `EMOptions#setNativeLibBasePath` 方法支持动态加载 SDK 所需的 `.so` 文件。以 SDK 4.5.0 为例，`.so` 文件包括 `libcipherdb.so` 和 `libhyphenate.so` 两个文件。该功能的实现步骤如下：
+为了减少应用安装包的大小，SDK 从 4.5.0 开始提供了 `EMOptions#setNativeLibBasePath` 方法支持动态加载 SDK 所需的 `.so` 文件。以 SDK 4.5.0 为例，`.so` 文件包括 `libcipherdb.so` 和 `libhyphenate.so` 两个文件。**从 4.11.0 开始，`.so` 文件还包含 `libaosl.so` 文件。**
+
+该功能的实现步骤如下：
 
 1. 下载最新版本的 SDK 并解压缩。
 2. 集成 `hyphenatechat_4.5.0.jar` 到你的项目中。
@@ -189,6 +190,32 @@ EMClient.getInstance().init(mContext, options);
 -keep class com.hyphenate.** {*;}
 -dontwarn  com.hyphenate.**
 ```
+
+### 5. 其他集成问题
+
+当同时集成环信 SDK 4.11.0 和声网 RTM SDK 2.2.0 或 RTC SDK 4.3.0 及以上版本时，由于同时包含 `libaosl.so` 库，编译时可能会出现以下错误：
+
+```java
+com.android.builder.merge.DuplicateRelativeFileException: More than one file was found with OS independent path 'lib/x86/libaosl.so'
+```
+
+可在 app 的 `build.gradle` 文件的 Android 节点中添加 `packagingOptions` 节点，指定在构建过程中优先选择第一个匹配的文件：
+
+```java
+android {
+  // ...
+  packagingOptions {
+    pickFirst 'lib/x86/libaosl.so'
+    pickFirst 'lib/x86_64/libaosl.so'
+    pickFirst 'lib/armeabi-v7a/libaosl.so'
+    pickFirst 'lib/arm64-v8a/libaosl.so'
+  }
+}
+```
+
+然后 Gradle 文件同步，重新构建项目。
+
+如欲了解详情，请点击[这里](https://doc.shengwang.cn/faq/integration-issues/rtm2-rtc-integration-issue)。
 
 ## 实现单聊
 

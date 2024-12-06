@@ -35,21 +35,21 @@
 消息引用指用户可以引用一条已发送的消息。消息引用可以帮助用户回复特定的消息，或强调特定的信息。
 
 目前，单群聊 UIKit 支持引用消息进行回复。消息引用 UI 和逻辑结构如下：
-- `EaseChatMessageReplyView`：消息气泡的引用消息自定义 View。
-- `EaseChatExtendMessageReplyView`：底部输入框组件上方展示的引用消息自定义 View。
-- `EaseChatMessageReplyController`：控制引用功能的显示、隐藏、跳转等逻辑。
+- `ChatUIKitMessageReplyView`：消息气泡的引用消息自定义 View。
+- `ChatUIKitExtendMessageReplyView`：底部输入框组件上方展示的引用消息自定义 View。
+- `ChatUIKitMessageReplyController`：控制引用功能的显示、隐藏、跳转等逻辑。
 
 ![img](/images/uikit/chatuikit/feature/message/message_reply.png) 
 
 #### 如何使用
 
-消息引用特性在 `EaseChatConfig` 中默认开启，即 `enableReplyMessage` 的默认值为 `true`。要关闭该特性，需将该参数设置为 `false`。
+消息引用特性在 `ChatUIKitConfig` 中默认开启，即 `enableReplyMessage` 的默认值为 `true`。要关闭该特性，需将该参数设置为 `false`。
 
 示例代码如下：
 
 ```kotlin
 
-	 EaseIM.getConfig()?.chatConfig?.enableReplyMessage
+	 ChatUIKitClient.getConfig()?.chatConfig?.enableReplyMessage
 
 ```
 
@@ -59,11 +59,11 @@
 
 目前，单群聊 UIKit 支持翻译文本消息。消息翻译的 UI 和逻辑部分结构如下：
 
-- 消息翻译的 UI 布局为 `EaseChatMessageTranslationView` 自定义布局。
+- 消息翻译的 UI 布局为 `ChatUIKitMessageTranslationView` 自定义布局。
 
-- 消息气泡中添加 view 以及显示和隐藏翻译布局的逻辑在 `EaseChatAddExtendFunctionViewController` 中的 `addTranslationViewToMessage` 方法。
+- 消息气泡中添加 view 以及显示和隐藏翻译布局的逻辑在 `ChatUIKitAddExtendFunctionViewController` 中的 `addTranslationViewToMessage` 方法。
 
-- 长按消息气泡弹出的显示和隐藏翻译菜单的逻辑在 `EaseChatMessageTranslationController` 中。
+- 长按消息气泡弹出的显示和隐藏翻译菜单的逻辑在 `ChatUIKitMessageTranslationController` 中。
 
 ![img](/images/uikit/chatuikit/feature/message/message_translate.png) 
 
@@ -73,17 +73,17 @@
 
 1. 开启消息翻译特性。
 
-消息翻译特性在 `EaseChatConfig` 中默认关闭，即 `enableTranslationMessage` 的默认值为 `false`。要开启该特性，需将该参数设置为 `true`。示例代码如下：
+消息翻译特性在 `ChatUIKitConfig` 中默认关闭，即 `enableTranslationMessage` 的默认值为 `false`。要开启该特性，需将该参数设置为 `true`。示例代码如下：
 
 ```kotlin
 
-   EaseIM.getConfig()?.chatConfig?.enableTranslationMessage
+   ChatUIKitClient.getConfig()?.chatConfig?.enableTranslationMessage
 
 ```
 
 2. 设置翻译的目标语言。
 
-单群聊 UiKit 的 `EaseChatFragment.Builder` 对象中提供了 `setTargetTranslation` 方法设置目标翻译语言。
+单群聊 UiKit 的 `UIKitChatFragment.Builder` 对象中提供了 `setTargetTranslation` 方法设置目标翻译语言。
 
 如果未设置翻译的目标语言，则默认使用中文。
 
@@ -91,8 +91,8 @@
 
 ```kotlin
 
-   val builder = EaseChatFragment.Builder
-   builder.setTargetTranslation(EaseTranslationLanguageType.English)
+   val builder = UIKitChatFragment.Builder
+   builder.setTargetTranslation(ChatUIKitTranslationLanguageType.English)
 
 ```
 
@@ -102,15 +102,15 @@
 
 目前，单群聊 UIKit 支持对消息添加表情回复。Reaction UI 和逻辑部分结构如下：
 
-- Reaction 在消息列表中的 UI 布局实现 `EaseChatMessageReactionView` 自定义布局。
+- Reaction 在消息列表中的 UI 布局实现 `ChatUIKitMessageReactionView` 自定义布局。
 
-- Reaction 在消息长按菜单中的 UI 布局实现 `EaseMessageMenuReactionView` 自定义 `RecyclerView`。
+- Reaction 在消息长按菜单中的 UI 布局实现 `ChatUIKitMessageMenuReactionView` 自定义 `RecyclerView`。
 
-- Reaction 表情列表的弹窗 `EaseChatReactionsDialog` 继承于` EaseBaseSheetFragmentDialog`。
+- Reaction 表情列表的弹窗 `ChatUIKitReactionsDialog` 继承于` ChatUIKitBaseSheetFragmentDialog`。
 
-- Reaction 成员列表 `EaseReactionUserListFragment`。
+- Reaction 成员列表 `ChatUIKitReactionUserListFragment`。
 
-- 消息气泡中添加 view 以及显示和隐藏 Reaction 布局的逻辑在 `EaseChatAddExtendFunctionViewController` 中的 `addReactionViewToMessage`方法。
+- 消息气泡中添加 view 以及显示和隐藏 Reaction 布局的逻辑在 `ChatUIKitAddExtendFunctionViewController` 中的 `addReactionViewToMessage`方法。
 
 ![img](/images/uikit/chatuikit/feature/message/message_reactions.png) 
 
@@ -118,11 +118,11 @@
 
 使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
 
-消息表情回复特性在 `EaseChatConfig` 中默认关闭，即 `enableMessageReaction` 的默认值为 `false`。要开启该特性，将该参数设置为 `true`。示例代码如下：
+消息表情回复特性在 `ChatUIKitConfig` 中默认关闭，即 `enableMessageReaction` 的默认值为 `false`。要开启该特性，将该参数设置为 `true`。示例代码如下：
 
 ```kotlin
 
-    EaseIM.getConfig()?.chatConfig?.enableMessageReaction
+    ChatUIKitClient.getConfig()?.chatConfig?.enableMessageReaction
 
 ```
 
@@ -130,7 +130,7 @@
 
 消息话题（即 `Thread`）指用户可以在群组聊天中根据一条消息创建话题进行深入探讨，讨论和追踪特定项目任务，而不影响其他聊天内容。
 
-单群聊 UIKit 中实现了 Thread 页面 `EaseChatThreadActivity`，开发者只需要调用 `EaseChatThreadActivity.actionStart` 启动该页面传入需要的参数即可。
+单群聊 UIKit 中实现了 Thread 页面 `ChatUIKitThreadActivity`，开发者只需要调用 `ChatUIKitThreadActivity.actionStart` 启动该页面传入需要的参数即可。
 
 ![img](/images/uikit/chatuikit/feature/message/message_thread.png) 
 
@@ -138,24 +138,24 @@
 
 使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
 
-消息话题特性在 `EaseChatConfig` 中默认关闭，即 `enableChatThreadMessage` 的默认值为 `false`。要开启该特性，需将该参数设置为 `true`。
+消息话题特性在 `ChatUIKitConfig` 中默认关闭，即 `enableChatThreadMessage` 的默认值为 `false`。要开启该特性，需将该参数设置为 `true`。
 
 示例代码如下：
 
 ```kotlin
 
-    EaseIM.getConfig()?.chatConfig?.enableChatThreadMessage
+    ChatUIKitClient.getConfig()?.chatConfig?.enableChatThreadMessage
 
 ```
 
 #### 如何自定义
 
-你可以通过继承 `EaseChatThreadActivity` 添加自己的逻辑，示例如下：
+你可以通过继承 `ChatUIKitThreadActivity` 添加自己的逻辑，示例如下：
 
 ```kotlin
 
-class ChatThreadActivity:EaseChatThreadActivity() {
-    override fun setChildSettings(builder: EaseChatFragment.Builder) {
+class ChatThreadActivity:ChatUIKitThreadActivity() {
+    override fun setChildSettings(builder: UIKitChatFragment.Builder) {
         super.setChildSettings(builder)
     }
 }
@@ -168,21 +168,21 @@ class ChatThreadActivity:EaseChatThreadActivity() {
 
 消息转发 UI 和逻辑部分结构如下：
 
-- `Forward EaseChatMultipleSelectMenuView`：底部菜单 View。
-- `Forward EaseChatMessageMultipleSelectController`：处理 UI 布局变更(隐藏/显示 `EaseChatLayout` 中的 `EaseChatInputMenu` 输入菜单)以及转发和删除的逻辑。
-- `Forward EaseChatMessageMultiSelectHelper`：消息选择帮助类用于记录选中的消息信息并提供获取方法。
+- `Forward ChatUIKitMultipleSelectMenuView`：底部菜单 View。
+- `Forward ChatUIKitMessageMultipleSelectController`：处理 UI 布局变更(隐藏/显示 `ChatUIKitLayout` 中的 `ChatUIKitInputMenu` 输入菜单)以及转发和删除的逻辑。
+- `Forward ChatUIKitMessageMultiSelectHelper`：消息选择帮助类用于记录选中的消息信息并提供获取方法。
 
 ![img](/images/uikit/chatuikit/feature/message/message_forward.png) 
 
 #### 如何使用
 
-消息转发特性在 `EaseChatConfig` 中默认开启，即 `enableSendCombineMessage` 的默认值为 `true`。要关闭该特性，需将该参数设置为 `false`。
+消息转发特性在 `ChatUIKitConfig` 中默认开启，即 `enableSendCombineMessage` 的默认值为 `true`。要关闭该特性，需将该参数设置为 `false`。
 
 示例代码如下：
 
 ```kotlin
 
-	 EaseIM.getConfig()?.chatConfig?.enableSendCombineMessage
+	 ChatUIKitClient.getConfig()?.chatConfig?.enableSendCombineMessage
 
 ```
 
@@ -191,28 +191,28 @@ class ChatThreadActivity:EaseChatThreadActivity() {
 消息置顶指用户将重要信息固定在会话顶部，有助于用户快速访问关键会话，避免遗漏重要内容。该特性尤其适用于处理紧急事务或持续跟进的项目，帮助高效管理重要会话。
 
 目前，单群聊 UIKit 支持消息置顶。消息置顶 UI 和逻辑结构如下：
-- `EaseChatPinMessageListViewGroup`：消息置顶区域自定义 View。
-- `EaseChatPinMessageController`：控制消息置顶的显示、隐藏、跳转等逻辑。
-- `EaseChatPinMessageListAdapter`：消息置顶列表适配器。
-- `EaseChatPinDefaultViewHolder`：置顶消息默认类型展示样式。
-- `EaseChatPinTextMessageViewHolder`：置顶消息文本类型展示样式。
-- `EaseChatPinImageMessageViewHolder`：置顶消息图片类型展示样式。
+- `ChatUIKitPinMessageListViewGroup`：消息置顶区域自定义 View。
+- `ChatUIKitPinMessageController`：控制消息置顶的显示、隐藏、跳转等逻辑。
+- `ChatUIKitPinMessageListAdapter`：消息置顶列表适配器。
+- `ChatUIKitPinDefaultViewHolder`：置顶消息默认类型展示样式。
+- `ChatUIKitPinTextMessageViewHolder`：置顶消息文本类型展示样式。
+- `ChatUIKitPinImageMessageViewHolder`：置顶消息图片类型展示样式。
 
 ![img](/images/uikit/chatuikit/feature/message/message_pin.png) 
 
 #### 如何使用
 
-消息置顶特性在 `EaseChatConfig` 中默认开启，即 `enableChatPingMessage` 的默认值为 `true`。要关闭该特性，需将该参数设置为 `false`。
+消息置顶特性在 `ChatUIKitConfig` 中默认开启，即 `enableChatPingMessage` 的默认值为 `true`。要关闭该特性，需将该参数设置为 `false`。
 
 示例代码如下：
 
 ```kotlin
 
-     EaseIM.getConfig()?.chatConfig?.enableChatPingMessage 
+     ChatUIKitClient.getConfig()?.chatConfig?.enableChatPingMessage 
 
      // 先定义 pin 消息的控制器
-     val chatPinMessageController:EaseChatPinMessageController by lazy {
-        EaseChatPinMessageController(mContext,this@EaseChatLayout, conversationId, viewModel)
+     val chatPinMessageController:ChatUIKitPinMessageController by lazy {
+        ChatUIKitPinMessageController(mContext,this@ChatUIKitLayout, conversationId, viewModel)
      }
      // 初始化 Controller 其中包含 pin 列表条目内置点击事件监听回调 （原始消息存在时）列表默认滚动到原始消息位置
      chatPinMessageController.initPinInfoView()
@@ -232,7 +232,7 @@ class ChatThreadActivity:EaseChatThreadActivity() {
 
      // 更新 pin 消息
      // 需要添加消息监听回调
-     private val chatMessageListener = object : EaseMessageListener() {
+     private val chatMessageListener = object : ChatUIKitMessageListener() {
          // pin 消息变更回调
          override fun onMessagePinChanged(
             messageId: String?,
@@ -251,7 +251,7 @@ class ChatThreadActivity:EaseChatThreadActivity() {
         }
      }
 
-     EaseIM.addChatMessageListener(chatMessageListener)
+     ChatUIKitClient.addChatMessageListener(chatMessageListener)
 
      // 显示 pin view
      chatPinMessageController.showPinInfoView()
@@ -265,10 +265,10 @@ class ChatThreadActivity:EaseChatThreadActivity() {
 输入状态指示功能指在单聊会话中实时显示会话的一方正在输入的状态，增强通讯互动的实时性。此功能有助于用户了解对方是否正在回复，从而优化沟通体验，提升对话流畅度。
 
 输入状态指示的 UI 和逻辑结构如下：
-- `EaseTitleBar` 中的 `subtitle` 控件显示用户的状态以及输入状态指示，收到输入状态后会先显示输入状态，用户取消输入状态后显示用户的状态，输入状态消失。
+- `ChatUIKitTitleBar` 中的 `subtitle` 控件显示用户的状态以及输入状态指示，收到输入状态后会先显示输入状态，用户取消输入状态后显示用户的状态，输入状态消失。
 - 输入状态相关回调和方法：
-  - 输入状态投递为透传消息，接收到透传消息后，通过 `EaseChatFragment.Builder` 提供的 `setOnPeerTypingListener` 监听对方输入状态。
-  - 输入状态回调为 `onPeerTyping(action: String?)`，其中 `action` 代表状态 `EaseChatLayout.ACTION_TYPING_BEGI` ｜ `EaseChatLayout.ACTION_TYPING_END`。
+  - 输入状态投递为透传消息，接收到透传消息后，通过 `UIKitChatFragment.Builder` 提供的 `setOnPeerTypingListener` 监听对方输入状态。
+  - 输入状态回调为 `onPeerTyping(action: String?)`，其中 `action` 代表状态 `ChatUIKitLayout.ACTION_TYPING_BEGI` ｜ `ChatUIKitLayout.ACTION_TYPING_END`。
 
 | 开启输入状态提示            | 关闭输入状态提示   | 
 | :-------------- | :----- | 
@@ -276,15 +276,15 @@ class ChatThreadActivity:EaseChatThreadActivity() {
 
 #### 如何使用
 
-输入状态指示特性在 `EaseIM.getConfig()?.chatConfig?.enableChatTyping` 中默认开启，即 `enableChatTyping` 的默认值为 `true`。要关闭该特性，需将该参数设置为 `false`。
+输入状态指示特性在 `ChatUIKitClient.getConfig()?.chatConfig?.enableChatTyping` 中默认开启，即 `enableChatTyping` 的默认值为 `true`。要关闭该特性，需将该参数设置为 `false`。
 
-同时也支持通过代码进行设置，`EaseChatFragment.Builder` 提供开启或关闭的 API `builder.turnOnTypingMonitor(true|false)`。通过代码设置优先级更高。
+同时也支持通过代码进行设置，`UIKitChatFragment.Builder` 提供开启或关闭的 API `builder.turnOnTypingMonitor(true|false)`。通过代码设置优先级更高。
 
 示例代码如下：
 
 ```kotlin
     
-    EaseIM.getConfig()?.chatConfig?.enableChatTyping = true
+    ChatUIKitClient.getConfig()?.chatConfig?.enableChatTyping = true
 
 ```
 

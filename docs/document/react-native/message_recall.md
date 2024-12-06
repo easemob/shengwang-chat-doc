@@ -56,9 +56,6 @@ ChatClient.getInstance()
 
 ```typescript
 let listener = new (class implements ChatMessageEventListener {
-  onMessagesRecalled(messages: ChatMessage[]): void {
-    // 该方法已经作废，请使用 `onMessagesRecalledInfo` 替换。
-  },
   onMessagesRecalledInfo(info: Array<ChatRecalledMessageInfo>): void {
     // 消息撤回通知，messages 为撤销的消息
   },

@@ -238,7 +238,7 @@ ChatClient.getInstance()
 
 #### 添加成员至聊天室禁言列表
 
-仅聊天室所有者和管理员可以调用 `muteChatRoomMembers` 方法将指定成员添加至聊天室禁言列表。被禁言后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `onMuteListAdded` 回调。
+仅聊天室所有者和管理员可以调用 `muteChatRoomMembers` 方法将指定成员添加至聊天室禁言列表。被禁言后，该成员和其他未操作的聊天室管理员或聊天室所有者收到 `onMuteListAddedV2` 回调。
 
 :::notice
 聊天室所有者可禁言聊天室所有成员，聊天室管理员可禁言聊天室普通成员。

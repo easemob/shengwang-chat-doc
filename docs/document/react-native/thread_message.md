@@ -102,15 +102,15 @@ ChatClient.getInstance().chatManager.removeAllMessageListener();
 
 接收消息的具体逻辑，请参考 [撤回消息](message_recall.html)，此处只介绍子区消息和其他消息的区别。
 
-子区有消息撤回时，子区所属群组的所有成员收到 `ChatMessageEventListener#onChatMessageThreadUpdated` 回调，子区成员收到 `ChatMessageEventListener#onMessagesRecalled` 回调。
+子区有消息撤回时，子区所属群组的所有成员收到 `ChatMessageEventListener#onChatMessageThreadUpdated` 回调，子区成员收到 `ChatMessageEventListener#onMessagesRecalledInfo` 回调。
 
 示例代码如下：
 
 ```typescript
 // 继承并实现 `ChatMessageEventListener`
 class ChatMessageEvent implements ChatMessageEventListener {
-  onMessagesRecalled(messages: ChatMessage[]): void {
-    console.log(`onMessagesRecalled: `, messages);
+  onMessagesRecalledInfo(infos: ChatRecalledMessageInfo[]): void {
+    console.log(onMessagesRecalledInfo: , infos);
   }
   onChatMessageThreadUpdated(msgThread: ChatMessageThreadEvent): void {
     console.log(`onChatMessageThreadUpdated: `, msgThread);
