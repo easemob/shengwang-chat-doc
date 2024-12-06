@@ -296,6 +296,27 @@ override fun onChatExtendMenuItemClick(view: View?, itemId: Int): Boolean {
 
 ### 设置消息长按后的菜单项
 
+**风格样式**
+
+1. 若实现消息长按后弹出类似微信样式的弹窗，可进行如下设置：
+
+```kotlin
+ChatUIKitClient.getConfig()?.chatConfig?.enableWxMessageStyle = true
+```
+
+2. 若实现消息长按后弹出仿系统 UIActionSheet 样式的弹窗，可进行如下设置：
+
+```kotlin
+ChatUIKitClient.getConfig()?.chatConfig?.enableWxMessageStyle = false
+```
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_longpress_1.png" title="UIActionSheet" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_longpress_2.png" title="类似微信样式" />
+</ImageGallery>
+
+**菜单条目相关操作**
+
 - 增加自定义菜单条目
 
 ```kotlin
@@ -339,6 +360,25 @@ override fun onDismiss() {
     // 可以在这里处理快捷菜单的隐藏事件。
 }
 ```
+
+### 设置发送附件消息弹窗样式
+
+1. 若实现发送附件消息时弹出类似微信样式的弹窗，可进行如下设置：
+   
+```kotlin
+ChatUIKitClient.getConfig()?.chatConfig?.enableWxExtendStyle = true
+```
+    
+2. 若实现消息长按后弹出仿系统 `UIActionSheet` 样式的弹窗，可进行如下设置：
+
+```kotlin
+ChatUIKitClient.getConfig()?.chatConfig?.enableWxExtendStyle = false
+```  
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_types_1.png" title="UIActionSheet" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_types_2.png" title="类似微信样式" />
+</ImageGallery>
 
 ### 设置输入菜单相关属性
 
