@@ -7,6 +7,7 @@
 以下示例代码显示如何设置和获取推送通知的首选语言：
 
 ```typescript
+// 设置推送通知的首选语言
 ChatClient.getInstance()
   .pushManager.setPreferredNotificationLanguage(languageCode)
   .then(() => {
@@ -15,4 +16,13 @@ ChatClient.getInstance()
   .catch((reason) => {
     console.log("Failed to set the preferred notification language.", reason);
   });
+// 获取推送通知的首选语言  
+ChatClient.getInstance()
+  .pushManager.fetchPreferredNotificationLanguage()
+  .then((value) => {
+    console.log('fetchPreferredNotificationLanguage', value);
+  })
+  .catch((e) => {
+    console.log('fetchPreferredNotificationLanguage', e);
+  });  
 ```
