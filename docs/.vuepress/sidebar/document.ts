@@ -125,7 +125,8 @@ const documentSidebar = [
             { text: 'HarmonyOS 推送', link: 'push/push_harmony.html', only: ['harmonyos'] }
            ]
           }, 
-          { text: '上传推送证书', link: 'push/push_easemob_console.html', only: ['react-native', 'flutter'] },
+          { text: '上传推送证书', link: 'push/push_easemob_console.html', only: ['react-native'] },
+          { text: '上传推送证书及绑定推送信息', link: 'push/push_easemob_console.html', only: ['flutter'] },
           { text: '获取或更新推送 token', link: 'push/push_get_device_token.html', only: ['react-native'] },
           { text: '发送推送 token 到环信服务器', link: 'push/push_send_token_to_server.html', only: ['react-native'] },
           { text: '解析推送消息', link: 'push/push_parsing.html', only: ['android', 'ios'] },
