@@ -20,7 +20,7 @@
 
 ### 修复
 
-修复调用 [EMPushManager#getSilentModeForConversations]((/document/android/push/push_notification_mode_dnd.html#获取多个会话的推送通知设置)) 方法获取会话的免打扰状态失败的问题。
+修复调用 [EMPushManager#getSilentModeForConversations](/document/android/push/push_notification_mode_dnd.html#获取多个会话的推送通知设置)方法获取会话的免打扰状态失败的问题。
 
 ## 版本 V4.10.2 Dev 2024-11-04（开发版）
 

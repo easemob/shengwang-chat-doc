@@ -13,7 +13,7 @@
 | `from`      | String   | 发送已读回执用户 ID。                                        |
 | `to`        | String   | 接收已读回执用户 ID。                                        |
 | `eventType` | String   | `chat`：单聊。                                               |
-| `timestamp` | long     | 到环信 IM 服务器的 Unix 时间戳，单位为 ms。                  |
+| `timestamp` | long     | 环信 IM 服务器收到消息已读回执的 Unix 时间戳，单位为 ms。                  |
 | `msg_id`    | String   | 该回执消息的消息 ID。                                        |
 
 回调请求示例：

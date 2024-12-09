@@ -4,7 +4,7 @@
 
 ## 版本 4.10.0 2024-12-05
 
-- 修复 `fetchSilentModeForConversations` 方法获取会话的免打扰状态失败的问题。
+- 修复 [fetchSilentModeForConversations](/document/flutter/push/push_notification_mode_dnd.html#获取多个会话的推送通知设置) 方法获取会话的免打扰状态失败的问题。
 - 修复 iOS `applicationDidEnterBackground` 和 `applicationWillEnterForeground` 不执行的问题。
 
 ## 版本 4.8.2+1
@@ -22,8 +22,8 @@
 - 支持[加入聊天室时携带扩展信息、是否退出之前加入的全部聊天室](room_manage.html#加入聊天室)：
   - 新增 `EMChatRoomManager.joinChatRoom(String roomId, {bool leaveOther = true,String? ext,})` 方法，支持设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。
   - 新增 `EMChatRoomEventHandler.onMemberJoinedFromChatRoom(String roomId, String participant, String? ext)` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
-- 新增 `EMPushManager.syncConversationsSilentMode()` 方法，支持从服务器获取所有会话的推送通知方式的设置。
-- 新增 `EMPushManager.bindDeviceToken(String notifierName, String deviceToken)` 方法。
+- 新增 `EMPushManager.syncConversationsSilentMode()` 方法，支持[从服务器获取所有会话的推送通知方式的设置](/document/flutter/push/push_notification_mode_dnd.html#推送通知方式)。
+- 新增 [EMPushManager.bindDeviceToken(String notifierName, String deviceToken) 方法](/document/flutter/push/push_easemob_console.html#绑定推送信息)。
 - 新增 `EMConversation.remindType()` 方法，用于本地存储会话的推送通知方式。
 - 新增 `EMConversation.getLocalMessageCount()` 方法，用于[获取 SDK 本地数据库中会话在某个时间段内的全部消息数](message_retrieve.html#获取会话在一定时间内的消息数)。
 - 新增[设备登录时允许携带自定义消息，并将其传递给被踢的设备](multi_device.html#设置登录设备的扩展信息)：
