@@ -226,7 +226,6 @@ const chatUikitSidebar = [
   },
   { text: "集成单群聊 UIKit", link: "chatuikit_integrated.html", only: ['Uniapp'] },
   { text: "设计指南", link: "design_guide.html", only: ['Uniapp']}
-]
 const chatroomUikitSidebar = [
   { text: "概述", link: "roomuikit_overview.html" },
   {
