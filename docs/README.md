@@ -72,9 +72,12 @@ starter:
       - icon: /sdk/web.svg
         link: /uikit/chatuikit/web/chatuikit_integrated_react.html
         text: Web
-      - icon: /sdk/flutter.svg
-        link: /uikit/chatuikit/flutter/chatuikit_integrated.html
-        text: Flutter
+      - icon: /sdk/web.svg
+        link: /uikit/chatuikit/web/chatuikit_integrated_react.html
+        text: Web  
+      - icon: /sdk/uniapp.svg
+        link: /uikit/chatuikit/uniapp/chatuikit_integrated.html
+        text: Uniapp
       - icon: /sdk/react.svg
         link: /uikit/chatuikit/react-native/chatuikit_integrated.html
         text: React Native

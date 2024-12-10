@@ -249,7 +249,7 @@ html,body,page {
 
 在 uni-app IDE 中，运行 Demo：
 
-![image](./images/uikit/chatuikit/uniapp/uniapp_run.png)
+![image](/images/uikit/chatuikit/uniapp/uniapp_run.png)
 
 ## 高级特性
 

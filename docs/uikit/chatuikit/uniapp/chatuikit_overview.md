@@ -18,7 +18,7 @@
     │   ├── Chat                                  // 聊天功能模块
     │   ├── ChatNew                               // 发起新会话模块
     │   ├── ContactAdd                            // 添加联系人模块
-    │   ├── ContactList                           // 联系人列表模块      
+    │   ├── ContactList                           // 联系人列表模块
     │   ├── ContactRequestList                    // 联系人好友请求列表模块
     │   ├── ContactSearchList                     // 联系人搜索列表模块
     │   ├── Conversation                          // 会话列表模块
@@ -49,10 +49,10 @@
 单群聊 UIKit 中业务相关的 UI 组件在 `ChatUIKit/modules` 目录下，下图展示单群聊 UIKit 的主要功能：
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/ChatUIKit/android/main_chat.png" title="聊天页面" />
-  <ImageItem src="/images/uikit/ChatUIKit/android/main_conversation_list.png" title="会话列表" />
-  <ImageItem src="/images/uikit/ChatUIKit/android/main_contact_list.png" title="通讯录" />
-  <ImageItem src="/images/uikit/ChatUIKit/android/main_chat_group.png" title="群聊" />
+  <ImageItem src="/images/uikit/chatuikit/android/main_chat.png" title="聊天页面" />
+  <ImageItem src="/images/uikit/chatuikit/android/main_conversation_list.png" title="会话列表" />
+  <ImageItem src="/images/uikit/chatuikit/android/main_contact_list.png" title="通讯录" />
+  <ImageItem src="/images/uikit/chatuikit/android/main_chat_group.png" title="群聊" />
 </ImageGallery>
 
 ### 聊天页面功能
@@ -60,12 +60,12 @@
 `ChatUIKit/modules/Chat` 提供所有聊天视图的容器。
 
 <ImageGallery :columns="3">
-  <ImageItem src="/images/uikit/ChatUIKit/android/chat_detail.png" title="聊天页面" />
-  <ImageItem src="/images/uikit/ChatUIKit/android/message_types_2.png" title="发送多种类型的消息" />
-  <ImageItem src="/images/uikit/ChatUIKit/android/message_longpress_2.png" title="消息长按操作" />
-  <ImageItem src="/images/uikit/ChatUIKit/android/message_reply.png" title="消息引用" />
-  <ImageItem src="/images/uikit/ChatUIKit/android/message_deliveryreceipt.png" title="已发送回执" />
-  <ImageItem src="/images/uikit/ChatUIKit/android/message_readreceipt.png" title="已读回执" />
+  <ImageItem src="/images/uikit/chatuikit/android/chat_detail.png" title="聊天页面" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_types_2.png" title="发送多种类型的消息" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_longpress_2.png" title="消息长按操作" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_reply.png" title="消息引用" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_deliveryreceipt.png" title="已发送回执" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_readreceipt.png" title="已读回执" />
 </ImageGallery>
 
 ### 会话列表页面功能
@@ -73,8 +73,8 @@
 `ChatUIKit/modules/Conversation` 提供会话列表容器。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/ChatUIKit/android/conversation_longpress.png" title="会话长按操作" />
-  <ImageItem src="/images/uikit/ChatUIKit/android/conversation_operation.png" title="会话操作" />
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_longpress.png" title="会话长按操作" />
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_operation.png" title="会话操作" />
 </ImageGallery>
 
 ### 通讯录页面功能
@@ -82,8 +82,8 @@
 `ChatUIKit/modules/ContactList` 提供联系人列表容器, `ChatUIKit/modules/GroupList` 提供群组列表容器。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/ChatUIKit/android/contact list.png" title="联系人列表" />
-  <ImageItem src="/images/uikit/ChatUIKit/android/group_list.png" title="群组列表" />
+  <ImageItem src="/images/uikit/chatuikit/android/contact list.png" title="联系人列表" />
+  <ImageItem src="/images/uikit/chatuikit/android/group_list.png" title="群组列表" />
 </ImageGallery>
 
 ### 页面搜索功能
@@ -91,7 +91,6 @@
 单群聊 UIKit 提供以下搜索功能：
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/ChatUIKit/android/search_conversation.png" title="搜索会话名称" />
-  <ImageItem src="/images/uikit/ChatUIKit/android/search_contact.png" title="搜索联系人名称" />
+  <ImageItem src="/images/uikit/chatuikit/android/search_conversation.png" title="搜索会话名称" />
+  <ImageItem src="/images/uikit/chatuikit/android/search_contact.png" title="搜索联系人名称" />
 </ImageGallery>
-

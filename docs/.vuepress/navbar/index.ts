@@ -120,7 +120,7 @@ export const zhNavbar = navbar([
           },
           {
             text: 'Uniapp',
-            icon: '/icon-uniapp.svg',
+            icon: '/icon-uni-app.svg',
             link: '/uikit/chatuikit/uniapp/chatuikit_overview.html'
           },
           {

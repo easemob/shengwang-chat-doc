@@ -31,6 +31,10 @@ const PLATFORM_ICON_MAP = {
     icon: "/icon-unity.svg",
     activeIcon: "/icon-unity-hover.svg",
   },
+  uniapp: {
+    icon: "/icon-uni-app.svg",
+    activeIcon: "/icon-uni-app.svg",
+  },
   applet: {
     icon: "/icon-mini-program.svg",
     activeIcon: "/icon-mini-program-hover.svg",
@@ -69,6 +73,10 @@ const options = [
       {
         value: "flutter",
         label: "Flutter",
+      },
+      {
+        value: "uniapp",
+        label: "Uniapp",
       },
     ],
   },
