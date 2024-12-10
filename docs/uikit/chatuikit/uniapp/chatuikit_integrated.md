@@ -286,7 +286,7 @@ ChatUIKit.groupStore.setGroupAvatar('groupId', 'group avatar url');
 
 ## 隐藏 UIKit 功能
 
-如果你不想使用 UIKIT 的某些功能，可以调用 `ChatUIKit.hideFeature` 方法隐藏，可以在 `ChatUIKit/configType.ts` 文件查看所有可隐藏的功能。
+如果你不想使用 UIKit 的某些功能，可以调用 `ChatUIKit.hideFeature` 方法隐藏，可以在 `ChatUIKit/configType.ts` 文件查看所有可隐藏的功能。
 
 例如，不使用环信内置用户属性，示例代码如下：
 
