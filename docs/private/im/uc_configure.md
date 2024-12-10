@@ -94,7 +94,7 @@
 
 ![img](/images/privitization/deploy_push_callback.png)
 
-3. 点击 **添加回调地址** 按钮，打开回调配置对话框，在回调配置对话框中，填写回调相关配置信息，点击 **保存** 按钮，完成回调配置，具体配置内容说明见 [回调配置](/document/server-side/callback.html#实现步骤)。
+3. 点击 **添加回调地址** 按钮，打开回调配置对话框，在回调配置对话框中，填写回调相关配置信息，点击 **保存** 按钮，完成回调配置，具体配置内容说明见 [回调配置](/product/enable_and_configure_IM.html#配置回调规则)。
 
 ![img](/images/privitization/deploy_push_window.png)
 

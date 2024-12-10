@@ -12,7 +12,7 @@
 
 ![img](/images/moderation/moderation_callback_02.png)
 
-3. 勾选 **内容审核**，其他字段的设置详见[设置回调](/document/server-side/callback.html)。
+3. 勾选 **内容审核**，其他字段的设置详见[配置回调规则](/product/enable_and_configure_IM.html#配置回调规则)。
 
 ![img](/images/moderation/moderation_callback_03.png)
 

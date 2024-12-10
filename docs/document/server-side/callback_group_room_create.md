@@ -4,7 +4,7 @@
 :::tip
 1. 你所使用的环信即时通讯 IM 的版本可能需要单独开通回调服务，详见[增值服务说明](/product/pricing.html#增值服务费用)。
 2. 如果需要创建群组/聊天室的回调事件，你需要在[环信控制台](https://console.easemob.com/user/login)设置发送后回调规则，详见[配置回调规则](/product/enable_and_configure_IM.html#配置回调规则)。
-3. 发送后回调的相关介绍，详见[回调说明](/document/server-side/callback.html)。
+3. 发送后回调的相关介绍，详见[回调说明](/document/server-side/callback_postsending.html)。
 :::
  
 ## 回调时机

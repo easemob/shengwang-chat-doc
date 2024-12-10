@@ -196,9 +196,9 @@ GET https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}
 以下载图片为例：
 
 ```bash
-# 将 <YourAppToken> 替换为你在服务端生成的 App Token
+# 将 <YourToken> 替换为你的用户 token 或在服务端生成的 App Token 
 
-curl -X GET -H 'Accept: application/octet-stream' -H 'Authorization: Bearer <YourAppToken>' -H 'share-secret: f0Vr-uyyEeiHpHmsu53XXXXXXXXZYgyLkdfsZ4xo2Z0cSBnB' 'https://XXXX/XXXX/XXXX/chatfiles/7f456bf0-XXXX-XXXX-b630-777db304f26c'-o /Users/test/easemob/image/image.JPG
+curl -X GET -H 'Accept: application/octet-stream' -H 'Authorization: Bearer <YourToken>' -H 'share-secret: f0Vr-uyyEeiHpHmsu53XXXXXXXXZYgyLkdfsZ4xo2Z0cSBnB' 'https://XXXX/XXXX/XXXX/chatfiles/7f456bf0-XXXX-XXXX-b630-777db304f26c'-o /Users/test/easemob/image/image.JPG
 ```
 
 :::notice
@@ -248,7 +248,7 @@ GET https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}
 | :-------------- | :----- | :--------------------- | :------------------ |
 | `Accept`        | String | 否     | 内容类型。请填 `application/octet-stream`，表示下载二进制数据流格式的文件。        |
 | `Authorization` | String | 否     | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。                                                        |
-| `thumbnail`     | Bool   | 否      | 是否下载缩略图：<ul><li> `true`：是，下载缩略图。</li><li>`false`：否，下载原文件。</li></ul> <Container type="notice" title="注意">若该参数为空，下载原文件。</Container> |
+| `thumbnail`     | Bool   | 否      | 是否下载缩略图：<ul><li> `true`：是，下载缩略图。</li><li>（默认）`false`：否，下载原文件。</li></ul> <Container type="notice" title="注意">若该参数为空，下载原文件。</Container> |
 | `share-secret`  | String | 否    | 缩略图访问密钥。若上传图片时限制了访问（`restrict-access` 设置为 `true`），下载缩略图时则需要该访问密钥。成功上传图片后，从 [文件上传](#上传文件) 的响应 body 中获取该密钥。 |
 
 ### HTTP 响应
