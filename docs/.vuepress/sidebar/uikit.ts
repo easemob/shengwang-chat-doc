@@ -208,6 +208,24 @@ const chatUikitSidebar = [
     ],
     only: ['android', 'react-native', 'flutter', 'ios']
   }
+  {
+    text: '产品介绍',
+    collapsible: true,
+    children: [
+      { text: '概述', link: 'chatuikit_overview.html' },
+      { text: '特性', 
+        collapsible: true,
+      children: [
+        { text: '通用', link: 'chatfeature_common.html' },
+        { text: '会话', link: 'chatfeature_conversation.html' },
+        { text: '消息', link: 'chatfeature_message.html' },
+        ],
+      },
+    ],
+    only: ['Uniapp']
+  },
+  { text: "集成单群聊 UIKit", link: "chatuikit_integrated.html", only: ['Uniapp'] },
+  { text: "设计指南", link: "design_guide.html", only: ['Uniapp']}
 ]
 const chatroomUikitSidebar = [
   { text: "概述", link: "roomuikit_overview.html" },
