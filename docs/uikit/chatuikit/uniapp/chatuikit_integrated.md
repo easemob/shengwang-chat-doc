@@ -28,7 +28,7 @@
 2. 下载 UIKit 源码。
 
 :::tip
- UIKIT中依赖的静态资源（`ChatUIKit/assets`）放置在环信服务器中，建议您将静态资源放置在您的业务服务器上，然后修改 `ChatUIKit/const/index.ts` 文件中的 `ASSETS_URL` 为您的资源服务器地址。
+ UIKIT中依赖的静态资源（`ChatUIKit/assets`）放置在环信服务器中，建议你将静态资源放置在你的业务服务器上，然后修改 `ChatUIKit/const/index.ts` 文件中的 `ASSETS_URL` 为你的资源服务器地址。
 :::
 
  ```bash
@@ -46,7 +46,7 @@
 3. 添加依赖
 
 :::tip 
-环信即时通讯 IM Web SDK 4.11.0 及以上
+环信即时通讯 IM Web SDK 4.11.0 及以上。
 :::
 
 在项目根目录下执行以下命令，添加依赖：
@@ -56,9 +56,9 @@ npm init -y
 npm i easemob-websdk@4.11.0 pinyin-pro@3.26.0 mobx@6.13.4 --save
 ```
 
-4. 引入 `ChatUIKit` 并初始化
+4. 引入 `ChatUIKit` 并初始化。
 
-在您的项目 `App.vue` 文件中引入 `ChatUIKit` 组件并进行初始化。
+在你的项目 `App.vue` 文件中引入 `ChatUIKit` 组件并进行初始化。
 
 ```jsx
 <script lang="ts">
@@ -255,7 +255,7 @@ html,body,page {
 
 ### 仅集成聊天
 
-如果您按照本文步骤集成 UIKit 后，需要单独使用聊天能力，按照以下示例代码用 `uni.navigateTo` 进行跳转即可。
+如果你按照本文步骤集成 UIKit 后，需要单独使用聊天能力，按照以下示例代码用 `uni.navigateTo` 进行跳转即可。
 
 ```javascript
 const id = '1234567890'; // 群组 ID 或者用户 ID
