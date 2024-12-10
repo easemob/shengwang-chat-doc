@@ -207,7 +207,7 @@ const chatUikitSidebar = [
       { text: '集成会话列表页面', link: 'ui_conversation.html', except: ['android','ios'] },
     ],
     only: ['android', 'react-native', 'flutter', 'ios']
-  }
+  },
   {
     text: '产品介绍',
     collapsible: true,
