@@ -251,7 +251,7 @@
 
 1. 在左侧导航栏，选择 **即时通讯** > **功能配置** > **消息回调**，进入 **消息回调** 页面。
 
-![img](/images/product/push-callback.png)
+![img](/images/product/callback_rule_list.png)
 
 2. 点击 **添加回调地址** 按钮，打开回调配置对话框，填写回调相关配置信息，点击 **保存** 按钮，完成回调配置。
 
