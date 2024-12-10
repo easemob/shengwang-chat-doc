@@ -44,7 +44,7 @@
 
    - 环信服务器为回调规则生成的 secret：你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**消息回调**页面的回调规则列表中查看。
 
-     ![img](1.png)
+    ![img](/images/product/callback_secret.png)
 
    - 回调时间戳：回调请求体中的时间戳参数。
 
