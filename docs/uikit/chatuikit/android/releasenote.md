@@ -22,9 +22,9 @@
 调用方式如下：
 
 python3 rename_file_and_update_content.py target_folder --rename-files --replace-content
-# target_folder：目标文件夹路径。
-# --rename-files：如果指定此参数，则会执行文件重命名操作。
-# --replace-content：如果指定此参数，则会执行文件内容替换操作。
+- target_folder：目标文件夹路径。
+- --rename-files：如果指定此参数，则会执行文件重命名操作。
+-  --replace-content：如果指定此参数，则会执行文件内容替换操作。
 
 例如：`python3 rename_file_and_update_content.py ../quickstart/src  --replace-content --rename-files`
 
