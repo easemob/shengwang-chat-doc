@@ -151,7 +151,7 @@ POST https://{host}/{org_name}/{app_name}/token
 
 如果返回的 HTTP 状态码为 `200`，表示成功获取 token。如果返回的 HTTP 状态码非 200，表示请求失败。你可以参考[响应状态码](/document/server-side/error.html)了解可能的原因。
 
-关于响应包体中的字段的描述，详见[通过用户 ID 和密码获取 token 的 API](#通过用户 ID 和密码获取用户 token) 中的响应字段的描述。
+关于响应包体中的字段的描述，详见[通过用户 ID 和密码获取 token 的 API](#通过用户-id-和密码获取用户-token) 中的响应字段的描述。
 
 ### 示例
 
