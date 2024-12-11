@@ -54,6 +54,7 @@ options.enableDeliveryAck = YES;
 ```
 
 2. 接收方收到消息后，SDK 自动向发送方送达回执。
+   
 3. 发送方监听 `EMChatManagerDelegate#messagesDidDeliver` 事件，收到接收方的送达回执。你可以在收到该通知时，显示消息的送达状态。
 
 ```objectivec
@@ -94,12 +95,14 @@ options.enableRequireReadAck = YES;
 2. 接收方发送消息已读回执。
 
 - 消息接收方进入会话时，发送会话已读回执。
+  
+  聊天页面未打开时，若有未读消息，进入聊天页面，发送会话已读回执。这种方式可避免发送多个消息已读回执。
 
 ```objectivec
 [[EMClient sharedClient].chatManager ackConversationRead:conversationId completion:nil];
 ```
 
-- 在会话页面，接收到消息时，根据消息类型发送消息已读回执。
+- 接收方在聊天页面打开时，接收到消息时，再根据消息类型发送单个消息已读回执。  
 
 ```objectivec
 // 接收消息回调。
