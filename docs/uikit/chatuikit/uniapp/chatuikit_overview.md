@@ -52,7 +52,7 @@
   <ImageItem src="/images/uikit/chatuikit/android/main_chat.png" title="聊天页面" />
   <ImageItem src="/images/uikit/chatuikit/android/main_conversation_list.png" title="会话列表" />
   <ImageItem src="/images/uikit/chatuikit/android/main_contact_list.png" title="通讯录" />
-  <ImageItem src="/images/uikit/chatuikit/android/main_chat_group.png" title="群聊" />
+  <ImageItem src="/images/uikit/chatuikit/uniapp/main_chat_group.png" title="群聊" />
 </ImageGallery>
 
 ### 聊天页面功能
