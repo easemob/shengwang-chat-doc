@@ -38,13 +38,13 @@
 
 已发送回执用于告知消息发送者，其发送的消息已经成功发送到服务器、接收方以及发送失败。
 
-![img](/images/uikit/chatuikit/uniapp/message_receipt_delivery.png) 
+![img](/images/uikit/chatuikit/uniapp/message_receipt_delivery.png  =350x750) 
 
 ## 已读回执
 
 已读回执用于告知消息发送者，接收者已经阅读了其发送的消息。
 
-![img](/images/uikit/chatuikit/uniapp/message_receipt_read.png) 
+![img](/images/uikit/chatuikit/uniapp/message_receipt_read.png  =350x750) 
 
 ## 语音消息
 

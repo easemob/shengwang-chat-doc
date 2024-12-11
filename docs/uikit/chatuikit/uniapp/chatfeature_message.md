@@ -31,7 +31,7 @@
 - `ChatUIKitExtendMessageReplyView`：底部输入框组件上方展示的引用消息自定义 View。
 - `ChatUIKitMessageReplyController`：控制引用功能的显示、隐藏、跳转等逻辑。
 
-![img](/images/uikit/chatuikit/feature/message/message_reply.png) 
+![img](/images/uikit/chatuikit/uniapp/message_reply.png) 
 
 #### 如何使用
 

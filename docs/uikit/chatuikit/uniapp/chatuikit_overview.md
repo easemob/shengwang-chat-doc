@@ -73,8 +73,7 @@
 `ChatUIKit/modules/Conversation` 提供会话列表容器。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/conversation_longpress.png" title="会话长按操作" />
-  <ImageItem src="/images/uikit/chatuikit/android/conversation_operation.png" title="会话操作" />
+  <ImageItem src="/images/uikit/chatuikit/uniapp/conversation_swipe_left.png" title="会话左滑操作" />
 </ImageGallery>
 
 ### 通讯录页面功能
