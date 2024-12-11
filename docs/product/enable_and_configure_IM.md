@@ -399,7 +399,9 @@
 
 ![img](/images/product/user_create_test.png)
    
-创建用户后，你可以查看用户 token、设置 token 有效时间（针对所有用户生效）、重置密码、查询用户以及删除用户。   
+创建用户后，你可以查看用户 token、设置 token 有效时间、重置密码、查询用户以及删除用户。 
+
+注意：设置 token 有效时间对当前 App Key 下的 app 和用户 token 均生效，仅对修改后新生成的 token 生效，不影响修改之前已生成的 token。
 
 ![img](/images/product/user_operation_test.png)
 
