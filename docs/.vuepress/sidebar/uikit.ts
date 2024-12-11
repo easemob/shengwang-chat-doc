@@ -243,11 +243,19 @@ const chatUikitSidebar = [
     only: ["uniapp"],
   },
   {
-    text: "集成单群聊 UIKit",
-    link: "chatuikit_integrated.html",
+    text: "集成文档",
+    collapsible: true,
+    children: [
+      { text: "集成单群聊 UIKit", link: "chatuikit_integrated.html" },
+    ],
     only: ["uniapp"],
   },
-  { text: "设计指南", link: "design_guide.html", only: ["uniapp"] },
+  {
+    text: "设计文档",
+    collapsible: true,
+    children: [{ text: "设计指南", link: "chatuikit_design_guide.html" }],
+    only: ["uniapp"],
+  },
 ];
 const chatroomUikitSidebar = [
   { text: "概述", link: "roomuikit_overview.html" },
