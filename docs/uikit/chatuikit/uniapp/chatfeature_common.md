@@ -20,13 +20,13 @@
 
 创建会话是即时通讯的核心功能之一，它允许用户启动与一个或多个其他用户交流。
 
-![img](/images/uikit/chatuikit/feature/common/conversation_create.png)
+![img](/images/uikit/chatuikit/uniapp/conversation_create.png)
 
 ## 创建群组	
 
 群组是允许多个用户加入的聊天会话。用户可以邀请其他用户加入群组，并对群组进行管理。
 
-![img](/images/uikit/chatuikit/feature/common/group_create.png)
+![img](/images/uikit/chatuikit/uniapp/group_create.png)
 
 ## 用户列表	
 
