@@ -24,7 +24,7 @@
 
 ## 创建群组	
 
-群组是允许多个用户加入的聊天会话。用户可以邀请其他用户加入群组，并对群组进行管理。
+群组是允许多个用户加入的聊天会话。
 
 ![img](/images/uikit/chatuikit/uniapp/group_create.png)
 
