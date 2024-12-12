@@ -40,8 +40,8 @@ UIKit中依赖的静态资源（`ChatUIKit/assets`）放置在环信服务器中
 
  3. 添加依赖
 
-:::
-tip easemob-websdk 版本 4.11.0 及以上
+:::tip
+ easemob-websdk 版本 4.11.0 及以上
 :::
 
 在项目根目录下执行以下命令，添加依赖
