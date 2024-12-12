@@ -94,7 +94,7 @@ uni.$UIKit = ChatUIKit;
 
 
 // 登录环信即时通讯 IM
-const login = ()=>{
+const login = () => {
     uni.$UIKit.chatStore.login({
         user: "", // 用户 ID
         accessToken: "" // 用户 Token

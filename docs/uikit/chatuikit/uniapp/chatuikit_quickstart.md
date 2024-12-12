@@ -113,11 +113,11 @@ const handleLogin = () => {
       console.error("登录失败", error);
     });
 };
-</script>
 // 退出登录
 const logout = () => {
     uni.$UIKit.chatStore.logout();
-}
+};
+</script>
 <style lang="scss" scoped>
 .index {
   height: 100%;
