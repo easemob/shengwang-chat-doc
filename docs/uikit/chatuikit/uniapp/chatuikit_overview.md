@@ -49,10 +49,10 @@
 单群聊 UIKit 中业务相关的 UI 组件在 `ChatUIKit/modules` 目录下，下图展示单群聊 UIKit 的主要功能：
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/ChatUIKit/android/main_chat.png" title="聊天页面" />
-  <ImageItem src="/images/uikit/ChatUIKit/android/main_conversation_list.png" title="会话列表" />
-  <ImageItem src="/images/uikit/ChatUIKit/android/main_contact_list.png" title="通讯录" />
-  <ImageItem src="/images/uikit/ChatUIKit/android/main_chat_group.png" title="群聊" />
+  <ImageItem src="/images/uikit/chatuikit/android/main_chat.png" title="聊天页面" />
+  <ImageItem src="/images/uikit/chatuikit/android/main_conversation_list.png" title="会话列表" />
+  <ImageItem src="/images/uikit/chatuikit/android/main_contact_list.png" title="通讯录" />
+  <ImageItem src="/images/uikit/chatuikit/android/main_chat_group.png" title="群聊" />
 </ImageGallery>
 
 ### 聊天页面功能
@@ -60,11 +60,11 @@
 `ChatUIKit/modules/Chat` 提供所有聊天视图的容器。
 
 <ImageGallery :columns="3">
-  <ImageItem src="/images/uikit/ChatUIKit/android/chat_detail.png" title="聊天页面" />
-  <ImageItem src="/images/uikit/ChatUIKit/android/message_types_2.png" title="发送多种类型的消息" />
-  <ImageItem src="/images/uikit/ChatUIKit/android/message_longpress_2.png" title="消息长按操作" />
-  <ImageItem src="/images/uikit/ChatUIKit/android/message_reply.png" title="消息引用" />
-  <ImageItem src="/images/uikit/ChatUIKit/android/message_deliveryreceipt.png" title="已发送回执" />
+  <ImageItem src="/images/uikit/chatuikit/android/chat_detail.png" title="聊天页面" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_types_2.png" title="发送多种类型的消息" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_longpress_2.png" title="消息长按操作" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_reply.png" title="消息引用" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_deliveryreceipt.png" title="已发送回执" />
   <ImageItem src="/images/uikit/ChatUIKit/android/message_readreceipt.png" title="已读回执" />
 </ImageGallery>
 

@@ -8,11 +8,11 @@
 
 开始前，请确保你的开发环境满足以下条件：
 
-- HBuilderX最新版
+- HBuilderX 最新版
 - Vue3
-- sass（sass-loader 版本 ≤ 10.1.1）
-- node（12.13.0 ~ 17.0.0 推荐 LTS 版本 16.17.0）
-- npm （版本请与 Node.js 版本匹配）
+- sass：sass-loader 10.1.1 及之前版本
+- node 12.13.0 - 17.0.0，推荐 LTS 版本 16.17.0
+- npm：版本请与 Node.js 版本匹配
 
 ## 项目准备
 
@@ -20,10 +20,10 @@
 
 1. 创建 uni-app Vue3 项目，详情参考 [uni-app 项目创建](https://uniapp.dcloud.net.cn/quickstart-hx.html)。
 
-2. 下载UIKit源码
+2. 下载 UIKit 源码
 
-:::
-tip UIKit中依赖的静态资源（`ChatUIKit/assets`）放置在环信服务器中,有访问频率限制，建议您将静态资源放置在您的业务服务器上，然后修改 `ChatUIKit/const/index.ts` 文件中的 `ASSETS_URL` 为您的资源服务器地址。
+:::tip
+UIKit中依赖的静态资源（`ChatUIKit/assets`）放置在环信服务器中,有访问频率限制，建议您将静态资源放置在您的业务服务器上，然后修改 `ChatUIKit/const/index.ts` 文件中的 `ASSETS_URL` 为您的资源服务器地址。
 :::
 
  ```bash
