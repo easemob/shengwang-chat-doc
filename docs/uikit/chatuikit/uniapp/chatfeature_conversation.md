@@ -2,7 +2,9 @@
 
 本文介绍会话相关特性，包括会话已读、置顶、免打扰和删除功能。
 
-![img](/images/uikit/chatuikit/uniapp/conversation_swipe_left.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/uniapp/conversation_swipe_left.png" title="会话左滑操作" />
+</ImageGallery>
 
 ## 会话已读	
 

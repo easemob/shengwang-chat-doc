@@ -61,8 +61,8 @@
 
 <ImageGallery :columns="3">
   <ImageItem src="/images/uikit/chatuikit/android/chat_detail.png" title="聊天页面" />
-  <ImageItem src="/images/uikit/chatuikit/android/message_types_2.png" title="发送多种类型的消息" />
-  <ImageItem src="/images/uikit/chatuikit/android/message_longpress_2.png" title="消息操作" />
+  <ImageItem src="/images/uikit/chatuikit/uniapp/message_types.png" title="发送多种类型的消息" />
+  <ImageItem src="/images/uikit/chatuikit/uniapp/message_operation.png" title="消息操作" />
   <ImageItem src="/images/uikit/chatuikit/android/message_reply.png" title="消息引用" />
   <ImageItem src="/images/uikit/chatuikit/android/message_deliveryreceipt.png" title="已发送回执" />
   <ImageItem src="/images/uikit/chatuikit/android/message_readreceipt.png" title="已读回执" />
@@ -89,7 +89,7 @@
 
 单群聊 UIKit 提供以下搜索功能：
 
-<ImageGallery :columns="3">
+<ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/android/search_conversation.png" title="搜索会话名称" />
   <ImageItem src="/images/uikit/chatuikit/android/search_contact.png" title="搜索联系人名称" />
 </ImageGallery>

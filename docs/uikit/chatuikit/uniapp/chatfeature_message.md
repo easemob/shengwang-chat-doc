@@ -4,7 +4,9 @@
 
 本文介绍消息相关特性，包括消息复制、删除、撤回、编辑和引用。
 
-![img](/images/uikit/chatuikit/uniapp/message_operation.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/uniapp/message_operation.png" title="消息操作" />
+</ImageGallery>
 
 ## 消息复制
 

@@ -56,7 +56,7 @@
 
 消息审核对用户发送的消息内容进行审查，判断其是否符合平台的社区准则、服务条款和相关法律法规。
 
-![img](/images/uikit/chatuikit/uniapp/message_report.png =300x630) 
+![img](/images/uikit/chatuikit/uniapp/message_report.png) 
 
 ## 群组 @ 提及 
 
