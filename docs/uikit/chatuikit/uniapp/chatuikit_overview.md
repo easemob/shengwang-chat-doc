@@ -30,7 +30,7 @@
     │   ├── appUser.ts                            // UIKit用户属性store
     │   ├── chat.ts                               // IM连接状态和事件处理
     │   ├── config.ts                             // UIKit Config
-    │   ├── conn.ts                               // 管理SDK实例
+    │   ├── conn.ts                               // 管理 SDK 实例
     │   ├── contact.ts                            // 联系人相关 store
     │   ├── conversation.ts                       // 会话相关 store
     │   ├── group.ts                              // 群组相关 store
@@ -62,10 +62,10 @@
 <ImageGallery :columns="3">
   <ImageItem src="/images/uikit/chatuikit/android/chat_detail.png" title="聊天页面" />
   <ImageItem src="/images/uikit/chatuikit/android/message_types_2.png" title="发送多种类型的消息" />
-  <ImageItem src="/images/uikit/chatuikit/android/message_longpress_2.png" title="消息长按操作" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_longpress_2.png" title="消息操作" />
   <ImageItem src="/images/uikit/chatuikit/android/message_reply.png" title="消息引用" />
   <ImageItem src="/images/uikit/chatuikit/android/message_deliveryreceipt.png" title="已发送回执" />
-  <ImageItem src="/images/uikit/ChatUIKit/android/message_readreceipt.png" title="已读回执" />
+  <ImageItem src="/images/uikit/chatuikit/android/message_readreceipt.png" title="已读回执" />
 </ImageGallery>
 
 ### 会话列表页面功能
@@ -74,6 +74,7 @@
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/uniapp/conversation_swipe_left.png" title="会话左滑操作" />
+</ImageGallery>
 
 ### 通讯录页面功能
 

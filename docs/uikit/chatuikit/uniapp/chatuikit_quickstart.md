@@ -11,8 +11,8 @@
 - HBuilderX 最新版
 - Vue3
 - sass：sass-loader 10.1.1 及之前版本
-- node 12.13.0 - 17.0.0，推荐 LTS 版本 16.17.0
-- npm：版本请与 Node.js 版本匹配
+- node：12.13.0 - 17.0.0，推荐 LTS 版本 16.17.0
+- npm：版本需与 Node.js 版本匹配
 
 ## 项目准备
 
@@ -20,16 +20,16 @@
 
 1. 创建 uni-app Vue3 项目，详情参考 [uni-app 项目创建](https://uniapp.dcloud.net.cn/quickstart-hx.html)。
 
-2. 下载 UIKit 源码
+2. 下载 UIKit 源码。
 
 :::tip
-UIKit中依赖的静态资源（`ChatUIKit/assets`）放置在环信服务器中,有访问频率限制，建议您将静态资源放置在您的业务服务器上，然后修改 `ChatUIKit/const/index.ts` 文件中的 `ASSETS_URL` 为您的资源服务器地址。
+UIKit 中依赖的静态资源（`ChatUIKit/assets`）放置在环信服务器中，存在访问频率限制，建议你将静态资源放置在你的业务服务器上，然后修改 `ChatUIKit/const/index.ts` 文件中的 `ASSETS_URL` 为你的资源服务器地址。
 :::
 
  ```bash
-   # 找一个目录，clone UIKit
+   # 克隆 UIKit
    git clone git@github.com:Wster11/uniapp-uikit.git
-   # 在您的 uni-app 项目根目录下执行以下命令，拷贝组件文件
+   # 在你的 uni-app 项目根目录下执行以下命令，拷贝组件文件
    mkdir -p ./ChatUIKit
    # macOS
    mv ${组件项目路径}/ChatUIKit/* ./ChatUIKit
@@ -38,13 +38,13 @@ UIKit中依赖的静态资源（`ChatUIKit/assets`）放置在环信服务器中
 
  ```
 
- 3. 添加依赖
+3. 添加依赖。
 
 :::tip
- easemob-websdk 版本 4.11.0 及以上
+环信即时通讯 IM Web SDK 4.11.0 及以上。
 :::
 
-在项目根目录下执行以下命令，添加依赖
+在项目根目录下执行以下命令，添加依赖：
 
 ```bash
 npm init -y
@@ -86,8 +86,8 @@ import { ref } from "vue";
 const userId = ref("");
 const password = ref("");
 
-const id = ""; // 用户ID或者群ID
-const type = ""; // 会话类型支持 singleChat 单聊 groupChat 群聊
+const id = ""; // 用户 ID 或者群组 ID
+const type = ""; // 会话类型：单聊 singleChat，群聊为 groupChat 
 
 const handleLogin = () => {
   if (!userId.value || !password.value) {
@@ -165,8 +165,9 @@ const handleLogin = () => {
 
 ```
 
+2. 打开 `app.vue` 文件，并替换为如下内容。
 
-2. 打开 `app.vue` 文件，并替换为如下内容：
+要查看服务器域名配置，请点击[这里](https://doc.easemob.com/document/applet/wechat.html#配置服务器域名) 。
 
 ```jsx
 <script lang="ts">
@@ -174,12 +175,9 @@ import { ChatUIKit } from "./ChatUIKit";
 import websdk from "easemob-websdk/uniApp/Easemob-chat";
 import { EasemobChatStatic } from "easemob-websdk/Easemob-chat";
 
-// 服务器域名配置 https://doc.easemob.com/document/applet/wechat.html#%E9%85%8D%E7%BD%AE%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9F%9F%E5%90%8D
-
-
-// 创建IM实例
+// 创建 IM 实例
 const chat = new (websdk as unknown as EasemobChatStatic).connection({
-  appKey: '', // 环信APPKEY
+  appKey: '', // 应用的 App Key
   isHttpDNS: false,
   url: '', // 环信 websocket URL
   apiUrl: '', // 环信 Restful API URL
@@ -189,10 +187,10 @@ const chat = new (websdk as unknown as EasemobChatStatic).connection({
 
 // 初始化 ChatUIKit
 ChatUIKit.init({
-  chat, // 传入IM实例
+  chat, // 传入 IM 实例
   config: {
     theme: {
-			// 头像形状 支持 circle 圆形 和 square 方形
+			// 头像形状：圆形（circle）和方形（square）
       avatarShape: "square"
     },
     isDebug: true // 是否开启调试模式
@@ -207,7 +205,7 @@ export default {
   },
   onShow: function () {
     console.log("App Show");
-    // 在 onShow 中调用 ChatUIKit.onShow() 方法，主动监测IM连接状态
+    // 在 onShow 中调用 ChatUIKit.onShow() 方法，主动监测 IM 连接状态
     ChatUIKit.onShow();
   },
   onHide: function () {
@@ -224,9 +222,9 @@ html,body,page {
 </style>
 ```
 
-3. 配置路由
+3. 配置路由。
 
-在您项目的 pages.json 文件中的更新 pages 路由：
+在你项目的 `pages.json` 文件中的更新 `pages` 路由：
 
 ```json
 {
@@ -264,7 +262,6 @@ html,body,page {
 ```
 
 ### 第二步 运行项目
-
 
 在 uni-app IDE 中，运行 项目：
 
