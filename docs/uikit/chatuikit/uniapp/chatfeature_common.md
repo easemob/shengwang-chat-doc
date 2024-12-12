@@ -64,11 +64,11 @@
 
 #### 如何使用
 
-群组 @ 提及特性默认开启。要关闭该特性，则需将 `enableMention` 设置为 `false`。
+群组 @ 提及特性默认开启。要关闭该特性，则可以调用 `ChatUIKit.hideFeature`方法隐藏。
 
 示例代码如下：
 
-```kotlin
-    ChatUIKitClient.getConfig()?.chatConfig?.enableMention == false
+```javascript
+    ChatUIKit.hideFeature(['inputMention'])
 ```
 
