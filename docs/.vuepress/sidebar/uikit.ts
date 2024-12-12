@@ -196,6 +196,7 @@ const chatUikitSidebar = [
     text: "更新日志",
     collapsible: true,
     children: [{ text: "更新日志", link: "releasenote.html" }],
+    only: ["android", "react-native", "flutter"],
   },
   {
     text: "历史文档",
@@ -262,6 +263,12 @@ const chatUikitSidebar = [
     text: "设计文档",
     collapsible: true,
     children: [{ text: "设计指南", link: "chatuikit_design_guide.html" }],
+    only: ["uniapp"],
+  },
+  {
+    text: "更新日志",
+    collapsible: true,
+    children: [{ text: "更新日志", link: "releasenote.html" }],
     only: ["uniapp"],
   },
 ];
