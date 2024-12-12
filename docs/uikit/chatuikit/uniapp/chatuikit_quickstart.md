@@ -268,7 +268,7 @@ html,body,page {
 
 在 uni-app IDE 中，运行 项目：
 
-![img](./run.jpg  =375x176)
+![image](/images/uikit/chatuikit/uniapp/uniapp_run.png)
 
 ### 第三步 发送第一条消息
 
