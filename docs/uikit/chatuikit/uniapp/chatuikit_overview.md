@@ -31,10 +31,10 @@
     │   ├── chat.ts                               // IM连接状态和事件处理
     │   ├── config.ts                             // UIKit Config
     │   ├── conn.ts                               // 管理SDK实例
-    │   ├── contact.ts                            // 联系人相关store
-    │   ├── conversation.ts                       // 会话相关store
-    │   ├── group.ts                              // 群组相关store
-    │   ├── message.ts                            // 消息相关store
+    │   ├── contact.ts                            // 联系人相关 store
+    │   ├── conversation.ts                       // 会话相关 store
+    │   ├── group.ts                              // 群组相关 store
+    │   ├── message.ts                            // 消息相关 store
     ├── styles                                 // UIKit 通用样式
     ├── types                                  // UIKit 类型定义
     ├── utils                                  // UIKit 通用工具函数
@@ -52,7 +52,7 @@
   <ImageItem src="/images/uikit/chatuikit/android/main_chat.png" title="聊天页面" />
   <ImageItem src="/images/uikit/chatuikit/android/main_conversation_list.png" title="会话列表" />
   <ImageItem src="/images/uikit/chatuikit/android/main_contact_list.png" title="通讯录" />
-  <ImageItem src="/images/uikit/chatuikit/android/main_chat_group.png" title="群聊" />
+  <ImageItem src="/images/uikit/chatuikit/uniapp/main_chat_group.png" title="群聊" />
 </ImageGallery>
 
 ### 聊天页面功能
@@ -73,17 +73,15 @@
 `ChatUIKit/modules/Conversation` 提供会话列表容器。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/ChatUIKit/android/conversation_longpress.png" title="会话长按操作" />
-  <ImageItem src="/images/uikit/ChatUIKit/android/conversation_operation.png" title="会话操作" />
-</ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/uniapp/conversation_swipe_left.png" title="会话左滑操作" />
 
 ### 通讯录页面功能
 
 `ChatUIKit/modules/ContactList` 提供联系人列表容器, `ChatUIKit/modules/GroupList` 提供群组列表容器。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/ChatUIKit/android/contact list.png" title="联系人列表" />
-  <ImageItem src="/images/uikit/ChatUIKit/android/group_list.png" title="群组列表" />
+  <ImageItem src="/images/uikit/chatuikit/android/contact list.png" title="联系人列表" />
+  <ImageItem src="/images/uikit/chatuikit/android/group_list.png" title="群组列表" />
 </ImageGallery>
 
 ### 页面搜索功能
@@ -91,7 +89,7 @@
 单群聊 UIKit 提供以下搜索功能：
 
 <ImageGallery :columns="3">
-  <ImageItem src="/images/uikit/ChatUIKit/android/search_conversation.png" title="搜索会话名称" />
-  <ImageItem src="/images/uikit/ChatUIKit/android/search_contact.png" title="搜索联系人名称" />
+  <ImageItem src="/images/uikit/chatuikit/android/search_conversation.png" title="搜索会话名称" />
+  <ImageItem src="/images/uikit/chatuikit/android/search_contact.png" title="搜索联系人名称" />
 </ImageGallery>
 
