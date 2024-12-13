@@ -6,6 +6,12 @@
 
 若要访问源码，请点击[这里](https://github.com/easemob/easemob-uikit-uniapp)。
 
+## 体验 Demo
+
+- [H5](https://uniapp-h5.easemob.com/)；
+- [Android](https://www.pgyer.com/unggU6xu)；
+- [iOS](https://www.pgyer.com/LvuQvWCN)；
+
 ## UIKit 基本项目结构
 
 ```
