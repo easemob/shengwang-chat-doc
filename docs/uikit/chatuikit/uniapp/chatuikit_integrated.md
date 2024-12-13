@@ -98,7 +98,7 @@ const login = () => {
     uni.$UIKit.chatStore.login({
         user: "", // 用户 ID
         accessToken: "" // 用户 Token
-    }).then(()=>{
+    }).then(() => {
 			// 登录成功后，跳转会话列表页面
 			uni.navigateTo({
 				url: '/ChatUIKit/modules/Conversation/index'
