@@ -2,9 +2,21 @@
 
 环信即时通讯 IM SDK 中已集成 HarmonyOS 推送相关逻辑，你还需要完成以下步骤。
 
-## 步骤一 开通推送服务与配置 Client ID
+## 步骤一 申请服务账号密钥
 
-在华为开发者后台创建应用，并开启推送服务，并上传对应的证书指纹。详见华为官方介绍：[开通推送服务与配置Client ID](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/push-config-setting-V5)。
+鸿蒙推送基于服务账号生成鉴权令牌，因此，[需申请服务账号密钥](https://developer.huawei.com/consumer/cn/console/)。
+
+1. 开启鸿蒙推送服务。
+   
+![image](/images/harmonyos/push/push_harmonyos_enable.png)
+
+2. 创建服务账号凭证。
+   
+![image](/images/harmonyos/push/push_harmonyos_key_generate.png)
+
+3. 凭证创建后，可点击**创建并下载JSON**，获取服务账号密钥。
+
+![image](/images/harmonyos/push/push_harmonyos_account_create.png)
 
 ## 步骤二 上传推送证书
 
