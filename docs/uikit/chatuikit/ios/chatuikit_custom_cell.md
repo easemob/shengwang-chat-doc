@@ -85,7 +85,7 @@ final class MineMessageEntity: MessageEntity {
 ```Swift
 class CustomMessageListController: MessageListController {
 
-        //followInput需要同时重载这个以及下面那个
+        //实现微信样式（followInput）需要同时重载下面的方法以及实现 ActionSheet 的方法
     override func processFollowInputAttachmentAction() {
         if Appearance.chat.messageAttachmentMenuStyle == .followInput {
             if let fileItem = Appearance.chat.inputExtendActions.first(where: { $0.tag == "File" }) {
@@ -117,7 +117,7 @@ class CustomMessageListController: MessageListController {
         }
     }
     
-    //ActionSheet 风格只需要重载这个
+    //仿系统 UIActionSheet 样式（ActionSheet）只需要重载以下方法
     override func handleAttachmentAction(item: any ActionSheetItemProtocol) {
         switch item.tag {
         case "File": self.selectFile()
