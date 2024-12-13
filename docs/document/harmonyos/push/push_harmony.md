@@ -12,11 +12,11 @@
 
 2. 创建服务账号凭证。
    
-![image](/images/harmonyos/push/push_harmonyos_key_generate.png)
+![image](/images/harmonyos/push/push_harmonyos_account_create.png)
 
 3. 凭证创建后，可点击**创建并下载JSON**，获取服务账号密钥。
 
-![image](/images/harmonyos/push/push_harmonyos_account_create.png)
+![image](/images/harmonyos/push/push_harmonyos_key_generate.png)
 
 ## 步骤二 上传推送证书
 
