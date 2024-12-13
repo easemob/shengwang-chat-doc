@@ -84,7 +84,40 @@ final class MineMessageEntity: MessageEntity {
 
 ```Swift
 class CustomMessageListController: MessageListController {
+
+        //要实现微信样式（followInput），需要同时重载下面的方法以及仿系统 UIActionSheet 样式（ActionSheet）的方法
+    override func processFollowInputAttachmentAction() {
+        if Appearance.chat.messageAttachmentMenuStyle == .followInput {
+            if let fileItem = Appearance.chat.inputExtendActions.first(where: { $0.tag == "File" }) {
+                fileItem.action = { [weak self] item,object in
+                    self?.handleAttachmentAction(item: item)
+                }
+            }
+            if let photoItem = Appearance.chat.inputExtendActions.first(where: { $0.tag == "Photo" }) {
+                photoItem.action = { [weak self] item,object in
+                    self?.handleAttachmentAction(item: item)
+                }
+            }
+            if let cameraItem = Appearance.chat.inputExtendActions.first(where: { $0.tag == "Camera" }) {
+                cameraItem.action = { [weak self] item,object in
+                    self?.handleAttachmentAction(item: item)
+                }
+            }
+            if let contactItem = Appearance.chat.inputExtendActions.first(where: { $0.tag == "Contact" }) {
+                contactItem.action = { [weak self] item,object in
+                    self?.handleAttachmentAction(item: item)
+                }
+            }
+            if let redPackageItem = Appearance.chat.inputExtendActions.first(where: { $0.tag == "Red" }) {
+                redPackageItem.action = { [weak self] item,object in
+                    self?.handleAttachmentAction(item: item)
+                }
+            }
+            
+        }
+    }
     
+    //仿系统 UIActionSheet 样式（ActionSheet）只需要重载以下方法
     override func handleAttachmentAction(item: any ActionSheetItemProtocol) {
         switch item.tag {
         case "File": self.selectFile()

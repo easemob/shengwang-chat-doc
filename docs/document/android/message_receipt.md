@@ -73,24 +73,24 @@ EMClient.getInstance().chatManager().removeMessageListener(msgListener);
 
 ### 单聊消息已读回执
 
-单聊既支持单条消息已读回执，也支持[会话已读回执](conversation_receipt.html)。我们建议你结合使用这两种回执：
-
-- 聊天页面打开时，若收到消息，发送单条消息已读回执。
-- 聊天页面未打开时，若有未读消息，进入聊天页面，发送会话已读回执。这种方式可避免发送多个消息已读回执。
+单聊既支持单条消息已读回执，也支持[会话已读回执](conversation_receipt.html)。我们建议你结合使用这两种回执，见实现步骤的描述。
 
 单聊消息的已读回执有效期与消息在服务端的存储时间一致，即在服务器存储消息期间均可发送已读回执。消息在服务端的存储时间与你订阅的套餐包有关，详见[产品价格](/product/pricing.html#套餐包功能详情)。 
 
 参考如下步骤在单聊中实现消息已读回执。
 
 1. App 开启已读回执功能，即 SDK 初始化时将 `EMOptions#setRequireAck` 设置为 `true`。
+   
 ```java
-// 设置是否需要接受方已读确认,默认为true
+// 设置是否需要接收方已读确认,默认为 true
 options.setRequireAck(true);
 ```
 
 2. 接收方发送消息已读回执。
 
 - 接收方进入会话时，发送会话已读回执。
+  
+  聊天页面未打开时，若有未读消息，进入聊天页面，发送会话已读回执。这种方式可避免发送多个消息已读回执。
 
 ```java
 try {
@@ -100,7 +100,7 @@ try {
 }
 ```
 
-- 接收方在会话页面，接收到消息时，再根据消息类型发送单个消息已读回执。  
+- 接收方在聊天页面打开时，接收到消息时，再根据消息类型发送单个消息已读回执。  
 
 ```java
 EMClient.getInstance().chatManager().addMessageListener(new EMMessageListener() {
@@ -141,7 +141,7 @@ public void sendReadAck(EMMessage message) {
 
 ```
 
-3. 消息发送方监听消息已读回调。
+1. 消息发送方监听消息已读回调。
 
 消息发送方可以通过 `EMMessageListener#onMessageRead` 事件监听指定消息是否已读，示例代码如下：
 
@@ -285,7 +285,7 @@ public void asyncFetchGroupReadAcks(
 
 - 会话已读回执发送后，开发者需要调用 `EMConversation#markAllMessagesAsRead` 方法将该会话的所有消息置为已读，即会话的未读消息数清零。
 
-- 消息已读回执发送后，开发者需要调用 `EMConversation#markMessageAsRead` 方法将该条消息置为已读，则消息未读数会有变化。
+- 消息已读回执发送后，开发者需要调用 `EMConversation#markMessageAsRead` 方法将该条消息置为已读，消息未读数会有变化。
 
 
 
