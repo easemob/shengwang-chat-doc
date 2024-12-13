@@ -119,6 +119,11 @@ export const zhNavbar = navbar([
             link: '/uikit/chatuikit/web/chatuikit_overview.html'
           },
           {
+            text: 'Uniapp',
+            icon: '/icon-uni-app.svg',
+            link: '/uikit/chatuikit/uniapp/chatuikit_overview.html'
+          },
+          {
             text: 'React Native',
             icon: '/icon-ReactNative.svg',
             link: '/uikit/chatuikit/react-native/chatuikit_overview.html'
