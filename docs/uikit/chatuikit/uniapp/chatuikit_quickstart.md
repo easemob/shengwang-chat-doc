@@ -28,7 +28,7 @@ UIKit 中依赖的静态资源（`ChatUIKit/assets`）放置在环信服务器�
 
  ```bash
    # 克隆 UIKit
-   git clone git@github.com:Wster11/uniapp-uikit.git
+   git clone https://github.com/easemob/easemob-uikit-uniapp.git
    # 在你的 uni-app 项目根目录下执行以下命令，拷贝组件文件
    mkdir -p ./ChatUIKit
    # macOS
