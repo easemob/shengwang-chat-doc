@@ -30,7 +30,9 @@ const ChatContainer = () => {
 };
 ```
 
-![img](/images/uikit/chatuikit/web/buble1.png =400x450)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/chat_default.png" title="聊天页面" />
+</ImageGallery>
 
 ## 自定义组件
 
@@ -76,7 +78,10 @@ const ChatContainer = () => {
 };
 ```
 
-![img](/images/uikit/chatuikit/web/buble2.png =400x530)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/custom_message_cell.png" title="头像粉红且字体为白色" />
+</ImageGallery>
+
 
 ### 设置消息日期和时间格式
 
@@ -328,7 +333,9 @@ const ChatContainer = () => {
 };
 ```
 
-![img](/images/uikit/chatuikit/web/custom-msg.png =400x500)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/custom_message.png" title="自定义消息" />
+</ImageGallery>
 
 ### 修改聊天相关的主题
 

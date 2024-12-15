@@ -11,7 +11,7 @@
 
 消息相关功能，详见[功能介绍文档](chatfeature_message.html)。
 
-<ImageGallery :columns="3">
+<ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/android/custom_chat_detail.png" title="聊天页面" />
 </ImageGallery>
 
