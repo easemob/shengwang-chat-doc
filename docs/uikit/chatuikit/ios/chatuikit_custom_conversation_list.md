@@ -149,7 +149,11 @@
 
 你可以利用 `Appearance.conversation.singlePlaceHolder = value` 设置会话列表中单聊会话头像占位图和群聊会话头像占位图。
 
-![img](/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_placeHolder.png)
+<ImageGallery :columns="3">
+  <ImageItem src="/images/uikit/chatuikit/ios/avatar_square.png" title="方形头像" />
+  <ImageItem src="/images/uikit/chatuikit/ios/avatar_circle.png" title="圆形头像" />
+  <ImageItem src="/images/uikit/chatuikit/ios/avatar_no.png" title="无头像" />
+</ImageGallery>
 
 ### 设置会话列表项左滑和右滑菜单项
 

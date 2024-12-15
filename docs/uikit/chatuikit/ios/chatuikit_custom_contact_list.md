@@ -42,13 +42,17 @@
         }
 ```
 
-![img](/images/uikit/chatuikit/ios/configurationitem/contact/Appearance_contact_listHeaderExtensionActions.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/contact/contact_list_header.png" title="自定义联系人列表 Header" />
+</ImageGallery>
 
 ### 设置联系人列表 Header Cell 的高度
 
 你可以通过 `Appearance.contact.headerRowHeight = value` 设置联系人列表 Header Cell 的高度。
 
-![img](/images/uikit/chatuikit/ios/configurationitem/contact/Appearance_contact_headerRowHeight.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/contact/contact_header_row_height.png" title="设置联系人列表 Header Cell 的高度" />
+</ImageGallery>
 
 ## 自定义联系人列表
 
@@ -87,7 +91,9 @@
 
 你可以通过 `Appearance.contact.rowHeight = value` 设置联系人列表项（Cell）的高度。
 
-![img](/images/uikit/chatuikit/ios/configurationitem/contact/Appearance_contact_rowHeight.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/contact/contact_cell_height.png" title="设置联系人列表 Cell 的高度" />
+</ImageGallery>
 
 ### 设置联系人头像
 

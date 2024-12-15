@@ -61,7 +61,10 @@
 
 你可以通过 `Appearance.chat.bubbleStyle = withArrow` 设置聊天页面消息气泡的样式，分为带箭头与多圆角两种。
 
-![img](/images/uikit/chatuikit/ios/configurationitem/chat/Appearance_chat_bubbleStyle.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/bubble_square.png" title="带箭头的方角气泡" />
+  <ImageItem src="/images/uikit/chatuikit/ios/bubble_circle.png" title="圆角气泡" />
+</ImageGallery>
 
 ### 设置消息气泡中的内容
 
@@ -80,13 +83,18 @@
         }
 ```
 
-![img](/images/uikit/chatuikit/ios/configurationitem/chat/Appearance_chat_contentStyle.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/bubble_hiddenable.png" title="可隐藏区域" />
+  <ImageItem src="/images/uikit/chatuikit/ios/bubble_hidden.png" title="隐藏后的效果" />
+</ImageGallery>
 
 ### 设置消息文字颜色
 
 你可以通过 `Appearance.chat.receiveTextColor = value`/`Appearance.chat.sendTextColor = value` 设置聊天页面接收方/发送方的消息文字颜色。
 
-![img](/images/uikit/chatuikit/ios/configurationitem/chat/Appearance_chat_textColor.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/font_color.png" title="设置消息文字颜色" />
+</ImageGallery>
 
 ### 设置消息日期
 
@@ -124,22 +132,27 @@
 
 你可以通过 `Appearance.chat.audioDuration = value` 设置聊天页面语音消息录制的最大时长，默认为 60 秒。
 
-![img](/images/uikit/chatuikit/ios/configurationitem/chat/Appearance_chat_audioDuration.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/audio_duration.png" title="设置语音消息录制的最大时长" />
+</ImageGallery>
 
 - 设置语音消息播放时的动画
 
 1. `Appearance.chat.receiveAudioAnimationImages = value`：设置聊天页面接收方语音消息播放时的动画图片。
 2. `Appearance.chat.sendAudioAnimationImages = value`：设置聊天页面发送方语音消息播放时的动画图片。
-
-![img](/images/uikit/chatuikit/ios/configurationitem/chat/Appearance_chat_receiveAudioAnimationImages.png)
-
-![img](/images/uikit/chatuikit/ios/configurationitem/chat/Appearance_chat_bubbleColor.png)
+   
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/audio_animation.png" title="语音播放动画" />
+</ImageGallery>
 
 - 设置图片消息圆角
 
 你可以通过 `Appearance.chat.imageMessageCorner = value` 设置聊天页面图片消息圆角，默认为 4。
 
-![img](/images/uikit/chatuikit/ios/configurationitem/chat/Appearance_chat_imageMessageCorner.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/image_radius_small.png" title="小的图片圆角" />
+  <ImageItem src="/images/uikit/chatuikit/ios/image_radius_large.png" title="大的图片圆角" />
+</ImageGallery>
 
 - 设置图片/视频消息占位图
 
@@ -237,7 +250,9 @@ override func filterMessageActions(message: MessageEntity) -> [ActionSheetItemPr
 
 你可以通过 `Appearance.chat.reportSelectionTags` 和 `Appearance.chat.reportSelectionReasons` 设置消息举报功能的举报标签数组以及对应的原因数组，key-value 格式，二者一 一对应。
 
-![img](/images/uikit/chatuikit/ios/configurationitem/chat/Appearance_chat_report.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/message_report.png" title="消息举报" />
+</ImageGallery>
 
 ## 设置跳转事件
 
