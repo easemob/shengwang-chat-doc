@@ -15,6 +15,13 @@
   1. 设置 `Options#RequireAck` 为 `true` 开启已读回执功能。
   2. 消息接收方进入会话页面，阅读消息后，调用 `SendConversationReadAck` 方法发送会话已读回执。
   3. 消息发送方通过监听 `OnConversationRead` 回调接收会话已读回执。
+   
+## 前提条件
+
+开始前，请确保满足以下条件：
+
+- 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
+- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。   
 
  ## 实现方法
 

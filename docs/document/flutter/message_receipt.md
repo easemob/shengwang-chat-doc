@@ -70,9 +70,6 @@
 
 单聊既支持单条消息已读回执，也支持[会话已读回执](conversation_receipt.html)。我们建议你结合使用这两种回执，见实现步骤的描述。
 
-- 聊天页面打开时，若收到消息，发送单条消息已读回执。
-- 聊天页面未打开时，若有未读消息，进入聊天页面，发送会话已读回执。这种方式可避免发送多个消息已读回执。
-
 单聊消息的已读回执有效期与消息在服务端的存储时间一致，即在服务器存储消息期间均可发送已读回执。消息在服务端的存储时间与你订阅的套餐包有关，详见[产品价格](/product/pricing.html#套餐包功能详情)。 
 
 参考如下步骤在单聊中实现消息已读回执。
@@ -88,7 +85,18 @@
 
 2. 接收方发送消息已读回执。
 
-- 接收方进入会话时，发送会话已读回执。
+- 聊天页面未打开时，若有未读消息，进入聊天页面，发送会话已读回执。这种方式可避免发送多个消息已读回执。
+
+```dart
+try {
+  await EMClient.getInstance.chatManager
+      .sendConversationReadAck(conversationId);
+} on EMError catch (e) {
+  debugPrint(e.toString());
+}
+```
+
+- 聊天页面打开时，若收到消息，发送单条消息已读回执。
 
 ```dart
 try {
@@ -97,7 +105,6 @@ try {
     debugPrint('Failed to send message read ack: ${e.description}');
 }
 ```
-
 
 3. 消息发送方监听消息已读回调。
 
