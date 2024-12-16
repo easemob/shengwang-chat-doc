@@ -6,7 +6,9 @@
 
 联系人按照名称首字母分类排序，如果是中文则使用汉字首字母排序，如果没有昵称则使用用户 ID。
 
-![img](/images/uikit/chatuikit/ios/custom_contact_list.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/custom_contact_list.png" title="通讯录" />
+</ImageGallery>
 
 默认使用示例如下：
 
