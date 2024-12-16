@@ -140,8 +140,6 @@ let redPackageIdentifier = "redPackage"
 
 ```
 
-![img](/images/uikit/chatuikit/ios/configurationitem/chat/red_package_attachment.png =350x750)
-
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/ios/red_package_attachment.png" title="红包消息" />
 </ImageGallery>
