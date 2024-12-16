@@ -10,7 +10,9 @@
 
 `Appearance.pageContainerConstraintsSize = value`：底部弹窗页面的宽度和高度。主要使用类在 Xcode 中查找到 `PageContainersDialogController.swift` 查看该属性。
 
-![img](/images/uikit/chatuikit/ios/configurationitem/common/Appearance_pageContainerConstraintsSize.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/common/message_report_bottom.png" title="消息审核弹窗" />
+</ImageGallery>
 
 ## 设置 Alert 的样式
 
@@ -42,10 +44,9 @@
 
 `Appearance.actionSheetRowHeight = value`：ActionSheet Cell 的行高。
 
-![img](/images/uikit/chatuikit/ios/configurationitem/common/Appearance_actionSheetRowHeight.png)
-
-
-
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/common/conversation_operation_row_height.png" title="ActionSheet Cell 的行高" />
+</ImageGallery>
 
 
 

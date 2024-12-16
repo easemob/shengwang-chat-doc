@@ -137,7 +137,9 @@ ChatUIKitClient.setGroupProfileProvider(object : ChatUIKitGroupProfileProvider {
 })
 ```
 
-![img](/images/uikit/chatuikit/android/cvs-nick.png =450x800)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/conversation_list_custom_all.png" title="会话头像和昵称" />
+</ImageGallery>
 
 ## UIKit 信息处理逻辑
 
