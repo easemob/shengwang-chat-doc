@@ -106,6 +106,9 @@ starter:
       - icon: /sdk/iOS.svg
         link: /document/ios/easecallkit.html
         text: iOS  
+      - icon: /sdk/web.svg
+        link: /document/web/easecallkit.html
+        text: Web  
 projects:
   - title: SDK/服务端功能
     features:
