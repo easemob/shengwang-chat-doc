@@ -17,7 +17,7 @@
 会话列表相关功能，详见[功能介绍文档](chatfeature_conversation.html)。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/page_conversation.png" title="会话列表" />
+  <ImageItem src="/images/uikit/chatuikit/android/main_conversation_list.png" title="会话列表" />
 </ImageGallery>
 
 ## 使用示例
