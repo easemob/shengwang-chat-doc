@@ -8,13 +8,19 @@
 
 会话列表呈现了用户所有正在进行的对话，帮助用户快速找到所需联系人并查看消息进展。
 
-![img](/images/uikit/chatuikit/feature/common/conversation_list.png =350x750)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/page_conversation.png" title="会话列表" />
+</ImageGallery>
 
 ## 聊天	
 
 聊天是即时通讯的核心功能之一，它允许用户与其他用户进行实时文字交流。聊天通常以会话的形式进行，每个会话由两个或多个用户组成。
 
 ![img](/images/uikit/chatuikit/feature/common/chat.png  =350x750)
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/feature/common/chat_android.png" title="聊天页面" />
+</ImageGallery>
 
 ## 创建会话
 
