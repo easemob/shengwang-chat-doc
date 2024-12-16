@@ -107,7 +107,9 @@ const Conversation = () => {
 };
 ```
 
-![img](/images/uikit/chatuikit/web/cvs-header2.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/custom_conversation_list_header.png" title="自定义会话列表页面的 header" />
+</ImageGallery>
 
 ## 自定义会话列表项
 
@@ -161,7 +163,11 @@ const Conversation = () => {
 };
 ```
 
-![img](/images/uikit/chatuikit/web/cvs-nick.png =300x700)
+<ImageGallery :columns="3">
+  <ImageItem src="/images/uikit/chatuikit/web/conversation_list_avatar.png" title="会话列表带头像" />
+  <ImageItem src="/images/uikit/chatuikit/web/conversation_list_avatar_no.png" title="会话列表无头像" />
+  <ImageItem src="/images/uikit/chatuikit/web/conversation_list_avatar_color.png" title="会话列表自定义头像颜色" />
+</ImageGallery>
 
 ### 设置日期和时间格式
 
@@ -296,7 +302,11 @@ const Conversation = () => {
 };
 ```
 
-![img](/images/uikit/chatuikit/web/cvs-action.png =300x700)
+![img](/images/uikit/chatuikit/web/custom_conversation_list_action.png)
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/custom_conversation_list_action.png" title="自定义会话操作" />
+</ImageGallery>
 
 ### 修改会话列表相关的主题
 

@@ -142,6 +142,10 @@ let redPackageIdentifier = "redPackage"
 
 ![img](/images/uikit/chatuikit/ios/configurationitem/chat/red_package_attachment.png =350x750)
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/red_package_attachment.png" title="红包消息" />
+</ImageGallery>
+
 ## 步骤五 增加发送新类型附件消息的方法
 
 在 `EaseChatUIKit` 的 `MessageListViewModel` 中增加发送红包消息的方法。
@@ -176,7 +180,9 @@ extension MessageListViewModel {
 
 ```
 
-![img](/images/uikit/chatuikit/ios/configurationitem/chat/red_package_send.png =350x750)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/red_package_send.png" title="发送红包消息" />
+</ImageGallery>
 
 ## 步骤六 注册继承的对象
 
@@ -268,4 +274,6 @@ final class MineConversationInfo: ConversationInfo {
 
 ```
 
-![img](/images/uikit/chatuikit/ios/configurationitem/chat/red_package_receive.png =350x750)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/red_package_receive.png" title="接收红包消息" />
+</ImageGallery>

@@ -11,7 +11,7 @@
 
 消息相关功能，详见[功能介绍文档](chatfeature_message.html)。
 
-<ImageGallery :columns="3">
+<ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/android/custom_chat_detail.png" title="聊天页面" />
 </ImageGallery>
 
@@ -226,7 +226,9 @@ class CustomMessageAdapter: ChatUIKitMessagesAdapter() {
 builder.setCustomAdapter(CustomMessageAdapter())
 ```
 
-![img](/images/uikit/chatuikit/android/buble2.png =400x750)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/custom_message_type.png" title="自定义消息类型" />
+</ImageGallery>
 
 ### 列表控件相关功能设置
 
@@ -277,7 +279,10 @@ val chatExtendMenu: IChatExtendMenu? = binding?.layoutChat?.chatInputMenu?.chatE
 | setMenuOrder()     | 对指定的菜单项进行排序。 |
 | registerMenuItem() | 添加新的菜单项。         |
 
-![img](/images/uikit/chatuikit/android/editor2.png =400x700)
+
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/custom msg_type_list.png" title="消息类型扩展" />
+</ImageGallery>
 
 ### 监听扩展条目点击事件
 

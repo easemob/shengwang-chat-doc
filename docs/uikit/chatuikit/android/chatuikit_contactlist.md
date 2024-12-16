@@ -152,7 +152,9 @@ class CustomContactListAdapter : ChatUIKitContactListAdapter() {
 builder.setCustomAdapter(CustomContactListAdapter)
 ```
 
-![img](/images/uikit/chatuikit/android/group_creating.png =350x600) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/contactlist_configurable.png" title="可选择的联系人列表" />
+</ImageGallery>
 
 ### 设置成可选择的联系人列表
 

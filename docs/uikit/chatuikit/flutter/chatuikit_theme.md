@@ -22,11 +22,15 @@
 
 - 浅色主题
 
-![img](/images/uikit/chatuikit/android/light_mode.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/light_mode.png" title="浅色主题" />
+</ImageGallery>
 
 - 深色主题
 
-![img](/images/uikit/chatuikit/android/dark_mode.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/dark_mode.png" title="深色主题" />
+</ImageGallery>
 
 ## 切换主题
 
