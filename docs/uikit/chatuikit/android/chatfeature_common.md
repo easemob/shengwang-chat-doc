@@ -9,17 +9,15 @@
 会话列表呈现了用户所有正在进行的对话，帮助用户快速找到所需联系人并查看消息进展。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/page_conversation.png" title="会话列表" />
+  <ImageItem src="/images/uikit/chatuikit/android/main_conversation_list.png" title="会话列表" />
 </ImageGallery>
 
 ## 聊天	
 
 聊天是即时通讯的核心功能之一，它允许用户与其他用户进行实时文字交流。聊天通常以会话的形式进行，每个会话由两个或多个用户组成。
 
-![img](/images/uikit/chatuikit/feature/common/chat.png  =350x750)
-
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/feature/common/chat_android.png" title="聊天页面" />
+  <ImageItem src="/images/uikit/chatuikit/android/main_chat.png" title="聊天页面" />
 </ImageGallery>
 
 ## 创建会话
@@ -44,7 +42,9 @@
 
 用户列表显示了用户的所有联系人，包括联系人列表，群成员列表和黑名单等。用户可以通过用户列表快速找到需要联系的人。
 
-![img](/images/uikit/chatuikit/feature/common/user_list.png =350x760) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/contact_list.png" title="联系人列表" />
+</ImageGallery>
 
 ## 文件共享	
 
@@ -86,7 +86,9 @@
 
 消息审核对用户发送的消息内容进行审查，判断其是否符合平台的社区准则、服务条款和相关法律法规。
 
-![img](/images/uikit/chatuikit/feature/common/message_report.png =300x630) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/uniapp/message_report.png" title="消息审核" />
+</ImageGallery>
 
 ## 本地搜索
 

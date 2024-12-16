@@ -60,7 +60,7 @@
 Chat Fragment 提供所有聊天视图的容器。
 
 <ImageGallery :columns="3">
-  <ImageItem src="/images/uikit/chatuikit/android/chat_detail.png" title="聊天页面" />
+  <ImageItem src="/images/uikit/chatuikit/android/main_chat.png" title="聊天页面" />
   <ImageItem src="/images/uikit/chatuikit/android/message_types_2.png" title="发送多种类型的消息" />
   <ImageItem src="/images/uikit/chatuikit/android/message_longpress_2.png" title="消息长按操作" />
   <ImageItem src="/images/uikit/chatuikit/android/message_reply.png" title="消息引用" />
@@ -82,7 +82,7 @@ Conversation Fragment 提供会话列表容器。
 Contact Fragment 提供联系人、群组及其详情等容器。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/contact list.png" title="联系人列表" />
+  <ImageItem src="/images/uikit/chatuikit/android/contact_list.png" title="联系人列表" />
   <ImageItem src="/images/uikit/chatuikit/android/contact_detail.png" title="联系人详情" />
   <ImageItem src="/images/uikit/chatuikit/android/block_list.png" title="联系人黑名单" />
   <ImageItem src="/images/uikit/chatuikit/android/group_list.png" title="群组列表" />

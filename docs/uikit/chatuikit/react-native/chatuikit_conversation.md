@@ -19,7 +19,9 @@
 
 会话列表相关功能，详见[功能介绍文档](chatfeature_conversation.html)。
 
-![img](/images/uikit/chatuikit/ios/custom_conversation_list.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/custom_conversation_list.png" title="会话列表" />
+</ImageGallery>
 
 使用默认参数时的示例代码如下：
 

@@ -87,7 +87,7 @@
 `ChatUIKit/modules/ContactList` 提供联系人列表容器, `ChatUIKit/modules/GroupList` 提供群组列表容器。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/android/contact list.png" title="联系人列表" />
+  <ImageItem src="/images/uikit/chatuikit/android/contact_list.png" title="联系人列表" />
   <ImageItem src="/images/uikit/chatuikit/android/group_list.png" title="群组列表" />
 </ImageGallery>
 
