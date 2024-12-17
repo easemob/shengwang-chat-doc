@@ -1,5 +1,5 @@
 ---
-home: true
+home: false
 title: 导航页
 heroText: false
 tagline: false
