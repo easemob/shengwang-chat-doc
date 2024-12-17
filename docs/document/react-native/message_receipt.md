@@ -38,6 +38,7 @@
 
 - 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 要使用群消息已读回执功能，需在[环信即时通讯云控制台](https://console.easemob.com/user/login)开通，具体费用详见[产品价格](/product/pricing.html#增值服务费用)。
 
 ## 实现方法
 
@@ -164,7 +165,7 @@ message.needGroupAck = true;
 
 ```typescript
 const convId; // 会话ID。
-const convType; // 回话理性。群组为1.
+const convType; // 会话类型。群组为 1。
 const msgId; // 消息ID。
 ChatClient.getInstance()
   .chatManager.markMessageAsRead(convId, convType, msgId)
