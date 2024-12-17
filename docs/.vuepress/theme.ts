@@ -16,6 +16,7 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
   // docsDir: 'docs',
   darkmode: 'disable',
   pure: true,
+  breadcrumb: false,
   contributors: false,
   // navbar
   navbar: zhNavbar,
