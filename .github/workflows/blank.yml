@@ -1,51 +1,51 @@
-# name: note build
-# # 触发workflow的条件
-# on:
-#   push:
-#     branches: ['doc-v2']
+name: note build
+# 触发workflow的条件
+on:
+  push:
+    branches: ['doc']
 
-# env:
-#   SERVER_PRIVATE_KEY: ${{ secrets.SERVER_PRIVATE_KEY }} # 服务器私钥
-#   SERVER_HOST: ${{ secrets.SERVER_HOST }} # 服务器IP地址
-#   SERVER_POSR: ${{ secrets.SERVER_PORT }} # 服务器端口
-#   USER_NAME: ${{ secrets.SERVER_USER_NAME }} # 服务器用户名
-#   cache-name: note
-#   TZ: Asia/Shanghai # 设置当前环境时区
+env:
+  SERVER_PRIVATE_KEY: ${{ secrets.SERVER_PRIVATE_KEY }} # 服务器私钥
+  SERVER_HOST: ${{ secrets.SERVER_HOST }} # 服务器IP地址
+  SERVER_POSR: ${{ secrets.SERVER_PORT }} # 服务器端口
+  USER_NAME: ${{ secrets.SERVER_USER_NAME }} # 服务器用户名
+  cache-name: note
+  TZ: Asia/Shanghai # 设置当前环境时区
 
-# # jobs表示执行的一项或多项任务
-# jobs:
-#   cache-and-install:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v3
+# jobs表示执行的一项或多项任务
+jobs:
+  cache-and-install:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-#       - name: Install Node.js
-#         uses: actions/setup-node@v3
-#         with:
-#           node-version: 18
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
-#       - name: Run install
-#         uses: borales/actions-yarn@v4
-#         with:
-#           cmd: install
+      - name: Run install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install
 
-#       - name: Build production bundle
-#         uses: borales/actions-yarn@v4
-#         with:
-#           cmd: docs:build
+      - name: Build production bundle
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: docs:build
 
-#       # 上传打包资源
-#       - name: Deploy
-#         uses: easingthemes/ssh-deploy@main
-#         env:
-#           SSH_PRIVATE_KEY: ${{ secrets.SERVER_PRIVATE_KEY }}
-#           ARGS: '-rltgoDzvO --delete'
-#           SOURCE: 'docs/.vuepress/dist/'
-#           REMOTE_HOST: ${{ secrets.SERVER_HOST }}
-#           REMOTE_PORT: ${{ secrets.SERVER_PORT }} -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa
-#           REMOTE_USER: ${{ secrets.SERVER_USER_NAME }}
-#           TARGET: /data/apps/data/docs-im-beta/ # 服务器目标路径
+      # 上传打包资源
+      - name: Deploy
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_PRIVATE_KEY }}
+          ARGS: '-rltgoDzvO --delete'
+          SOURCE: 'docs/.vuepress/dist/'
+          REMOTE_HOST: ${{ secrets.SERVER_HOST }}
+          REMOTE_PORT: ${{ secrets.SERVER_PORT }} -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa
+          REMOTE_USER: ${{ secrets.SERVER_USER_NAME }}
+          TARGET: /data/apps/data/shengwang-chat-doc/ # 服务器目标路径
 
 #       - name: CDN Refresh HTTPS
 #         uses: visionwx/ali-cdn-refresh@main
