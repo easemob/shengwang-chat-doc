@@ -48,7 +48,7 @@
 ### 新增特性
 
 - [IM SDK] 新增 `getSilentModeRemindTypeConversations` 方法，用于分页获取所有设置了推送通知方式的会话。
-- [IM SDK] 新增[从服务器拉取离线消息的开始和结束的事件回调](overview.html#连接状态相关): `onOfflineMessageSyncStart` 和 `onOfflineMessageSyncFinish`。
+- [IM SDK] 新增[从服务器拉取离线消息的开始和结束的事件回调](connection.html): `onOfflineMessageSyncStart` 和 `onOfflineMessageSyncFinish`。
 - [IM SDK] 原消息置顶接口 `pinMessage` 和 `unpinMessage` [增加对单聊会话中置顶消息的支持](message_pin.html)。接口无变化。
 - [IM SDK] `onMultiDeviceEvent` 新增以下两个离线推送相关的多设备通知事件： 
   - `setSilentModeForConversation`：若你调用了 `setSilentModeForConversation` API [设置指定会话的推送通知方式或免打扰时间](/document/web/push/push_notification_mode_dnd.html#设置单个会话的推送通知)，其他设备会收到该事件。
@@ -69,13 +69,13 @@
 
 ### 新增特性
 
-- [IM SDK] 新增[日志上报](overview.html#日志上报)功能, 即将日志会上传到环信的服务器。该功能默认关闭，如有需要, 可联系商务开通。
+- [IM SDK] 新增[日志上报](log.html#日志上报)功能, 即将日志会上传到环信的服务器。该功能默认关闭，如有需要, 可联系商务开通。
 
 ## 版本 V4.8.0 Dev 2024-07-01
 
 ### 新增特性
 
-- [IM SDK] [`onDisconnected` 事件](overview.html#连接状态相关)新增断开原因回调参数, 告知用户触发 `onDisconnected` 的原因。
+- [IM SDK] [`onDisconnected` 事件](connection.html)新增断开原因回调参数, 告知用户触发 `onDisconnected` 的原因。
 - [IM SDK] 新增[设备登录时允许携带自定义消息，并将其传递给被踢的设备](multi_device.html#设置登录设备的扩展信息)： 
   - `setLoginInfoCustomExt`：设置登录设备的扩展信息。
   - `onDisconnected`：多设备登录场景下，若当前设备被新登录设备踢下线，被踢设备收到的事件中会携带新设备的扩展信息。
@@ -96,7 +96,7 @@
 
 - [IM SDK] 新增 `getJoinedChatRooms` 方法，用于[获取当前用户加入的聊天室列表](room_manage.html#获取当前用户加入的聊天室列表)。
 - [IM SDK] [撤回消息](message_recall.html#实现方法)接口 `recallMessage` 中新增 `ext` 参数，支持传入自定义字符串，设置扩展信息。
-- [IM SDK] SDK logger 中新增 `setConsoleLogVisibility` 方法，用于[设置日志是否输出到控制台](overview.html#输出信息到日志文件)。
+- [IM SDK] SDK logger 中新增 `setConsoleLogVisibility` 方法，用于[设置日志是否输出到控制台](log.html#输出信息到日志文件)。
 
 ### 修复
 

@@ -56,7 +56,7 @@ conn.getSelfIdsOnOtherPlatform().then((res) => {
 
 初始化 SDK 时，你可以调用 `setLoginInfoCustomExt` 方法设置登录设备的自定义扩展信息。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时（`206` 错误，`WEBIM_CONNCTION_USER_LOGIN_ANOTHER_DEVICE`），被踢设备收到的 `onDisconnected` 回调会包含导致该设备被踢下线的新登录设备的自定义扩展信息。
 
-:::notice
+:::tip
 登录成功后才会将该设置发送到服务器。
 :::
 
