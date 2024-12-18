@@ -199,6 +199,7 @@ const documentSidebar = [
     children: [
       {
         text: '集成介绍',
+        collapsible: true,
         children: [
           { text: '微信小程序', link: 'wechat.html' },
           { text: 'QQ 小程序', link: 'qq.html' },
@@ -206,7 +207,6 @@ const documentSidebar = [
           { text: '抖音小程序', link: 'bytedance.html' },
           { text: '支付宝小程序', link: 'alipay.html' },
           { text: 'Uniapp 全平台', link: 'uniapp.html' },
-          { text: '小程序 API 文档', link: 'apidoc.html' },
         ],
       },
       { text: '初始化', link: 'initialization.html' },
@@ -311,6 +311,7 @@ const documentSidebar = [
   {
     text: '其他帮助',
     children: [
+      { text: '小程序 API 文档', link: 'apidoc.html' },
       { text: 'Uniapp 生成原生 Android、iOS 应用', link: 'uniappnativeapp.html' },
       { text: '小程序模板使用指南', link: 'uniappuikit.html' },
       { text: '如何配置服务器域名', link: 'serverconfig.html' },
