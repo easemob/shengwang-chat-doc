@@ -51,15 +51,6 @@ const documentSidebar = [
         ]
       },
       {
-        text: '用户相关',
-        collapsible: true,
-        children: [
-          { text: '用户关系', link: 'user_relationship.html' },
-          { text: '用户属性', link: 'userprofile.html' },
-          { text: '在线状态订阅', link: 'message_retrieve.html' },
-        ]
-      },
-      {
         text: '消息管理',
         collapsible: true,
         children: [
@@ -116,6 +107,15 @@ const documentSidebar = [
           { text: '创建和管理聊天室', link: 'room_manage.html' },
           { text: '管理聊天室成员', link: 'room_members.html' },
           { text: '管理聊天室属性', link: 'room_attributes.html' },
+        ]
+      },
+      {
+        text: '用户相关',
+        collapsible: true,
+        children: [
+          { text: '用户关系', link: 'user_relationship.html' },
+          { text: '用户属性', link: 'userprofile.html' },
+          { text: '在线状态订阅', link: 'message_retrieve.html' },
         ]
       },
       {
@@ -220,15 +220,6 @@ const documentSidebar = [
         ],  
       },
       {
-        text: '用户相关',
-        collapsible: true,
-        children: [
-          { text: '用户关系', link: 'user_relationship.html' },
-          { text: '用户属性', link: 'userprofile.html' },
-          { text: '在线状态订阅', link: 'presence.html' },
-        ]
-      },    
-      {
         text: '消息管理',
         collapsible: true,
         children: [
@@ -286,6 +277,15 @@ const documentSidebar = [
           { text: '管理聊天室属性', link: 'room_attributes.html' },
         ]
       },
+      {
+        text: '用户相关',
+        collapsible: true,
+        children: [
+          { text: '用户关系', link: 'user_relationship.html' },
+          { text: '用户属性', link: 'userprofile.html' },
+          { text: '在线状态订阅', link: 'presence.html' },
+        ]
+      },    
       { text: '离线推送', 
         collapsible: true,
         children: [
