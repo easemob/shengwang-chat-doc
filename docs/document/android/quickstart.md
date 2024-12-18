@@ -40,7 +40,7 @@
 
 ### 2. 集成 SDK
 
-你可以使用 mavenCentral 自动集成。该方法仅适用于 v3.8.2 或以上版本。
+你可以使用 mavenCentral 自动集成。该方法仅适用于 v3.8.2 或以上版本。获取最新 SDK 的版本号，详见 [SDK 更新日志](releasenote.html)。
 
 除此之外，你还可以通过手动复制 SDK 文件和动态加载 `.so` 库文件的方法集成 IM SDK，详见[集成文档](integration.html)。
 
@@ -74,8 +74,6 @@ dependencies {
     implementation 'io.hyphenate:hyphenate-chat:x.x.x'
 }
 ```
-
-获取最新 SDK 的版本号：[SDK 更新日志](releasenote.html)
 
 :::notice
 如果使用 3.8.0 之前的版本，gradle 依赖需要按照下面格式添加：
