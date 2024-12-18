@@ -279,7 +279,7 @@ XXX：Windows 用户名; YYY: Unity 中设置的公司名称，如果没有设�
 
 - Unity iOS 
 
-本地日志的获取与 iOS 的相同，详见 [iOS 本地日志的获取](/document/ios/overview.html#获取本地日志)。
+本地日志的获取与 iOS 的相同，详见 [iOS 本地日志的获取](/document/ios/log.html#获取本地日志)。
 
 日志路径：沙箱 Library/Application Support/HyphenateSDK/easemobLog。
 

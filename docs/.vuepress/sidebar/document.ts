@@ -25,9 +25,6 @@ const documentSidebar = [
       { text: 'Demo（EaseIM App）体验', link: 'demo.html', except: ['web', 'windows', 'react-native', 'flutter', 'unity', 'server-side'] },
       { text: '快速开始', link: 'quickstart.html', except: ['windows', 'react-native', 'flutter', 'unity', 'server-side'] },
       { text: '快速开始', link: 'quickstart.html', only: ['windows', 'react-native', 'flutter', 'unity'] },
-      { text: '按需导入 SDK（推荐）', link: 'import_sdk_minicore.html', only: ['web'] },
-      { text: 'SDK 集成概述', link: 'overview.html', only: ['android', 'ios', 'web', 'harmonyos', 'flutter'] },
-      { text: 'SDK 集成概述', link: 'overview.html', only: ['windows', 'react-native', 'unity'] },
       // { text: '私有云 SDK 集成配置', link: 'privatecloud.html', except: ['windows', 'server-side', 'react-native', 'flutter', 'unity'] },
       { text: 'SDK 更新日志', link: 'releasenote.html', except: ['server-side']},
       /*{ text: 'API reference', link: 'apireference.html', only: ['android', 'ios', 'web', 'windows', 'react-native', 'flutter', 'unity']},*/
@@ -40,8 +37,28 @@ const documentSidebar = [
     except: ['applet', 'electron','linux']
   },
   {
-    text: '基础功能',
+    text: '用户指南',
     children: [
+      { text: '集成 SDK', link: 'integration.html' },
+      { text: '初始化', link: 'initialization.html' },
+      {
+        text: '登录',
+        collapsible: true,
+        children: [
+          { text: '登录介绍', link: 'log.html' },
+          { text: '连接', link: 'connection.html' },
+          { text: '多设备登录', link: 'multi_device.html' },
+        ]
+      },
+      {
+        text: '用户相关',
+        collapsible: true,
+        children: [
+          { text: '用户关系', link: 'user_relationship.html' },
+          { text: '用户属性', link: 'userprofile.html' },
+          { text: '在线状态订阅', link: 'message_retrieve.html' },
+        ]
+      },
       {
         text: '消息管理',
         collapsible: true,
@@ -53,6 +70,7 @@ const documentSidebar = [
           { text: '搜索消息', link: 'message_search.html', except: ['web', 'harmonyos']},
           { text: '消息回执', link: 'message_receipt.html'},
           { text: '修改消息', link: 'message_modify.html'},
+          { text: '消息表情回复', link: 'reaction.html' },
           { text: '转发消息', link: 'message_forward.html', except: ['web']},
           { text: '导入和插入消息', link: 'message_import_insert.html', except: ['web']},
           { text: '更新消息', link: 'message_update.html', except: ['web']},
@@ -60,6 +78,7 @@ const documentSidebar = [
           { text: '置顶消息', link: 'message_pin.html', except: ['harmonyos']},         
           { text: '翻译消息', link: 'message_translation.html', except: ['harmonyos']},
           { text: '只投在线用户', link: 'message_deliver_only_online.html'},
+          { text: '消息审核（举报）', link: 'moderation.html', except: ['harmonyos']},
           { text: '获取消息流量统计', link: 'message_traffic_statis.html', only: ['android', 'ios'] },
         ]
       },
@@ -77,8 +96,6 @@ const documentSidebar = [
           { text: '删除会话', link: 'conversation_delete.html' },
         ]
       },
-      { text: '管理用户属性', link: 'userprofile.html' },
-      { text: '管理用户关系', link: 'user_relationship.html' },
       {
         text: '群组管理',
         collapsible: true,
@@ -87,6 +104,8 @@ const documentSidebar = [
           { text: '创建和管理群组', link: 'group_manage.html' },
           { text: '管理群组成员', link: 'group_members.html' },
           { text: '管理群组属性', link: 'group_attributes.html' },
+          { text: '管理子区', link: 'thread.html', except: ['harmonyos'] },
+          { text: '管理子区消息', link: 'thread_message.html', except: ['harmonyos'] }
         ]
       },
       {
@@ -99,13 +118,7 @@ const documentSidebar = [
           { text: '管理聊天室属性', link: 'room_attributes.html' },
         ]
       },
-    ],
-    except: ['applet', 'server-side', 'electron','linux']
-  },
-  {
-    text: '进阶功能',
-    children: [
-      { 
+      {
         text: '离线推送', 
         collapsible: true,
         children: [
@@ -139,32 +152,32 @@ const documentSidebar = [
           { text: 'FAQ', link: 'push/push_solution.html', only: ['android', 'ios','harmonyos']},
         ]
       },
-      { text: '登录多个设备', link: 'multi_device.html' },
-      { text: '管理在线状态订阅', link: 'presence.html' },
-      { text: '消息表情回复', link: 'reaction.html' },
-      {
-        text: '子区管理',
-        collapsible: true,
-        children: [
-          { text: '管理子区', link: 'thread.html', except: ['harmonyos'] },
-          { text: '管理子区消息', link: 'thread_message.html', except: ['harmonyos'] }
-        ]
-      },
-      { text: '消息审核（举报）', link: 'moderation.html', except: ['harmonyos']},
     ],
     except: ['applet','server-side','electron','linux']
   },
   {
-    text: '其他',
+    text: '错误排查',
     children: [
       { text: '错误码', link: 'error.html' },
-      //{ text: 'EaseIMKit 使用指南', link: 'easeimkit.html', except: ['web', 'windows', 'react-native', 'flutter', 'unity'] },
-      { text: 'EaseCallKit 使用指南', link: 'easecallkit.html', except: ['web', 'windows', 'react-native', 'flutter', 'unity', 'harmonyos'] },
+      { text: '日志', link: 'log.html', except: ['flutter'] },
+    ],
+    except: ['applet', 'server-side','electron','linux']
+  },
+  {
+    text: 'CallKit 使用指南',
+    children: [
+      { text: 'EaseCallKit 使用指南', link: 'easecallkit.html', only: ['android', 'ios'] },
       { text: 'CallKit 使用指南', link: 'easecallkit.html', only: ['web'] },
-      { text: '苹果隐私策略', link: 'privacy_policy.html', only: ['ios'] },
     ],
     except: ['applet', 'server-side','electron','linux']
 
+  },
+  {
+    text: '苹果隐私策略',
+    children: [
+      { text: '苹果隐私策略', link: 'privacy_policy.html', only: ['ios'] },
+    ],
+    except: ['applet', 'server-side','electron','linux']
   },
   {
     text: '精简版 SDK',
@@ -182,22 +195,39 @@ const documentSidebar = [
     only: ['applet']
   },
   {
-    text: '集成介绍',
+    text: '用户指南',
     children: [
-      { text: '微信小程序', link: 'wechat.html' },
-      { text: 'QQ 小程序', link: 'qq.html' },
-      { text: '百度小程序', link: 'baidu.html' },
-      { text: '抖音小程序', link: 'bytedance.html' },
-      { text: '支付宝小程序', link: 'alipay.html' },
-      { text: 'Uniapp 全平台', link: 'uniapp.html' },
-      { text: '小程序 API 文档', link: 'apidoc.html' },
-    ],
-    only: ['applet']
-  },
-  {
-    text: '基本功能',
-    children: [
-      { text: '初始化及登录', link: 'initialization.html' },
+      {
+        text: '集成介绍',
+        children: [
+          { text: '微信小程序', link: 'wechat.html' },
+          { text: 'QQ 小程序', link: 'qq.html' },
+          { text: '百度小程序', link: 'baidu.html' },
+          { text: '抖音小程序', link: 'bytedance.html' },
+          { text: '支付宝小程序', link: 'alipay.html' },
+          { text: 'Uniapp 全平台', link: 'uniapp.html' },
+          { text: '小程序 API 文档', link: 'apidoc.html' },
+        ],
+      },
+      { text: '初始化', link: 'initialization.html' },
+      {
+        text: '登录',
+        collapsible: true,
+        children: [
+          { text: '登录介绍', link: 'log.html' },
+          { text: '连接', link: 'connection.html' },
+          { text: '多设备登录', link: 'multi_device.html' },
+        ],  
+      },
+      {
+        text: '用户相关',
+        collapsible: true,
+        children: [
+          { text: '用户关系', link: 'user_relationship.html' },
+          { text: '用户属性', link: 'userprofile.html' },
+          { text: '在线状态订阅', link: 'presence.html' },
+        ]
+      },    
       {
         text: '消息管理',
         collapsible: true,
@@ -207,11 +237,13 @@ const documentSidebar = [
           { text: '获取历史消息', link: 'message_retrieve.html' },
           { text: '撤回消息', link: 'message_recall.html' },
           { text: '消息回执', link: 'message_receipt.html' }, 
+          { text: '消息表情回复', link: 'reaction.html' },
           { text: '修改消息', link: 'message_modify.html' },
           { text: '删除消息', link: 'message_delete.html' },
           { text: '置顶消息', link: 'message_pin.html' }, 
           { text: '翻译消息', link: 'message_translation.html' },
-          { text: '只投在线用户', link: 'message_deliver_only_online.html'},        
+          { text: '只投在线用户', link: 'message_deliver_only_online.html'},  
+          { text: '消息审核（举报）', link: 'moderation.html'},      
         ]
       },
       {
@@ -226,8 +258,6 @@ const documentSidebar = [
           { text: '删除会话', link: 'conversation_delete.html'},
         ]
       },
-      { text: '管理用户属性', link: 'userprofile.html' },
-      { text: '管理用户关系', link: 'user_relationship.html' },
       {
         text: '群组管理',
         collapsible: true,
@@ -236,6 +266,14 @@ const documentSidebar = [
           { text: '创建和管理群组', link: 'group_manage.html' },
           { text: '管理群组成员', link: 'group_members.html' },
           { text: '管理群组属性', link: 'group_attributes.html' },
+          {
+            text: '子区管理',
+            collapsible: true,
+            children: [
+              { text: '管理子区', link: 'thread.html' },
+              { text: '管理子区消息', link: 'thread_message.html' }
+            ]
+          },
         ]
       },
       {
@@ -248,12 +286,6 @@ const documentSidebar = [
           { text: '管理聊天室属性', link: 'room_attributes.html' },
         ]
       },
-    ],
-    only: ['applet']
-  },
-  {
-    text: '进阶功能',
-    children: [
       { text: '离线推送', 
         collapsible: true,
         children: [
@@ -265,25 +297,20 @@ const documentSidebar = [
         { text: 'uni-app 离线推送', link: 'push/uniapp_push.html' }
         ]
       }, 
-      { text: '登录多个设备', link: 'multi_device.html' },
-      { text: '管理在线状态订阅', link: 'presence.html' },
-      { text: '消息表情回复', link: 'reaction.html' },
-      {
-        text: '子区管理',
-        collapsible: true,
-        children: [
-          { text: '管理子区', link: 'thread.html' },
-          { text: '管理子区消息', link: 'thread_message.html' }
-        ]
-      },
-      { text: '消息审核（举报）', link: 'moderation.html'},
+    ],
+    only: ['applet']
+  },
+  {
+    text: '错误排查',
+    children: [
+      { text: '错误码', link: 'error.html' },
+      { text: '日志', link: 'log.html' },
     ],
     only: ['applet']
   },
   {
     text: '其他帮助',
     children: [
-      { text: '错误码', link: 'error.html' },
       { text: 'Uniapp 生成原生 Android、iOS 应用', link: 'uniappnativeapp.html' },
       { text: '小程序模板使用指南', link: 'uniappuikit.html' },
       { text: '如何配置服务器域名', link: 'serverconfig.html' },

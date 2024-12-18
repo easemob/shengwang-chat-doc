@@ -19,7 +19,7 @@
 
 开始前，请确保满足以下条件：
 
-1. 完成 SDK 初始化，详见 [快速开始](quickstart.html) 及 [SDK 集成概述](overview.html)。
+1. 完成 SDK 初始化，详见 [初始化](initialization.html)文档。
 2. 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
 3. 已在 [环信即时通讯云控制台开通消息举报功能](/product/enable_and_configure_IM.html#消息举报)。
 

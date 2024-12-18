@@ -51,7 +51,7 @@
 
 ## 前提条件
 
-开始前，请确保满足完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html) 及 [SDK 集成概述](overview.html)。
+开始前，请确保满足完成 SDK 初始化，并连接到服务器，详见 [初始化](initialization.html)及[连接](connection.html)文档。
 
 ## 实现方法
 
