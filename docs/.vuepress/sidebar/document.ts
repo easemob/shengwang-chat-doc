@@ -45,7 +45,7 @@ const documentSidebar = [
         text: '登录',
         collapsible: true,
         children: [
-          { text: '登录介绍', link: 'log.html' },
+          { text: '登录介绍', link: 'login.html' },
           { text: '连接', link: 'connection.html' },
           { text: '多设备登录', link: 'multi_device.html' },
         ]

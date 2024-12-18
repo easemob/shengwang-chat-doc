@@ -97,7 +97,7 @@ iOS SDK 初始化时会生成登录 ID 用于在多设备登录和消息推送�
 
 初始化 SDK 时，你可以调用 `initializeSDKWithOptions` 方法时设置 `EMOptions#customDeviceName` 属性自定义登录设备的名称。设置设备名称后，若登录设备时因达到了登录设备数量限制而导致在已登录的设备上强制退出时，被踢设备收到的 `userAccountDidLoginFromOtherDevice` 回调里会包含导致该设备被踢下线的自定义设备名称。
 
-:::notice
+:::tip
 登录成功后才会将该设置发送到服务器。
 :::
 
@@ -122,7 +122,7 @@ option.customDeviceName = @"XXX的iPad";
 
 2. 初始化 SDK 时，调用 `initializeSDKWithOptions` 方法设置 `EMOptions#customOSType` 属性添加自定义平台。确保该属性的值与环信控制台的**新增自定义平台**对话框中设置的**设备平台**的值相同。
 
-:::notice
+:::tip
 登录成功后才会将该设置发送到服务器。
 :::
 
@@ -138,7 +138,7 @@ option.customOSType = 60;
 
 初始化 SDK 时，可通过 `EMOptions#loginExtensionInfo` 属性设置设备扩展信息。设置后，多设备场景下，登录该设备后，若因达到了登录设备数量限制而导致当前登录设备被踢下线（`206` 错误，`EMErrorUserLoginOnAnotherDevice`），被踢设备收到的 `EMClientDelegate#userAccountDidLoginFromOtherDeviceWithInfo` 回调中会包含该设备的自定义扩展信息。
 
-:::notice
+:::tip
 登录成功后才会将该设置发送到服务器。
 :::
 

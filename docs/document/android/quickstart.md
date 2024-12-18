@@ -164,7 +164,7 @@ android {
 
 ### 1. SDK 初始化
 
-在主进程中进行初始化：
+在**主进程**中进行初始化：
 
 ```java
 EMOptions options = new EMOptions();
