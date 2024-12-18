@@ -7,6 +7,15 @@
 用户注册模式分为以下两种：
 
 - 开放注册：一般在体验 Demo 和测试环境时使用，正式环境中不推荐使用该方式注册环信账号。要使用开放注册，需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**即时通讯** > **服务概览**的**设置**区域，将**用户注册模式**设置为**开放注册**。只有打开该开关，才能使用客户端或 [REST API](/document/server-side/account_system.html#开放注册单个用户)开放注册用户。
+  
+示例代码如下所示：
+
+```TypeScript
+ChatClient.getInstance().createAccount(userId, pwd).then(()=> {
+    // success logic
+});
+```
+
 - 授权注册：通过环信提供的 REST API 注册环信用户账号，注册后保存到你的服务器或返给客户端。要使用授权注册，你需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**即时通讯** > **服务概览**的**设置**区域，将**用户注册模式**设置为**授权注册**。相关的 REST API 介绍，详见[授权注册单个用户](/document/server-side/account_system.html#授权注册单个用户)和[批量授权注册用户](/document/server-side/account_system.html#批量授权注册用户)的接口介绍。
 
 除此以外，可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)创建正式环境下和测试环境下的用户，详见[创建用户相关介绍](/product/enable_and_configure_IM.html#创建-im-用户)。
@@ -62,7 +71,7 @@ ChatClient.getInstance().logout().then(()=> {
 :::tip
 
 1. 如果集成了鸿蒙推送，`logout` 方法中 `unbindToken` 参数需设为 `true`，退出时会解绑设备 token，否则可能会出现退出了，还能收到消息推送通知的现象。
-有时可能会遇到网络问题而解绑失败，app 处理时可以弹出提示框让用户选择，是否继续退出(弹出框提示继续退出能收到消息的风险)，如果用户选择继续退出，传 `false` 再调用 `logout` 方法退出成功。
+2. 有时可能会遇到网络问题而解绑失败，app 处理时可以弹出提示框让用户选择，是否继续退出(弹出框提示继续退出能收到消息的风险)，如果用户选择继续退出，传 `false` 再调用 `logout` 方法退出成功。
 
 :::
 
@@ -73,9 +82,7 @@ ChatClient.getInstance().logout().then(()=> {
 ## 多设备登录
 
 除了单端单设备登录，环信即时通讯 IM 支持同一账号在多端的多个设备上登录。多设备登录时，若同端设备数量超过限制，新登录的设备会将之前登录的设备踢下线。
-
 关于多设备登录场景中的设备数量限制、互踢策略以及信息同步，详见[多设备登录文档](multi_device.html)。
-
 
 ## 更多
 

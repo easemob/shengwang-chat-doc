@@ -7,13 +7,24 @@
 用户注册模式分为以下两种：
 
 - 开放注册：一般在体验 Demo 和测试环境时使用，正式环境中不推荐使用该方式注册环信账号。要使用开放注册，需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**即时通讯** > **服务概览**的**设置**区域，将**用户注册模式**设置为**开放注册**。只有打开该开关，才能使用客户端或 [REST API](/document/server-side/account_system.html#开放注册单个用户)开放注册用户。
+  
+示例代码如下所示： 
+  
+```Objective-C
+// 异步方法
+[[EMClient sharedClient] registerWithUsername:@"username"
+                                         password:@"your password"
+                                       completion:^(NSString *aUsername, EMError *aError) {
+                                   }];
+```
+
 - 授权注册：通过环信提供的 REST API 注册环信用户账号，注册后保存到你的服务器或返给客户端。要使用授权注册，你需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**即时通讯** > **服务概览**的**设置**区域，将**用户注册模式**设置为**授权注册**。相关的 REST API 介绍，详见[授权注册单个用户](/document/server-side/account_system.html#授权注册单个用户)和[批量授权注册用户](/document/server-side/account_system.html#批量授权注册用户)的接口介绍。
 
 除此以外，可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)创建用户，详见[创建用户相关介绍](/product/enable_and_configure_IM.html#创建-im-用户)。
 
 ## 主动登录
 
-**用户 ID + token** 是更加安全的登录方式。
+1. **用户 ID + token** 是更加安全的登录方式。
 
 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
 
@@ -27,15 +38,19 @@ EMClient.shared().login(withUsername: "userId", token: "token") { userId, err in
 }
 ```
 
-调用登录接口后，收到 `onConnected` 回调表明 SDK 与环信服务器连接成功。
+2. **用户 ID + 密码** 是传统的登录方式。用户名和密码均由你的终端用户自行决定，密码需要符合密码规则要求。
 
-```swift
-func connectionStateDidChange(_ aConnectionState: EMConnectionState) {
-    if aConnectionState == .connected {
-        // 连接服务器成功
-    }
-}
+```Objective-C
+    //SDK 初始化 `EMOptions` 时可以传入 `loginExtensionInfo` 属性投递给被踢下线的设备。该属性需要开启多设备登录的情况下才能生效。
+    EMOptions *options = [EMOptions optionsWithAppkey:<#AppKey#>];
+    options.loginExtensionInfo = @"you was kicked out by other device";
+    [EMClient.sharedClient initializeSDKWithOptions:options];
+// 异步方法
+[[EMClient sharedClient] loginWithUsername:@"username"
+                                     password:@"your password"
+                                   completion:^(NSString *aUsername, EMError *aError) {
 
+}];
 ```
 
 ## 自动登录
@@ -49,24 +64,6 @@ extension ViewController: EMClientDelegate {
     }
 }
 ```
-
-自动登录在以下几种情况下会被取消：
-
-- 用户调用了 SDK 的登出动作。
-- 登录时鉴权错误，例如， token 无效或已过期。
-- 用户在别的设备上更改了密码，导致此设备上自动登录失败。
-- 用户的账号被从服务器端删除。
-- 用户从另一个设备登录，将当前设备上登录的用户踢出。 
-- 用户登录设备数超过限制。
-- 应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限。
-
-## 登录重试
-
-登录重试机制如下：
-
-- 登录时，若服务器返回明确的失败原因，例如，token 不正确，SDK 不会重试登录。
-- 若登录因超时失败，SDK 会重试登录。
-- 用户的网络断开并重新连接后，SDK 会自动重试。 
 
 ## 获取当前登录的用户
 

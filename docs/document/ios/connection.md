@@ -2,7 +2,7 @@
 
 应用客户端成功连接到环信服务器后，才能使用环信即时通讯 SDK 的收发消息等功能。
 
-你调用 `loginWithToken`方法登录后，客户端 SDK 会自动连接环信服务器。关于登录详情，请参见[登录文档](login.html)。
+你调用 `login` 方法登录后，客户端 SDK 会自动连接环信服务器。关于登录详情，请参见[登录文档](login.html)。
 
 ## 监听连接状态
 
@@ -39,37 +39,16 @@ extension ViewController: EMClientDelegate {
 
 ```
 
-## 断网自动重连
+## 自动重连
 
-如果由于网络信号弱、切换网络等引起的连接中断，SDK 会自动尝试重连。重连成功或者失败时分别会收到通知 `connectionStateDidChange`。
+登录后，如果由于网络信号弱、切换网络等引起的连接中断，SDK 会自动尝试重连。重连成功或者失败时会收到 `connectionStateDidChange` 通知。
 
-## 被动退出登录
+不过，SDK 在以下情况下会停止自动重连。你需要调用 `login` 方法登录。
 
-你可以通过监听到以下回调后，调用 `EMClient.shared.logout(false)` 进行退出并返回登录界面。
-
-```swift
-extension ViewController: EMClientDelegate {
-    
-    // 用户账户已经被移除
-    func userAccountDidRemoveFromServer() {
-        
-    }
-    
-    // 用户已经在其他设备登录
-    func userAccountDidLoginFromOtherDevice(with info: EMLoginExtensionInfo?) {
-        
-    }
-    
-    // 用户账户被禁用
-    func userDidForbidByServer() {
-        
-    }
-    
-    // 当前账号被强制退出登录，有以下原因：密码被修改；登录设备数过多；服务被封禁; 被强制下线;
-    func userAccountDidForced(toLogout aError: EMError?) {
-        
-    }
-}
-```
-
-关于错误码更多详情，详见[错误码文档](/document/iOS/error.html)。
+- 用户调用了 SDK 的登出方法 `logout` 主动退出登录。
+- 登录时鉴权错误，例如， token 无效（错误码 104）或已过期（错误码 108）。
+- 用户在其他的设备上更改了密码，导致此设备上自动登录失败，提示错误码 216。
+- 用户的账号被从服务器端删除，提示错误码 207。
+- 用户在另一设备登录，将当前设备上登录的用户踢出，提示错误码 206。 
+- 用户登录设备数量超过限制，提示错误码 214。
+- 应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限，提示错误码 8。
