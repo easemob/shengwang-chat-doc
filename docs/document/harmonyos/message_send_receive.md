@@ -196,7 +196,8 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 
 2. 接收方收到图片消息，自动下载图片缩略图。
 
-SDK 默认自动下载缩略图，即 `ChatOptions.setAutoDownloadThumbnail` 设置为 `true`。若设置为手动下载缩略图，即 `ChatOptions.setAutoDownloadThumbnail` 设置为 `false` ，需调用 `ChatClient.getInstance().chatManager()?.downloadThumbnail(message)` 下载。
+- 默认情况下，SDK 自动下载缩略图，即 `ChatOptions.setAutoDownloadThumbnail` 设置为 `true`。
+- 若设置为手动下载缩略图，即 `ChatOptions.setAutoDownloadThumbnail` 设置为 `false` ，需调用 `ChatClient.getInstance().chatManager()?.downloadThumbnail(message)` 下载。
 
 3. 接收方收到 `onMessageReceived` 回调，调用 `downloadAttachment` 下载原图。
 
@@ -262,7 +263,8 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 
 3. 接收方收到视频消息时，自动下载视频缩略图。
 
-SDK 默认自动下载缩略图，即 `ChatOptions.setAutoDownloadThumbnail` 设置为 `true` 。若设置为手动下载缩略图，即 `ChatOptions.setAutoDownloadThumbnail` 设置为 `false`，需调用 `ChatClient.getInstance().chatManager()?.downloadThumbnail(message)` 下载。
+- 默认情况下，SDK 自动下载缩略图，即 `ChatOptions.setAutoDownloadThumbnail` 设置为 `true` 。
+- 若设置为手动下载缩略图，即 `ChatOptions.setAutoDownloadThumbnail` 设置为 `false`，需调用 `ChatClient.getInstance().chatManager()?.downloadThumbnail(message)` 下载。
 
 4. 接收方收到 `onMessageReceived` 回调，可以调用 `ChatClient.getInstance().chatManager()?.downloadAttachment(message)` 方法下载视频原文件。
 

@@ -193,7 +193,8 @@ NSString *thumbnailLocalPath = body.thumbnailLocalPath;
 
 2. 接收方收到图片消息，自动下载图片缩略图。
 
-SDK 默认自动下载缩略图，即 `[EMClient sharedClient].options.isAutoDownloadThumbnail;` 为 `YES`。若设置为手动下载缩略图，即 `[EMClient sharedClient].options.isAutoDownloadThumbnail(NO);`，需调用 `[[EMClient sharedClient].chatManager downloadMessageThumbnail:message progress:nil completion:nil];` 下载。
+- 默认情况下，SDK 自动下载缩略图，即 `[EMClient sharedClient].options.isAutoDownloadThumbnail;` 为 `YES`。
+- 若设置为手动下载缩略图，即 `[EMClient sharedClient].options.isAutoDownloadThumbnail(NO);`，需调用 `[[EMClient sharedClient].chatManager downloadMessageThumbnail:message progress:nil completion:nil];` 下载。
 
 3. 接收方收到 `messagesDidReceive` 回调，调用 `downloadMessageAttachment` 下载原图。
 
@@ -238,7 +239,8 @@ message.chatType = EMChatTypeGroupChat;
 
 3. 接收方收到视频消息时，自动下载视频缩略图。
 
-SDK 默认自动下载缩略图，即 `[EMClient sharedClient].options.isAutoDownloadThumbnail;` 为 `YES`。若设置为手动下载缩略图，即 `[EMClient sharedClient].options.isAutoDownloadThumbnail(NO);`，需调用 `[[EMClient sharedClient].chatManager downloadMessageThumbnail:message progress:nil completion:nil];` 下载。
+- 默认情况下，SDK 自动下载缩略图，即 `[EMClient sharedClient].options.isAutoDownloadThumbnail;` 为 `YES`。
+- 若设置为手动下载缩略图，即 `[EMClient sharedClient].options.isAutoDownloadThumbnail(NO);`，需调用 `[[EMClient sharedClient].chatManager downloadMessageThumbnail:message progress:nil completion:nil];` 下载。
 
 4. 接收方收到 `messagesDidReceive` 回调，可以调用 `downloadMessageAttachment` 方法下载视频原文件。
 
