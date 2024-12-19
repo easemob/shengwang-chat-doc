@@ -8,7 +8,7 @@
 
 你可以通过注册连接监听确认连接状态。
 
-```java
+```Java
 EMConnectionListener connectionListener = new EMConnectionListener() {
     @Override
     public void onConnected() {

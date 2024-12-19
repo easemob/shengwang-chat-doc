@@ -52,7 +52,7 @@
 
 示例代码如下：
 
-```javascript
+```JavaScript
 // 发送文本消息。
 function sendTextMessage() {
   let option = {
@@ -78,7 +78,7 @@ function sendTextMessage() {
 
 对于聊天室消息，可设置消息优先级。示例代码如下：
 
-```javascript
+```JavaScript
 // 发送文本消息。
 function sendTextMessage() {
     let option = {
@@ -106,7 +106,7 @@ function sendTextMessage() {
 
 当消息到达时，接收方会收到 `onXXXMessage` 回调。每个回调包含一条或多条消息。你可以遍历消息列表，并可以解析和展示回调中的消息。
 
-```javascript
+```JavaScript
 // 使用 `addEventHandler` 监听回调事件
 WebIM.conn.addEventHandler("eventName", {
   // SDK 与环信服务器连接成功。
@@ -180,7 +180,7 @@ WebIM.conn.addEventHandler("eventName", {
 
 参考以下代码示例创建和发送语音消息：
 
-```javascript
+```JavaScript
 /**
  * @param {Object} tempFilePath - 要上传的文件的小程序临时文件路径。
  * @param {Object} duration - 语音时长，单位为秒。
@@ -236,7 +236,7 @@ function sendPrivateAudio(tempFilePath, duration) {
 
 参考以下代码示例创建和发送图片消息：
 
-```javascript
+```JavaScript
 function sendImage() {
   var me = this;
   wx.chooseImage({
@@ -324,7 +324,7 @@ function sendPrivateImg(res) {
 
 发送 URL 图片消息前，确保将 `Connection` 类中的 `useOwnUploadFun` 设置为 `true`。
 
-```javascript
+```JavaScript
 function sendPrivateUrlImg() {
   let option = {
     chatType: "singleChat",
@@ -348,7 +348,7 @@ function sendPrivateUrlImg() {
 
 参考以下代码示例创建和发送视频消息：
 
-```javascript
+```JavaScript
 function sendPrivateVideo(){
 			var me = this;
 			var token = WebIM.conn.context.accessToken
@@ -410,7 +410,7 @@ function sendPrivateVideo(){
 
 参考以下代码示例创建、发送和接收文件消息：
 
-```javascript
+```JavaScript
 // 发送文件消息。
 function sendFileMessage() {
       const me = this;
@@ -482,7 +482,7 @@ function sendFileMessage() {
 
 当你需要发送位置时，需要集成第三方的地图服务，获取到位置点的经纬度信息。接收方接收到位置消息时，需要将该位置的经纬度，借由第三方的地图服务，将位置在地图上显示出来。
 
-```javascript
+```JavaScript
 const sendLocMsg = () => {
   let option = {
     chatType: "singleChat",
@@ -512,7 +512,7 @@ const sendLocMsg = () => {
 
 参考以下代码示例发送和接收透传消息：
 
-```javascript
+```JavaScript
 function sendCMDMessage() {
   let option = {
     // 消息类型。
@@ -564,7 +564,7 @@ function sendCMDMessage() {
 
 发送输入状态的用户。
 
-```typescript
+```TypeScript
 let previousChangedTimeStamp = 0;
 // 监听输入状态的变化
 const onInputChange = function () {
@@ -602,7 +602,7 @@ const sendBeginTyping = function () {
 
 接收输入状态的用户。
 
-```typescript
+```TypeScript
 // 设置状态监听器
 let timer;
 conn.addEventHandler("message", {
@@ -629,7 +629,7 @@ const beginTimer = () => {
 
 参考以下示例代码创建和发送自定义消息：
 
-```javascript
+```JavaScript
 function sendCustomMsg() {
   // 设置自定义事件。
   let customEvent = "customEvent";
@@ -701,7 +701,7 @@ function sendCustomMsg() {
 
 示例代码如下：
 
-```javascript
+```JavaScript
 let option = {
   chatType: "singleChat",
   type: "combine",
@@ -738,7 +738,7 @@ conn.send
 
 合并消息实际上是一种附件消息。收到合并消息后，你可以调用 `downloadAndParseCombineMessage` 方法下载合并消息附件并解析出原始消息列表。
 
-```javascript
+```JavaScript
 connection
   .downloadAndParseCombineMessage({
     url: msg.url,
@@ -766,7 +766,7 @@ connection
 
 下面以文本消息为例介绍如何发送定向消息，示例代码如下：
 
-```javascript
+```JavaScript
 // 发送定向文本消息。
 function sendTextMessage() {
   let option = {
@@ -798,7 +798,7 @@ function sendTextMessage() {
 
 如果上述类型的消息无法满足要求，你可以使用消息扩展为消息添加属性。这种情况可用于更复杂的消息传递场景，例如消息中需要携带被回复的消息内容或者是图文消息等场景。
 
-```javascript
+```JavaScript
 function sendTextMessage() {
   let option = {
     type: "txt",

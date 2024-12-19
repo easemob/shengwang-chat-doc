@@ -24,11 +24,11 @@ EaseChatUIKit 内置浅色和深色主题，默认为浅色主题。
 初始化单群聊 UIKit 视图之前调用 `switchTheme` 方法可修改默认主题。
 :::
 
-```swift
+```Swift
 Theme.switchTheme(style: .dark)
 ```
 
-```swift
+```Swift
 Theme.switchTheme(style: .light)
 ```
 

@@ -6,7 +6,7 @@
 
 ## 监听连接状态
 
-```javascript
+```JavaScript
 conn.addEventHandler("connectionListener", {
   onConnected: () => {
     console.log("连接成功");

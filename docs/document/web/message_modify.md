@@ -42,7 +42,7 @@
 
 示例代码如下：
 
-```javascript
+```JavaScript
 
 // 注册修改消息事件
 conn.addEventHandler("modifiedMessage", {

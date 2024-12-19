@@ -262,14 +262,14 @@ UIKit 内置了 Store 模块，你可以通过阅读 `ChatUIKit/Store` 模块源
 
 - 获取 `ChatUIKit` 的所有会话消息未读数：
 
-```javascript
+```JavaScript
 // 消息未读数
 const unRead = ChatUIKit.conversationStore.totalUnreadCount
 ```
 
 - 手动设置群组头像：
 
-```javascript
+```JavaScript
 // 设置群组头像
 ChatUIKit.groupStore.setGroupAvatar('groupId', 'group avatar url');
 ```
@@ -280,7 +280,7 @@ ChatUIKit.groupStore.setGroupAvatar('groupId', 'group avatar url');
 
 例如，使用自己的用户属性，示例代码如下：
 
-```javascript
+```JavaScript
 // 隐藏环信内置的用户属性
 ChatUIKit.hideFeature(['useUserInfo'])
 

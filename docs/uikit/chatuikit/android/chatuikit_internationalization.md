@@ -4,7 +4,7 @@
 
 ## 设置界面语言
 
-```kotlin
+```Kotlin
 object LanguageUtil {
     fun changeLanguage(languageCode:String){
         val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(languageCode)

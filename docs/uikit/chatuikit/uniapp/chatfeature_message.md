@@ -36,7 +36,7 @@
 
 示例代码如下：
 
-```javascript
+```JavaScript
     ChatUIKit.hideFeature(['replyMessage'])
 ```
 

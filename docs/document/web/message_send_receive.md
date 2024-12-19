@@ -54,7 +54,7 @@
 
 默认情况下，SDK 对单个用户发送消息的频率未做限制。如果你联系了环信商务设置了该限制，一旦在单聊、群聊或聊天室中单个用户的消息发送频率超过设定的上限，SDK 会上报错误，即错误码 509 `MESSAGE_CURRENT_LIMITING`。
 
-```javascript
+```JavaScript
 // 发送文本消息。
 function sendTextMessage() {
   let option = {
@@ -80,7 +80,7 @@ function sendTextMessage() {
 
 对于聊天室消息，可设置消息优先级。示例代码如下：
 
-```javascript
+```JavaScript
 // 发送文本消息。
 function sendTextMessage() {
     let option = {
@@ -110,7 +110,7 @@ function sendTextMessage() {
 
 对于聊天室消息，你可以通过消息的 `broadcast` 属性判断该消息是否为[通过 REST API 发送的聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
 
-```javascript
+```JavaScript
 // 使用 `addEventHandler` 监听回调事件
 conn.addEventHandler("eventName", {
   // SDK 与环信服务器连接成功。
@@ -180,7 +180,7 @@ conn.addEventHandler("eventName", {
 
 对于消息附件，你也可以将附件上传到自己的服务器，而不是环信服务器，然后发送消息。这种情况下，需要在 SDK 初始化时将 [`Connection` 类中的 `useOwnUploadFun` 参数](https://doc.easemob.com/jsdoc/classes/Connection.Connection-1.html)设置为 `true`。例如，对于图片消息，上传附件后，调用 `sendPrivateUrlImg` 方法传入图片的 URL 发送图片消息。
 
-```javascript
+```JavaScript
 function sendPrivateUrlImg() {
   let option = {
     chatType: "singleChat",
@@ -204,7 +204,7 @@ function sendPrivateUrlImg() {
 
 参考以下代码示例创建和发送语音消息：
 
-```javascript
+```JavaScript
 function sendPrivateAudio() {
   // 获取语音文件。
   let input = document.getElementById("audio");
@@ -258,7 +258,7 @@ function sendPrivateAudio() {
 
 接收方收到 `onAudioMessage` 回调，根据消息 `url` 字段获取语音文件的服务器地址，从而获取语音文件。
 
-```javascript
+```JavaScript
 // 使用 `addEventHandler` 监听回调事件
 conn.addEventHandler("eventName", {
   // 当前用户收到语音消息。
@@ -276,7 +276,7 @@ conn.addEventHandler("eventName", {
 
 请参考以下代码示例创建和发送图片消息：
 
-```javascript
+```JavaScript
 function sendPrivateImg() {
   // 选择本地图片文件。
   let input = document.getElementById("image");
@@ -334,7 +334,7 @@ function sendPrivateImg() {
 
 接收方收到 `onImageMessage` 回调，根据消息 `url` 字段获取图片文件的服务器地址，从而获取图片文件。
 
-```javascript
+```JavaScript
 // 使用 `addEventHandler` 监听回调事件
 conn.addEventHandler("eventName", {
   // 当前用户收到图片消息。
@@ -354,7 +354,7 @@ conn.addEventHandler("eventName", {
 
 参考以下代码示例创建和发送视频消息：
 
-```javascript
+```JavaScript
 function sendPrivateVideo() {
   // 选择本地视频文件。
   let input = document.getElementById("video");
@@ -408,7 +408,7 @@ function sendPrivateVideo() {
 
 接收方收到 `onVideoMessage` 回调，根据消息 `url` 字段获取视频文件的服务器地址，从而获取视频文件。
 
-```javascript
+```JavaScript
 // 使用 `addEventHandler` 监听回调事件
 conn.addEventHandler("eventName", {
   // 当前用户收到视频消息。
@@ -426,7 +426,7 @@ conn.addEventHandler("eventName", {
 
 参考以下代码示例创建、发送和接收文件消息：
 
-```javascript
+```JavaScript
 function sendPrivateFile() {
   // 选择本地文件。
   let input = document.getElementById("file");
@@ -483,7 +483,7 @@ function sendPrivateFile() {
 
 接收方收到 `onFileMessage` 回调，根据消息 `url` 字段获取文件的服务器地址，从而获取文件。
 
-```javascript
+```JavaScript
 // 使用 `addEventHandler` 监听回调事件
 conn.addEventHandler("eventName", {
   // 当前用户收到文件消息。
@@ -499,7 +499,7 @@ conn.addEventHandler("eventName", {
 
 当你需要发送位置时，需要集成第三方的地图服务，获取到位置点的经纬度信息。接收方接收到位置消息时，需要将该位置的经纬度，借由第三方的地图服务，将位置在地图上显示出来。
 
-```javascript
+```JavaScript
 const sendLocMsg = () => {
   let coords;
   if (navigator.geolocation) {
@@ -531,7 +531,7 @@ const sendLocMsg = () => {
 
 参考以下代码示例发送和接收透传消息：
 
-```javascript
+```JavaScript
 function sendCMDMessage() {
   let option = {
     // 消息类型。
@@ -585,7 +585,7 @@ function sendCMDMessage() {
 
 发送输入状态的用户。
 
-```typescript
+```TypeScript
 let previousChangedTimeStamp = 0;
 // 监听输入状态的变化
 const onInputChange = function () {
@@ -623,7 +623,7 @@ const sendBeginTyping = function () {
 
 接收输入状态的用户。
 
-```typescript
+```TypeScript
 // 设置状态监听器
 let timer;
 conn.addEventHandler("message", {
@@ -650,7 +650,7 @@ const beginTimer = () => {
 
 参考以下示例代码创建和发送自定义消息：
 
-```javascript
+```JavaScript
 function sendCustomMsg() {
   // 自定义事件。
   let customEvent = "customEvent";
@@ -718,7 +718,7 @@ function sendCustomMsg() {
 
 示例代码如下：
 
-```javascript
+```JavaScript
 let option = {
   chatType: "singleChat",
   type: "combine",
@@ -756,7 +756,7 @@ conn.send
 
 合并消息实际上是一种附件消息。收到合并消息后，你可以调用 `downloadAndParseCombineMessage` 方法下载合并消息附件并解析出原始消息列表。
 
-```javascript
+```JavaScript
 connection
   .downloadAndParseCombineMessage({
     url: msg.url,
@@ -784,7 +784,7 @@ connection
 
 下面以文本消息为例介绍如何发送定向消息，示例代码如下：
 
-```javascript
+```JavaScript
 // 发送定向文本消息。
 function sendTextMessage() {
   let option = {
@@ -816,7 +816,7 @@ function sendTextMessage() {
 
 如果上述消息类型无法满足要求，你可以使用消息扩展为消息添加属性。这种情况可用于更复杂的消息传递场景，例如消息中需要携带被回复的消息内容或者是图文消息等场景。
 
-```javascript
+```JavaScript
 function sendTextMessage() {
   let option = {
     type: "txt",
