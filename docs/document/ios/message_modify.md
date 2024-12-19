@@ -35,7 +35,7 @@
 
 示例代码如下：
 
-```ObjectiveC
+```objective-c
             [EMClient.sharedClient.chatManager modifyMessage:model.message.messageId body:body completion:^(EMError * _Nullable error, EMChatMessage * _Nullable message) {
                 if (!error) {
                 //refresh UI
