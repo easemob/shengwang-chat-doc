@@ -20,6 +20,7 @@ export const zhSidebar = sidebar({
       children: [
         { text: "产品概述", link: "introduction.html" },
         { text: "特性介绍",
+          collapsible: true,
           children: [
             { text: "消息", 
               collapsible: true,
