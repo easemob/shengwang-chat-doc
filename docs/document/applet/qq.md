@@ -28,6 +28,8 @@ request 合法域名：
 3. https://a3.easemob.com
 4. https://a4.easemob.com
 5. https://a5.easemob.com
+6. https://rs.chat.agora.io
+7. https://rs.easemob.com
 :::
 
 :::tip
