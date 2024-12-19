@@ -228,7 +228,6 @@ if(msg.body.type == MessageType.VOICE) {
 
 1. 发送方调用 `EMMessage#createImageSendMessage` 方法传入接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）和图片文件的 filePath，创建图片消息，然后调用 `sendMessage` 方法发送该消息。SDK 会将图片上传至环信服务器，服务器自动生成图片缩略图。
 
-
 ```dart
 final imgMsg = EMMessage.createImageSendMessage(
   targetId: targetId,
@@ -285,7 +284,6 @@ body.thumbnailRemotePath;
 你可以设置发送消息结果回调，用于接收消息发送进度或者发送结果，如发送成功或失败。为此，需实现 `EMChatManager#addMessageEvent` 接口。
 
 2. 发送方调用 `EMMessage#createVideoSendMessage` 方法传入接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）,图片文件的 filePath、创建视频消息，然后调用 `sendMessage` 方法发送消息。SDK 会将视频文件上传至消息服务器。若需要视频缩略图，你需自行获取视频首帧的路径，将该路径传入 `createVideoSendMessage` 方法。
-
 
 ```dart
 

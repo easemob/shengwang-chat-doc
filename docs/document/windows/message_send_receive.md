@@ -112,7 +112,7 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
 
 ### 发送和接收附件消息
 
-除文本消息外，还有几种其他类型的消息，其中语音，图片，短视频，文件等消息，是通过先将附件上传到消息服务器的方式实现。收到语音时，会自动下载，而图片和视频会自动下载缩略图。文件消息不会自动下载附件，接收方需调用下载附件的 API，具体实现参考下文。
+除文本消息外，还有几种其他类型的消息，其中语音，图片，视频，文件等消息，是通过先将附件上传到消息服务器的方式实现。收到语音时，会自动下载，而图片和视频会自动下载缩略图。文件消息不会自动下载附件，接收方需调用下载附件的 API，具体实现参考下文。
 
 #### 发送和接收语音消息
 
@@ -229,11 +229,11 @@ else {
 
 下载完成后，调用相应消息 `msg.Body` 的 `ThumbnailLocalPath` 去获取缩略图路径。
 
-#### 发送和接收短视频消息
+#### 发送和接收视频消息
 
-发送短视频消息时，应用层需要完成视频文件的选取或者录制。视频消息支持给出视频的时长作为参数，发送给接收方。
+发送视频消息时，应用层需要完成视频文件的选取或者录制。视频消息支持给出视频的时长作为参数，发送给接收方。
 
-参考如下示例代码，创建并发送短视频消息：
+参考如下示例代码，创建并发送视频消息：
 
 ```C#
 Message msg = Message.CreateVideoSendMessage(toChatUsername, localPath, displayName, thumbnailLocalPath, fileSize, duration, width, height);
@@ -253,13 +253,11 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 ));
 ```
 
-默认情况下，当收件人收到短视频消息时，SDK 会下载视频消息的缩略图。
+默认情况下，当收件人收到视频消息时，SDK 会下载视频消息的缩略图。
 
-如果不希望 SDK 自动下载视频缩略图，可以将 `Options.IsAutoDownload` 设置为 `false`。
+如果不希望 SDK 自动下载视频缩略图，可以将 `Options.IsAutoDownload` 设置为 `false`。这种情况下，需主动调用 `SDKClient.Instance.ChatManager.DownloadThumbnail` 下载。下载完成后，使用相应消息 `Body` 的 `ThumbnailLocalPath` 成员获取缩略图路径。
 
-如果未设置自动下载，需主动调用 `SDKClient.Instance.ChatManager.DownloadThumbnail` 下载。下载完成后，使用相应消息 `Body` 的 `ThumbnailLocalPath` 成员获取缩略图路径。
-
-短视频文件本身需要通过 `SDKClient.Instance.ChatManager.DownloadAttachment` 下载，下载完成后，使用相应消息 `Body` 的 `LocalPath` 成员获取短视频文件路径。
+视频文件本身需要通过 `SDKClient.Instance.ChatManager.DownloadAttachment` 下载，下载完成后，使用相应消息 `Body` 的 `LocalPath` 成员获取视频文件路径。
 
 ```C#
 // 接收到视频消息需先下载附件才能打开。
@@ -272,7 +270,7 @@ SDKClient.Instance.ChatManager.DownloadAttachment("Message ID", new CallBack(
     {
       if (msg.Body.Type == ChatSDK.MessageBodyType.VIDEO) {
         ChatSDK.MessageBody.VideoBody vb = (ChatSDK.MessageBody.VideoBody)msg.Body;
-        //从本地获取短视频文件路径。
+        //从本地获取视频文件路径。
         string videoLocalUri = vb.LocalPath;
         //这里可以根据本地路径打开文件。
       }
