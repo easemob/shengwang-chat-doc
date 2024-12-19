@@ -89,7 +89,7 @@ miniCore.contact.getContacts();
 
 #### 与整体导入的接口差别
 
-通过按需导入的 SDK 与通过 [JavaScript](#通过-javascript-导入-sdk)和 [TavaScript](#通过-typescript-导入-sdk)导入的 SDK 在接口使用方面类似，唯一差别是后者将所有方法都挂载到 `connection` 类, 而使用 miniCore 时，基础的登录登出方法挂载在 miniCore 上，其他功能模块上的方法挂载在相应的模块上。
+通过按需导入的 SDK 与通过 [JavaScript](#引入-javascript-sdk)和 [TavaScript](#引入-typescript-sdk)导入的 SDK 在接口使用方面类似，唯一差别是后者将所有方法都挂载到 `connection` 类, 而使用 miniCore 时，基础的登录登出方法挂载在 miniCore 上，其他功能模块上的方法挂载在相应的模块上。
 
 本节以登录/登出、事件监听和发送消息为例进行说明。
 

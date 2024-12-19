@@ -80,6 +80,8 @@ request 合法域名，uploadFile 合法域名，downloadFile 合法域名
 8. https://a41.easemob.com
 9. https://a51.easemob.com
 10. https://a1-chatfile.easemob.com
+11. https://rs.chat.agora.io
+12. https://rs.easemob.com
 :::
 
 :::tip
