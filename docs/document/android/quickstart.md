@@ -127,7 +127,7 @@ implementation 'io.hyphenate:hyphenate-sdk-lite:3.7.5' // 精简版，只包含I
 
 在 `app/proguard-rules.pro` 文件中添加如下行，防止混淆 SDK 的代码：
 
-```java
+```Java
 -keep class com.hyphenate.** {*;}
 -dontwarn  com.hyphenate.**
 ```
@@ -136,13 +136,13 @@ implementation 'io.hyphenate:hyphenate-sdk-lite:3.7.5' // 精简版，只包含I
 
 当同时集成环信 SDK 4.11.0 和声网 RTM SDK 2.2.0 或 RTC SDK 4.3.0 及以上版本时，由于同时包含 `libaosl.so` 库，编译时可能会出现以下错误：
 
-```java
+```Java
 com.android.builder.merge.DuplicateRelativeFileException: More than one file was found with OS independent path 'lib/x86/libaosl.so'
 ```
 
 可在 app 的 `build.gradle` 文件的 Android 节点中添加 `packagingOptions` 节点，指定在构建过程中优先选择第一个匹配的文件：
 
-```java
+```Java
 android {
   // ...
   packagingOptions {
@@ -166,7 +166,7 @@ android {
 
 在**主进程**中进行初始化：
 
-```java
+```Java
 EMOptions options = new EMOptions();
 options.setAppKey("Your appkey");
 ......// 其他 EMOptions 配置。
@@ -177,7 +177,7 @@ EMClient.getInstance().init(context, options);
 
 可以使用如下代码创建账户：
 
-```java
+```Java
 try {
         // 注册失败会抛出 HyphenateException。
         // 同步方法，会阻塞当前线程。
@@ -198,7 +198,7 @@ try {
 
 使用如下代码实现用户登录：
 
-```java
+```Java
 EMClient.getInstance().login(mAccount, mPassword, new EMCallBack() {
     // 登录成功回调
     @Override
@@ -228,7 +228,7 @@ EMClient.getInstance().login(mAccount, mPassword, new EMCallBack() {
 
 ### 4. 发送一条单聊消息
 
-```java
+```Java
 // `content` 为要发送的文本内容，`toChatUsername` 为对方的账号。
 EMMessage message = EMMessage.createTextSendMessage(content, toChatUsername);
 // 发送消息

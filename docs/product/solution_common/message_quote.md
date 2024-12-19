@@ -73,7 +73,7 @@
 
 @tab Java
 
-```java
+```Java
 
 EMMessage msg = EMMessage.createTextSendMessage("hi", conversationId);
  JSONObject jsonObject = new JSONObject();

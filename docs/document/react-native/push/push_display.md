@@ -207,7 +207,7 @@ msg.attributes = {
 
 自定义显示字段的数据结构如下：
 
-```java
+```Java
 {
     "em_apns_ext": {
         "em_push_title": "custom push title",

@@ -39,7 +39,7 @@ implementation 'com.easemob.im:im-sdk-core:1.0.11'
 
 #### 1. 使用 Easemob App Credentials 的情况
 
-```java
+```Java
 SDK 初始化建议写到配置类中，示例如下：
 @Configuration
 public class Config {
@@ -83,7 +83,7 @@ public class Config {
 
 注意：在使用各业务 API 前，一定要保证 SDK 初始化完成。
 
-```java
+```Java
 @Service
 public class UserService {
 
@@ -112,7 +112,7 @@ public class UserService {
 
 建议写到配置类中，示例如下：
 
-```java
+```Java
 try {
     Configuration.setDefaultApiClient(ApiClient.builder()
             .setBasePath("https://Your privatized address name")
@@ -137,7 +137,7 @@ try {
 
 示例：
 
-```java
+```Java
 try {
     Configuration.setDefaultApiClient(ApiClient.builder()
             .setBasePath("Rest BasePath")
@@ -161,7 +161,7 @@ try {
 
 如果你使用的代代理不需要认证，那么需要传入自己的 IP、端口。
 
-```java
+```Java
 ApiClient.EMProxy proxy = ApiClient.EMProxy.builder()
                 .setIP("ip")
                 .setPort(80)
@@ -182,7 +182,7 @@ try {
 
 如果你使用的代理需要认证，那么需要传入自己的 IP、端口、账号以及密码。
 
-```java
+```Java
 ApiClient.EMProxy proxy = ApiClient.EMProxy.builder()
                 .setIP("ip")
                 .setPort(80)
