@@ -65,7 +65,7 @@ import SDK from "../sdk/webimSDK3.x.x"; // 3.0sdk
 
 #### 实例调用方式
 
-实例化 SDK，并挂载在全局对象下
+实例化 SDK，并挂载在全局对象下。
 
 ```javascript
 //实例化 SDK 对象

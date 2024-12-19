@@ -23,7 +23,7 @@ conn.registerUser({
 
 ## 登录方式
 
-### **用户 ID + token** 是更加安全的登录方式。
+1. **用户 ID + token** 是更加安全的登录方式。
 
 测试环境下，你在[环信即时通讯云控制台](https://console.easemob.com/user/login)创建用户后，环信服务器会自动为这些用户分配用户 Token，详见[测试环境下创建用户的介绍](/product/enable_and_configure_IM.html#测试环境)。
 
@@ -43,7 +43,7 @@ conn
   });
 ```
 
-### **用户 ID + 密码**登录是传统的登录方式。用户 ID 和密码均由你的终端用户自行决定，密码需要符合[密码规则要求](/document/server-side/account_system.html#开放注册单个用户)。
+2. **用户 ID + 密码**登录是传统的登录方式。用户 ID 和密码均由你的终端用户自行决定，密码需要符合[密码规则要求](/document/server-side/account_system.html#开放注册单个用户)。
 
 ```javascript
 conn
