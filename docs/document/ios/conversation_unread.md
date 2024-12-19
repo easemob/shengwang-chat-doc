@@ -50,7 +50,7 @@ NSInteger unreadCount = conversation.unreadMessagesCount;
 
 你可以调用 `EMChatManager#markAllConversationsAsRead` 方法将本地所有会话设为已读，即将所有会话的未读消息数清零，示例代码如下：
 
-```swift
+```Swift
 let err = EMClient.shared().chatManager?.markAllConversationsAsRead()
     if err == nil {
         // 标记所有会话为已读成功

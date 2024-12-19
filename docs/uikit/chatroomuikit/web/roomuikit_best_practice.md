@@ -61,7 +61,7 @@ ChatroomUIKit 中提供了聊天室事件的监听接口。你可以通过注册
 
 ChatroomUIKit 中主动调用 API 的事件监听如下:
 
-```javascript
+```JavaScript
 import { eventHandler } from "easemob-chat-uikit";
 
 eventHandler.addEventHandler("chatroom", {
@@ -99,7 +99,7 @@ eventHandler.addEventHandler("chatroom", {
 
 从 UIKit 中获取 Chat SDK 实例来监听收到的聊天室事件:
 
-```javascript
+```JavaScript
 import React, { useEffect } from "react";
 import { useClient } from "easemob-chat-uikit";
 

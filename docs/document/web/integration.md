@@ -60,7 +60,7 @@ yarn add easemob-websdk
 
 根据项目需求引入相应的功能模块。例如，引入用户关系模块：
 
-```javascript
+```JavaScript
 import MiniCore from "easemob-websdk/miniCore/miniCore";
 import * as contactPlugin from "easemob-websdk/contact/contact";
 ```
@@ -69,7 +69,7 @@ import * as contactPlugin from "easemob-websdk/contact/contact";
 
 将引入的功能模块注册到 miniCore 中：
 
-```javascript
+```JavaScript
 const miniCore = new MiniCore({
   appKey: "your appKey",
 });
@@ -82,7 +82,7 @@ miniCore.usePlugin(contactPlugin, "contact");
 
 注册所需模块后，即可在项目中使用这些模块提供的功能：
 
-```javascript
+```JavaScript
 // 获取联系人列表
 miniCore.contact.getContacts();
 ```
@@ -97,7 +97,7 @@ miniCore.contact.getContacts();
 
 示例代码如下：
 
-```javascript
+```JavaScript
 // 登录
 miniCore.open({
   username: "username",
@@ -113,7 +113,7 @@ miniCore.close();
 
 示例代码如下：
 
-```javascript
+```JavaScript
 miniCore.addEventHandler("handlerId", {
   onTextMessage: (message) => {
     console.log(message);
@@ -125,7 +125,7 @@ miniCore.addEventHandler("handlerId", {
 
 示例代码如下：
 
-```javascript
+```JavaScript
 import { EasemobChat } from "easemob-websdk";
 //发送文本消息
 const sendTextMsg = () => {
@@ -149,7 +149,7 @@ const sendTextMsg = () => {
 
 ### 引入 JavaScript SDK
 
-```javascript
+```JavaScript
 import EC from "easemob-websdk";
 ```
 
@@ -157,7 +157,7 @@ import EC from "easemob-websdk";
 
 在下面的导入代码中，`EasemobChat` 是 SDK 类型的命名空间。
 
-```javascript
+```JavaScript
 import EC, { EasemobChat } from "easemob-websdk";
 ```
 
@@ -177,7 +177,7 @@ import EC, { EasemobChat } from "easemob-websdk";
 
 1. Nuxt 项目, 你可以在 mounted 生命周期动态导入 SDK：
 
-```javascript
+```JavaScript
 export default {
   mounted: () => {
     import("easemob-websdk").then((res) => {
@@ -193,7 +193,7 @@ export default {
 
 2. 对于 Next 项目, 要使用客户端组件，你可以在文件顶部的导入上方添加 `use client` 指令。
 
-```tsx
+```TypeScript
 'use client'
  
 import { useEffect } from 'react'

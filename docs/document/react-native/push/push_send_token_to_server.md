@@ -23,7 +23,7 @@ yarn add react-native-chat-sdk
 
 ![img](/images/react-native/push/push_get_certificate_name.png)
 
-```tsx
+```TypeScript
 import { getPlatform, getDeviceType } from "react-native-push-collection";
 import { ChatClient, ChatOptions, ChatPushConfig } from "react-native-chat-sdk";
 
@@ -48,7 +48,7 @@ const pushType = React.useMemo(() => {
 ### 步骤三 初始化即时通讯 IM SDK
 
 
-```tsx
+```TypeScript
 ChatClient.getInstance()
   .init(
     new ChatOptions({
@@ -69,7 +69,7 @@ ChatClient.getInstance()
 
 ### 步骤四 初始化推送 SDK
 
-```tsx
+```TypeScript
 ChatPushClient.getInstance()
   .init({
     platform: getPlatform(),
@@ -99,7 +99,7 @@ ChatPushClient.getInstance()
 
 ### 步骤五 更新服务端的推送 Token
 
-```tsx
+```TypeScript
 ChatClient.getInstance()
   .updatePushConfig(
     new ChatPushConfig({

@@ -52,7 +52,7 @@
 4. 历史消息在服务器上的存储时间与产品的套餐包相关，详见[产品套餐包详情](/product/pricing.html#套餐包功能详情)。
 :::
 
-```swift
+```Swift
 let option = EMFetchServerMessagesOption();
         EMClient.shared().chatManager?.fetchMessagesFromServer(by: "conversationId", conversationType: .chat, cursor: "", pageSize: 50, option: option, completion: { result, err in
             if let err = err {
@@ -130,7 +130,7 @@ EMConversation* conv = [EMClient.sharedClient.chatManager getConversationWithCon
 
 你可以调用 `EMConversation#getMessageCountStart:to:` 方法从 SDK 本地数据库中获取会话在某个时间段内的全部消息数。
 
-```swift
+```Swift
 if let conversation = EMClient.shared().chatManager?.getConversationWithConvId("conversationId") {
     let count = conversation.getMessageCountStart(startTimestamp, to: endTimestamp)
 }

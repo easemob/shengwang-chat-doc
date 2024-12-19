@@ -27,7 +27,7 @@
 若使用该功能，需将 SDK 升级至 V4.5.0 或以上版本。
 :::
 
-```javascript
+```JavaScript
 conn.deleteAllMessagesAndConversations().then(() => {
   // 清除全部会话和消息记录成功
 })
@@ -45,7 +45,7 @@ conn.deleteAllMessagesAndConversations().then(() => {
 
 示例代码如下：
 
-```javascript
+```JavaScript
 // 按时间删除消息
 connection.removeHistoryMessages({targetId: 'userId', chatType: 'singleChat', beforeTimeStamp: Date.now()})
 

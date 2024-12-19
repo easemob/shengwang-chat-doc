@@ -359,7 +359,7 @@ CallKit 4.8.2 及更高版本支持私有化部署，包括初始化和初测监
 
 配置私有化 AgoraAppId。其他可配置的选项，详见本文档中的[初始化](https://doc.easemob.com/document/android/easecallkit.html#初始化)一节。
 
-```kotlin
+```Kotlin
 EaseCallKitConfig().apply {
     ……
     agoraAppId = "2d4f114e22304cee8d31ae909f3289d2"
@@ -372,7 +372,7 @@ EaseCallKitConfig().apply {
 
 监听 `com.hyphenate.easecallkit.base.EaseCallKitListener#onRtcEngineCreated` 事件，在 RTC 引擎创建的回调里进行私有化配置。详见 [API 参考](https://doc.shengwang.cn/api-ref/rtc/android/API/toc_network#api_irtcengine_setlocalaccesspoint)。
 
-```kotlin
+```Kotlin
 private val callKitListener by lazy { object :EaseCallKitListener {
         ……
 

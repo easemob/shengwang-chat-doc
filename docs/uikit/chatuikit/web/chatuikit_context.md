@@ -83,7 +83,7 @@ rootStore 包含以下数据模块:
 
 ## 使用示例
 
-```javascript
+```JavaScript
 import { rootStore } from "easemob-chat-uikit";
 ```
 
@@ -97,7 +97,7 @@ import { rootStore } from "easemob-chat-uikit";
 
 ### 使用示例
 
-```javascript
+```JavaScript
 import React from "react";
 import { useConversationContext } from "easemob-chat-uikit";
 
@@ -170,7 +170,7 @@ const ChatAPP = () => {
 
 ### Usage example
 
-```javascript
+```JavaScript
 import React from "react";
 import { useChatContext, useSDK } from "easemob-chat-uikit";
 
@@ -281,7 +281,7 @@ const ChatAPP = () => {
 
 ### 使用示例
 
-```javascript
+```JavaScript
 import React from "react";
 import { useAddressContext } from "easemob-chat-uikit";
 

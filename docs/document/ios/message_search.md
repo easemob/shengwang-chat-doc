@@ -55,7 +55,7 @@ EMClient.shared().chatManager?.loadMessages(withKeyword: "keyword", timestamp: 0
 若使用该功能，需将 SDK 升级至 V4.4.0 或以上版本。
 :::
 
-```swift
+```Swift
 if let conversation = EMClient.shared().chatManager?.getConversationWithConvId("conversationsId") {
     conversation.loadMessages(withKeyword: "keyword", timestamp: 0, count: 50, fromUser: "", searchDirection: .down, scope: .content, completion: { messages, aError in
                 

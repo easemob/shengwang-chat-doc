@@ -28,7 +28,7 @@
 
 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
 
-```swift
+```Swift
 EMClient.shared().login(withUsername: "userId", token: "token") { userId, err in
     if err == nil {
         // 登录成功
@@ -57,7 +57,7 @@ EMClient.shared().login(withUsername: "userId", token: "token") { userId, err in
 
 初始化时，你可以设置 `EMOptions#isAutoLogin` 选项确定是否自动登录。如果设置为自动登录，则登录成功之后，后续初始化 SDK 时会自动登录，并收到以下回调。
 
-```swift
+```Swift
 extension ViewController: EMClientDelegate {
     func autoLoginDidCompleteWithError(_ aError: EMError?) {
         
@@ -79,7 +79,7 @@ extension ViewController: EMClientDelegate {
 
 异步方法：
 
-```swift
+```Swift
 EMClient.shared().logout(true) { aError in
     if aError == nil {
         // 退出成功

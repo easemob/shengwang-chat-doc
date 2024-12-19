@@ -41,7 +41,7 @@ yarn add easemob-websdk
 
 根据项目需求引入相应的功能模块。例如，引入用户关系模块：
 
-```javascript
+```JavaScript
 import MiniCore from "easemob-websdk/miniCore/miniCore";
 import * as contactPlugin from "easemob-websdk/contact/contact";
 ```
@@ -50,7 +50,7 @@ import * as contactPlugin from "easemob-websdk/contact/contact";
 
 将引入的功能模块注册到 miniCore 中：
 
-```javascript
+```JavaScript
 const miniCore = new MiniCore({
   appKey: "your appKey",
 });
@@ -63,7 +63,7 @@ miniCore.usePlugin(contactPlugin, "contact");
 
 注册所需模块后，即可在项目中使用这些模块提供的功能：
 
-```javascript
+```JavaScript
 // 获取联系人列表
 miniCore.contact.getContacts();
 ```
@@ -78,7 +78,7 @@ miniCore.contact.getContacts();
 
 示例代码如下：
 
-```javascript
+```JavaScript
 // 登录
 miniCore.open({
   username: "username",
@@ -94,7 +94,7 @@ miniCore.close();
 
 示例代码如下：
 
-```javascript
+```JavaScript
 miniCore.addEventHandler("handlerId", {
   onTextMessage: (message) => {
     console.log(message);
@@ -106,7 +106,7 @@ miniCore.addEventHandler("handlerId", {
 
 示例代码如下：
 
-```javascript
+```JavaScript
 import { EasemobChat } from "easemob-websdk";
 //发送文本消息
 const sendTextMsg = () => {

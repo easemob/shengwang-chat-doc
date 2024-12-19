@@ -14,11 +14,11 @@ ChatroomUIkit 内置浅色和深色主题，默认为浅色主题。
 
 若从当前的主题切换到 ChatroomUIKit 内置的浅色或深色主题，可使用以下方法：
 
-````swift
+````Swift
 Theme.switchTheme(style: .dark)
 ````
 
-````swift
+````Swift
 Theme.switchTheme(style: .light)
 ````
 

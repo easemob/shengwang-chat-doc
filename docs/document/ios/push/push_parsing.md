@@ -15,7 +15,7 @@
 
 - 若 app 中不使用 `SceneDelegate`，iOS 系统会通过 `application:didFinishLaunchingWithOptions:` 方法中的 `launchOptions` 将推送中的用户自定义信息传递给 app。你需要查看 `launchOptions` 参数获取推送内容。
 
-```plaintext
+```objective-c
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
       NSDictionary *userInfo = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
   }
@@ -24,7 +24,7 @@
 
 推送中的用户自定义信息的数据结构：
 
-```plaintext
+```json
 {
     "aps":{
         "alert":{

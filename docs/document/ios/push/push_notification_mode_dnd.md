@@ -63,7 +63,7 @@
 
 你可以调用 `EMPushManager#syncSilentModeConversationsFromServerCompletion:` 方法从服务器同步所有会话的推送通知方式设置。同步后成功后的结果会存储到本地数据库，然后你可以通过 `EMConversation#disturbType` 查询当前会话的推送通知方式。
 
-```swift
+```Swift
 EMClient.shared().pushManager?.syncSilentModeConversations(fromServerCompletion: { err in
     if err == nil {
         if let conversations = EMClient.shared().chatManager?.getAllConversations() {
@@ -80,7 +80,7 @@ EMClient.shared().pushManager?.syncSilentModeConversations(fromServerCompletion:
 
 在本机上调用 `EMPushManager#setSilentModeForConversation:conversationType:params:completion` 设置会话的推送通知方式，在多设备事件 `EMMultiDevicesDelegate#onConversationEvent:conversationId:conversationType` 里会回调当前操作，此时参数 `event` 的值为 `EMMultiDevicesEventConversationMuteInfoChanged`。
 
-```swift
+```Swift
 //对会话设置推送通知方式
 let param = EMSilentModeParam(paramType: .remindType)
         param.remindType = .none

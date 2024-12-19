@@ -223,7 +223,7 @@ message.chatType = EMChatTypeChat;
 
 **解析的内容**
 
-```plaintext
+```json
 {
     "aps":{
         "alert":{

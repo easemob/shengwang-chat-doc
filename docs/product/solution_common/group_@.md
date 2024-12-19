@@ -89,7 +89,7 @@ EMClient.getInstance().chatManager().sendMessage(msg);
 
 @tab iOS
 
-```swift
+```Swift
 let textBody = EMTextMessageBody(text: "@userId1 你好")
 // @ 指定用户的消息构造如下。如果要 @ 所有人，ext 可以设置为 ["em_at_list": "All"]。
 let msg = EMMessage(conversationID: "groupId", body: textBody, ext: ["em_at_list": ["userId1"]])
@@ -105,7 +105,7 @@ EMClient.shared().chatManager?.send(msg, progress: nil, completion: { msg, err i
 
 @tab Web
 
-```javascript
+```JavaScript
 const message = chatSDK.message.create({
   to: "userId",
   chatType: "groupChat",
@@ -210,7 +210,7 @@ private void handleMentionedMessage(EMMessage messages) {
 
 @tab iOS
 
-```swift
+```Swift
 func handleMentionedMessage(_ message: EMChatMessage) {
     let atListInfo = message.ext?["em_at_list"]
         if let atListInfo = atListInfo as? String, 
@@ -235,7 +235,7 @@ func messagesDidReceive(_ aMessages: [EMChatMessage]) {
 
 @tab Web
 
-```javascript
+```JavaScript
 receiveMessage(message){
     let mentionList = message?.ext?.em_at_list;
     // 收到文本消息            
