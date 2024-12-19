@@ -225,7 +225,7 @@ else {
 
 接收方如果设置了自动下载，即 `Options.IsAutoDownload` 为 `true`，SDK 接收到消息后会下载缩略图；如果未设置自动下载，需主动调用 `SDKClient.Instance.ChatManager.DownloadThumbnail` 下载。
 
-下载完成后，调用相应消息 `msg.Body` 的 `ThumbnailLocalPath` 去获取缩略图路径。
+下载完成后，调用相应消息 `msg.Body` 的 `ThumbnailLocalPath` 获取缩略图路径。
 
 #### 发送和接收视频消息
 
