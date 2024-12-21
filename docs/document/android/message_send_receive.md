@@ -12,12 +12,10 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
+- 完成 SDK 初始化，详见 [快速开始](initialization.html)。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 
 ## 发送和接收文本消息
-
-#### 发送文本消息
 
 1. 首先，利用 `EMMessage` 类构造一条消息。
 
@@ -58,9 +56,7 @@ message.setMessageStatusCallback(new EMCallBack() {
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
-#### 接收文本消息
-
-你可以用注册监听 `EMMessageListener` 接收消息。该 `EMMessageListener` 可以多次添加，请记得在不需要的时候移除 `listener`，如在 `activity` 的 `onDestroy()` 时。
+3. 你可以用注册监听 `EMMessageListener` 接收消息。该 `EMMessageListener` 可以多次添加，请记得在不需要的时候移除 `listener`，如在 `activity` 的 `onDestroy()` 时。
 
 在新消息到来时，你会收到 `onMessageReceived` 的回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。若在初始化时打开了 `EMOptions#setIncludeSendMessageInMessageListener` 开关，则该回调中会返回发送成功的消息。
 
@@ -109,7 +105,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 3. 接收方收到语音消息时，自动下载语音文件。
 
-4. 接收方收到 [onMessageReceived 回调](#接收文本消息)，调用 `getRemoteUrl` 或 `getLocalUri` 方法获取语音文件的服务器地址或本地路径，从而获取语音文件。
+4. 接收方收到 [onMessageReceived 回调](#发送和接收文本消息)，调用 `getRemoteUrl` 或 `getLocalUri` 方法获取语音文件的服务器地址或本地路径，从而获取语音文件。
 
 ```Java
 EMVoiceMessageBody voiceBody = (EMVoiceMessageBody) msg.getBody();
@@ -140,7 +136,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 - 默认情况下，SDK 自动下载缩略图，即 `EMClient.getInstance().getOptions().setAutoDownloadThumbnail(true)`。
 - 若设置为手动下载缩略图，即 `EMClient.getInstance().getOptions().setAutoDownloadThumbnail(false)`，需调用 `EMClient.getInstance().chatManager().downloadThumbnail(message)` 下载。
 
-3. 接收方收到 [onMessageReceived 回调](#接收文本消息)，调用 `downloadAttachment` 下载原图。
+3. 接收方收到 [onMessageReceived 回调](#发送和接收文本消息)，调用 `downloadAttachment` 下载原图。
 
 ```Java
 @Override
@@ -203,12 +199,9 @@ if (chatType == CHATTYPE_GROUP)
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
-3. 接收方收到视频消息时，自动下载视频缩略图。
+3. 接收方收到视频消息时，自动下载视频缩略图。你可以设置自动或手动下载视频缩略图，该设置与图片缩略图相同，详见[设置图片缩略图自动下载](#发送和接收图片消息)。
 
-- 默认情况下，SDK 自动下载缩略图，即 `EMClient.getInstance().getOptions().setAutoDownloadThumbnail(true)`。
-- 若设置为手动下载缩略图，即 `EMClient.getInstance().getOptions().setAutoDownloadThumbnail(false)`，需调用 `EMClient.getInstance().chatManager().downloadThumbnail(message)` 下载。
-
-4. 接收方收到 [onMessageReceived 回调](#接收文本消息)，可以调用 `EMClient.getInstance().chatManager().downloadAttachment(message)` 方法下载视频原文件。
+4. 接收方收到 [onMessageReceived 回调](#发送和接收文本消息)，可以调用 `EMClient.getInstance().chatManager().downloadAttachment(message)` 方法下载视频原文件。
 
 ```Java
 /**
@@ -262,7 +255,7 @@ if (chatType == CHATTYPE_GROUP)
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
-2. 接收方收到 [onMessageReceived 回调](#接收文本消息)，调用 `downloadAttachment` 方法下载文件。
+2. 接收方收到 [onMessageReceived 回调](#发送和接收文本消息)，调用 `downloadAttachment` 方法下载文件。
 
 ```Java
 /**
@@ -299,13 +292,9 @@ Uri fileLocalUri = fileMessageBody.getLocalUri();
 
 ## 发送和接收位置消息
 
-1. 当你需要发送位置时，需要集成第三方的地图服务，获取到位置点的经纬度信息。
-
-2. 接收位置消息与文本消息一致，详见[接收文本消息](#接收文本消息)。
-   
-   接收方接收到位置消息时，需要将该位置的经纬度，借由第三方的地图服务，将位置在地图上显示出来。
-   
-以下为创建和发送位置消息的示例代码：   
+1. 创建和发送位置消息。
+  
+发送位置时，需要集成第三方的地图服务，获取到位置点的经纬度信息。 
 
 ```Java
 // `latitude` 为纬度，`longitude` 为经度，`locationAddress` 为具体位置内容。
@@ -317,6 +306,10 @@ if (chatType == CHATTYPE_GROUP)
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
+2. 接收位置消息与文本消息一致，详见[接收文本消息](#发送和接收文本消息)。
+   
+ 接收方接收到位置消息时，需要将该位置的经纬度，借由第三方的地图服务，将位置在地图上显示出来。
+
 ## 发送和接收透传消息
 
 透传消息可视为命令消息，通过发送这条命令给对方，通知对方要进行的操作，收到消息可以自定义处理。
@@ -324,9 +317,11 @@ EMClient.getInstance().chatManager().sendMessage(message);
 具体功能可以根据自身业务需求自定义，例如实现头像、昵称的更新等。另外，以 `em_` 和 `easemob::` 开头的 action 为内部保留字段，注意不要使用。
 
 :::tip
-1. 透传消息发送后，不支持撤回。
-2. 透传消息不会存入本地数据库中，所以在 UI 上不会显示。
+- 透传消息发送后，不支持撤回。
+- 透传消息不会存入本地数据库中，所以在 UI 上不会显示。
 :::
+
+1. 创建和发送透传消息。
 
 ```Java
 EMMessage cmdMsg = EMMessage.createSendMessage(EMMessage.Type.CMD);
@@ -347,7 +342,7 @@ cmdMsg.addBody(cmdBody);
 EMClient.getInstance().chatManager().sendMessage(cmdMsg);
 ```
 
-请注意透传消息的接收方，也是由单独的回调进行通知，方便用户进行不同的处理。
+2. 接收方通过 `onMessageReceived` 和 `onCmdMessageReceived` 回调接收透传消息，方便用户进行不同的处理。
 
 ```Java
 EMMessageListener msgListener = new EMMessageListener(){
@@ -366,9 +361,7 @@ EMMessageListener msgListener = new EMMessageListener(){
 
 除了几种消息之外，你可以自己定义消息类型，方便业务处理，即首先设置一个消息类型名称，然后可添加多种自定义消息。
 
-接收自定义消息与其他类型消息一致，详见[接收文本消息](#接收文本消息)。
-
-以下为创建和发送自定义类型消息的示例代码：
+1. 创建和发送自定义类型消息。
 
 ```Java
 EMMessage customMessage = EMMessage.createSendMessage(EMMessage.Type.CUSTOM);
@@ -385,6 +378,8 @@ customMessage.setChatType(chatType);
 // 发送消息
 EMClient.getInstance().chatManager().sendMessage(customMessage);
 ```
+
+2. 接收自定义消息与其他类型消息一致，详见[接收文本消息](#发送和接收文本消息)。
 
 ## 发送和接收合并消息
 
@@ -441,7 +436,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 #### 接收和解析合并消息
 
-接收合并消息与接收普通消息的操作相同，详见[接收文本消息](#接收文本消息)。
+接收合并消息与接收普通消息的操作相同，详见[接收文本消息](#发送和接收文本消息)。
 
 对于不支持合并转发消息的 SDK 版本，该类消息会被解析为文本消息，消息内容为 `compatibleText` 携带的内容，其他字段会被忽略。
 
@@ -500,7 +495,7 @@ EMMessage message = EMMessage.createTextSendMessage(content, groupId);
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
-接收群定向消息与接收普通消息的操作相同，详见[接收文本消息](#接收文本消息)。
+接收群定向消息与接收普通消息的操作相同，详见[接收文本消息](#发送和接收文本消息)。
 
 ## 使用消息扩展字段
 
@@ -526,7 +521,7 @@ message.getBooleanAttribute("attribute2", false)
 
 针对聊天室消息并发量较大的场景，即时通讯服务提供消息分级功能。你可以通过设置消息优先级，将消息划分为高、普通和低三种级别。你可以在创建消息时，将指定消息类型，或指定成员的所有消息设置为高优先级，确保此类消息优先送达。这种方式可以确保在聊天室内消息并发量较大或消息发送频率过高的情况下，服务器首先丢弃低优先级消息，将资源留给高优先级消息，确保重要消息（如打赏、公告等）优先送达，以此提升重要消息的可靠性。请注意，该功能并不保证高优先级消息必达。在聊天室内消息并发量过大的情况下，为保证用户实时互动的流畅性，即使是高优先级消息仍然会被丢弃。
 
-对于聊天室消息，可设置消息优先级，包括高、普通和低优先级。示例代码如下：
+对于聊天室消息，可设置消息优先级。示例代码如下：
 
 ```Java
    EMMessage message = EMMessage.createTextSendMessage(content, conversationId);

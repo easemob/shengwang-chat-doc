@@ -19,8 +19,6 @@
 
 ## 发送和接收文本消息
 
-### 发送文本消息
-
 1. 首先，利用 `ChatMessage` 类构造一条消息。
 
 默认情况下，SDK 对单个用户发送消息的频率未做限制。如果你联系了环信商务设置了该限制，一旦在单聊、群聊或聊天室中单个用户的消息发送频率超过设定的上限，SDK 会上报错误，即错误码 509。
@@ -72,9 +70,7 @@ ChatClient.getInstance()
 ChatClient.getInstance().chatManager.sendMessage(msg!, callback).then().catch();
 ```
 
-### 接收文本消息
-
-你可以用注册监听 `ChatMessageEventListener` 接收消息。该监听可添加多次，可在不需要的时移除。
+3. 你可以用注册监听 `ChatMessageEventListener` 接收消息。该监听可添加多次，可在不需要的时移除。
 
 在新消息到来时，你会收到 `onMessagesReceived` 的回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。若在初始化时打开了 `ChatOptions#messagesReceiveCallbackIncludeSend` 开关，则该回调中会返回发送成功的消息。
 
@@ -177,7 +173,7 @@ ChatClient.getInstance()
   .catch();
 ```
 
-3. 接收方收到 [onMessageReceived 回调](#接收文本消息)，调用 `downloadAttachment` 下载原图。
+3. 接收方收到 [onMessageReceived 回调](#发送和接收文本消息)，调用 `downloadAttachment` 下载原图。
 
 ```TypeScript
 ChatClient.getInstance()
@@ -217,9 +213,9 @@ const msg = ChatMessage.createVideoMessage(targetId, filePath, chatType, {
 EMClient.getInstance().chatManager().sendMessage(msg, callback).then().catch();
 ```
 
-3. 接收方收到视频消息时，自动下载视频缩略图，和[图片消息缩略图](#发送和接收图片消息)类似。
+3. 接收方收到视频消息时，自动下载视频缩略图。你可以设置自动或手动下载视频缩略图，该设置与图片缩略图相同，详见[设置图片缩略图自动下载](#发送和接收图片消息)。
 
-4. 接收方收到 [onMessageReceived 回调](#接收文本消息)，可以调用 `downloadAttachment` 方法下载视频原文件，和[图片消息附件下载](#发送和接收图片消息)类似。
+4. 接收方收到 [onMessageReceived 回调](#发送和接收文本消息)，可以调用 `downloadAttachment` 方法下载视频原文件。
 
 ```TypeScript
 ChatClient.getInstance()
@@ -286,8 +282,8 @@ EMClient.getInstance().chatManager().sendMessage(msg, callback).then().catch();
 具体功能可以根据自身业务需求自定义，例如实现头像、昵称的更新等。另外，以 `em_` 和 `easemob::` 开头的 action 为内部保留字段，注意不要使用。
 
 :::tip
-1. 透传消息发送后，不支持撤回。
-2. 透传消息不会存入本地数据库中，所以在 UI 上不会显示。
+- 透传消息发送后，不支持撤回。
+- 透传消息不会存入本地数据库中，所以在 UI 上不会显示。
 :::
 
 ```TypeScript
@@ -313,7 +309,7 @@ ChatClient.getInstance().chatManager.addMessageListener(listener);
 
 除了几种消息之外，你可以自己定义消息类型，方便业务处理，即首先设置一个消息类型名称，然后可添加多种自定义消息。
 
-接收自定义消息与其他类型消息一致，详见[接收文本消息](#接收文本消息)。
+接收自定义消息与其他类型消息一致，详见[接收文本消息](#发送和接收文本消息)。
 
 以下为创建和发送自定义类型消息的示例代码：
 

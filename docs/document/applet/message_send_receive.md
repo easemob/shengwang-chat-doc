@@ -19,9 +19,7 @@
 
 ## 发送和接收文本消息
 
-### 发送文本消息
-
-使用 `Message` 类创建并发送文本消息。示例代码如下：
+1. 使用 `Message` 类创建并发送文本消息。
 
 默认情况下，SDK 对单个用户发送消息的频率未做限制。如果你联系了环信商务设置了该限制，一旦在单聊、群聊或聊天室中单个用户的消息发送频率超过设定的上限，SDK 会上报错误，即错误码 509 `MESSAGE_CURRENT_LIMITING`。
 
@@ -49,9 +47,7 @@ function sendTextMessage() {
 }
 ```
 
-### 接收文本消息
-
-你可以通过 `addEventHandler` 注册监听器监听消息事件。你可以添加多个事件。当不再监听事件时，请确保删除监听器。
+2. 你可以通过 `addEventHandler` 注册监听器监听消息事件。你可以添加多个事件。当不再监听事件时，请确保删除监听器。
 
 当消息到达时，接收方会收到 `onTextMessage` 回调。每个回调包含一条或多条消息。你可以遍历消息列表，并可以解析和展示回调中的消息。
 
@@ -95,6 +91,78 @@ function sendPrivateUrlImg() {
   // 调用 `send` 方法发送该图片消息。
   conn.send(msg);
 }
+```
+
+### 发送和接收语音消息
+
+在发送语音消息前，你应该在 app 级别实现录音，提供录制的语音文件的 URI 和时长（单位为秒）。
+
+1. 创建和发送语音消息。
+
+```JavaScript
+/**
+ * @param {Object} tempFilePath - 要上传的文件的小程序临时文件路径。
+ * @param {Object} duration - 语音时长，单位为秒。
+ */
+function sendPrivateAudio(tempFilePath, duration) {
+  var str = WebIM.config.appkey.split("#");
+  var token = WebIM.conn.context.accessToken;
+  var domain = WebIM.conn.apiUrl;
+  wx.uploadFile({
+    url: domain + "/" + str[0] + "/" + str[1] + "/chatfiles",
+    filePath: tempFilePath,
+    name: "file",
+    header: {
+      Authorization: "Bearer " + token
+    },
+    success(res) {
+      var dataObj = JSON.parse(res.data);
+      var option = {
+        type: "audio",
+        chatType: "singleChat",
+        filename: tempFilePath,
+        // 消息接收方：单聊为对端用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
+        to: "username", 
+        body: {
+          //文件 URL。
+          url: dataObj.uri + "/" + dataObj.entities[0].uuid,
+          //文件类型。
+          type: "audio",
+          //文件名。
+          filename: tempFilePath,
+          // 音频文件时长，单位为秒。
+          length: Math.ceil(duration / 1000),
+        },
+      };
+      let msg = WebIM.message.create(option);
+      // 调用 `send` 方法发送该语音消息。
+      conn
+        .send(msg)
+        .then((res) => {
+          // 语音消息成功发送。
+          console.log("Success");
+        })
+        .catch((e) => {
+          // 语音消息发送失败。
+          console.log("Fail", e);
+        });
+    },
+  });
+}
+```
+
+2. 接收方收到 `onAudioMessage` 回调，根据消息 `url` 字段获取语音文件的服务器地址，从而获取语音文件。
+
+```JavaScript
+// 使用 `addEventHandler` 监听回调事件
+conn.addEventHandler("eventName", {
+  // 当前用户收到语音消息。
+  onAudioMessage: function (message) {
+    // 语音文件在服务器的地址。
+    console.log(message.url);
+  },
+});
+
 ```
 
 ### 发送和接收图片消息
@@ -194,80 +262,6 @@ conn.addEventHandler("eventName", {
 });
 ```
 
-### 发送和接收语音消息
-
-在发送语音消息前，你应该在 app 级别实现录音，提供录制的语音文件的 URI 和时长（单位为秒）。
-
-1. 创建和发送语音消息。
-
-```JavaScript
-/**
- * @param {Object} tempFilePath - 要上传的文件的小程序临时文件路径。
- * @param {Object} duration - 语音时长，单位为秒。
- */
-function sendPrivateAudio(tempFilePath, duration) {
-  var str = WebIM.config.appkey.split("#");
-  var token = WebIM.conn.context.accessToken;
-  var domain = WebIM.conn.apiUrl;
-  wx.uploadFile({
-    url: domain + "/" + str[0] + "/" + str[1] + "/chatfiles",
-    filePath: tempFilePath,
-    name: "file",
-    header: {
-      Authorization: "Bearer " + token
-    },
-    success(res) {
-      var dataObj = JSON.parse(res.data);
-      var option = {
-        type: "audio",
-        chatType: "singleChat",
-        filename: tempFilePath,
-        // 消息接收方：单聊为对端用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
-        to: "username", 
-        body: {
-          //文件 URL。
-          url: dataObj.uri + "/" + dataObj.entities[0].uuid,
-          //文件类型。
-          type: "audio",
-          //文件名。
-          filename: tempFilePath,
-          // 音频文件时长，单位为秒。
-          length: Math.ceil(duration / 1000),
-        },
-      };
-      let msg = WebIM.message.create(option);
-      // 调用 `send` 方法发送该语音消息。
-      conn
-        .send(msg)
-        .then((res) => {
-          // 语音消息成功发送。
-          console.log("Success");
-        })
-        .catch((e) => {
-          // 语音消息发送失败。
-          console.log("Fail", e);
-        });
-    },
-  });
-}
-```
-
-2. 接收方收到 `onAudioMessage` 回调，根据消息 `url` 字段获取语音文件的服务器地址，从而获取语音文件。
-
-```JavaScript
-// 使用 `addEventHandler` 监听回调事件
-conn.addEventHandler("eventName", {
-  // 当前用户收到语音消息。
-  onAudioMessage: function (message) {
-    // 语音文件在服务器的地址。
-    console.log(message.url);
-  },
-});
-
-```
-
-
-
 ### 发送和接收视频消息
 
 在发送视频消息之前，应在 app 级别实现视频捕获以及捕获文件的上传。
@@ -344,7 +338,7 @@ conn.addEventHandler("eventName", {
     console.log(message.thumb);
   },
 });
-
+```
 
 ### 发送和接收文件消息
 

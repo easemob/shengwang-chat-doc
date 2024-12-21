@@ -17,8 +17,6 @@
 
 ## 发送和接收文本消息
 
-#### 发送文本消息
-
 1. 首先，利用 `EMMessage` 类构造一条消息。
 
 默认情况下，SDK 对单个用户发送消息的频率未做限制。如果你联系了环信商务设置了该限制，一旦在单聊、群聊或聊天室中单个用户的消息发送频率超过设定的上限，SDK 会上报错误，即错误码 509 `MESSAGE_CURRENT_LIMITING`。
@@ -78,9 +76,7 @@ EMClient.getInstance.chatManager.sendMessage(message).then((value) {
 });
 ```
 
-#### 接收文本消息
-
-你可以添加 `EMChatEventHandler` 监听器接收消息。`EMChatEventHandler` 可以多次添加。请记得在不需要的时候移除该监听器，如在 `dispose` 时。
+2. 你可以添加 `EMChatEventHandler` 监听器接收消息。`EMChatEventHandler` 可以多次添加。请记得在不需要的时候移除该监听器，如在 `dispose` 时。
 
 在新消息到来时，你会收到 `onMessagesReceived` 事件，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。
 
@@ -143,7 +139,7 @@ EMClient.getInstance.chatManager.sendMessage(msg);
 ```
 3. 接收方收到语音消息时，自动下载语音文件。
 
-4. 接收方收到 [EMChatEventHandler#onMessagesReceived 回调](#接收文本消息)，调用 `remotePath` 或 `localPath` 方法获取语音文件的服务器地址或本地路径，从而获取语音文件。
+4. 接收方收到 [EMChatEventHandler#onMessagesReceived 回调](#发送和接收文本消息)，调用 `remotePath` 或 `localPath` 方法获取语音文件的服务器地址或本地路径，从而获取语音文件。
 
 ```dart
 if(msg.body.type == MessageType.VOICE) {
@@ -171,8 +167,11 @@ EMClient.getInstance.chatManager.sendMessage(imgMsg);
 ```
 
 2. 接收方收到图片消息，自动下载图片缩略图。
+   
+- 默认情况下，SDK 自动下载缩略图，即 `EMOptions#isAutoDownloadThumbnail` 设置为 `true`。
+- 若设置为手动下载缩略图，即 `EMOptions#isAutoDownloadThumbnail` 设置为 `false`，需调用 `EMChatManage#downloadThumbnail` 下载。
 
-3. 接收方收到 [EMChatEventHandler#onMessagesReceived 回调](#接收文本消息)，调用 `downloadAttachment` 下载大图。
+3. 接收方收到 [EMChatEventHandler#onMessagesReceived 回调](#发送和接收文本消息)，调用 `downloadAttachment` 下载大图。
 
 ```dart
 EMClient.getInstance.chatManager.addMessageEvent(
@@ -216,7 +215,7 @@ body.thumbnailRemotePath;
 
 你可以设置发送消息结果回调，用于接收消息发送进度或者发送结果，如发送成功或失败。为此，需实现 `EMChatManager#addMessageEvent` 接口。
 
-2. 发送方调用 `EMMessage#createVideoSendMessage` 方法传入接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）,图片文件的 filePath、创建视频消息，然后调用 `sendMessage` 方法发送消息。SDK 会将视频文件上传至消息服务器。若需要视频缩略图，你需自行获取视频首帧的路径，将该路径传入 `createVideoSendMessage` 方法。
+2. 发送方调用 `EMMessage#createVideoSendMessage` 方法传入接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）,图片文件的 `filePath`、创建视频消息，然后调用 `sendMessage` 方法发送消息。SDK 会将视频文件上传至消息服务器。若需要视频缩略图，你需自行获取视频首帧的路径，将该路径传入 `createVideoSendMessage` 方法。
 
 ```dart
 
@@ -231,9 +230,9 @@ EMClient.getInstance.chatManager.sendMessage(videoMsg);
 
 ```
 
-3. 接收方收到视频消息时，自动下载视频缩略图。
+3. 接收方收到视频消息时，自动下载视频缩略图。你可以设置自动或手动下载视频缩略图，该设置与图片缩略图相同，详见[设置图片缩略图自动下载](#发送和接收图片消息)。
 
-4. 接收方收到 [EMChatEventHandler#onMessagesReceived 回调](#接收文本消息)，调用 `downloadAttachment` 下载视频文件。
+4. 接收方收到 [EMChatEventHandler#onMessagesReceived 回调](#发送和接收文本消息)，调用 `downloadAttachment` 下载视频文件。
 
 ```dart
 
@@ -286,7 +285,7 @@ final fileMsg = EMMessage.createFileSendMessage(
 EMClient.getInstance.chatManager.sendMessage(fileMsg);
 ```
 
-2. 接收方收到 [EMChatEventHandler#onMessagesReceived 回调](#接收文本消息)，调用 `downloadAttachment` 下载文件。
+2. 接收方收到 [EMChatEventHandler#onMessagesReceived 回调](#发送和接收文本消息)，调用 `downloadAttachment` 下载文件。
 
 ```dart
 EMClient.getInstance.chatManager.addMessageEvent(
@@ -320,13 +319,9 @@ body.remotePath;
 
 ### 发送和接收位置消息
 
-1. 当你需要发送位置时，需要集成第三方的地图服务，获取到位置点的经纬度信息。
-
-2. 接收位置消息与文本消息一致，详见[接收文本消息](#接收文本消息)。
-   
-   接收方接收到位置消息时，需要将该位置的经纬度，借由第三方的地图服务，将位置在地图上显示出来。
-
-以下为创建和发送位置消息的示例代码：  
+1. 创建和发送位置消息。
+  
+发送位置时，需要集成第三方的地图服务，获取到位置点的经纬度信息。
 
 ```dart
 final localMsg = EMMessage.createLocationSendMessage(
@@ -339,6 +334,10 @@ final localMsg = EMMessage.createLocationSendMessage(
 EMClient.getInstance.chatManager.sendMessage(localMsg);
 ```
 
+2. 接收位置消息与文本消息一致，详见[接收文本消息](#发送和接收文本消息)。
+   
+ 接收方接收到位置消息时，需要将该位置的经纬度，借由第三方的地图服务，将位置在地图上显示出来。
+
 ### 发送和接收透传消息
 
 透传消息可视为命令消息，通过发送这条命令给对方，通知对方要进行的操作，收到消息可以自定义处理。
@@ -346,8 +345,8 @@ EMClient.getInstance.chatManager.sendMessage(localMsg);
 具体功能可以根据自身业务需求自定义，例如实现头像、昵称的更新等。另外，以 `em_` 和 `easemob::` 开头的 action 为内部保留字段，注意不要使用。
 
 :::tip
-1. 透传消息发送后，不支持撤回。
-2. 透传消息不会存入本地数据库中，所以在 UI 上不会显示。
+- 透传消息发送后，不支持撤回。
+- 透传消息不会存入本地数据库中，所以在 UI 上不会显示。
 :::
 
 ```dart
@@ -360,7 +359,7 @@ final cmdMsg = EMMessage.createCmdSendMessage(
 EMClient.getInstance.chatManager.sendMessage(cmdMsg);
 ```
 
-请注意透传消息的接收方，也是由单独的回调进行通知，方便用户进行不同的处理。
+1. 接收方通过 `onCmdMessagesReceived` 回调接收透传消息，方便用户进行不同的处理。
 
 ```dart
 final handler = EMChatEventHandler(
@@ -385,7 +384,7 @@ EMClient.getInstance.chatManager.removeEventHandler(
 
 除了几种消息之外，你可以自己定义消息类型，方便业务处理，即首先设置一个消息类型名称，然后可添加多种自定义消息。
 
-接收自定义消息与其他类型消息一致，详见[接收文本消息](#接收文本消息)。
+接收自定义消息与其他类型消息一致，详见[接收文本消息](#发送和接收文本消息)。
 
 ```dart
 final customMsg = EMMessage.createCustomSendMessage(
@@ -442,7 +441,7 @@ EMClient.getInstance.chatManager.sendMessage(combineMsg);
 
 #### 接收和解析合并消息
 
-接收合并消息与接收普通消息的操作相同，详见[接收文本消息](#接收文本消息)。
+接收合并消息与接收普通消息的操作相同，详见[接收文本消息](#发送和接收文本消息)。
 
 对于不支持合并转发消息的 SDK 版本，该类消息会被解析为文本消息，消息内容为 `compatibleText` 携带的内容，其他字段会被忽略。
 
@@ -497,7 +496,7 @@ msg.receiverList = ['userId1', 'userId2'];
 EMClient.getInstance.chatManager.sendMessage(msg);
 
 ```
-接收群定向消息与接收普通消息的操作相同，详见[接收文本消息](#接收文本消息)。
+接收群定向消息与接收普通消息的操作相同，详见[接收文本消息](#发送和接收文本消息)。
 
 ### 使用消息扩展字段
 

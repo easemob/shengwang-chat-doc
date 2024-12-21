@@ -19,9 +19,7 @@
 
 ## 发送和接收文本消息
 
-### 发送文本消息
-
-你可以利用 `EMChatMessage` 类构造一条消息，然后通过 `ChatManager` 将该消息发出。
+1. 你可以利用 `EMChatMessage` 类构造一条消息，然后通过 `ChatManager` 将该消息发出。
 
 默认情况下，SDK 对单个用户发送消息的频率未做限制。如果你联系了环信商务设置了该限制，一旦在单聊、群聊或聊天室中单个用户的消息发送频率超过设定的上限，SDK 会上报错误，即错误码 509 `EMErrorMessageCurrentLimiting`。示例代码如下：
 
@@ -42,9 +40,7 @@ message.chatType = EMChatTypeChatRoom;
 
 ```
 
-### 接收文本消息
-
-你可以用注册监听 `EMChatManagerDelegate` 接收消息。该 `EMChatManagerDelegate` 可以多次添加，请记得在不需要的时候移除 `Delegate`，如在`ViewController` `dealloc()` 时。
+2. 你可以用注册监听 `EMChatManagerDelegate` 接收消息。该 `EMChatManagerDelegate` 可以多次添加，请记得在不需要的时候移除 `Delegate`，如在 `ViewController` `dealloc()` 时。
 
 在新消息到来时，你会收到 `messagesDidReceive` 的回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。若在初始化时打开了 `EMOptions#includeSendMessageInMessageListener` 开关，则该回调中会返回发送成功的消息。
 
@@ -117,7 +113,7 @@ NSString *thumbnailLocalPath = body.thumbnailLocalPath;
 - 默认情况下，SDK 自动下载缩略图，即 `[EMClient sharedClient].options.isAutoDownloadThumbnail;` 为 `YES`。
 - 若设置为手动下载缩略图，即 `[EMClient sharedClient].options.isAutoDownloadThumbnail(NO);`，需调用 `[[EMClient sharedClient].chatManager downloadMessageThumbnail:message progress:nil completion:nil];` 下载。
 
-3. 接收方收到 [messagesDidReceive 回调](#接收文本消息)，调用 `downloadMessageAttachment` 下载原图。
+3. 接收方收到 [messagesDidReceive 回调](#发送和接收文本消息)，调用 `downloadMessageAttachment` 下载原图。
 
 下载完成后，在回调里调用相应消息 `body` 的 `thumbnailLocalPath` 获取缩略图路径。
 
@@ -158,7 +154,7 @@ message.chatType = EMChatTypeGroupChat;
 
 3. 接收方收到语音消息时，自动下载语音文件。
 
-4. 接收方收到 [messagesDidReceive 回调](#接收文本消息)，调用 `remotePath` 或 `localPath` 方法获取语音文件的服务器地址或本地路径，从而获取语音文件。
+4. 接收方收到 [messagesDidReceive 回调](#发送和接收文本消息)，调用 `remotePath` 或 `localPath` 方法获取语音文件的服务器地址或本地路径，从而获取语音文件。
 
 ```Objective-C
 EMVoiceMessageBody *voiceBody = (EMVoiceMessageBody *)message.body;
@@ -188,12 +184,9 @@ message.chatType = EMChatTypeGroupChat;
 [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
 ```
 
-3. 接收方收到视频消息时，自动下载视频缩略图。
+3. 接收方收到视频消息时，自动下载视频缩略图。你可以设置自动或手动下载视频缩略图，该设置与图片缩略图相同，详见[设置图片缩略图自动下载](#发送和接收图片消息)。
 
-- 默认情况下，SDK 自动下载缩略图，即 `[EMClient sharedClient].options.isAutoDownloadThumbnail;` 为 `YES`。
-- 若设置为手动下载缩略图，即 `[EMClient sharedClient].options.isAutoDownloadThumbnail(NO);`，需调用 `[[EMClient sharedClient].chatManager downloadMessageThumbnail:message progress:nil completion:nil];` 下载。
-
-4. 接收方收到 [messagesDidReceive 回调](#接收文本消息)，可以调用 `downloadMessageAttachment` 方法下载视频原文件。
+4. 接收方收到 [messagesDidReceive 回调](#发送和接收文本消息)，可以调用 `downloadMessageAttachment` 方法下载视频原文件。
 
 5. 获取视频缩略图和视频原文件。
 
@@ -226,7 +219,7 @@ message.chatType = EMChatTypeGroupChat;
 [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
 ```
 
-2. 接收方收到 `messagesDidReceive` 回调，调用 `downloadMessageAttachment` 方法下载文件。
+2. 接收方收到 [messagesDidReceive 回调](#发送和接收文本消息)，调用 `downloadMessageAttachment` 方法下载文件。
 
 ```Objective-C
 [[EMClient sharedClient].chatManager downloadMessageAttachment:message progress:nil completion:^(EMChatMessage *message, EMError *error) {
@@ -248,13 +241,9 @@ NSString *localPath = body.localPath;
 
 ## 发送和接收位置消息
 
-1. 当你需要发送位置时，需要集成第三方的地图服务，获取到位置点的经纬度信息。
-
-2. 接收位置消息与文本消息一致，详见[接收文本消息](#接收文本消息)。
-   
-   接收方接收到位置消息时，需要将该位置的经纬度，借由第三方的地图服务，将位置在地图上显示出来。
-
-以下为创建和发送位置消息的示例代码：  
+1. 创建和发送位置消息。
+  
+发送位置时，需要集成第三方的地图服务，获取到位置点的经纬度信息。  
 
 ```Objective-C
 // `latitude` 为纬度，`longitude` 为经度，`address` 为具体位置内容。
@@ -267,6 +256,10 @@ message.chatType = EMChatTypeGroupChat;
 [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
 ```
 
+2. 接收位置消息与文本消息一致，详见[接收文本消息](#发送和接收文本消息)。
+   
+ 接收方接收到位置消息时，需要将该位置的经纬度，借由第三方的地图服务，将位置在地图上显示出来。
+
 ## 发送和接收透传消息
 
 可将透传消息理解为一条指令，通过发送这条指令给对方，通知对方要执行的操作，收到消息可以自定义处理。
@@ -276,9 +269,11 @@ message.chatType = EMChatTypeGroupChat;
 透传消息适用于更新头像、更新昵称等场景。
 
 :::tip
-1. 透传消息发送后，不支持撤回。
-2. 透传消息不会存入本地数据库中，所以在 UI 上不会显示。
+- 透传消息发送后，不支持撤回。
+- 透传消息不会存入本地数据库中，所以在 UI 上不会显示。
 :::
+
+1. 创建和发送透传消息。
 
 ```Objective-C
 // `action` 自定义 `NSString` 类型的命令内容。
@@ -293,7 +288,7 @@ EMCmdMessageBody *body = [[EMCmdMessageBody alloc] initWithAction:action];
     [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
 ```
 
-请注意透传消息的接收方，也是由单独的回调进行通知，方便用户进行不同的处理。
+2. 接收方通过 `cmdMessagesDidReceive` 回调接收透传消息，方便用户进行不同的处理。
 
 ```Objective-C
 // 收到透传消息。
@@ -309,9 +304,7 @@ EMCmdMessageBody *body = [[EMCmdMessageBody alloc] initWithAction:action];
 
 除了几种消息之外，你可以自己定义消息类型，方便业务处理，即首先设置一个消息类型名称，然后可添加多种自定义消息。
 
-接收自定义消息与其他类型消息一致，详见[接收文本消息](#接收文本消息)。
-
-以下为创建和发送自定义类型消息的示例代码：
+1. 创建和发送自定义类型消息。
 
 ```Objective-C
 // event 为需要传递的自定义消息事件，比如名片消息，可以设置 "userCard"；`ext` 为事件扩展字段，比如可以设置 `uid`，`nickname`，`avatar`。
@@ -323,6 +316,8 @@ message.chatType = EMChatTypeGroupChat;
 // 发送消息。
 [[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
 ```
+
+2. 接收自定义消息与其他类型消息一致，详见[接收文本消息](#发送和接收文本消息)。
 
 ## 发送和接收合并消息
 
@@ -336,7 +331,7 @@ message.chatType = EMChatTypeGroupChat;
 对于转发合并消息，例如，用户 A 向 用户 B 发送了合并消息，用户 B 将该合并消息转发给用户 C，需要调用转发单条合并消息的 API。详见[转发单条消息](message_forward.html#转发单条消息)。
 :::
 
-### 创建和发送合并消息
+#### 创建和发送合并消息
 
 你可以调用 `EMCombineMessageBody#initWithTitle:summary:compatibleText:messageList` 方法构造一条合并消息体，然后创建消息 `EMChatMessage` 并调用 `sendMessage` 方法发送该条消息。
 
@@ -366,7 +361,7 @@ EMChatMessage* msg = [[EMChatMessage alloc] initWithConversationID:@"conversatio
 }];
 ```
 
-### 接收和解析合并消息
+#### 接收和解析合并消息
 
 接收合并消息与接收普通消息的操作相同，详见[接收消息](#接收消息)。
 
@@ -429,7 +424,7 @@ msg.receiverList = @[@"A",@"B"];
 }];
 ```
 
-接收定向消息与接收普通消息的操作相同，详见[接收文本消息](#接收文本消息)。
+接收定向消息与接收普通消息的操作相同，详见[接收文本消息](#发送和接收文本消息)。
 
 ## 使用消息扩展字段
 

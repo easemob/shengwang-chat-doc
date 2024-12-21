@@ -17,9 +17,7 @@
 
 ## 发送和接收文本消息
 
-#### 发送文本消息
-
-你可以利用 `Message` 类构造一个消息，然后通过 `IChatManager` 将该消息发出。
+1. 你可以利用 `Message` 类构造一个消息，然后通过 `IChatManager` 将该消息发出。
 
 默认情况下，SDK 对单个用户发送消息的频率未做限制。如果你联系了环信商务设置了该限制，一旦在单聊、群聊或聊天室中单个用户的消息发送频率超过设定的上限，SDK 会上报错误，即错误码 509 `MESSAGE_CURRENT_LIMITING`。 
 
@@ -51,9 +49,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 ));
 ```
 
-#### 接收文本消息
-
-你可以用注册监听 `IChatManagerDelegate` 接收消息。该 `IChatManagerDelegate` 可以多次添加，请记得在不需要的时候移除该监听。如在析构 `IChatManagerDelegate` 的继承实例之前。
+2. 你可以用注册监听 `IChatManagerDelegate` 接收消息。该 `IChatManagerDelegate` 可以多次添加，请记得在不需要的时候移除该监听。如在析构 `IChatManagerDelegate` 的继承实例之前。
 
 在新消息到来时，你会收到 `OnMessagesReceived` 的回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。若在初始化时打开了 `Options#IncludeSendMessageInMessageListener` 开关，则该回调中会返回发送成功的消息。
 
@@ -119,7 +115,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 ));
 ```
 
-语音消息的接收与文本消息一致，详见[接收文本消息](#接收文本消息)。
+语音消息的接收与文本消息一致，详见[接收文本消息](#发送和接收文本消息)。
 
 接收方收到语音消息后，参考如下示例代码获取语音消息的附件：
 
@@ -143,9 +139,9 @@ else {
 
 ### 发送和接收图片消息
 
-图片消息默认会被压缩后发出，可通过设置 `original` 参数为 `true` 发送原图。
+1. 创建并发送图片消息。
 
-参考如下示例代码，创建并发送图片消息：
+图片消息默认会被压缩后发出，可通过设置 `original` 参数为 `true` 发送原图。
 
 ```C#
 //`localPath` 为图片本地资源路径。
@@ -174,9 +170,14 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 ));
 ```
 
-图片消息的接收与文本消息一致，详见[接收文本消息](#接收文本消息)。
+2. 图片消息的接收与文本消息一致，详见[接收文本消息](#发送和接收文本消息)。
 
-接收方收到图片消息后，参考如下示例代码获取图片消息的缩略图和附件：
+接收方收到图片消息后，参考如下示例代码获取图片消息的缩略图和附件。
+
+- 接收方如果设置了自动下载，即 `Options.IsAutoDownload` 为 `true`，SDK 接收到消息后会下载缩略图
+- 如果未设置自动下载，需主动调用 `SDKClient.Instance.ChatManager.DownloadThumbnail` 下载。
+
+下载完成后，调用相应消息 `msg.Body` 的 `ThumbnailLocalPath` 获取缩略图路径。
 
 ```C#
 //注意：这里的 "Message ID" 是消息发送成功以后（`CallBack` 中的 `onSuccess` 被触发以后），被发送消息的 ID。
@@ -203,15 +204,11 @@ else {
 }
 ```
 
-接收方如果设置了自动下载，即 `Options.IsAutoDownload` 为 `true`，SDK 接收到消息后会下载缩略图；如果未设置自动下载，需主动调用 `SDKClient.Instance.ChatManager.DownloadThumbnail` 下载。
-
-下载完成后，调用相应消息 `msg.Body` 的 `ThumbnailLocalPath` 获取缩略图路径。
-
 ### 发送和接收视频消息
 
 发送视频消息时，应用层需要完成视频文件的选取或者录制。视频消息支持给出视频的时长作为参数，发送给接收方。
 
-参考如下示例代码，创建并发送视频消息：
+1. 创建并发送视频消息。
 
 ```C#
 Message msg = Message.CreateVideoSendMessage(toChatUsername, localPath, displayName, thumbnailLocalPath, fileSize, duration, width, height);
@@ -231,11 +228,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 ));
 ```
 
-视频消息的接收与文本消息一致，详见[接收文本消息](#接收文本消息)。
-
-- 默认情况下，当收件人收到视频消息时，SDK 会下载视频消息的缩略图。
-
-- 如果不希望 SDK 自动下载视频缩略图，可以将 `Options.IsAutoDownload` 设置为 `false`。这种情况下，需主动调用 `SDKClient.Instance.ChatManager.DownloadThumbnail` 下载。下载完成后，使用相应消息 `Body` 的 `ThumbnailLocalPath` 成员获取缩略图路径。
+2. 接收方收到视频消息时，自动下载视频缩略图。你可以设置自动或手动下载视频缩略图，该设置与图片缩略图相同，详见[设置图片缩略图自动下载](#发送和接收图片消息)。
 
 视频文件本身需要通过 `SDKClient.Instance.ChatManager.DownloadAttachment` 下载，下载完成后，使用相应消息 `Body` 的 `LocalPath` 成员获取视频文件路径。
 
@@ -271,7 +264,7 @@ SDKClient.Instance.ChatManager.DownloadAttachment("Message ID", new CallBack(
 
 #### 发送和接收文件消息
 
-1. 创建并发送文件消息：
+1. 创建并发送文件消息。
 
 ```C#
 // localPath 为文件本地路径，displayName 为消息显示名称，fileSize 为文件大小。
@@ -315,17 +308,13 @@ else {
 
 ```
 
-2. 文件消息的接收与文本消息一致，详见[接收文本消息](#接收文本消息)。
+2. 文件消息的接收与文本消息一致，详见[接收文本消息](#发送和接收文本消息)。
 
 ## 发送位置消息
 
-1. 当你需要发送位置时，需要集成第三方的地图服务，获取到位置点的经纬度信息。
-
-2. 接收位置消息与文本消息一致，详见[接收文本消息](#接收文本消息)。
-   
-   接收方接收到位置消息时，需要将该位置的经纬度，借由第三方的地图服务，将位置在地图上显示出来。
-
-以下为创建和发送位置消息的示例代码：  
+1. 创建和发送位置消息。
+  
+发送位置时，需要集成第三方的地图服务，获取到位置点的经纬度信息。 
 
 ```C#
 //`latitude` 为纬度，`longitude` 为经度，`locationAddress` 为具体位置内容，`buildingName` 为建筑名称。
@@ -341,6 +330,10 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 ));
 ```
 
+2. 接收位置消息与文本消息一致，详见[接收文本消息](#发送和接收文本消息)。
+   
+ 接收方接收到位置消息时，需要将该位置的经纬度，借由第三方的地图服务，将位置在地图上显示出来。
+
 ## 发送和接收透传消息
 
 透传消息可视为命令消息，通过发送这条命令给对方，通知对方要进行的操作，收到消息可以自定义处理。
@@ -348,9 +341,11 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 具体功能可以根据自身业务需求自定义，例如实现头像、昵称的更新等。另外，以 `em_` 和 `easemob::` 开头的 action 为内部保留字段，注意不要使用。
 
 :::tip
-1. 透传消息发送后，不支持撤回。
-2. 透传消息不会存入本地数据库中，所以在 UI 上不会显示。
+- 透传消息发送后，不支持撤回。
+- 透传消息不会存入本地数据库中，所以在 UI 上不会显示。
 :::
+
+1. 创建和发送透传消息。
 
 ```C#
 //`action` 可以自定义。
@@ -366,7 +361,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 ));
 ```
 
-请注意透传消息的接收方，也是由单独的回调进行通知，方便用户进行不同的处理。
+2. 接收方通过 `OnMessagesReceived` 和 `OnCmdMessagesReceived` 回调接收透传消息，方便用户进行不同的处理。
 
 ```C#
 // 继承并实现 `IChatManagerDelegate`。
@@ -390,13 +385,11 @@ SDKClient.Instance.ChatManager.AddChatManagerDelegate(adelegate);
 
 ```
 
-### 发送和接收自定义类型消息
+## 发送和接收自定义类型消息
 
 除了几种消息之外，你可以自己定义消息类型，方便业务处理，即首先设置一个消息类型名称，然后可添加多种自定义消息。
 
-接收自定义消息与其他类型消息一致，详见[接收文本消息](#接收文本消息)。
-
-以下为创建和发送自定义类型消息的示例代码：
+1. 创建和发送自定义类型消息。
 
 ```C#
 //`event` 为字符串类型的自定义事件，比如礼物消息，可以设置：
@@ -416,6 +409,8 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
    }
 ));
 ```
+
+2. 接收自定义消息与其他类型消息一致，详见[接收文本消息](#接收文本消息)。
 
 ## 发送和接收合并消息
 
