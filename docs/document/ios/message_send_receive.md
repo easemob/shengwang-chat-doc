@@ -78,6 +78,36 @@ message.chatType = EMChatTypeChatRoom;
 2. 接收附件消息。SDK 自动下载语音消息，默认自动下载图片和视频的缩略图。若下载原图、视频和文件，需调用 `downloadAttachment` 方法。
 3. 获取附件的服务器地址和本地路径。
 
+### 发送和接收语音消息
+
+发送和接收语音消息的过程如下：
+
+1. 发送语音消息前，在应用层录制语音文件。
+   
+2. 发送方调用 `initWithLocalPath` 和 `initWithConversationID` 方法传入语音文件的 URI、语音时长和接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）创建语音消息，然后调用 `sendMessage` 方法发送消息。SDK 会将文件上传至环信服务器。
+
+```Objective-C
+// `localPath` 为语音文件本地资源路径，`displayName` 为附件的显示名称。
+EMVoiceMessageBody *body = [[EMVoiceMessageBody alloc] initWithLocalPath:localPath displayName:displayName];
+EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:body ext:messageExt];
+// 设置 `EMChatMessage` 类的 `ChatType` 属性，可设置为 `EMChatTypeChat`、`EMChatTypeGroupChat` 和 `EMChatTypeChatRoom`，即单聊、群聊或聊天室消息，默认为单聊。
+message.chatType = EMChatTypeGroupChat;
+// 发送消息。
+[[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
+```
+
+3. 接收方收到语音消息时，自动下载语音文件。
+
+4. 接收方收到 [messagesDidReceive 回调](#发送和接收文本消息)，调用 `remotePath` 或 `localPath` 方法获取语音文件的服务器地址或本地路径，从而获取语音文件。
+
+```Objective-C
+EMVoiceMessageBody *voiceBody = (EMVoiceMessageBody *)message.body;
+// 获取语音文件在服务器的地址。
+NSString *voiceRemotePath = voiceBody.remotePath;
+// 本地语音文件的资源路径。
+NSString *voiceLocalPath = voiceBody.localPath;
+```
+
 ### 发送和接收图片消息
 
 发送和接收图片消息的流程如下：
@@ -132,36 +162,6 @@ NSString *thumbnailLocalPath = imageBody.thumbnailLocalPath;
                 NSString *localPath = imageBody.localPath;
             }
         }];
-```
-
-### 发送和接收语音消息
-
-发送和接收语音消息的过程如下：
-
-1. 发送语音消息前，在应用层录制语音文件。
-   
-2. 发送方调用 `initWithLocalPath` 和 `initWithConversationID` 方法传入语音文件的 URI、语音时长和接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）创建语音消息，然后调用 `sendMessage` 方法发送消息。SDK 会将文件上传至环信服务器。
-
-```Objective-C
-// `localPath` 为语音文件本地资源路径，`displayName` 为附件的显示名称。
-EMVoiceMessageBody *body = [[EMVoiceMessageBody alloc] initWithLocalPath:localPath displayName:displayName];
-EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:toChatUsername from:fromChatUsername to:toChatUsername body:body ext:messageExt];
-// 设置 `EMChatMessage` 类的 `ChatType` 属性，可设置为 `EMChatTypeChat`、`EMChatTypeGroupChat` 和 `EMChatTypeChatRoom`，即单聊、群聊或聊天室消息，默认为单聊。
-message.chatType = EMChatTypeGroupChat;
-// 发送消息。
-[[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:nil];
-```
-
-3. 接收方收到语音消息时，自动下载语音文件。
-
-4. 接收方收到 [messagesDidReceive 回调](#发送和接收文本消息)，调用 `remotePath` 或 `localPath` 方法获取语音文件的服务器地址或本地路径，从而获取语音文件。
-
-```Objective-C
-EMVoiceMessageBody *voiceBody = (EMVoiceMessageBody *)message.body;
-// 获取语音文件在服务器的地址。
-NSString *voiceRemotePath = voiceBody.remotePath;
-// 本地语音文件的资源路径。
-NSString *voiceLocalPath = voiceBody.localPath;
 ```
 
 ### 发送和接收视频消息
