@@ -14,7 +14,7 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
+- 完成 SDK 初始化，详见 [初始化文档](initialization.html)。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 
 ## 发送和接收文本消息
@@ -64,7 +64,7 @@ conn.addEventHandler("eventName", {
 });
 ```
 
-## 发送附件消息
+## 发送和接收附件消息
 
 语音、图片、视频和文件消息本质上是附件消息。发送和接收附件消息的流程如下：
 
@@ -100,7 +100,9 @@ function sendPrivateUrlImg() {
 
 对于图片消息，服务器会根据用户设置的 `thumbnailHeight` 和 `thumbnailWidth` 参数自动生成图片的缩略图。若这两个参数未传，则图片的高度和宽度均默认为 170 像素。你也可以在 [环信即时通讯控制台](https://console.easemob.com/user/login)的 `服务概览` 页面的 `设置` 区域修改该默认值。
 
-1. 创建和发送图片消息，示例代码如下所示。
+发送和接收图片消息的流程如下：
+
+1. 创建和发送图片消息。
 
 ```JavaScript
 function sendPrivateImg() {
@@ -176,9 +178,9 @@ conn.addEventHandler("eventName", {
 
 ### 发送和接收语音消息
 
-发送语音消息前，你应该在 app 级别实现录音，提供录制的语音文件的 URI 和时长。
+发送语音消息前，你应该在 app 级别实现录音，提供录制的语音文件的 URI 和时长（单位为秒）。
 
-1. 创建和发送语音消息，示例代码如下所示：
+1. 创建和发送语音消息。
 
 ```JavaScript
 function sendPrivateAudio() {
@@ -246,11 +248,11 @@ conn.addEventHandler("eventName", {
 
 ```
 
-#### 发送和接收视频消息
+### 发送和接收视频消息
 
 在发送视频消息之前，应在 app 级别实现视频捕获，获得捕获的视频文件的时长，单位为秒。
 
-1. 创建和发送视频消息，示例代码如下所示：
+1. 创建和发送视频消息。
 
 ```JavaScript
 function sendPrivateVideo() {
@@ -320,9 +322,9 @@ conn.addEventHandler("eventName", {
 
 ```
 
-#### 发送和接收文件消息
+### 发送和接收文件消息
 
-1. 创建和发送文件消息，示例代码如下所示：
+1. 创建和发送文件消息。
 
 ```JavaScript
 function sendPrivateFile() {
@@ -393,15 +395,13 @@ conn.addEventHandler("eventName", {
 
 ```
 
-### 发送和接收位置消息
+## 发送和接收位置消息
 
-1. 当你需要发送位置时，需要集成第三方的地图服务，获取到位置点的经纬度信息。
+发送和接收位置消息的流程如下：
 
-2. 接收位置消息与文本消息一致，详见[接收文本消息](#接收文本消息)。
-   
-   接收方接收到位置消息时，需要将该位置的经纬度，借由第三方的地图服务，将位置在地图上显示出来。
+1. 创建和发送位置消息。
 
-以下为创建和发送位置消息的示例代码：  
+发送位置时，需要集成第三方的地图服务，获取到位置点的经纬度信息。
 
 ```JavaScript
 const sendLocMsg = () => {
@@ -429,7 +429,7 @@ const sendLocMsg = () => {
 }
 ```
 
-2. 接收方收到 `onFileMessage` 回调，需要将该位置的经纬度，借由第三方的地图服务，将位置在地图上显示出来。
+2. 接收方收到 `onLocationMessage` 回调，需要将该位置的经纬度，借由第三方的地图服务，将位置在地图上显示出来。
 
 ```JavaScript
 // 使用 `addEventHandler` 监听回调事件
@@ -439,9 +439,13 @@ conn.addEventHandler("eventName", {
 });
 ```
 
-### 发送和接收透传消息
+## 发送和接收透传消息
 
 透传消息是通知指定用户采取特定操作的命令消息。接收方自己处理透传消息。
+
+:::tip
+透传消息发送后，不支持撤回。
+:::
 
 1. 创建和发送透传消息。
 
@@ -475,7 +479,7 @@ function sendCMDMessage() {
 }
 ```
 
-2. 接收方通过 `onCmdMessage` 回调，可对透传消息进行处理。
+2. 接收方通过 `onCmdMessage` 回调接收透传消息。
 
 ```JavaScript
 // 使用 `addEventHandler` 监听回调事件
@@ -484,15 +488,17 @@ conn.addEventHandler("eventName", {
 });
 ```
 
-### 发送和接收自定义消息
+## 发送和接收自定义消息
 
 自定义消息为用户自定义的键值对，包括消息类型和消息内容。
 
-1. 创建和发送自定义消息：
+发送和接收自定义消息的流程如下：
+
+1. 创建和发送自定义消息。
 
 ```JavaScript
 function sendCustomMsg() {
-  // 自定义事件。
+  // 设置自定义事件。
   let customEvent = "customEvent";
   // 通过键值对设置自定义消息内容。
   let customExts = {};
@@ -506,7 +512,7 @@ function sendCustomMsg() {
     customEvent,
     // key 和 value 只支持字符串类型，否则客户端无法解析。
     customExts,
-    // 消息扩展字段，不能设置为空，即设置为 "ext:null" 这种形式会出错。
+    // 消息扩展字段，不能设置为空，即设置为 "ext:null" 会出错。
     ext: {},
   };
   // 创建一条自定义消息。
@@ -599,7 +605,7 @@ conn.send
 
 #### 接收和解析合并消息
 
-接收合并消息与[接收普通消息](#接收文本消息)的操作相同，唯一不同是对于合并消息来说，消息接收事件为 `onCombineMessage`。
+接收合并消息与接收普通消息的操作相同，唯一不同是对于合并消息来说，消息接收事件为 `onCombineMessage`。
 
 对于不支持合并转发消息的 SDK 版本，该类消息会被解析为文本消息，消息内容为 `compatibleText` 携带的内容，其他字段会被忽略。
 
@@ -616,7 +622,7 @@ connection
   });
 ```
 
-### 发送和接收定向消息
+## 发送和接收定向消息
 
 发送定向消息是指向群组或聊天室的单个或多个指定的成员发送消息，其他成员不会收到该消息。
 
@@ -659,7 +665,7 @@ function sendTextMessage() {
 }
 ```
 
-接收定向消息与接收普通消息的操作相同，详见[接收消息](#接收文本消息)。
+接收定向消息与接收普通消息的操作相同，详见各类消息的接收描述。
 
 ### 使用消息扩展
 
@@ -672,7 +678,7 @@ function sendTextMessage() {
     msg: "message content",
     to: "username",
     chatType: "singleChat",
-    // 消息扩展信息。扩展字段为可选，若带有该字段，值不能为空，即 "ext:null" 会出错。
+    // 设置消息扩展信息。扩展字段为可选，若带有该字段，值不能为空，即 "ext:null" 会出错。
     ext: {
       key1: "Self-defined value1",
       key2: {
