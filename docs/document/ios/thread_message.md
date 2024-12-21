@@ -65,7 +65,7 @@ message.isChatThread = self.isChatThread;
 
 ### 接收子区消息
 
-接收消息的具体逻辑，请参考 [接收消息](message_send_receive.html#接收消息)，此处只介绍子区消息和其他消息的区别。
+接收消息的具体逻辑，请参考 [接收消息](message_send_receive.html#发送和接收文本消息)，此处只介绍子区消息和其他消息的区别。
 
 子区成员可以设置消息监听回调 `EMManagerDelegate#messagesDidReceive` 对子区消息的接收进行监听。
 

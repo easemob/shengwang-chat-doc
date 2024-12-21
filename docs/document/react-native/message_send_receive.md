@@ -369,7 +369,7 @@ EMClient.getInstance().chatManager().sendMessage(msg, callback).then().catch();
 
 #### 接收和解析合并消息
 
-接收合并消息与接收普通消息的操作相同，详见[接收消息](#接收消息)。
+接收合并消息与接收普通消息的操作相同，详见[接收消息](#发送和接收文本消息)。
 
 对于不支持合并转发消息的 SDK 版本，该类消息会被解析为文本消息，消息内容为 `compatibleText` 携带的内容，其他字段会被忽略。
 
@@ -423,7 +423,7 @@ ChatClient.getInstance().chatManager.sendMessage(msg, {
 } as ChatMessageStatusCallback);
 ```
 
-接收群定向消息与接收普通消息的操作相同，详见[接收消息](#接收消息)。
+接收群定向消息与接收普通消息的操作相同，详见[接收消息](#发送和接收文本消息)。
 
 ## 使用消息扩展字段
 
