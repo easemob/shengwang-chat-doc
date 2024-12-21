@@ -92,6 +92,78 @@ function sendPrivateUrlImg() {
 }
 ```
 
+### 发送和接收语音消息
+
+发送语音消息前，你应该在 app 级别实现录音，提供录制的语音文件的 URI 和时长（单位为秒）。
+
+1. 创建和发送语音消息。
+
+```JavaScript
+function sendPrivateAudio() {
+  // 获取语音文件。
+  let input = document.getElementById("audio");
+  let file = WebIM.message.getFileUrl(input);
+  let allowType = {
+    mp3: true,
+    amr: true,
+    wmv: true,
+  };
+  if (file.filetype.toLowerCase() in allowType) {
+    let option = {
+      // 消息类型。
+      type: "audio",
+      file: file,
+      // 语音文件长度，单位为秒。
+      length: "3",
+      // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
+      to: "username",
+      // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
+      chatType: "singleChat",
+      // 语音文件上传失败。
+      onFileUploadError: function () {
+        console.log("onFileUploadError");
+      },
+      // 语音文件上传进度。
+      onFileUploadProgress: function (e) {
+        console.log(e);
+      },
+      // 语音文件上传成功。
+      onFileUploadComplete: function () {
+        console.log("onFileUploadComplete");
+      },
+      ext: { },
+    };
+    // 创建一条语音消息。
+    let msg = WebIM.message.create(option);
+    // 调用 `send` 方法发送该语音消息。
+    conn
+      .send(msg)
+      .then((res) => {
+        // 语音文件成功发送。
+        console.log("Success");
+      })
+      .catch((e) => {
+        // 语音文件发送失败。
+        console.log("Fail");
+      });
+  }
+}
+```
+
+2. 接收方收到 `onAudioMessage` 回调，根据消息 `url` 字段获取语音文件的服务器地址，从而获取语音文件。
+
+```JavaScript
+// 使用 `addEventHandler` 监听回调事件
+conn.addEventHandler("eventName", {
+  // 当前用户收到语音消息。
+  onAudioMessage: function (message) {
+    // 语音文件在服务器的地址。
+    console.log(message.url);
+  },
+});
+
+```
+
 ### 发送和接收图片消息
 
 对于图片消息，服务器会根据用户设置的 `thumbnailHeight` 和 `thumbnailWidth` 参数自动生成图片的缩略图。若这两个参数未传，则图片的高度和宽度均默认为 170 像素。你也可以在 [环信即时通讯控制台](https://console.easemob.com/user/login)的 `服务概览` 页面的 `设置` 区域修改该默认值。
@@ -167,78 +239,6 @@ conn.addEventHandler("eventName", {
     console.log(message.url);
     // 图片缩略图文件在服务器的地址。
     console.log(message.thumb);
-  },
-});
-
-```
-
-### 发送和接收语音消息
-
-发送语音消息前，你应该在 app 级别实现录音，提供录制的语音文件的 URI 和时长（单位为秒）。
-
-1. 创建和发送语音消息。
-
-```JavaScript
-function sendPrivateAudio() {
-  // 获取语音文件。
-  let input = document.getElementById("audio");
-  let file = WebIM.message.getFileUrl(input);
-  let allowType = {
-    mp3: true,
-    amr: true,
-    wmv: true,
-  };
-  if (file.filetype.toLowerCase() in allowType) {
-    let option = {
-      // 消息类型。
-      type: "audio",
-      file: file,
-      // 语音文件长度，单位为秒。
-      length: "3",
-      // 消息接收方：单聊为对方用户 ID，群聊和聊天室分别为群组 ID 和聊天室 ID。
-      to: "username",
-      // 会话类型：单聊、群聊和聊天室分别为 `singleChat`、`groupChat` 和 `chatRoom`。
-      chatType: "singleChat",
-      // 语音文件上传失败。
-      onFileUploadError: function () {
-        console.log("onFileUploadError");
-      },
-      // 语音文件上传进度。
-      onFileUploadProgress: function (e) {
-        console.log(e);
-      },
-      // 语音文件上传成功。
-      onFileUploadComplete: function () {
-        console.log("onFileUploadComplete");
-      },
-      ext: { },
-    };
-    // 创建一条语音消息。
-    let msg = WebIM.message.create(option);
-    // 调用 `send` 方法发送该语音消息。
-    conn
-      .send(msg)
-      .then((res) => {
-        // 语音文件成功发送。
-        console.log("Success");
-      })
-      .catch((e) => {
-        // 语音文件发送失败。
-        console.log("Fail");
-      });
-  }
-}
-```
-
-2. 接收方收到 `onAudioMessage` 回调，根据消息 `url` 字段获取语音文件的服务器地址，从而获取语音文件。
-
-```JavaScript
-// 使用 `addEventHandler` 监听回调事件
-conn.addEventHandler("eventName", {
-  // 当前用户收到语音消息。
-  onAudioMessage: function (message) {
-    // 语音文件在服务器的地址。
-    console.log(message.url);
   },
 });
 
@@ -663,7 +663,7 @@ function sendTextMessage() {
 
 接收定向消息与接收普通消息的操作相同，详见各类消息的接收描述。
 
-### 使用消息扩展
+## 使用消息扩展
 
 如果上述消息类型无法满足要求，你可以使用消息扩展为消息添加属性。这种情况可用于更复杂的消息传递场景，例如消息中需要携带被回复的消息内容或者是图文消息等场景。
 

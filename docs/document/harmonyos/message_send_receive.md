@@ -12,7 +12,7 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，详见 [快速开始](initialization.html)。
+- 完成 SDK 初始化，详见 [初始化文档](initialization.html)。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 
 ## 发送和接收文本消息
@@ -290,7 +290,7 @@ let fileRemoteUrl = fileMessageBody.getRemoteUrl();
 let fileLocalPath = fileMessageBody.getLocalPath();
 ```
 
-### 发送和接收位置消息
+## 发送和接收位置消息
 
 1. 创建和发送位置消息。
   
@@ -312,7 +312,7 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
    
  接收方接收到位置消息时，需要将该位置的经纬度，借由第三方的地图服务，将位置在地图上显示出来。
 
-### 发送和接收透传消息
+## 发送和接收透传消息
 
 透传消息可视为命令消息，通过发送这条命令给对方，通知对方要进行的操作，收到消息可以自定义处理。
 
@@ -352,7 +352,7 @@ let msgListener: ChatMessageListener = {
 }
 ```
 
-### 发送自定义类型消息
+## 发送自定义类型消息
 
 除了几种消息之外，你可以自己定义消息类型，方便业务处理，即首先设置一个消息类型名称，然后可添加多种自定义消息。
 
@@ -373,7 +373,7 @@ ChatClient.getInstance().chatManager()?.sendMessage(customMessage);
 
 2. 接收自定义消息与其他类型消息一致，详见[接收文本消息](#发送和接收文本消息)。
 
-### 发送和接收合并消息
+## 发送和接收合并消息
 
 为了方便消息互动，SDK 支持将多个消息合并在一起进行转发。你可以采取以下步骤进行消息的合并转发：
 
@@ -445,7 +445,7 @@ ChatClient.getInstance().chatManager()?.downloadAndParseCombineMessage(message).
 });
 ```
 
-### 发送和接收定向消息
+## 发送和接收定向消息
 
 发送定向消息是指向群组或聊天室的单个或多个指定的成员发送消息，其他成员不会收到该消息。
 
@@ -478,7 +478,7 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 
 接收群定向消息与接收普通消息的操作相同，详见[接收消息](#接收消息)。
 
-### 使用消息扩展字段
+## 使用消息扩展字段
 
 当 SDK 提供的消息类型不满足需求时，你可以通过消息扩展字段传递自定义的内容，从而生成自己需要的消息类型。
 

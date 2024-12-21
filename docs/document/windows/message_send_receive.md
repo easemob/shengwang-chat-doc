@@ -12,7 +12,7 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
+- 完成 SDK 初始化，详见 [初始化文档](initialization.html)。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 
 ## 发送和接收文本消息
@@ -262,7 +262,7 @@ SDKClient.Instance.ChatManager.DownloadAttachment("Message ID", new CallBack(
 ));
 ```
 
-#### 发送和接收文件消息
+### 发送和接收文件消息
 
 1. 创建并发送文件消息。
 
@@ -310,7 +310,7 @@ else {
 
 2. 文件消息的接收与文本消息一致，详见[接收文本消息](#发送和接收文本消息)。
 
-## 发送位置消息
+## 发送和接收位置消息
 
 1. 创建和发送位置消息。
   
@@ -385,7 +385,7 @@ SDKClient.Instance.ChatManager.AddChatManagerDelegate(adelegate);
 
 ```
 
-### 发送和接收自定义类型消息
+## 发送和接收自定义类型消息
 
 除了几种消息之外，你可以自己定义消息类型，方便业务处理，即首先设置一个消息类型名称，然后可添加多种自定义消息。
 
