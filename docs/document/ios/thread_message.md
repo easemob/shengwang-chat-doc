@@ -40,7 +40,7 @@
 
 ### 发送子区消息
 
-发送子区消息和发送群组消息的方法基本一致，详情请参考 [发送消息](message_send_receive.html#发送文本消息)。唯一不同的是，发送子区消息需要指定标记 `isChatThread` 为 `YES`。
+发送子区消息和发送群组消息的方法基本一致，详情请参考 [发送消息](message_send_receive.html)。唯一不同的是，发送子区消息需要指定标记 `isChatThread` 为 `YES`。
 
 单设备登录时，子区所属群组的所有成员会收到 `EMChatThreadManagerDelegate#onChatThreadUpdated` 回调。
 
