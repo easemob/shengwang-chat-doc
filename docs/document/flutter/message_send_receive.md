@@ -76,7 +76,7 @@ EMClient.getInstance.chatManager.sendMessage(message).then((value) {
 });
 ```
 
-2. 你可以添加 `EMChatEventHandler` 监听器接收消息。`EMChatEventHandler` 可以多次添加。请记得在不需要的时候移除该监听器，如在 `dispose` 时。
+3. 你可以添加 `EMChatEventHandler` 监听器接收消息。`EMChatEventHandler` 可以多次添加。请记得在不需要的时候移除该监听器，如在 `dispose` 时。
 
 在新消息到来时，你会收到 `onMessagesReceived` 事件，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。
 
@@ -349,6 +349,8 @@ EMClient.getInstance.chatManager.sendMessage(localMsg);
 - 透传消息不会存入本地数据库中，所以在 UI 上不会显示。
 :::
 
+1. 创建和发送透传消息。
+
 ```dart
 final cmdMsg = EMMessage.createCmdSendMessage(
   targetId: targetId,
@@ -359,7 +361,7 @@ final cmdMsg = EMMessage.createCmdSendMessage(
 EMClient.getInstance.chatManager.sendMessage(cmdMsg);
 ```
 
-1. 接收方通过 `onCmdMessagesReceived` 回调接收透传消息，方便用户进行不同的处理。
+2. 接收方通过 `onCmdMessagesReceived` 回调接收透传消息，方便用户进行不同的处理。
 
 ```dart
 final handler = EMChatEventHandler(
