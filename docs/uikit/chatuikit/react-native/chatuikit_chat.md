@@ -23,7 +23,7 @@
 
 示例代码如下：
 
-```tsx
+```typescriptx
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import type { RootParamsName, RootScreenParamsList } from "../routes";
 type Props = NativeStackScreenProps<RootScreenParamsList>;
@@ -235,7 +235,7 @@ export function ConversationDetailScreen(props: Props) {
 
 ### 设置消息列表的背景颜色
 
-```tsx
+```typescriptx
 type Props = NativeStackScreenProps<RootScreenParamsList>;
 export function ConversationDetailScreen(props: Props) {
   const { route } = props;
@@ -259,7 +259,7 @@ export function ConversationDetailScreen(props: Props) {
 
 ### 设置消息列表的背景图片
 
-```tsx
+```typescriptx
 type Props = NativeStackScreenProps<RootScreenParamsList>;
 export function ConversationDetailScreen(props: Props) {
   const { route } = props;
@@ -285,7 +285,7 @@ export function ConversationDetailScreen(props: Props) {
 
 设置消息气泡下面的时间戳，需要在初始化部分进行。 示例代码如下：
 
-```tsx
+```typescriptx
 export function App() {
   const { getOptions } = useApp();
 
@@ -309,7 +309,7 @@ export function App() {
 
 对于消息列表项，可以设置头像、昵称、气泡布局、样式、事件等。
 
-```tsx
+```typescriptx
 export function MyMessageContent(props: MessageContentProps) {
   const { msg, layoutType, isSupport, contentMaxWidth } = props;
   if (msg.body.type === ChatMessageType.TXT) {
@@ -353,7 +353,7 @@ export function ConversationDetailScreen(props: Props) {
 
 其它自定义的内容，可以参考 `MessageViewProps` 属性。
 
-```tsx
+```typescriptx
 export function MyMessageView(props: MessageViewProps) {
   if (props.model.layoutType === 'left') {
     // todo: 如果是左边的消息，则不显示头像
@@ -483,7 +483,7 @@ export function App() {
 
 示例如下：
 
-```tsx
+```typescriptx
 export function MyMessageContent(props: MessageContentProps) {
   const { msg } = props;
   if (msg.body.type === ChatMessageType.CUSTOM) {

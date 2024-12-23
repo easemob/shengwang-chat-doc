@@ -87,7 +87,7 @@
 
 例如：
 
-```tsx
+```typescriptx
 export function SomeView() {
   const { colors } = usePaletteContext();
   const { getColor } = useColors({
@@ -112,7 +112,7 @@ export function SomeView() {
 
 例如：
 
-```tsx
+```typescriptx
 export function SomeView() {
   const [value, setValue] = React.useState("");
   const { delayExecTask: deferSearch } = useDelayExecTask(
@@ -140,7 +140,7 @@ export function SomeView() {
 
 例如：
 
-```tsx
+```typescriptx
 export function SomeView() {
   const count = React.useRef(0);
   const { updater } = useForceUpdate();
@@ -166,7 +166,7 @@ export function SomeView() {
 
 例如：
 
-```tsx
+```typescriptx
 export function SomeView(props) {
   const { containerStyle } = props;
   const { getStyleSize } = useGetStyleProps();
@@ -193,7 +193,7 @@ export function SomeView(props) {
 
 例如：
 
-```tsx
+```typescriptx
 export function SomeView() {
   const { getPermission } = usePermissions();
   React.useEffect(() => {

@@ -133,7 +133,7 @@
 
 下面的示例代码为如何开启消息置顶功能：
 
-```tsx
+```typescriptx
 import { NavigationContainer } from "@react-navigation/native";
 import { Container as UIKitContainer } from "react-native-chat-uikit";
 export function App() {
@@ -168,7 +168,7 @@ export function App() {
 
 示例代码如下：
 
-```tsx
+```typescriptx
 export function App() {
   // 设置是否启用正在输入状态
   const enableTypingRef = React.useRef(false);

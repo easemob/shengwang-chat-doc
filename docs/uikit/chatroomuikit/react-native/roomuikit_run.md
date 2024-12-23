@@ -14,7 +14,7 @@
 
 ### 第一步 在项目中安装 ChatroomUIKit
 
-```tsx
+```typescriptx
 npm install react-native-chat-room 
 // or     
 yarn add react-native-chat-room

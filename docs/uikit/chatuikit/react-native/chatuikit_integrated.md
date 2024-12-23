@@ -99,7 +99,7 @@ twemoji@>=14.0.2
 
 例如：
 
-```tsx
+```typescriptx
 function App(): React.JSX.Element {
   return (
     <Container options={{ appKey: "appKey" }}>
@@ -113,7 +113,7 @@ function App(): React.JSX.Element {
 
 通过 `Container` 组件提供的属性设置主题，示例代码如下：
 
-```tsx
+```typescriptx
 function App(): React.JSX.Element {
   const palette = usePresetPalette();
   const light = useLightTheme(palette);
@@ -129,7 +129,7 @@ function App(): React.JSX.Element {
 
 通过 `Container` 组件提供的属性设置国际化，示例代码如下：
 
-```tsx
+```typescriptx
 function App(): React.JSX.Element {
   return (
     <Container options={{ appKey: "appKey" }} language={"zh-Hans"}>
@@ -145,7 +145,7 @@ function App(): React.JSX.Element {
 
 例如：
 
-```tsx
+```typescriptx
 function App(): React.JSX.Element {
   return (
     <Container options={{ appKey: "appKey" }}>
@@ -170,7 +170,7 @@ function App(): React.JSX.Element {
 
 如果想要进行搜索，需要使用 `SearchConversation` 组件，例如：
 
-```tsx
+```typescriptx
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 type Props = NativeStackScreenProps<RootScreenParamsList>;
@@ -216,7 +216,7 @@ export function ConversationListScreen(props: Props) {
 
 例如：
 
-```tsx
+```typescriptx
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 type Props = NativeStackScreenProps<RootScreenParamsList>;
@@ -253,7 +253,7 @@ export function ContactListScreen(props: Props) {
 
 例如：
 
-```tsx
+```typescriptx
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import type { RootParamsName, RootScreenParamsList } from "../routes";
 type Props = NativeStackScreenProps<RootScreenParamsList>;

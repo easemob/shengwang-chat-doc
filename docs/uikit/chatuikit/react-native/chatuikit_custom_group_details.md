@@ -10,7 +10,7 @@
 
 该导航栏组件为通用组件，在成员页面,导航栏左边组件为返回按钮、右边为功能扩展菜单。自定义方式和方法和会话列表类似。
 
-```tsx
+```typescriptx
 type Props = NativeStackScreenProps<RootScreenParamsList>;
 export function GroupParticipantListScreen(props: Props) {
   const { route } = props;
@@ -57,7 +57,7 @@ export function GroupParticipantListScreen(props: Props) {
 
 可以添加、删除、修改按钮项，每个按钮项可以修改样式、布局、事件等内容。
 
-```tsx
+```typescriptx
 type Props = NativeStackScreenProps<RootScreenParamsList>;
 export function GroupInfoScreen(props: Props) {
   const { route } = props;
@@ -86,7 +86,7 @@ export function GroupInfoScreen(props: Props) {
 
 可以添加、删除、修改列表项，每个列表项可以修改样式、布局、事件等内容。
 
-```tsx
+```typescriptx
 type Props = NativeStackScreenProps<RootScreenParamsList>;
 export function GroupInfoScreen(props: Props) {
   const { route } = props;

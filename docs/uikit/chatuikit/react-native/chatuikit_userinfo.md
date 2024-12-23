@@ -18,7 +18,7 @@
 
 示例如下：
 
-```tsx
+```typescriptx
 export function App() {
   const onUsersHandler = React.useCallback(
     async (data: Map<string, DataModel>) => {
@@ -102,7 +102,7 @@ export function App() {
 
 示例如下：
 
-```tsx
+```typescriptx
 // 假设更新群组名称
 export function SomeComponent() {
   const im = useChatContext();

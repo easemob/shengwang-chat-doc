@@ -16,7 +16,7 @@
 
 若切换 ChatUIKitTheme 内置的浅色或深色主题，可使用以下方法：
 
-```tsx
+```typescriptx
 // ...
 // 设置主题 
 ChatUIKitTheme(

@@ -6,7 +6,7 @@
 
 `Chatroom` 和 `ChatroomMember` 组件需要包裹在 `UIKitProvider` 组件内部使用。如果 `UIKitProvider` 在初始化完成前在组件内部使用 `useClient` 获取 SDK，则会获取失败，所以建议将 `UIKitProvider` 放在使用 `Chatroom` 或 `ChatroomMember` 组件的父组件中。
 
-```tsx
+```typescriptx
 // App.ts
 // ...
 const App = () => {
@@ -29,7 +29,7 @@ UIKit 提供两种登录方式：
 - 初始化时指定 `userId` 和 `password/token` 进行自动登录。
 - 使用 `useClient` 获取 SDK 实例进行手动登录。
 
-```tsx
+```typescriptx
 // 手动登录
 // ...
 const App = () => {

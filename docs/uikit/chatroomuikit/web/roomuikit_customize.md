@@ -25,7 +25,7 @@ const ChatApp = () => {
 
 你可以通过容器组件的 `renderMessageList` 方法渲染自定义聊天室消息区域:
 
-```tsx
+```typescriptx
 import { Chatroom, MessageList } from "easemob-chat-uikit";
 
 const ChatApp = () => {
@@ -58,7 +58,7 @@ const ChatApp = () => {
 
 你可以通过容器组件的 `messageEditorProps` 属性自定义 `giftConfig`:
 
-```tsx
+```typescriptx
 import { Chatroom, MessageList } from "easemob-chat-uikit";
 
 const ChatApp = () => {

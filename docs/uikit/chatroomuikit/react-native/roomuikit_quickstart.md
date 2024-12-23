@@ -43,7 +43,7 @@ npx expo install react-native-chat-room
 
 初始化时，需传入 App Key。你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**应用详情**页面查看 App Key。
 
-```tsx
+```typescriptx
 export function App() {
   const appKey = '<your app key>';
   return <Container appKey={appKey}>{/* // todo: 在这里添加组件 */}</Container>;
@@ -62,7 +62,7 @@ export function App() {
 
 在开发环境中，你需要在环信控制台[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，从你的 App Server 获取用户 token，详见[使用环信用户 token 鉴权](/product/easemob_user_token.html)。
 
-```tsx
+```typescriptx
 // ...
 // 获取 IM 服务对象
 const im = useRoomContext();
@@ -89,7 +89,7 @@ im.login({
 
 通过加载 `Chatroom` 组件，你会自动加入聊天室，并返回是否成功加入。若该组件加载失败，你可以调用加入聊天室的 API 加入聊天室。
 
-```tsx
+```typescriptx
 // ...
 // 创建组件引用对象。
 const chatroomRef = React.useRef<Chatroom>({} as any);

@@ -102,7 +102,7 @@
 
 示例代码如下：
 
-```tsx
+```typescriptx
 type Props = NativeStackScreenProps<RootScreenParamsList>;
 export function MessageSearchScreen(props: Props) {
   const { route } = props;

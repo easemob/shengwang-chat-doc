@@ -103,7 +103,7 @@ npx react-native --version 0.73.2 init ProjectName
 
 添加的主要代码包括登录、登出、发送消息。
 
-```tsx
+```typescriptx
 import * as React from "react";
 import { Pressable, SafeAreaView, Text, View } from "react-native";
 import {

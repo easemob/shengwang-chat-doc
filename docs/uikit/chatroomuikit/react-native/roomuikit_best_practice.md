@@ -4,7 +4,7 @@
 
 初始化是使用 ChatroomUIKit 的必要步骤，需在所有接口方法调用前完成。
 
-```tsx
+```typescriptx
 export function App() {
   const palette = usePresetPalette();
   const dark = useDarkTheme(palette);
@@ -52,7 +52,7 @@ export function App() {
 
 你可以通过使用工程中的用户对象并遵守 `UserInfoProtocol` 协议登录 ChatroomUIKit，示例代码如下：
 
-```tsx
+```typescriptx
 export function LoginScreen(props: Props) {
   const {} = props;
   const im = useRoomContext();
@@ -92,7 +92,7 @@ export function LoginScreen(props: Props) {
 
 2. 加载聊天室视图 `Chatroom`，传入的参数包括聊天室 ID、聊天室所有者的用户 ID 及一些选项。
 
-```tsx
+```typescriptx
 export function ChatroomScreen(props: Props) {
   return (
     <View>
@@ -106,7 +106,7 @@ export function ChatroomScreen(props: Props) {
 
 你可以调用 `useRoomListener` 方法添加监听器用于监听聊天室的事件和错误。
 
-```tsx
+```typescriptx
 useRoomListener(
   React.useMemo(() => {
     return {

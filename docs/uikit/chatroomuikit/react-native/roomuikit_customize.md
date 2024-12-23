@@ -8,7 +8,7 @@
 
 若 ChatroomUIKit 中内置的打赏消息组件 `GiftMessageList` 无法满足需求，你可以在满足 `GiftMessageListComponent` 的约束的前提下创建新组件，例如 `MyGiftMessageList`，实现自定义业务逻辑和自定义样式。
 
-```tsx
+```typescriptx
 export const MyGiftMessageList: GiftMessageListComponent = React.forwardRef<
   GiftMessageListRef,
   GiftMessageListProps
@@ -35,7 +35,7 @@ export const MyGiftMessageList: GiftMessageListComponent = React.forwardRef<
 
 利用新的 `MyGiftMessageList` 组件替换内置的 `GiftMessageList` 组件，添加到 Chatroom 组件。
 
-```tsx
+```typescriptx
 <Chatroom GiftMessageList={MyGiftMessageList} />
 ```
 
@@ -43,7 +43,7 @@ export const MyGiftMessageList: GiftMessageListComponent = React.forwardRef<
 
 若 ChatroomUIKit 中内置的全局广播消息组件 `GlobalBroadcast` 无法满足需求，你可以在满足 `GlobalBroadcastComponent` 的约束的情况下创建新组件，例如 `MyGlobalBroadcast`，实现自定义业务逻辑和自定义样式。
 
-```tsx
+```typescriptx
 export const MyGlobalBroadcast = React.forwardRef<
   GlobalBroadcastRef,
   GlobalBroadcastProps
@@ -69,7 +69,7 @@ export const MyGlobalBroadcast = React.forwardRef<
 
 利用 `MyGlobalBroadcast` 组件替换内置的 `GlobalBroadcast` 组件。
 
-```tsx
+```typescriptx
 <Chatroom GlobalBroadcast={MyGlobalBroadcast} />
 ```
 
@@ -77,7 +77,7 @@ export const MyGlobalBroadcast = React.forwardRef<
 
 修改组件的消息样式。示例代码如下：
 
-```tsx
+```typescriptx
 export function MyMessageListItem(props: MessageListItemProps) {
   // todo：实现自己的业务逻辑或修改当前业务逻辑。
   return <></>;
@@ -87,7 +87,7 @@ export const MyMessageListItemMemo = React.memo(MyMessageListItem);
 
 更新消息列表项的样式。示例代码如下：
 
-```tsx
+```typescriptx
 <Chatroom
   messageList={{
     props: {
@@ -101,7 +101,7 @@ export const MyMessageListItemMemo = React.memo(MyMessageListItem);
 
 修改聊天室成员组件的列表项样式。示例代码如下：
 
-```tsx
+```typescriptx
 export function MyParticipantListItem(props: ParticipantListItemProps) {
   // todo：实现自己的业务逻辑或修改当前业务逻辑。
   return <></>;
@@ -112,7 +112,7 @@ export const MyParticipantListItemMemo = React.memo(MyParticipantListItem);
 
 更新聊天室成员组件的列表项样式。示例代码如下：
 
-```tsx
+```typescriptx
 <Chatroom
   participantList={{
     props: {

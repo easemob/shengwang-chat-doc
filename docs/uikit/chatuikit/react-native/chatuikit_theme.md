@@ -18,7 +18,7 @@
 
 使用默认主题，代码如下：
 
-```tsx
+```typescriptx
 export function App() {
   const palette = usePresetPalette();
   const dark = useDarkTheme(palette);
@@ -59,7 +59,7 @@ export function App() {
 
 例如：
 
-```tsx
+```typescriptx
 export function App() {
   const { createPalette } = useCreatePalette({
     colors: {
@@ -85,7 +85,7 @@ export function App() {
 
 除了颜色，你还可以修改字体、边框圆角等样式。
 
-```tsx
+```typescriptx
 export function App() {
   // 通过调色板修改
   const palette = usePresetPalette();
