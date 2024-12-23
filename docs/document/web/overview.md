@@ -48,7 +48,7 @@ export default {
 
 Next 项目, 要使用客户端组件，你可以在文件顶部的导入上方添加 `use client` 指令。
 
-```typescriptx
+```tsx
 'use client'
  
 import { useEffect } from 'react'

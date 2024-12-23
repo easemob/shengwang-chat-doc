@@ -6,7 +6,7 @@
 
 例如：
 
-```typescriptx
+```tsx
 export function App() {
   // 如果没有指定语言，则通过系统获取默认语言。
   const [language] = React.useState<LanguageCode>("zh-Hans");
@@ -25,7 +25,7 @@ export function App() {
 
 例如：
 
-```typescriptx
+```tsx
 // 创建法语语言包
 export function createStringSetFr(): StringSet {
   return {

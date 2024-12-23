@@ -23,7 +23,7 @@ UIKit 支持多国语言切换，目前内置中文和英文，可以扩展其�
 
 例如：若要 UIKit 使用英文显示，可以如下设置：
 
-```typescriptx
+```tsx
 <Container appKey={env.appKey} language={'en'} />
 ```
 
@@ -35,7 +35,7 @@ UIKit 支持多国语言切换，目前内置中文和英文，可以扩展其�
 
 例如，若开发者希望 `UIKit` 和应用均使用中文，设置如下：
 
-```typescriptx
+```tsx
 // ...
 // 创建应用需要的语言包。
 function createLanguage(type: LanguageCode): StringSet {
@@ -58,7 +58,7 @@ return <Text>{tr('Chinese text.')}</Text>;
 
 例如，若开发者希望应用和 UIKit 均显示法语，设置如下：
 
-```typescriptx
+```tsx
 // ...
 // 创建应用扩展语言集合。
 function createAppLanguage(type: LanguageCode): StringSet {
@@ -94,7 +94,7 @@ export function createUIKitLanguage(type: LanguageCode): StringSet {
 
 `Chatroom UIKit SDK` 的入口为 `Container` 组件，主要负责集成其他组件和参数配置。
 
-```typescriptx
+```tsx
 export type ContainerProps = React.PropsWithChildren<{
   appKey: string;
   isDevMode?: boolean;
@@ -112,7 +112,7 @@ export type ContainerProps = React.PropsWithChildren<{
 }>;
 ```
 
-```typescriptx
+```tsx
 // 主要控制 `Chatroom` 组件中的组件是否加载。
 export type RoomOption = {
   globalBroadcast: {
@@ -154,7 +154,7 @@ export type RoomOption = {
 
 通常 `Container` 会处于应用的底层，一般为根组件，或者与根组件同一级别。例如：
 
-```typescriptx
+```tsx
 export function App() {
   return <Container appKey={'your app key'}>{children}</Container>;
 }
@@ -166,7 +166,7 @@ Chatroom 组件集成了成员列表组件 `ParticipantList`、消息输入组�
 
 示例如下：
 
-```typescriptx
+```tsx
 // ...
 // 创建引用对象
 const ref = React.useRef<Chatroom>({} as any);
@@ -177,7 +177,7 @@ const ref = React.useRef<Chatroom>({} as any);
 
 由于 `UIKit` 没有路由 （`React-Native` 未内置），所以若需要成员搜索，设置如下：
 
-```typescriptx
+```tsx
 <Chatroom
   ref={chatroomRef}
   participantList={{
@@ -233,7 +233,7 @@ const ref = React.useRef<Chatroom>({} as any);
 
 示例代码如下：
 
-```typescriptx
+```tsx
 // ...
 // 创建组件引用对象
 const ref = React.useRef<MessageListRef>({} as any);
@@ -283,7 +283,7 @@ ref?.current?.addSendedMessage?.(message);
 
 示例代码如下：
 
-```typescriptx
+```tsx
 // ...
 // 创建组件引用对象
 const ref = React.useRef<BottomSheetParticipantListRef>({} as any);
@@ -331,7 +331,7 @@ ref?.current?.startShow?.();
 
 示例代码如下：
 
-```typescriptx
+```tsx
 // ...
 // 创建组件引用对象
 const ref = React.useRef<GiftMessageListRef>({} as any);
@@ -370,7 +370,7 @@ ref.current?.pushTask({
 
 简单示例如下：
 
-```typescriptx
+```tsx
 // ...
 // 创建组件引用对象
 const ref = React.useRef<GlobalBroadcastRef>({} as any);
@@ -413,7 +413,7 @@ ref.current?.pushTask?.({
 
 简单示例如下：
 
-```typescriptx
+```tsx
 // ...
 // 创建引用对象
 const ref = React.useRef<MessageInputRef>({} as any);
@@ -467,7 +467,7 @@ ref?.current?.close?.();
 
 示例代码如下：
 
-```typescriptx
+```tsx
 // ...
 // 创建引用对象
 const ref = React.useRef<BottomSheetGiftSimuRef>({} as any);
@@ -526,7 +526,7 @@ ref?.current?.startShow?.();
 
 示例代码如下：
 
-```typescriptx
+```tsx
 // ...
 // 创建引用对象
 const ref = React.useRef<BottomSheetMessageReport>({} as any);

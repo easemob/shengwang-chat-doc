@@ -16,7 +16,7 @@
 
 可以添加、删除、修改按钮项，每个按钮项可以修改样式、布局、事件等内容。
 
-```typescriptx
+```tsx
 type Props = NativeStackScreenProps<RootScreenParamsList>;
 export function ContactInfoScreen(props: Props) {
   const { route } = props;
@@ -43,7 +43,7 @@ export function ContactInfoScreen(props: Props) {
 
 可以添加、删除、修改列表项，每个列表项可以修改样式、布局、事件等内容。
 
-```typescriptx
+```tsx
 type Props = NativeStackScreenProps<RootScreenParamsList>;
 export function ContactInfoScreen(props: Props) {
   const { route } = props;

@@ -25,7 +25,7 @@
 
 使用默认参数时的示例代码如下：
 
-```typescriptx
+```tsx
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 type Props = NativeStackScreenProps<RootScreenParamsList>;
 export function ConversationListScreen(props: Props) {
@@ -95,7 +95,7 @@ export function ConversationListScreen(props: Props) {
 
 你也可以使用 `View` 组件实现自定义导航栏。相对于 `TopNavigationBar` 组件，`View` 组件较为灵活，例如支持设置导航栏背景色。
 
-```typescriptx
+```tsx
 type MyConversationListScreenProps = {};
 function MyConversationListScreen(props: MyConversationListScreenProps) {
   const {} = props;
@@ -140,7 +140,7 @@ function MyConversationListScreen(props: MyConversationListScreenProps) {
 
 通过 `ListItemRender` 属性实现列表项的样式、布局修改，例如，会话列表项的高度、宽度、背景颜色、上下边距、左右边距以及会话列表项的自定义点击行为和长按行为等。
 
-```typescriptx
+```tsx
 type MyConversationListScreenProps = {};
 function MyConversationListScreen(props: MyConversationListScreenProps) {
   const {} = props;
@@ -175,7 +175,7 @@ function MyConversationListScreen(props: MyConversationListScreenProps) {
 
 默认组件不支持侧滑，你需要自定义列表项组件，例如，在左滑和右滑菜单中添加按钮。其中，`SlideListItem` 组件在 `uikit` 中提供，示例如下：
 
-```typescriptx
+```tsx
 type MyConversationListScreenProps = {};
 function MyConversationListScreen(props: MyConversationListScreenProps) {
   const {} = props;

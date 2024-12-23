@@ -12,7 +12,7 @@
 
 默认使用示例如下：
 
-```typescriptx
+```tsx
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 type Props = NativeStackScreenProps<RootScreenParamsList>;
 export function ContactListScreen(props: Props) {
@@ -82,7 +82,7 @@ export function ContactListScreen(props: Props) {
 
 自定义 Header 列表项，可以添加、删除、修改列表项，每个列表项可以实现样式、布局、颜色等属性的修改。
 
-```typescriptx
+```tsx
 export const MyCustomItemView = (props: ContactItemProps) => {
   const {} = props;
   return <View style={{ width: 100, height: 44, backgroundColor: 'red' }} />;
@@ -108,7 +108,7 @@ function MyContactListScreen(props: MyContactListScreenProps) {
 
 ## 是否显示字母索引表和字母导航列表
 
-```typescriptx
+```tsx
 export type MyContactListScreenProps = {};
 function MyContactListScreen(props: MyContactListScreenProps) {
   const {} = props;
@@ -127,7 +127,7 @@ function MyContactListScreen(props: MyContactListScreenProps) {
 
 自定义列表项可以修改头像、昵称、样式（例如，列表项的高度和背景颜色）、布局等。
 
-```typescriptx
+```tsx
 export type MyContactListScreenProps = {};
 function MyContactListScreen(props: MyContactListScreenProps) {
   const {} = props;
