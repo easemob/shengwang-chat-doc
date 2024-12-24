@@ -4,7 +4,7 @@
 
 你需要在应用里创建推送服务扩展(推送扩展服务仅支持 iOS 10 及以上版本)，在推送扩展里导入环信扩展服务 SDK，调用对应的 API。
 
-:::notice
+:::tip
 APNs 的点击已在 SDK 内部实现，无需单独处理。
 :::
 
@@ -70,13 +70,13 @@ APNs 的送达统计 SDK 下载地址：
 
 在 **NotificationService.m** 里引入头文件：
 
-```objectiveC
+```objectivec
 #import <EMPushExtension/EMPushExtension.h> 
 ```
 
 在系统提供处理推送的方法里调用 EMPushServiceExt 的两个方法，这两个方法必须都调用，且设置 Appkey的方法需要先调用。
 
-```objectiveC
+```objectivec
 - (void)didReceiveNotificationRequest:(UNNotificationRequest *)request withContentHandler:(void (^)(UNNotificationContent * _Nonnull))contentHandler {
     self.contentHandler = contentHandler;
     self.bestAttemptContent = [request.content mutableCopy];

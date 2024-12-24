@@ -51,7 +51,7 @@
 
 ## 前提条件
 
-开始前，请确保满足完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html) 及 [SDK 集成概述](overview.html)。
+开始前，请确保满足完成 SDK 初始化，并连接到服务器，详见 [初始化](initialization.html)及[连接](connection.html)文档。
 
 ## 实现方法
 
@@ -110,7 +110,7 @@ ChatClient.getInstance()
 
 即时通讯 IM 自 1.2.0 版本开始支持自定义设置登录设备的名称。这样在多设备场景下，若有设备被踢下线，你就能知道是被哪个设备挤下线的。设备名称 `deviceName` 可以通过 `getLoggedInDevicesFromServer` 返回对象 `ChatDeviceInfo` 获取。如果没有设置则返回默认值，即设备型号。
 
-:::notice
+:::tip
 登录成功后才会将该设置发送到服务器。
 :::
 
@@ -145,7 +145,7 @@ ChatClient.getInstance()
 
 2. 初始化 SDK。确保该方法中的 `customOSType` 参数的值与环信控制台的**添加自定义平台**对话框中设置的**设备平台**的值相同。
 
-:::notice
+:::tip
 登录成功后才会将该设置发送到服务器。
 :::
 
@@ -172,7 +172,7 @@ ChatClient.getInstance()
 
 初始化 SDK 时，你可以利用 `ChatOptions#loginExtraInfo` 属性设置登录设备的自定义扩展信息。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时（`206` 错误，Android 为 `USER_LOGIN_ANOTHER_DEVICE`，iOS 为 `EMErrorUserLoginOnAnotherDevice`），被踢设备收到的 `ChatConnectEventListener#onUserDidLoginFromOtherDeviceWithInfo` 回调会包含导致该设备被踢下线的新登录设备的自定义扩展信息。
 
-:::notice
+:::tip
 登录成功后才会将该设置发送到服务器。
 :::
 
@@ -217,7 +217,7 @@ ChatClient.getInstance()
 
 你可以调用 `kickDevice` 方法将指定账号从单个登录设备踢下线。调用该方法前，你需要首先通过 `ChatClient#getLoggedInDevicesFromServer` 方法获取设备 ID。
 
-:::notice
+:::tip
 不登录也可以使用该接口。
 :::
 
@@ -242,7 +242,7 @@ ChatClient.getInstance()
 
 你可以调用 `kickAllDevices` 方法通过传入用户 ID 和登录密码或用户 token 将指定账号从所有登录设备踢下线。
 
-:::notice
+:::tip
 不登录也可以使用该接口。
 :::
 

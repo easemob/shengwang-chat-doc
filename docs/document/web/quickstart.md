@@ -117,7 +117,7 @@ Easemob_quickstart<br>
 
 `index.js` 的内容如下。本文使用 import 方法导入 SDK，并使用 webpack 对 JavaScript 文件进行打包，以避免浏览器兼容性问题。你需要分别将代码中的 `<Your app key>` 替换为你之前获取的 App Key。
 
-```Javascript
+```javascript
 import WebIM from 'easemob-websdk'
 const appKey = "<Your app key>"
 
@@ -213,9 +213,9 @@ window.onload = function () {
     }
 }
 ```
-:::notice
+:::tip
 对于 Typescript，通过以下代码引入类型声明：
-```JavaScript
+```javascript
 import WebIM, { EasemobChat } from 'easemob-websdk'
 ```
 :::
@@ -249,7 +249,7 @@ import WebIM, { EasemobChat } from 'easemob-websdk'
 
 2.在项目根目录中添加 `webpack.config.js` 文件，用于配置 webpack。文件内容如下：
 
-```Javascript
+```javascript
 const path = require('path');
 
 module.exports = {
@@ -292,44 +292,3 @@ $ npm run start:dev
 ```
 
 项目启动后，在页面输入用户名和密码进行注册，然后利用该用户名和密码登录。登录成功后，输入对方的用户名和要发送的消息，点击**发送**按钮发送消息，可同时打开另一页面相互收发消息。
-
-### 6. 参考信息
-
-可通过以下两种方式集成 SDK：
-
-#### 方法一：通过 npm 安装并导入 SDK
-
-1. 在 `package.json` 中的 `dependencies` 字段中加入 `easemob-websdk` 及对应版本：
-
-```json
-{
-    "name": "web",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "dependencies": {
-    "easemob-websdk": "latest"
-    },
-    "author": "",
-    "license": "ISC"
-}
-```
-
-2. 在你的 `index.js` 文件中导入 `easemob-websdk` 模块：
-
-```JavaScript
-import WebIM from 'easemob-websdk'
-```
-
-#### 方法二：从官网获取并导入 SDK
-
-1. 下载 [Easemob Chat SDK for Web](https://www.easemob.com/download/im)。将 `demo/src/config` 中的 Easemob-chat 文件保存到你的项目下。
-
-2. 在 `index.html` 文件中，对 `index.js` 文件进行引用。
-
-```JavaScript
-<script src="path to the JS file"></script>
-```

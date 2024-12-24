@@ -28,6 +28,8 @@ request 合法域名：
 3. https://a3.easemob.com
 4. https://a4.easemob.com
 5. https://a5.easemob.com
+6. https://rs.chat.agora.io
+7. https://rs.easemob.com
 :::
 
 :::tip
@@ -35,7 +37,7 @@ socket 合法域名：
 wss://im-api-wechat.easemob.com（3.0 IM SDK）
 :::
 
-:::notice
+:::tip
 为满足不同客户的业务需求，环信在多地部署了数据中心。不同数据中心的 REST API 请求域名、WebSocket 访问域名不同。请根据您所在数据中心进行配置。
 :::
 
@@ -88,7 +90,7 @@ import SDK from "../sdk/Easemob-chat-miniProgram"; // 3.0 SDK
 
 #### 实例调用方式
 
-实例化 SDK，并挂载在全局对象下
+实例化 SDK，并挂载在全局对象下。
 
 ```javascript
 // 实例化 SDK 对象

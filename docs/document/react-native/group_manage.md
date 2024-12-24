@@ -21,7 +21,7 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，详见 [快速开始](quickstart.html) 及 [SDK 集成概述](overview.html)。
+- 完成 SDK 初始化，详见 [初始化](initialization.html)及[快速开始](quickstart.html)。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 - 了解群组和群成员的数量限制，详见 [套餐包详情](https://www.easemob.com/pricing/im)。
 
@@ -93,7 +93,7 @@ ChatClient.getInstance()
 
 仅群主可以调用 `destroyGroup` 方法解散群组。群组解散时，其他群组成员收到 `ChatGroupEventListener#onGroupDestroyed` 回调并被踢出群组。
 
-:::notice
+:::tip
 解散群组后，将删除本地数据库及内存中的群相关信息及群会话，谨慎操作。
 :::
 

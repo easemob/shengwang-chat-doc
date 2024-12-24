@@ -31,6 +31,8 @@ request 合法域名：
 4. https://a4.easemob.com
 5. https://a5.easemob.com
 6. https://a1-chatfile.easemob.com
+7. https://rs.chat.agora.io
+8. https://rs.easemob.com
 :::
 
 :::tip
@@ -56,7 +58,7 @@ downloadFile 合法域名：
 8. https://a1-chatfile.easemob.com
 :::
 
-:::notice
+:::tip
 为满足不同客户的业务需求，环信在多地部署了数据中心。不同数据中心的 REST API 请求域名、WebSocket 访问域名不同。请根据您所在数据中心进行配置。
 :::
 
@@ -105,7 +107,7 @@ import SDK from "../sdk/Easemob-chat-miniProgram"; // 3.0sdk
 
 #### 实例调用方式
 
-实例化 SDK，并挂载在全局对象下
+实例化 SDK，并挂载在全局对象下。
 
 ```javascript
 //实例化SDK对象

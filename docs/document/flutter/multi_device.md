@@ -96,7 +96,7 @@ try {
 
 初始化 SDK 时，你可以调用 `EMOptions#deviceName` 方法设置登录设备的名称。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时，被踢设备收到的 `EMConnectionListener#onUserDidLoginFromOtherDevice` 回调会包含导致该设备被踢下线的自定义设备名称。
 
-:::notice
+:::tip
 登录成功后才会将该设置发送到服务器。
 :::
 
@@ -128,7 +128,7 @@ EMClient.getInstance.addConnectionEventHandler(
 
 2. 初始化 SDK 时，调用 `EMOptions#osType` 方法自定义设置登录设备的平台。确保该方法中的 `osType` 参数的值与环信控制台的**添加自定义平台**对话框中设置的**设备平台**的值相同。
 
-:::notice
+:::tip
 登录成功后才会将该设置发送到服务器。
 :::
 
@@ -143,7 +143,7 @@ EMClient.getInstance.init(options);
 
 初始化 SDK 时，你可以调用 `EMOptions.loginExtension` 方法设置登录设备的自定义扩展信息。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时（例如 Android 平台提示 `206` 错误，`USER_LOGIN_ANOTHER_DEVICE`），被踢设备收到的 `EMConnectionEventHandler#onUserDidLoginFromOtherDevice` 回调会包含导致该设备被踢下线的新登录设备的自定义扩展信息。
 
-:::notice
+:::tip
 登录成功后才会将该设置发送到服务器。
 :::
 
@@ -176,7 +176,7 @@ EMClient.getInstance.removeConnectionEventHandler("identifier");
 
 你可以调用 `kickDevice` 方法通过传入用户 ID 和登录密码或用户 token 将指定账号从单个登录设备踢下线。被踢设备会收到 `onUserKickedByOtherDevice` 回调。调用该方法前，你需要首先通过 `EMClient#fetchLoggedInDevices` 方法获取设备 ID。
 
-:::notice
+:::tip
 不登录也可以使用该接口。
 :::
 
@@ -206,7 +206,7 @@ try {
 
 你可以调用 `kickAllDevices` 方法通过传入用户 ID 和登录密码或用户 token 将指定账号从所有登录设备踢下线。
 
-:::notice
+:::tip
 不登录也可以使用该接口。
 :::
 

@@ -22,7 +22,7 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 `1.0.5 或以上版本` SDK 初始化，详见 [快速开始](quickstart.html) 及 [SDK 集成概述](overview.html)。
+- 完成 `1.0.5 或以上版本` SDK 初始化，详见 [初始化](initialization.html)文档。
 - 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
 - 了解子区和子区成员数量限制，详见 [使用限制](/product/limitation.html)。
 - 联系商务开通子区功能。
@@ -59,7 +59,7 @@ ChatClient.getInstance()
 
 单设备登录时，子区所属群组的所有成员均会收到 `ChatMessageEventListener#onChatMessageThreadDestroyed` 回调；多设备登录时，其他设备会同时收到 `ChatMultiDeviceEventListener#onThreadEvent` 回调，回调事件为 `THREAD_DESTROY`。
 
-:::notice
+:::tip
 解散子区或解散子区所在的群组后，将删除本地数据库及内存中关于该子区的全部数据，需谨慎操作。
 :::
 

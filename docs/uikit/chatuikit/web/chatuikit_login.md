@@ -20,7 +20,7 @@ const App = () => {
 };
 ```
 
-若要手动登录登出，你可以获取即时通讯 IM SDK connection 实例，然后[调用 SDK 的 API 进行登录登出](/document/web/overview.html#手动登录)。
+若要手动登录登出，你可以获取即时通讯 IM SDK connection 实例，然后[调用 SDK 的 API 进行登录登出](/document/web/login.html#登录方式)。
 
 ```javascript
 import { useClient } from "easemob-chat-uikit";

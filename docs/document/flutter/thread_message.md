@@ -6,22 +6,11 @@
 
 ## 技术原理
 
-即时通讯 IM Flutter SDK 提供 `EMChatThreadManager`、`EMMessage` 和 `EMChatThread` 类，用于管理子区消息，支持你通过调用 API 在项目中实现如下功能：
+即时通讯 IM Flutter SDK 提供 `EMChatThreadManager`、`EMMessage` 和 `EMChatThread` 类，用于管理子区消息，支持你通过调用 API 在项目中实现发送、接收、撤回和获取子区消息。
 
-- 发送子区消息
-- 接收子区消息
-- 撤回子区消息
-- 获取子区消息
+消息收发流程如下：
 
-下图展示在客户端发送和接收消息的工作流程：
-
-![img](/images/android/sendandreceivemsg.png)
-
-如上图所示，消息收发流程如下：
-
-1. 客户端从应用服务器获取 token。
-2. 客户端 A 和 B 登录即时通讯。
-3. 客户端 A 向客户端 B 发送消息。消息发送至即时通讯 IM 服务器，服务器将消息传递给客户端 B。对于子区消息，服务器投递给子区内其他每一个成员。客户端 B 收到消息后，SDK 触发事件。客户端 B 监听事件并获取消息。
+客户端 A 向客户端 B 发送消息。消息发送至即时通讯 IM 服务器，服务器将消息传递给客户端 B。对于子区消息，服务器投递给子区内其他每一个成员。客户端 B 收到消息后，SDK 触发事件。客户端 B 监听事件并获取消息。
 
 子区创建和查看如下图：
 
@@ -41,7 +30,7 @@
 
 ### 发送子区消息
 
-发送子区消息和发送群组消息的方法基本一致，详情请参考 [发送消息](message_send_receive.html#发送消息)。唯一不同的是，发送子区消息需要指定标记 `isChatThreadMessage` 为 `true`。
+发送子区消息和发送群组消息的方法基本一致，详情请参考 [发送消息](message_send_receive.html)。唯一不同的是，发送子区消息需要指定标记 `isChatThreadMessage` 为 `true`。
 
 示例代码如下：
 
@@ -61,7 +50,7 @@ EMClient.getInstance.chatManager.sendMessage(msg);
 
 ### 接收子区消息
 
-接收消息的具体逻辑，请参考 [接收消息](message_send_receive.html#接收消息)，此处只介绍子区消息和其他消息的区别。
+接收消息的具体逻辑，请参考 [接收消息](message_send_receive.html#发送和接收文本消息)，此处只介绍子区消息和其他消息的区别。
 
 子区有新增消息时，子区所属群组的所有成员收到 `EMChatThreadEventHandler#onChatThreadUpdated` 事件，子区成员收到 `EMChatEventHandler#onMessagesReceived` 事件。
 

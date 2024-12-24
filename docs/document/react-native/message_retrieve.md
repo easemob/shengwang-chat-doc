@@ -25,7 +25,7 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html) 及 [SDK 集成概述](overview.html)。
+- 完成 SDK 初始化，并连接到服务器，详见 [初始化](initialization.html)及[连接](connection.html)文档。
 - 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
 
 ## 实现方法
@@ -50,7 +50,7 @@
 3. 历史消息在服务器上的存储时间与产品的套餐包相关，详见[产品套餐包详情](/product/pricing.html#套餐包功能详情)。
    :::
 
-```tsx
+```typescript
 // convId 会话 ID：单聊、群聊和聊天室分别为对端用户 ID、群组 ID 和聊天室 ID。
 // convType 会话类型：单聊、群聊和聊天室分别为 PeerChat、GroupChat 和 RoomChat。
 // cursor 查询的起始消息 ID。若该参数设置为空字符串，从最新消息开始。

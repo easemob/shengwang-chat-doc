@@ -54,7 +54,7 @@ NSString *cursor = @"";
 若使用该功能，需将 SDK 升级至 4.6.0。
 :::
 
-```Swift
+```swift
         EMClient.shared().chatManager?.filterConversationsFromDB(cleanMemoryCache: true, filter: { conversation in
                //case1: 判断 ext 中是否含有某个 key 然后返回 `true` or `false`
               //case2: 根据会话类型返回 Boolean 值
@@ -102,7 +102,7 @@ SDK 初始化时，你可以设置 `EMOptions#autoLoadConversations` 属性，�
 
 你可以调用 `cleanConversationsMemoryCache` 方法，清除本地内存中的所有会话，从而释放内存。
 
-```Swift
+```swift
 EMClient.shared().chatManager?.cleanConversationsMemoryCache()
 ```
 
@@ -114,7 +114,7 @@ EMClient.shared().chatManager?.cleanConversationsMemoryCache()
 2. 获取会话前清空内存中的会话：调用 `filterConversationsFromDB` 获取过滤的会话时，将 `cleanMemoryCache` 参数传 `true`。
 3. 监控到内存较高时（开发者自己实现）释放内存: 调用 `cleanConversationsMemoryCache` 方法清空内存中的会话，释放内存。
 
-```Swift
+```swift
 //step 1：SDK 初始化时，关闭自动加载会话开关。
 option.autoLoadConversations = false
 
