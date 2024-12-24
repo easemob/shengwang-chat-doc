@@ -187,7 +187,7 @@ message.chatType = EMChatTypeChat;
 若发送方在发送消息时使用了推送模板，则推送通知栏中的显示内容以发送方的推送模板为准。
 :::
 
-```objective-C
+```objectivec
 [EMClient.sharedClient.pushManager setPushTemplate:@"templateName" completion:^(EMError * _Nullable aError) {
 
 }];
@@ -197,7 +197,7 @@ message.chatType = EMChatTypeChat;
 
 创建推送消息时，你可以设置消息扩展字段自定义要显示的推送标题 `em_push_title` 和推送内容 `em_push_content`。
 
-```plaintext
+```objectivec
 EMTextMessageBody *body = [[EMTextMessageBody alloc] initWithText:@"test"];
 EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:conversationId from:currentUsername to:conversationId body:body ext:nil];
 message.ext = @{@"em_apns_ext":@{
@@ -223,7 +223,7 @@ message.chatType = EMChatTypeChat;
 
 **解析的内容**
 
-```plaintext
+```json
 {
     "aps":{
         "alert":{

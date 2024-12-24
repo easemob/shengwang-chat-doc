@@ -44,7 +44,7 @@
   - `ChatOptions#setLoginCustomExt`：设置设备的扩展信息；
   - `ChatOptions#getLoginCustomExt`：获取设备的扩展信息。
   - `ConnectionListener#onLogout(errorCode: number, info: LoginExtInfo)`：多设备登录场景下，若当前设备被新登录设备踢下线，被踢设备收到的事件中会携带新设备的扩展信息。
-- 新增[从服务器拉取离线消息的开始和结束的事件回调](overview.html#连接状态相关): `ConnectionListener#onOfflineMessageSyncStart` 和 `ConnectionListener#onOfflineMessageSyncFinish`。
+- 新增[从服务器拉取离线消息的开始和结束的事件回调](connection.html#监听连接状态): `ConnectionListener#onOfflineMessageSyncStart` 和 `ConnectionListener#onOfflineMessageSyncFinish`。
 - 新增 `GroupManager#checkIfInGroupMutelist` 接口，可以[查看当前用户是否在群组禁言列表中](group_members.html#检查自己是否在禁言列表中)。
 - 新增 [错误码 213 ChatError#USER_BIND_ANOTHER_DEVICE](error.html)，用于当用户达到登录设备上线时，当前设备无法登录的场景。
 - 在撤回消息的 `ChatMessageListener#onMessageRecalled` 事件中[返回被撤回的消息所属的会话 ID](message_recall.html#设置消息撤回监听)。

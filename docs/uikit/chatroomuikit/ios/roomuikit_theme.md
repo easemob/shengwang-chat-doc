@@ -38,7 +38,7 @@ ChatroomUIKit 中的所有颜色均使用 HSLA 颜色模型定义，该模型是
 
 通过调整 HSLA 模型的色相值，你可以实现精确的色彩控制。
 
-```Swift
+```swift
 Appearance.primaryHue = 191/360.0
 Appearance.secondaryHue = 210/360.0
 Appearance.errorHue = 189/360.0
@@ -53,13 +53,13 @@ Theme.switchTheme(style: .custom)
 
 1. 在 `Theme` 类中注册你的视图。
 
-```Swift
+```swift
 Theme.registerSwitchThemeViews(view: self)
 ```
 
 2. 在上述视图中实现 `ThemeSwitchProtocol` 协议。
 
-```Swift
+```swift
 extension YourView: ThemeSwitchProtocol {
 
 }

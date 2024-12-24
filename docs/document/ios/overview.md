@@ -45,7 +45,7 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 
 若支持 SDK 注册，需登录[环信即时通讯云控制台](https://console.easemob.com/user/login)，选择 **即时通讯** > **服务概览**，将 **设置**下的 **用户注册模式** 设置为 **开放注册**。
 
-```Objective-C
+```objectivec
 // 异步方法
 [[EMClient sharedClient] registerWithUsername:@"username"
                                          password:@"your password"
@@ -53,7 +53,7 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
                                    }];
 ```
 
-:::notice
+:::tip
 该注册模式为在客户端注册，旨在方便测试，并不推荐在正式环境中使用。
 :::
 
@@ -74,7 +74,7 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 
 **用户 ID + 密码** 是传统的登录方式。用户名和密码均由你的终端用户自行决定，密码需要符合密码规则要求。
 
-```Objective-C
+```objectivec
     //SDK 初始化 `EMOptions` 时可以传入 `loginExtensionInfo` 属性投递给被踢下线的设备。该属性需要开启多设备登录的情况下才能生效。
     EMOptions *options = [EMOptions optionsWithAppkey:<#AppKey#>];
     options.loginExtensionInfo = @"you was kicked out by other device";
@@ -91,7 +91,7 @@ EMOptions *options = [EMOptions optionsWithAppkey:@"<#appkey#>"];
 
 **用户 ID + token** 是更加安全的登录方式。token 可以通过调用 REST API 获取，详见 [环信用户 token 的获取](/document/server-side/easemob_user_token.html)。
 
-:::notice
+:::tip
 使用 token 登录时需要处理 token 过期的问题，比如每次登录时更新 token 等机制。
 :::
 

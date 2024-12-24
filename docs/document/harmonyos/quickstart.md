@@ -56,7 +56,7 @@
     ]
   }
 }
-````
+```
 
 :::tip
 - 此配置需要将 `DevEco Studio` 升级到 `Beta2（5.0.3.502）` 及以上版本。
@@ -111,7 +111,7 @@
 
 ### 1. SDK 初始化
 
-```TypeScript
+```typescript
 let options = new ChatOptions("Your appkey");
 ......// 其他 ChatOptions 配置。
 // 初始化时传入上下文以及options
@@ -122,13 +122,13 @@ ChatClient.getInstance().init(context, options);
 
 测试期间，可以使用如下代码创建账户：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().createAccount(userId, pwd).then(()=> {
     // success logic
 });
 ```
 
-:::notice
+:::tip
 该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用，需要在[环信控制台](https://console.easemob.com/user/login)中手动开通开放注册功能；正式环境中应使用服务器端调用 Restful API 注册，具体见[注册单个用户](/document/server-side/account_system.html#开放注册单个用户)。
 :::
 
@@ -136,19 +136,19 @@ ChatClient.getInstance().createAccount(userId, pwd).then(()=> {
 
 使用如下代码实现用户登录：
 
-```TypeScript
+```typescript
 ChatClient.getInstance().login(userId, pwd).then(() => {
     // success logic        
 })
 ```
 
-:::notice
+:::tip
 1. 除了注册监听器，其他的 SDK 操作均需在登录之后进行。
 :::
 
 ### 4. 发送一条单聊消息
 
-```TypeScript
+```typescript
 // `content` 为要发送的文本内容，`toChatUsername` 为对方的账号。
 let message = ChatMessage.createTextSendMessage(toChatUsername, content);
 if (!message) {

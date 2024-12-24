@@ -20,6 +20,7 @@ export const zhSidebar = sidebar({
       children: [
         { text: "产品概述", link: "introduction.html" },
         { text: "特性介绍",
+          collapsible: true,
           children: [
             { text: "消息", 
               collapsible: true,
@@ -65,22 +66,6 @@ export const zhSidebar = sidebar({
       text: "Demo",
       children: [
         { text: "Demo 体验及源码地址", link: "demo_sourcecode_address.html" },
-      ],
-    },
-    {
-      text: "快速开始",
-      children: [
-        { text: "使用环信 App Token 鉴权", link: "easemob_app_token.html" },
-        { text: "使用环信 User Token 鉴权", link: "easemob_user_token.html" },
-        { text: "快速开始 Android", link: "/document/android/quickstart.html" },
-        { text: "快速开始 iOS", link: "/document/ios/quickstart.html" },
-        { text: "快速开始 Web", link: "/document/web/quickstart.html" },
-        { text: "快速开始 Applet", link: "/document/applet/wechat.html" },
-        { text: "快速开始 HarmonyOS", link: "/document/harmonyos/quickstart.html" },
-        { text: "快速开始 Flutter", link: "/document/flutter/quickstart.html" },
-        { text: "快速开始 React Native", link: "/document/react-native/quickstart.html" },
-        { text: "快速开始 Unity", link: "/document/unity/quickstart.html" },
-        { text: "快速开始 Windows", link: "/document/windows/quickstart.html" },
       ],
     },
     {
@@ -338,6 +323,7 @@ export const zhSidebar = sidebar({
       children: [
         { text: "群 @ 消息", link: "solution_common/group_@.html" },
         { text: "消息引用", link: "solution_common/message_quote.html" },
+        { text: "实现输入指示器", link: "solution_common/typing_indication.html" },
         { text: "迁移到环信", link: "solution_common/migrate_to_easemob.html" },
       ],
     },

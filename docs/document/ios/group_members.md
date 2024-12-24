@@ -52,7 +52,7 @@
 
 1. 调用 `getPublicGroupsFromServerWithCursor` 方法从服务器获取公开群列表，查询到想要加入的群组 ID。示例代码如下：
 
-```objective-c
+```objectivec
 NSMutableArray *memberList = [[NSMutableArray alloc]init];
 NSInteger pageSize = 50;
 NSString *cursor = nil;
@@ -73,7 +73,7 @@ do {
 - 如果公开群无需群主或管理员审批，即 `EMGroupStyle` 为 `EMGroupStylePublicOpenJoin`，申请人会直接加入群组，其他群成员会收到 `EMGroupManagerDelegate#userDidJoinGroup` 回调。
 - 如果公开群需要群主或管理员审批，即 `EMGroupStyle` 为 `EMGroupStylePublicJoinNeedApproval`，申请人不会直接加入群组，群主和群管理员收到 `EMGroupManagerDelegate#joinGroupRequestDidReceive` 回调。待群主或管理员同意入群申请后，申请人会收到joinGroupRequestDidApprove的回调。示例代码如下：
 
-```objective-c
+```objectivec
 // 异步方法
 [[EMClient sharedClient].groupManager requestToJoinPublicGroup:@"groupId" message:nil completion:^(EMGroup *aGroup1, EMError *aError) {
         if (aError == nil) {
@@ -93,7 +93,7 @@ do {
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 异步方法
 [[EMClient sharedClient].groupManager approveJoinGroupRequest:@"groupId" sender:@"userId" completion:^(EMGroup *aGroup, EMError *aError) {
 
@@ -104,7 +104,7 @@ do {
 
 示例代码如下：
 
-```objective-c
+```objectivec
 // 异步方法
 [[EMClient sharedClient].groupManager declineJoinGroupRequest:@"groupId" sender:@"userId" reason:@"reason" completion:^(EMGroup *aGroup, EMError *aError) {
 
@@ -121,7 +121,7 @@ do {
 
    - 群主或群管理员可以邀请人入群，对于私有群 `EMGroupStyle` 设置为 `EMGroupStylePrivateMemberCanInvite` 时，普通群成员也可以邀请人进群。邀请人入群需要调用 `addMembers` 方法：
 
-   ```objective-c
+   ```objectivec
    // 异步方法
    [[EMClient sharedClient].groupManager addMembers:@{@"member1",@"member2"}
                          toGroup:@"groupID"
@@ -133,14 +133,14 @@ do {
 
    - 受邀用户同意加入群组，需要调用 `acceptInvitationFromGroup` 方法。
 
-   ```objective-c
+   ```objectivec
    [[EMClient sharedClient].groupManager acceptInvitationFromGroup:@"groupId" inviter:@"userId" completion:^(EMGroup *aGroup, EMError *aError) {
    }];
    ```
 
    - 受邀人拒绝入群组，需要调用 `declineGroupInvitation` 方法。
 
-   ```objective-c
+   ```objectivec
    [[EMClient sharedClient].groupManager declineGroupInvitation:@"groupId" inviter:@"inviter" reason:@"reason" completion:^(EMError *aError) {
 
    }];
@@ -219,7 +219,7 @@ do {
 
 你可调用 `EMGroupManager#fetchMembersAttributes` 方法根据指定的属性 key 获取多个群成员的自定义属性。
 
-:::notice
+:::tip
 每次最多可获取 10 个群成员的自定义属性。
 :::
 

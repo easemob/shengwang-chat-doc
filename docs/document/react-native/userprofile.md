@@ -8,7 +8,7 @@
 
 本文介绍如何通过管理用户属性设置、更新、存储并获取实时消息用户的相关信息。
 
-:::notice
+:::tip
 为保证用户信息安全，SDK 仅支持 Chat 用户设置或更新自己的用户属性。
 :::
 
@@ -24,7 +24,7 @@
 
 设置用户属性前，请确保满足以下条件：
 
-- 完成 SDK 初始化，详见 [快速开始](quickstart.html) 及 [SDK 集成概述](overview.html)。
+- 完成 SDK 初始化，详见 [初始化](initialization.html)文档。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 
 ## 实现方法

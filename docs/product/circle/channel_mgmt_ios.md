@@ -23,7 +23,7 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 Circle SDK 的初始化，即完成 IM SDK 3.9.9.1 版本的初始化，详见 [IM SDK 初始化](/document/ios/overview.html#sdk-初始化)。
+- 完成 Circle SDK 的初始化，即完成 IM SDK 3.9.9.1 版本的初始化，详见 [IM SDK 初始化](/document/ios/initialization.html)。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 - 了解 Circle 的使用限制，详见 [使用限制](circle_overview.html#限制条件)。
 
@@ -183,7 +183,7 @@ EMClient.shared().circleManager?.fetchPrivateChannels(inCategory: self.serverId,
 
 ### 发送消息
 
-在频道中发送消息与在群组中发送消息的方式类似，唯一的区别在于接收方需要设置为频道 ID。详见 [发送群聊消息](/document/ios/message_send_receive.html#发送文本消息)。
+在频道中发送消息与在群组中发送消息的方式类似，唯一的区别在于接收方需要设置为频道 ID。详见 [发送群聊消息](/document/ios/message_send_receive.html)。
 
 ### 管理频道成员
 

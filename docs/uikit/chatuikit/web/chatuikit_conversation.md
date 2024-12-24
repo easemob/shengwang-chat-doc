@@ -302,8 +302,6 @@ const Conversation = () => {
 };
 ```
 
-![img](/images/uikit/chatuikit/web/custom_conversation_list_action.png)
-
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/web/custom_conversation_list_action.png" title="自定义会话操作" />
 </ImageGallery>

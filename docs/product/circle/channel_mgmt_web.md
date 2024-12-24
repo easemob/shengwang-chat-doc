@@ -23,7 +23,7 @@
 
 开始前，请确保满足以下条件：
 
-- 完成环信即时通讯 Web Circle SDK 的初始化。Circle SDK 初始化与 IM SDK 相同，详见 [IM SDK 初始化](/document/web/overview.html#sdk-初始化)。
+- 完成环信即时通讯 Web Circle SDK 的初始化。Circle SDK 初始化与 IM SDK 相同，详见 [IM SDK 初始化](/document/web/initialization.html)。
 - 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 - 了解 Circle 的使用限制，详见 [使用限制](circle_overview.html#限制条件)。
 
@@ -247,7 +247,7 @@ WebIM.conn.getCategoryPrivateChannels(options).then((res) => {
 
 ### 发送消息
 
-在频道中发送消息与在群组中发送消息的方式类似，唯一的区别在于接收方需要设置为频道 ID。详见 [发送群聊消息](/document/web/message_send_receive.html#发送文本消息)。
+在频道中发送消息与在群组中发送消息的方式类似，唯一的区别在于接收方需要设置为频道 ID。详见 [发送群聊消息](/document/web/message_send_receive.html)。
 
 ### 管理频道成员
 

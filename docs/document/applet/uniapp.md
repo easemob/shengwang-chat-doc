@@ -15,7 +15,7 @@
 
 ![img](/images/applet/applet-demo.png)
 
-:::notice
+:::tip
 
 - 小程序 Demo 只包含部分 IM 功能，详细参考 **功能说明**。
 - Uni-app Demo Git 源码地址 [https://github.com/easemob/webim-uniapp-demo](https://github.com/easemob/webim-uniapp-demo)
@@ -80,6 +80,8 @@ request 合法域名，uploadFile 合法域名，downloadFile 合法域名
 8. https://a41.easemob.com
 9. https://a51.easemob.com
 10. https://a1-chatfile.easemob.com
+11. https://rs.chat.agora.io
+12. https://rs.easemob.com
 :::
 
 :::tip

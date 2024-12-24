@@ -210,7 +210,7 @@ SDK 中提供了聊天室事件的监听接口。你可以通过注册聊天室�
 
 2. 收到通知事件后，通过 `EMChatroom#occupantsCount` 获取聊天室当前人数。
 
-```Swift
+```swift
 extension ViewController: EMChatroomManagerDelegate {
     func userDidJoin(_ aChatroom: EMChatroom, user aUsername: String) {
         let memberCount = aChatroom.occupantsCount

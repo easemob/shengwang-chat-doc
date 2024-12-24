@@ -51,7 +51,7 @@
 
 @tab Java
 
-```Java
+```java
 JSONArray atUserList = new JSONArray();
 atUserList.put("@User1");
 atUserList.put("@User2");
@@ -67,7 +67,7 @@ EMClient.getInstance().chatManager().sendMessage(msg);
 
 @tab Kotlin
 
-```Kotlin
+```kotlin
   val atUserList = JSONArray()
   atUserList.put("@User1")
   atUserList.put("@User2")
@@ -131,7 +131,7 @@ client.send(message);
 
 @tab Java
 
-```Java
+```java
 private void handleMentionedMessage(EMMessage messages) {
    try {
       String groupId = msg.getTo();
@@ -170,7 +170,7 @@ private void handleMentionedMessage(EMMessage messages) {
 
 @tab Kotlin
 
-```Kotlin
+```kotlin
     private fun handleMentionedMessage(messages: EMMessage) {
         try {
             val groupId: String = messages.to

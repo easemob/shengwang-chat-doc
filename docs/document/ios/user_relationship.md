@@ -144,7 +144,7 @@ if (!aError) {
 
 好友备注的长度不能超过 100 个字符。
 
-```objective-c
+```objectivec
 [EMClient.sharedClient.contactManager setContactRemark:@"userId" remark:@"remark" completion:^(EMContact * _Nullable contact, EMError * _Nullable aError) {
             
     }];

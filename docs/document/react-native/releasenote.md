@@ -7,7 +7,7 @@
 ### 新增特性
 
 - 依赖的原生 SDK 升级到版本：iOS 4.11.0 和 Android 4.11.0。
-- 更新服务器连接状态监听器 `ChatConnectEventListener`，新增 `onOfflineMessageSyncStart` 和 `onOfflineMessageSyncFinish` 事件，表示[从服务器拉取离线消息的开始和结束](overview.html#连接状态相关)。
+- 更新服务器连接状态监听器 `ChatConnectEventListener`，新增 `onOfflineMessageSyncStart` 和 `onOfflineMessageSyncFinish` 事件，表示[从服务器拉取离线消息的开始和结束](connection.html)。
 - 新增 `ChatManager#getMessageCount` 方法，用于获取数据库中的消息总数。
   
 ### 优化
@@ -37,7 +37,7 @@
 ### 优化
 
 - 原生平台优化弱网服务器连接成功率。
-- 作废 `ChatConnectEventListener` 中的 `onUserDidLoginFromOtherDevice` 事件，由 [onUserDidLoginFromOtherDeviceWithInfo](overview.html#连接状态相关) 替代。
+- 作废 `ChatConnectEventListener` 中的 `onUserDidLoginFromOtherDevice` 事件，由 [onUserDidLoginFromOtherDeviceWithInfo](connection.html) 替代。
 - 作废 `fetchHistoryMessages` 接口，由 [fetchHistoryMessagesByOptions](message_retrieve.html#从服务器获取指定会话的消息) 替代。
 - 作废 `joinChatRoom` 接口，由 [joinChatRoomEx](room_manage.html#加入聊天室) 替代。
 

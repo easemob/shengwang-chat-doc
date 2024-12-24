@@ -194,7 +194,7 @@ sendMessage(message){
 
 @tab Java
 
-```Java
+```java
 private void handleQuotedMessage(EMMessage message) {
   if(message.ext() != null && message.ext().containsKey("msgQuote")) {
       String msgQuote = message.getStringAttribute("msgQuote","");
@@ -238,7 +238,7 @@ private void handleQuotedMessage(EMMessage message) {
 
 @tab Kotlin
 
-```Kotlin
+```kotlin
     private fun handleMentionedMessage(message: EMMessage) {
         message.ext()?.let {
             if (it.containsKey("msgQuote")){
