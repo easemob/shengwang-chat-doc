@@ -33,7 +33,7 @@
 
 @tab Android
 
-```Java
+```java
 //发送表示正在输入的透传消息
 private static final String MSG_TYPING_BEGIN = "TypingBegin";
 private long previousChangedTimeStamp;
@@ -59,7 +59,7 @@ private void sendBeginTyping() {
 
 @tab iOS
 
-```Objective-C
+```objectivec
 //发送表示正在输入的透传消息
 #define MSG_TYPING_BEGIN @"TypingBegin"
 
@@ -85,7 +85,7 @@ private void sendBeginTyping() {
 
 @tab Web/Applet
 
-```TypeScript
+```typescript
 let previousChangedTimeStamp = 0;
 // 监听输入状态的变化
 const onInputChange = function () {
@@ -150,7 +150,7 @@ void _sendBeginTyping() async {
 
 @tab React Native
 
-```TypeScript
+```typescript
 // 发送自己在输入状态中的命令消息
 const action = "inputting";
 const msg = ChatMessage.createCmdMessage(targetId, action, chatType);
@@ -159,7 +159,7 @@ EMClient.getInstance().chatManager().sendMessage(msg, callback).then().catch();
 
 @tab Unity/Windows
 
-```C#
+```csharp
 //发送表示正在输入的透传消息
 string msgTypingBegin = "TypingBegin";
 
@@ -192,7 +192,7 @@ void _sendBeginTyping() {
 
 @tab Android
 
-```Java
+```java
 private static final int TYPING_SHOW_TIME = 10000;
 private static final int MSG_TYPING_END = 1;
 private Handler typingHandler;
@@ -242,7 +242,7 @@ private void cancelTimer() {
 
 @tab iOS
 
-```Objective-C
+```objectivec
 #define TypingTimerCountNum 10
 - (void)cmdMessagesDidReceive:(NSArray *)aCmdMessages
 {
@@ -296,7 +296,7 @@ private void cancelTimer() {
 
 @tab Web/Applet
 
-```TypeScript
+```typescript
 // 设置状态监听器
 let timer;
 conn.addEventHandler("message", {
@@ -353,7 +353,7 @@ void cancelTimer() {
 
 @tab React Native
 
-```TypeScript
+```typescript
 let listener = new (class implements ChatMessageEventListener {
   onCmdMessagesReceived(messages: ChatMessage[]): void {
     // 收到命令消息
@@ -370,7 +370,7 @@ ChatClient.getInstance().chatManager.addMessageListener(listener);
 
 @tab Unity/Windows
 
-```C#
+```csharp
 int typingTime = 10;
 
 void OnCmdMessagesReceived(List<Message> list) {
