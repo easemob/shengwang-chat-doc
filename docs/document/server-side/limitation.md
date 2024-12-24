@@ -1,6 +1,6 @@
 ---
 {
-    pageUri: "/product/limitation.html",
-    title: "限制条件"
+    pageUri: "/android/limitation.html",
+    title: "产品使用限制"
 }
 ---
