@@ -23,15 +23,9 @@
 
 1. 在**项目管理**页面，点击你要使用的项目的**操作**一栏中的**配置**。
 
-![](https://web-cdn.agora.io/docs-files/1670827574193)
-
 2. 在**服务配置**页面，点击**即时通讯**中的**配置**。
 
-![](https://web-cdn.agora.io/docs-files/1670827609516)
-
 3. 在左侧导航栏，选择**运营管理** > **用户**，点击**创建IM用户**。
-
-![](https://web-cdn.agora.io/docs-files/1670827634437)
 
 4. 在**创建IM用户**对话框中，填写用户信息并点击**保存**，创建用户。
 
@@ -43,23 +37,17 @@
 
 在左侧导航栏选择**基本信息 > 应用信息**，点击**数据中心**区域的 **Chat App Temp Token** 对应的 **生成** 生成一个 App 权限 Token，可用于调用 RESTful API。
 
-![](https://web-cdn.agora.io/docs-files/1681094132023)
-
 为了安全考虑，在生产环境中 Token 由你的 App Server 使用 AgoraTools 生成。本文介绍如何从你的 App Server 中获取 Token 实现用户鉴权。
 
 ## 技术原理
 
 1. 使用 App 权限的 Token 鉴权的流程，如下图所示：
 
-![](https://web-cdn.agora.io/docs-files/1683353354701)
-
-[app_token_auth.png]
+![img](/images/server-side/token_apptoken_chart.png)
 
 2. 使用用户权限 Token 鉴权的流程，如下图所示：
 
-![](https://web-cdn.agora.io/docs-files/1683353376076)
-
-[user_token_auth.png]
+![img](/images/server-side/token_usertoken_chart.png)
 
 ## 前提条件
 
