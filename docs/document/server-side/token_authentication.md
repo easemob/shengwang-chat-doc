@@ -6,8 +6,8 @@
 
 | 应用场景   | Token 权限 | Token 构成           | Token 最长有效期       |
 | :------------ | :----- | :----------------------------------------- | :------- |
-| RESTful API 调用 | App 权限   | <ul><li>你的即时通讯 IM 项目的 App ID。</li><li>你的即时通讯 IM 项目的 App 证书。</li><li>你设置的即时通讯 Token 的有效期。</li></ul> | 24 小时（以 UTC 时区为准） |
-| SDK API 调用     | 用户权限   | <ul><li>你的即时通讯 IM 项目的 App ID。</li><li>你的即时通讯 IM 项目的 App 证书。</li><li> 你的即时通讯 IM 项目的 Token 有效期。</li><li>待鉴权用户的 ID。</li> |  24 小时（以 UTC 时区为准）                          |
+| RESTful API 调用 | App 权限   | <br/> - 你的即时通讯 IM 项目的 App ID。<br/> - 你的即时通讯 IM 项目的 App 证书。<br/> - 你设置的即时通讯 Token 的有效期。</li></ul> | 24 小时（以 UTC 时区为准） |
+| SDK API 调用     | 用户权限   | <br/> - 你的即时通讯 IM 项目的 App ID。<br/> - 你的即时通讯 IM 项目的 App 证书。<br/> - 你的即时通讯 IM 项目的 Token 有效期。</li><li>待鉴权用户的 ID。</li> |  24 小时（以 UTC 时区为准）                          |
 
 ## 体验 Token 生成
 
@@ -85,8 +85,6 @@
 ## 实现鉴权流程
 
 本节介绍使用即时通讯的 App 权限 Token 进行鉴权的完整流程：
-
-<a name="deployserver"></a>
 
 ### 搭建 App Server 生成 Token
 
@@ -333,7 +331,7 @@ return builder.buildAppToken(appid, appcert, expirePeriod);
 2. 使用即时通讯 Token 调用即时通讯 RESTful API 注册一个新用户。在终端中，使用 curl 命令向即时通讯服务器发送请求注册一个新用户，示例如下：
 
    ```shell
-   curl -X POST -H "Authorization: Bearer <YourAgoraAppToken>" -i "https://XXXX/XXXX/XXXX/users" -d '[
+   curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H "Authorization: Bearer <YourAgoraAppToken>" -i "https://XXXX/XXXX/users" -d '[
        {
            "username": "user1",
            "password": "123",
@@ -607,7 +605,7 @@ Token 即将过期或已经过期后，即时通讯 IM SDK 会分别触发 `onTo
 
 Token 过期后自动重连可确保终端用户在后台运行应用时保持即时通讯服务的连接状态，重新进入应用时无需再次登录。实现该功能的流程如下：
 
-1. [搭建 App Server 生成 Token 并提供获取 Token 的 API]((#deployserver))。
+1. [搭建 App Server 生成 Token 并提供获取 Token 的 API](#搭建-app-server-生成-token)。
 2. 在你的 App 端实现对 Token 过期的判断。当 Token 过期时，你的 App 需通过获取 Token 的 API 获取新的 Token，重新登录声网服务器。
 
 ### Token 和 RTC 产品

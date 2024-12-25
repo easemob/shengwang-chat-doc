@@ -9,6 +9,7 @@ const documentSidebar = [
   { text: '文档指引', link: 'document_index.html' },
   {
     text: "产品介绍",
+    collapsible: true,
     children: [
       { text: '发版说明', link: 'releasenote.html'},
       { text: "特性介绍",
@@ -69,6 +70,7 @@ const documentSidebar = [
         children: 子菜单。请参考「子菜单示例」
     */
     text: '快速开始',
+    collapsible: true,
     children: [
       // { text: 'React Demo（WebIM）体验', link: 'demo_react.html', only: ['web'] },
       // { text: 'Vue Demo（WebIM）体验', link: 'demo_vue.html', only: ['web'] },
@@ -83,6 +85,7 @@ const documentSidebar = [
   },
   {
     text: '用户指南',
+    collapsible: true,
     children: [
       { text: '集成 SDK', link: 'integration.html' },
       { text: '初始化', link: 'initialization.html' },
@@ -203,6 +206,7 @@ const documentSidebar = [
   { text: 'API 参考', link: 'api_reference_overview.html' },
   {
     text: '错误排查',
+    collapsible: true,
     children: [
       { text: '错误码', link: 'error.html' },
       { text: '日志', link: 'log.html', except: ['flutter'] },
@@ -365,11 +369,12 @@ const documentSidebar = [
   //  only: ['applet']
   //},
     {
-    text: '服务端 REST API',
+    text: 'REST API',
+    collapsible: true,
     children: [
-      { text: '即时通讯 REST API 概览', link: 'overview.html' },
+      { text: 'REST API 概览', link: 'overview.html' },
       { 
-        text: '消息管理', 
+        text: '消息', 
         children: [
           { text: '发送单聊消息', link: 'message_single.html' },
           { text: '发送群聊消息', link: 'message_group.html' },
@@ -449,6 +454,7 @@ const documentSidebar = [
   },
   {
     text: 'Server SDK',
+    collapsible: true,
     children: [
       { text: 'Java Server SDK 2.0', link: 'java_server_sdk_2.0.html' },
       { text: 'Java Server SDK 1.0', link: 'java_server_sdk.html' },
@@ -456,15 +462,10 @@ const documentSidebar = [
     ],
     only: ['server-side']
   },
-  {
-    text: '错误码',
-    children: [
-      { text: '错误码', link: 'error.html' }
-    ],
-    only: ['server-side']
-  },
+  { text: '错误码', link: 'error.html', only: ['server-side']},
   {
     text: '设置回调',
+    collapsible: true,
     children: [
       { text: '回调概述', link: 'callback_overview.html' },
       { text: '发送前回调', link: 'callback_presending.html' },
