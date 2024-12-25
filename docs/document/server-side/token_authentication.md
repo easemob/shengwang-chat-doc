@@ -25,31 +25,19 @@
 
 ![](https://web-cdn.agora.io/docs-files/1670827574193)
 
-![](./images/quickstart/config_project.png)
-
 2. 在**服务配置**页面，点击**即时通讯**中的**配置**。
 
 ![](https://web-cdn.agora.io/docs-files/1670827609516)
-
-![](./images/quickstart/config_chat.png)
 
 3. 在左侧导航栏，选择**运营管理** > **用户**，点击**创建IM用户**。
 
 ![](https://web-cdn.agora.io/docs-files/1670827634437)
 
-![](./images/quickstart/user_mgmt.png)
-
 4. 在**创建IM用户**对话框中，填写用户信息并点击**保存**，创建用户。
-
-![](https://web-cdn.agora.io/docs-files/1670827653548)
-
-![](./images/quickstart/create_user.png)
 
 #### 生成 Token
 
 在左侧导航栏选择**基本信息 > 应用信息**，在**数据中心**区域的 **Chat User Temp Token** 框中输入用户 ID，点击**生成**生成一个用户权限 Token，可用于调用 SDK 的 API。
-
-![](./images/token/generate_user_token_ui.png)
 
 ### 生成 App 权限 Token
 
@@ -94,7 +82,7 @@
 
 下图为生成即时通讯 IM 的用户权限 Token 的 API 调用时序图：
 
-![image-20240321144250563](/Users/easemob-dn0164/Library/Application Support/typora-user-images/image-20240321144250563.png)
+![img](/images/server-side/token_usertoken_time_sequence.png)
 
 1. 在 `IntelliJ` 中创建一个 Maven 项目，设置项目名称、选择项目储存路径后，点击 **Finish**。
 
@@ -301,8 +289,6 @@ public class AgoraChatTokenController {
 6. 启动 App Server。点击图中绿色三角标识，选择 `Debug "AgoraChatTokenStarter..." `。
 
   ![](https://web-cdn.agora.io/docs-files/1670990071861)
-
-   [agra_chat_token_starter.png]
 
 ### 使用 Token 调用即时通讯 RESTful API
 
