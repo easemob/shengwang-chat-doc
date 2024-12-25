@@ -103,11 +103,7 @@ const options = [
       {
         value: 'windows',
         label: 'Windows',
-      },
-      {
-        value: 'linux',
-        label: 'Linux',
-      },
+      }
     ],
   },
   {
@@ -124,15 +120,7 @@ const options = [
       {
         value: 'unity',
         label: 'Unity',
-      },
-      {
-        value: 'applet',
-        label: '小程序',
-      },
-      {
-        value: 'electron',
-        label: 'Electron',
-      },
+      }
     ],
   },
   {
@@ -140,7 +128,7 @@ const options = [
     options: [
       {
         value: 'server-side',
-        label: 'Rest Api',
+        label: 'RESTful API',
       }
     ],
   },

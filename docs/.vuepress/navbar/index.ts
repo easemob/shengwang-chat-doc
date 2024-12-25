@@ -1,7 +1,7 @@
 import { navbar } from 'vuepress-theme-hope'
 
 export const zhNavbar = navbar([
-  { text: '产品简介', link: '/product/introduction.html' },
+  // { text: '产品简介', link: '/product/introduction.html' },
   {
     text: 'UIKit',
     children: [
@@ -40,36 +40,36 @@ export const zhNavbar = navbar([
           }
         ]
       },
-      {
-        text: '聊天室 UIKit',
-        children: [
-          {
-            text: 'Android',
-            icon: '/icon-Android.svg',
-            link: '/uikit/chatroomuikit/android/roomuikit_overview.html'
-          },
-          {
-            text: 'iOS',
-            icon: '/icon-iOS.svg',
-            link: '/uikit/chatroomuikit/ios/roomuikit_overview.html'
-          },
-          {
-            text: 'Web',
-            icon: '/icon-web.svg',
-            link: '/uikit/chatroomuikit/web/roomuikit_overview.html'
-          },
-          {
-            text: 'React Native',
-            icon: '/icon-ReactNative.svg',
-            link: '/uikit/chatroomuikit/react-native/roomuikit_overview.html'
-          },
-          {
-            text: 'Flutter',
-            icon: '/icon-flutter.svg',
-            link: '/uikit/chatroomuikit/flutter/roomuikit_overview.html'
-          }
-        ]
-      }
+ //     {
+ //        text: '聊天室 UIKit',
+ //        children: [
+ //          {
+ //            text: 'Android',
+ //            icon: '/icon-Android.svg',
+ //            link: '/uikit/chatroomuikit/android/roomuikit_overview.html'
+ //          },
+ //          {
+ //            text: 'iOS',
+ //            icon: '/icon-iOS.svg',
+ //            link: '/uikit/chatroomuikit/ios/roomuikit_overview.html'
+ //          },
+ //          {
+ //            text: 'Web',
+ //            icon: '/icon-web.svg',
+ //            link: '/uikit/chatroomuikit/web/roomuikit_overview.html'
+ //          },
+ //          {
+ //            text: 'React Native',
+ //            icon: '/icon-ReactNative.svg',
+ //           link: '/uikit/chatroomuikit/react-native/roomuikit_overview.html'
+ //         },
+ //         {
+ //            text: 'Flutter',
+ //            icon: '/icon-flutter.svg',
+ //           link: '/uikit/chatroomuikit/flutter/roomuikit_overview.html'
+//         }
+//        ]
+//      }
     ]
   },
   {
@@ -103,11 +103,6 @@ export const zhNavbar = navbar([
             icon: '/icon-windows.svg',
             link: '/document/windows/quickstart.html'
           },
-          {
-            text: 'Linux',
-            icon: '/icon-linux.svg',
-            link: '/document/linux/overview.html'
-          }
         ]
       },
       {
@@ -128,21 +123,16 @@ export const zhNavbar = navbar([
             icon: '/icon-unity.svg',
             link: '/document/unity/quickstart.html'
           },
-          {
-            text: '小程序',
-            icon: '/icon-mini-program.svg',
-            link: '/document/applet/overview.html'
-          },
-          {
-            text: 'uni-app',
-            icon: '/icon-uni-app.svg',
-            link: '/document/applet/uniapp.html'
-          },
-          {
-            text: 'Electron',
-            icon: '/icon-Electron.svg',
-            link: '/document/electron/overview.html'
-          }
+          // {
+          //   text: '小程序',
+          //  icon: '/icon-mini-program.svg',
+          //  link: '/document/applet/overview.html'
+          // },
+          // {
+          //  text: 'uni-app',
+          //  icon: '/icon-uni-app.svg',
+          //  link: '/document/applet/uniapp.html'
+          // },
         ]
       },
       {
@@ -184,7 +174,7 @@ export const zhNavbar = navbar([
             link: 'https://sdkdocs.easemob.com/apidoc/ios/chat3.0/annotated.html'
           },
           {
-            text: 'Web/小程序',
+            text: 'Web',
             icon: '/icon-web.svg',
             link: 'https://doc.easemob.com/jsdoc/index.html'
           },
@@ -218,11 +208,6 @@ export const zhNavbar = navbar([
             icon: '/icon-unity.svg',
             link: 'https://sdkdocs.easemob.com/apidoc/unity/annotated.html'
           },
-          {
-            text: 'Electron',
-            icon: '/icon-Electron.svg',
-            link: 'https://downloads.easemob.com/doc/desktop/apidoc/index.html'
-          }
         ]
       },
       {
