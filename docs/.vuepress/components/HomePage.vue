@@ -60,7 +60,8 @@
             <section>
               <h2 class="section-title">资源下载</h2>
               <p class="section-sub-title-desc">
-                下载 Agora RTM SDK 和相关资源，包括文档、示例代码和 API 参考。
+                从下面选项中选择合适 SDK 下载并集成到你的应用中，
+                以快速接入即时通讯服务体验实时互动特性。
               </p>
               <div class="download-tip-container">
                 <div class="download-tip">
@@ -80,14 +81,28 @@
                     </svg>
                   </div>
                   <div class="tip-content">
-                    <div class="tip-title">下载须知</div>
+                    <div class="tip-title">SDK合规信息公式</div>
                     <div class="tip-desc">
-                      下载前请仔细阅读以下说明：
-                      <ul>
-                        <li>请保您的开发环境满足系统要求</li>
-                        <li>建议使用最新版本的 SDK 以获得更好的体验</li>
-                        <li>如遇到问题，请参考文档或联系技术支持</li>
-                      </ul>
+                      <p>
+                        <strong>功能介绍：</strong>
+                        <span>
+                          为开发者提供低延时、高并发、可扩展、高可靠的实时消息及状态同步网络服务。
+                        </span>
+                      </p>
+                      <p>
+                        <strong>基本信息：</strong>
+                      </p>
+                      <p>
+                        【SDK 名称】实时消息
+                        SDK；【开发者】上海兆言网络科技有限公司；【版本号】见下列下载选项；【MD5
+                        值】见下列下载选项；
+                      </p>
+                      <p>
+                        【更新日期】见下列下载选项；【使用说明】
+                        <a href="#"> 《实时消息 SDK 合规使用说明》 </a
+                        >；【个人信息处理规则】
+                        <a href="#">《SDK 个人信息处理规则》 </a>
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -134,17 +149,19 @@
                         <td>{{ item.updateTime }}</td>
                         <td><a :href="item.downloadLink">点击查看</a></td>
                         <td>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              fill="currentColor"
-                              d="m12 16l-5-5l1.4-1.45l2.6 2.6V4h2v8.15l2.6-2.6L17 11zm-6 4q-.825 0-1.412-.587T4 18v-3h2v3h12v-3h2v3q0 .825-.587 1.413T18 20z"
-                            />
-                          </svg>
+                          <a href="#">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                fill="currentColor"
+                                d="m12 16l-5-5l1.4-1.45l2.6 2.6V4h2v8.15l2.6-2.6L17 11zm-6 4q-.825 0-1.412-.587T4 18v-3h2v3h12v-3h2v3q0 .825-.587 1.413T18 20z"
+                              />
+                            </svg>
+                          </a>
                         </td>
                       </tr>
                     </tbody>
@@ -172,17 +189,19 @@
                         <td>{{ item.updateTime }}</td>
                         <td><a :href="item.downloadLink">点击查看</a></td>
                         <td>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              fill="currentColor"
-                              d="m12 16l-5-5l1.4-1.45l2.6 2.6V4h2v8.15l2.6-2.6L17 11zm-6 4q-.825 0-1.412-.587T4 18v-3h2v3h12v-3h2v3q0 .825-.587 1.413T18 20z"
-                            />
-                          </svg>
+                          <a href="#">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                fill="currentColor"
+                                d="m12 16l-5-5l1.4-1.45l2.6 2.6V4h2v8.15l2.6-2.6L17 11zm-6 4q-.825 0-1.412-.587T4 18v-3h2v3h12v-3h2v3q0 .825-.587 1.413T18 20z"
+                              />
+                            </svg>
+                          </a>
                         </td>
                       </tr>
                     </tbody>
@@ -273,6 +292,7 @@ const activeTab = ref(0)
   padding: 0 20px;
   box-sizing: border-box;
 }
+
 .section-title {
   font-size: 26px;
   color: #000;
@@ -286,16 +306,19 @@ const activeTab = ref(0)
   color: #000;
   margin-bottom: 20px;
 }
+
 .card-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
 }
+
 .card-container-solution {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 20px;
 }
+
 .card {
   background: #fff;
   border: 1px solid #e0e0e0;
@@ -316,19 +339,23 @@ const activeTab = ref(0)
   transform: translateY(-5px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
+
 .card img {
   width: 50px;
   height: 50px;
 }
+
 .card h3 {
   font-size: 20px;
   color: #333;
 }
+
 .card p {
   font-size: 14px;
   color: #666;
   text-align: left;
 }
+
 .card .btn {
   display: inline-block;
   margin-top: 15px;
@@ -339,9 +366,11 @@ const activeTab = ref(0)
   text-decoration: none;
   border-radius: 20px;
 }
+
 .card .btn:hover {
   background: #167abc;
 }
+
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -352,15 +381,17 @@ const activeTab = ref(0)
   display: block;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
 .table th,
 .table td {
   border: 1px solid #e0e0e0;
-  padding: 13px;
+  padding: 15px;
   text-align: center;
   font-size: 14px;
   white-space: nowrap;
   min-width: 80px;
 }
+
 .table th:nth-child(5),
 .table td:nth-child(5) {
   width: 100%;
@@ -375,13 +406,16 @@ const activeTab = ref(0)
   color: blue;
   cursor: pointer;
 }
+
 .table th {
   background: #f5f5f5;
   color: #333;
 }
+
 .table td {
   color: #555;
 }
+
 .table .btn {
   padding: 5px 10px;
   background: #1890ff;
@@ -390,9 +424,11 @@ const activeTab = ref(0)
   border-radius: 4px;
   font-size: 12px;
 }
+
 .table .btn:hover {
   background: #167abc;
 }
+
 .placeholder {
   height: 150px;
   background-color: #e6f7ff;
@@ -403,7 +439,7 @@ const activeTab = ref(0)
 .download-tip {
   display: flex;
   align-items: flex-start;
-  padding: 16px 24px;
+  padding: 16px 18px;
   background: #e6f7ff;
   border: 1px solid #91d5ff;
   border-radius: 4px;
@@ -412,8 +448,8 @@ const activeTab = ref(0)
 
 .tip-icon {
   color: #1890ff;
-  font-size: 24px;
-  margin-right: 16px;
+  font-size: 18px;
+  margin-right: 14px;
   margin-top: 2px;
 }
 
