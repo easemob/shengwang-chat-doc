@@ -74,10 +74,6 @@ const options = [
         value: "flutter",
         label: "Flutter",
       },
-      {
-        value: "uniapp",
-        label: "Uniapp",
-      },
     ],
   },
 ];
