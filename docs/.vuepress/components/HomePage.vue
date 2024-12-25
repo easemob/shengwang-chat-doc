@@ -3,129 +3,190 @@
     <template #center>
       <div class="main-container">
         <HeroSection />
-        <main :ref="containerRef" class="main-content">
-          <div class="toc">
-            <ClientOnly>
-              <el-affix :offset="80">
-                <el-anchor
-                  :container="containerRef"
-                  type="underline"
-                  :offset="60"
-                >
-                  <el-anchor-link
-                    v-for="anchorLink in anchorLinks"
-                    :key="anchorLink.text"
-                    :href="`#${anchorLink.text}`"
-                  >
-                    {{ anchorLink.text }}
-                    <template v-if="anchorLink.children" #sub-link>
-                      <el-anchor-link
-                        v-for="subLink in anchorLink.children"
-                        :key="subLink.text"
-                        :href="`#${subLink.text}`"
-                      >
-                        {{ subLink.text }}
-                      </el-anchor-link>
-                    </template>
-                  </el-anchor-link>
-                </el-anchor>
-              </el-affix>
-            </ClientOnly>
-          </div>
+        <main class="main-content">
+          <div class="home-container">
+            <section>
+              <h2 class="section-title">用户指南</h2>
+              <template v-for="s in starter" :key="s.title">
+                <h3 class="section-sub-title">{{ s.title }}</h3>
+                <p class="section-sub-title-desc">
+                  {{ s.desc }}
+                </p>
+                <div class="card-container">
+                  <template v-for="p in s.platform" :key="p.text">
+                    <div v-if="p.text" class="card">
+                      <div class="card-header">
+                        <h3>{{ p.text }}</h3>
+                        <img
+                          :src="p.icon"
+                          alt="JavaScript Logo"
+                          style="background-color: #e6f7ff"
+                        />
+                      </div>
+                      <p>{{ p.desc }}</p>
+                      <a :href="p.link" class="btn">快速开始 </a>
+                    </div>
+                    <div
+                      v-else
+                      class="card"
+                      style="visibility: hidden; height: 0"
+                    ></div>
+                  </template>
+                </div>
+              </template>
+            </section>
 
-          <div class="content">
-            <section class="product-section">
-              <div class="product-links">
-                <template v-for="(item, index) in products" :key="item.text">
-                  <el-link
-                    :href="item.link"
-                    type="primary"
-                    class="product-link"
-                  >
-                    {{ item.text }}
-                  </el-link>
-                  <span v-if="index < products.length - 1">|</span>
+            <section v-for="p in projects" :key="p.title">
+              <h2 class="section-title">{{ p.title }}</h2>
+              <p class="section-sub-title-desc">
+                {{ p.desc }}
+              </p>
+              <div class="card-container-solution">
+                <template v-for="p in p.contexts" :key="p.title">
+                  <div v-if="p.title" class="card">
+                    <div class="placeholder"></div>
+                    <h3>{{ p.title }}</h3>
+                    <p>{{ p.desc }}</p>
+                  </div>
+                  <div
+                    v-else
+                    class="card"
+                    style="visibility: hidden; height: 0"
+                  ></div>
                 </template>
               </div>
-              <div v-for="s in starter" :key="s.title" :id="s.title">
-                <h2 class="sdk-start-title">{{ s.title }}</h2>
-                <div class="sdk-start-list">
-                  <div
-                    class="sdk-start-item"
-                    v-for="item in s.platform"
-                    :key="item.text"
-                    @click="goTo(item.link)"
-                  >
-                    <div class="sdk-start-icon">
-                      <img
-                        :src="item.icon"
-                        alt="Platform Icon"
-                        class="platform-icon"
-                      />
-                      <span class="platform-name">{{ item.text }}</span>
+            </section>
+
+            <section>
+              <h2 class="section-title">资源下载</h2>
+              <p class="section-sub-title-desc">
+                下载 Agora RTM SDK 和相关资源，包括文档、示例代码和 API 参考。
+              </p>
+              <div class="download-tip-container">
+                <div class="download-tip">
+                  <div class="tip-icon">
+                    <svg
+                      viewBox="64 64 896 896"
+                      focusable="false"
+                      data-icon="info-circle"
+                      width="1em"
+                      height="1em"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm32 664c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V456c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272zm-32-344a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="tip-content">
+                    <div class="tip-title">下载须知</div>
+                    <div class="tip-desc">
+                      下载前请仔细阅读以下说明：
+                      <ul>
+                        <li>请保您的开发环境满足系统要求</li>
+                        <li>建议使用最新版本的 SDK 以获得更好的体验</li>
+                        <li>如遇到问题，请参考文档或联系技术支持</li>
+                      </ul>
                     </div>
-                    <img
-                      src="/arrow_right.svg"
-                      alt="Arrow icon"
-                      class="arrow-icon"
-                    />
                   </div>
                 </div>
               </div>
+              <div class="tabs">
+                <div class="tab-header">
+                  <div
+                    class="tab-btn"
+                    :class="{ active: activeTab === 0 }"
+                    @click="activeTab = 0"
+                  >
+                    客户端
+                  </div>
+                  <div
+                    class="tab-btn"
+                    :class="{ active: activeTab === 1 }"
+                    @click="activeTab = 1"
+                  >
+                    服务端
+                  </div>
+                </div>
 
-              <div
-                :id="project.title"
-                v-for="project in projects"
-                :key="project.title"
-              >
-                <h2 class="sdk-features-title">{{ project.title }}</h2>
-                <div
-                  class="sdk-feature-item"
-                  v-for="feature in project.features"
-                  :key="feature.title"
-                  :id="feature.title || null"
-                >
-                  <div v-if="feature.title" class="sdk-feature-header">
-                    <img
-                      v-if="feature.icon"
-                      :src="feature.icon"
-                      class="feature-icon"
-                    />
-                    <h3 v-if="feature.title" class="feature-title">
-                      {{ feature.title }}
-                    </h3>
-                  </div>
-                  <div class="sdk-feature-links">
-                    <template
-                      v-for="context in feature.contexts"
-                      :key="context.text"
-                    >
-                      <a
-                        v-if="context.link"
-                        class="feature-link"
-                        type="primary"
-                        :href="context.link"
-                      >
-                        {{ context.text }}
-                      </a>
-                      <ClientOnly v-else>
-                        <el-popover placement="bottom-start" :width="436">
-                          <template #reference>
-                            <a class="feature-link" type="primary">
-                              {{ context.text }}
-                            </a>
-                          </template>
-                          <template #default>
-                            <CardMenu
-                              :title="context.text"
-                              :sdks="context.sdks"
-                              :desc="context.desc"
+                <div class="tab-content">
+                  <!-- 客户端 SDK 表格 -->
+                  <table class="table" v-if="activeTab === 0">
+                    <thead>
+                      <tr>
+                        <th
+                          v-for="column in downloadTableColumns"
+                          :key="column.title"
+                          :style="{ minWidth: column.width + 'px' }"
+                        >
+                          {{ column.title }}
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="item in clientSDKDownloadInfo" :key="item.id">
+                        <td>{{ item.language }}</td>
+                        <td>{{ item.platform }}</td>
+                        <td>{{ item.version }}</td>
+                        <td>{{ item.package }}</td>
+                        <td>{{ item.md5 }}</td>
+                        <td>{{ item.updateTime }}</td>
+                        <td><a :href="item.downloadLink">点击查看</a></td>
+                        <td>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              fill="currentColor"
+                              d="m12 16l-5-5l1.4-1.45l2.6 2.6V4h2v8.15l2.6-2.6L17 11zm-6 4q-.825 0-1.412-.587T4 18v-3h2v3h12v-3h2v3q0 .825-.587 1.413T18 20z"
                             />
-                          </template>
-                        </el-popover>
-                      </ClientOnly>
-                    </template>
-                  </div>
+                          </svg>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <!-- 服务端 API 表格 -->
+                  <table class="table" v-if="activeTab === 1">
+                    <thead>
+                      <tr>
+                        <th
+                          v-for="column in downloadTableColumns"
+                          :key="column.title"
+                          :style="{ minWidth: column.width + 'px' }"
+                        >
+                          {{ column.title }}
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="item in serverSDKDownloadInfo" :key="item.id">
+                        <td>{{ item.language }}</td>
+                        <td>{{ item.platform }}</td>
+                        <td>{{ item.version }}</td>
+                        <td>{{ item.package }}</td>
+                        <td>{{ item.md5 }}</td>
+                        <td>{{ item.updateTime }}</td>
+                        <td><a :href="item.downloadLink">点击查看</a></td>
+                        <td>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              fill="currentColor"
+                              d="m12 16l-5-5l1.4-1.45l2.6 2.6V4h2v8.15l2.6-2.6L17 11zm-6 4q-.825 0-1.412-.587T4 18v-3h2v3h12v-3h2v3q0 .825-.587 1.413T18 20z"
+                            />
+                          </svg>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </section>
@@ -141,47 +202,52 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import HopeHomePage from 'vuepress-theme-hope/components/HomePage.js'
 import HeroSection from './CustomHero.vue'
-import CardMenu from './CardMenu.vue'
 import { usePageFrontmatter } from '@vuepress/client'
+import {
+  clientSDKDownloadInfo,
+  serverSDKDownloadInfo
+} from '../data/download.js'
 const frontmatter = usePageFrontmatter()
 const router = useRouter()
-const products = frontmatter.value.products || []
 const starter = frontmatter.value.starter || []
 const projects = frontmatter.value.projects || []
-const containerRef = ref<HTMLElement | null>(null)
 
-const goTo = (path: string) => {
-  if(path.indexOf('http')==0) {
-    window.open(path)
-  } else {
-    router.push(path)
+const downloadTableColumns = [
+  {
+    title: '语言',
+    width: 100
+  },
+  {
+    title: '适用平台',
+    width: 100
+  },
+  {
+    title: '最新版本',
+    width: 80
+  },
+  {
+    title: '包名',
+    width: 110
+  },
+  {
+    title: 'MD5值',
+    width: 200
+  },
+  {
+    title: '更新日期',
+    width: 120
+  },
+  {
+    title: '更新日志',
+    width: 80
+  },
+  {
+    title: '下载',
+    width: 40
   }
+]
 
-}
-
-interface AnchorLink {
-  text: string
-  children?: AnchorLink[]
-}
-
-const buildAnchorLink = () => {
-  const values: AnchorLink[] = []
-  starter.forEach((s) => {
-    values.push({ text: s.title })
-  })
-  projects.forEach((project) => {
-    const children = []
-    project.features.forEach((feature) => {
-      if (feature.title) {
-        children.push({ text: feature.title })
-      }
-    })
-    values.push({ text: project.title, children })
-  })
-  return values
-}
-
-const anchorLinks = buildAnchorLink()
+const activeTab = ref(0)
 </script>
 
 <style scoped>
@@ -196,338 +262,201 @@ const anchorLinks = buildAnchorLink()
   align-self: center;
   margin-top: 16px;
   width: 100%;
-  max-width: 772px;
+  max-width: 1200px;
   position: relative;
 }
 
-@media (max-width: 991px) {
-  .main-content {
-    max-width: 95%;
-  }
+.home-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+.section-title {
+  font-size: 26px;
+  color: #000;
+  margin-bottom: 20px;
+  text-align: left;
+  border: none;
 }
 
-.content {
+.section-sub-title {
+  font-size: 20px;
+  color: #000;
+  margin-bottom: 20px;
+}
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+.card-container-solution {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 20px;
+}
+.card {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+.card img {
+  width: 50px;
+  height: 50px;
+}
+.card h3 {
+  font-size: 20px;
+  color: #333;
+}
+.card p {
+  font-size: 14px;
+  color: #666;
+  text-align: left;
+}
+.card .btn {
+  display: inline-block;
+  margin-top: 15px;
+  width: 100%;
+  padding: 10px 0;
+  background: #1890ff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 20px;
+}
+.card .btn:hover {
+  background: #167abc;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px;
+  background: #fff;
+  border-radius: 8px;
+  overflow-x: auto;
+  display: block;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.table th,
+.table td {
+  border: 1px solid #e0e0e0;
+  padding: 13px;
+  text-align: center;
+  font-size: 14px;
+  white-space: nowrap;
+  min-width: 80px;
+}
+.table th:nth-child(5),
+.table td:nth-child(5) {
   width: 100%;
 }
 
-.toc {
-  margin-top: 20px;
-  position: absolute;
-  top: 0;
-  left: -200px;
-  visibility: visible;
-  width: unset;
-  height: unset;
+.table td:nth-child(8) svg {
+  color: #1890ff;
+  transition: color 0.3s;
 }
 
-@media (max-width: 1200px) {
-  .toc {
-    visibility: hidden;
-    width: 0;
-    height: 0;
-  }
+.table td:nth-child(8) svg:hover {
+  color: blue;
+  cursor: pointer;
 }
-
-.columns {
-  gap: 20px;
-  display: flex;
-  justify-content: center;
+.table th {
+  background: #f5f5f5;
+  color: #333;
 }
-
-.sdk-features {
-  justify-content: flex-end;
+.table td {
+  color: #555;
+}
+.table .btn {
+  padding: 5px 10px;
+  background: #1890ff;
+  color: #fff;
+  text-decoration: none;
   border-radius: 4px;
-  background-color: #fff;
-  display: flex;
-  gap: 20px;
-  white-space: nowrap;
-  padding: 10px;
+  font-size: 12px;
 }
-
-@media (max-width: 991px) {
-  .sdk-features {
-    white-space: initial;
-  }
+.table .btn:hover {
+  background: #167abc;
 }
-
-.feature-title {
-  font-family: PingFang SC, sans-serif;
-  flex-grow: 1;
-  font-size: 16px;
-  flex-basis: auto;
-}
-
-.sdk-list {
-  display: flex;
-  padding-left: 12px;
-  flex-direction: column;
-  font-size: 14px;
-  color: #808080;
-  white-space: nowrap;
-}
-
-@media (max-width: 991px) {
-  .sdk-list {
-    white-space: initial;
-  }
-}
-
-.sdk-item {
-  font-family: PingFang SC, sans-serif;
-  align-items: start;
-  border-left: 2px solid rgba(204, 204, 204, 1);
-  background-color: #fff;
-  justify-content: center;
-  padding: 10px 12px;
-}
-
-@media (max-width: 991px) {
-  .sdk-item {
-    padding-right: 20px;
-    white-space: initial;
-  }
-}
-
-.sdk-item.active {
-  border-left-color: rgba(9, 109, 217, 1);
-  color: #096dd9;
-  padding: 9px 12px;
-}
-
-.column:last-child {
-  display: flex;
-  flex-direction: column;
-  line-height: normal;
-  width: 81%;
-  margin-left: 20px;
-}
-
-@media (max-width: 991px) {
-  .column:last-child {
-    width: 100%;
-  }
-}
-
-.product-section {
-  display: flex;
-  flex-grow: 1;
-  flex-direction: column;
-}
-
-@media (max-width: 991px) {
-  .product-section {
-    max-width: 100%;
-    margin-top: 40px;
-  }
-}
-
-.product-links {
-  justify-content: space-between;
-  display: flex;
-  gap: 20px;
-  font-size: 14px;
-  color: #096dd9;
-  font-weight: 400;
-  white-space: nowrap;
-  padding: 8px;
-}
-
-@media (max-width: 991px) {
-  .product-links {
-    max-width: 100%;
-    flex-wrap: wrap;
-    white-space: initial;
-  }
-}
-
-.product-link {
-  font-family: PingFang SC, sans-serif;
-}
-
-.sdk-start-title {
-  border-bottom: 1px solid rgba(230, 230, 230, 1);
-  margin-top: 20px;
-  color: #1a1a1a;
-  white-space: nowrap;
-  justify-content: center;
-  padding: 8px 0;
-  font: 600 20px PingFang SC, sans-serif;
-}
-
-@media (max-width: 991px) {
-  .sdk-start-title {
-    max-width: 100%;
-    white-space: initial;
-  }
-}
-
-.sdk-start-list {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 16px;
-  gap: 12px;
-  font-size: 14px;
-  color: #000;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-@media (max-width: 991px) {
-  .sdk-start-list {
-    flex-wrap: wrap;
-    white-space: initial;
-  }
-}
-
-.sdk-start-item {
-  border-radius: 25px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(230, 230, 230, 1);
-  background-color: #fff;
-  display: flex;
-  gap: 20px;
-  justify-content: space-between;
-  padding: 6px 12px;
-  width: 157px;
-}
-
-.sdk-start-item:hover {
-  cursor: pointer;
-  background: #e1f3d8;
-}
-
-@media (max-width: 991px) {
-  .sdk-start-item {
-    white-space: initial;
-  }
-}
-
-.sdk-start-icon {
-  display: flex;
-  gap: 4px;
-}
-
-@media (max-width: 991px) {
-  .sdk-start-icon {
-    white-space: initial;
-  }
-}
-
-.platform-icon {
-  aspect-ratio: 1;
-  object-fit: contain;
-  width: 28px;
-}
-
-.platform-name {
-  font-family: PingFang SC, sans-serif;
-  margin: auto 0;
-}
-
-.arrow-icon {
-  aspect-ratio: 1;
-  object-fit: contain;
-  width: 16px;
-  margin: auto 0;
-}
-
-.sdk-features-title {
-  border-bottom: 1px solid rgba(230, 230, 230, 1);
-  margin-top: 36px;
-  color: #1a1a1a;
-  white-space: nowrap;
-  justify-content: center;
-  padding: 8px 0;
-  font: 600 20px PingFang SC, sans-serif;
-}
-
-@media (max-width: 991px) {
-  .sdk-features-title {
-    max-width: 100%;
-    white-space: initial;
-  }
-}
-
-.sdk-feature-item {
-  justify-content: center;
+.placeholder {
+  height: 150px;
+  background-color: #e6f7ff;
   border-radius: 8px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(230, 230, 230, 1);
-  display: flex;
-  margin-top: 16px;
-  flex-direction: column;
-  font-size: 14px;
-  color: #096dd9;
-  font-weight: 400;
-  white-space: nowrap;
-  padding: 16px;
+  margin-bottom: 10px;
 }
 
-@media (max-width: 991px) {
-  .sdk-feature-item {
-    max-width: 100%;
-    white-space: initial;
-  }
+.download-tip {
+  display: flex;
+  align-items: flex-start;
+  padding: 16px 24px;
+  background: #e6f7ff;
+  border: 1px solid #91d5ff;
+  border-radius: 4px;
+  margin-bottom: 24px;
 }
 
-.sdk-feature-header {
-  align-self: start;
-  display: flex;
-  gap: 2px;
+.tip-icon {
+  color: #1890ff;
+  font-size: 24px;
+  margin-right: 16px;
+  margin-top: 2px;
+}
+
+.tip-content {
+  flex: 1;
+}
+
+.tip-title {
   font-size: 16px;
-  color: #1a1a1a;
-  font-weight: 600;
+  font-weight: 500;
+  color: #262626;
+  margin-bottom: 8px;
 }
 
-@media (max-width: 991px) {
-  .sdk-feature-header {
-    white-space: initial;
-  }
+.tip-desc {
+  font-size: 14px;
+  color: #595959;
+  line-height: 1.5;
 }
 
-.feature-icon {
-  aspect-ratio: 1;
-  object-fit: contain;
-  width: 20px;
+.tip-desc ul {
+  margin: 8px 0 0 20px;
+  padding: 0;
 }
 
-.feature-title {
-  font-family: PingFang SC, sans-serif;
-  margin: 0;
+.tip-desc li {
+  margin-bottom: 4px;
 }
 
-.sdk-feature-links {
-  align-content: flex-start;
-  flex-wrap: wrap;
+.tab-header {
+  width: 130px;
   display: flex;
-  margin-top: 16px;
-  gap: 20px;
-  padding: 8px 0;
-}
-
-@media (max-width: 991px) {
-  .sdk-feature-links {
-    max-width: 100%;
-    white-space: initial;
-  }
-}
-
-.feature-link {
-  font-family: PingFang SC, sans-serif;
-  text-decoration: underline;
-  min-width: 120px;
+  justify-content: space-between;
+  color: #abadad;
   cursor: pointer;
 }
 
-.feature-link-group {
-  display: flex;
-  gap: 20px;
-  justify-content: space-between;
+.tab-btn {
+  padding: 12px 0;
 }
 
-@media (max-width: 991px) {
-  .feature-link-group {
-    white-space: initial;
-  }
+.active {
+  color: #1890ff;
+  border-bottom: 2px solid #1890ff;
 }
 </style>
