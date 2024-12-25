@@ -6,8 +6,8 @@
 
 | 应用场景   | Token 权限 | Token 构成           | Token 最长有效期       |
 | :------------ | :----- | :----------------------------------------- | :------- |
-| RESTful API 调用 | App 权限   | <br/> - 你的即时通讯 IM 项目的 App ID。<br/> - 你的即时通讯 IM 项目的 App 证书。<br/> - 你设置的即时通讯 Token 的有效期。</li></ul> | 24 小时（以 UTC 时区为准） |
-| SDK API 调用     | 用户权限   | <br/> - 你的即时通讯 IM 项目的 App ID。<br/> - 你的即时通讯 IM 项目的 App 证书。<br/> - 你的即时通讯 IM 项目的 Token 有效期。</li><li>待鉴权用户的 ID。</li> |  24 小时（以 UTC 时区为准）                          |
+| RESTful API 调用 | App 权限   | <br/> - 你的即时通讯 IM 项目的 App ID。<br/> - 你的即时通讯 IM 项目的 App 证书。<br/> - 你设置的即时通讯 Token 的有效期。| 24 小时（以 UTC 时区为准） |
+| SDK API 调用     | 用户权限   | <br/> - 你的即时通讯 IM 项目的 App ID。<br/> - 你的即时通讯 IM 项目的 App 证书。<br/> - 你的即时通讯 IM 项目的 Token 有效期。<br/> - 待鉴权用户的 ID。|  24 小时（以 UTC 时区为准）                          |
 
 ## 体验 Token 生成
 
