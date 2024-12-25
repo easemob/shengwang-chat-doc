@@ -8,7 +8,7 @@ interface CustomConfig {
 
 export default hopeTheme(<ThemeOptions & CustomConfig>{
   hostname: 'https://doc.chat.rtnsvc.com/',
-  home: '/product/introduction.html',
+  home: '/',
   iconAssets: 'iconfont',
   // logo: '/logo.svg',
   // repo: 'easemob/easemob-doc',
