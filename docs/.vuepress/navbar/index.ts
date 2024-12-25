@@ -23,11 +23,11 @@ export const zhNavbar = navbar([
             icon: '/icon-web.svg',
             link: '/uikit/chatuikit/web/chatuikit_overview.html'
           },
-          {
-            text: 'Uniapp',
-            icon: '/icon-uni-app.svg',
-            link: '/uikit/chatuikit/uniapp/chatuikit_overview.html'
-          },
+          // {
+          //   text: 'Uniapp',
+          //   icon: '/icon-uni-app.svg',
+          //   link: '/uikit/chatuikit/uniapp/chatuikit_overview.html'
+          // },
           {
             text: 'React Native',
             icon: '/icon-ReactNative.svg',
