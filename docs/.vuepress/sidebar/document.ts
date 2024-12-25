@@ -213,7 +213,14 @@ const documentSidebar = [
     ],
     except: ['applet', 'server-side','electron','linux']
   },
-  { text: '合规指南', link: 'security.html' },
+  { text: '合规指南', 
+    collapsible: true,
+    children: [
+      { text: '合规使用说明', link: 'security.html' },
+      { text: '苹果隐私策略', link: 'privacy_policy.html', only: ['ios'] },
+    ],
+    except: ['applet', 'server-side','electron','linux']
+  },
   // {
   //  text: 'CallKit 使用指南',
   //  children: [
@@ -223,13 +230,6 @@ const documentSidebar = [
    // except: ['applet', 'server-side','electron','linux']
 
   //},
-  {
-    text: '苹果隐私策略',
-    children: [
-      { text: '苹果隐私策略', link: 'privacy_policy.html', only: ['ios'] },
-    ],
-    except: ['applet', 'server-side','electron','linux']
-  },
   //{
   //  text: '精简版 SDK',
   //  children: [
