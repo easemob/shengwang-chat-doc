@@ -2,10 +2,10 @@
 
 <Toc />
 
-本文展示如何调用环信即时通讯 RESTful API 实现离线推送，包括设置离线推送通知显示的昵称、推送通知方式及免打扰模式。调用以下方法前，请先参考 [接口频率限制](limitationapi.html) 了解即时通讯 RESTful API 的调用频率限制。
+本文展示如何调声网即时通讯 RESTful API 实现离线推送，包括设置离线推送通知显示的昵称、推送通知方式及免打扰模式。调用以下方法前，请先参考 [接口频率限制](limitationapi.html) 了解即时通讯 RESTful API 的调用频率限制。
 
 :::tip
-若要使用离线推送的高级功能，即设置推送通知模式、免打扰模式和自定义推送模板，你需要在[环信即时通讯云控制后台](https://console.easemob.com/user/login)中点击你的应用后选择 **即时通讯** > **功能配置** > **功能配置总览** 开通离线推送高级功能。
+若要使用离线推送的高级功能，即设置推送通知模式、免打扰模式和自定义推送模板，你需要在[声网控制台](https://console.shengwang.cn/overview)中点击你的应用后选择 **即时通讯** > **功能配置** > **总览** 开通离线推送高级功能。
 :::
 
 ## 公共参数
@@ -16,29 +16,25 @@
 
 | 参数       | 类型   | 是否必需 | 描述   |
 | :--------- | :----- | :------- | :------------------ |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `host`     | String | 是       | 声网即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `app_id`     | String | 是       | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
 
 ### 响应参数
 
 | 参数              | 类型   | 描述                                                                           |
 | :---------------- | :----- | :----------------------------------------------------------------------------- |
 | `action`          | String | 请求方式。                                                                     |
-| `organization`    | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
-| `application`     | String | 环信即时通讯服务分配给每个 app 的唯一内部标识，开发者无需关注。                |
 | `uri`             | String | 请求 URL。                                                                     |
 | `timestamp`       | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。                                          |
-| `applicationName` | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
 | `duration`        | Int    | 从发送 HTTP 请求到响应的时长，单位为毫秒。                                     |
 
 ## 认证方式
 
-环信即时通讯 REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，必须在请求头部填入如下 `Authorization` 字段：
+声网即时通讯 RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，必须在请求头部填入如下 `Authorization` 字段：
 
 `Authorization: Bearer YourAppToken`
 
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 REST API 仅支持使用 App Token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
+为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 REST API 仅支持使用 App Token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
 
 ## 绑定和解绑推送信息 
 
@@ -50,14 +46,14 @@
 
 - 推送证书：推送证书由第三方推送服务提供，一个 app 对应一个推送证书。
 
-用户从第三方推送服务器获取 device token 和证书名称，然后向环信即时通讯服务器上传，服务器根据 device token 向用户推送消息。
+用户从第三方推送服务器获取 device token 和证书名称，然后向声网即时通讯服务器上传，服务器根据 device token 向用户推送消息。
 
 你可以调用该接口对设备与推送信息进行绑定或解绑。
 
 ### HTTP 请求
 
 ```
-PUT https://{host}/{org_name}/{app_name}/users/{userId}/push/binding
+PUT https://{host}/app-id/{app_id}/users/{userId}/push/binding
 ```
 
 #### 路径参数
@@ -80,7 +76,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{userId}/push/binding
 | 参数            | 类型   | 描述                                                         | 是否必需 |
 | :-------------- | :----- | :----------------------------------------------------------- | :------- |
 | `device_id`     | String | 移动端设备标识，服务端用于识别设备，进行推送信息的绑定和解绑。 | 是       |
-| `notifier_name` | String | 推送证书名称。<br/> - 传入的证书名称必需与你在环信控制台的**添加推送证书**页面上填写的证书名称一致，否则推送失败。<br/> - 若 `notifier_name` 为空，表示解除当前设备与所有推送信息的绑定。 | 是       |
+| `notifier_name` | String | 推送证书名称。<br/> - 传入的证书名称必需与你在[声网控制台](https://console.shengwang.cn/overview)的**添加推送证书**页面上填写的证书名称一致，否则推送失败。<br/> - 若 `notifier_name` 为空，表示解除当前设备与所有推送信息的绑定。 | 是       |
 | `device_token`  | String | 推送设备 token。错误的信息会推送失败，且服务端自动解除绑定。若 `device_token` 为空，则会解除当前用户当前设备 ID 和当前证书名的绑定。 | 是       |
 
 ### HTTP 响应
@@ -104,7 +100,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{userId}/push/binding
 **绑定请求**
 
 ```shell
-curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/push/binding' \
+curl -L -X PUT 'https://XXXX/app-id/XXXX/users/XXXX/push/binding' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{    
@@ -117,7 +113,7 @@ curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/push/binding' \
 **解除绑定**
 
 ```shell
-curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/push/binding' \
+curl -L -X PUT 'https://XXXX/app-id/XXXX/users/XXXX/push/binding' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{    
@@ -164,7 +160,7 @@ curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/push/binding' \
 ### HTTP 请求
 
 ```
-GET https://{host}/{org_name}/{app_name}/users/{userId}/push/binding
+GET https://{host}/app-id/{app_id}/users/{userId}/push/binding
 ```
 
 #### 路径参数
@@ -233,7 +229,7 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/push/binding' \
 ### HTTP 请求
 
 ```http
-PUT https://{host}/{org_name}/{app_name}/users/{userId}
+PUT https://{host}/app-id/{app_id}/users/{userId}
 ```
 
 #### 路径参数
@@ -274,7 +270,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{userId}
 |  - `created`   | Number  | 用户注册的 Unix 时间戳，单位为毫秒。       |
 |  - `modified`  | Number  | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。      |
 |  - `username`  | String  | 用户 ID。用户登录的唯一账号。         |
-|  - `activated` | Boolean | 用户是否为活跃状态：<ul><li>`true`：用户为活跃状态。</li><li>`false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](/document/server-side/account_system.html#账号封禁)解除封禁。</li></ul> |
+|  - `activated` | Boolean | 用户是否为活跃状态：<br/> - `true`：用户为活跃状态。<br/> - `false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](/document/server-side/account_system.html#账号封禁)解除封禁。|
 |  - `nickname`  | String  | 推送通知中显示的昵称。 |
 
 其他参数及说明详见 [公共参数](#公共参数)。
@@ -286,7 +282,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{userId}
 #### 请求示例
 
 ```bash
-curl -X PUT https://XXXX/XXXX/XXXX/users/XXXX  \
+curl -X PUT https://XXXX/app-id/XXXX/users/XXXX  \
 -H 'Content-Type: application/json'  \
 -H 'Accept: application/json'  \
 -H 'Authorization: Bearer <YourAppToken>'  \
@@ -298,9 +294,8 @@ curl -X PUT https://XXXX/XXXX/XXXX/users/XXXX  \
 ```json
 {
   "action": "put",
-  "application": "8be024f0-XXXX-XXXX-XXXX-5d598d5f8402",
   "path": "/users",
-  "uri": "https://XXXX/XXXX/XXXX/users/XXXX",
+  "uri": "https://XXXX/app-id/XXXX/users/XXXX",
   "entities": [
     {
       "uuid": "4759aa70-XXXX-XXXX-XXXX-6fa0510823ba",
@@ -313,9 +308,7 @@ curl -X PUT https://XXXX/XXXX/XXXX/users/XXXX  \
     }
   ],
   "timestamp": 1542596083685,
-  "duration": 6,
-  "organization": "agora-demo",
-  "applicationName": "testapp"
+  "duration": 6
 }
 ```
 
@@ -328,7 +321,7 @@ curl -X PUT https://XXXX/XXXX/XXXX/users/XXXX  \
 ### HTTP 请求
 
 ```http
-PUT https://{host}/{org_name}/{app_name}/push/nickname
+PUT https://{host}/app-id/{app_id}/push/nickname
 ```
 
 #### 路径参数
@@ -357,7 +350,7 @@ PUT https://{host}/{org_name}/{app_name}/push/nickname
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
 | 参数            | 类型   | 描述                                                         |
-| :-------------- | :----- | :------- | :----------------------------------------------------------- |
+| :-------------- | :----- | :------- | 
 | `entities`           | JSON Array  | 用户在推送通知中显示的昵称以及用户相关信息。     |
 | `entities.push_nickname`  | String | 离线推送时在接收方的客户端推送通知栏中显示的发送方的昵称。  |
 | `entities.username`        | String | 为哪个用户设置离线推送时显示的发送方昵称。    |
@@ -382,7 +375,7 @@ PUT https://{host}/{org_name}/{app_name}/push/nickname
 ```shell
 curl -X PUT -H 'Content-Type: application/json'  \
 -H 'Accept: application/json'  \
--H 'Authorization: Bearer <YourAppToken>' 'https://XXX/XXX/XXX/push/nickname'  \
+-H 'Authorization: Bearer <YourAppToken>' 'https://XXX/app-id/XXX/push/nickname'  \
 -d '[
       {"username":"user1", "push_nickname":"推送昵称-1"}, 
       {"username":"user2", "push_nickname":"推送昵称-2"}
@@ -394,10 +387,8 @@ curl -X PUT -H 'Content-Type: application/json'  \
 ```json
 {
     "path": "/push",
-    "uri": "http://XXX/XXX/XXX/push",
+    "uri": "http://XXX/app-id/XXX/push",
     "timestamp": 1719542740148,
-    "organization": "XXX",
-    "application": "6b58d05d-99c0-XXX-XXX-1ff3e95a3dc0",
     "entities": [
         {
             "push_nickname": "推送昵称-1",
@@ -409,8 +400,7 @@ curl -X PUT -H 'Content-Type: application/json'  \
         }
     ],
     "action": "put",
-    "duration": 0,
-    "applicationName": "XXX"
+    "duration": 0
 }
 ```
 
@@ -421,7 +411,7 @@ curl -X PUT -H 'Content-Type: application/json'  \
 ### HTTP 请求
 
 ```http
-PUT https://{host}/{org_name}/{app_name}/users/{userId}
+PUT https://{host}/app-id/{app_id}/users/{userId}
 ```
 
 #### 路径参数
@@ -445,7 +435,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{userId}
 
 | 参数                         | 类型 | 描述             | 是否必需 |
 | :--------------------------- | :--- | :--------------------------------- | :------- |
-| `notification_display_style` | Int  | 离线推送通知的展示方式：<ul><li>（默认）`0`：推送标题为“您有一条新消息”，推送内容为“请点击查看”；</li><li>`1`：推送标题为“您有一条新消息”，推送内容为发送人昵称和离线消息的内容。</li></ul> | 是       |
+| `notification_display_style` | Int  | 离线推送通知的展示方式：<br/> - （默认）`0`：推送标题为“您有一条新消息”，推送内容为“请点击查看”；<br/> - `1`：推送标题为“您有一条新消息”，推送内容为发送人昵称和离线消息的内容。| 是       |
 
 ### HTTP 响应
 
@@ -459,7 +449,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{userId}
 |  - `created`                          | Long    | 用户创建的 Unix 时间戳，单位为毫秒。            |
 |  - `modified`                         | Long    | 最近一次修改用户信息的 Unix 时间戳，单位为毫秒。      |
 |  - `username`                         | String  | 用户 ID。用户登录的唯一账号。      |
-|  - `activated`                        | Boolean | 用户是否为活跃状态：<ul><li>`true`：用户为活跃状态。</li><li>`false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](/document/server-side/account_system.html#账号封禁)解除封禁。</li></ul> |
+|  - `activated`                        | Boolean | 用户是否为活跃状态：<br/> - `true`：用户为活跃状态。<br/> - `false`：用户为封禁状态。如要使用已被封禁的用户账户，你需要调用[解禁用户](/document/server-side/account_system.html#账号封禁)解除封禁。|
 |  - `notification_display_style`       | Int     | 离线推送通知的展示方式。      |
 |  - `nickname`                         | String  | 离线推送通知收到时显示的昵称。    |
 |  - `notifier_name`                    | String  | 推送证书名称。   |
@@ -473,7 +463,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{userId}
 #### 请求示例
 
 ```bash
-curl -X PUT https://XXXX/XXXX/XXXX/users/XXXX
+curl -X PUT https://XXXX/app-id/XXXX/users/XXXX
 -H 'Content-Type: application/json'  \
 -H "Authorization: Bearer <YourAppToken>"
 -d '{"notification_display_style": "1"}'
@@ -485,9 +475,8 @@ curl -X PUT https://XXXX/XXXX/XXXX/users/XXXX
 ```json
 {
   "action": "put",
-  "application": "17d59e50-XXXX-XXXX-XXXX-0dc80c0f5e99",
   "path": "/users",
-  "uri": "https://XXXX/XXXX/XXXX/users/XXXX",
+  "uri": "https://XXXX/app-id/XXXX/users/XXXX",
   "entities": [
     {
       "uuid": "3b8c9890-XXXX-XXXX-XXXX-f50bf55cafad",
@@ -502,9 +491,7 @@ curl -X PUT https://XXXX/XXXX/XXXX/users/XXXX
     }
   ],
   "timestamp": 1534407146058,
-  "duration": 3,
-  "organization": "1112171214115068",
-  "applicationName": "testapp"
+  "duration": 3
 }
 ```
 
@@ -515,7 +502,7 @@ curl -X PUT https://XXXX/XXXX/XXXX/users/XXXX
 ### HTTP 请求
 
 ```http
-PUT https://{host}/{org}/{app}/users/{userId}/notification/{chattype}/{key}
+PUT https://{host}/app-id/{app_id}/users/{userId}/notification/{chattype}/{key}
 ```
 
 #### 路径参数
@@ -571,7 +558,7 @@ PUT https://{host}/{org}/{app}/users/{userId}/notification/{chattype}/{key}
 #### 请求示例
 
 ```bash
-curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/notification/user/XXXX' \
+curl -L -X PUT 'https://XXXX/app-id/XXXX/users/XXXX/notification/user/XXXX' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
 -d '{
@@ -586,18 +573,15 @@ curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/notification/user/XXXX' \
 ```json
 {
   "path": "/users",
-  "uri": "https://XXXX/XXXX/XXXX/users/notification/user/XXXX",
+  "uri": "https://XXXX/app-id/XXXX/users/notification/user/XXXX",
   "timestamp": 1647503749918,
-  "organization": "hx",
-  "application": "17fe201b-XXXX-XXXX-XXXX-1ed1ebd7b227",
   "action": "put",
   "data": {
     "type": "NONE",
     "ignoreDuration": 1647590149924,
     "ignoreInterval": "21:30-08:00"
   },
-  "duration": 20,
-  "applicationName": "hxdemo"
+  "duration": 20
 }
 ```
 
@@ -608,7 +592,7 @@ curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/notification/user/XXXX' \
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org}/{app}/users/{userId}/notification/{chattype}/{key}
+GET https://{host}/app-id/{app_id}/users/{userId}/notification/{chattype}/{key}
 ```
 
 #### 路径参数
@@ -647,7 +631,7 @@ GET https://{host}/{org}/{app}/users/{userId}/notification/{chattype}/{key}
 #### 请求示例
 
 ```bash
-curl -L -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/notification/chatgroup/XXXX' \
+curl -L -X GET 'https://XXXX/app-id/XXXX/users/XXXX/notification/chatgroup/XXXX' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
@@ -656,10 +640,8 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/notification/chatgroup/XXXX' \
 ```json
 {
   "path": "/users",
-  "uri": "https://XXXX/XXXX/XXXX/users/notification/chatgroup/12312312321",
+  "uri": "https://XXXX/app-id/XXXX/users/notification/chatgroup/12312312321",
   "timestamp": 1647503749918,
-  "organization": "hx",
-  "application": "17fe201b-XXXX-XXXX-XXXX-1ed1ebd7b227",
   "action": "get",
   "data": {
     "type": "NONE",
@@ -667,7 +649,6 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/notification/chatgroup/XXXX' \
     "ignoreInterval": "21:30-08:00"
   },
   "duration": 20,
-  "applicationName": "XXXX"
 }
 ```
 
@@ -678,7 +659,7 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/notification/chatgroup/XXXX' \
 ### HTTP 请求
 
 ```http
-PUT https://{host}/{org}/{app}/users/{userId}/notification/language
+PUT https://{host}/app-id/{app_id}/users/{userId}/notification/language
 ```
 
 #### 路径参数
@@ -720,7 +701,7 @@ PUT https://{host}/{org}/{app}/users/{userId}/notification/language
 #### 请求示例
 
 ```bash
-curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/notification/language' \
+curl -L -X PUT 'https://XXXX/app-id/XXXX/users/XXXX/notification/language' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
 -d '{
@@ -733,16 +714,13 @@ curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/notification/language' \
 ```json
 {
   "path": "/users",
-  "uri": "https://XXXX/XXXX/XXXX/users/XXXX/notification/language",
+  "uri": "https://XXXX/app-id/XXXX/users/XXXX/notification/language",
   "timestamp": 1648089630244,
-  "organization": "hx",
-  "application": "17fe201b-XXXX-XXXX-XXXX-1ed1ebd7b227",
   "action": "put",
   "data": {
     "language": "EU"
   },
   "duration": 66,
-  "applicationName": "hxdemo"
 }
 ```
 
@@ -753,7 +731,7 @@ curl -L -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/notification/language' \
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/users/{userId}/notification/language
+GET https://{host}/app-id/{app_id}/users/{userId}/notification/language
 ```
 
 #### 路径参数
@@ -788,7 +766,7 @@ GET https://{host}/{org_name}/{app_name}/users/{userId}/notification/language
 #### 请求示例
 
 ```bash
-curl -L -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/notification/language' \
+curl -L -X GET 'https://XXXX/app-id/XXXX/users/XXXX/notification/language' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
@@ -797,28 +775,25 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/notification/language' \
 ```json
 {
   "path": "/users",
-  "uri": "https://XXXX/XXXX/XXXX/users/XXXX/notification/language",
+  "uri": "https://XXXX/app-id/XXXX/users/XXXX/notification/language",
   "timestamp": 1648089630244,
-  "organization": "hx",
-  "application": "17fe201b-XXXX-XXXX-XXXX-1ed1ebd7b227",
   "action": "put",
   "data": {
     "language": "EU"
   },
-  "duration": 66,
-  "applicationName": "hxdemo"
+  "duration": 66
 }
 ```
 
 ## 使用推送模板
 
-你可以使用推送模板设置推送标题和内容。你可以调用以下 REST API 配置默认推送模板 `default` 和自定义推送模板。除此之外，你也可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)设置推送模板，详见[控制台文档](enable_and_configure_IM.html#配置推送模板)。
+你可以使用推送模板设置推送标题和内容。你可以调用以下 RESTful API 配置默认推送模板 `default` 和自定义推送模板。除此之外，你也可以在[声网控制台](https://console.shengwang.cn/overview)设置推送模板，详见[控制台文档](enable_and_configure_IM.html#配置推送模板)。
 
 对于群组消息，你可以使用定向模板将离线通知只发送给特定用户，或向某些用户推送与其他用户不同的离线通知。
 
 使用推送模板有以下优势：
 
-1. 自定义修改环信服务端默认推送内容。   
+1. 自定义修改声网服务端默认推送内容。   
 
 2. 接收方可以决定使用哪个模板。 
 
@@ -836,14 +811,14 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/users/XXXX/notification/language' \
 
 ### 创建离线推送模板
 
-创建离线推送消息模板，包括默认模板 `default` 和自定模板。你可以通过[环信即时通讯云控制台](https://console.easemob.com/user/login)创建推送模板，详见[控制台文档](enable_and_configure_IM.html#配置推送模板)。
+创建离线推送消息模板，包括默认模板 `default` 和自定模板。你可以通过[声网控制台](https://console.shengwang.cn/overview)创建推送模板，详见[控制台文档](enable_and_configure_IM.html#配置推送模板)。
 
 若使用默认模板 **default**，消息推送时自动使用默认模板，创建消息时无需传入模板名称。
 
 #### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/notification/template
+POST https://{host}/app-id/{app_id}/notification/template
 ```
 
 ##### 路径参数
@@ -880,7 +855,7 @@ POST https://{host}/{org_name}/{app_name}/notification/template
       "ext":{
           "em_push_template":{
               "title_args":[
-                  "环信"
+                  "声网"
               ],
               "content_args":[
                   "欢迎使用im-push",
@@ -890,7 +865,7 @@ POST https://{host}/{org_name}/{app_name}/notification/template
       }
   }
   
-  # title: {0} = "环信"
+  # title: {0} = "声网"
   # content: {0} = "欢迎使用im-push" {1} = "加油"
   ```
 
@@ -928,7 +903,7 @@ POST https://{host}/{org_name}/{app_name}/notification/template
 ##### 请求示例
 
 ```bash
-curl -X POST 'https://XXXX/XXXX/XXXX/notification/template' \
+curl -X POST 'https://XXXX/app-id/XXXX/notification/template' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -942,10 +917,8 @@ curl -X POST 'https://XXXX/XXXX/XXXX/notification/template' \
 
 ```json
 {
-  "uri": "https://XXXX/XXXX/XXXX/notification/template",
+  "uri": "https://XXXX/app-id/XXXX/notification/template",
   "timestamp": 1646989584108,
-  "organization": "hx",
-  "application": "17fe201b-XXXX-XXXX-XXXX-1ed1ebd7b227",
   "action": "post",
   "data": {
     "name": "test7",
@@ -954,8 +927,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/notification/template' \
     "title_pattern": "你好,{0}",
     "content_pattern": "推送测试,{0}"
   },
-  "duration": 26,
-  "applicationName": "XXXX"
+  "duration": 26
 }
 ```
 
@@ -966,7 +938,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/notification/template' \
 #### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/notification/template/{name}
+GET https://{host}/app-id/{app_id}/notification/template/{name}
 ```
 
 ##### 路径参数
@@ -1005,7 +977,7 @@ GET https://{host}/{org_name}/{app_name}/notification/template/{name}
 ##### 请求示例
 
 ```bash
-curl -X GET 'https://XXXX/XXXX/XXXX/notification/template/XXXX' \
+curl -X GET 'https://XXXX/app-id/XXXX/notification/template/XXXX' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
@@ -1013,10 +985,8 @@ curl -X GET 'https://XXXX/XXXX/XXXX/notification/template/XXXX' \
 
 ```json
 {
-  "uri": "https://XXXX/XXXX/XXXX/notification/template/XXXX",
+  "uri": "https://XXXX/app-id/XXXX/notification/template/XXXX",
   "timestamp": 1646989686393,
-  "organization": "hx",
-  "application": "17fe201b-XXXX-XXXX-XXXX-1ed1ebd7b227",
   "action": "get",
   "data": {
     "name": "test7",
@@ -1025,8 +995,7 @@ curl -X GET 'https://XXXX/XXXX/XXXX/notification/template/XXXX' \
     "title_pattern": "你好,{0}",
     "content_pattern": "推送测试,{0}"
   },
-  "duration": 11,
-  "applicationName": "hxdemo"
+  "duration": 11
 }
 ```
 
@@ -1037,7 +1006,7 @@ curl -X GET 'https://XXXX/XXXX/XXXX/notification/template/XXXX' \
 #### HTTP 请求
 
 ```
-PUT https://{host}/{org_name}/{app_name}/users/{userId}/notification/template
+PUT https://{host}/app-id/{app_id}/users/{userId}/notification/template
 ```
 
 ##### 路径参数
@@ -1081,7 +1050,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{userId}/notification/template
 ##### 请求示例
 
 ```shell
-curl -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/notification/template' \
+curl -X PUT 'https://XXXX/app-id/XXXX/users/XXXX/notification/template' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourUserToken>' \
 -d '{    
@@ -1094,16 +1063,13 @@ curl -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/notification/template' \
 ```json
 {
     "path": "/users",
-    "uri": "http://XXX/XXX/XXX/users/XXX/notification/template",
+    "uri": "http://XXX/app-id/XXX/users/XXX/notification/template",
     "timestamp": 1705470003984,
-    "organization": "XXX",
-    "application": "cc7380d5-XXXX-XXXX-a93e-51d6d590b475",
     "action": "put",
     "data": {
         "templateName": "hxtest"
     },
-    "duration": 43,
-    "applicationName": "XXX"
+    "duration": 43
 }
 ```
 
@@ -1135,7 +1101,7 @@ curl -X PUT 'https://XXXX/XXXX/XXXX/users/XXXX/notification/template' \
 关于推送标题和推送内容参数的填充，即 `title_pattern` 和 `content_pattern`，详见[创建离线推送模板](#创建离线推送模板)。
 
 ```shell
-curl -L -X POST 'https://XXXX/XXXX/XXXX/messages/users' \
+curl -L -X POST 'https://XXXX/app-id/XXXX/messages/users' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -1162,29 +1128,26 @@ curl -L -X POST 'https://XXXX/XXXX/XXXX/messages/users' \
   "path": "/messages/users",
   "uri": "https://XXXX/XXXX/XXXX/messages/users",
   "timestamp": 1657254052191,
-  "organization": "XXXX",
-  "application": "e82bcc5f-XXXX-XXXX-a7c1-92de917ea2b0",
   "action": "post",
   "data": {
     "user2": "1029457500870543736"
   },
-  "duration": 0,
-  "applicationName": "XXXX"
+  "duration": 0
 }
 ```
 
-接口详情，请参见[发送文本消息](https://doc.easemob.com/document/server-side/message_single.html#发送文本消息)。
+接口详情，请参见[发送文本消息](message_single.html#发送文本消息)。
 
 单聊会话中发送其他类型的消息的接口，请参见[发送单聊消息](message_single.html)接口描述。
 
-2. 下面以发送群聊文本消息时使用群组昵称为例进行介绍：
+1. 下面以发送群聊文本消息时使用群组昵称为例进行介绍：
 
 #### 请求示例
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups' 
+curl -X POST -i 'https://XXXX/app-id/XXXX/messages/chatgroups' 
 -H 'Content-Type: application/json' 
 -H 'Accept: application/json' 
 -H 'Authorization: Bearer <YourAppToken>' 
@@ -1215,14 +1178,11 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups'
   "path": "/messages/chatgroups",
   "uri": "https://XXXX/XXXX/XXXX/messages/chatgroups",
   "timestamp": 1657254052191,
-  "organization": "XXXX",
-  "application": "e82bcc5f-XXXX-XXXX-a7c1-92de917ea2b0",
   "action": "post",
   "data": {
     "184524748161025": "1029544257947437432"
   },
   "duration": 0,
-  "applicationName": "XXXX"
 }
 ```
 
@@ -1237,7 +1197,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatgroups'
 #### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/notification/template/{name}
+DELETE https://{host}/app-id/{app_id}/notification/template/{name}
 ```
 
 ##### 路径参数
@@ -1277,7 +1237,7 @@ DELETE https://{host}/{org_name}/{app_name}/notification/template/{name}
 ##### 请求示例
 
 ```bash
-curl -X DELETE 'https://XXXX/XXXX/XXXX/notification/template/XXXX' \
+curl -X DELETE 'https://XXXX/app-id/XXXX/notification/template/XXXX' \
 -H 'Authorization: Bearer {YourAppToken}'
 ```
 
@@ -1287,8 +1247,6 @@ curl -X DELETE 'https://XXXX/XXXX/XXXX/notification/template/XXXX' \
 {
   "uri": "https://XXXX/XXXX/XXXX/notification/template/XXXX",
   "timestamp": 1646989686393,
-  "organization": "hx",
-  "application": "17fe201b-XXXX-XXXX-XXXX-1ed1ebd7b227",
   "action": "delete",
   "data": {
     "name": "test7",
@@ -1297,8 +1255,7 @@ curl -X DELETE 'https://XXXX/XXXX/XXXX/notification/template/XXXX' \
     "title_pattern": "你好,{0}",
     "content_pattern": "推送测试,{0}"
   },
-  "duration": 11,
-  "applicationName": "XXXX"
+  "duration": 11
 }
 ```
 
@@ -1312,16 +1269,16 @@ curl -X DELETE 'https://XXXX/XXXX/XXXX/notification/template/XXXX' \
 
 | RESTful API 接口        | 方法 | 接口 URL           |
 | :----------- | :--- | :------------- |
-| 绑定和解绑推送信息           | PUT  | /{org_name}/{app_name}/users/{userId}/push/binding |
-| 查询推送绑定信息    | GET  | /{org_name}/{app_name}/users/{userId}/push/binding |
-| 设置离线推送时显示的昵称 | PUT  | /{org_name}/{app_name}/users/{userId} |
-| 设置离线推送通知的展示方式 | PUT  | /{org_name}/{app_name}/users/{userId} |
-| 设置离线推送         | PUT  | /{org_name}/{app_name}/users/{userId}/notification/{chattype}/{key} |
-| 查询离线推送设置     | GET  | /{org_name}/{app_name}/users/{userId}/notification/{chattype}/{key} |
-| 设置推送通知的首选语言     | PUT  | /{org_name}/{app_name}/users/{userId}/notification/language |
-| 获取推送通知的首选语言 | GET  | /{org_name}/{app_name}/users/{userId}/notification/language |
-| 设置接收方配置模板名称 | PUT  | /{org_name}/{app_name}/users/{userId}/notification/template |
-| 获取接收方配置模板名称 | GET | /{org_name}/{app_name}/users/{userId}/notification/template |
+| 绑定和解绑推送信息           | PUT  | /app-id/{app_id}/users/{userId}/push/binding |
+| 查询推送绑定信息    | GET  | /app-id/{app_id}/users/{userId}/push/binding |
+| 设置离线推送时显示的昵称 | PUT  | /app-id/{app_id}/users/{userId} |
+| 设置离线推送通知的展示方式 | PUT  | /app-id/{app_id}/users/{userId} |
+| 设置离线推送         | PUT  | /app-id/{app_id}/users/{userId}/notification/{chattype}/{key} |
+| 查询离线推送设置     | GET  | /app-id/{app_id}/users/{userId}/notification/{chattype}/{key} |
+| 设置推送通知的首选语言     | PUT  | /app-id/{app_id}/users/{userId}/notification/language |
+| 获取推送通知的首选语言 | GET  | /app-id/{app_id}/users/{userId}/notification/language |
+| 设置接收方配置模板名称 | PUT  | /app-id/{app_id}/users/{userId}/notification/template |
+| 获取接收方配置模板名称 | GET | /app-id/{app_id}/users/{userId}/notification/template |
 
 以上 API 的常见错误码如下所示：
 
@@ -1330,7 +1287,7 @@ curl -X DELETE 'https://XXXX/XXXX/XXXX/notification/template/XXXX' \
 | 400 | RequiredPropertyNotFoundException | Entity user requires a property named username | 用户不存在 | 检查并修改请求参数，请使用正确的且存在的用户 ID。 |
 | 400  | IllegalArgumentException | parameters is invalid : XXX | XXX 属性值不合法 | 检查并修改请求参数，在限定范围内使用请求参数。|
 | 404 | 请求路径不存在 | url is invalid | 请求路径错误 | 检查并修改，请使用正确的请求路径。 |
-| 5xx | 服务器内部错误   | 任意      | 服务器在尝试处理请求时发生内部错误| 联系环信技术支持。 |
+| 5xx | 服务器内部错误   | 任意      | 服务器在尝试处理请求时发生内部错误| 联系声网技术支持。 |
 
 ### 推送模板相关接口的常见错误码
 
@@ -1338,10 +1295,10 @@ curl -X DELETE 'https://XXXX/XXXX/XXXX/notification/template/XXXX' \
 
 | RESTful API 接口        | 方法 | 接口 URL           |
 | :----------- | :--- | :------------- |
-| 创建离线推送模板          | POST  | /{org_name}/{app_name}/notification/template |
-| 修改离线推送模板      | PUT  | /{org_name}/{app_name}/notification/template/{name} |
-| 查询离线推送模板 | GET | /{org_name}/{app_name}/notification/template/{name} |
-| 删除离线推送模板          | DELETE  | /{org_name}/{app_name}/notification/template/{name} |
+| 创建离线推送模板          | POST  | /app-id/{app_id}/notification/template |
+| 修改离线推送模板      | PUT  | /app-id/{app_id}/notification/template/{name} |
+| 查询离线推送模板 | GET | /app-id/{app_id}/notification/template/{name} |
+| 删除离线推送模板          | DELETE  | /app-id/{app_id}/notification/template/{name} |
 
 这些 REST API 的常见错误码如下所示：
 
@@ -1349,7 +1306,7 @@ curl -X DELETE 'https://XXXX/XXXX/XXXX/notification/template/XXXX' \
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 400  | EntityNotFoundException | XXX template is not exist | XXX 模板不存在 | 检查并修改请求参数，使用正确存在的模板名称。 |
 | 404 | 请求路径不存在 | url is invalid | 请求路径错误 | 检查并修改，使用正确的请求路径。 |
-| 5xx | 服务器内部错误   | 任意      | 服务器在尝试处理请求时发生内部错误 | 联系环信技术支持。 |
+| 5xx | 服务器内部错误   | 任意      | 服务器在尝试处理请求时发生内部错误 | 联系声网技术支持。 |
 
 其他错误，你可以参考 [错误码](error.html) 了解可能的原因。
 
