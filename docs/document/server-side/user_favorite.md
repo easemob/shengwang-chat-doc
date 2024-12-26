@@ -1,27 +1,23 @@
 # 用户收藏
 
-环信即时通讯云 IM 支持你收藏聊天过程中发送成功的各类消息或你的其他自定义内容。这些收藏的内容永久保存，你可以随时查看。例如，你若收藏指定的消息附件，可[将消息附件设置为永久存储](message_attachment_storage.html)，然后再收藏，即可随时查看这些附件内容。
+声网即时通讯 IM 支持你收藏聊天过程中发送成功的各类消息或你的其他自定义内容。这些收藏的内容永久保存，你可以随时查看。例如，你若收藏指定的消息附件，可[将消息附件设置为永久存储](message_attachment_storage.html)，然后再收藏，即可随时查看这些附件内容。
 
 ## 公共参数
 
-以下表格列举了环信 IM 的 RESTful 接口的公共请求参数和响应参数：
+以下表格列举了声网即时通讯 IM 的 RESTful 接口的公共请求参数和响应参数：
 
 #### 请求参数
 
-| 参数       | 类型   | 是否必需 | 描述         |
-| :--------- | :----- | :------- | :------------------------- |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| 参数       | 类型   | 是否必需 | 描述   |
+| :--------- | :----- | :------- | :------------------ |
+| `host`     | String | 是       | 声网即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `app_id`     | String | 是       | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
 
 #### 响应参数
 
 | 参数                 | 类型   | 描述            |
 | :------------------- | :----- | :-------------------------------------------- |
 | `action`             | String | 请求方法。                                   |
-| `organization`       | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。          |
-| `application`        | String | 系统内为应用生成的唯一标识，开发者无需关心。          |
-| `applicationName`    | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。    |
 | `uri`                | String | 请求 URL。                |
 | `path`               | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。       |
 | `data`               | JSON   | 实际获取的数据详情。            |
@@ -30,19 +26,19 @@
 
 ## 前提条件
 
-要调用环信即时通讯 RESTful API，请确保满足以下要求：
+要调用声网即时通讯 IM 的 RESTful API，请确保满足以下要求：
 
-- 已在环信即时通讯云控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
-- 已从服务端获取 app token，详见 [使用 App Token 鉴权](easemob_app_token.html)。
-- 了解环信 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置声网即时通讯 IM 服务](enable_im.html)。
+- 已从服务端获取 app token，详见 [使用 Token 鉴权](token_authentication.html)。
+- 了解声网即时通讯 IM 的 RESTful API 调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 认证方式
 
-环信即时通讯 REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
+声网即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
 `Authorization: Bearer YourAppToken`
 
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。本文介绍的即时通讯所有 REST API 均需使用 App Token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
+为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的 鉴权方式，详见 [使用 Token 鉴权](token_authentication.html)。
 
 ## 分页获取用户收藏
 
@@ -53,7 +49,7 @@
 #### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/users/{username}/collections  
+GET https://{host}/app-id/{app_id}/users/{username}/collections  
 ```
 
 ##### 路径参数
@@ -115,7 +111,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/collections
 ```shell
 将 <YourAppToken> 替换为你在服务端生成的 App Token 
 curl -X GET -H 'Accept: application/json' \
--H 'Authorization: Bearer <YourAppToken>' https://XXX/XXX/XXX/users/{username}/collections
+-H 'Authorization: Bearer <YourAppToken>' https://XXXX/app-id/XXXX/users/{username}/collections
 ```
 
 ##### 响应示例
@@ -157,7 +153,7 @@ curl -X GET -H 'Accept: application/json' \
 #### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/users/{username}/collections
+POST https://{host}/app-id/{app_id}/users/{username}/collections
 ```
 
 ##### 路径参数 
@@ -180,7 +176,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/collections
 
 | 参数            | 类型   | 是否必需 | 描述                 |
 | :-------------- | :----- | :------- | --------------------------------- |
-| `id`   | String | 否       | 收藏 ID，收藏的唯一标识。若不传，环信服务器会设置随机的 UUID。     |
+| `id`   | String | 否       | 收藏 ID，收藏的唯一标识。若不传，声网服务器会设置随机的 UUID。     |
 | `data` | String | 是       | 收藏内容。 |
 | `type` | Int    | 是       | 收藏类型。 |
 | `ext`  | String | 否       | 收藏的扩展信息。默认为 `NULL`，即无扩展信息。 |
@@ -210,7 +206,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/collections
 
 ```shell
 将 <YourAppToken> 替换为你在服务端生成的 App Token 
-curl -X POST https://XXX/XXX/XXX/users/{username}/collections
+curl -X POST https://XXXX/app-id/XXXX/users/{username}/collections
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' 
@@ -256,7 +252,7 @@ curl -X POST https://XXX/XXX/XXX/users/{username}/collections
 #### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/collections
+POST https://{host}/app-id/{app_id}/collections
 ```
 
 ##### 路径参数 
@@ -297,7 +293,7 @@ POST https://{host}/{org_name}/{app_name}/collections
 
 ```shell
 将 <YourAppToken> 替换为你在服务端生成的 App Token 
-curl -X POST https://XXX/XXX/XXX/collections
+curl -X POST https://XXXX/app-id/XXXX/collections
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>'  \
@@ -359,7 +355,7 @@ curl -X POST https://XXX/XXX/XXX/collections
 #### HTTP 请求
 
 ```http
-PUT https://{host}/{org_name}/{app_name}/users/{username}/collections/{collectionId}
+PUT https://{host}/app-id/{app_id}/users/{username}/collections/{collectionId}
 ```
 
 ##### 路径参数 
@@ -410,7 +406,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}/collections/{collectio
 
 ```shell
 将 <YourAppToken> 替换为你在服务端生成的 App Token 
-curl -X PUT https://XXX/XXX/XXX/users/{username}/collections/{collectionId} \
+curl -X PUT https://XXXX/app-id/XXXX/users/{username}/collections/{collectionId} \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
@@ -454,7 +450,7 @@ curl -X PUT https://XXX/XXX/XXX/users/{username}/collections/{collectionId} \
 #### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/users/{username}/collections
+DELETE https://{host}/app-id/{app_id}/users/{username}/collections
 ```
 
 ##### 路径参数 
@@ -499,7 +495,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{username}/collections
 
 ```shell
 将 <YourAppToken> 替换为你在服务端生成的 App Token 
-curl -X DELETE https://XXX/XXX/XXX/users/{username}/collections \
+curl -X DELETE https://XXXX/app-id/XXXX/users/{username}/collections \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>'  \

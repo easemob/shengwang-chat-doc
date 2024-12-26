@@ -2,7 +2,7 @@
 
 随着监管机制日益完善，对 app 的监管不断加强，安全合规逐渐成为 app 的生命线。
 
-为加强 app 管理，环信即时通讯提供全局禁言功能，对 app 提供用户 ID 级别的禁言管理，支持在管理员发现用户违规后进行全局禁言，以维护 app 良好的内容生态环境。禁言到期后，服务器会自动解除禁言，恢复该用户发送消息的权限。
+为加强 app 管理，声网即时通讯提供全局禁言功能，对 app 提供用户 ID 级别的禁言管理，支持在管理员发现用户违规后进行全局禁言，以维护 app 良好的内容生态环境。禁言到期后，服务器会自动解除禁言，恢复该用户发送消息的权限。
 
 你可以对单个用户 ID 设置单聊、群组或聊天室消息全局禁言。禁言后，该用户无论通过调用客户端 API，还是使用服务端 RESTful API 都将无法在对应的单聊、群组或聊天室发送消息。
 
@@ -12,24 +12,20 @@
 
 ## 公共参数
 
-以下表格列举了环信 IM 的 RESTful 接口的公共请求参数和响应参数：
+以下表格列举了声网即时通讯 IM 的 RESTful 接口的公共请求参数和响应参数：
 
 ### 请求参数
 
-| 参数       | 类型   | 是否必需 | 描述         |
-| :--------- | :----- | :------- | :------------------------- |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| 参数       | 类型   | 是否必需 | 描述   |
+| :--------- | :----- | :------- | :------------------ |
+| `host`     | String | 是       | 声网即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `app_id`     | String | 是       | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
 
 ### 响应参数
 
 | 参数                 | 类型   | 描述            |
 | :------------------- | :----- | :-------------------------------------------- |
 | `action`             | String | 请求方法。                                   |
-| `organization`       | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。          |
-| `application`        | String | 系统内为应用生成的唯一标识，开发者无需关心。          |
-| `applicationName`    | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。    |
 | `uri`                | String | 请求 URL。                |
 | `path`               | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。       |
 | `data`               | JSON   | 实际获取的数据详情。            |
@@ -38,19 +34,19 @@
 
 ## 前提条件
 
-要调用环信即时通讯 RESTful API，请确保满足以下要求：
+要调用声网即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在环信即时通讯云控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
-- 已从服务端获取 app token，详见 [使用 App Token 鉴权](easemob_app_token.html)。
-- 了解环信 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置声网即时通讯 IM 服务](enable_im.html)。
+- 已从服务端获取 app token，详见 [使用 Token 鉴权](token_authentication.html)。
+- 了解声网即时通讯 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 认证方式
 
-环信即时通讯 REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
+声网即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
 `Authorization: Bearer YourAppToken`
 
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。本文介绍的即时通讯所有 REST API 均需使用 App Token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
+为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的 鉴权方式，详见 [使用 Token 鉴权](token_authentication.html)。
 
 ### 设置用户全局禁言
 
@@ -59,7 +55,7 @@
 #### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/mutes
+POST https://{host}/app-id/{app_id}/mutes
 ```
 
 ##### 路径参数
@@ -105,7 +101,7 @@ POST https://{host}/{org_name}/{app_name}/mutes
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L -X POST 'https://XXXX/XXXX/XXXX/mutes' \
+curl -L -X POST 'https://XXXX/app-id/XXXX/mutes' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json'  \
@@ -122,16 +118,13 @@ curl -L -X POST 'https://XXXX/XXXX/XXXX/mutes' \
 ```json
 {
   "path": "/mutes",
-  "uri": "https://XXXX/XXXX/XXXX/mutes",
+  "uri": "https://XXXX/app-id/XXXX/mutes",
   "timestamp": 1631609754727,
-  "organization": "XXXX",
-  "application": "357169f0-XXXX-XXXX-9b3a-f1af649cc48d",
   "action": "post",
   "data": {
     "result": "ok"
   },
-  "duration": 74,
-  "applicationName": "XXXX"
+  "duration": 74
 }
 ```
 
@@ -143,7 +136,6 @@ curl -L -X POST 'https://XXXX/XXXX/XXXX/mutes' \
 | :----- | :---------- | :-------- | :------------------| :------------------------|
 | 400         | required_property_not_found        | Entity user requires a property named username    | 用户不存在。  | 先注册用户或者检查用户名是否正确。 |
 | 401         | unauthorized                       | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。              |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
 
 关于其他错误，你可以参考 [错误码](#错误码) 了解可能的原因。
 
@@ -154,7 +146,7 @@ curl -L -X POST 'https://XXXX/XXXX/XXXX/mutes' \
 #### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/mutes/{username}
+GET https://{host}/app-id/{app_id}/mutes/{username}
 ```
 
 ##### 路径参数
@@ -199,7 +191,7 @@ GET https://{host}/{org_name}/{app_name}/mutes/{username}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L -X GET 'https://XXXX/XXXX/XXXX/mutes/zs1' \
+curl -L -X GET 'https://XXXX/app-id/XXXX/mutes/zs1' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json'  \
@@ -210,10 +202,8 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/mutes/zs1' \
 ```json
 {
   "path": "/mutes",
-  "uri": "https://XXXX/XXXX/XXXX/mutes",
+  "uri": "https://XXXX/app-id/XXXX/mutes/zs1",
   "timestamp": 1631609831800,
-  "organization": "XXXX",
-  "application": "357169f0-XXXX-XXXX-9b3a-f1af649cc48d",
   "action": "get",
   "data": {
     "userid": "XXXX#restys_zs1",
@@ -222,8 +212,7 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/mutes/zs1' \
     "chatroom": 96,
     "unixtime": 1631609831
   },
-  "duration": 13,
-  "applicationName": "XXXX"
+  "duration": 13
 }
 ```
 
@@ -235,7 +224,6 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/mutes/zs1' \
 | :---------- | :------------------| :-------------------| :-----------| :------------|
 | 400         | required_property_not_found        | Entity user requires a property named username     | 用户不存在。 | 先注册用户或者检查用户名是否正确。 |
 | 401         | unauthorized      | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。              |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。    | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。|
 
 关于其他错误，你可以参考 [错误码](#错误码) 了解可能的原因。
 
@@ -246,7 +234,7 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/mutes/zs1' \
 #### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/mutes
+GET https://{host}/app-id/{app_id}/mutes
 ```
 
 ##### 路径参数
@@ -294,7 +282,7 @@ GET https://{host}/{org_name}/{app_name}/mutes
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L -X GET 'https://XXXX/XXXX/XXXX/mutes?pageNum=1&pageSize=10' \
+curl -L -X GET 'https://XXXX/app-id/XXXX/mutes?pageNum=1&pageSize=10' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json'  \
@@ -305,10 +293,8 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/mutes?pageNum=1&pageSize=10' \
 ```json
 {
   "path": "/mutes",
-  "uri": "https://XXXX/XXXX/XXXX/mutes",
+  "uri": "https://XXXX/app-id/XXXX/mutes",
   "timestamp": 1631609858771,
-  "organization": "XXXX",
-  "application": "357169f0-XXXX-XXXX-9b3a-f1af649cc48d",
   "action": "get",
   "data": {
     "data": [
@@ -343,8 +329,7 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/mutes?pageNum=1&pageSize=10' \
     ],
     "unixtime": 1631609858
   },
-  "duration": 17,
-  "applicationName": "XXXX"
+  "duration": 17
 }
 ```
 
@@ -355,7 +340,6 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/mutes?pageNum=1&pageSize=10' \
 | HTTP 状态码 | 错误类型    | 错误提示        | 可能原因     | 处理建议         |
 | :---------- | :------------------| :--------------------| :------------------| :----------------|
 | 401         | unauthorized    | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。              |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。   | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
 
 关于其他错误，你可以参考 [错误码](#错误码) 了解可能的原因。
 

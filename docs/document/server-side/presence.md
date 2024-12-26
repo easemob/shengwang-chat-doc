@@ -2,7 +2,7 @@
 
 <Toc />
 
-在线状态（Presence）表示用户的当前状态信息。除了环信 IM 内置的在线和离线状态，你还可以添加自定义在线状态，例如忙碌、马上回来、离开、接听电话、外出就餐等。本文展示如何调用环信即时通讯 RESTful API 实现用户在线状态（Presence）订阅，包括设置用户在线状态信息、批量订阅和获取在线状态、取消订阅以及查询订阅列表。
+在线状态（Presence）表示用户的当前状态信息。除了声网即时通讯 IM 内置的在线和离线状态，你还可以添加自定义在线状态，例如忙碌、马上回来、离开、接听电话、外出就餐等。本文展示如何调用声网即时通讯 RESTful API 实现用户在线状态（Presence）订阅，包括设置用户在线状态信息、批量订阅和获取在线状态、取消订阅以及查询订阅列表。
 
 关于用户的在线、离线和自定义状态的定义，详见[用户在线状态管理](/product/product_user_presence.html)。
 
@@ -10,34 +10,33 @@
 使用该特性前，你需要联系商务开通。
 :::
 
-## 前提条件
-
-要调用环信即时通讯 RESTful API，请确保满足以下要求：
-
-- 已在环信即时通讯云控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
-- 已从服务端获取 app token，详见 [使用 App Token 鉴权](easemob_app_token.html)。
-- 了解环信 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
-
 ## 公共参数
 
 以下表格列举了即时通讯 RESTful API 的公共请求参数和响应参数：
 
 ### 请求参数
 
-| 参数    | 类型   | 是否必需 | 描述         |
-| :------------ | :----- | :------ | :---------------- |
-| `host`| String | 是    | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
-| `org_name` | String | 是     | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是    | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。|
+| 参数       | 类型   | 是否必需 | 描述   |
+| :--------- | :----- | :------- | :------------------ |
+| `host`     | String | 是       | 声网即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `app_id`     | String | 是       | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
 | `username`      | String | 是 |用户在即时通讯服务器上的唯一 ID。                            | 
+
+## 前提条件
+
+要调用声网即时通讯 RESTful API，请确保满足以下要求：
+
+- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置声网即时通讯 IM 服务](enable_im.html)。
+- 已从服务端获取 app token，详见 [使用 Token 鉴权](token_authentication.html)。
+- 了解声网即时通讯 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 认证方式
 
-环信即时通讯 RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
+声网即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
 `Authorization: Bearer YourAppToken`
 
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 建议使用 App Token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
+为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的 鉴权方式，详见 [使用 Token 鉴权](token_authentication.html)。
 
 ## 设置用户在线状态信息
 
@@ -46,7 +45,7 @@
 ### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/users/{username}/presence/{resource}/{status}
+POST https://{host}/app-id/{app_id}/users/{username}/presence/{resource}/{status}
 ```
 
 #### 路径参数
@@ -92,7 +91,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/presence/{resource}/{
 #### 请求示例
 
 ```shell
-curl -X POST 'a1-test.easemob.com:8089/5101220107132865/test/users/c1/presence/android/0' \
+curl -X POST 'https://XXXX/app-id/XXXX/users/c1/presence/android/0' \
 -H 'Authorization: Bearer YWMtnjEbUopPEeybKGMmN0wpeZsaLSh8UEgpirS4wNAM_qx8oS2wik8R7LE4Rclv5hu9AwMAAAF-4tr__wBPGgDWGAeO86wl2lHGeTnU030fpWuEDR015Vk6ULWGYGKccA' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json'
@@ -113,7 +112,7 @@ curl -X POST 'a1-test.easemob.com:8089/5101220107132865/test/users/c1/presence/a
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 400   | illegal_argument | ext cannot be null | 在线状态扩展参数 `ext` 传了空值。 | 保证 `ext` 参数传非空值。 |
 | 400   | illegal_argument | ext is too big | 在线状态扩展信息超过了 1024 字节长度限制。 | 控制在线状态扩展信息的长度不要超过 1024 字节。 |
-| 400   | service open exception | the app not open presence | 没有开通在线状态 Presence 服务。 | 联系商务开通在线状态 Presence 服务。|
+| 400   | service open exception | the app not open presence | 没有开通在线状态 Presence 服务。 | 联系声网商务开通在线状态 Presence 服务。|
 | 401  | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
 
 关于其他错误，你可以参考 [错误码](#错误码) 了解可能的原因。
@@ -125,7 +124,7 @@ curl -X POST 'a1-test.easemob.com:8089/5101220107132865/test/users/c1/presence/a
 ### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/users/{username}/presence/{expiry}
+POST https://{host}/app-id/{app_id}/users/{username}/presence/{expiry}
 ```
 
 #### 路径参数
@@ -175,7 +174,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/presence/{expiry}
 #### 请求示例
 
 ```shell
-curl -X POST 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presence/1000' \
+curl -X POST 'https://XXXX/app-id/XXXX/users/wzy/presence/1000' \
 -H 'Authorization: Bearer YWMtnjEbUopPEeybKGMmN0wpeZsaLSh8UEgpirS4wNAM_qx8oS2wik8R7LE4Rclv5hu9AwMAAAF-4tr__wBPGgDWGAeO86wl2lHGeTnU030fpWuEDR015Vk6ULWGYGKccA' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json'
@@ -229,7 +228,7 @@ curl -X POST 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presence/
 ### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/users/{username}/presence
+POST https://{host}/app-id/{app_id}/users/{username}/presence
 ```
 
 #### 路径参数
@@ -277,7 +276,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/presence
 #### 请求示例
 
 ```shell
-curl -X POST 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presence' \
+curl -X POST 'https://XXXX/app-id/XXXX/users/wzy/presence' \
 -H 'Authorization: Bearer YWMtnjEbUopPEeybKGMmN0wpeZsaLSh8UEgpirS4wNAM_qx8oS2wik8R7LE4Rclv5hu9AwMAAAF-4tr__wBPGgDWGAeO86wl2lHGeTnU030fpWuEDR015Vk6ULWGYGKccA' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json'
@@ -319,14 +318,14 @@ curl -X POST 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presence'
 
 ## 查询单个群组的在线成员数量
 
-你可以查询单个群组的在线成员数量。**如需使用该 API，需要联系环信商务开通。**
+你可以查询单个群组的在线成员数量。**如需使用该 API，需要联系声网商务开通。**
 
 这里的在线状态指用户的 app 与服务器成功建立连接，不包括用户的自定义在线状态，如忙碌、马上回来等。
 
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/presence/online/{group_id}/type/{query_type}
+GET https://{host}/app-id/{app_id}/presence/online/{group_id}/type/{query_type}
 ```
 
 #### 路径参数
@@ -365,7 +364,7 @@ GET https://{host}/{org_name}/{app_name}/presence/online/{group_id}/type/{query_
 
 ```shell
 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXX/XXX/XXX/presence/online/XXX/type/XXX'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'http://XXX/app-id/XXX/presence/online/XXX/type/XXX'
 ```
 
 #### 响应示例
@@ -397,7 +396,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/users/{username}/presence
+DELETE https://{host}/app-id/{app_id}/users/{username}/presence
 ```
 
 ### 路径参数
@@ -438,7 +437,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{username}/presence
 #### 请求示例
 
 ```shell
-curl -X DELETE 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presence' \
+curl -X DELETE 'https://XXXX/app-id/XXXX/users/XXXX/presence' \
 -H 'Authorization: Bearer YWMtnjEbUopPEeybKGMmN0wpeZsaLSh8UEgpirS4wNAM_qx8oS2wik8R7LE4Rclv5hu9AwMAAAF-4tr__wBPGgDWGAeO86wl2lHGeTnU030fpWuEDR015Vk6ULWGYGKccA' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json'  \
@@ -471,7 +470,7 @@ curl -X DELETE 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presenc
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/users/{uid}/presence/sublist?pageNum={pagenumber}&pageSize={pagesize}
+GET https://{host}/app-id/{app_id}/users/{uid}/presence/sublist?pageNum={pagenumber}&pageSize={pagesize}
 ```
 
 #### 路径参数

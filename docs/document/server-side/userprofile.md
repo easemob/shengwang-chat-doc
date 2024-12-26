@@ -6,10 +6,10 @@
 
 例如，在招聘场景下，利用用户属性功能，可以存储性别、邮箱、用户类型（面试者）、职位类型（web 研发）等。当查看用户信息时，可以直接查询服务器存储的用户属性信息。
 
-环信 IM 提供 RESTful API 接口方便开发者管理服务端的用户属性信息。
+声网即时通讯 IM 提供 RESTful API 接口方便开发者管理服务端的用户属性信息。
 
 :::tip
-为保证用户信息安全，环信即时通讯 IM 仅支持用户本人或 app 管理员设置用户属性。
+为保证用户信息安全，声网即时通讯 IM 仅支持用户本人或 app 管理员设置用户属性。
 :::
 
 可以调用以下 RESTful API 实现用户属性功能：
@@ -24,44 +24,40 @@
 
 ## 前提条件
 
-要调用环信即时通讯 RESTful API，请确保满足以下条件：
+要调用声网即时通讯 IM 的 RESTful API，请确保满足以下条件：
 
-- 已在环信即时通讯云控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
-- 了解环信 IM REST API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置声网即时通讯 IM 服务](enable_im.html)。
+- 了解声网即时通讯 IM 的 RESTful API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 公共参数
 
 ### 请求参数
 
-| 参数       | 类型   | 是否必需 | 描述                                                                                                                                            |
-| :--------- | :----- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `username` | String | 是       | 用户 ID。                                                                                                                                       |
+| 参数       | 类型   | 是否必需 | 描述           |
+| :--------- | :----- | :------- | :------------------ |
+| `host`     | String | 是       | 声网即时通讯 IM 分配的用于访问 RESTful API 的域名。 |
+| `app_id`     | String | 是       | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 |
+| `username` | String | 是       | 用户 ID。      |
 
 ### 响应参数
 
-| 参数              | 类型   | 描述                                                                           |
-| :---------------- | :----- | :----------------------------------------------------------------------------- |
-| `organization`    | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
-| `application`     | String | 应用在系统内的唯一标识。该标识由系统生成，开发者无需关心。                     |
-| `applicationName` | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
+| 参数              | 类型   | 描述         |
+| :---------------- | :----- | :-------------------------------- |
 | `entities`        | Object | 响应实体。                                                                     |
 | `username`        | String | 用户 ID。                                                                      |
 | `data.nickname`   | String | 用户昵称。                                                                     |
 | `data.ext`        | String | 自定义的用户属性扩展字段。                                                     |
 | `data.avatarurl`  | String | 用户头像 URL。                                                                 |
-| `timestamp`       | Long   | Unix 时间戳，单位为毫秒。                                                      |
-| `duration`        | Long   | 从发送 HTTP 请求到响应的时长, 单位为毫秒。                                     |
+| `timestamp`       | Long   | Unix 时间戳，单位为毫秒。             |
+| `duration`        | Long   | 从发送 HTTP 请求到响应的时长, 单位为毫秒。      |
 
 ## 认证方式
 
-环信即时通讯 IM REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
+声网即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
 `Authorization: Bearer YourAppToken`
 
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 REST API 推荐使用 app token 的 鉴权方式，详见 [使用环信 App Token 鉴权](easemob_app_token.html)。
+为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的 鉴权方式，详见 [使用 Token 鉴权](token_authentication.html)。
 
 ## 设置用户属性
 
@@ -72,7 +68,7 @@
 ### HTTP 请求
 
 ```http
-PUT https://{host}/{org_name}/{app_name}/metadata/user/{username}
+PUT https://{host}/app-id/{app_id}/metadata/user/{username}
 ```
 
 #### 路径参数
@@ -81,8 +77,8 @@ PUT https://{host}/{org_name}/{app_name}/metadata/user/{username}
 
 #### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| 参数            | 类型   | 是否必需 | 描述         |
+| :-------------- | :----- | :------- | :--------------- |
 | `Content-Type`  | String | 是       | 内容类型。请填 `application/x-www-form-urlencoded`。                                                                 |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
@@ -97,8 +93,8 @@ PUT https://{host}/{org_name}/{app_name}/metadata/user/{username}
 
 关于用户属性，客户端针对用户的昵称、头像 URL、联系方式、邮箱、性别、签名、生日和扩展字段默认使用以下键名。调用该 RESTful 接口设置用户属性时，若要确保在客户端能够获取设置，请求中必须传以下键名与客户端保持一致，键值可根据实际使用场景确定：
 
-| 字段        | 描述                                                                                              |
-| :---------- | :------------------------------------------------------------------------------------------------ |
+| 字段        | 描述        |
+| :---------- | :------------------------------------------------ |
 | `nickname`  | 用户昵称。长度在 64 个字符内。                                                                    |
 | `avatarurl` | 用户头像 URL 地址。长度在 256 个字符内。                                                          |
 | `phone`     | 用户联系方式。长度在 32 个字符内。                                                                |
@@ -129,7 +125,7 @@ PUT https://{host}/{org_name}/{app_name}/metadata/user/{username}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X PUT -H 'Content-Type: application/x-www-form-urlencoded' -H 'Authorization: Bearer <YourAppToken>' -d 'avatarurl=https://www.easemob.com/avatar.png&ext=ext&nickname=nickname' 'https://XXXX/XXXX/XXXX/metadata/user/user1'
+curl -X PUT -H 'Content-Type: application/x-www-form-urlencoded' -H 'Authorization: Bearer <YourAppToken>' -d 'avatarurl=https://www.easemob.com/avatar.png&ext=ext&nickname=nickname' 'https://XXXX/app-id/XXXX/metadata/user/user1'
 ```
 
 #### 响应示例
@@ -140,7 +136,7 @@ curl -X PUT -H 'Content-Type: application/x-www-form-urlencoded' -H 'Authorizati
   "data": {
     "ext": "ext",
     "nickname": "nickname",
-    "avatarurl": "https://www.easemob.com/avatar.png"
+    "avatarurl": "https://www.XXXX.com/avatar.png"
   },
   "duration": 166
 }
@@ -169,7 +165,7 @@ curl -X PUT -H 'Content-Type: application/x-www-form-urlencoded' -H 'Authorizati
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/metadata/user/{username}
+GET https://{host}/app-id/{app_id}/metadata/user/{username}
 ```
 
 #### 路径参数
@@ -204,7 +200,7 @@ GET https://{host}/{org_name}/{app_name}/metadata/user/{username}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/metadata/user/user1'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/app-id/XXXX/metadata/user/user1'
 ```
 
 #### 响应示例
@@ -215,7 +211,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
   "data": {
     "ext": "ext",
     "nickname": "nickname",
-    "avatarurl": "https://www.easemob.com/avatar.png"
+    "avatarurl": "https://www.XXXX.com/avatar.png"
   },
   "duration": 166
 }
@@ -228,7 +224,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | metadata_error          | auth error        | 鉴权失败。例如，使用的 token 与路径参数 `username` 不匹配。   | 使用正确的 token。     |
-| 403     | FORBIDDEN       | {appkey} user metadata service not allow        | 用户属性功能未开通。  | 联系商务开通用户属性功能。 |
+| 403     | FORBIDDEN       | {appkey} user metadata service not allow        | 用户属性功能未开通。  | 联系声网商务开通用户属性功能。 |
 | 500     | INTERNAL_SERVER_ERROR          |         | 服务未知异常。  | 
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
@@ -242,7 +238,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/metadata/user/get
+POST https://{host}/app-id/{app_id}/metadata/user/get
 ```
 
 #### 路径参数
@@ -299,7 +295,7 @@ curl -X POST -H 'Content-Type: application/json' \
     "user2",
     "user3"
   ]
-}' 'https://XXXX/XXXX/XXXX/metadata/user/get'
+}' 'https://XXXX/app-id/XXXX/metadata/user/get'
 ```
 
 #### 响应示例
@@ -311,17 +307,17 @@ curl -X POST -H 'Content-Type: application/json' \
     "user1": {
       "ext": "ext",
       "nickname": "nickname",
-      "avatarurl": "https://www.easemob.com/avatar.png"
+      "avatarurl": "https://www.XXXX.com/avatar.png"
     },
     "user2": {
       "ext": "ext",
       "nickname": "nickname",
-      "avatarurl": "https://www.easemob.com/avatar.png"
+      "avatarurl": "https://www.XXXX.com/avatar.png"
     },
     "user3": {
       "ext": "ext",
       "nickname": "nickname",
-      "avatarurl": "https://www.easemob.com/avatar.png"
+      "avatarurl": "https://www.XXXX.com/avatar.png"
     }
   },
   "duration": 3
@@ -347,7 +343,7 @@ curl -X POST -H 'Content-Type: application/json' \
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/metadata/user/capacity
+GET https://{host}/app-id/{app_id}/metadata/user/capacity
 ```
 
 #### 路径参数
@@ -382,7 +378,7 @@ GET https://{host}/{org_name}/{app_name}/metadata/user/capacity
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/metadata/user/capacity'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/app-id/XXXX/metadata/user/capacity'
 ```
 
 #### 响应示例
@@ -414,7 +410,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/metadata/user/{username}
+DELETE https://{host}/app-id/{app_id}/metadata/user/{username}
 ```
 
 #### 路径参数
@@ -448,7 +444,7 @@ DELETE https://{host}/{org_name}/{app_name}/metadata/user/{username}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/metadata/user/user1'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/app-id/XXXX/metadata/user/user1'
 ```
 
 #### 响应示例
