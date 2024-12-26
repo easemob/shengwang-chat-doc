@@ -1,14 +1,13 @@
 # 发送聊天室消息
 
-本文展示如何调用环信 IM RESTful API 在服务端实现聊天室场景中全类型消息的发送与接收，包括文本消息、图片消息、语音消息、视频消息、透传消息和自定义消息。
+本文展示如何调用声网即时通讯 IM RESTful API 在服务端实现聊天室场景中全类型消息的发送与接收，包括文本消息、图片消息、语音消息、视频消息、透传消息和自定义消息。
 
 聊天室场景下，发送各类型的消息调用需调用同一 RESTful API，不同类型的消息只是请求体中的 body 字段内容存在差异，发送方式与单聊类似，详见[发送单聊消息](message_single.html)。
 
 :::tip
 1. 接口调用过程中，请求体和扩展字段的总长度不能超过 5 KB。
 2. 聊天室中发消息时，不会同步给发送方。
-3. 通过 RESTful 接口发送的消息默认不写入会话列表，若需要此类消息写入会话列表，需在[环信即时通讯控制台开通](/product/enable_and_configure_IM.html#设置通过-restful-api-发送的消息写入会话列表)。
-4. [内容审核服务会关注消息 body 中指定字段的内容，不同类型的消息审核不同的字段](/product/moderation/moderation_mechanism.html)，若创建消息时在这些字段中传入了很多业务信息，可能会影响审核效果。因此，创建消息时需要注意内容审核的字段不涉及业务信息，建议业务信息放在扩展字段中。
+3. 通过 RESTful 接口发送的消息默认不写入会话列表，若需要此类消息写入会话列表，需在[声网即时通讯控制台开通](/product/enable_and_configure_IM.html#设置通过-restful-api-发送的消息写入会话列表)。
 :::
 
 **发送频率**：对于单个 app，该 REST API 存在以下三个限制：
@@ -16,14 +15,15 @@
 - 100 条/秒：例如，你每次向 10 个聊天室发送消息，即发送了 10 条消息，你每秒最多可调用 10 次该接口。第 11 次调用时，则报 403 错误。
 - 20 次/秒：例如，你每次调用该 API 向单个聊天室发送消息，可调用 20 次，第 21 次调用时会报 429 错误。
 
-对于聊天室消息，环信即时通讯提供消息分级功能，将消息的优先级划分为高、普通和低三种级别，高优先级的消息会优先送达。你可以在创建消息时对指定聊天室消息类型或指定成员的消息设置为高优先级，确保这些消息优先送达。这种方式确保在聊天室内消息并发量很大或消息发送频率过高时，重要消息能够优先送达，从而提升重要消息的可靠性。 当服务器的负载较高时，会优先丢弃低优先级的消息，将资源留给高优先级的消息。不过，消息分级功能只确保消息优先到达，并不保证必达。服务器负载过高的情况下，即使是高优先级消息依然会被丢弃。
+对于聊天室消息，声网即时通讯提供消息分级功能，将消息的优先级划分为高、普通和低三种级别，高优先级的消息会优先送达。你可以在创建消息时对指定聊天室消息类型或指定成员的消息设置为高优先级，确保这些消息优先送达。这种方式确保在聊天室内消息并发量很大或消息发送频率过高时，重要消息能够优先送达，从而提升重要消息的可靠性。 当服务器的负载较高时，会优先丢弃低优先级的消息，将资源留给高优先级的消息。不过，消息分级功能只确保消息优先到达，并不保证必达。服务器负载过高的情况下，即使是高优先级消息依然会被丢弃。
 
 ## 前提条件
 
-要调用环信即时通讯 REST API，请确保满足以下要求：
+要调用声网即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
-- 了解环信 IM REST API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置声网即时通讯 IM 服务](enable_im.html)。
+- 已从服务端获取 app token，详见 [使用 Token 鉴权](token_authentication.html)。
+- 了解声网即时通讯 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 公共参数 
 
@@ -31,18 +31,14 @@
 
 | 参数       | 类型   | 是否必需 | 描述        |
 | :--------- | :----- | :------- | :----------------------- |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `host`     | String | 是       | 声网即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `app_id`     | String | 是      | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
 
 ### 响应参数
 
 | 参数              | 类型   | 描述          |
 | :---------------- | :----- | :------------------------------- |
 | `action`          | String | 请求方法。                                                                     |
-| `organization`    | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
-| `application`     | String | 应用在系统内的唯一标识。该标识由系统生成，开发者无需关心。                     |
-| `applicationName` | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
 | `uri`             | String | 请求 URL。                                                                     |
 | `path`            | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。                              |
 | `timestamp`       | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。                                          |
@@ -50,18 +46,18 @@
 
 ## 认证方式
 
-环信即时通讯 REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
+声网即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
 `Authorization: Bearer YourAppToken`
 
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。本文涉及的所有消息管理 REST API 都需要使用 App Token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
+为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的 鉴权方式，详见 [使用 Token 鉴权](token_authentication.html)。
 
 ## 发送文本消息
 
 ### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/messages/chatrooms
+POST https://{host}/app-id/{app_id}/messages/chatrooms
 ```
 
 #### 路径参数
@@ -121,7 +117,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
+curl -X POST -i 'https://XXXX/app-id/XXXX/messages/chatrooms' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
@@ -141,16 +137,13 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
 ```json
 {
   "path": "/messages/chatrooms",
-  "uri": "https://XXXX/XXXX/XXXX/messages/chatrooms",
+  "uri": "https://XXXX/app-id/XXXX/messages/chatrooms",
   "timestamp": 1657254052191,
-  "organization": "XXXX",
-  "application": "e82bcc5f-XXXX-XXXX-a7c1-92de917ea2b0",
   "action": "post",
   "data": {
     "185145305923585": "1029545553039460728"
   },
-  "duration": 0,
-  "applicationName": "XXXX"
+  "duration": 0
 }
 ```
 
@@ -159,7 +152,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
 ### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/messages/chatrooms
+POST https://{host}/app-id/{app_id}/messages/chatrooms
 ```
 
 #### 路径参数
@@ -185,7 +178,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 | `filename` | String | 否       | 图片名称。建议传入该参数，否则客户端收到图片消息时无法显示图片名称。           |
 | `secret`   | String | 否       | 图片的访问密钥，即成功上传图片后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取的 `share-secret`。如果图片文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。 |
 | `size`     | JSON   | 否       | 图片尺寸，单位为像素，包含以下字段：<br/> - `height`：图片高度；<br/> - `width`：图片宽度。   |
-| `url`      | String | 是       | 图片 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传图片文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取。  |
+| `url`      | String | 是       | 图片 URL 地址：`https://{host}/app-id/{app_id}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传图片文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取。  |
 
 ### HTTP 响应
 
@@ -208,7 +201,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
+curl -X POST -i 'https://XXXX/app-id/XXXX/messages/chatrooms' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
@@ -219,7 +212,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
   "body": {
     "filename":"testimg.jpg",
     "secret":"VfXXXXNb_",
-    "url":"https://XXXX/XXXX/XXXX/chatfiles/55f12940-XXXX-XXXX-8a5b-ff2336f03252",
+    "url":"https://XXXX/app-id/XXXX/chatfiles/55f12940-XXXX-XXXX-8a5b-ff2336f03252",
     "size":{
       "width":480,
       "height":720
@@ -233,16 +226,13 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
 ```json
 {
   "path": "/messages/chatrooms",
-  "uri": "https://XXXX/XXXX/XXXX/messages/chatrooms",
+  "uri": "https://XXXX/app-id/XXXX/messages/chatrooms",
   "timestamp": 1657254052191,
-  "organization": "XXXX",
-  "application": "e82bcc5f-XXXX-XXXX-a7c1-92de917ea2b0",
   "action": "post",
   "data": {
     "185145305923585": "1029545553039460728"
   },
-  "duration": 0,
-  "applicationName": "XXXX"
+  "duration": 0
 }
 ```
 
@@ -251,7 +241,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
 ### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/messages/chatrooms
+POST https://{host}/app-id/{app_id}/messages/chatrooms
 ```
 
 #### 路径参数
@@ -277,7 +267,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 | `filename` | String | 否       | 语音文件的名称。建议传入该参数，否则客户端收到语音消息时无法显示语音文件名称。    |
 | `secret`   | String | 否       | 语音文件访问密钥，即成功上传语音文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取的 `share-secret`。 如果语音文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。 |
 | `Length`   | Int    | 否      | 语音时长，单位为秒。         |
-| `url`      | String | 是       | 语音文件 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。`file_uuid` 为文件 ID，成功上传语音文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取。  |
+| `url`      | String | 是       | 语音文件 URL 地址：`https://{host}/app-id/{app_id}/chatfiles/{file_uuid}`。`file_uuid` 为文件 ID，成功上传语音文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取。  |
 
 ### HTTP 响应
 
@@ -300,7 +290,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
+curl -X POST -i 'https://XXXX/app-id/XXXX/messages/chatrooms' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
@@ -309,7 +299,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
   "to": ["185145305923585"],
   "type": "audio",
   "body": {
-    "url": "https://XXXX/XXXX/XXXX/chatfiles/1dfc7f50-XXXX-XXXX-8a07-7d75b8fb3d42",
+    "url": "https://XXXX/app-id/XXXX/chatfiles/1dfc7f50-XXXX-XXXX-8a07-7d75b8fb3d42",
     "filename": "testaudio.amr",
     "length": 10,
     "secret": "HfXXXXCjM"
@@ -322,16 +312,13 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
 ```json
 {
   "path": "/messages/chatrooms",
-  "uri": "https://XXXX/XXXX/XXXX/messages/chatrooms",
+  "uri": "https://XXXX/app-id/XXXX/messages/chatrooms",
   "timestamp": 1657254052191,
-  "organization": "XXXX",
-  "application": "e82bcc5f-XXXX-XXXX-a7c1-92de917ea2b0",
   "action": "post",
   "data": {
     "185145305923585": "1029545553039460728"
   },
-  "duration": 0,
-  "applicationName": "XXXX"
+  "duration": 0
 }
 ```
 
@@ -340,7 +327,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
 ### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/messages/chatrooms
+POST https://{host}/app-id/{app_id}/messages/chatrooms
 ```
 
 #### 路径参数
@@ -364,12 +351,12 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 | 参数           | 类型   | 是否必需 | 描述    |
 | :------------- | :----- | :------- | :---------------- |
 | `filename` | String | 否 | 视频文件名称。建议传入该参数，否则客户端收到视频消息时无法显示视频文件名称。|
-| `thumb`        | String | 否       | 视频缩略图 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。`file_uuid` 为视频缩略图唯一标识，成功上传缩略图文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取。 |
+| `thumb`        | String | 否       | 视频缩略图 URL 地址：`https://{host}/app-id/{app_id}/chatfiles/{file_uuid}`。`file_uuid` 为视频缩略图唯一标识，成功上传缩略图文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取。 |
 | `length`       | Int    | 否       | 视频时长，单位为秒。  |
 | `secret`       | String | 否       | 视频文件访问密钥，即成功上传视频文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取的 `share-secret`。如果视频文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。        |
 | `file_length`  | Long   | 否       | 视频文件大小，单位为字节。  |
 | `thumb_secret` | String | 否       | 视频缩略图访问密钥，即成功上传视频文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取的 `share-secret`。如果缩略图文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。    |
-| `url`          | String | 是       | 视频文件 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传视频文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取。   |
+| `url`          | String | 是       | 视频文件 URL 地址：`https://{host}/app-id/{app_id}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传视频文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取。   |
 
 ### HTTP 响应
 
@@ -391,7 +378,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
+curl -X POST -i 'https://XXXX/app-id/XXXX/messages/chatrooms' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
@@ -400,11 +387,11 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
   "to": ["185145305923585"],
   "type": "video",
   "body": {
-    "thumb" : "https://XXXX/XXXX/XXXX/chatfiles/67279b20-7f69-11e4-8eee-21d3334b3a97",
+    "thumb" : "https://XXXX/app-id/XXXX/chatfiles/67279b20-7f69-11e4-8eee-21d3334b3a97",
     "length" : 0,"secret":"VfXXXXNb_",
     "file_length" : 58103,
     "thumb_secret" : "ZyXXXX2I",
-    "url" : "https://XXXX/XXXX/XXXX/chatfiles/671dfe30-XXXX-XXXX-ba67-8fef0d502f46"
+    "url" : "https://XXXX/app-id/XXXX/chatfiles/671dfe30-XXXX-XXXX-ba67-8fef0d502f46"
   }
 }'
 ```
@@ -414,16 +401,13 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
 ```json
 {
   "path": "/messages/chatrooms",
-  "uri": "https://XXXX/XXXX/XXXX/messages/chatrooms",
+  "uri": "https://XXXX/app-id/XXXX/messages/chatrooms",
   "timestamp": 1657254052191,
-  "organization": "XXXX",
-  "application": "e82bcc5f-XXXX-XXXX-a7c1-92de917ea2b0",
   "action": "post",
   "data": {
     "185145305923585": "1029545553039460728"
   },
-  "duration": 0,
-  "applicationName": "XXXX"
+  "duration": 0
 }
 ```
 
@@ -432,7 +416,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
 ### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/messages/chatrooms
+POST https://{host}/app-id/{app_id}/messages/chatrooms
 ```
 
 #### 路径参数
@@ -457,7 +441,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 | :--------- | :----- | :------- | :------------ |
 | `filename` | String | 否      | 文件名称。建议传入该参数，否则客户端收到文件消息时无法显示文件名称。   |
 | `secret`   | String | 否       | 文件访问密钥，即成功上传文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取的 `share-secret`。如果文件上传时设置了文件访问限制（`restrict-access`），则该字段为必填。      |
-| `url`      | String | 是       | 文件 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传视频文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取。 |
+| `url`      | String | 是       | 文件 URL 地址：`https://{host}/app-id/{app_id}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传视频文件后，从 [文件上传](message_download.html#上传文件) 的响应 body 中获取。 |
 
 ### HTTP 响应
 
@@ -479,7 +463,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
+curl -X POST -i 'https://XXXX/app-id/XXXX/messages/chatrooms' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
@@ -490,7 +474,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
   "body": {
     "filename":"test.txt",
     "secret":"1-g0XXXXua",
-    "url":"https://XXXX/XXXX/XXXX/chatfiles/d7eXXXX7444"
+    "url":"https://XXXX/app-id/XXXX/chatfiles/d7eXXXX7444"
   }
 }'
 ```
@@ -500,16 +484,13 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
 ```json
 {
   "path": "/messages/chatrooms",
-  "uri": "https://XXXX/XXXX/XXXX/messages/chatrooms",
+  "uri": "https://XXXX/app-id/XXXX/messages/chatrooms",
   "timestamp": 1657254052191,
-  "organization": "XXXX",
-  "application": "e82bcc5f-XXXX-XXXX-a7c1-92de917ea2b0",
   "action": "post",
   "data": {
     "185145305923585": "1029545553039460728"
   },
-  "duration": 0,
-  "applicationName": "XXXX"
+  "duration": 0
 }
 ```
 
@@ -518,7 +499,7 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
 ### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/messages/chatrooms
+POST https://{host}/app-id/{app_id}/messages/chatrooms
 ```
 
 #### 路径参数
@@ -566,7 +547,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatrooms"  \
+curl -X POST -i "https://XXXX/app-id/XXXX/messages/chatrooms"  \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
@@ -587,16 +568,13 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatrooms"  \
 ```json
 {
   "path": "/messages/chatrooms",
-  "uri": "https://XXXX/XXXX/XXXX/messages/chatrooms",
+  "uri": "https://XXXX/app-id/XXXX/messages/chatrooms",
   "timestamp": 1657254052191,
-  "organization": "XXXX",
-  "application": "e82bcc5f-XXXX-XXXX-a7c1-92de917ea2b0",
   "action": "post",
   "data": {
     "185145305923585": "1029545553039460728"
   },
-  "duration": 0,
-  "applicationName": "XXXX"
+  "duration": 0
 }
 ```
 
@@ -605,7 +583,7 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatrooms"  \
 ### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/messages/chatrooms
+POST https://{host}/app-id/{app_id}/messages/chatrooms
 ```
 
 #### 路径参数
@@ -651,7 +629,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatrooms" \
+curl -X POST -i "https://XXXX/app-id/XXXX/messages/chatrooms" \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \ 
 -H "Authorization:Bearer <YourAppToken>" \
@@ -670,16 +648,13 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatrooms" \
 ```json
 {
   "path": "/messages/chatrooms",
-  "uri": "https://XXXX/XXXX/XXXX/messages/chatrooms",
+  "uri": "https://XXXX/app-id/XXXX/messages/chatrooms",
   "timestamp": 1657254052191,
-  "organization": "XXXX",
-  "application": "e82bcc5f-XXXX-XXXX-a7c1-92de917ea2b0",
   "action": "post",
   "data": {
     "185145305923585": "1029545553039460728"
   },
-  "duration": 0,
-  "applicationName": "XXXX"
+  "duration": 0
 }
 ```
 
@@ -688,7 +663,7 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatrooms" \
 ### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/messages/chatrooms
+POST https://{host}/app-id/{app_id}/messages/chatrooms
 ```
 
 #### 路径参数
@@ -734,7 +709,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatrooms" \
+curl -X POST -i "https://XXXX/app-id/XXXX/messages/chatrooms" \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H "Authorization:Bearer <YourAppToken>" \
@@ -756,16 +731,13 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatrooms" \
 ```json
 {
   "path": "/messages/chatrooms",
-  "uri": "https://XXXX/XXXX/XXXX/messages/chatrooms",
+  "uri": "https://XXXX/app-id/XXXX/messages/chatrooms",
   "timestamp": 1657254052191,
-  "organization": "XXXX",
-  "application": "e82bcc5f-XXXX-XXXX-a7c1-92de917ea2b0",
   "action": "post",
   "data": {
     "185145305923585": "1029545553039460728"
   },
-  "duration": 0,
-  "applicationName": "XXXX"
+  "duration": 0
 }
 ```
 
@@ -780,7 +752,7 @@ curl -X POST -i "https://XXXX/XXXX/XXXX/messages/chatrooms" \
 ### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/messages/chatrooms/users
+POST https://{host}/app-id/{app_id}/messages/chatrooms/users
 ```
 
 #### 路径参数
@@ -838,7 +810,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms/users
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
+curl -X POST -i 'https://XXXX/app-id/XXXX/messages/chatrooms' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
@@ -858,29 +830,26 @@ curl -X POST -i 'https://XXXX/XXXX/XXXX/messages/chatrooms' \
 ```json
 {
   "path": "/messages/chatrooms",
-  "uri": "https://XXXX/XXXX/XXXX/messages/chatrooms",
+  "uri": "https://XXXX/app-id/XXXX/messages/chatrooms",
   "timestamp": 1657254052191,
-  "organization": "XXXX",
-  "application": "e82bcc5f-XXXX-XXXX-a7c1-92de917ea2b0",
   "action": "post",
   "data": {
     "185145305923585": "1029545553039460728"
   },
-  "duration": 0,
-  "applicationName": "XXXX"
+  "duration": 0
 }
 ```
 
 ## 发送聊天室全局广播消息
 
-可通过该接口向 app 下的所有活跃聊天室（聊天室至少存在一个成员，而且曾经至少发送过一条消息）发送广播消息，支持所有消息类型。**该功能默认关闭，如果需要，请联系环信商务开通。**
+可通过该接口向 app 下的所有活跃聊天室（聊天室至少存在一个成员，而且曾经至少发送过一条消息）发送广播消息，支持所有消息类型。**该功能默认关闭，如果需要，请联系声网商务开通。**
 
 **发送频率**：每分钟最多可发 10 次，而且每天最多可发 100 次广播消息。
 
 ### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/messages/chatrooms/broadcast
+POST https://{host}/app-id/{app_id}/messages/chatrooms/broadcast
 ```
 
 #### 路径参数
@@ -941,7 +910,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatrooms/broadcast
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
+curl -L 'https://XXXX/app-id/XXXX/messages/chatrooms/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -962,7 +931,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
+curl -L 'https://XXXX/app-id/XXXX/messages/chatrooms/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -970,7 +939,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
         "type": "img",
         "filename":"testimg.jpg",
         "secret":"VfXXXXNb_",
-        "url":"https://XXXX/XXXX/XXXX/chatfiles/55f12940-XXXX-XXXX-8a5b-ff2336f03252",
+        "url":"https://XXXX/app-id/XXXX/chatfiles/55f12940-XXXX-XXXX-8a5b-ff2336f03252",
         "size":{
            "width":480,
            "height":720
@@ -989,13 +958,13 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
+curl -L 'https://XXXX/app-id/XXXX/messages/chatrooms/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
     "msg": {
         "type": "audio",
-        "url": "https://XXXX/XXXX/XXXX/chatfiles/1dfc7f50-XXXX-XXXX-8a07-7d75b8fb3d42",
+        "url": "https://XXXX/app-id/XXXX/chatfiles/1dfc7f50-XXXX-XXXX-8a07-7d75b8fb3d42",
         "filename": "testaudio.amr",
         "length": 10,
         "secret": "HfXXXXCjM"
@@ -1013,18 +982,18 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
+curl -L 'https://XXXX/app-id/XXXX/messages/chatrooms/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
     "msg": {
         "type": "video",
-        "thumb" : "https://XXXX/XXXX/XXXX/chatfiles/67279b20-7f69-11e4-8eee-21d3334b3a97",
+        "thumb" : "https://XXXX/app-id/XXXX/chatfiles/67279b20-7f69-11e4-8eee-21d3334b3a97",
         "length" : 0,
         "secret":"VfXXXXNb_",
         "file_length" : 58103,
         "thumb_secret" : "ZyXXXX2I",
-        "url" : "https://XXXX/XXXX/XXXX/chatfiles/671dfe30-XXXX-XXXX-ba67-8fef0d502f46"
+        "url" : "https://XXXX/app-id/XXXX/chatfiles/671dfe30-XXXX-XXXX-ba67-8fef0d502f46"
     },
     "from": "admin",
     "ext": {
@@ -1039,7 +1008,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
+curl -L 'https://XXXX/app-id/XXXX/messages/chatrooms/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -1047,7 +1016,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
         "type": "file",
         "filename":"test.txt",
         "secret":"1-g0XXXXua",
-        "url":"https://XXXX/XXXX/XXXX/chatfiles/d7eXXXX7444"
+        "url":"https://XXXX/app-id/XXXX/chatfiles/d7eXXXX7444"
     },
     "from": "admin",
     "ext": {
@@ -1062,7 +1031,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
+curl -L 'https://XXXX/app-id/XXXX/messages/chatrooms/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -1085,7 +1054,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
+curl -L 'https://XXXX/app-id/XXXX/messages/chatrooms/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -1106,7 +1075,7 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
+curl -L 'https://XXXX/app-id/XXXX/messages/chatrooms/broadcast' \
 -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -d '{
@@ -1127,16 +1096,13 @@ curl -L 'https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast' \
 ```json
 {
   "path": "/messages/chatrooms/broadcast",
-  "uri": "https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast",
+  "uri": "https://XXXX/app-id/XXXX/messages/chatrooms/broadcast",
   "timestamp": 1699944653964,
-  "organization": "easemob-demo",
-  "application": "331d42e6-ad85-460f-b6b0-d1fb6fef9f12",
   "action": "post",
   "data": {
     "id": 1173998498812376874
    },
-  "duration": 1,
-  "applicationName": "wang"
+  "duration": 1
 }
 ```
 
