@@ -6,16 +6,32 @@
 
 此外，你也可以从服务器中单向删除会话，并且设置是否删除该会话在服务端的漫游消息。
 
+## 前提条件
+
+要调用声网即时通讯 RESTful API，请确保满足以下要求：
+
+- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置声网即时通讯 IM 服务](enable_im.html)。
+- 已从服务端获取 app token，详见 [使用 Token 鉴权](token_authentication.html)。
+- 了解声网即时通讯 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+
+## 认证方式
+
+声网即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
+
+`Authorization: Bearer YourAppToken`
+
+为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的 鉴权方式，详见 [使用 Token 鉴权](token_authentication.html)。
+
 ## 撤回消息
 
-发送方可以撤回一条发送成功的消息。默认情况下，发送方可撤回发出 2 分钟内的消息。你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**功能配置** > **功能配置总览** > **基础功能** 页面设置消息撤回时长，该时长不超过 7 天。
+发送方可以撤回一条发送成功的消息。默认情况下，发送方可撤回发出 2 分钟内的消息。你可以在[声网控制台](https://console.shengwang.cn/overview)的**功能配置** > **功能配置总览** > **基础功能** 页面设置消息撤回时长，该时长不超过 7 天。
 
 对于附件类型消息，包括图片、音频和视频和文件消息，撤回消息后，消息附件也相应删除。
 
 ### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/messages/msg_recall
+POST https://{host}/app-id/{app_id}/messages/msg_recall
 ```
 
 #### 路径参数
@@ -68,7 +84,7 @@ POST https://{host}/{org_name}/{app_name}/messages/msg_recall
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
 curl -i -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H "Authorization: Bearer <YourAppToken>"
-"https://XXXX/XXXX/XXXX/messages/msg_recall"
+"https://XXXX/app-id/XXXX/messages/msg_recall"
 -d '{
     "msg_id": "1028442084794698104",
     "to": "user2",
@@ -84,7 +100,7 @@ curl -i -X POST -H 'Content-Type: application/json' -H 'Accept: application/json
 ```json
 {
   "path": "/messages/msg_recall",
-  "uri": "https://XXXX/XXXX/XXXX/messages/msg_recall",
+  "uri": "https://XXXX/app-id/XXXX/messages/msg_recall",
   "timestamp": 1657529588473,
   "organization": "XXXX",
   "application": "09ebbf8b-XXXX-XXXX-XXXX-d47c3b38e434",
@@ -114,10 +130,10 @@ curl -i -X POST -H 'Content-Type: application/json' -H 'Accept: application/json
 | 400      | message_recall_error | can’t find msg to | 未找到撤回消息的接收⽅。 | 需传入正确的消息接收方。 |
 | 403        | message_recall_error | exceed recall time limit | 消息撤回超时。 | 消息撤回时长默认为消息发送后的 2 分钟。  |
 | 403      | message_recall_error | not_found msg | 消息因过期在服务端删除或消息已被撤回。 | 若撤回过期的消息，你需要开启强制撤回，即将 `force` 设置为 `true`。这种情况下，会撤回接收方在本地保存的消息，但发送方本地消息仍存在。<br/>若消息已被撤回，则无需重复撤回。        |
-| 403       | forbidden_op         | message recall service is unopened | 消息撤回服务未在环信即时通讯云管理后台开通。| 请先在环信即时通讯云管理后台开通该服务。 |
+| 403       | forbidden_op         | message recall service is unopened | 消息撤回服务未在[声网控制台](https://console.shengwang.cn/overview)开通。| 请先在[声网控制台](https://console.shengwang.cn/overview)开通该服务。 |
 | 500      |                      | internal error | 后端服务出现异常。 |      |
 
-例如，消息撤回服务未在环信即时通讯云管理后台开通，返回示例如下：
+例如，消息撤回服务未在[声网控制台](https://console.shengwang.cn/overview)开通，返回示例如下：
 
 ```json
 {
@@ -138,7 +154,7 @@ curl -i -X POST -H 'Content-Type: application/json' -H 'Accept: application/json
 ### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/users/{username}/user_channel
+DELETE https://{host}/app-id/{app_id}/users/{username}/user_channel
 ```
 
 #### 路径参数
@@ -184,14 +200,15 @@ DELETE https://{host}/{org_name}/{app_name}/users/{username}/user_channel
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L -X DELETE 'https://XXXX/XXXX/XXXX/users/u1/user_channel' \
+curl -L -X DELETE 'https://XXXX/app-id/XXXX/users/u1/user_channel' \
 -H 'Authorization: Bearer <YourAppToken>'  \
 -H 'Content-Type: application/json'  \
 -H 'Accept: application/json'  \
--d '
-
-{ "channel": "u2", "type": "chat", "delete_roam": true }
-'
+-d '{
+      "channel": "u2", 
+     "type": "chat", 
+     "delete_roam": true 
+ }'
 ```
 
 #### 响应示例
@@ -199,17 +216,14 @@ curl -L -X DELETE 'https://XXXX/XXXX/XXXX/users/u1/user_channel' \
 ```json
 {
   "path": "/users/user_channel",
-  "uri": "https://XXXX/XXXX/XXXX/users/u1/user_channel",
+  "uri": "https://XXXX/app-id/XXXX/users/u1/user_channel",
   "timestamp": 1638440544078,
-  "organization": "XXXX",
-  "application": "c3624975-XXXX-XXXX-9da2-ee91ed4c5a76",
   "entities": [],
   "action": "delete",
   "data": {
     "result": "ok"
   },
-  "duration": 3,
-  "applicationName": "XXXX"
+  "duration": 3
 }
 ```
 

@@ -1,42 +1,41 @@
 # 修改文本或自定义消息
 
-本文展示如何调用环信 IM RESTful API 在服务端修改发送成功的文本消息或自定义消息。
+本文展示如何调用声网即时通讯 IM RESTful API 在服务端修改发送成功的文本消息或自定义消息。
 
 **调用频率**：100 次/秒/App Key
 
 :::tip
-若使用该功能，需联系环信商务开通。
+若使用该功能，需联系声网商务开通。
 :::
 
 ## 前提条件
 
-要调用环信即时通讯 REST API，请确保满足以下要求：
+要调用声网即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
-- 了解环信 IM REST API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置声网即时通讯 IM 服务](enable_im.html)。
+- 已从服务端获取 app token，详见 [使用 Token 鉴权](token_authentication.html)。
+- 了解声网即时通讯 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 认证方式
 
-环信即时通讯 REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
+声网即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
 `Authorization: Bearer YourAppToken`
 
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。本文涉及的所有消息管理 REST API 都需要使用 App Token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
+为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的 鉴权方式，详见 [使用 Token 鉴权](token_authentication.html)。
 
 ## HTTP 请求
 
 ```http
-PUT https://{host}/{org_name}/{app_name}/messages/rewrite/{msg_id}
+PUT https://{host}/app-id/{app_id}/messages/rewrite/{msg_id}
 ```
 
 ### 路径参数
 
-| 参数       | 类型   | 是否必需 | 描述        |
-| :--------- | :----- | :------- | :----------------------- |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `msg_id` | String| 是 | 要修改的消息的 ID。|
+| 参数       | 类型   | 是否必需 | 描述         |
+| :--------- | :----- | :------- | :------------------------- |
+| `host`     | String | 是       | 声网即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `app_id`     | String | 是       | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
 
 ### 请求 header
 
@@ -70,12 +69,9 @@ PUT https://{host}/{org_name}/{app_name}/messages/rewrite/{msg_id}
 | `path`            | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。      |
 | `uri`             | String | 请求 URL。     |
 | `timestamp`       | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。  |
-| `organization`    | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
-| `application`     | String | 应用在系统内的唯一标识。该标识由系统生成，开发者无需关心。                     |
 | `action`          | String | 请求方法。     |
 | `data` | String | 值为 `success`，表示消息成功修改。| 
 | `duration`        | Int    | 从发送 HTTP 请求到响应的时长，单位为毫秒。 |
-| `applicationName` | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -88,7 +84,7 @@ PUT https://{host}/{org_name}/{app_name}/messages/rewrite/{msg_id}
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X PUT -i 'https://XXXX/XXXX/XXXX/messages/rewrite/1235807318835202004' \
+curl -X PUT -i 'http://XXXX/app-id/XXXX/messages/rewrite/1235807318835202004' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
@@ -106,7 +102,7 @@ curl -X PUT -i 'https://XXXX/XXXX/XXXX/messages/rewrite/1235807318835202004' \
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X PUT -i 'https://XXXX/XXXX/XXXX/messages/rewrite/1235807318835202004' \
+curl -X PUT -i 'http://XXXX/app-id/XXXX/messages/rewrite/1235807318835202004' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
@@ -132,14 +128,11 @@ curl -X PUT -i 'https://XXXX/XXXX/XXXX/messages/rewrite/1235807318835202004' \
 ```json
 {
   "path": "/messages/rewrite/1235807318835202004",
-  "uri": "https://XXXX/XXXX/XXXX/messages/rewrite/1235807318835202004",
+  "uri": "http://XXXX/app-id/XXXX/messages/rewrite/1235807318835202004",
   "timestamp": 1705372388118,
-  "organization": "XXXX",
-  "application": "ff678832-XXXX-XXXX-8130-58ac38cb6c15",
   "action": "put",
   "data": "success",
-  "duration": 49,
-  "applicationName": "XXXX"
+  "duration": 49
 }
 ```
 
@@ -156,7 +149,7 @@ curl -X PUT -i 'https://XXXX/XXXX/XXXX/messages/rewrite/1235807318835202004' \
 | 404      | message_rewrite_error  | The message is unavailable or has expired.   | 请求参数 `msg_id` 不存在。 | 输入正确的请求参数 `msg_id`。     |
 | 401      | message_rewrite_error   | You are not authorized to edit this message.   | 请求参数 `msg_id` 不正确。 |  输入正确的请求参数 `msg_id`。 |
 | 403      | message_rewrite_error   | The message has reached its edit limit and cannot be modified further.   | 消息 `msg_id` 的修改次数到达上线。 | 消息修改次数限制在 10 次以内。   |
-| 403      | message_rewrite_error   | The rewrite message feature is not open.   | 消息修改功能未开通。  |  联系商务开通消息修改功能。  |
+| 403      | message_rewrite_error   | The rewrite message feature is not open.   | 消息修改功能未开通。  |  联系环信商务开通消息修改功能。  |
 | 404 | MessageUnavailableException  | The message is unavailable or has expired.   | 修改的消息不存在或者已经过期。 | 只能修改服务端存储的消息，若消息不存在或已过期，则不能修改。|
 | 409         | concurrent_operation_error         | The message has been edited by another.    | 并发调用了修改消息接口修改同一消息。 | 避免同时请求修改同一消息。  |
 | 500 | RewriteMessageInternalErrorException | An unknown error occurred while processing the request.   | 内部服务异常，修改消息失败。 |    |

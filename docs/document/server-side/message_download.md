@@ -2,38 +2,36 @@
 
 <Toc />
 
-对于附件类型的消息，如图片、语音、视频或其他类型文件，发送消息前需上传文件。你可以将文件上传到自己的服务器，也可以上传至环信服务器。若你将文件上传至自己的服务器，需注意以下两点：
+对于附件类型的消息，如图片、语音、视频或其他类型文件，发送消息前需上传文件。你可以将文件上传到自己的服务器，也可以上传至声网服务器。若你将文件上传至自己的服务器，需注意以下两点：
 
-- 对于图片，发送图片消息时不存在图片缩略图。这是因为图片上传至环信服务器时，环信服务器会自动生成缩略图，发送图片消息时无需传入缩略图 URL 地址。
+- 对于图片，发送图片消息时不存在图片缩略图。这是因为图片上传至声网服务器时，声网服务器会自动生成缩略图，发送图片消息时无需传入缩略图 URL 地址。
 - 对于视频，你需要将视频和缩略图均上传至你的服务器，发送视频消息时需传入这两个文件的 URL 地址。
 
-本文介绍如何调用 RESTful API 将文件上传到环信服务器、下载图片、语音、视频或其他类型的文件以及下载图片和视频文件的缩略图。
+本文介绍如何调用 RESTful API 将文件上传到声网服务器、下载图片、语音、视频或其他类型的文件以及下载图片和视频文件的缩略图。
 
 ## 前提条件
 
-要调用环信即时通讯 REST API，请确保满足以下要求：
+要调用声网即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
-- 了解环信 IM REST API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置声网即时通讯 IM 服务](enable_im.html)。
+- 已从服务端获取 app token，详见 [使用 Token 鉴权](token_authentication.html)。
+- 了解声网即时通讯 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 公共参数 
 
 ### 请求参数
 
-| 参数       | 类型   | 是否必需 | 描述        |
-| :--------- | :----- | :------- | :----------------------- |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| 参数       | 类型   | 是否必需 | 描述         |
+| :--------- | :----- | :------- | :------------------------- |
+| `host`     | String | 是       | 声网即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `app_id`     | String | 是       | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
+| `username`     | String | 是       | 调用该接口的用户 ID。 | 
 
 ### 响应参数
 
 | 参数              | 类型   | 描述          |
 | :---------------- | :----- | :------------------------------- |
 | `action`          | String | 请求方法。        |
-| `organization`    | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
-| `application`     | String | 应用在系统内的唯一标识。该标识由系统生成，开发者无需关心。     |
-| `applicationName` | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
 | `uri`             | String | 请求 URL。      |
 | `path`            | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。  |
 | `entities`        | JSON | 响应实体。  |
@@ -42,18 +40,18 @@
 
 ## 认证方式
 
-环信即时通讯 REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
+声网即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
 `Authorization: Bearer YourAppToken`
 
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。本文涉及的所有消息管理 REST API 都需要使用 App Token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
+为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的 鉴权方式，详见 [使用 Token 鉴权](token_authentication.html)。
 
 ## 上传文件
 
 对于附件类型的消息，如图片、语音、视频或其他类型文件，发送消息前需上传文件。图片和视频存在缩略图，文件上传详情如下：
 
-- 图片：可调用文件上传接口上传原图，环信服务器会自动为图片生成缩略图。若上传的图片在 10 KB 以内，缩略图与原图等同；若图片超过 10 KB，环信服务器会根据你在请求中设置的图片高度和宽度，即 `thumbnail-height` 和 `thumbnail-width` 参数，生成缩略图。若这两个参数未传，则图片的高度和宽度均默认为 170 像素。
-- 视频：环信服务器不会自动为视频文件生成缩略图。若需要视频缩略图，需先调用文件上传接口上传缩略图。然后，再次调用文件上传接口上传视频源文件。上传视频文件时，无需传 `thumbnail-height` 和 `thumbnail-width` 参数。上传视频缩略图时，若图片在 10 KB 以内，视频缩略图即为上传的图片。如果图片超过 10 KB，而且设置了这两个参数，视频缩略图的高度和宽度取决于这两个参数的设置。若这两个参数未传，则图片的高度和宽度均默认为 170 像素。
+- 图片：可调用文件上传接口上传原图，声网服务器会自动为图片生成缩略图。若上传的图片在 10 KB 以内，缩略图与原图等同；若图片超过 10 KB，声网服务器会根据你在请求中设置的图片高度和宽度，即 `thumbnail-height` 和 `thumbnail-width` 参数，生成缩略图。若这两个参数未传，则图片的高度和宽度均默认为 170 像素。
+- 视频：声网服务器不会自动为视频文件生成缩略图。若需要视频缩略图，需先调用文件上传接口上传缩略图。然后，再次调用文件上传接口上传视频源文件。上传视频文件时，无需传 `thumbnail-height` 和 `thumbnail-width` 参数。上传视频缩略图时，若图片在 10 KB 以内，视频缩略图即为上传的图片。如果图片超过 10 KB，而且设置了这两个参数，视频缩略图的高度和宽度取决于这两个参数的设置。若这两个参数未传，则图片的高度和宽度均默认为 170 像素。
 
 同时，为了保证聊天文件的安全，我们的 API 保证了以下几点：
 
@@ -63,7 +61,7 @@
 ### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/chatfiles
+POST https://{host}/app-id/{app_id}/chatfiles
 ```
 
 #### 路径参数
@@ -76,9 +74,9 @@ POST https://{host}/{org_name}/{app_name}/chatfiles
 | :---------------- | :----- | :------- | :------------------------ |
 | `Content-Type`    | String | 是       | 内容类型： `multipart/form-data`。 |
 | `Authorization`   | String | 否       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
-| `restrict-access` | Bool   | 否       | 是否限制访问该文件：<br/> - `true`：是。用户需要通过响应 body 中获取的文件访问密钥（`share-secret`）才能下载该文件。<br/> - `false`：否。表示不限制访问。用户可以直接下载该文件。<br/><Container type="tip" title="提示">要使用文件访问限制功能，请联系商务开通。</Container>|
-| `thumbnail-height` | Int    | 否       | 缩略图的高度，单位为像素。<br/> - 若上传的原图或视频缩略图小于 10 KB，上传的图片即为缩略图。<br/> - 若上传的图片超过 10 KB，缩略图的高度取决于该参数的设置。<br/> - 若不传该参数，缩略图的高度默认为 170 像素。你也可以在 [环信即时通讯控制台](https://console.easemob.com/user/login)的 `服务概览` 页面的 `设置` 区域修改该默认值。 |
-| `thumbnail-width`  | Int    | 否       | 缩略图的宽度，单位为像素。<br/> - 若上传的原图或视频缩略图小于 10 KB，图片原图即为缩略图。<br/> - 若上传的图片超过 10 KB，缩略图的宽度取决于该参数的设置。<br/> - 若不传该参数，缩略图的宽度默认为 170 像素。你也可以在 [环信即时通讯控制台](https://console.easemob.com/user/login)的 `服务概览` 页面的 `设置` 区域修改该默认值。   |
+| `restrict-access` | Bool   | 否       | 是否限制访问该文件：<br/> - `true`：是。用户需要通过响应 body 中获取的文件访问密钥（`share-secret`）才能下载该文件。<br/> - `false`：否。表示不限制访问。用户可以直接下载该文件。<br/><Container type="tip" title="提示">要使用文件访问限制功能，请联系声网商务开通。</Container>|
+| `thumbnail-height` | Int    | 否       | 缩略图的高度，单位为像素。<br/> - 若上传的原图或视频缩略图小于 10 KB，上传的图片即为缩略图。<br/> - 若上传的图片超过 10 KB，缩略图的高度取决于该参数的设置。<br/> - 若不传该参数，缩略图的高度默认为 170 像素。你也可以在 [声网控制台](https://console.shengwang.cn/overview)的 `服务概览` 页面的 `设置` 区域修改该默认值。 |
+| `thumbnail-width`  | Int    | 否       | 缩略图的宽度，单位为像素。<br/> - 若上传的原图或视频缩略图小于 10 KB，图片原图即为缩略图。<br/> - 若上传的图片超过 10 KB，缩略图的宽度取决于该参数的设置。<br/> - 若不传该参数，缩略图的宽度默认为 170 像素。你也可以在 [声网控制台](https://console.shengwang.cn/overview)的 `服务概览` 页面的 `设置` 区域修改该默认值。   |
 
 #### 请求 body
 
@@ -109,7 +107,7 @@ POST https://{host}/{org_name}/{app_name}/chatfiles
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token，将 file 的路径替换为待上传文件所在的本地完整路径
-curl -X POST 'https://XXXX/XXXX/XXXX/chatfiles'  \
+curl -X POST 'https://XXXX/app-id/XXXX/chatfiles'  \
 -H 'Authorization: Bearer <YourAppToken>'   \
 -H 'Content-Type: multipart/form-data; boundary=---WebKitFormBoundary7MA4YWxkTrZu0gW'   \
 -H 'restrict-access: true'   \
@@ -123,9 +121,8 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatfiles'  \
 ```json
 {
   "action": "post",
-  "application": "8be024f0-XXXX-XXXX-b697-5d598d5f8402",
   "path": "/chatfiles",
-  "uri": "https://XXXX/XXXX/XXXX/chatfiles",
+  "uri": "https://XXXX/app-id/XXXX/chatfiles",
   "entities": [
     {
       "uuid": "5fd74830-XXXX-XXXX-822a-81ea50bb049d",
@@ -134,9 +131,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatfiles'  \
     }
   ],
   "timestamp": 1554371126338,
-  "duration": 0,
-  "organization": "XXXX",
-  "applicationName": "XXXX"
+  "duration": 0
 }
 ```
 
@@ -162,7 +157,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatfiles'  \
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}
+GET https://{host}/app-id/{app_id}/chatfiles/{file_uuid}
 ```
 
 #### 路径参数
@@ -198,11 +193,11 @@ GET https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}
 ```bash
 # 将 <YourToken> 替换为你的用户 token 或在服务端生成的 App Token 
 
-curl -X GET -H 'Accept: application/octet-stream' -H 'Authorization: Bearer <YourToken>' -H 'share-secret: f0Vr-uyyEeiHpHmsu53XXXXXXXXZYgyLkdfsZ4xo2Z0cSBnB' 'https://XXXX/XXXX/XXXX/chatfiles/7f456bf0-XXXX-XXXX-b630-777db304f26c'-o /Users/test/easemob/image/image.JPG
+curl -X GET -H 'Accept: application/octet-stream' -H 'Authorization: Bearer <YourToken>' -H 'share-secret: f0Vr-uyyEeiHpHmsu53XXXXXXXXZYgyLkdfsZ4xo2Z0cSBnB' 'https://XXXX/app-id/XXXX/chatfiles/7f456bf0-XXXX-XXXX-b630-777db304f26c'-o /Users/test/easemob/image/image.JPG
 ```
 
 :::tip
-上述请求示例中，`/Users/test/easemob/image/image.JPG` 为环信即时通讯 IM 的本地文件路径，使用时请替换为自己的文件路径，否则会请求失败。
+上述请求示例中，`/Users/test/easemob/image/image.JPG` 为声网即时通讯 IM 的本地文件路径，使用时请替换为自己的文件路径，否则会请求失败。
 :::
 
 #### 响应示例
@@ -231,7 +226,7 @@ curl -X GET -H 'Accept: application/octet-stream' -H 'Authorization: Bearer <You
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}
+GET https://{host}/app-id/{app_id}/chatfiles/{file_uuid}
 ```
 
 #### 路径参数
@@ -248,7 +243,7 @@ GET https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}
 | :-------------- | :----- | :--------------------- | :------------------ |
 | `Accept`        | String | 否     | 内容类型。请填 `application/octet-stream`，表示下载二进制数据流格式的文件。        |
 | `Authorization` | String | 否     | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。                                                        |
-| `thumbnail`     | Bool   | 否      | 是否下载缩略图：<ul><li> `true`：是，下载缩略图。</li><li>（默认）`false`：否，下载原文件。</li></ul> <Container type="notice" title="注意">若该参数为空，下载原文件。</Container> |
+| `thumbnail`     | Bool   | 否      | 是否下载缩略图：<br/> - `true`：是，下载缩略图。<br/> - 默认）`false`：否，下载原文件。<br/> <Container type="notice" title="注意">若该参数为空，下载原文件。</Container> |
 | `share-secret`  | String | 否    | 缩略图访问密钥。若上传图片时限制了访问（`restrict-access` 设置为 `true`），下载缩略图时则需要该访问密钥。成功上传图片后，从 [文件上传](#上传文件) 的响应 body 中获取该密钥。 |
 
 ### HTTP 响应
@@ -266,7 +261,7 @@ GET https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/octet-stream' -H 'Authorization: Bearer <YourAppToken>' -H 'share-secret: f0Vr-uyyEeiHpHmsu53XXXXXXXXZYgyLkdfsZ4xo2Z0cSBnB' -H 'thumbnail: true' 'https://XXXX/XXXX/XXXX/chatfiles/7f456bf0-ecb2-11e8-b630-777db304f26c'
+curl -X GET -H 'Accept: application/octet-stream' -H 'Authorization: Bearer <YourAppToken>' -H 'share-secret: f0Vr-uyyEeiHpHmsu53XXXXXXXXZYgyLkdfsZ4xo2Z0cSBnB' -H 'thumbnail: true' 'https://XXXX/app-id/XXXX/chatfiles/7f456bf0-ecb2-11e8-b630-777db304f26c'
 ```
 
 #### 响应示例
