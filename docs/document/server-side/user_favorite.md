@@ -4,25 +4,12 @@
 
 ## 公共参数
 
-以下表格列举了声网即时通讯 IM 的 RESTful 接口的公共请求参数和响应参数：
-
-#### 请求参数
+以下表格列举了声网即时通讯 IM 的 RESTful 接口的公共请求参数：
 
 | 参数       | 类型   | 是否必需 | 描述   |
 | :--------- | :----- | :------- | :------------------ |
 | `host`     | String | 是       | 声网即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
 | `app_id`     | String | 是       | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
-
-#### 响应参数
-
-| 参数                 | 类型   | 描述            |
-| :------------------- | :----- | :-------------------------------------------- |
-| `action`             | String | 请求方法。                                   |
-| `uri`                | String | 请求 URL。                |
-| `path`               | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。       |
-| `data`               | JSON   | 实际获取的数据详情。            |
-| `timestamp`          | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。       |
-| `duration`           | Long   | 从发送 HTTP 请求到响应的时长, 单位为毫秒。     |
 
 ## 前提条件
 
@@ -44,7 +31,7 @@
 
 调用该接口获取指定用户的收藏。
 
-**调用频率上限**：100 次/秒/App Key 
+**调用频率上限**：100 次/秒/App ID 
 
 #### HTTP 请求
 
@@ -100,8 +87,6 @@ GET https://{host}/app-id/{app_id}/users/{username}/collections
 | - `createdAt` | Long  | 收藏创建时间。            |
 | - `updatedAt` | Long  | 收藏更新时间。            |
 
-响应字段及说明详见 [公共参数](#公共参数)。
-
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码)了解可能的原因。
 
 #### 示例
@@ -137,7 +122,7 @@ curl -X GET -H 'Accept: application/json' \
 
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
 | :----------- | :--- | :------------- | :----------- | :----------- |
-| 400         | illegal_argument  | username XXX is not legal   | 用户 ID 不合法。  | 查看注册用户名[规范](account_system.html#开放注册单个用户)。 |
+| 400         | illegal_argument  | username XXX is not legal   | 用户 ID 不合法。  | 查看注册用户名[规范](account_system.html#注册单个用户)。 |
 | 400         | illegal_argument  | limit should be less than 200   | 传入的每页查询的收藏数量 `limit` 不能超过 200。  | 将 `limit` 的值控制在 200 以内。 |
 | 400         | illegal_argument  | direction should be desc or asc   | `direction` 参数传错。  | `direction` 参数只能是 `desc` 或者 `asc`。 |
 | 400         |     | user collection not found  | 用户收藏找不到。  | 对 `collection_id` 参数传入存在的用户收藏 ID。        |
@@ -148,7 +133,7 @@ curl -X GET -H 'Accept: application/json' \
 
 调用该接口对指定用户添加一条收藏。
 
-**调用频率上限**：100 次/秒/App Key 
+**调用频率上限**：100 次/秒/App ID 
 
 #### HTTP 请求
 
@@ -196,8 +181,6 @@ POST https://{host}/app-id/{app_id}/users/{username}/collections
 | `createdAt` | Long  | 收藏创建时间。            |
 | `updatedAt` | Long  | 收藏更新时间。            |
 
-响应字段及说明详见 [公共参数](#公共参数)。
-
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码)了解可能的原因。
 
 #### 示例
@@ -239,7 +222,7 @@ curl -X POST https://XXXX/app-id/XXXX/users/{username}/collections
 
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
 | :----------- | :--- | :------------- | :----------- | :----------- |
-| 400         | illegal_argument  | username XXX is not legal   | 用户 ID 不合法。  | 查看注册用户名[规范](account_system.html#开放注册单个用户)。 |
+| 400         | illegal_argument  | username XXX is not legal   | 用户 ID 不合法。  | 查看注册用户名[规范](account_system.html#注册单个用户)。 |
 
 关于其他错误，你可以参考 [错误码](error.html) 了解可能的原因。
 
@@ -247,7 +230,7 @@ curl -X POST https://XXXX/app-id/XXXX/users/{username}/collections
 
 调用该接口对指定用户添加多条收藏。
 
-**调用频率上限**：100 次/秒/App Key 
+**调用频率上限**：100 次/秒/App ID 
 
 #### HTTP 请求
 
@@ -342,7 +325,7 @@ curl -X POST https://XXXX/app-id/XXXX/collections
 
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
 | :----------- | :--- | :------------- | :----------- | :----------- |
-| 400         | illegal_argument  | username XXX is not legal   | 用户 ID 不合法。  | 查看注册用户名[规范](account_system.html#开放注册单个用户)。 |
+| 400         | illegal_argument  | username XXX is not legal   | 用户 ID 不合法。  | 查看注册用户名[规范](account_system.html#注册单个用户)。 |
 
 关于其他错误，你可以参考 [错误码](error.html) 了解可能的原因。
 
@@ -350,7 +333,7 @@ curl -X POST https://XXXX/app-id/XXXX/collections
 
 调用该接口修改指定用户的一条收藏的扩展信息。
 
-**调用频率上限**：100 次/秒/App Key 
+**调用频率上限**：100 次/秒/App ID 
 
 #### HTTP 请求
 
@@ -396,8 +379,6 @@ PUT https://{host}/app-id/{app_id}/users/{username}/collections/{collectionId}
 | `createdAt` | Long  | 收藏创建时间。            |
 | `updatedAt` | Long  | 收藏更新时间。            |
 
-响应字段及说明详见 [公共参数](#公共参数)。
-
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码)了解可能的原因。
 
 #### 示例
@@ -436,7 +417,7 @@ curl -X PUT https://XXXX/app-id/XXXX/users/{username}/collections/{collectionId}
 
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
 | :----------- | :--- | :------------- | :----------- | :----------- |
-| 400         | illegal_argument  | username XXX is not legal   | 用户 ID 不合法。  | 查看注册用户名[规范](account_system.html#开放注册单个用户)。 |
+| 400         | illegal_argument  | username XXX is not legal   | 用户 ID 不合法。  | 查看注册用户名[规范](account_system.html#注册单个用户)。 |
 
 关于其他错误，你可以参考 [错误码](error.html) 了解可能的原因。
 
@@ -445,7 +426,7 @@ curl -X PUT https://XXXX/app-id/XXXX/users/{username}/collections/{collectionId}
 
 调用该接口删除指定用户的收藏。
 
-**调用频率上限**：100 次/秒/App Key 
+**调用频率上限**：100 次/秒/App ID 
 
 #### HTTP 请求
 
@@ -485,8 +466,6 @@ DELETE https://{host}/app-id/{app_id}/users/{username}/collections
 | :------- | :--- | :----------------- |
 | `result`   | String  | 是否成功删除收藏：<br/> - `true`：成功；<br/> - `false`：失败。 |
 
-响应字段及说明详见 [公共参数](#公共参数)。
-
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码)了解可能的原因。
 
 #### 示例
@@ -520,7 +499,7 @@ curl -X DELETE https://XXXX/app-id/XXXX/users/{username}/collections \
 
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
 | :----------- | :--- | :------------- | :----------- | :----------- |
-| 400         | illegal_argument  | username XXX is not legal   | 用户 ID 不合法。  | 查看注册用户名[规范](account_system.html#开放注册单个用户)。 |
+| 400         | illegal_argument  | username XXX is not legal   | 用户 ID 不合法。  | 查看注册用户名[规范](account_system.html#注册单个用户)。 |
 | 400         |     | user collection not found  | 用户收藏找不到。  | 对 `collection_ids` 参数传入存在的用户收藏 ID。        |
 
 关于其他错误，你可以参考 [错误码](error.html) 了解可能的原因。

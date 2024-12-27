@@ -111,7 +111,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 {
   "action": "post",
   "path": "/users/475XXXXba/contacts",
-  "uri": "https://XXXX/app-id/XXXX/users/475XXXXba/contacts",
+  "uri": "https://XXXX/XXXX/XXXX/users/475XXXXba/contacts",
   "entities": [
     {
       "uuid": "b2aXXXXf1",
@@ -203,7 +203,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 {
   "action": "delete",
   "path": "/users/475XXXXba/contacts",
-  "uri": "https://XXXX/app-id/XXXX/users/475XXXXba/contacts",
+  "uri": "https://XXXX/XXXX/XXXX/users/475XXXXba/contacts",
   "entities": [
     {
       "uuid": "b2aXXXXf1",
@@ -306,7 +306,7 @@ curl -X PUT 'https://XXXX/app_id/XXXX/user/{owner_username}/contacts/users/{frie
   "duration": 22,
   "status": "ok",
   "timestamp": 1700633088329,
-  "uri": "https://XXXX/app_id/XXXX/user/{owner_username}/contacts/users/{friend_username}"
+  "uri": "https://XXXX/XXXX/XXXX/user/{owner_username}/contacts/users/{friend_username}"
 }
 ```
 
@@ -390,7 +390,7 @@ curl -L -X GET 'https://XXXX/app-id/XXXX/user/XXXX/contacts?limit=10&needReturnR
 
 ```json
 {
-  "uri": "https://XXXX/app_id/XXXX/users/XXXX/rostersByPage",  
+  "uri": "https://XXXX/XXXX/XXXX/users/XXXX/rostersByPage",  
   "timestamp": 1706238297509,
   "entities": [],
   "count": 1,
@@ -476,7 +476,7 @@ curl -X GET 'https://XXXX/app-id/XXXX/users/user1/contacts/users' \
 ```json
 {
   "action": "get",
-  "uri": "https://XXXX/app-id/XXXX/users/user1/contacts/users",
+  "uri": "https://XXXX/XXXX/XXXX/users/user1/contacts/users",
   "entities": [],
   "data": ["user3", "user2"],
   "timestamp": 1543819826513,
@@ -683,7 +683,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 ```json
 {
   "action": "post",
-  "uri": "https://XXXX/app-id/XXXX/users/user1/blocks/users",
+  "uri": "https://XXXX/XXXX/XXXX/users/user1/blocks/users",
   "entities": [],
   "data": ["user2"],
   "timestamp": 1542600372046,
@@ -767,7 +767,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 
 ```json
 {
-    "uri": "https://XXXX/app-id/XXXX/users/XXXX/blocks/users",
+    "uri": "https://XXXX/XXXX/XXXX/users/XXXX/blocks/users",
     "timestamp": 1682064422108,
     "entities": [],
     "cursor": "MTA5OTAwMzMwNDUzNTA2ODY1NA==",
@@ -859,7 +859,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
   "action": "delete",
   "application": "8bXXXX402",
   "path": "/users/475XXXXba/blocks",
-  "uri": "https://XXXX/app-id/XXXX/users/475XXXXba/blocks",
+  "uri": "https://XXXX/XXXX/XXXX/users/475XXXXba/blocks",
   "entities": [
     {
       "uuid": "b2aXXXXf1",

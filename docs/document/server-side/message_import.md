@@ -273,7 +273,7 @@ curl -X POST -H "Authorization: Bearer <YourAppToken> " "http://XXXX/app-id/XXXX
 ```json
 {
   "path": "/messages/users/import",
-  "uri": "http://XXXX/app-id/XXXX/messages/chatgroups/import",
+  "uri": "http://XXXX/XXXX/XXXX/messages/chatgroups/import",
   "timestamp": 1638440544078,
   "entities": [],
   "action": "post",

@@ -100,7 +100,7 @@ curl -i -X POST -H 'Content-Type: application/json' -H 'Accept: application/json
 ```json
 {
   "path": "/messages/msg_recall",
-  "uri": "https://XXXX/app-id/XXXX/messages/msg_recall",
+  "uri": "https://XXXX/XXXX/XXXX/messages/msg_recall",
   "timestamp": 1657529588473,
   "organization": "XXXX",
   "application": "09ebbf8b-XXXX-XXXX-XXXX-d47c3b38e434",
@@ -216,7 +216,7 @@ curl -L -X DELETE 'https://XXXX/app-id/XXXX/users/u1/user_channel' \
 ```json
 {
   "path": "/users/user_channel",
-  "uri": "https://XXXX/app-id/XXXX/users/u1/user_channel",
+  "uri": "https://XXXX/XXXX/XXXX/users/u1/user_channel",
   "timestamp": 1638440544078,
   "entities": [],
   "action": "delete",

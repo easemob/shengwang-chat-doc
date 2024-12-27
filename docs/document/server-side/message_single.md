@@ -204,7 +204,7 @@ curl -X POST -i 'https://XXXX/app-id/XXXX/messages/users' \
 ```json
 {
   "path": "/messages/users",
-  "uri": "https://XXXX/app-id/XXXX/messages/users",
+  "uri": "https://XXXX/XXXX/XXXX/messages/users",
   "timestamp": 1657254052191,
   "action": "post",
   "data": {
@@ -293,7 +293,7 @@ curl -X POST -i 'https://XXXX/app-id/XXXX/messages/users' \
 ```json
 {
   "path": "/messages/users",
-  "uri": "https://XXXX/app-id/XXXX/messages/users",
+  "uri": "https://XXXX/XXXX/XXXX/messages/users",
   "timestamp": 1657254052191,
   "data": {
     "user2": "1029457500870543736"
@@ -365,7 +365,7 @@ curl -X POST -i 'https://XXXX/app-id/XXXX/messages/users' \
   "to": ["user2"],
   "type": "audio",
   "body": {
-    "url": "https://XXXX/app-id/XXXX/chatfiles/1dfc7f50-XXXX-XXXX-8a07-7d75b8fb3d42",
+    "url": "https://XXXX/XXXX/XXXX/chatfiles/1dfc7f50-XXXX-XXXX-8a07-7d75b8fb3d42",
     "filename": "testaudio.amr",
     "length": 10,
     "secret": "HfXXXXCjM"
@@ -378,7 +378,7 @@ curl -X POST -i 'https://XXXX/app-id/XXXX/messages/users' \
 ```json
 {
   "path": "/messages/users",
-  "uri": "https://XXXX/app-id/XXXX/messages/users",
+  "uri": "https://XXXX/XXXX/XXXX/messages/users",
   "timestamp": 1657254052191,
   "action": "post",
   "data": {
@@ -470,7 +470,7 @@ curl -X POST -i 'https://XXXX/app-id/XXXX/messages/users' \
 ```json
 {
   "path": "/messages/users",
-  "uri": "https://XXXX/app-id/XXXX/messages/users",
+  "uri": "https://XXXX/XXXX/XXXX/messages/users",
   "timestamp": 1657254052191,
   "action": "post",
   "data": {
@@ -554,7 +554,7 @@ curl -X POST -i 'https://XXXX/app-id/XXXX/messages/users' \
 ```json
 {
   "path": "/messages/users",
-  "uri": "https://XXXX/app-id/XXXX/messages/users",
+  "uri": "https://XXXX/XXXX/XXXX/messages/users",
   "timestamp": 1657254052191,
   "action": "post",
   "data": {
@@ -638,7 +638,7 @@ curl -X POST -i "https://XXXX/app-id/XXXX/messages/users"  \
 ```json
 {
   "path": "/messages/users",
-  "uri": "https://XXXX/app-id/XXXX/messages/users",
+  "uri": "https://XXXX/XXXX/XXXX/messages/users",
   "timestamp": 1657254052191,
   "action": "post",
   "data": {
@@ -718,7 +718,7 @@ curl -X POST -i "https://XXXX/app-id/XXXX/messages/users" \
 ```json
 {
   "path": "/messages/users",
-  "uri": "https://XXXX/app-id/XXXX/messages/users",
+  "uri": "https://XXXX/XXXX/XXXX/messages/users",
   "timestamp": 1657254052191,
   "action": "post",
   "data": {
@@ -802,7 +802,7 @@ curl -X POST -i "https://XXXX/app-id/XXXX/messages/users" \
 ```json
 {
   "path": "/messages/users",
-  "uri": "https://XXXX/app-id/XXXX/messages/users",
+  "uri": "https://XXXX/XXXX/XXXX/messages/users",
   "timestamp": 1657254052191,
   "action": "post",
   "data": {

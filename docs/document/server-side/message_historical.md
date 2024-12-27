@@ -94,7 +94,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ```json
 {
   "action": "get",
-  "uri": "'https://XXXX/app-id/XXXX/chatmessages/2018112717",
+  "uri": "'https://XXXX/XXXX/XXXX/chatmessages/2018112717",
   "data": [
     {
       "url": "https://XXXX?Expires=1543316122&OSSAccessKeyId=XXXX&Signature=XXXX"
@@ -190,7 +190,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
         "width": 746
       },
       "type": "img",
-      "url": "https://XXXX/app-id/chatdemoui/chatfiles/65e54a4a-XXXX-XXXX-b821-ebde7b50cc4b"
+      "url": "https://XXXX/XXXX/chatdemoui/chatfiles/65e54a4a-XXXX-XXXX-b821-ebde7b50cc4b"
     }
   ]
 }
@@ -243,7 +243,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
   "length":10,
   "secret":"DRGM8OZrEeO1vafuJSo2IjHBeKlIhDp0GCnFu54xOF3M6KLr",
   "type":"audio",
-  "url":"https://XXXX/app-id/chatdemoui/chatfiles/0637e55a-f606-XXXX-XXXX-51f25fd1215b"
+  "url":"https://XXXX/XXXX/chatdemoui/chatfiles/0637e55a-f606-XXXX-XXXX-51f25fd1215b"
       }
    ]
 ```
@@ -275,10 +275,10 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
   "length": 10,
   "secret": "VfEpSmSvEeS7yU8dwa9rAQc-DIL2HhmpujTNfSTsrDt6eNb_",
   "size":{"height":480,"width":360},
-  "thumb": "https://XXXX/app-id/chatdemoui/chatfiles/67279b20-XXXX-XXXX-8eee-21d3334b3a97",
+  "thumb": "https://XXXX/XXXX/chatdemoui/chatfiles/67279b20-XXXX-XXXX-8eee-21d3334b3a97",
   "thumb_secret": "ZyebKn9pEeSSfY03ROk7ND24zUf74s7HpPN1oMV-1JxN2O2I",
   "type": "video",
-  "url": "https://XXXX/app-id/chatdemoui/chatfiles/671dfe30-XXXX-XXXX-ba67-8fef0d502f46"   }]
+  "url": "https://XXXX/XXXX/chatdemoui/chatfiles/671dfe30-XXXX-XXXX-ba67-8fef0d502f46"   }]
 ```
 
 ### 文件消息
@@ -303,7 +303,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
   "filename":"record.md",
   "secret":"2RNXCgeeEeeXXXX-XXXXbtZXJH4cgr2admVXn560He2PD3RX",
   "type":"file",
-  "url":"https://XXXX/app-id/XXXX/chatfiles/d9135700-XXXX-XXXX-b000-a7039876610f"
+  "url":"https://XXXX/XXXX/XXXX/chatfiles/d9135700-XXXX-XXXX-b000-a7039876610f"
   }
 ]
 ```
@@ -396,7 +396,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
       "subType": "sub_combine",
       "summary": ":yyuu\n:[图片]\n:[文件]\n",
       "title": "聊天记录",
-      "url": "https://XXXX/app-id/XXXX/chatfiles/6bf39390-8aba-11ef-a8ae-6f545c50ca23"
+      "url": "https://XXXX/XXXX/XXXX/chatfiles/6bf39390-8aba-11ef-a8ae-6f545c50ca23"
     }
 ]
 ```

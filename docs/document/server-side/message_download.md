@@ -122,7 +122,7 @@ curl -X POST 'https://XXXX/app-id/XXXX/chatfiles'  \
 {
   "action": "post",
   "path": "/chatfiles",
-  "uri": "https://XXXX/app-id/XXXX/chatfiles",
+  "uri": "https://XXXX/XXXX/XXXX/chatfiles",
   "entities": [
     {
       "uuid": "5fd74830-XXXX-XXXX-822a-81ea50bb049d",

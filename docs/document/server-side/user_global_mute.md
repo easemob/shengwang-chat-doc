@@ -118,7 +118,7 @@ curl -L -X POST 'https://XXXX/app-id/XXXX/mutes' \
 ```json
 {
   "path": "/mutes",
-  "uri": "https://XXXX/app-id/XXXX/mutes",
+  "uri": "https://XXXX/XXXX/XXXX/mutes",
   "timestamp": 1631609754727,
   "action": "post",
   "data": {
@@ -202,7 +202,7 @@ curl -L -X GET 'https://XXXX/app-id/XXXX/mutes/zs1' \
 ```json
 {
   "path": "/mutes",
-  "uri": "https://XXXX/app-id/XXXX/mutes/zs1",
+  "uri": "https://XXXX/XXXX/XXXX/mutes/zs1",
   "timestamp": 1631609831800,
   "action": "get",
   "data": {
@@ -293,7 +293,7 @@ curl -L -X GET 'https://XXXX/app-id/XXXX/mutes?pageNum=1&pageSize=10' \
 ```json
 {
   "path": "/mutes",
-  "uri": "https://XXXX/app-id/XXXX/mutes",
+  "uri": "https://XXXX/XXXX/XXXX/mutes",
   "timestamp": 1631609858771,
   "action": "get",
   "data": {

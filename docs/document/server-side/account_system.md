@@ -52,98 +52,7 @@
 
 ## 注册用户
 
-### 开放注册单个用户
-
-开放注册指用户可以在登录客户端 SDK 后自行通过账号密码注册账号。一般在体验 Demo 和测试开发环境时使用，使用前需先在[声网控制台](https://console.shengwang.cn/overview)打开相应应用的开放注册开关，即在控制台首页的 **应用列表** 下点击目标应用的 **操作** 一栏中的 **管理**，然后选择 **即时通讯** > **服务概览**，在页面的 **设置** 区域中将 **用户注册模式** 设置为 **开放注册**。
-
-#### HTTP 请求
-
-```http
-POST https://{host}/app-id/{app_id}/users
-```
-
-##### 请求 Header
-
-| 参数           | 类型   | 是否必需 | 描述                                |
-| :------------- | :----- | :------- | :---------------------------------- |
-| `Content-Type` | String | 是       | 内容类型。请填 `application/json`。 |
-
-##### 请求 body
-
-| 参数       | 类型   | 是否必需 | 描述          |
-| :--------- | :----- | :------- | :-------------------------------------------- |
-| `username` | String | 是       | 用户 ID，长度不可超过 64 个字节。不可设置为空。支持以下字符集：<br/>- 26 个小写英文字母 a-z；<br/>- 26 个大写英文字母 A-Z；<br/>- 10 个数字 0-9；<br/>- “\_”, “-”, “.”。 <br/><Container type="notice" title="注意"><br/>- 该参数不区分大小写，因此 `Aa` 和 `aa` 为相同的用户 ID；<br/>- 请确保同一个 app 下，用户 ID 唯一；<br/>- 用户 ID 为公开信息，请勿使用 UUID、邮箱地址、手机号等敏感信息。</Container> |
-| `password` | String | 是       | 用户的登录密码，长度不可超过 64 个字符。  |
-| `nickname` | String | 否       | 离线推送时在接收方的客户端推送通知栏中显示的发送方的昵称。你可以自定义该昵称，长度不能超过 100 个字符。<br/>支持以下字符集：<br/> - 26 个小写英文字母 a-z；<br/> - 26 个大写英文字母 A-Z；<br/> - 10 个数字 0-9；<br/> - 中文；<br/> - 特殊字符。<Container type="tip" title="提示">1. 若不设置昵称，推送时会显示发送方的用户 ID，而非昵称。<br/>2. 该昵称可与用户属性中的昵称设置不同，不过我们建议这两种昵称的设置保持一致。因此，修改其中一个昵称时，也需调用相应方法对另一个进行更新，确保设置一致。更新用户属性中的昵称的方法，详见 [设置用户属性](userprofile.html#设置用户属性)。</Container> |
-
-其他参数及说明详见 [公共参数](#公共参数)。
-
-#### HTTP 响应
-
-##### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-响应字段及说明详见 [公共参数](#公共参数)。
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码)了解可能的原因。
-
-#### 示例
-
-##### 请求示例
-
-```shell
-## 无需传入 token
-curl -X POST -i "https://XXXX.com/XXXX-demo/XXXX/users" -d '{"username":"user1","password":"123","nickname":"testuser"}'
-```
-
-##### 响应示例
-
-```json
-{
-  "action": "post",
-  "path": "/users",
-  "uri": "https://XXXX.com/XXXX-demo/XXXX/users",
-  "entities": [
-    {
-      "uuid": "0ffe2d80-XXXX-XXXX-8d66-279e3e1c214b",
-      "type": "user",
-      "created": 1542795196504,
-      "modified": 1542795196504,
-      "username": "user1",
-      "activated": true
-    }
-  ],
-  "timestamp": 1542795196515,
-  "duration": 0,
-}
-```
-
-#### 错误码
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
-
-| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
-| :----------- | :--- | :------------- | :----------- | :----------- |
-| 400         | illegal_argument  | username XXX is not legal   | 用户名不合法。  | 查看注册用户名[规范](#开放注册单个用户)。 |
-| 400         | illegal_argument | USERNAME_TOO_LONG  | 用户长度超过限制。  | 查看注册用户名[规范](#开放注册单个用户)。 |
-| 400         | illegal_argument  | password or pin must provided    | 注册用户请求 body 中没有提供 `password` 参数。 | 注册用户请求 body 中提供 `password`。   |
-| 400         | illegal_argument | NICKNAME_TOO_LONG    | 注册用户的推送昵称长度超过限制。   | 查看注册用户名[规范](#开放注册单个用户)。 |
-| 400         | duplicate_unique_property_exists   | Application XXX Entity user requires that property named username be unique, value of XXX exists | 注册用户名已经存在。 | 更换用户名重新注册。  |
-| 401         | unauthorized  | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。   | 使用新的 token 访问。       |
-| 429         | resource_limited    | You have exceeded the limit of the community edition,Please upgrade to the enterprise edition | 注册用户的数量超过当前产品套餐包的限制。 | 联系声网商务开通付费版。   |
-
-关于其他错误，你可以参考 [错误码](#错误码) 了解可能的原因。
-
-### 授权注册单个用户
-
-授权注册模式指注册声网即时通讯 IM 账号时携带管理员身份认证信息，即 App Token。
-
-要使用该注册方式，你需要在[声网控制台](https://console.shengwang.cn/overview)进行如下配置：
-
-在控制台首页的 **应用列表** 下点击目标应用的 **操作** 一栏中的 **管理**，然后选择 **即时通讯** > **服务概览**，在页面的 **设置** 区域中将**用户注册模式**设置**授权注册**，然后单击**保存**。
-
-推荐使用该模式，因为该模式较为安全，可防止已获取了注册 URL 和了解注册流程的某些人恶意向服务器大量注册垃圾用户。
+### 注册单个用户
 
 #### HTTP 请求
 
@@ -168,7 +77,6 @@ POST https://{host}/app-id/{app_id}/users
 | 参数       | 类型   | 是否必需 | 描述         |
 | :--------- | :----- | :------- | :------------------------ |
 | `username` | String | 是       | 用户 ID，长度不可超过 64 字节。不可设置为空。支持以下字符集：<br/>- 26 个小写英文字母 a-z；<br/>- 26 个大写英文字母 A-Z；<br/>- 10 个数字 0-9；<br/>- “\_”, “-”, “.”。 <br/><Container type="notice" title="注意"><br/>- 该参数不区分大小写，因此 `Aa` 和 `aa` 为相同用户名；<br/>- 请确保同一个 app 下，用户 ID 唯一；<br/>- 用户 ID 为公开信息，请勿使用 UUID、邮箱地址、手机号等敏感信息。</Container> |
-| `password` | String | 是       | 用户的登录密码，长度不可超过 64 个字符。 |
 
 #### HTTP 响应
 
@@ -189,8 +97,7 @@ POST https://{host}/app-id/{app_id}/users
 
 curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '[
    {
-     "username": "user1",
-     "password": "123"
+     "username": "user1"
    }
  ]' 'https://XXXX/app-id/XXXX/users'
 ```
@@ -201,7 +108,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 {
   "action": "post",
   "path": "/users",
-  "uri": "https://XXXX/app-id/XXXX/users",
+  "uri": "https://XXXX/XXXX/XXXX/users",
   "entities": [
     {
       "uuid": "0ffe2d80-XXXX-XXXX-8d66-279e3e1c214b",
@@ -223,10 +130,10 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 | HTTP 状态码 | 错误类型      | 错误提示       | 可能原因       | 处理建议       |
 | :---- | :-------- | :------------ | :----------------- | :----------------- |
-| 400         | illegal_argument                   | username XXX is not legal  | 用户名不合法。   | 查看注册用户名[规范](#开放注册单个用户)。 |
-| 400         | illegal_argument                   | USERNAME_TOO_LONG   | 用户长度超过限制。 | 查看注册用户名[规范](#开放注册单个用户)。 |
+| 400         | illegal_argument                   | username XXX is not legal  | 用户名不合法。   | 查看注册用户名[规范](#注册单个用户)。 |
+| 400         | illegal_argument                   | USERNAME_TOO_LONG   | 用户长度超过限制。 | 查看注册用户名[规范](#注册单个用户)。 |
 | 400         | illegal_argument                   | password or pin must provided  | 注册用户请求 body 中没有提供 `password` 参数。| 注册用户请求 body 中提供 `password`。 |
-| 400         | illegal_argument                   | NICKNAME_TOO_LONG    | 注册用户的推送昵称长度超过限制。 | 查看注册用户名[规范](#开放注册单个用户)。 |
+| 400         | illegal_argument                   | NICKNAME_TOO_LONG    | 注册用户的推送昵称长度超过限制。 | 查看注册用户名[规范](#注册单个用户)。 |
 | 400         | duplicate_unique_property_exists   | Application XXX Entity user requires that property named username be unique, value of XXX exists | 注册用户名已经存在。 | 更换用户名重新注册。   |
 | 400         | illegal_argument                   | username [XXX] is not legal  | 注册用户的 `username` 不合法。| 请按照用户名的规范进行注册用户。 |
 | 400         | illegal_argument                   | USERNAME_TOO_LONG    | 注册用户的 `username` 长度超限。 | 请按照用户名的规范进行注册用户。  |
@@ -239,9 +146,9 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
-### 批量授权注册用户
+### 批量注册用户
 
-批量注册为授权注册方式，服务端需要校验有效的 token 权限才能进行操作。
+单次请求注册多个用户。
 
 #### HTTP 请求
 
@@ -269,7 +176,6 @@ POST https://{host}/app-id/{app_id}/users
 | 参数       | 类型   | 是否必需 | 描述        |
 | :--------- | :----- | :------- | :----------------------------- |
 | `username` | String | 是       | 用户 ID，长度不可超过 64 个字节。不可设置为空。支持以下字符集：<br/>- 26 个小写英文字母 a-z；<br/>- 26 个大写英文字母 A-Z；<br/>- 10 个数字 0-9；<br/>- “\_”, “-”, “.”。 <br/><Container type="notice" title="注意"><br/>- 该参数不区分大小写，因此 `Aa` 和 `aa` 为相同用户名；<br/>- 请确保同一个 app 下，用户 ID 唯一；<br/>- 用户 ID 为公开信息，请勿使用 UUID、邮箱地址、手机号等敏感信息。</Container> |
-| `password` | String | 是       | 用户的登录密码，长度不可超过 64 个字符。      |
 
 #### HTTP 响应
 
@@ -290,7 +196,7 @@ POST https://{host}/app-id/{app_id}/users
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/app-id/XXXX/users" -d '[{"username":"user1", "password":"123"}, {"username":"user2", "password":"456"}]'
+curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/app-id/XXXX/users" -d '[{"username":"user1"}, {"username":"user2"}]'
 ```
 
 ##### 响应示例一
@@ -299,7 +205,7 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/app-id/
 {
   "action": "post",
   "path": "/users",
-  "uri": "https://XXXX/app-id/XXXX/users",
+  "uri": "https://XXXX/XXXX/XXXX/users",
   "entities": [
     {
       "uuid": "278b5e60-XXXX-XXXX-8f9b-d5d83ebec806",
@@ -331,7 +237,7 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/app-id/
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/app-id/XXXX/users" -d '[{"username":"user1", "password":"123"}, {"username":"user2", "password":"456"}, {"username":"user3", "password":"789"}]'
+curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/app-id/XXXX/users" -d '[{"username":"user1"}, {"username":"user2"}, {"username":"user3"}]'
 ```
 
 ##### 响应示例二
@@ -340,7 +246,7 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/app-id/
 {
   "action": "post",
   "path": "/users",
-  "uri": "https://XXXX/app-id/XXXX/testapp/users",
+  "uri": "https://XXXX/XXXX/XXXX/testapp/users",
   "entities": [
     {
       "uuid": "278b5e60-XXXX-XXXX-8f9b-d5d83ebec806",
@@ -376,10 +282,9 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/app-id/
 
 | HTTP 状态码 | 错误类型   | 错误提示      | 可能原因   | 处理建议       |
 | :----- | :----------- | :----| :-------| :---------------|
-| 400         | illegal_argument                   | username XXX is not legal  | 用户名不合法。| 查看注册用户名[规范](#开放注册单个用户)。 |
-| 400         | illegal_argument                   | USERNAME_TOO_LONG    | 用户长度超过限制。 | 查看注册用户名[规范](#开放注册单个用户)。 |
-| 400         | illegal_argument                   | password or pin must provided  | 注册用户请求 body 中没有提供 `password` 参数。  | 注册用户请求 body 中提供 `password`。  |
-| 400         | illegal_argument                   | NICKNAME_TOO_LONG    | 注册用户的推送昵称长度超过限制。  | 查看注册用户名[规范](#开放注册单个用户)。 |
+| 400         | illegal_argument                   | username XXX is not legal  | 用户名不合法。| 查看注册用户名[规范](#注册单个用户)。 |
+| 400         | illegal_argument                   | USERNAME_TOO_LONG    | 用户长度超过限制。 | 查看注册用户名[规范](#注册单个用户)。 |
+| 400         | illegal_argument                   | NICKNAME_TOO_LONG    | 注册用户的推送昵称长度超过限制。  | 查看注册用户名[规范](#注册单个用户)。 |
 | 400         | duplicate_unique_property_exists   | Application XXX Entity user requires that property named username be unique, value of XXX exists | 注册用户名已经存在。  | 更换用户名重新注册。  |
 | 400         | duplicate_unique_property_exists   | the same user XXX has a different password, the passwords are XXX | 注册用户时，请求 body 中存在 `username` 相同但密码不同的情况。 | 对相同的 `username` 进行修改重新注册。    |
 | 400         | illegal_argument                   | username [XXX] is not legal    | 注册用户的 `username` 不合法。 | 请按照用户名的规范进行注册用户。 |
@@ -455,7 +360,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 {
   "action": "get",
   "path": "/users",
-  "uri": "https://XXXX/app-id/XXXX/users/XXXX",
+  "uri": "https://XXXX/XXXX/XXXX/users/XXXX",
   "entities": [
     {
       "uuid": "0ffe2d80-XXXX-XXXX-8d66-279e3e1c214b",
@@ -568,7 +473,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
     "limit": ["2"]
   },
   "path": "/users",
-  "uri": "https://XXXX/app-id/XXXX/users",
+  "uri": "https://XXXX/XXXX/XXXX/users",
   "entities": [
     {
       "uuid": "ab90eff0-XXXX-XXXX-9174-8f161649a182",
@@ -618,7 +523,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
     "limit": ["2"]
   },
   "path": "/users",
-  "uri": "https://XXXX/app-id/XXXX/users",
+  "uri": "https://XXXX/XXXX/XXXX/users",
   "entities": [
     {
       "uuid": "fef7f250-XXXX-XXXX-ba39-0fed7dcc3cdd",
@@ -695,7 +600,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 {
   "action": "delete",
   "path": "/users",
-  "uri": "https://XXXX/app-id/XXXX/users",
+  "uri": "https://XXXX/XXXX/XXXX/users",
   "entities": [
     {
       "uuid": "ab90eff0-XXXX-XXXX-9174-8f161649a182",
@@ -787,7 +692,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
     "limit": ["2"]
   },
   "path": "/users",
-  "uri": "https://XXXX/app-id/testapp/users",
+  "uri": "https://XXXX/XXXX/testapp/users",
   "entities": [
     {
       "uuid": "b2aade90-XXXX-XXXX-a974-f3368f82e4f1",
@@ -977,7 +882,7 @@ curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppTok
 | HTTP 状态码 | 错误类型      | 错误提示     | 可能原因       | 处理建议      |
 | :---------- | :------------------| :-------------------| :------------------| :-------------|
 | 401         | unauthorized     | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 404         | service_resource_not_found         | Service resource not found   | 用户不存在。  | 先[注册用户](account_system.html#开放注册单个用户)或者检查用户名是否正确。 |
+| 404         | service_resource_not_found         | Service resource not found   | 用户不存在。  | 先[注册用户](account_system.html#注册单个用户)或者检查用户名是否正确。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -1043,7 +948,7 @@ curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppTok
 | HTTP 状态码 | 错误类型     | 错误提示      | 可能原因       | 处理建议    |
 | :---------- | :---------| :---------------------| :----------| :--------|
 | 401         | unauthorized                       | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。    |
-| 404         | service_resource_not_found         | Service resource not found   | 用户不存在。  | 先[注册用户](account_system.html#开放注册单个用户)或者检查用户名是否正确。 |
+| 404         | service_resource_not_found         | Service resource not found   | 用户不存在。  | 先[注册用户](account_system.html#注册单个用户)或者检查用户名是否正确。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -1099,7 +1004,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ```json
 {
   "action": "get",
-  "uri": "https://XXXX/app-id/XXXX/users/user1/disconnect",
+  "uri": "https://XXXX/XXXX/XXXX/users/user1/disconnect",
   "entities": [],
   "data": {
     "result": true
@@ -1184,7 +1089,7 @@ curl -X DELETE -H 'Accept: application/json'   \
 
 ```json
 {
-    "uri": "https://XXXX/app-id/XXXX/users/XXXX/disconnect/XXXX",
+    "uri": "https://XXXX/XXXX/XXXX/users/XXXX/disconnect/XXXX",
     "timestamp": 1709865422596,
     "entities": [],
     "action": "delete",
@@ -1257,7 +1162,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ```json
 {
   "action": "get",
-  "uri": "https://XXXX/app-id/XXXX/users/user1/status",
+  "uri": "https://XXXX/XXXX/XXXX/users/user1/status",
   "entities": [],
   "data": {
     "user1": "offline"
@@ -1423,7 +1328,7 @@ curl -L -X GET 'http://XXXX//app-id/XXXX/users/XXXX/resources' \
 ```json
 {
     "path": "/users/XXXX/resources",
-    "uri": "https://XXXX/app-id/XXXX/users/XXXX/resources",
+    "uri": "https://XXXX/XXXX/XXXX/users/XXXX/resources",
     "timestamp": 1692325141777,
     "entities": [],
     "action": "get",

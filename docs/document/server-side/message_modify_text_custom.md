@@ -128,7 +128,7 @@ curl -X PUT -i 'http://XXXX/app-id/XXXX/messages/rewrite/1235807318835202004' \
 ```json
 {
   "path": "/messages/rewrite/1235807318835202004",
-  "uri": "http://XXXX/app-id/XXXX/messages/rewrite/1235807318835202004",
+  "uri": "http://XXXX/XXXX/XXXX/messages/rewrite/1235807318835202004",
   "timestamp": 1705372388118,
   "action": "put",
   "data": "success",

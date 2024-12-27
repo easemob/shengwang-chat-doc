@@ -302,7 +302,7 @@ curl -X PUT https://XXXX/app-id/XXXX/users/XXXX  \
 {
   "action": "put",
   "path": "/users",
-  "uri": "https://XXXX/app-id/XXXX/users/XXXX",
+  "uri": "https://XXXX/XXXX/XXXX/users/XXXX",
   "entities": [
     {
       "uuid": "4759aa70-XXXX-XXXX-XXXX-6fa0510823ba",
@@ -394,7 +394,7 @@ curl -X PUT -H 'Content-Type: application/json'  \
 ```json
 {
     "path": "/push",
-    "uri": "http://XXX/app-id/XXX/push",
+    "uri": "http://XXXX/XXXX/XXXX/push",
     "timestamp": 1719542740148,
     "entities": [
         {
@@ -483,7 +483,7 @@ curl -X PUT https://XXXX/app-id/XXXX/users/XXXX
 {
   "action": "put",
   "path": "/users",
-  "uri": "https://XXXX/app-id/XXXX/users/XXXX",
+  "uri": "http://XXXX/XXXX/XXXX/users/XXXX",
   "entities": [
     {
       "uuid": "3b8c9890-XXXX-XXXX-XXXX-f50bf55cafad",
@@ -580,7 +580,7 @@ curl -L -X PUT 'https://XXXX/app-id/XXXX/users/XXXX/notification/user/XXXX' \
 ```json
 {
   "path": "/users",
-  "uri": "https://XXXX/app-id/XXXX/users/notification/user/XXXX",
+  "uri": "http://XXXX/XXXX/XXXX/users/notification/user/XXXX",
   "timestamp": 1647503749918,
   "action": "put",
   "data": {
@@ -647,7 +647,7 @@ curl -L -X GET 'https://XXXX/app-id/XXXX/users/XXXX/notification/chatgroup/XXXX'
 ```json
 {
   "path": "/users",
-  "uri": "https://XXXX/app-id/XXXX/users/notification/chatgroup/12312312321",
+  "uri": "http://XXXX/XXXX/XXXX/users/notification/chatgroup/12312312321",
   "timestamp": 1647503749918,
   "action": "get",
   "data": {
@@ -721,7 +721,7 @@ curl -L -X PUT 'https://XXXX/app-id/XXXX/users/XXXX/notification/language' \
 ```json
 {
   "path": "/users",
-  "uri": "https://XXXX/app-id/XXXX/users/XXXX/notification/language",
+  "uri": "http://XXXX/XXXX/XXXX/users/XXXX/notification/language",
   "timestamp": 1648089630244,
   "action": "put",
   "data": {
@@ -782,7 +782,7 @@ curl -L -X GET 'https://XXXX/app-id/XXXX/users/XXXX/notification/language' \
 ```json
 {
   "path": "/users",
-  "uri": "https://XXXX/app-id/XXXX/users/XXXX/notification/language",
+  "uri": "http://XXXX/XXXX/XXXX/users/XXXX/notification/language",
   "timestamp": 1648089630244,
   "action": "put",
   "data": {
@@ -924,7 +924,7 @@ curl -X POST 'https://XXXX/app-id/XXXX/notification/template' \
 
 ```json
 {
-  "uri": "https://XXXX/app-id/XXXX/notification/template",
+  "uri": "http://XXXX/XXXX/XXXX/notification/template",
   "timestamp": 1646989584108,
   "action": "post",
   "data": {
@@ -992,7 +992,7 @@ curl -X GET 'https://XXXX/app-id/XXXX/notification/template/XXXX' \
 
 ```json
 {
-  "uri": "https://XXXX/app-id/XXXX/notification/template/XXXX",
+  "uri": "http://XXXX/XXXX/XXXX/notification/template/XXXX",
   "timestamp": 1646989686393,
   "action": "get",
   "data": {
@@ -1070,7 +1070,7 @@ curl -X PUT 'https://XXXX/app-id/XXXX/users/XXXX/notification/template' \
 ```json
 {
     "path": "/users",
-    "uri": "http://XXX/app-id/XXX/users/XXX/notification/template",
+    "uri": "http://XXXX/XXXX/XXXX/users/XXX/notification/template",
     "timestamp": 1705470003984,
     "action": "put",
     "data": {

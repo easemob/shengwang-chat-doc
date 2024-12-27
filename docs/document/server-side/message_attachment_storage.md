@@ -98,7 +98,7 @@ curl -X PUT -L "http://XXXX/app-id/XXXX/users/{username}/chatfiles/lifetime" \
 ```json
 {
   "path": "/users/test/chatfiles/lifetime",
-  "uri": "https://XXXX/app-id/XXXX/users/test/chatfiles/lifetime",
+  "uri": "https://XXXX/XXXX/XXXX/users/test/chatfiles/lifetime",
   "timestamp": 1731382587142,
   "action": "put",
   "data": {

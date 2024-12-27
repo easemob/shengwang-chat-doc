@@ -137,7 +137,7 @@ curl -X POST -i 'https://XXXX/app-id/XXXX/messages/chatrooms' \
 ```json
 {
   "path": "/messages/chatrooms",
-  "uri": "https://XXXX/app-id/XXXX/messages/chatrooms",
+  "uri": "https://XXXX/XXXX/XXXX/messages/chatrooms",
   "timestamp": 1657254052191,
   "action": "post",
   "data": {
@@ -226,7 +226,7 @@ curl -X POST -i 'https://XXXX/app-id/XXXX/messages/chatrooms' \
 ```json
 {
   "path": "/messages/chatrooms",
-  "uri": "https://XXXX/app-id/XXXX/messages/chatrooms",
+  "uri": "https://XXXX/XXXX/XXXX/messages/chatrooms",
   "timestamp": 1657254052191,
   "action": "post",
   "data": {
@@ -312,7 +312,7 @@ curl -X POST -i 'https://XXXX/app-id/XXXX/messages/chatrooms' \
 ```json
 {
   "path": "/messages/chatrooms",
-  "uri": "https://XXXX/app-id/XXXX/messages/chatrooms",
+  "uri": "https://XXXX/XXXX/XXXX/messages/chatrooms",
   "timestamp": 1657254052191,
   "action": "post",
   "data": {
@@ -401,7 +401,7 @@ curl -X POST -i 'https://XXXX/app-id/XXXX/messages/chatrooms' \
 ```json
 {
   "path": "/messages/chatrooms",
-  "uri": "https://XXXX/app-id/XXXX/messages/chatrooms",
+  "uri": "https://XXXX/XXXX/XXXX/messages/chatrooms",
   "timestamp": 1657254052191,
   "action": "post",
   "data": {
@@ -484,7 +484,7 @@ curl -X POST -i 'https://XXXX/app-id/XXXX/messages/chatrooms' \
 ```json
 {
   "path": "/messages/chatrooms",
-  "uri": "https://XXXX/app-id/XXXX/messages/chatrooms",
+  "uri": "https://XXXX/XXXX/XXXX/messages/chatrooms",
   "timestamp": 1657254052191,
   "action": "post",
   "data": {
@@ -568,7 +568,7 @@ curl -X POST -i "https://XXXX/app-id/XXXX/messages/chatrooms"  \
 ```json
 {
   "path": "/messages/chatrooms",
-  "uri": "https://XXXX/app-id/XXXX/messages/chatrooms",
+  "uri": "https://XXXX/XXXX/XXXX/messages/chatrooms",
   "timestamp": 1657254052191,
   "action": "post",
   "data": {
@@ -648,7 +648,7 @@ curl -X POST -i "https://XXXX/app-id/XXXX/messages/chatrooms" \
 ```json
 {
   "path": "/messages/chatrooms",
-  "uri": "https://XXXX/app-id/XXXX/messages/chatrooms",
+  "uri": "https://XXXX/XXXX/XXXX/messages/chatrooms",
   "timestamp": 1657254052191,
   "action": "post",
   "data": {
@@ -731,7 +731,7 @@ curl -X POST -i "https://XXXX/app-id/XXXX/messages/chatrooms" \
 ```json
 {
   "path": "/messages/chatrooms",
-  "uri": "https://XXXX/app-id/XXXX/messages/chatrooms",
+  "uri": "https://XXXX/XXXX/XXXX/messages/chatrooms",
   "timestamp": 1657254052191,
   "action": "post",
   "data": {
@@ -830,7 +830,7 @@ curl -X POST -i 'https://XXXX/app-id/XXXX/messages/chatrooms' \
 ```json
 {
   "path": "/messages/chatrooms",
-  "uri": "https://XXXX/app-id/XXXX/messages/chatrooms",
+  "uri": "https://XXXX/XXXX/XXXX/messages/chatrooms",
   "timestamp": 1657254052191,
   "action": "post",
   "data": {
@@ -1096,7 +1096,7 @@ curl -L 'https://XXXX/app-id/XXXX/messages/chatrooms/broadcast' \
 ```json
 {
   "path": "/messages/chatrooms/broadcast",
-  "uri": "https://XXXX/app-id/XXXX/messages/chatrooms/broadcast",
+  "uri": "https://XXXX/XXXX/XXXX/messages/chatrooms/broadcast",
   "timestamp": 1699944653964,
   "action": "post",
   "data": {

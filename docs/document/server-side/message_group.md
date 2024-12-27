@@ -169,7 +169,7 @@ curl -X POST -i 'https://XXXX/app-id/XXXX/messages/chatgroups'
 ```json
 {
   "path": "/messages/chatgroups",
-  "uri": "https://XXXX/app-id/XXXX/messages/chatgroups",
+  "uri": "https://XXXX/XXXX/XXXX/messages/chatgroups",
   "timestamp": 1657254052191,
   "action": "post",
   "data": {
@@ -258,7 +258,7 @@ curl -X POST -i 'https://XXXX/app-id/XXXX/messages/chatgroups' \
 ```json
 {
   "path": "/messages/chatgroups",
-  "uri": "https://XXXX/app-id/XXXX/messages/chatgroups",
+  "uri": "https://XXXX/XXXX/XXXX/messages/chatgroups",
   "timestamp": 1657254052191,
   "action": "post",
   "data": {
@@ -343,7 +343,7 @@ curl -X POST -i 'https://XXXX/app-id/XXXX/messages/chatgroups' \
 ```json
 {
   "path": "/messages/chatgroups",
-  "uri": "https://XXXX/app-id/XXXX/messages/chatgroups",
+  "uri": "https://XXXX/XXXX/XXXX/messages/chatgroups",
   "timestamp": 1657254052191,
   "action": "post",
   "data": {
@@ -435,7 +435,7 @@ curl -X POST -i 'https://XXXX/app-id/XXXX/messages/chatgroups' \
 ```json
 {
   "path": "/messages/chatgroups",
-  "uri": "https://XXXX/app-id/XXXX/messages/chatgroups",
+  "uri": "https://XXXX/XXXX/XXXX/messages/chatgroups",
   "timestamp": 1657254052191,
   "action": "post",
   "data": {
@@ -518,7 +518,7 @@ curl -X POST -i 'https://XXXX/app-id/XXXX/messages/chatgroups' \
 ```json
 {
   "path": "/messages/chatgroups",
-  "uri": "https://XXXX/app-id/XXXX/messages/chatgroups",
+  "uri": "https://XXXX/XXXX/XXXX/messages/chatgroups",
   "timestamp": 1657254052191,
   "action": "post",
   "data": {
@@ -602,7 +602,7 @@ curl -X POST -i 'https://XXXX/app-id/XXXX/messages/chatgroups'  \
 ```json
 {
   "path": "/messages/chatgroups",
-  "uri": "https://XXXX/app-id/XXXX/messages/chatgroups",
+  "uri": "https://XXXX/XXXX/XXXX/messages/chatgroups",
   "timestamp": 1657254052191,
   "action": "post",
   "data": {
@@ -682,7 +682,7 @@ curl -X POST -i "https://XXXX/app-id/XXXX/messages/chatgroups" \
 ```json
 {
   "path": "/messages/chatgroups",
-  "uri": "https://XXXX/app-id/XXXX/messages/chatgroups",
+  "uri": "https://XXXX/XXXX/XXXX/messages/chatgroups",
   "timestamp": 1657254052191,
   "action": "post",
   "data": {
@@ -766,7 +766,7 @@ curl -X POST -i "https://XXXX/app-id/XXXX/messages/chatgroups" \
 ```json
 {
   "path": "/messages/chatgroups",
-  "uri": "https://XXXX/app-id/XXXX/messages/chatgroups",
+  "uri": "https://XXXX/XXXX/XXXX/messages/chatgroups",
   "timestamp": 1657254052191,
   "action": "post",
   "data": {
@@ -875,7 +875,7 @@ curl -X POST -i 'https://XXXX/app-id/XXXX/messages/chatgroups/users' \
 ```json
 {
   "path": "/messages/chatgroups",
-  "uri": "https://XXXX/app-id/XXXX/messages/chatgroups",
+  "uri": "https://XXXX/XXXX/XXXX/messages/chatgroups",
   "timestamp": 1657254052191,
   "action": "post",
   "data": {

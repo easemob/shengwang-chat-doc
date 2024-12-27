@@ -96,7 +96,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ```json
 {
   "action": "get",
-  "uri": "http://XXXX/app-id/XXXX/users/user1/offline_msg_count",
+  "uri": "http://XXXX/XXXX/XXXX/users/user1/offline_msg_count",
   "entities": [],
   "data": {
     "user1": 0
@@ -173,7 +173,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ```json
 {
   "action": "get",
-  "uri": "http://XXXX/app-id/XXXX/users/user1/offline_msg_status/123",
+  "uri": "http://XXXX/XXXX/XXXX/users/user1/offline_msg_status/123",
   "entities": [],
   "data": {
     "123": "delivered"
