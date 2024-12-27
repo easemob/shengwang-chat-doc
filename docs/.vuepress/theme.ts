@@ -7,7 +7,7 @@ interface CustomConfig {
 }
 
 export default hopeTheme(<ThemeOptions & CustomConfig>{
-  hostname: 'https://doc.chat.rtnsvc.com/',
+  hostname: 'https://im.shengwang.cn/',
   home: '/',
   iconAssets: 'iconfont',
   // logo: '/logo.svg',
