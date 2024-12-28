@@ -2,32 +2,31 @@
 
 <Toc />
 
-环信即时通讯 IM 支持通过 RESTful API 管理用户之间的关系，包括添加和移除联系人以及将用户添加至或移除黑名单。
+声网即时通讯 IM 支持通过 RESTful API 管理用户之间的关系，包括添加和移除联系人以及将用户添加至或移除黑名单。
 
 ## 前提条件
 
-要调用环信即时通讯 RESTful API，请确保满足以下要求：
+要调用声网即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
-- 了解环信 IM REST API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置声网即时通讯 IM 服务](enable_im.html)。
+- 了解声网即时通讯 IM 的 RESTful API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 认证方式
 
-环信即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
+声网即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
 `Authorization: Bearer YourAppToken`
 
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
+为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的 鉴权方式，详见 [使用 Token 鉴权](token_authentication.html)。
 
 ## 公共参数
 
 ### 请求参数
 
-| 参数       | 类型   | 是否必需 | 描述                                                                                                                                            |
-| :--------- | :----- | :------- | :------------------------------------ |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| 参数       | 类型   | 是否必需 | 描述   |
+| :--------- | :----- | :------- | :------------------ |
+| `host`     | String | 是       | 即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `app_id`     | String | 是       | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
 | `username` | String | 是       | 用户 ID。     |
 
 ### 响应参数
@@ -39,17 +38,12 @@
 | `uuid`            | String | 用户在系统内的唯一标识。该标识由系统生成，开发者无需关心。                     |
 | `username`        | String | 用户 ID。                                                                      |
 | `action`          | String | 请求方法。                                                                     |
-| `organization`    | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
-| `application`     | String | 应用在系统内的唯一标识。该标识由系统生成，开发者无需关心。                     |
-| `applicationName` | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
 | `uri`             | String | 请求 URL。                                                                     |
 | `path`            | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。                              |
 | `username`        | String | 用户 ID。                                                                      |
 | `nickname`        | String | 用户昵称。                                                                     |
 | `timestamp`       | Long   | Unix 时间戳，单位为毫秒。                                                      |
 | `duration`        | String | 请求响应时间，单位为毫秒。                                                     |
-
-用户关系管理的主要接口如下：
 
 ## 添加好友
 
@@ -60,7 +54,7 @@
 ### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users/{friend_username}
+POST https://{host}/app-id/{app_id}/users/{owner_username}/contacts/users/{friend_username}
 ```
 
 #### 路径参数
@@ -108,7 +102,7 @@ POST https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users/
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/contacts/users/user2'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/app-id/XXXX/users/user1/contacts/users/user2'
 ```
 
 #### 响应示例
@@ -116,7 +110,6 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 ```json
 {
   "action": "post",
-  "application": "8bXXXX402",
   "path": "/users/475XXXXba/contacts",
   "uri": "https://XXXX/XXXX/XXXX/users/475XXXXba/contacts",
   "entities": [
@@ -131,9 +124,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
     }
   ],
   "timestamp": 1542598913819,
-  "duration": 63,
-  "organization": "XXXX",
-  "applicationName": "testapp"
+  "duration": 63
 }
 ```
 
@@ -156,7 +147,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 ### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users/{friend_username}
+DELETE https://{host}/app-id/{app_id}/users/{owner_username}/contacts/users/{friend_username}
 ```
 
 #### 路径参数
@@ -203,7 +194,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/user
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/contacts/users/user2'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/app-id/XXXX/users/user1/contacts/users/user2'
 ```
 
 #### 响应示例
@@ -211,7 +202,6 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 ```json
 {
   "action": "delete",
-  "application": "8bXXXX402",
   "path": "/users/475XXXXba/contacts",
   "uri": "https://XXXX/XXXX/XXXX/users/475XXXXba/contacts",
   "entities": [
@@ -226,9 +216,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
     }
   ],
   "timestamp": 1542599266616,
-  "duration": 350,
-  "organization": "XXXX",
-  "applicationName": "testapp"
+  "duration": 350
 }
 ```
 
@@ -252,7 +240,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 ### HTTP 请求
 
 ```http
-PUT https://{host}/{org_name}/{app_name}/user/{owner_username}/contacts/users/{friend_username}
+PUT https://{host}/app-id/{app_id}/user/{owner_username}/contacts/users/{friend_username}
 ```
 
 #### 路径参数
@@ -301,7 +289,7 @@ PUT https://{host}/{org_name}/{app_name}/user/{owner_username}/contacts/users/{f
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -X PUT 'https://{host}/{org_name}/{app_name}/user/{owner_username}/contacts/users/{friend_username}' \
+curl -X PUT 'https://XXXX/app_id/XXXX/user/{owner_username}/contacts/users/{friend_username}' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
@@ -318,7 +306,7 @@ curl -X PUT 'https://{host}/{org_name}/{app_name}/user/{owner_username}/contacts
   "duration": 22,
   "status": "ok",
   "timestamp": 1700633088329,
-  "uri": "https://{host}/{org_name}/{app_name}/user/{owner_username}/contacts/users/{friend_username}"
+  "uri": "https://XXXX/XXXX/XXXX/user/{owner_username}/contacts/users/{friend_username}"
 }
 ```
 
@@ -341,7 +329,7 @@ curl -X PUT 'https://{host}/{org_name}/{app_name}/user/{owner_username}/contacts
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/user/{username}/contacts?limit={N}&cursor={cursor}&needReturnRemark={true/false} 
+GET https://{host}/app-id/{app_id}/user/{username}/contacts?limit={N}&cursor={cursor}&needReturnRemark={true/false} 
 ```
 
 #### 路径参数
@@ -359,7 +347,6 @@ GET https://{host}/{org_name}/{app_name}/user/{username}/contacts?limit={N}&curs
 | `limit` | Int     | 否    | 每次期望返回的好友的数量。取值范围为 [1,50]。该参数仅在分页获取时为必需，默认为 `10`。 |
 | `cursor` | String  | 否    | 数据查询的起始位置。该参数仅在分页获取时为必需。第一次调用该接口不传 `cursor`，获取 `limit` 指定的好友数量。| 
 | `needReturnRemark` | Boolean | 否    | 是否需要返回好友备注：<br/> - `true`：返回；<br/> - （默认）`false`：不返回。|
-
 
 #### 请求 header
 
@@ -393,7 +380,7 @@ GET https://{host}/{org_name}/{app_name}/user/{username}/contacts?limit={N}&curs
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L -X GET 'https://XXXX/XXXX/XXXX/user/XXXX/contacts?limit=10&needReturnRemark=true' \
+curl -L -X GET 'https://XXXX/app-id/XXXX/user/XXXX/contacts?limit=10&needReturnRemark=true' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer  <YourAppToken>'
@@ -403,7 +390,7 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/user/XXXX/contacts?limit=10&needReturnRem
 
 ```json
 {
-  "uri": "http://XXXX/XXXX/XXXX/users/XXXX/rostersByPage",  
+  "uri": "https://XXXX/XXXX/XXXX/users/XXXX/rostersByPage",  
   "timestamp": 1706238297509,
   "entities": [],
   "count": 1,
@@ -439,7 +426,7 @@ curl -L -X GET 'https://XXXX/XXXX/XXXX/user/XXXX/contacts?limit=10&needReturnRem
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users
+GET https://{host}/app-id/{app_id}/users/{owner_username}/contacts/users
 ```
 
 #### 路径参数
@@ -452,8 +439,8 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users
 
 #### 请求 header
 
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| 参数            | 类型   | 是否必需 | 描述        |
+| :-------------- | :----- | :------- | :------------ |
 | `Accept`        | String | 是       | 内容类型。请填 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
@@ -479,7 +466,7 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/contacts/users
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET 'https://XXXX/XXXX/XXXX/users/user1/contacts/users' \
+curl -X GET 'https://XXXX/app-id/XXXX/users/user1/contacts/users' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
@@ -513,12 +500,12 @@ curl -X GET 'https://XXXX/XXXX/XXXX/users/user1/contacts/users' \
 
 你可以调用该接口导入好友列表。
 
-**调用频率上限**：100 次/秒/App Key
+**调用频率上限**：100 次/秒/App ID
 
 ### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/users/{username}/contacts/import
+POST https://{host}/app-id/{app_id}/users/{username}/contacts/import
 ```
 
 #### 路径参数
@@ -583,7 +570,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/contacts/import
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl --location 'https://{host}/{org_name}/{app_name}/users/{username}/contacts/import' \
+curl --location 'https://{host}/app_id/XXXX/users/{username}/contacts/import' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
 -d '{
@@ -638,7 +625,7 @@ curl --location 'https://{host}/{org_name}/{app_name}/users/{username}/contacts/
 ### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users
+POST https://{host}/app-id/{app_id}/users/{owner_username}/blocks/users
 ```
 
 #### 路径参数
@@ -688,7 +675,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
    "usernames": [
      "user2"
    ]
- }' 'https://XXXX/XXXX/XXXX/users/user1/blocks/users'
+ }' 'https://XXXX/app-id/XXXX/users/user1/blocks/users'
 ```
 
 #### 响应示例
@@ -696,14 +683,11 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 ```json
 {
   "action": "post",
-  "application": "8bXXXX402",
-  "uri": "https://XXXX.com/XXXX/testapp",
+  "uri": "https://XXXX/XXXX/XXXX/users/user1/blocks/users",
   "entities": [],
   "data": ["user2"],
   "timestamp": 1542600372046,
-  "duration": 11,
-  "organization": "XXXX",
-  "applicationName": "testapp"
+  "duration": 11
 }
 ```
 
@@ -725,7 +709,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users?pageSize={N}&cursor={cursor}
+GET https://{host}/app-id/{app_id}/users/{owner_username}/blocks/users?pageSize={N}&cursor={cursor}
 ```
 
 #### 路径参数
@@ -776,7 +760,7 @@ GET https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users?pag
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/blocks/users?pageSize=2'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/app-id/XXXX/users/user1/blocks/users?pageSize=2'
 ```
 
 #### 响应示例
@@ -818,7 +802,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users/{blocked_username}
+DELETE https://{host}/app-id/{app_id}/users/{owner_username}/blocks/users/{blocked_username}
 ```
 
 #### 路径参数
@@ -865,7 +849,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{owner_username}/blocks/users/
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/blocks/users/user2'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/app-id/XXXX/users/user1/blocks/users/user2'
 ```
 
 #### 响应示例

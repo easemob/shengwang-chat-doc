@@ -20,7 +20,7 @@
 
 ## 调用 RESTful API 查询离线推送结果统计数据
 
-**接口调用频率上限**：10 次/10 秒/App Key
+**接口调用频率上限**：10 次/10 秒/App ID
 
 ### HTTP 请求
 
@@ -32,7 +32,7 @@ GET https://{host}/app-id/{app_id}/push/data/offline-push/begin/{startTime}/end/
 
 | 参数       | 类型   | 是否必需 | 描述         |
 | :--------- | :----- | :------- | :------------------------- |
-| `host`     | String | 是       | 声网即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `host`     | String | 是       | 即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
 | `app_id`     | String | 是       | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
 | `startTime` | String |  是       | 查询数据的开始时间，格式为 yyyy-MM-dd，例如，`2024-04-01`。 |
 | `endTime`   | String |  是       | 查询数据的结束时间，格式为 yyyy-MM-dd，例如，`2024-04-02`。 |
@@ -71,7 +71,7 @@ GET https://{host}/app-id/{app_id}/push/data/offline-push/begin/{startTime}/end/
 
 ```shell
 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L -g -X GET 'https://XXXX/XXXX/XXXX/push/data/offline-push/begin/2024-04-01/end/2024-04-02?platform=ALL' \
+curl -L -g -X GET 'https://XXXX/app-id/XXXX/push/data/offline-push/begin/2024-04-01/end/2024-04-02?platform=ALL' \
 -H 'Authorization: Bearer <YourAppToken>
 ```
 

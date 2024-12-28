@@ -2,48 +2,46 @@
 
 <Toc />
 
-数据迁移时，你可以调用接口导入单聊和群聊的历史消息到环信服务器。本文中的两个 RESTful API 只支持单条消息的导入。                   
+数据迁移时，你可以调用接口导入单聊和群聊的历史消息到声网服务器。本文中的两个 RESTful API 只支持单条消息的导入。                   
 
 ## 前提条件
 
-要调用环信即时通讯 REST API，请确保满足以下要求：
+要调用声网即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
-- 了解环信 IM REST API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置声网即时通讯 IM 服务](enable_im.html)。
+- 已从服务端获取 app token，详见 [使用 Token 鉴权](token_authentication.html)。
+- 了解声网即时通讯 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 公共参数
 
-### 请求参数
+#### 请求参数
 
-| 参数       | 类型   | 是否必需 | 描述        |
-| :--------- | :----- | :------- | :----------------- |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| 参数       | 类型   | 是否必需 | 描述         |
+| :--------- | :----- | :------- | :------------------------- |
+| `host`     | String | 是       | 即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `app_id`     | String | 是       | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
+| `username`     | String | 是       | 调用该接口的用户 ID。 | 
 
-### 响应参数
+#### 响应参数
 
 | 参数              | 类型   | 描述                                                                           |
 | :---------------- | :----- | :----------------------------------------------------------------------------- |
 | `action`          | String | 请求方法。                                                                     |
-| `organization`    | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
-| `application`     | String | 应用在系统内的唯一标识。该标识由系统生成，开发者无需关心。                     |
-| `applicationName` | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
 | `uri`             | String | 请求 URL。                                                                     |
 | `path`            | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。                              |
 | `entities`        | JSON   | 响应实体。                                                                     |
-| `host`            | String | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名，与请求参数 `host` 相同。    |
+| `host`     | String | 是       | 即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
 | `data`            | JSON   | 实际获取的数据详情。                                                           |
 | `timestamp`       | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。                                          |
 | `duration`        | Int    | 从发送 HTTP 请求到响应的时长，单位为毫秒。                                     |
 
 ## 认证方式
 
-环信即时通讯 REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
+声网即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
 `Authorization: Bearer YourAppToken`
 
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。本篇涉及的所有消息管理 REST API 都需要使用 App Token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
+为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的 鉴权方式，详见 [使用 Token 鉴权](token_authentication.html)。
 
 ## 导入单聊消息
 
@@ -52,7 +50,7 @@
 ### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/messages/users/import
+POST https://{host}/app-id/{app_id}/messages/users/import
 ```
 
 #### 路径参数
@@ -75,7 +73,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users/import
 | `body`          | JSON   | 是       | 消息内容。      |
 | `ext`   | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。例如，请求中的 "key1": "value1"。  |
 | `is_ack_read`   | Bool   | 否       | 是否设置会话已读。<br/> - `true`：是；<br/> - `false`：否。<br/>调用该接口导入消息后会生成对应的会话，若该字段为 `true`，则会话为已读状态，为 `false` 表示会话为未读状态。 |
-| `msg_timestamp` | Long   | 否       | 要导入的消息的时间戳，单位为毫秒。若不传该参数，环信服务器会将导入的消息的时间戳设置为当前时间。   |
+| `msg_timestamp` | Long   | 否       | 要导入的消息的时间戳，单位为毫秒。若不传该参数，声网服务器会将导入的消息的时间戳设置为当前时间。   |
 | `need_download` | Bool   | 否       | 是否需要下载附件并上传到服务器。<br/> - `true`：是。这种情况下，需确保附件地址可直接访问，没有访问权限的限制。<br/> - （默认）`false`：否。  |
 
 与发送单聊消息类似，不同类型的消息只是 `body` 字段内容存在差异。详见 [发送单聊消息](message_single.html)。
@@ -102,7 +100,7 @@ POST https://{host}/{org_name}/{app_name}/messages/users/import
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -X POST -H "Authorization: Bearer <YourAppToken>" "https://XXXX/XXXX/XXXX/messages/users/import" -d '{
+curl -X POST -H "Authorization: Bearer <YourAppToken>" "http://XXXX/app-id/XXXX/messages/users/import" -d '{
     "target": "username2",
     "type": "txt",
     "body": {
@@ -121,7 +119,7 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" "https://XXXX/XXXX/XXXX/m
 
 ```bash
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -X POST -H "Authorization: Bearer <YourAppToken>" "https://XXXX/XXXX/XXXX/messages/users/import" -d '{
+curl -X POST -H "Authorization: Bearer <YourAppToken>" "http://XXXX/app-id/XXXX/messages/users/import" -d '{
     "target": "username2",
     "type": "img",
     "body": {
@@ -147,17 +145,14 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" "https://XXXX/XXXX/XXXX/m
 ```json
 {
   "path": "/messages/users/import",
-  "uri": "https://XXXX/XXXX/XXXX/messages/users/import",
+  "uri": "http://XXXX/app-id/XXXX/messages/users/import",
   "timestamp": 1638440544078,
-  "organization": "XXXX",
-  "application": "c3624975-XXXX-XXXX-9da2-ee91ed4c5a76",
   "entities": [],
   "action": "post",
   "data": {
     "msg_id": "10212123848595"
   },
-  "duration": 3,
-  "applicationName": "XXXX"
+  "duration": 3
 }
 ```
 
@@ -180,7 +175,7 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" "https://XXXX/XXXX/XXXX/m
 ### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/messages/chatgroups/import
+POST https://{host}/app-id/{app_id}/messages/chatgroups/import
 ```
 
 #### 路径参数
@@ -203,7 +198,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups/import
 | `body`          | JSON   | 是       | 消息内容。                  |
 | `ext`   | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。例如，请求中的 "key1": "value1"。  |
 | `is_ack_read`   | Bool   | 否       | 是否设置消息是否已读。<br/> - `true`：是；<br/> - `false`：否。 |
-| `msg_timestamp` | Long   | 否       | 要导入的消息的时间戳，单位为毫秒。若不传该参数，环信服务器会将导入的消息的时间戳设置为当前时间。 |
+| `msg_timestamp` | Long   | 否       | 要导入的消息的时间戳，单位为毫秒。若不传该参数，声网服务器会将导入的消息的时间戳设置为当前时间。 |
 | `need_download` | Bool   | 否       | 是否需要下载附件并上传到服务器。<br/> - `true`：是。这种情况下，需确保附件地址可直接访问，没有访问权限的限制。<br/> - （默认）`false`：否。     |
 
 :::tip
@@ -232,7 +227,7 @@ POST https://{host}/{org_name}/{app_name}/messages/chatgroups/import
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -X POST -H "Authorization: Bearer <YourAppToken> " "https://XXXX/XXXX/XXXX/messages/chatgroups/import" -d '{
+curl -X POST -H "Authorization: Bearer <YourAppToken> " "http://XXXX/app-id/XXXX/messages/chatgroups/import" -d '{
     "target": "1123376564212",
     "type": "txt",
     "body": {
@@ -251,7 +246,7 @@ curl -X POST -H "Authorization: Bearer <YourAppToken> " "https://XXXX/XXXX/XXXX/
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -X POST -H "Authorization: Bearer <YourAppToken> " "https://XXXX/XXXX/XXXX/messages/chatgroups/import" -d '{
+curl -X POST -H "Authorization: Bearer <YourAppToken> " "http://XXXX/app-id/XXXX/messages/chatgroups/import" -d '{
     "target": "1123376564212",
     "type": "img",
     "body": {
@@ -278,17 +273,14 @@ curl -X POST -H "Authorization: Bearer <YourAppToken> " "https://XXXX/XXXX/XXXX/
 ```json
 {
   "path": "/messages/users/import",
-  "uri": "https://XXXX/XXXX/XXXX/messages/chatgroups/import",
+  "uri": "http://XXXX/XXXX/XXXX/messages/chatgroups/import",
   "timestamp": 1638440544078,
-  "organization": "XXXX",
-  "application": "c3624975-XXXX-XXXX-9da2-ee91ed4c5a76",
   "entities": [],
   "action": "post",
   "data": {
     "msg_id": "10212123848595"
   },
-  "duration": 3,
-  "applicationName": "XXXX"
+  "duration": 3
 }
 ```
 

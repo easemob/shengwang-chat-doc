@@ -1,6 +1,6 @@
 # 单向删除漫游消息
 
-本文介绍如何根据消息 ID 单向删除单聊和群聊的漫游消息以及如何单向清空环信服务端的漫游消息，包含以下五个 REST API：
+本文介绍如何根据消息 ID 单向删除单聊和群聊的漫游消息以及如何单向清空声网服务端的漫游消息，包含以下五个 RESTful API：
 
 - [根据消息 ID 单向删除单聊漫游消息](#根据消息-id-单向删除单聊漫游消息)
 - [根据消息 ID 单向删除群聊漫游消息](#根据消息-id-单向删除群聊漫游消息)
@@ -10,41 +10,41 @@
 
 ## 前提条件
 
-要调用环信即时通讯 REST API，请确保满足以下要求：
+要调用声网即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
-- 了解环信 IM REST API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置声网即时通讯 IM 服务](enable_im.html)。
+- 已从服务端获取 app token，详见 [使用 Token 鉴权](token_authentication.html)。
+- 了解声网即时通讯 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 公共参数
 
 ### 请求参数
 
-| 参数       | 类型   | 是否必需 | 描述        |
-| :--------- | :----- | :------- | :--------------- |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| 参数       | 类型   | 是否必需 | 描述         |
+| :--------- | :----- | :------- | :------------------------- |
+| `host`     | String | 是       | 即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `app_id`     | String | 是       | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
 
 ## 认证方式
 
-环信即时通讯 RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
+声网即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
 `Authorization: Bearer YourAppToken`
 
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
+为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的 鉴权方式，详见 [使用 Token 鉴权](token_authentication.html)。
 
 ## 根据消息 ID 单向删除单聊漫游消息
 
 根据消息 ID 单向删除指定用户的单聊会话的一条或多条漫游消息。
 
-调用该接口后，该用户的指定漫游消息会从服务器和本地删除，该用户无法从环信服务端拉取到这些消息。若该会话的全部漫游消息均被删除了，该用户的这个会话在服务端也会被清除，拉取会话列表时拉不到该会话。不过，其他用户不受影响，仍然可以拉取与该用户的漫游消息和会话。
+调用该接口后，该用户的指定漫游消息会从服务器和本地删除，该用户无法从声网服务端拉取到这些消息。若该会话的全部漫游消息均被删除了，该用户的这个会话在服务端也会被清除，拉取会话列表时拉不到该会话。不过，其他用户不受影响，仍然可以拉取与该用户的漫游消息和会话。
 
-**调用频率上限**：100 次/秒/App Key
+**调用频率上限**：100 次/秒/App ID
 
 ### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/chat/user/{userId}?userId={userId}&msgIdList={msgIdList}&isNotify={isNotify}
+DELETE https://{host}/app-id/{app_id}/rest/message/roaming/chat/user/{userId}?userId={userId}&msgIdList={msgIdList}&isNotify={isNotify}
 ```
 
 #### 路径参数
@@ -92,7 +92,7 @@ DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/chat/user/{user
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L -X DELETE 'https://XXXX/XXXX/XXXX/rest/message/roaming/chat/user/XXXX?userId=XXXX&msgIdList=XXXX&isNotify=false' \
+curl -L -X DELETE 'http://XXXX/app-id/XXXX/rest/message/roaming/chat/user/XXXX?userId=XXXX&msgIdList=XXXX&isNotify=false' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json'
@@ -113,7 +113,7 @@ curl -L -X DELETE 'https://XXXX/XXXX/XXXX/rest/message/roaming/chat/user/XXXX?us
 
 | HTTP 状态码 | 错误类型      | 错误提示                                          | 可能原因            | 处理建议           |
 |:---------|:-------------------|:----------------------------------------------|:----------------|:---------------|
-| 400      | service open exception  | this appKey not open message roaming   | 消息漫游服务未开通。  | 联系商务开通。  |
+| 400      | service open exception  | this appKey not open message roaming   | 消息漫游服务未开通。  | 联系声网商务开通。  |
 | 400      | param exception  | delete msg list limit can not greater than 50 | 一次删除的消息 ID 数量超过限制（50）。 | 减少一次删除的消息 ID 数量。 |
 | 400      | Bad Request  | Bad Request    | 缺少必填参数，例如查询参数 `userId` 或 `msgIdList`。 | 校验参数是否传入正确。  |
 
@@ -123,14 +123,14 @@ curl -L -X DELETE 'https://XXXX/XXXX/XXXX/rest/message/roaming/chat/user/XXXX?us
 
 根据消息 ID 单向删除指定用户的某个群聊会话的一条或多条漫游消息。
 
-调用该接口后，该用户的指定漫游消息会从服务器和本地删除，该用户无法从环信服务端拉取到这些消息。若删除了该群聊会话的全部漫游消息，该用户的这个会话在服务端也会被清除，拉取会话列表时拉不到该会话。不过，其他用户不受影响，仍然可以拉取这些漫游消息和会话。
+调用该接口后，该用户的指定漫游消息会从服务器和本地删除，该用户无法从声网服务端拉取到这些消息。若删除了该群聊会话的全部漫游消息，该用户的这个会话在服务端也会被清除，拉取会话列表时拉不到该会话。不过，其他用户不受影响，仍然可以拉取这些漫游消息和会话。
 
-**调用频率上限**：100 次/秒/App Key
+**调用频率上限**：100 次/秒/App ID
 
 ### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/group/user/{userId}?groupId={groupId}&msgIdList={msgIdList}&isNotify={isNotify}
+DELETE https://{host}/app-id/{app_id}/rest/message/roaming/group/user/{userId}?groupId={groupId}&msgIdList={msgIdList}&isNotify={isNotify}
 ```
 
 #### 路径参数
@@ -178,7 +178,7 @@ DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/group/user/{use
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L -X DELETE 'https://XXXX/XXXX/XXXX/rest/message/roaming/group/user/XXXX?groupId=XXXX&msgIdList=XXXXisNotify=false' \
+curl -L -X DELETE 'http://XXXX/app-id/XXXX/rest/message/roaming/group/user/XXXX?groupId=XXXX&msgIdList=XXXXisNotify=false' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json'
@@ -210,12 +210,12 @@ curl -L -X DELETE 'https://XXXX/XXXX/XXXX/rest/message/roaming/group/user/XXXX?g
 
 调用该接口后，该用户的漫游消息会从服务器和本地清空，该用户无法从服务端拉取到漫游消息，而且该用户的所有会话也会被清除，也拉不到会话列表。不过，其他用户不受影响，仍然可以拉取与该用户的漫游消息和会话。
 
-**调用频率上限**：100 次/秒/App Key
+**调用频率上限**：100 次/秒/App ID
 
 ### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/rest/message/roaming/user/{userId}/delete/all
+POST https://{host}/app-id/{app_id}/rest/message/roaming/user/{userId}/delete/all
 ```
 
 #### 路径参数
@@ -251,7 +251,7 @@ POST https://{host}/{org_name}/{app_name}/rest/message/roaming/user/{userId}/del
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L -X POST 'https://XXXX/XXXX/XXXX/rest/message/roaming/user/XXXX/delete/all' \
+curl -L -X POST 'http://XXXX/app-id/XXXX/rest/message/roaming/user/XXXX/delete/all' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: Content-Type: application/json' \
 -H 'Accept: Accept: application/json'
@@ -280,14 +280,14 @@ curl -L -X POST 'https://XXXX/XXXX/XXXX/rest/message/roaming/user/XXXX/delete/al
 
 你可以调用该 RESTful API 清空指定用户的某个单聊会话在某个时间点及之前的漫游消息。
 
-调用该接口后，该用户的漫游消息会从服务器和本地清空，该用户无法从环信服务端拉取到这些漫游消息。若清除了该会话的全部漫游消息，该用户的这个会话在服务端也会被清除，拉取会话列表时拉不到该会话。不过，其他用户不受影响，仍然可以拉取与该用户的漫游消息和会话。
+调用该接口后，该用户的漫游消息会从服务器和本地清空，该用户无法从声网服务端拉取到这些漫游消息。若清除了该会话的全部漫游消息，该用户的这个会话在服务端也会被清除，拉取会话列表时拉不到该会话。不过，其他用户不受影响，仍然可以拉取与该用户的漫游消息和会话。
 
-**调用频率上限**：100 次/秒/App Key
+**调用频率上限**：100 次/秒/App ID
 
 ### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/chat/user/{userId}/time?userId={userId}&delTime={delTime}&isNotify={isNotify}
+DELETE https://{host}/app-id/{app_id}/rest/message/roaming/chat/user/{userId}/time?userId={userId}&delTime={delTime}&isNotify={isNotify}
 ```
 
 #### 路径参数
@@ -304,7 +304,7 @@ DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/chat/user/{user
 |:--------|:-------|:-----|:----------------------|
 | `userId` | String | 是       | 单聊会话中的对端用户，即要清空和哪个用户之间的漫游消息。需传入该用户 ID。  |
 | `delTime`  | Long | 是       | 要清空哪个时间点及之前的单聊漫游消息。该时间为 Unix 时间戳，单位为毫秒。 |
-| `isNotify` | Boolean | 否       | 消息删除后，是否同步到消息所属用户的所有在线设备。<br/> -  （默认）`true`：是<br/> -  `false`：否 |
+| `isNotify` | Boolean | 否       | 消息删除后，是否同步到消息所属用户的所有在线设备。<br/> - （默认）`true`：是<br/> - `false`：否 |
 
 #### 请求 header
 
@@ -335,7 +335,7 @@ DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/chat/user/{user
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L -X DELETE 'http://XXXX/XXXX/XXXX/rest/message/roaming/chat/user/XXXX/time?userId=XXXX&delTime=1659014868000&isNotify=false' \
+curl -L -X DELETE 'http://XXXX/app-id/XXXX/rest/message/roaming/chat/user/XXXX/time?userId=XXXX&delTime=1659014868000&isNotify=false' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
@@ -362,14 +362,14 @@ curl -L -X DELETE 'http://XXXX/XXXX/XXXX/rest/message/roaming/chat/user/XXXX/tim
 
 你可以调用该 RESTful API 清空指定用户的某个群组或聊天室会话在某个时间点及之前的的漫游消息。
 
-调用该接口后，该用户的漫游消息会从服务器和本地清空，该用户无法从环信服务端拉取到这些漫游消息。若清除了该会话的全部漫游消息，该用户的这个会话在服务端也会被清除，拉取会话列表时拉不到该会话。不过，其他用户不受影响，仍然可以拉取这些漫游消息和会话。
+调用该接口后，该用户的漫游消息会从服务器和本地清空，该用户无法从声网服务端拉取到这些漫游消息。若清除了该会话的全部漫游消息，该用户的这个会话在服务端也会被清除，拉取会话列表时拉不到该会话。不过，其他用户不受影响，仍然可以拉取这些漫游消息和会话。
 
-**调用频率上限**：100 次/秒/App Key
+**调用频率上限**：100 次/秒/App ID
 
 ### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/group/user/{userId}/time?groupId={groupId}&delTime={delTime}&isNotify={isNotify}
+DELETE https://{host}/app-id/{app_id}/rest/message/roaming/group/user/{userId}/time?groupId={groupId}&delTime={delTime}&isNotify={isNotify}
 ```
 
 #### 路径参数
@@ -386,7 +386,7 @@ DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/group/user/{use
 |:--------|:-------|:-----|:----------------------|
 | `groupId` | String  | 是    | 要清空哪个群组或聊天室的漫游消息。你可以传入群组 ID 或聊天室 ID。|
 | `delTime` | Long  | 是    | 要清空哪个时间点及之前的群组或聊天室的漫游消息。该时间为 Unix 时间戳，单位为毫秒。 |
-| `isNotify` | Boolean | 否       | 消息删除后，是否同步到消息所属用户的所有在线设备。<br/> -  （默认）`true`：是<br/> -  `false`：否 |
+| `isNotify` | Boolean | 否       | 消息删除后，是否同步到消息所属用户的所有在线设备。<br/> - （默认）`true`：是<br/> - `false`：否 |
 
 #### 请求 header
 
@@ -417,7 +417,7 @@ DELETE https://{host}/{org_name}/{app_name}/rest/message/roaming/group/user/{use
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L -X DELETE 'http://XXXX/XXXX/XXXX/rest/message/roaming/group/user/XXXX/time?groupId=XXXX&delTime=1659014868000&isNotify=false' \
+curl -L -X DELETE 'http://XXXX/app-id/XXXX/rest/message/roaming/group/user/XXXX/time?groupId=XXXX&delTime=1659014868000&isNotify=false' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 

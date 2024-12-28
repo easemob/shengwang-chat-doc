@@ -16,7 +16,7 @@
 
 | 参数       | 类型   | 是否必需 | 描述   |
 | :--------- | :----- | :------- | :------------------ |
-| `host`     | String | 是       | 声网即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `host`     | String | 是       | 即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
 | `app_id`     | String | 是       | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
 
 ### 响应参数
@@ -27,14 +27,21 @@
 | `uri`             | String | 请求 URL。                                                                     |
 | `timestamp`       | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。                                          |
 | `duration`        | Int    | 从发送 HTTP 请求到响应的时长，单位为毫秒。                                     |
+## 前提条件
+
+要调用声网即时通讯 RESTful API，请确保满足以下要求：
+
+- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置声网即时通讯 IM 服务](enable_im.html)。
+- 已从服务端获取 app token，详见 [使用 Token 鉴权](token_authentication.html)。
+- 了解声网即时通讯 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 认证方式
 
-声网即时通讯 RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，必须在请求头部填入如下 `Authorization` 字段：
+声网即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
 `Authorization: Bearer YourAppToken`
 
-为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 REST API 仅支持使用 App Token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
+为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的 鉴权方式，详见 [使用 Token 鉴权](token_authentication.html)。
 
 ## 绑定和解绑推送信息 
 
@@ -295,7 +302,7 @@ curl -X PUT https://XXXX/app-id/XXXX/users/XXXX  \
 {
   "action": "put",
   "path": "/users",
-  "uri": "https://XXXX/app-id/XXXX/users/XXXX",
+  "uri": "https://XXXX/XXXX/XXXX/users/XXXX",
   "entities": [
     {
       "uuid": "4759aa70-XXXX-XXXX-XXXX-6fa0510823ba",
@@ -316,7 +323,7 @@ curl -X PUT https://XXXX/app-id/XXXX/users/XXXX  \
 
 批量设置用户离线推送时显示的昵称。
 
-**调用频率上限**：100 次/秒/App Key
+**调用频率上限**：100 次/秒/App ID
 
 ### HTTP 请求
 
@@ -387,7 +394,7 @@ curl -X PUT -H 'Content-Type: application/json'  \
 ```json
 {
     "path": "/push",
-    "uri": "http://XXX/app-id/XXX/push",
+    "uri": "http://XXXX/XXXX/XXXX/push",
     "timestamp": 1719542740148,
     "entities": [
         {
@@ -476,7 +483,7 @@ curl -X PUT https://XXXX/app-id/XXXX/users/XXXX
 {
   "action": "put",
   "path": "/users",
-  "uri": "https://XXXX/app-id/XXXX/users/XXXX",
+  "uri": "http://XXXX/XXXX/XXXX/users/XXXX",
   "entities": [
     {
       "uuid": "3b8c9890-XXXX-XXXX-XXXX-f50bf55cafad",
@@ -573,7 +580,7 @@ curl -L -X PUT 'https://XXXX/app-id/XXXX/users/XXXX/notification/user/XXXX' \
 ```json
 {
   "path": "/users",
-  "uri": "https://XXXX/app-id/XXXX/users/notification/user/XXXX",
+  "uri": "http://XXXX/XXXX/XXXX/users/notification/user/XXXX",
   "timestamp": 1647503749918,
   "action": "put",
   "data": {
@@ -640,7 +647,7 @@ curl -L -X GET 'https://XXXX/app-id/XXXX/users/XXXX/notification/chatgroup/XXXX'
 ```json
 {
   "path": "/users",
-  "uri": "https://XXXX/app-id/XXXX/users/notification/chatgroup/12312312321",
+  "uri": "http://XXXX/XXXX/XXXX/users/notification/chatgroup/12312312321",
   "timestamp": 1647503749918,
   "action": "get",
   "data": {
@@ -714,7 +721,7 @@ curl -L -X PUT 'https://XXXX/app-id/XXXX/users/XXXX/notification/language' \
 ```json
 {
   "path": "/users",
-  "uri": "https://XXXX/app-id/XXXX/users/XXXX/notification/language",
+  "uri": "http://XXXX/XXXX/XXXX/users/XXXX/notification/language",
   "timestamp": 1648089630244,
   "action": "put",
   "data": {
@@ -775,7 +782,7 @@ curl -L -X GET 'https://XXXX/app-id/XXXX/users/XXXX/notification/language' \
 ```json
 {
   "path": "/users",
-  "uri": "https://XXXX/app-id/XXXX/users/XXXX/notification/language",
+  "uri": "http://XXXX/XXXX/XXXX/users/XXXX/notification/language",
   "timestamp": 1648089630244,
   "action": "put",
   "data": {
@@ -917,7 +924,7 @@ curl -X POST 'https://XXXX/app-id/XXXX/notification/template' \
 
 ```json
 {
-  "uri": "https://XXXX/app-id/XXXX/notification/template",
+  "uri": "http://XXXX/XXXX/XXXX/notification/template",
   "timestamp": 1646989584108,
   "action": "post",
   "data": {
@@ -985,7 +992,7 @@ curl -X GET 'https://XXXX/app-id/XXXX/notification/template/XXXX' \
 
 ```json
 {
-  "uri": "https://XXXX/app-id/XXXX/notification/template/XXXX",
+  "uri": "http://XXXX/XXXX/XXXX/notification/template/XXXX",
   "timestamp": 1646989686393,
   "action": "get",
   "data": {
@@ -1063,7 +1070,7 @@ curl -X PUT 'https://XXXX/app-id/XXXX/users/XXXX/notification/template' \
 ```json
 {
     "path": "/users",
-    "uri": "http://XXX/app-id/XXX/users/XXX/notification/template",
+    "uri": "http://XXXX/XXXX/XXXX/users/XXX/notification/template",
     "timestamp": 1705470003984,
     "action": "put",
     "data": {

@@ -1,36 +1,36 @@
-# 消息表情回复 Reaction REST API
+# 消息表情回复 Reaction
 
 <Toc />
 
-消息表情回复（“Reaction”）指用户在单聊和群聊场景中对单条消息回复表情，可丰富用户聊天时的互动方式。对于单个消息，一个消息表情即为一个 Reaction，若不同用户重复添加同一消息表情，Reaction 数量计为 1。每条消息默认可添加 20 个 Reaction，若需提升该上限，需联系环信商务。
+消息表情回复（“Reaction”）指用户在单聊和群聊场景中对单条消息回复表情，可丰富用户聊天时的互动方式。对于单个消息，一个消息表情即为一个 Reaction，若不同用户重复添加同一消息表情，Reaction 数量计为 1。每条消息默认可添加 20 个 Reaction，若需提升该上限，需联系声网商务。
 
 本页介绍如何使用即时通讯 IM RESTful API 实现 Reaction 功能。
 
 ## 前提条件
 
-要调用环信即时通讯 RESTful API，请确保满足以下要求：
+要调用声网即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在环信即时通讯云控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
-- 已从服务端获取 app token，详见 [使用 App Token 鉴权](easemob_app_token.html)。
-- 了解环信 IM RESTful API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置声网即时通讯 IM 服务](enable_im.html)。
+- 已从服务端获取 app token，详见 [使用 Token 鉴权](token_authentication.html)。
+- 了解声网即时通讯 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 公共参数
 
-### 请求参数
+#### 请求参数
 
-| 参数       | 类型   | 是否必需 | 描述                                                                                                                                            |
-| :--------- | :----- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| 参数       | 类型   | 是否必需 | 描述         |
+| :--------- | :----- | :------- | :------------------------- |
+| `host`     | String | 是       | 即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `app_id`     | String | 是       | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
+| `username`     | String | 是       | 调用该接口的用户 ID。 | 
 
 ## 认证方式
 
-环信即时通讯 REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，必须在请求头部填入如下 `Authorization` 字段：
+声网即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
 `Authorization: Bearer YourAppToken`
 
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 仅支持使用 app token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
+为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的 鉴权方式，详见 [使用 Token 鉴权](token_authentication.html)。
 
 ## 创建/追加 Reaction
 
@@ -38,13 +38,13 @@
 
 创建 Reaction 指对消息添加第一条 Reaction，后续的 Reaction 添加称为追加。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/reaction/user/{userId}
+POST https://{host}/app-id/{app_id}/reaction/user/{userId}
 ```
 
-#### 路径参数
+##### 路径参数
 
 | 参数            | 类型   | 是否必需 | 描述          |
 | :-------------- | :----- | :------- | :-------------------------------------------------------- |
@@ -52,23 +52,23 @@ POST https://{host}/{org_name}/{app_name}/reaction/user/{userId}
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述          |
 | :-------------- | :----- | :------- | :-------------------------------------------------------- |
 | `Content-Type`  | String | 是       | 内容类型。填入 `application/json`。                                                                                  |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-#### 请求 body
+##### 请求 body
 
-| 参数      | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                                                                                                                                                          |
-| :-------- | :----- | :--------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `msgId`   | String | 是                                       | 消息 ID。                                                                                                                                                     |
+| 参数      | 类型   | 是否必需<div style="width: 80px;"></div> | 描述    |
+| :-------- | :----- | :--------------------------------------- | :----------- |
+| `msgId`   | String | 是                                       | 消息 ID。 |
 | `message` | String | 是                                       | 表情 ID。长度不能超过 128 个字符，必须与客户端的设置一致。该参数对支持的字符集类型没有限制，若使用特殊字符，获取和删除 Reaction 时需对特殊字符进行 URL 编码。 |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -89,18 +89,18 @@ POST https://{host}/{org_name}/{app_name}/reaction/user/{userId}
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```shell
-curl -g -X POST 'https://localhost:8089/easemob-demo/easeim/reaction/user/e1' -H 'Authorization: Bearer <YourAppToken>' -H 'Content-Type: application/json' --data-raw '{
+curl -g -X POST 'http://XXXX/app-id/XXXX/reaction/user/e1' -H 'Authorization: Bearer <YourAppToken>' -H 'Content-Type: application/json' --data-raw '{
     "msgId":"997625372793113144",
     "message":"emoji_40"
 }'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -118,14 +118,14 @@ curl -g -X POST 'https://localhost:8089/easemob-demo/easeim/reaction/user/e1' -H
 }
 ```
 
-### 错误码
+#### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
 | HTTP 状态码 | 错误类型    | 错误提示      | 可能原因      | 处理建议        |
 |:---------|:--------------------|:-----------|:----------|:------------|
-| 400      | Bad Request         | this appKey is not open reaction service!   | Reaction 功能未开通。 | 请在环信即时通讯控制台开通 Reaction 服务。 |
-| 400      | Bad Request         | The quantity has exceeded the limit!  | 一条消息上的 Reaction 数量达到上限。| 每条消息默认可添加 20 个 Reaction。若需提升该上限，需联系环信商务。|
+| 400      | Bad Request         | this appKey is not open reaction service!   | Reaction 功能未开通。 | 请在[声网控制台](https://console.shengwang.cn/overview)开通 Reaction 服务。 |
+| 400      | Bad Request         | The quantity has exceeded the limit!  | 一条消息上的 Reaction 数量达到上限。| 每条消息默认可添加 20 个 Reaction。若需提升该上限，需联系声网商务。|
 | 400      | Bad Request                | the user operation is illegal!                      | 不是会话双方。 | 只有会话双方才能操作 Reaction。       |
 | 400      | Bad Request                | the user is already operation this message                      | 同一个用户重复添加相同的 Reaction。 | 同一用户不能重复添加相同的 Reaction。      |
 
@@ -135,13 +135,13 @@ curl -g -X POST 'https://localhost:8089/easemob-demo/easeim/reaction/user/e1' -H
 
 该方法根据单聊或群聊中的消息 ID 获取单个或多个消息的 Reaction 信息，包括 Reaction ID、使用的表情 ID、以及使用该 Reaction 的用户 ID 及用户人数。获取的 Reaction 的用户列表只展示最早三个添加 Reaction 的用户。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}?msgIdList={N,M}&msgType={msgType}&groupId={groupId}
+GET https://{host}/app-id/{app_id}/reaction/user/{userId}?msgIdList={N,M}&msgType={msgType}&groupId={groupId}
 ```
 
-#### 路径参数
+##### 路径参数
 
 | 参数            | 类型   | 是否必需 | 描述          |
 | :-------------- | :----- | :------- | :-------------------------------------------------------- |
@@ -149,7 +149,7 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}?msgIdList={N,M}&
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-#### 查询参数
+##### 查询参数
 
 | 参数        | 类型   | 是否必需 | 描述                                                                                 |
 | :---------- | :----- | :------- | :----------------------------------------------------------------------------------- |
@@ -157,15 +157,15 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}?msgIdList={N,M}&
 | `msgType`   | String | 是       | 消息的会话类型：<br/> - `chat`：单聊；<br/> - `groupchat`：群聊。                    |
 | `groupId`   | String | 否       | 群组 ID。如果 `msgType` 设置为 `groupchat`，即拉取群中的 Reaction，必须指定群组 ID。 |
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
 | :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -184,15 +184,15 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}?msgIdList={N,M}&
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 ```shell
-curl -g -X GET 'https://localhost:8089/easemob-demo/easeim/reaction/user/{{userId}}?msgIdList=msgId1&msgType=chat' -H 'Authorization: Bearer <YourAppToken>'
+curl -g -X GET 'http://XXXX/app-id/XXXX/reaction/user/{{userId}}?msgIdList=msgId1&msgType=chat' -H 'Authorization: Bearer <YourAppToken>'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
@@ -233,7 +233,7 @@ curl -g -X GET 'https://localhost:8089/easemob-demo/easeim/reaction/user/{{userI
 }
 ```
 
-### 错误码
+#### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 
@@ -248,82 +248,10 @@ curl -g -X GET 'https://localhost:8089/easemob-demo/easeim/reaction/user/{{userI
 
 删除当前用户追加的 Reaction。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/reaction/user/{userId}?msgId={msgId}&message={message}
-```
-
-### 路径参数
-
-| 参数            | 类型   | 是否必需 | 描述          |
-| :-------------- | :----- | :------- | :-------------------------------------------------------- |
-| `userId` | String | 是       | 当前用户的用户 ID。 |
-
-其他参数及描述详见 [公共参数](#公共参数)。
-
-#### 请求 header
-
-| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
-| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
-| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
-
-#### 查询参数
-
-| 参数      | 类型   | 是否必需 | 描述                                                           |
-| :-------- | :----- | :------- | :------------------------------------------------------------- |
-| `msgId`   | String | 是       | 消息 ID。                                                      |
-| `message` | String | 是       | 表情 ID。长度不可超过 128 个字符。该参数的值必须与客户端一致。 |
-
-### HTTP 响应
-
-#### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-| 参数                | 类型   | 描述                                      |
-| :------------------ | :----- | :---------------------------------------- |
-| `requestStatusCode` | String | 操作结果。`ok` 表示成功删除 Reaction。    |
-| `timestamp`         | Long   | 请求响应的时间，Unix 时间戳，单位为毫秒。 |
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
-
-### 示例
-
-#### 请求示例
-
-```shell
-curl -g -X DELETE 'https://localhost:8089/easemob-demo/easeim/reaction/user/wz?msgId=997625372793113144&message=emoji_40' -H 'Authorization: Bearer <YourAppToken>'
-```
-
-#### 响应示例
-
-```json
-{
-  "requestStatusCode": "ok",
-  "timestamp": 1645774821181
-}
-```
-
-### 错误码
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
-
-| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因                     | 处理建议        |
-| :----------- | :--- | :------------- |:-------------------------|:------------|
-| 400     | Bad Request   | the user operation is illegal!        | 传入的用户 ID 没有操作过该 Reaction。 | 传入正确的用户 ID。 |
-| 400      | Bad Request  | this appKey is not open reaction service!   | Reaction 服务未开通。 | 请在环信即时通讯控制台开通 Reaction 服务。 |
-
-关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
-
-## 根据消息 ID 和表情 ID 获取 Reaction 信息
-
-该方法根据指定的消息的 ID 和表情 ID 获取对应的 Reaction 信息，包括使用了该 Reaction 的用户 ID 及用户人数。
-
-### HTTP 请求
-
-```http
-GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}/detail?msgId={msgId}&message={message}&limit={limit}&cursor={cursor}
+DELETE https://{host}/app-id/{app_id}/reaction/user/{userId}?msgId={msgId}&message={message}
 ```
 
 #### 路径参数
@@ -334,7 +262,79 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}/detail?msgId={ms
 
 其他参数及描述详见 [公共参数](#公共参数)。
 
-#### 查询参数
+##### 请求 header
+
+| 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
+| :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
+| `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
+
+##### 查询参数
+
+| 参数      | 类型   | 是否必需 | 描述                                                           |
+| :-------- | :----- | :------- | :------------------------------------------------------------- |
+| `msgId`   | String | 是       | 消息 ID。                                                      |
+| `message` | String | 是       | 表情 ID。长度不可超过 128 个字符。该参数的值必须与客户端一致。 |
+
+#### HTTP 响应
+
+##### 响应 body
+
+如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
+
+| 参数                | 类型   | 描述                                      |
+| :------------------ | :----- | :---------------------------------------- |
+| `requestStatusCode` | String | 操作结果。`ok` 表示成功删除 Reaction。    |
+| `timestamp`         | Long   | 请求响应的时间，Unix 时间戳，单位为毫秒。 |
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
+
+#### 示例
+
+##### 请求示例
+
+```shell
+curl -g -X DELETE 'http://XXXX/app-id/XXXX/reaction/user/wz?msgId=997625372793113144&message=emoji_40' -H 'Authorization: Bearer <YourAppToken>'
+```
+
+##### 响应示例
+
+```json
+{
+  "requestStatusCode": "ok",
+  "timestamp": 1645774821181
+}
+```
+
+#### 错误码
+
+如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
+
+| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因                     | 处理建议        |
+| :----------- | :--- | :------------- |:-------------------------|:------------|
+| 400     | Bad Request   | the user operation is illegal!        | 传入的用户 ID 没有操作过该 Reaction。 | 传入正确的用户 ID。 |
+| 400      | Bad Request  | this appKey is not open reaction service!   | Reaction 服务未开通。 | 请在[声网控制台](https://console.shengwang.cn/overview)开通 Reaction 服务。 |
+
+关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
+
+## 根据消息 ID 和表情 ID 获取 Reaction 信息
+
+该方法根据指定的消息的 ID 和表情 ID 获取对应的 Reaction 信息，包括使用了该 Reaction 的用户 ID 及用户人数。
+
+#### HTTP 请求
+
+```http
+GET https://{host}/app-id/{app_id}/reaction/user/{userId}/detail?msgId={msgId}&message={message}&limit={limit}&cursor={cursor}
+```
+
+##### 路径参数
+
+| 参数            | 类型   | 是否必需 | 描述          |
+| :-------------- | :----- | :------- | :-------------------------------------------------------- |
+| `userId` | String | 是       | 当前用户的用户 ID。 |
+
+其他参数及描述详见 [公共参数](#公共参数)。
+
+##### 查询参数
 
 | 参数      | 类型   | 是否必需 | 描述                                                           |
 | :-------- | :----- | :------- | :------------------------------------------------------------- |
@@ -349,15 +349,15 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}/detail?msgId={ms
 
 :::
 
-#### 请求 header
+##### 请求 header
 
 | 参数            | 类型   | 是否必需 | 描述                                                                                                                 |
 | :-------------- | :----- | :------- | :------------------------------------------------------------------------------------------------------------------- |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
@@ -367,7 +367,7 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}/detail?msgId={ms
 | `timestamp`         | Long   | 请求响应的时间，Unix 时间戳，单位为毫秒。                                                               |
 | `data`              | JSON   | 消息添加的 Reaction 的详情。                                                                            |
 | `data.reactionId`   | String | Reaction ID。                                                                                           |
-| `data.reaction`     | String | 表情 ID，与客户端一致。该参数与[创建/追加 Reaction API](#创建/追加-Reaction)的请求参数 `message` 相同。 |
+| `data.reaction`     | String | 表情 ID，与客户端一致。该参数与[创建/追加 Reaction API](#创建/追加-reaction)的请求参数 `message` 相同。 |
 | `data.count`        | Int    | 添加该 Reaction 的用户人数。                                                                            |
 | `data.state`        | Bool   | 当前请求用户是否添加过该 Reaction。 <br/> - `true`：是；<br/> - `false`：否。                           |
 | `data.userList`     | Array  | 按 Reaction 添加时间正序返回的用户 ID 列表。                           |
@@ -377,21 +377,21 @@ GET https://{host}/{org_name}/{app_name}/reaction/user/{userId}/detail?msgId={ms
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例(第一页)
-
-```shell
-curl -g -X GET 'https://localhost:8089/easemob-demo/easeim/reaction/user/wz/detail?msgId=997627787730750008&message=emoji_40&limit=50' -H 'Authorization: Bearer <YourAppToken>'
-```
-
-#### 请求示例(第 N 页)
+##### 请求示例(第一页)
 
 ```shell
-curl -g -X GET 'https://localhost:8089/easemob-demo/easeim/reaction/user/wz/detail?msgId=997627787730750008&message=emoji_40&cursor=944330529971449164&limit=50' -H 'Authorization: Authorization: Bearer <YourAppToken>'
+curl -g -X GET 'http://XXXX/app-id/XXXX/reaction/user/wz/detail?msgId=997627787730750008&message=emoji_40&limit=50' -H 'Authorization: Bearer <YourAppToken>'
 ```
 
-#### 响应示例
+##### 请求示例(第 N 页)
+
+```shell
+curl -g -X GET 'http://XXXX/app-id/XXXX/reaction/user/wz/detail?msgId=997627787730750008&message=emoji_40&cursor=944330529971449164&limit=50' -H 'Authorization: Authorization: Bearer <YourAppToken>'
+```
+
+##### 响应示例
 
 ```json
 {
@@ -408,7 +408,7 @@ curl -g -X GET 'https://localhost:8089/easemob-demo/easeim/reaction/user/wz/deta
 }
 ```
 
-### 错误码
+#### 错误码
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
 

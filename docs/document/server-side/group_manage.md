@@ -2,25 +2,24 @@
 
 <Toc />
 
-环信即时通讯 IM 提供了 RESTful API 管理 App 中的群组，包括创建、修改、获取、解散群组等操作。
+即时通讯 IM 提供了 RESTful API 管理 App 中的群组，包括创建、修改、获取、解散群组等操作。
 
 ## 前提条件
 
-要调用环信即时通讯 RESTful API，请确保满足以下要求：
+要调用即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在环信即时通讯 IM 管理后台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
-- 了解环信 IM RESTful API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
-- 了解单个 App 创建群组数量的限制，以及单个用户可加入群组的数量限制（视版本而定），详见 [使用限制](limitation.html#群组)。
+- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置即时通讯 IM 服务](enable_im.html)。
+- 已从服务端获取 app token，详见 [使用 Token 鉴权](token_authentication.html)。
+- 了解即时通讯 IM 的 API 调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 公共参数
 
 #### 请求参数
 
-| 参数       | 类型   | 是否必需 | 描述        |
-| :--------- | :----- | :------- | :--------------- |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| 参数       | 类型   | 是否必需 | 描述         |
+| :--------- | :----- | :------- | :------------------------- |
+| `host`     | String | 是       | 即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `app_id`     | String | 是       | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
 | `group_id` | String | 是       | 群组 ID。    |
 | `username` | String | 是       | 用户 ID。             |
 
@@ -29,9 +28,6 @@
 | 参数              | 类型   | 描述                                                                           |
 | :---------------- | :----- | :----------------------------------------------------------------------------- |
 | `action`          | String | 请求方法。                                                                     |
-| `organization`    | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
-| `application`     | String | 应用在系统内的唯一标识。该标识由系统生成，开发者无需关心。                     |
-| `applicationName` | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
 | `uri`             | String | 请求 URL。                                                                     |
 | `path`            | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。                              |
 | `entities`        | JSON   | 响应实体。                                                                     |
@@ -44,11 +40,11 @@
 
 ## 认证方式
 
-环信即时通讯 RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
+即时通讯 IM 的 RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
 `Authorization: Bearer YourAppToken`
 
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
+为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的 鉴权方式，详见[使用 Token 鉴权](token_authentication.html)。
 
 ## 创建群组
 
@@ -57,7 +53,7 @@
 #### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/chatgroups
+POST https://{host}/app-id/{app_id}/chatgroups
 ```
 
 ##### 路径参数
@@ -119,7 +115,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
    "members": [
      "user2"
    ]
- }' 'https://XXXX/XXXX/XXXX/chatgroups'
+ }' 'https://XXXX/app-id/XXXX/chatgroups'
 ```
 
 ##### 响应示例
@@ -127,16 +123,13 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 ```json
 {
   "action": "post",
-  "application": "8bXXXX02",
   "uri": "https://XXXX/XXXX/XXXX/chatgroups",
   "entities": [],
   "data": {
     "groupid": "6XXXX7"
   },
   "timestamp": 1542361730243,
-  "duration": 0,
-  "organization": "XXXX",
-  "applicationName": "testapp"
+  "duration": 0
 }
 ```
 
@@ -151,7 +144,6 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 | 400     | invalid_parameter | group must contain public field! | 创建群组必须设置 `public` 字段 | 设置 `public` 字段。 |
 | 400     | illegal_argument | group ID XX already exists! | groupId 重复。 | 使用新的群组 ID。 |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 403     | exceed_limit | appKey:XX#XX has create too many groups! | appKey 的群组数量达到上限。 | 删除不用的群组或联系商务调整上限。关于该上限，详见[相关文档](/product/pricing.html#套餐包功能详情)。 |
 | 403     | exceed_limit | user XX has joined too many groups! | 用户加入的群组数量达到上限。 | 退出不用的群组或联系商务调整上限。关于该上限，详见[相关文档](/product/pricing.html#套餐包功能详情)。 |
 | 403     | exceed_limit | members size is greater than max user size ! | 创建群时加入的人数超过最大限制。 | 调整创建群的加群人数。关于该上限，详见[相关文档](/product/pricing.html#套餐包功能详情)。|
 | 403     | group_name_violation | XX is violation, please change it. | 群组名称不合法。 | 使用合法的群组名称。 |
@@ -168,7 +160,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 #### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/disable
+POST https://{host}/app-id/{app_id}/chatgroups/{group_id}/disable
 ```
 
 ##### 路径参数
@@ -204,7 +196,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/disable
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/XXXX/disable'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/app-id/XXXX/chatgroups/XXXX/disable'
 ```
 
 ##### 响应示例
@@ -212,14 +204,11 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 ```json
 {
   "action": "post",
-  "application": "XXXX",
-  "applicationName": "XXXX",
   "data": {
     "disabled": true
   },
   "duration": 740,
   "entities": [],
-  "organization": "XXXX",
   "properties": {},
   "timestamp": 1672974260359,
   "uri": "https://XXXX/XXXX/XXXX/chatgroups/XXXX/disable"
@@ -244,7 +233,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 #### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/enable
+POST https://{host}/app-id/{app_id}/chatgroups/{group_id}/enable
 ```
 
 ##### 路径参数
@@ -280,7 +269,7 @@ POST https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/enable
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/XXXX/enable'
+curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/app-id/XXXX/chatgroups/XXXX/enable'
 ```
 
 ##### 响应示例
@@ -288,14 +277,11 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 ```json
 {
   "action": "post",
-  "application": "XXXX",
-  "applicationName": "XXXX",
   "data": {
     "disabled": false
   },
   "duration": 22,
   "entities": [],
-  "organization": "XXXX",
   "properties": {},
   "timestamp": 1672974668171,
   "uri": "https://XXXX/XXXX/XXXX/chatgroups/XXXX/enable"
@@ -320,7 +306,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 #### HTTP 请求
 
 ```http
-PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
+PUT https://{host}/app-id/{app_id}/chatgroups/{group_id}
 ```
 
 ##### 路径参数
@@ -376,7 +362,7 @@ PUT https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X PUT -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/6XXXX7' -d '{
+curl -X PUT -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/app-id/XXXX/chatgroups/6XXXX7' -d '{
     "groupname": "test groupname",
     "avatar": "https://www.XXXX.com/XXX/image",
     "description": "updategroupinfo12311",
@@ -394,8 +380,6 @@ curl -X PUT -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ```json
 {
   "action": "put",
-  "application": "XXXXXX",
-  "applicationName": "XXXX",
   "data": {
     "allowinvites": true,
     "invite_need_confirm": true,
@@ -409,7 +393,6 @@ curl -X PUT -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
   },
   "duration": 0,
   "entities": [],
-  "organization": "XXXX",
   "properties": {},
   "timestamp": 1666062065529,
   "uri": "https://XXXX/XXXX/XXXX/chatgroups/6XXXX7"
@@ -436,7 +419,7 @@ curl -X PUT -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 #### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}
+GET https://{host}/app-id/{app_id}/chatgroups?limit={N}&cursor={cursor}
 ```
 
 ##### 路径参数
@@ -451,7 +434,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}
 | `cursor` | String | 否       | 数据查询的起始位置。首次调用该接口，不传 `cursor`，服务器按群组创建时间倒序返回 `limit` 指定的群组数量。后续接口调用时，需要从上次调用的响应中获取 `cursor` 参数的值传入请求中的该参数。   |
 
 :::tip
-若请求中均未设置 `limit` 和 `cursor` 参数，环信服务器按群组创建时间倒序返回前 10 个群组。
+若请求中均未设置 `limit` 和 `cursor` 参数，声网服务器按群组创建时间倒序返回前 10 个群组。
 :::
 
 ##### 请求 header
@@ -490,7 +473,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups?limit={N}&cursor={cursor}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups?limit=2'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/app-id/XXXX/chatgroups?limit=2'
 ```
 
 第二页
@@ -498,7 +481,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups?limit=2&cursor=ZGNXXXX6Mg'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/app-id/XXXX/chatgroups?limit=2&cursor=ZGNXXXX6Mg'
 ```
 
 ##### 响应示例
@@ -554,7 +537,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 #### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/chatgroups/user/{username}?pagesize={}&pagenum={}
+GET https://{host}/app-id/{app_id}/chatgroups/user/{username}?pagesize={}&pagenum={}
 ```
 
 ##### 路径参数
@@ -616,7 +599,6 @@ curl -L -X GET 'http://XXXX/XXXX/XXXX/chatgroups/user/XXXX' \
 ```json
 {
   "action": "get",
-  "applicationName": "XXXX",
   "duration": 0,
   "entities": [
     {
@@ -634,7 +616,6 @@ curl -L -X GET 'http://XXXX/XXXX/XXXX/chatgroups/user/XXXX' \
       "created": 1692687427254
     }
   ],
-  "organization": "XXXX",
   "timestamp": 1692687427254,
   "total": 10,
   "uri": "http://XXXX/XXXX/XXXX/chatgroups/user/XXXX"
@@ -658,7 +639,7 @@ curl -L -X GET 'http://XXXX/XXXX/XXXX/chatgroups/user/XXXX' \
 #### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/user/{username}/is_joined
+GET https://{host}/app-id/{app_id}/chatgroups/{group_id}/user/{username}/is_joined
 ```
 
 ##### 路径参数
@@ -693,7 +674,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}/user/{username}/i
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/XXXX/user/XXXX/is_joined'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/app-id/XXXX/chatgroups/XXXX/user/XXXX/is_joined'
 ```
 
 ##### 响应示例
@@ -728,7 +709,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 #### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
+GET https://{host}/app-id/{app_id}/chatgroups/{group_id}
 ```
 
 ##### 路径参数
@@ -783,7 +764,7 @@ GET https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatgroups/66XXXX85'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/app-id/XXXX/chatgroups/66XXXX85'
 ```
 
 ##### 响应示例
@@ -791,8 +772,6 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ```json
 {
     "action": "get",
-    "application": "09ebbf8b-XXXX-XXXX-bd4b-d47c3b38e434",
-    "applicationName": "XXXX",
     "count": 1,
     "data": [
         {
@@ -822,7 +801,6 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
     ],
     "duration": 35,
     "entities": [],
-    "organization": "XXXX",
     "properties": {},
     "timestamp": 1682588814419,
     "uri": "http://XXXX/XXXX/XXXX/chatgroups/XXXX"
@@ -847,7 +825,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 #### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
+DELETE https://{host}/app-id/{app_id}/chatgroups/{group_id}
 ```
 
 ##### 路径参数
@@ -883,7 +861,7 @@ DELETE https://{host}/{org_name}/{app_name}/chatgroups/{group_id}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://a1.Ago ra.com/XXXX/testapp/chatgroups/6XXXX7'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/app-id/XXXX/chatgroups/6XXXX7'
 ```
 
 ##### 响应示例
@@ -891,7 +869,6 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 ```json
 {
   "action": "delete",
-  "application": "8bXXXX02",
   "uri": "https://XXXX/XXXX/XXXX/chatgroups/6XXXX7",
   "entities": [],
   "data": {
@@ -899,9 +876,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
     "groupid": "6XXXX7"
   },
   "timestamp": 1542363546590,
-  "duration": 0,
-  "organization": "XXXX",
-  "applicationName": "testapp"
+  "duration": 0
 }
 ```
 

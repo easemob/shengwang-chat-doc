@@ -2,28 +2,24 @@
 
 <Toc />
 
-本文展示如何调用环信即时通讯 RESTful API 实现用户体系建立和管理，包括用户注册、获取、修改、删除、封禁、解禁、强制下线等。
+本文展示如何调用声网即时通讯 RESTful API 实现用户体系建立和管理，包括用户注册、获取、修改、删除、封禁、解禁、强制下线等。
 
 ## 公共参数
 
-以下表格列举了环信 IM 的 RESTful 接口的公共请求参数和响应参数：
+以下表格列举了声网即时通讯 IM 的 RESTful 接口的公共请求参数和响应参数：
 
 ### 请求参数
 
-| 参数       | 类型   | 是否必需 | 描述         |
-| :--------- | :----- | :------- | :------------------------- |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| 参数       | 类型   | 是否必需 | 描述   |
+| :--------- | :----- | :------- | :------------------ |
+| `host`     | String | 是       | 即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `app_id`     | String | 是       | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
 
 ### 响应参数
 
 | 参数                 | 类型   | 描述            |
 | :------------------- | :----- | :-------------------------------------------- |
 | `action`             | String | 请求方法。                                   |
-| `organization`       | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。          |
-| `application`        | String | 系统内为应用生成的唯一标识，开发者无需关心。          |
-| `applicationName`    | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。    |
 | `uri`                | String | 请求 URL。                |
 | `path`               | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。       |
 | `entities`           | JSON Array | 响应实体。          |
@@ -40,123 +36,28 @@
 
 ## 前提条件
 
-要调用环信即时通讯 RESTful API，请确保满足以下要求：
+要调用声网即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在环信即时通讯云控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
-- 已从服务端获取 app token，详见 [使用 App Token 鉴权](easemob_app_token.html)。
-- 了解环信 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置声网即时通讯 IM 服务](enable_im.html)。
+- 已从服务端获取 app token，详见 [使用 App Token 鉴权](token_authentication.html)。
+- 了解声网 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 认证方式
 
-环信即时通讯 REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
+声网即时通讯 REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
 `Authorization: Bearer YourAppToken`
 
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。本文介绍的即时通讯所有 REST API 均需使用 App Token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
+为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。本文介绍的即时通讯所有 REST API 均需使用 App Token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
 
 ## 注册用户
 
-### 开放注册单个用户
-
-开放注册指用户可以在登录客户端 SDK 后自行通过账号密码注册账号。一般在体验 Demo 和测试开发环境时使用，使用前需先在[环信即时通讯云控制后台](https://console.easemob.com/user/login)打开相应应用的开放注册开关，即在控制台首页的 **应用列表** 下点击目标应用的 **操作** 一栏中的 **管理**，然后选择 **即时通讯** > **服务概览**，在页面的 **设置** 区域中将 **用户注册模式** 设置为 **开放注册**。
+### 注册单个用户
 
 #### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/users
-```
-
-##### 请求 Header
-
-| 参数           | 类型   | 是否必需 | 描述                                |
-| :------------- | :----- | :------- | :---------------------------------- |
-| `Content-Type` | String | 是       | 内容类型。请填 `application/json`。 |
-
-##### 请求 body
-
-| 参数       | 类型   | 是否必需 | 描述          |
-| :--------- | :----- | :------- | :-------------------------------------------- |
-| `username` | String | 是       | 用户 ID，长度不可超过 64 个字节。不可设置为空。支持以下字符集：<br/>- 26 个小写英文字母 a-z；<br/>- 26 个大写英文字母 A-Z；<br/>- 10 个数字 0-9；<br/>- “\_”, “-”, “.”。 <br/><Container type="notice" title="注意"><br/>- 该参数不区分大小写，因此 `Aa` 和 `aa` 为相同的用户 ID；<br/>- 请确保同一个 app 下，用户 ID 唯一；<br/>- 用户 ID 为公开信息，请勿使用 UUID、邮箱地址、手机号等敏感信息。</Container> |
-| `password` | String | 是       | 用户的登录密码，长度不可超过 64 个字符。  |
-| `nickname` | String | 否       | 离线推送时在接收方的客户端推送通知栏中显示的发送方的昵称。你可以自定义该昵称，长度不能超过 100 个字符。<br/>支持以下字符集：<br/> - 26 个小写英文字母 a-z；<br/> - 26 个大写英文字母 A-Z；<br/> - 10 个数字 0-9；<br/> - 中文；<br/> - 特殊字符。<Container type="tip" title="提示">1. 若不设置昵称，推送时会显示发送方的用户 ID，而非昵称。<br/>2. 该昵称可与用户属性中的昵称设置不同，不过我们建议这两种昵称的设置保持一致。因此，修改其中一个昵称时，也需调用相应方法对另一个进行更新，确保设置一致。更新用户属性中的昵称的方法，详见 [设置用户属性](userprofile.html#设置用户属性)。</Container> |
-
-其他参数及说明详见 [公共参数](#公共参数)。
-
-#### HTTP 响应
-
-##### 响应 body
-
-如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
-
-响应字段及说明详见 [公共参数](#公共参数)。
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [错误码](#错误码)了解可能的原因。
-
-#### 示例
-
-##### 请求示例
-
-```shell
-## 无需传入 token
-curl -X POST -i "https://XXXX.com/XXXX-demo/XXXX/users" -d '{"username":"user1","password":"123","nickname":"testuser"}'
-```
-
-##### 响应示例
-
-```json
-{
-  "action": "post",
-  "application": "8be024f0-e978-XXXX-XXXX-5d598d5f8402",
-  "path": "/users",
-  "uri": "https://XXXX.com/XXXX-demo/XXXX/users",
-  "entities": [
-    {
-      "uuid": "0ffe2d80-XXXX-XXXX-8d66-279e3e1c214b",
-      "type": "user",
-      "created": 1542795196504,
-      "modified": 1542795196504,
-      "username": "user1",
-      "activated": true
-    }
-  ],
-  "timestamp": 1542795196515,
-  "duration": 0,
-  "organization": "XXXX-demo",
-  "applicationName": "XXXX"
-}
-```
-
-#### 错误码
-
-如果返回的 HTTP 状态码非 `200`，表示请求失败，可能提示以下错误码：
-
-| HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
-| :----------- | :--- | :------------- | :----------- | :----------- |
-| 400         | illegal_argument  | username XXX is not legal   | 用户名不合法。  | 查看注册用户名[规范](#开放注册单个用户)。 |
-| 400         | illegal_argument | USERNAME_TOO_LONG  | 用户长度超过限制。  | 查看注册用户名[规范](#开放注册单个用户)。 |
-| 400         | illegal_argument  | password or pin must provided    | 注册用户请求 body 中没有提供 `password` 参数。 | 注册用户请求 body 中提供 `password`。   |
-| 400         | illegal_argument | NICKNAME_TOO_LONG    | 注册用户的推送昵称长度超过限制。   | 查看注册用户名[规范](#开放注册单个用户)。 |
-| 400         | duplicate_unique_property_exists   | Application XXX Entity user requires that property named username be unique, value of XXX exists | 注册用户名已经存在。 | 更换用户名重新注册。  |
-| 401         | unauthorized  | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。   | 使用新的 token 访问。       |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](https://doc.easemob.com/product/enable_and_configure_IM.html#创建应用)。 |
-| 429         | resource_limited    | You have exceeded the limit of the community edition,Please upgrade to the enterprise edition | 注册用户的数量超过当前产品套餐包的限制。 | 联系商务开通付费版。   |
-
-关于其他错误，你可以参考 [错误码](#错误码) 了解可能的原因。
-
-### 授权注册单个用户
-
-授权注册模式指注册环信即时通讯 IM 账号时携带管理员身份认证信息，即 App Token。
-
-要使用该注册方式，你需要在环信控制台进行如下配置：
-
-在控制台首页的 **应用列表** 下点击目标应用的 **操作** 一栏中的 **管理**，然后选择 **即时通讯** > **服务概览**，在页面的 **设置** 区域中将**用户注册模式**设置**授权注册**，然后单击**保存**。
-
-推荐使用该模式，因为该模式较为安全，可防止已获取了注册 URL 和了解注册流程的某些人恶意向服务器大量注册垃圾用户。
-
-#### HTTP 请求
-
-```http
-POST https://{host}/{org_name}/{app_name}/users
+POST https://{host}/app-id/{app_id}/users
 ```
 
 ##### 路径参数
@@ -176,7 +77,6 @@ POST https://{host}/{org_name}/{app_name}/users
 | 参数       | 类型   | 是否必需 | 描述         |
 | :--------- | :----- | :------- | :------------------------ |
 | `username` | String | 是       | 用户 ID，长度不可超过 64 字节。不可设置为空。支持以下字符集：<br/>- 26 个小写英文字母 a-z；<br/>- 26 个大写英文字母 A-Z；<br/>- 10 个数字 0-9；<br/>- “\_”, “-”, “.”。 <br/><Container type="notice" title="注意"><br/>- 该参数不区分大小写，因此 `Aa` 和 `aa` 为相同用户名；<br/>- 请确保同一个 app 下，用户 ID 唯一；<br/>- 用户 ID 为公开信息，请勿使用 UUID、邮箱地址、手机号等敏感信息。</Container> |
-| `password` | String | 是       | 用户的登录密码，长度不可超过 64 个字符。 |
 
 #### HTTP 响应
 
@@ -197,10 +97,9 @@ POST https://{host}/{org_name}/{app_name}/users
 
 curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '[
    {
-     "username": "user1",
-     "password": "123"
+     "username": "user1"
    }
- ]' 'https://XXXX/XXXX/XXXX/users'
+ ]' 'https://XXXX/app-id/XXXX/users'
 ```
 
 ##### 响应示例
@@ -208,7 +107,6 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 ```json
 {
   "action": "post",
-  "application": "8be024f0-XXXX-XXXX-b697-5d598d5f8402",
   "path": "/users",
   "uri": "https://XXXX/XXXX/XXXX/users",
   "entities": [
@@ -222,9 +120,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
     }
   ],
   "timestamp": 1542795196515,
-  "duration": 0,
-  "organization": "XXXX",
-  "applicationName": "XXXX"
+  "duration": 0
 }
 ```
 
@@ -234,10 +130,10 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 
 | HTTP 状态码 | 错误类型      | 错误提示       | 可能原因       | 处理建议       |
 | :---- | :-------- | :------------ | :----------------- | :----------------- |
-| 400         | illegal_argument                   | username XXX is not legal  | 用户名不合法。   | 查看注册用户名[规范](#开放注册单个用户)。 |
-| 400         | illegal_argument                   | USERNAME_TOO_LONG   | 用户长度超过限制。 | 查看注册用户名[规范](#开放注册单个用户)。 |
+| 400         | illegal_argument                   | username XXX is not legal  | 用户名不合法。   | 查看注册用户名[规范](#注册单个用户)。 |
+| 400         | illegal_argument                   | USERNAME_TOO_LONG   | 用户长度超过限制。 | 查看注册用户名[规范](#注册单个用户)。 |
 | 400         | illegal_argument                   | password or pin must provided  | 注册用户请求 body 中没有提供 `password` 参数。| 注册用户请求 body 中提供 `password`。 |
-| 400         | illegal_argument                   | NICKNAME_TOO_LONG    | 注册用户的推送昵称长度超过限制。 | 查看注册用户名[规范](#开放注册单个用户)。 |
+| 400         | illegal_argument                   | NICKNAME_TOO_LONG    | 注册用户的推送昵称长度超过限制。 | 查看注册用户名[规范](#注册单个用户)。 |
 | 400         | duplicate_unique_property_exists   | Application XXX Entity user requires that property named username be unique, value of XXX exists | 注册用户名已经存在。 | 更换用户名重新注册。   |
 | 400         | illegal_argument                   | username [XXX] is not legal  | 注册用户的 `username` 不合法。| 请按照用户名的规范进行注册用户。 |
 | 400         | illegal_argument                   | USERNAME_TOO_LONG    | 注册用户的 `username` 长度超限。 | 请按照用户名的规范进行注册用户。  |
@@ -246,19 +142,18 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 | 401         | unauthorized                       | token is illegal.    | token 不合法，生成 token 使用信息与请求携带的信息不匹配。 | 使用新的 token 访问。   |
 | 401         | unauthorized                       | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。  | 使用新的 token 访问。    |
 | 401         | unauthorized                       | Open registration doesn't allow, so register user need token| 授权注册模式，注册用户时需要 token。 | 请求时携带 token。 |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](https://doc.easemob.com/product/enable_and_configure_IM.html#创建应用) |
-| 429         | resource_limited                   | You have exceeded the limit of the community edition,Please upgrade to the enterprise edition | 注册用户的数量超过当前产品套餐版本的限制。 | 联系商务开通付费版。 |
+| 429         | resource_limited                   | You have exceeded the limit of the community edition,Please upgrade to the enterprise edition | 注册用户的数量超过当前产品套餐版本的限制。 | 联系声网商务开通付费版。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
-### 批量授权注册用户
+### 批量注册用户
 
-批量注册为授权注册方式，服务端需要校验有效的 token 权限才能进行操作。
+单次请求注册多个用户。
 
 #### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/users
+POST https://{host}/app-id/{app_id}/users
 ```
 
 ##### 路径参数
@@ -281,7 +176,6 @@ POST https://{host}/{org_name}/{app_name}/users
 | 参数       | 类型   | 是否必需 | 描述        |
 | :--------- | :----- | :------- | :----------------------------- |
 | `username` | String | 是       | 用户 ID，长度不可超过 64 个字节。不可设置为空。支持以下字符集：<br/>- 26 个小写英文字母 a-z；<br/>- 26 个大写英文字母 A-Z；<br/>- 10 个数字 0-9；<br/>- “\_”, “-”, “.”。 <br/><Container type="notice" title="注意"><br/>- 该参数不区分大小写，因此 `Aa` 和 `aa` 为相同用户名；<br/>- 请确保同一个 app 下，用户 ID 唯一；<br/>- 用户 ID 为公开信息，请勿使用 UUID、邮箱地址、手机号等敏感信息。</Container> |
-| `password` | String | 是       | 用户的登录密码，长度不可超过 64 个字符。      |
 
 #### HTTP 响应
 
@@ -302,7 +196,7 @@ POST https://{host}/{org_name}/{app_name}/users
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XXXX/users" -d '[{"username":"user1", "password":"123"}, {"username":"user2", "password":"456"}]'
+curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/app-id/XXXX/users" -d '[{"username":"user1"}, {"username":"user2"}]'
 ```
 
 ##### 响应示例一
@@ -310,7 +204,6 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XX
 ```json
 {
   "action": "post",
-  "application": "22bcffa0-XXXX-XXXX-9df8-516f6df68c6d",
   "path": "/users",
   "uri": "https://XXXX/XXXX/XXXX/users",
   "entities": [
@@ -333,9 +226,7 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XX
   ],
   "timestamp": 1541587920714,
   "data": [],
-  "duration": 0,
-  "organization": "XXXX",
-  "applicationName": "XXXX"
+  "duration": 0
 }
 ```
 
@@ -346,7 +237,7 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XX
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XXXX/users" -d '[{"username":"user1", "password":"123"}, {"username":"user2", "password":"456"}, {"username":"user3", "password":"789"}]'
+curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/app-id/XXXX/users" -d '[{"username":"user1"}, {"username":"user2"}, {"username":"user3"}]'
 ```
 
 ##### 响应示例二
@@ -354,7 +245,6 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XX
 ```json
 {
   "action": "post",
-  "application": "22bcffa0-XXXX-XXXX-9df8-516f6df68c6d",
   "path": "/users",
   "uri": "https://XXXX/XXXX/XXXX/testapp/users",
   "entities": [
@@ -382,9 +272,7 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XX
       "registerUserFailReason": "the user3 already exists"
     }
   ],
-  "duration": 0,
-  "organization": "XXXX",
-  "applicationName": "XXXX"
+  "duration": 0
 }
 ```
 
@@ -394,10 +282,9 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XX
 
 | HTTP 状态码 | 错误类型   | 错误提示      | 可能原因   | 处理建议       |
 | :----- | :----------- | :----| :-------| :---------------|
-| 400         | illegal_argument                   | username XXX is not legal  | 用户名不合法。| 查看注册用户名[规范](#开放注册单个用户)。 |
-| 400         | illegal_argument                   | USERNAME_TOO_LONG    | 用户长度超过限制。 | 查看注册用户名[规范](#开放注册单个用户)。 |
-| 400         | illegal_argument                   | password or pin must provided  | 注册用户请求 body 中没有提供 `password` 参数。  | 注册用户请求 body 中提供 `password`。  |
-| 400         | illegal_argument                   | NICKNAME_TOO_LONG    | 注册用户的推送昵称长度超过限制。  | 查看注册用户名[规范](#开放注册单个用户)。 |
+| 400         | illegal_argument                   | username XXX is not legal  | 用户名不合法。| 查看注册用户名[规范](#注册单个用户)。 |
+| 400         | illegal_argument                   | USERNAME_TOO_LONG    | 用户长度超过限制。 | 查看注册用户名[规范](#注册单个用户)。 |
+| 400         | illegal_argument                   | NICKNAME_TOO_LONG    | 注册用户的推送昵称长度超过限制。  | 查看注册用户名[规范](#注册单个用户)。 |
 | 400         | duplicate_unique_property_exists   | Application XXX Entity user requires that property named username be unique, value of XXX exists | 注册用户名已经存在。  | 更换用户名重新注册。  |
 | 400         | duplicate_unique_property_exists   | the same user XXX has a different password, the passwords are XXX | 注册用户时，请求 body 中存在 `username` 相同但密码不同的情况。 | 对相同的 `username` 进行修改重新注册。    |
 | 400         | illegal_argument                   | username [XXX] is not legal    | 注册用户的 `username` 不合法。 | 请按照用户名的规范进行注册用户。 |
@@ -408,7 +295,6 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XX
 | 401         | unauthorized                       | token is illegal.     | token 不合法，生成 token 使用信息与请求携带的信息不匹配。  | 使用新的 token 访问。 |
 | 401         | unauthorized                       | Unable to authenticate (OAuth)     | token 不合法，可能过期或 token 错误。  | 使用新的 token 访问。  |
 | 401         | unauthorized                       | Open registration doesn't allow, so register user need token, | 授权注册模式，注册用户时需要 token。  | 请求时携带 token。 |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
 | 429         | resource_limited                   | You have exceeded the limit of the community edition,Please upgrade to the enterprise edition | 注册用户的数量超过当前产品套餐版本的限制。 | 联系商务开通付费版。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
@@ -422,7 +308,7 @@ curl -X POST -H "Authorization: Bearer <YourAppToken>" -i  "https://XXXX/XXXX/XX
 #### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/users/{username}
+GET https://{host}/app-id/{app_id}/users/{username}
 ```
 
 ##### 路径参数
@@ -465,7 +351,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/XXXX'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/app-id/XXXX/users/XXXX'
 ```
 
 ##### 响应示例
@@ -499,7 +385,6 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | HTTP 状态码 | 错误类型    | 错误提示      | 可能原因      | 处理建议    |
 | :---------- | :---------- | :--------- | :----------- | :---------- |
 | 401         | unauthorized                       | Unable to authenticate (OAuth)    | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。    |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。   | 检查 `orgName` 和 `appName` 是否正确或[创建应用](https://doc.easemob.com/product/enable_and_configure_IM.html#创建应用)。 |
 | 404         | service_resource_not_found         | Service resource not found  | 用户不存在。  | 先注册用户或者检查用户名是否正确。  |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
@@ -513,7 +398,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 #### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/users?limit={N}&cursor={cursor}
+GET https://{host}/app-id/{app_id}/users?limit={N}&cursor={cursor}
 ```
 
 ##### 路径参数
@@ -566,7 +451,7 @@ GET https://{host}/{org_name}/{app_name}/users?limit={N}&cursor={cursor}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users?limit=2'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/app-id/XXXX/users?limit=2'
 ```
 
 使用返回的 cursor 获取下一页：
@@ -574,7 +459,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ```shell
 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users?limit=2&cursor=LTgzXXXX2tB'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/app-id/XXXX/users?limit=2&cursor=LTgzXXXX2tB'
 ```
 
 ##### 响应示例一
@@ -623,7 +508,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users?limit=2&cursor=LTgzXXXX  2tB'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/app-id/XXXX/users?limit=2&cursor=LTgzXXXX  2tB'
 ```
 
 ##### 响应示例二
@@ -663,7 +548,6 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | HTTP 状态码 | 错误类型  | 错误提示     | 可能原因     | 处理建议   |
 | :---------- | :---------- | :-------------- | :------------- | :--------------- |
 | 401         | unauthorized       | Unable to authenticate (OAuth)     | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。|
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。|
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -676,7 +560,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 #### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/users/{username}
+DELETE https://{host}/app-id/{app_id}/users/{username}
 ```
 
 ##### 路径参数
@@ -707,7 +591,7 @@ DELETE https://{host}/{org_name}/{app_name}/users/{username}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/app-id/XXXX/users/user1'
 ```
 
 ##### 响应示例
@@ -715,7 +599,6 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 ```json
 {
   "action": "delete",
-  "application": "8be024f0-XXXX-XXXX-b697-5d598d5f8402",
   "path": "/users",
   "uri": "https://XXXX/XXXX/XXXX/users",
   "entities": [
@@ -730,9 +613,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
     }
   ],
   "timestamp": 1542559539776,
-  "duration": 39,
-  "organization": "XXXX",
-  "applicationName": "XXXX"
+  "duration": 39
 }
 ```
 
@@ -744,8 +625,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 | :---------- | :---------- | :-------------- | :------------- | :--------------- |
 | 400         | management     | User with id null does not exist in app XXX      | 用户不存在。  | 先注册用户或者检查用户名是否正确。  |
 | 401         | unauthorized   | Unable to authenticate (OAuth)    | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。  |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。  | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
-| 404         | service_resource_not_found         | Service resource not found   | 用户不存在。    | 先注册用户或者检查用户名是否正确。  |
+| 404         | service_resource_not_found         | Service resource not found   | 用户不存在。    | 先注册用户或者检查用户 ID 是否正确。  |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -762,7 +642,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 #### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/users?limit={N}&cursor={cursor}
+DELETE https://{host}/app-id/{app_id}/users?limit={N}&cursor={cursor}
 ```
 
 ##### 路径参数
@@ -800,7 +680,7 @@ DELETE https://{host}/{org_name}/{app_name}/users?limit={N}&cursor={cursor}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users?limit=2'
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/app-id/XXXX/users?limit=2'
 ```
 
 ##### 响应示例
@@ -808,7 +688,6 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 ```json
 {
   "action": "delete",
-  "application": "8be024f0-XXXX-XXXX-b697-5d598d5f8402",
   "params": {
     "limit": ["2"]
   },
@@ -836,8 +715,6 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
   ],
   "timestamp": 1542867197779,
   "duration": 504,
-  "organization": "XXXX",
-  "applicationName": "testapp",
   "cursor": "LTgXXXXDNR"
 }
 ```
@@ -849,7 +726,6 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 | HTTP 状态码 | 错误类型 | 错误提示     | 可能原因         | 处理建议   |
 | :---------- | :----------- | :------------ | :---------- | :---------------- |
 | 401         | unauthorized   | Unable to authenticate (OAuth)  | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。  |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。  | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -860,7 +736,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 ### HTTP 请求
 
 ```http
-PUT https://{host}/{org_name}/{app_name}/users/{username}/password
+PUT https://{host}/app-id/{app_id}/users/{username}/password
 ```
 
 #### 路径参数
@@ -906,7 +782,7 @@ PUT https://{host}/{org_name}/{app_name}/users/{username}/password
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token，<YourPassword> 替换为你设置的新密码
 
-curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{ "newpassword": "<YourPassword>" }' 'https://XXXX/XXXX/XXXX/users/user1/password'
+curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' -d '{ "newpassword": "<YourPassword>" }' 'https://XXXX/app-id/XXXX/users/user1/password'
 ```
 
 #### 响应示例
@@ -926,7 +802,6 @@ curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 | HTTP 状态码 | 错误类型     | 错误提示   | 可能原因    | 处理建议     |
 | :---------- | :--------------- | :------------- | :------------ | :-----|
 | 401         | unauthorized    | Unable to authenticate (OAuth)    | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。  |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。   | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
 | 404         | entity_not_found  | User null not found    | 用户不存在。  | 先注册用户或者检查用户名是否正确。    |
 | 400              | illegal_argument                   | "newpassword is required"   | 修改用户密码的请求体未提供 `newpassword` 属性。|
 
@@ -936,12 +811,12 @@ curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 
 ### 账号封禁
 
-环信即时通讯 IM 提供了对用户的禁用以及解禁接口操作，用户若被禁用将立即下线并无法登录进入环信即时通讯 IM，直到被解禁后才能恢复登录。常用在对异常用户的即时处理场景使用。
+声网即时通讯 IM 提供了对用户的禁用以及解禁接口操作，用户若被禁用将立即下线并无法登录进入声网即时通讯 IM，直到被解禁后才能恢复登录。常用在对异常用户的即时处理场景使用。
 
 #### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/users/{username}/deactivate
+POST https://{host}/app-id/{app_id}/users/{username}/deactivate
 ```
 
 ##### 路径参数
@@ -976,7 +851,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/deactivate
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/deactivate'
+curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/app-id/XXXX/users/user1/deactivate'
 ```
 
 ##### 响应示例
@@ -1007,19 +882,18 @@ curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppTok
 | HTTP 状态码 | 错误类型      | 错误提示     | 可能原因       | 处理建议      |
 | :---------- | :------------------| :-------------------| :------------------| :-------------|
 | 401         | unauthorized     | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在。    | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
-| 404         | service_resource_not_found         | Service resource not found   | 用户不存在。  | 先[注册用户](account_system.html#开放注册单个用户)或者检查用户名是否正确。 |
+| 404         | service_resource_not_found         | Service resource not found   | 用户不存在。  | 先[注册用户](account_system.html#注册单个用户)或者检查用户名是否正确。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
 ### 账号解禁
 
-环信即时通讯 IM 提供了对用户的禁用以及解禁接口操作。对用户禁用后，用户将立即下线并无法登录进入环信即时通讯 IM，直到被解禁后才能恢复登录。该功能常于对异常用户的即时处理场景。
+声网即时通讯 IM 提供了对用户的禁用以及解禁接口操作。对用户禁用后，用户将立即下线并无法登录进入声网即时通讯 IM，直到被解禁后才能恢复登录。该功能常于对异常用户的即时处理场景。
 
 #### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/users/{username}/activate
+POST https://{host}/app-id/{app_id}/users/{username}/activate
 ```
 
 ##### 路径参数
@@ -1054,7 +928,7 @@ POST https://{host}/{org_name}/{app_name}/users/{username}/activate
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/activate'
+curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/app-id/XXXX/users/user1/activate'
 ```
 
 ##### 响应示例
@@ -1074,8 +948,7 @@ curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppTok
 | HTTP 状态码 | 错误类型     | 错误提示      | 可能原因       | 处理建议    |
 | :---------- | :---------| :---------------------| :----------| :--------|
 | 401         | unauthorized                       | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。    |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。    | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
-| 404         | service_resource_not_found         | Service resource not found   | 用户不存在。  | 先[注册用户](account_system.html#开放注册单个用户)或者检查用户名是否正确。 |
+| 404         | service_resource_not_found         | Service resource not found   | 用户不存在。  | 先[注册用户](account_system.html#注册单个用户)或者检查用户名是否正确。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -1088,7 +961,7 @@ curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppTok
 #### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/users/{username}/disconnect
+GET https://{host}/app-id/{app_id}/users/{username}/disconnect
 ```
 
 ##### 路径参数
@@ -1123,7 +996,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/disconnect
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/disconnect'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/app-id/XXXX/users/user1/disconnect'
 ```
 
 ##### 响应示例
@@ -1149,7 +1022,6 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | HTTP 状态码 | 错误类型    | 错误提示    | 可能原因    | 处理建议     |
 | :---------- | :-------| :------| :---------| :------------------|
 | 401   | unauthorized     | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。  |
-| 404   | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。    | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -1160,7 +1032,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 #### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/users/{username}/disconnect/{resourceId}
+DELETE https://{host}/app-id/{app_id}/users/{username}/disconnect/{resourceId}
 ```
 
 ##### 路径参数
@@ -1210,24 +1082,21 @@ DELETE https://{host}/{org_name}/{app_name}/users/{username}/disconnect/{resourc
 ```shell
 将 <YourAppToken> 替换为你在服务端生成的 App Token 
 curl -X DELETE -H 'Accept: application/json'   \
--H 'Authorization: Bearer <YourAppToken>' 'https://XXX/XXX/XXX/users/{userName}/disconnect/{resourceId}'
+-H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/app-id/XXXX/users/{userName}/disconnect/{resourceId}'
 ```
 
 ##### 响应示例
 
 ```json
 {
-    "uri": "https://XXX/XXX/XXX",
+    "uri": "https://XXXX/XXXX/XXXX/users/XXXX/disconnect/XXXX",
     "timestamp": 1709865422596,
-    "organization": "XXX",
-    "application": "6b58d05d-XXX-1ff3e95a3dc0",
     "entities": [],
     "action": "delete",
     "data": {
         "result": true
     },
-    "duration": 0,
-    "applicationName": "90"
+    "duration": 0
 }
 ```
 
@@ -1238,7 +1107,6 @@ curl -X DELETE -H 'Accept: application/json'   \
 | HTTP 状态码 | 错误类型  | 错误提示    | 可能原因     | 处理建议   |
 | :---------- | :-------| :------| :---------| :------------------|
 | 401  | unauthorized    | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。    |
-| 404  | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。 | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
 
 关于其他错误，你可以参考 [错误码](#错误码) 了解可能的原因。
 
@@ -1251,7 +1119,7 @@ curl -X DELETE -H 'Accept: application/json'   \
 #### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/users/{username}/status
+GET https://{host}/app-id/{app_id}/users/{username}/status
 ```
 
 ##### 路径参数
@@ -1286,7 +1154,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/status
 ```shell
 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/users/user1/status'
+curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/app-id/XXXX/users/user1/status'
 ```
 
 ##### 响应示例
@@ -1312,7 +1180,6 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | HTTP 状态码 | 错误类型   | 错误提示         | 可能原因      | 处理建议    |
 | :----- | :----------- | :--| :-------------- | :---|
 | 401         | unauthorized     | Unable to authenticate (OAuth)       | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。   |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key  不存在  | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
 
 关于其他错误，你可以参考 [错误码](#错误码) 了解可能的原因。
 
@@ -1325,7 +1192,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 #### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/users/batch/status
+POST https://{host}/app-id/{app_id}/users/batch/status
 ```
 
 ##### 路径参数
@@ -1365,7 +1232,7 @@ POST https://{host}/{org_name}/{app_name}/users/batch/status
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST https://XXXX/XXXX/chatdemoui/users/batch/status \
+curl -X POST https://XXXX/app-id/XXXX/users/batch/status \
 -H 'Accept: application/json'  \
 -H 'Authorization: Bearer <YourAppToken>'  \
 -H 'Content-Type: application/json'  \
@@ -1400,7 +1267,6 @@ curl -X POST https://XXXX/XXXX/chatdemoui/users/batch/status \
 | :-- | :------------ | :--------- | :--------- | :---------- |
 | 400   | illegal_argument      | request body exceeds maximum limit, maximum limit is 100     | 请求 body 中 `usernames` 的用户数量超过 100 个。 | 请调整`usernames` 中传入的用户 ID 数量。 |
 | 401 | unauthorized  | Unable to authenticate (OAuth)   | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。    |
-| 404  | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。 |  检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
 
 关于其他错误，你可以参考 [错误码](#错误码) 了解可能的原因。
 
@@ -1411,7 +1277,7 @@ curl -X POST https://XXXX/XXXX/chatdemoui/users/batch/status \
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/users/{username}/resources
+GET https://{host}/app-id/{app_id}/users/{username}/resources
 ```
 
 #### 路径参数
@@ -1452,7 +1318,7 @@ GET https://{host}/{org_name}/{app_name}/users/{username}/resources
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L -X GET 'http://XXXX/XXXX/XXXX/users/XXXX/resources' \
+curl -L -X GET 'http://XXXX//app-id/XXXX/users/XXXX/resources' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
@@ -1464,8 +1330,6 @@ curl -L -X GET 'http://XXXX/XXXX/XXXX/users/XXXX/resources' \
     "path": "/users/XXXX/resources",
     "uri": "https://XXXX/XXXX/XXXX/users/XXXX/resources",
     "timestamp": 1692325141777,
-    "organization": "XXXX",
-    "application": "0XXXX4",
     "entities": [],
     "action": "get",
     "data": [
@@ -1475,8 +1339,7 @@ curl -L -X GET 'http://XXXX/XXXX/XXXX/users/XXXX/resources' \
             "device_name": "HUAWEI-XXXX"
         }
     ],
-    "duration": 0,
-    "applicationName": "chatdemoui"
+    "duration": 0
 }
 ```
 
@@ -1487,6 +1350,5 @@ curl -L -X GET 'http://XXXX/XXXX/XXXX/users/XXXX/resources' \
 | HTTP 状态码 | 错误类型     | 错误提示          | 可能原因      | 处理建议        |
 | :----- | :--------- | :--------------- | :---------- | :------------- |
 | 401         | unauthorized    | Unable to authenticate (OAuth)     | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 404         | organization_application_not_found | Could not find application for XXX/XXX from URI: XXX/XXX/users | App key 不存在。    | 检查 `orgName` 和 `appName` 是否正确或[创建应用](/product/enable_and_configure_IM.html#创建应用)。 |
 
 关于其他错误，你可以参考 [错误码](#错误码) 了解可能的原因。
