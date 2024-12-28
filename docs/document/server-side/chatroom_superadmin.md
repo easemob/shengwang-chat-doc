@@ -2,14 +2,15 @@
 
 <Toc />
 
-仅聊天室超级管理员具有在客户端创建聊天室的权限。环信即时通讯 IM 提供多个管理超级管理员的接口，包括获取、添加、撤销等操作。
+仅聊天室超级管理员具有在客户端创建聊天室的权限。即时通讯 IM 提供多个管理超级管理员的接口，包括获取、添加、撤销等操作。
 
 ## 前提条件
 
-要调用环信即时通讯 RESTful API，请确保满足以下要求：
+要调用即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
-- 了解环信 IM REST API 的调用频率限制，详见[接口频率限制](limitationapi.html)。
+- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置即时通讯 IM 服务](enable_im.html)。
+- 已从服务端获取 app token，详见 [使用 Token 鉴权](token_authentication.html)。
+- 了解即时通讯 IM 的 API 调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 公共参数
 
@@ -17,46 +18,41 @@
 
 | 参数          | 类型   | 是否必需 | 描述  |
 | :------------ | :----- | :------- | :---------------- |
-| `host`        | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name`    | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name`    | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `host`     | String | 是       | 即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `app_id`     | String | 是       | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
 | `chatroom_id` | String | 是       | 聊天室 ID。  |
 | `username`    | String | 是       | 用户 ID。    |
 | `name`        | String | 是       | 聊天室名称，最大长度为 128 个字符。       |
 | `description` | String | 是       | 聊天室描述，最大长度为 512 个字符。    |
-| `maxusers`    | Int    | 否       | 聊天室成员数上限，创建聊天室时设置。该参数的默认最大值为 10,000，如需调整请联系商务。  |
+| `maxusers`    | Int    | 否       | 聊天室成员数上限，创建聊天室时设置。该参数的默认最大值为 10,000，如需调整请联系声网商务。  |
 
 ### 响应参数
 
 | 参数                 | 类型   | 描述   |
 | :------------------- | :----- | :------------ |
 | `action`             | String | 请求方法。  |
-| `host`               | String | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名，与请求参数 `host` 相同。    |
-| `organization`       | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。      |
-| `application`        | String | 系统内为应用生成的唯一标识，开发者无需关心。  |
-| `applicationName`    | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。   |
+| `host`               | String | 即时通讯 IM 分配的用于访问 RESTful API 的域名，与请求参数 `host` 相同。    |
 | `uri`                | String | 请求 URL。   |
 | `path`               | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。   |
-| `id`                 | String | 聊天室 ID，聊天室唯一标识，由环信即时通讯 IM 服务器生成。    |
+| `id`                 | String | 聊天室 ID，聊天室唯一标识，由即时通讯 IM 服务器生成。    |
 | `entities`           | JSON   | 响应实体。  |
 | `data`               | JSON   | 数据详情。 |
-| `uuid`               | String | 系统内为用户或者应用生成的系统内唯一标识，开发者无需关心。   |
 | `created`            | String | 用户、群组或聊天室的创建时间，Unix 时间戳，单位为毫秒。    |
 | `username`           | String | 用户 ID。     |
 | `affiliations_count` | Int    | 聊天室现有成员总数。     |
-| `affiliations`       | Array  | 聊天室现有成员列表，数组类型，包含 `owner` 和 `member` 元素，即聊天室所有者和聊天室成员（包括聊天室管理员）。例如： “affiliations”:[{“owner”: “13800138001”},{“member”:”v3y0kf9arx”},{“member”:”xc6xrnbzci”}]。 |
-| `owner`              | String | 聊天室所有者的用户 ID。例如：{“owner”: “13800138001”}。     |
-| `member`             | String | 聊天室成员的用户 ID，包括聊天室管理员和普通成员的用户 ID。例如：{“member”:”xc6xrnbzci”}。    |
+| `affiliations`       | Array  | 聊天室现有成员列表，数组类型，包含 `owner` 和 `member` 元素，即聊天室所有者和聊天室成员（包括聊天室管理员）。例如： "affiliations":[{"owner": "13800138001"},{"member":"v3y0kf9arx"},{"member":"xc6xrnbzci"}]。 |
+| `owner`              | String | 聊天室所有者的用户 ID。例如：{"owner": "13800138001"}。     |
+| `member`             | String | 聊天室成员的用户 ID，包括聊天室管理员和普通成员的用户 ID。例如：{"member":"xc6xrnbzci"}。    |
 | `timestamp`          | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。   |
 | `duration`           | Long   | 从发送 HTTP 请求到响应的时长，单位为毫秒。     |
 
 ## 认证方式
 
-环信即时通讯 REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
+即时通讯 IM 的 RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
 `Authorization: Bearer YourAppToken`
 
-为提高项目的安全性，环信使用 token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 REST API 推荐使用 app token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
+为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的 鉴权方式，详见[使用 Token 鉴权](token_authentication.html)。
 
 ## 添加超级管理员
 
@@ -65,7 +61,7 @@
 #### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/chatrooms/super_admin
+POST https://{host}/app-id/{app_id}/chatrooms/super_admin
 ```
 
 ##### 路径参数
@@ -107,7 +103,7 @@ POST https://{host}/{org_name}/{app_name}/chatrooms/super_admin
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X POST 'https://XXXX/XXXX/XXXX/chatrooms/super_admin'  \
+curl -X POST 'https://XXXX/app-id/XXXX/chatrooms/super_admin'  \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
 -d '{
@@ -120,15 +116,12 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatrooms/super_admin'  \
 ```json
 {
   "action": "post",
-  "application": "09XXXX34",
-  "applicationName": "XXXX",
   "data": {
     "result": "success",
     "resource": ""
   },
   "duration": 1,
   "entities": [],
-  "organization": "XXXX",
   "timestamp": 1656488117703,
   "uri": "https://XXXX/XXXX/XXXX/chatrooms/super_admin"
 }
@@ -151,16 +144,8 @@ curl -X POST 'https://XXXX/XXXX/XXXX/chatrooms/super_admin'  \
 
 #### HTTP 请求
 
-直接获取：
-
 ```http
-GET https://{host}/{org_name}/{app_name}/chatrooms/super_admin
-```
-
-分页获取：
-
-```http
-GET https://{host}/{org_name}/{app_name}/chatrooms/super_admin?pagenum={N}&pagesize={N}
+GET https://{host}/app-id/{app_id}/chatrooms/super_admin?pagenum={N}&pagesize={N}
 ```
 
 ##### 路径参数
@@ -203,7 +188,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/super_admin?pagenum={N}&pages
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X GET https://XXXX/XXXX/XXXX/chatrooms/super_admin?pagenum=2&pagesize=2 -H 'Authorization: Bearer <YourAppToken>'
+curl -X GET https://XXXX/app-id/XXXX/chatrooms/super_admin?pagenum=2&pagesize=2 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
 ##### 响应示例
@@ -211,7 +196,6 @@ curl -X GET https://XXXX/XXXX/XXXX/chatrooms/super_admin?pagenum=2&pagesize=2 -H
 ```json
 {
   "action": "get",
-  "application": "9fXXXX04",
   "params": {
     "pagesize": ["2"],
     "pagenum": ["2"]
@@ -221,8 +205,6 @@ curl -X GET https://XXXX/XXXX/XXXX/chatrooms/super_admin?pagenum=2&pagesize=2 -H
   "data": ["hXXXX1", "hXXXX11", "hXXXX10"],
   "timestamp": 1596187292391,
   "duration": 0,
-  "organization": "XXXX",
-  "applicationName": "testapp",
   "count": 3
 }
 ```
@@ -244,7 +226,7 @@ curl -X GET https://XXXX/XXXX/XXXX/chatrooms/super_admin?pagenum=2&pagesize=2 -H
 #### HTTP 请求
 
 ```http
-DELETE https://{host}/{org_name}/{app_name}/chatrooms/super_admin/{superAdmin}
+DELETE https://{host}/app-id/{app_id}/chatrooms/super_admin/{superAdmin}
 ```
 
 ##### 路径参数
@@ -284,8 +266,8 @@ DELETE https://{host}/{org_name}/{app_name}/chatrooms/super_admin/{superAdmin}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -L -X DELETE 'https://XXXX/XXXX/XXXX/chatrooms/super_admin/XXXX'
---header 'Authorization: Bearer <YourAppToken>'
+curl -L -X DELETE 'https://XXXX/app-id/XXXX/chatrooms/super_admin/XXXX' \
+-H 'Authorization: Bearer <YourAppToken>'
 ```
 
 ##### 响应示例
@@ -293,15 +275,12 @@ curl -L -X DELETE 'https://XXXX/XXXX/XXXX/chatrooms/super_admin/XXXX'
 ```json
 {
   "action": "delete",
-  "application": "09XXXX34",
-  "applicationName": "XXXX",
   "data": {
     "newSuperAdmin": "XXXX",
     "resource": ""
   },
   "duration": 0,
   "entities": [],
-  "organization": "XXXX",
   "properties": {},
   "timestamp": 1656488154100,
   "uri": "https://XXXX/XXXX/XXXX/chatrooms/super_admin/XXXX"

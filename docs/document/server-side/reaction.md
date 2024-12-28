@@ -1,4 +1,4 @@
-# 消息表情回复 Reaction REST API
+# 消息表情回复 Reaction
 
 <Toc />
 
@@ -20,7 +20,7 @@
 
 | 参数       | 类型   | 是否必需 | 描述         |
 | :--------- | :----- | :------- | :------------------------- |
-| `host`     | String | 是       | 声网即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `host`     | String | 是       | 即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
 | `app_id`     | String | 是       | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
 | `username`     | String | 是       | 调用该接口的用户 ID。 | 
 
@@ -124,7 +124,7 @@ curl -g -X POST 'http://XXXX/app-id/XXXX/reaction/user/e1' -H 'Authorization: Be
 
 | HTTP 状态码 | 错误类型    | 错误提示      | 可能原因      | 处理建议        |
 |:---------|:--------------------|:-----------|:----------|:------------|
-| 400      | Bad Request         | this appKey is not open reaction service!   | Reaction 功能未开通。 | 请在环信即时通讯控制台开通 Reaction 服务。 |
+| 400      | Bad Request         | this appKey is not open reaction service!   | Reaction 功能未开通。 | 请在[声网控制台](https://console.shengwang.cn/overview)开通 Reaction 服务。 |
 | 400      | Bad Request         | The quantity has exceeded the limit!  | 一条消息上的 Reaction 数量达到上限。| 每条消息默认可添加 20 个 Reaction。若需提升该上限，需联系声网商务。|
 | 400      | Bad Request                | the user operation is illegal!                      | 不是会话双方。 | 只有会话双方才能操作 Reaction。       |
 | 400      | Bad Request                | the user is already operation this message                      | 同一个用户重复添加相同的 Reaction。 | 同一用户不能重复添加相同的 Reaction。      |
@@ -312,7 +312,7 @@ curl -g -X DELETE 'http://XXXX/app-id/XXXX/reaction/user/wz?msgId=99762537279311
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因                     | 处理建议        |
 | :----------- | :--- | :------------- |:-------------------------|:------------|
 | 400     | Bad Request   | the user operation is illegal!        | 传入的用户 ID 没有操作过该 Reaction。 | 传入正确的用户 ID。 |
-| 400      | Bad Request  | this appKey is not open reaction service!   | Reaction 服务未开通。 | 请在环信即时通讯控制台开通 Reaction 服务。 |
+| 400      | Bad Request  | this appKey is not open reaction service!   | Reaction 服务未开通。 | 请在[声网控制台](https://console.shengwang.cn/overview)开通 Reaction 服务。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 
@@ -367,7 +367,7 @@ GET https://{host}/app-id/{app_id}/reaction/user/{userId}/detail?msgId={msgId}&m
 | `timestamp`         | Long   | 请求响应的时间，Unix 时间戳，单位为毫秒。                                                               |
 | `data`              | JSON   | 消息添加的 Reaction 的详情。                                                                            |
 | `data.reactionId`   | String | Reaction ID。                                                                                           |
-| `data.reaction`     | String | 表情 ID，与客户端一致。该参数与[创建/追加 Reaction API](#创建/追加-Reaction)的请求参数 `message` 相同。 |
+| `data.reaction`     | String | 表情 ID，与客户端一致。该参数与[创建/追加 Reaction API](#创建/追加-reaction)的请求参数 `message` 相同。 |
 | `data.count`        | Int    | 添加该 Reaction 的用户人数。                                                                            |
 | `data.state`        | Bool   | 当前请求用户是否添加过该 Reaction。 <br/> - `true`：是；<br/> - `false`：否。                           |
 | `data.userList`     | Array  | 按 Reaction 添加时间正序返回的用户 ID 列表。                           |

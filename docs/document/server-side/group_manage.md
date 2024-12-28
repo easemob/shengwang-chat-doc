@@ -2,15 +2,15 @@
 
 <Toc />
 
-声网即时通讯 IM 提供了 RESTful API 管理 App 中的群组，包括创建、修改、获取、解散群组等操作。
+即时通讯 IM 提供了 RESTful API 管理 App 中的群组，包括创建、修改、获取、解散群组等操作。
 
 ## 前提条件
 
-要调用声网即时通讯 RESTful API，请确保满足以下要求：
+要调用即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置声网即时通讯 IM 服务](enable_im.html)。
+- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置即时通讯 IM 服务](enable_im.html)。
 - 已从服务端获取 app token，详见 [使用 Token 鉴权](token_authentication.html)。
-- 了解声网即时通讯 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+- 了解即时通讯 IM 的 API 调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 公共参数
 
@@ -18,7 +18,7 @@
 
 | 参数       | 类型   | 是否必需 | 描述         |
 | :--------- | :----- | :------- | :------------------------- |
-| `host`     | String | 是       | 声网即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `host`     | String | 是       | 即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
 | `app_id`     | String | 是       | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
 | `group_id` | String | 是       | 群组 ID。    |
 | `username` | String | 是       | 用户 ID。             |
@@ -40,11 +40,11 @@
 
 ## 认证方式
 
-声网即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
+即时通讯 IM 的 RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
 `Authorization: Bearer YourAppToken`
 
-为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的 鉴权方式，详见 [使用 Token 鉴权](token_authentication.html)。
+为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的 鉴权方式，详见[使用 Token 鉴权](token_authentication.html)。
 
 ## 创建群组
 

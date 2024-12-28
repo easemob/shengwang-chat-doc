@@ -2,7 +2,7 @@
 
 本文展示如何调用声网即时通讯 IM RESTful API 在服务端修改发送成功的文本消息或自定义消息。
 
-**调用频率**：100 次/秒/App Key
+**调用频率**：100 次/秒/App ID
 
 :::tip
 若使用该功能，需联系声网商务开通。
@@ -34,7 +34,7 @@ PUT https://{host}/app-id/{app_id}/messages/rewrite/{msg_id}
 
 | 参数       | 类型   | 是否必需 | 描述         |
 | :--------- | :----- | :------- | :------------------------- |
-| `host`     | String | 是       | 声网即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `host`     | String | 是       | 即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
 | `app_id`     | String | 是       | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
 
 ### 请求 header

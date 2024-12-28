@@ -16,7 +16,7 @@
 
 | 参数       | 类型   | 是否必需 | 描述   |
 | :--------- | :----- | :------- | :------------------ |
-| `host`     | String | 是       | 声网即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `host`     | String | 是       | 即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
 | `app_id`     | String | 是       | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
 
 ### 响应参数
@@ -323,7 +323,7 @@ curl -X PUT https://XXXX/app-id/XXXX/users/XXXX  \
 
 批量设置用户离线推送时显示的昵称。
 
-**调用频率上限**：100 次/秒/App Key
+**调用频率上限**：100 次/秒/App ID
 
 ### HTTP 请求
 

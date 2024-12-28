@@ -52,7 +52,7 @@
 :::
 
 **发送频率**：对于单个 app，该 REST API 存在以下三个限制：
-- 100 次/秒/App Key。若超限，提示 429 错误。
+- 100 次/秒/App ID。若超限，提示 429 错误。
 - 6000 条/分钟。若超限报 403 错误，即 "Forbidden for url: [XXXX/XXXX/messages/users]"
 - 600 人/次。例如，一次向 600 人发消息，视为 600 条消息。若超限，报 400 错误，即 "params to's size can't exceed limit"。
 
@@ -70,7 +70,7 @@
 
 | 参数       | 类型   | 是否必需 | 描述   |
 | :--------- | :----- | :------- | :------------------ |
-| `host`     | String | 是       | 声网即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `host`     | String | 是       | 即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
 | `app_id`     | String | 是      | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
 | `username` | String | 是       | 用户 ID。              |
 

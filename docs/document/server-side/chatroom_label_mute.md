@@ -2,15 +2,16 @@
 
 <Toc />
 
-环信即时通讯 IM 支持设置用户在聊天室中的标签，并按标签用户禁言。**要使用该功能，需联系环信商务开通。**
+即时通讯 IM 支持设置用户在聊天室中的标签，并按标签用户禁言。**要使用该功能，需联系声网商务开通。**
 
 ## 前提条件
 
-要调用环信即时通讯 RESTful API，请确保满足以下要求：
+要调用声网即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在环信即时通讯控制台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
-- 了解环信 IM REST API 的调用频率限制，详见[接口频率限制](limitationapi.html)。
-- 了解聊天室成员相关限制，详见[使用限制](/product/limitation.html#聊天室成员)。
+- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置声网即时通讯 IM 服务](enable_im.html)。
+- 已从服务端获取 app token，详见 [使用 Token 鉴权](token_authentication.html)。
+- 了解声网即时通讯 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+- 了解聊天室成员相关限制，详见[使用限制](limitation.html#聊天室成员)。
 
 ## 公共参数
 
@@ -18,9 +19,8 @@
 
 | 参数          | 类型   | 是否必需 | 描述  |
 | :------------ | :----- | :------- | :---------------- |
-| `host`        | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name`    | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name`    | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| `host`     | String | 是       | 即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `app_id`     | String | 是       | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
 | `chatroom_id` | String | 是       | 聊天室 ID。  |
 | `username`    | String | 是       | 用户 ID。    |
 
@@ -29,13 +29,10 @@
 | 参数                 | 类型   | 描述   |
 | :------------------- | :----- | :------------ |
 | `action`             | String | 请求方法。  |
-| `host`               | String | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名，与请求参数 `host` 相同。    |
-| `organization`       | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。      |
-| `application`        | String | 系统内为应用生成的唯一标识，开发者无需关心。  |
-| `applicationName`    | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。   |
+| `host`               | String | 即时通讯 IM 分配的用于访问 RESTful API 的域名，与请求参数 `host` 相同。    |
 | `uri`                | String | 请求 URL。   |
 | `path`               | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。   |
-| `id`                 | String | 聊天室 ID，聊天室唯一标识，由环信即时通讯 IM 服务器生成。    |
+| `id`                 | String | 聊天室 ID，聊天室唯一标识，由即时通讯 IM 服务器生成。    |
 | `entities`           | JSON   | 响应实体。  |
 | `data`               | JSON   | 数据详情。 |
 | `created`            | String | 用户、群组或聊天室的创建时间，Unix 时间戳，单位为毫秒。    |
@@ -44,22 +41,22 @@
 
 ## 认证方式
 
-环信即时通讯 REST API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
+声网即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
 `Authorization: Bearer YourAppToken`
 
-为提高项目的安全性，环信使用 token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 REST API 推荐使用 app token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
+为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的 鉴权方式，详见 [使用 Token 鉴权](token_authentication.html)。
 
 ## 按用户在聊天室中的标签禁言
 
 可以控制标签下的用户是否可以在聊天室中发言。
 
-**调用频率上限**：100 次/秒/App Key
+**调用频率上限**：100 次/秒/App ID
 
 #### HTTP 请求
 
 ```http
-PUT https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/tag/mute
+PUT https://{host}/app-id/{app_id}/chatrooms/{chatroom_id}/tag/mute
 ```
 
 ##### 路径参数
@@ -103,7 +100,7 @@ PUT https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/tag/mute
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X PUT 'https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/tag/mute' \
+curl -X PUT 'https://XXXX/app-id/XXXX/chatrooms/12XXXX11/tag/mute' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
@@ -118,7 +115,6 @@ curl -X PUT 'https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/tag/mute' \
 ```json
 {
   "action": "put",
-  "application": "52XXXXf0",
   "uri": "https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/tag/mute",
   "entities":[],
   "data": {
@@ -126,9 +122,7 @@ curl -X PUT 'https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/tag/mute' \
   },
   "timestamp": 1489072189508,
   "duration": 0,
-  "properties":{}, 
-  "organization": "XXXX",
-  "applicationName": "testapp"
+  "properties":{}
 }
 ```
 
@@ -140,7 +134,7 @@ curl -X PUT 'https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/tag/mute' \
 | :---------- | :----------------- | :--------- | :------------------------------------ | :----------------------------------- |
 | 401         | unauthorized       | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。                |
 | 404         | resource_not_found | grpID XX does not exist!       | 聊天室不存在。                        | 使用合法的聊天室 ID。                |
-| 403         | forbidden_op       | Group tag mute is disabled     | 聊天室标签禁言功能没有开通。          | 联系环信商务开通聊天室标签禁言功能。 |
+| 403         | forbidden_op       | Group tag mute is disabled     | 聊天室标签禁言功能没有开通。          | 联系声网商务开通聊天室标签禁言功能。 |
 | 404         | resource_not_found | group tag not found            | 聊天室标签不存在。                    | 先为用户设置聊天室标签再进行操作。   |
 | 403 | exceed_limit | tag length exceeds limit! | 标签名称长度超过限制。 | 控制标签名称长度。 |
 
@@ -150,12 +144,12 @@ curl -X PUT 'https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/tag/mute' \
 
 设置用户在聊天室中的标签，一次最多设置 10 个，新设置的标签会覆盖原有标签。
 
-**调用频率上限**：100 次/秒/App Key
+**调用频率上限**：100 次/秒/App ID
 
 #### HTTP 请求
 
 ```http
-PUT https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/users/{username}/tag 
+PUT https://{host}/app-id/{app_id}/chatrooms/{chatroom_id}/users/{username}/tag 
 ```
 
 ##### 路径参数
@@ -207,7 +201,7 @@ curl -X PUT -H 'Content-Type: application/json' \
 -H 'Authorization: Bearer <YourAppToken>'  \
 -d '{
     "tags": ["t1", "t2"]
-}'https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/users/u10/tag'
+}'https://XXXX/app-id/XXXX/chatrooms/12XXXX11/users/u10/tag'
 ```
 
 ##### 响应示例
@@ -215,7 +209,6 @@ curl -X PUT -H 'Content-Type: application/json' \
 ```json
 {
   "action": "put",
-  "application": "52XXXXf0",
   "uri": "https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/users/u10/tag",
   "entities":[],
   "data": {
@@ -223,9 +216,7 @@ curl -X PUT -H 'Content-Type: application/json' \
   },
   "timestamp": 1489072189508,
   "properties":{},
-  "duration": 0,
-  "organization": "XXXX",
-  "applicationName": "testapp"
+  "duration": 0
 }
 ```
 
@@ -238,7 +229,7 @@ curl -X PUT -H 'Content-Type: application/json' \
 | 401         | unauthorized       | Unable to authenticate (OAuth)            | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。   |
 | 400         | forbidden_op       | users [XX] are not members of this group! | 用户 ID 不在聊天室中。                | 传入聊天室中的用户 ID。  |
 | 404         | resource_not_found | grpID XX does not exist!                  | 聊天室不存在。                        | 使用合法的聊天室 ID。  |
-| 403         | forbidden_op       | Group tag mute is disabled                | 聊天室标签禁言功能没有开通。          | 联系环信商务开通聊天室标签禁言功能。       |
+| 403         | forbidden_op       | Group tag mute is disabled                | 聊天室标签禁言功能没有开通。          | 联系声网商务开通聊天室标签禁言功能。       |
 | 403         | exceed_limit       | user group tag count exceed limit | 用户聊天室标签设置的数量超过限制。    | 控制一次请求 `tags` 的标签个数不要超过限制（10 个）。 |
 | 400         | invalid_parameter  | tags should be type of List               | 请求 body 中 `tags` 的类型错误。   | 请求 body 中的 `tags` 请使用数组类型 。|
 | 403 | exceed_limit | tag length exceeds limit! | 标签名称长度超过限制。 | 控制标签名称长度不要超过32字符。 |
@@ -249,12 +240,12 @@ curl -X PUT -H 'Content-Type: application/json' \
 
 获取某个用户在指定聊天室中的标签。
 
-**调用频率上限**：100 次/秒/App Key
+**调用频率上限**：100 次/秒/App ID
 
 #### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/users/{username}/tag 
+GET https://{host}/app-id/{app_id}/chatrooms/{chatroom_id}/users/{username}/tag 
 ```
 
 ##### 路径参数
@@ -297,7 +288,7 @@ GET https://{host}/{org_name}/{app_name}/chatrooms/{chatroom_id}/users/{username
 
 curl -X GET -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
--H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/users/u10/tag'
+-H 'Authorization: Bearer <YourAppToken>' 'https://XXXX/app-id/XXXX/chatrooms/12XXXX11/users/u10/tag'
 ```
 
 ##### 响应示例
@@ -305,7 +296,6 @@ curl -X GET -H 'Content-Type: application/json' \
 ```json
 {
   "action": "get",
-  "application": "52XXXXf0",
   "uri": "https://XXXX/XXXX/XXXX/chatrooms/12XXXX11/users/u10/tag",
   "entities":[],
   "data": {
@@ -313,9 +303,7 @@ curl -X GET -H 'Content-Type: application/json' \
   },
   "timestamp": 1489072189508,
   "properties":{},
-  "duration": 0,
-  "organization": "XXXX",
-  "applicationName": "testapp"
+  "duration": 0
 }
 ```
 
@@ -326,9 +314,9 @@ curl -X GET -H 'Content-Type: application/json' \
 | HTTP 状态码 | 错误类型           | 错误提示                                  | 可能原因                              | 处理建议                             |
 | :---------- | :----------------- | :---------------------------------------- | :------------------------------------ | :----------------------------------- |
 | 401         | unauthorized       | Unable to authenticate (OAuth)            | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。                |
-| 400         | forbidden_op       | users [XX] are not members of this group! | 用户 ID 不在聊天室中。                | 传入聊天室中的用户 ID。              |
+| 400         | forbidden_op       | users [XXX] are not members of this group! | 用户 ID 不在聊天室中。                | 传入聊天室中的用户 ID。              |
 | 404         | resource_not_found | grpID XX does not exist!                  | 聊天室不存在。                        | 使用合法的聊天室 ID。                |
-| 403         | forbidden_op       | Group tag mute is disabled                | 聊天室标签禁言功能没有开通。          | 联系环信商务开通聊天室标签禁言功能。 |
+| 403         | forbidden_op       | Group tag mute is disabled                | 聊天室标签禁言功能没有开通。          | 联系声网商务开通聊天室标签禁言功能。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
 

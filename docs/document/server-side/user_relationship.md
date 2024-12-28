@@ -25,7 +25,7 @@
 
 | 参数       | 类型   | 是否必需 | 描述   |
 | :--------- | :----- | :------- | :------------------ |
-| `host`     | String | 是       | 声网即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `host`     | String | 是       | 即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
 | `app_id`     | String | 是       | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
 | `username` | String | 是       | 用户 ID。     |
 
@@ -500,7 +500,7 @@ curl -X GET 'https://XXXX/app-id/XXXX/users/user1/contacts/users' \
 
 你可以调用该接口导入好友列表。
 
-**调用频率上限**：100 次/秒/App Key
+**调用频率上限**：100 次/秒/App ID
 
 ### HTTP 请求
 

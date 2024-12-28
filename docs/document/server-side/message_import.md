@@ -18,7 +18,7 @@
 
 | 参数       | 类型   | 是否必需 | 描述         |
 | :--------- | :----- | :------- | :------------------------- |
-| `host`     | String | 是       | 声网即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `host`     | String | 是       | 即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
 | `app_id`     | String | 是       | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
 | `username`     | String | 是       | 调用该接口的用户 ID。 | 
 
@@ -30,7 +30,7 @@
 | `uri`             | String | 请求 URL。                                                                     |
 | `path`            | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。                              |
 | `entities`        | JSON   | 响应实体。                                                                     |
-| `host`     | String | 是       | 声网即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `host`     | String | 是       | 即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
 | `data`            | JSON   | 实际获取的数据详情。                                                           |
 | `timestamp`       | Long   | HTTP 响应的 Unix 时间戳，单位为毫秒。                                          |
 | `duration`        | Int    | 从发送 HTTP 请求到响应的时长，单位为毫秒。                                     |

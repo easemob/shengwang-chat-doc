@@ -2,25 +2,24 @@
 
 <Toc />
 
-环信即时通讯 IM 提供了 RESTful API 管理 App 中群组的成员的属性，包括设置和获取单个或多个群成员的属性。
+声网即时通讯 IM 提供了 RESTful API 管理 App 中群组的成员的属性，包括设置和获取单个或多个群成员的属性。
 
 ## 前提条件
 
-要调用环信即时通讯 RESTful API，请确保满足以下要求：
+要调用声网即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在环信即时通讯 IM 管理后台 [开通配置环信即时通讯 IM 服务](enable_and_configure_IM.html)。
-- 了解环信 IM RESTful API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
-- 群成员的相关限制，详见 [使用限制](limitation.html#群组)。
+- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置声网即时通讯 IM 服务](enable_im.html)。
+- 已从服务端获取 app token，详见 [使用 Token 鉴权](token_authentication.html)。
+- 了解声网即时通讯 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 公共参数
 
 #### 请求参数
 
-| 参数       | 类型   | 是否必需 | 描述        |
-| :--------- | :----- | :------- | :--------------- |
-| `host`     | String | 是       | 环信即时通讯 IM 分配的用于访问 RESTful API 的域名。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见 [获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。  |
+| 参数       | 类型   | 是否必需 | 描述         |
+| :--------- | :----- | :------- | :------------------------- |
+| `host`     | String | 是       | 即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `app_id`     | String | 是       | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
 | `group_id` | String | 是       | 群组 ID。    |
 | `username` | String | 是       | 用户 ID。             |
 
@@ -29,9 +28,6 @@
 | 参数              | 类型   | 描述                                                                           |
 | :---------------- | :----- | :----------------------------------------------------------------------------- |
 | `action`          | String | 请求方法。                                                                     |
-| `organization`    | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
-| `application`     | String | 应用在系统内的唯一标识。该标识由系统生成，开发者无需关心。                     |
-| `applicationName` | String | 你在环信即时通讯云控制台创建应用时填入的应用名称，与请求参数 `app_name` 相同。 |
 | `uri`             | String | 请求 URL。                                                                     |
 | `path`            | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。                              |
 | `entities`        | JSON   | 响应实体。                                                                     |
@@ -43,20 +39,22 @@
 
 ## 认证方式
 
-环信即时通讯 RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
+声网即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
 `Authorization: Bearer YourAppToken`
 
-为提高项目的安全性，环信使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
+为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的 鉴权方式，详见 [使用 Token 鉴权](token_authentication.html)。
 
 ## 设置群成员自定义属性
 
 设置群成员的自定义属性（key-value），例如在群组中的昵称和头像等。
 
+**调用频率上限**：100 次/秒/App ID
+
 #### HTTP 请求
 
 ```http
-PUT https://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/user/{username}
+PUT https://{host}/app-id/{app_id}/metadata/chatgroup/{group_id}/user/{username}
 ```
 
 ##### 路径参数
@@ -97,7 +95,7 @@ PUT https://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/user/{use
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L -X PUT 'https://XXXX/XXXX/XXXX/metadata/chatgroup/XXXX/user/XXXX' \
+curl -L -X PUT 'https://XXXX/app-id/XXXX/metadata/chatgroup/XXXX/user/XXXX' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
@@ -136,12 +134,12 @@ curl -L -X PUT 'https://XXXX/XXXX/XXXX/metadata/chatgroup/XXXX/user/XXXX' \
 
 批量设置群成员的自定义属性（key-value），例如，在群组中的昵称和头像等。每次请求最多可为 20 个群成员设置多个属性，而且可对不同群成员设置不同属性。传入相同用户 ID 时，若其属性名称不同，则添加，相同则更新。
 
-**调用频率上限**：100 次/秒/App Key
+**调用频率上限**：100 次/秒/App ID
 
 #### HTTP 请求
 
 ```http
-PUT https://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/users/batch
+PUT https://{host}/app-id/{app_id}/metadata/chatgroup/{group_id}/users/batch
 ```
 
 ##### 路径参数
@@ -185,7 +183,7 @@ PUT https://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/users/bat
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L -X PUT 'http://XXXX/XXXX/XXXX/metadata/chatgroup/XXXX/users/batch' \
+curl -L -X PUT 'http://XXXX/app-id/XXXX/metadata/chatgroup/XXXX/users/batch' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>' \
@@ -255,10 +253,12 @@ curl -L -X PUT 'http://XXXX/XXXX/XXXX/metadata/chatgroup/XXXX/users/batch' \
 
 获取单个群成员的所有自定义属性。
 
+**调用频率上限**：100 次/秒/App ID
+
 #### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/user/{username}
+GET https://{host}/app-id/{app_id}/metadata/chatgroup/{group_id}/user/{username}
 ```
 
 ##### 路径参数
@@ -293,7 +293,7 @@ GET https://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/user/{use
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L -X GET 'https://a1-hsb.easemob.com/easemob-demo/testy/metadata/chatgroup/207059303858177/user/test2' \
+curl -L -X GET 'https://XXXX/app-id/XXXX/metadata/chatgroup/207059303858177/user/test2' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json'
 -H 'Authorization: Bearer YWMtozZwfsFFEe2oQTE6aob5eQAAAAAAAAAAAAAAAAAAAAExCXvf5bRGAJBgXNYFJVQ9AQMAAAGG2MUClwBPGgDsI1GYg1QtapTEdGyrm29Eu6L8qx60lDZ9TJRDOQjEsw' \
@@ -327,10 +327,12 @@ curl -L -X GET 'https://a1-hsb.easemob.com/easemob-demo/testy/metadata/chatgroup
 
 根据指定的属性 key 获取多个群成员的自定义属性。每次最多可获取 10 个群成员的自定义属性。
 
+**调用频率上限**：100 次/秒/App ID
+
 #### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/get
+POST https://{host}/app-id/{app_id}/metadata/chatgroup/{group_id}/get
 ```
 
 ##### 路径参数
@@ -372,10 +374,10 @@ POST https://{host}/{org_name}/{app_name}/metadata/chatgroup/{group_id}/get
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L -X POST 'https://XXXX/XXXX/XXXX/metadata/chatgroup/XXXX/get'\
--H'Content-Type: application/json'\
--H'Accept: application/json'\
--H'Authorization: Bearer <YourAppToken>'\
+curl -L -X POST 'https://XXXX/app-id/XXXX/metadata/chatgroup/XXXX/get'\
+-H 'Content-Type: application/json'\
+-H 'Accept: application/json'\
+-H 'Authorization: Bearer <YourAppToken>'\
 -d '{
     "targets":["test1","test2"],
     "properties":["key1","key2"]
