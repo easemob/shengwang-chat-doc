@@ -143,95 +143,95 @@ export const zhNavbar = navbar([
             icon: '/icon-platform.svg',
             link: '/document/server-side/overview.html'
           },
-          {
-            text: 'Java',
-            icon: '/icon-platform.svg',
-            link: '/document/server-side/java_server_sdk_2.0.html'
-          },
-          {
-            text: 'PHP',
-            icon: '/icon-platform.svg',
-            link: '/document/server-side/php_server_sdk.html'
-          }
+          // {
+          //   text: 'Java',
+          //   icon: '/icon-platform.svg',
+          //   link: '/document/server-side/java_server_sdk_2.0.html'
+          // },
+          // {
+          //   text: 'PHP',
+          //   icon: '/icon-platform.svg',
+          //   link: '/document/server-side/php_server_sdk.html'
+          // }
         ]
       }
     ]
   },
-  {
-    text: 'API 参考',
-    children: [
-      {
-        text: '平台',
-        children: [
-          {
-            text: 'Android',
-            icon: '/icon-Android.svg',
-            link: 'https://sdkdocs.easemob.com/apidoc/android/chat3.0/annotated.html'
-          },
-          {
-            text: 'iOS',
-            icon: '/icon-iOS.svg',
-            link: 'https://sdkdocs.easemob.com/apidoc/ios/chat3.0/annotated.html'
-          },
-          {
-            text: 'Web',
-            icon: '/icon-web.svg',
-            link: 'https://doc.easemob.com/jsdoc/index.html'
-          },
-          {
-            text: 'HarmonyOS',
-            icon: '/icon-harmonyos.svg',
-            link: 'https://sdkdocs.easemob.com/apidoc/harmony/chat3.0/classes/ChatClient.ChatClient.html'
-          },
-          {
-            text: 'Windows',
-            icon: '/icon-windows.svg',
-            link: 'https://sdkdocs.easemob.com/apidoc/unity/annotated.html'
-          }
-        ]
-      },
-      {
-        text: '框架',
-        children: [
-          {
-            text: 'React Native',
-            icon: '/icon-ReactNative.svg',
-            link: 'https://sdkdocs.easemob.com/apidoc/rn/modules.html'
-          },
-          {
-            text: 'Flutter',
-            icon: '/icon-flutter.svg',
-            link: 'https://sdkdocs.easemob.com/apidoc/flutter/index.html'
-          },
-          {
-            text: 'Unity',
-            icon: '/icon-unity.svg',
-            link: 'https://sdkdocs.easemob.com/apidoc/unity/annotated.html'
-          },
-        ]
-      },
-      {
-        text: '服务端',
-        children: [
-          {
-            text: 'Java 1.0',
-            icon: '/icon-platform.svg',
-            link: 'https://easemob.github.io/easemob-im-server-sdk/'
-          },
-          {
-            text: 'Java 2.0',
-            icon: '/icon-platform.svg',
-            link: 'https://github.com/easemob/easemob-im-server-sdk/tree/master_java_2.0/src/test/java/com/easemob/im/api'
-          },
-          {
-            text: 'PHP',
-            icon: '/icon-platform.svg',
-            link: 'https://easemob.github.io/im-php-server-sdk/annotated.html'
-          }
-        ]
-      }
-    ]
-  }
+  // {
+  //   text: 'API 参考',
+  //   children: [
+  //     {
+  //       text: '平台',
+  //       children: [
+  //         {
+  //           text: 'Android',
+  //           icon: '/icon-Android.svg',
+  //           link: 'https://sdkdocs.easemob.com/apidoc/android/chat3.0/annotated.html'
+  //         },
+  //         {
+  //           text: 'iOS',
+  //           icon: '/icon-iOS.svg',
+  //           link: 'https://sdkdocs.easemob.com/apidoc/ios/chat3.0/annotated.html'
+  //         },
+  //         {
+  //           text: 'Web',
+  //           icon: '/icon-web.svg',
+  //           link: 'https://doc.easemob.com/jsdoc/index.html'
+  //         },
+  //         {
+  //           text: 'HarmonyOS',
+  //           icon: '/icon-harmonyos.svg',
+  //           link: 'https://sdkdocs.easemob.com/apidoc/harmony/chat3.0/classes/ChatClient.ChatClient.html'
+  //         },
+  //         {
+  //           text: 'Windows',
+  //           icon: '/icon-windows.svg',
+  //           link: 'https://sdkdocs.easemob.com/apidoc/unity/annotated.html'
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       text: '框架',
+  //       children: [
+  //         {
+  //           text: 'React Native',
+  //           icon: '/icon-ReactNative.svg',
+  //           link: 'https://sdkdocs.easemob.com/apidoc/rn/modules.html'
+  //         },
+  //         {
+  //           text: 'Flutter',
+  //           icon: '/icon-flutter.svg',
+  //           link: 'https://sdkdocs.easemob.com/apidoc/flutter/index.html'
+  //         },
+  //         {
+  //           text: 'Unity',
+  //           icon: '/icon-unity.svg',
+  //           link: 'https://sdkdocs.easemob.com/apidoc/unity/annotated.html'
+  //         },
+  //       ]
+  //     },
+  //     {
+  //       text: '服务端',
+  //       children: [
+  //         {
+  //           text: 'Java 1.0',
+  //           icon: '/icon-platform.svg',
+  //           link: 'https://easemob.github.io/easemob-im-server-sdk/'
+  //         },
+  //         {
+  //           text: 'Java 2.0',
+  //           icon: '/icon-platform.svg',
+  //           link: 'https://github.com/easemob/easemob-im-server-sdk/tree/master_java_2.0/src/test/java/com/easemob/im/api'
+  //         },
+  //         {
+  //           text: 'PHP',
+  //           icon: '/icon-platform.svg',
+  //           link: 'https://easemob.github.io/im-php-server-sdk/annotated.html'
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // }
   // {
   //   text: '即时推送',
   //   link: '/push/push_overview.html'
