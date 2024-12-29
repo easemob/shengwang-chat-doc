@@ -478,7 +478,7 @@ const documentSidebar = [
           { text: '发送单聊消息已读回执', link: 'callback_single_read_ack.html' },
           { text: '发送会话已读回执', link: 'callback_single_conversation_ack.html' },
           { text: '撤回消息', link: 'callback_message_recall.html' },
-          { text: '群组/聊天室操作（新）', 
+          { text: '群组/聊天室操作', 
             collapsible: true,
             children: [
               { text: '创建群组/聊天室', link: 'callback_group_room_create.html' },
@@ -504,12 +504,10 @@ const documentSidebar = [
               { text: '添加/移除聊天室超级管理员', link: 'callback_room_superadmin.html' }
             ]
           },
-          { text: '群组/聊天室操作（旧）', link: 'callback_group_room_old.html' },
           { text: '用户关系操作', link: 'callback_contact.html' },
           { text: '离线推送', link: 'callback_offline_push.html' },
           { text: 'Reaction', link: 'callback_reaction.html' },
-          { text: 'Thread', link: 'callback_thread.html' },
-          { text: '敏感词监测', link: 'callback_sensitive_word.html' }
+          { text: 'Thread', link: 'callback_thread.html' }
         ]
       }
     ],
