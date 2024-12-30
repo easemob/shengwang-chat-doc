@@ -29,7 +29,7 @@
                     <div
                       v-else
                       class="card"
-                      style="visibility: hidden; height: 0; padding: 0; border: none;"
+                      style="visibility: hidden; height: 0"
                     ></div>
                   </template>
                 </div>
@@ -385,11 +385,11 @@ const activeTab = ref(0)
 .table th,
 .table td {
   border: 1px solid #e0e0e0;
+  padding: 15px;
   text-align: center;
   font-size: 14px;
   white-space: nowrap;
   min-width: 80px;
-  padding: 15px  0;
 }
 
 .table th:nth-child(5),

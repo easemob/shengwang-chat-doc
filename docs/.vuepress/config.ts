@@ -26,7 +26,7 @@ export default defineUserConfig({
   base: '/',
   lang: 'zh-CN',
   title: '即时通讯',
-  head: [['link', { rel: 'icon', href: '/logo.ico' }]],
+  head: [['link', { rel: 'icon', href: '/logo.png' }]],
   description: '声网即时通讯文档',
   bundler: viteBundler({
     viteOptions: {
