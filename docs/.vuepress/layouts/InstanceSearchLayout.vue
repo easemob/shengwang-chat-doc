@@ -78,7 +78,7 @@ export default {
     return {
       searchClient: algoliasearch(
         'DIYH96071T',
-        '5cbf6cc04fa6c97739534d54f734e96f'
+        '0477ac0d60376b558f7713b50d9b1ae6'
       ),
       initialUiState: {
         ['chat-rtnsvc']: {
