@@ -2,7 +2,7 @@
   <navbar />
   <ClientOnly>
     <ais-instant-search
-      index-name="im-beta-easemob"
+      index-name="chat-rtnsvc"
       :search-client="searchClient"
       :initial-ui-state="initialUiState"
     >
@@ -77,11 +77,11 @@ export default {
   data() {
     return {
       searchClient: algoliasearch(
-        '5K8UTB3JVE',
-        'df9e938d06f6531ce8dd8de71f907f0d'
+        'DIYH96071T',
+        '0477ac0d60376b558f7713b50d9b1ae6'
       ),
       initialUiState: {
-        ['im-beta-easemob']: {
+        ['chat-rtnsvc']: {
           query: useRoute().query.query || '',
           refinementList: {
             type: ['content']
