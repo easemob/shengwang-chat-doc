@@ -142,15 +142,15 @@
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/callbacks/storage/info    
+GET https://{host}/app-id/{app_id}/callbacks/storage/info    
 ```
 
 ### 路径参数
 
 | 参数       | 类型   | 是否必需 | 描述       |
 | :--------- | :----- | :------- | :--------------------- |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见[获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见[获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
+| `host`     | String | 是       | 即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `app_id`     | String | 是       | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
 
 ### 请求 header
 
@@ -166,12 +166,9 @@ GET https://{host}/{org_name}/{app_name}/callbacks/storage/info
 | :---------------- | :----- | :------------------ |
 | `path`            | string | 请求路径。              |
 | `uri`             | string | 请求路径的 URI。                                                               |
-| `timestamp`       | long   | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。                         |
-| `organization`    | string | 你在环信 IM 管理后台注册的组织唯一标识。                                       |
-| `application`     | string | 你在环信 IM 管理后台注册的 App 唯一标识。                                      |
+| `timestamp`       | long   | 声网服务器接收到此消息的 Unix 时间戳，单位为毫秒。                         |
 | `action`          | string | 请求方法。   |
 | `duration`        | long   | 请求耗时，单位为毫秒。                                                         |
-| `applicationName` | string | 你在环信 IM 管理后台注册的 App 名称。                                          |
 | `data`            | object | 响应数据内容。包括以下三个参数：`date`、`size` 和 `retry`。                    |
 | - `date`            | String | 当前的 date key，即每 10 分钟内的消息和事件。key 为 10 分钟的起点。              |
 | - `size`            | Int    | 该 date key 内的消息数量。                                                               |
@@ -184,7 +181,7 @@ GET https://{host}/{org_name}/{app_name}/callbacks/storage/info
 #### 请求示例
 
 ```shell
-curl -X GET 'https://a1.easemob.com/easemob-demo/easeim/callbacks/storage/info' \
+curl -X GET 'https://XXXX/app-id/XXXX/callbacks/storage/info' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
@@ -193,10 +190,8 @@ curl -X GET 'https://a1.easemob.com/easemob-demo/easeim/callbacks/storage/info' 
 ```json
 {
   "path": "/callbacks",
-  "uri": "https://XXXX/XXXX/XXXX/callbacks",
+  "uri": "https://XXXX/XXXX/XXXX/callbacks/storage/info",
   "timestamp": 1631193031254,
-  "organization": "XXXX",
-  "application": "8dfb1641-XXXX-XXXX-bbe9-d8d45a3be39f",
   "action": "post",
   "data": [
     {
@@ -210,8 +205,7 @@ curl -X GET 'https://a1.easemob.com/easemob-demo/easeim/callbacks/storage/info' 
       "retry": 1
     }
   ],
-  "duration": 153,
-  "applicationName": "XXXX"
+  "duration": 153
 }
 ```
 
@@ -222,15 +216,15 @@ curl -X GET 'https://a1.easemob.com/easemob-demo/easeim/callbacks/storage/info' 
 ### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/callbacks/storage/retry  
+POST https://{host}/app-id/{app_id}/callbacks/storage/retry  
 ```
 
 #### 路径参数
 
 | 参数       | 类型   | 是否必需 | 描述           |
 | :--------- | :----- | :------- | :---------------------------- |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见[获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见[获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
+| `host`     | String | 是       | 即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `app_id`     | String | 是       | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
 
 #### 请求 header
 
@@ -271,7 +265,7 @@ POST https://{host}/{org_name}/{app_name}/callbacks/storage/retry
 #### 请求示例
 
 ```shell
-curl -X POST 'https://XXXX/XXXX/XXXX/callback/storage/retry' \
+curl -X POST 'https://XXXX/app-id/XXXX/callback/storage/retry' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
 --data-raw '{
@@ -286,7 +280,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/callback/storage/retry' \
 ```json
 {
   "path": "/callbacks",
-  "uri": "https://XXXX/XXXX/XXXX/callbacks",
+  "uri": "https://XXXX/XXXX/XXXX/callback/storage/retry",
   "timestamp": 1631194031721,
   "organization": "XXXX",
   "application": "8dfb1641-XXXX-XXXX-bbe9-d8d45a3be39f",
