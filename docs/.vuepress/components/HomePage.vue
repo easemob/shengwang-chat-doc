@@ -29,7 +29,7 @@
                     <div
                       v-else
                       class="card"
-                      style="visibility: hidden; height: 0"
+                      style="visibility: hidden; height: 0; padding: 0; border: none;"
                     ></div>
                   </template>
                 </div>
