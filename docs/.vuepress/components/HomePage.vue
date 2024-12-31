@@ -29,14 +29,19 @@
                     <div
                       v-else
                       class="card"
-                      style="visibility: hidden; height: 0; padding: 0; border: none;"
+                      style="
+                        visibility: hidden;
+                        height: 0;
+                        padding: 0;
+                        border: none;
+                      "
                     ></div>
                   </template>
                 </div>
               </template>
             </section>
 
-            <section v-for="p in projects" :key="p.title">
+            <!-- <section v-for="p in projects" :key="p.title">
               <h2 class="section-title">{{ p.title }}</h2>
               <p class="section-sub-title-desc">
                 {{ p.desc }}
@@ -55,7 +60,7 @@
                   ></div>
                 </template>
               </div>
-            </section>
+            </section> -->
 
             <section>
               <h2 class="section-title">资源下载</h2>
@@ -389,7 +394,7 @@ const activeTab = ref(0)
   font-size: 14px;
   white-space: nowrap;
   min-width: 80px;
-  padding: 15px  0;
+  padding: 15px 0;
 }
 
 .table th:nth-child(5),
