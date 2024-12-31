@@ -111,6 +111,7 @@ body {
   margin: 75px auto 20px;
   display: flex;
   font-family: sans-serif;
+  flex-direction: column;
   padding: 1em;
 }
 
@@ -119,11 +120,19 @@ body {
 }
 
 .searchLeft {
-  flex: 3;
+  margin-bottom: 10px;
 }
 
 .searchRight {
   flex: 7;
+}
+
+.ais-RefinementList-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.ais-RefinementList-item {
+  margin: 3px;
 }
 
 .stateContainer {
