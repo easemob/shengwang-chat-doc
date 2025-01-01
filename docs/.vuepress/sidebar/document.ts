@@ -11,6 +11,7 @@ const documentSidebar = [
     text: "产品介绍",
     collapsible: true,
     children: [
+      { text: '小程序全平台解决方案', link: 'overview.html', only: ['applet']},
       { text: '发版说明', link: 'releasenote.html'},
       { text: "特性介绍",
         collapsible: true,
@@ -203,7 +204,7 @@ const documentSidebar = [
     ],
     except: ['applet','server-side','electron','linux']
   },
-  { text: 'API 参考', link: 'api_reference_overview.html' },
+  { text: 'API 参考', link: 'api_reference_overview.html', except: ['applet', 'server-side', 'electron', 'linux'] },
   {
     text: '错误排查',
     collapsible: true,
@@ -238,15 +239,8 @@ const documentSidebar = [
   //  only: ['android', 'ios']
   //},
   {
-  text: '产品介绍',
-   children: [
-     { text: '环信小程序全平台解决方案', link: 'overview.html' },
-     { text: '小程序 SDK 更新日志', link: 'releasenote.html' },
-   ],
-   only: ['applet']
-  },
-  {
    text: '用户指南',
+   collapsible: true,
   children: [
      {
        text: '集成介绍',
@@ -350,8 +344,10 @@ const documentSidebar = [
    ],
    only: ['applet']
   },
+  { text: 'API 参考', link: 'api_reference_overview.html', only: ['applet'] },
   {
    text: '错误排查',
+   collapsible: true,
    children: [
      { text: '错误码', link: 'error.html' },
      { text: '日志', link: 'log.html' },
@@ -359,7 +355,7 @@ const documentSidebar = [
    only: ['applet']
   },
   {
-   text: '其他帮助',
+   text: '常见问题',
    children: [
      { text: 'Uniapp 生成原生 Android、iOS 应用', link: 'uniappnativeapp.html' },
      { text: '小程序模板使用指南', link: 'uniappuikit.html' },
@@ -367,6 +363,13 @@ const documentSidebar = [
    ],
    only: ['applet']
   },
+  { text: '合规指南', 
+    collapsible: true,
+    children: [
+      { text: '合规使用说明', link: 'security.html' },
+    ],
+    only: ['applet']
+  }, 
     {
     text: 'RESTful API',
     collapsible: true,
