@@ -120,6 +120,10 @@ const options = [
       {
         value: 'unity',
         label: 'Unity',
+      },
+      {
+        value: 'applet',
+        label: '小程序',
       }
     ],
   },
