@@ -7,23 +7,60 @@
 - 在你的应用服务器端及时保存聊天历史记录或者离线消息。
 
 :::tip
-1. 如果你对聊天消息没有时效性需求，可以直接通过免费的[聊天记录文件拉取 REST API](message_historical.html#历史消息记录的内容) 获取聊天记录，无需使用发送后回调。
-2. 如果 app 开通了反垃圾/敏感词过滤，被识别的消息会在服务器被拦截并禁止发送，将不会回调。
+ 如果你对聊天消息没有时效性需求，可以直接通过免费的[聊天记录文件拉取 RESTful API](message_historical.html#历史消息记录的内容) 获取聊天记录，无需使用发送后回调。
 :::
 
 ![](/images/server-side/im-callback1.png)
 
 ## 实现步骤
 
-1. 开通发送后回调服务：在[环信即时通讯云控制台](https://console.easemob.com/user/login)[开通回调服务](/product/enable_and_configure_IM.html#开通消息回调)。
-2. 配置发送后回调规则：详见[规则配置说明](/product/enable_and_configure_IM.html#配置回调规则)。
-3. 发送消息或进行群组、聊天室或联系人相关操作后，环信服务器向你的应用服务器发送回调请求。
+1. [开通回调服务](callback.overview.html#开通回调服务)。
+2. [配置回调规则](#回调规则)。
+3. 发送消息或进行群组、聊天室或联系人相关操作后，声网服务器向你的应用服务器发送回调请求。
 
 ## 发送后回调规则
 
-要使用发送后回调，你需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)配置回调规则，详见[规则配置说明](/product/enable_and_configure_IM.html#配置回调规则)。
+开通发送前回调服务后，你需要在[声网控制台](https://console.shengwang.cn/overview)配置回调规则才能使用该服务。
 
-对于同一个 app 可以针对聊天消息、离线消息和通过 REST API 发送的消息配置不同的规则。如果 app 同时需要聊天消息和离线消息两种消息，建议区分回调地址。不过，规则也可以将这两种消息同时回调至一个指定服务器地址，在接收到消息后，可以对 `eventType` 判断，区分消息类型。
+1. 登录[声网控制台](https://console.shengwang.cn/overview)。
+
+2. 在左上角下拉框中选择想要开通消息回调服务的项目，然后点击左侧导航栏的**全部产品**，点击**基础能力**分组下的**即时通讯 IM**，进入**功能配置**标签页。
+
+3. 在**消息回调**页签中，点击**添加回调地址**按钮。
+
+4. 在弹出的对话框中的**发送后回调**页签中，配置发送后回调相关信息，点击 **保存** 按钮，完成回调配置。
+
+| 参数<div style="width: 80px;"></div> | 是否必填 | 内容       |
+| :--------------------- | :------- | :--------------- |
+| 规则名称 | 是 | 唯一的规则名称，只支持字母、数字和下划线，不支持中文字符，且长度不超过 32 字符。 |
+| 回调地址 | 是 |声网服务器会将消息推送到指定的 URL 地址，支持针对不同类型的消息配置不同的 HTTP 和 HTTPS 回调地址。   |
+| 启用状态 | 是 |是否启用该规则：<br/> - 启用：立即生效； <br/> - 关闭：暂不生效。|
+| 回调类型 | 是 |回调类型。你可以选择对各种类型的单聊、群聊、和聊天室消息以及各种事件进行回调，详见[回调事件](/document/server-side/callback_message_send.html)。<Container type="tip" title="提示">对于表情回复 Reaction 和子区 Thread，如要获取回调事件，无需单独配置，只需选择对应的消息类型即可。例如，如果需要单聊文本消息的 Reaction，你需要选中 **单聊消息 > 文本消息**，服务器发送回调事件时即会返回 Reaction 信息。</Container>|//TODO：确认产品经理，没有看到群组、聊天室的各种事件，而且，有敏感词监测
+| 消息类型 | 是 |需要回调的类型：<br/> - **聊天消息**：发送成功的消息，包括通过客户端和 REST API 发送的消息。这些消息与通过 REST 导出的聊天记录查询到的消息一致。例如，用户 u1 向用户 u2 发送消息，则会产生一条聊天消息，与接收方是否在线无关。收到的消息中 `from` 为 u1，`to` 为 u2。用户 u1 在群组 g1 中发送消息，则会产生一条聊天消息，收到的消息中 `from` 为 u1，`to` 为 g1，且返回值包含 `group_id` 字段。<br/> - **离线消息**：消息发送时接收方为离线的消息。例如：单聊中发送消息，若对端用户不在线，则会产生一条离线消息；在群聊中发送消息，若有几个群成员不在线，则会产生几条离线消息，这些离线消息的 `to` 参数为接收消息用户的 ID，并不是群组 ID。App 可以通过推送服务对这些消息进行个性化推送。<br/>对于同一个 app 可针对聊天消息、离线消息和通过 RESTful API 发送的消息配置不同的规则。如果 app 同时需要聊天消息和离线消息两种消息，建议区分回调地址。不过，规则也可以将这两种消息同时回调至一个指定服务器地址，在接收到消息后，可以对 `eventType` 判断，区分消息类型。|
+| REST 消息是否需要 | 是 | 通过 REST API 发送的消息是否需要回调：<br/> - **是**：需要；<br/> - **否**：不需要。 |
+
+// TODO：确认产品经理，高级筛选没有？
+| From ID  | 否 |消息发送方或操作者的用户 ID。每行输入一个用户 ID，一次最多输入 50 条。设置该参数后，声网服务器只针对该用户发送的消息及执行的操作（例如好友、群组或聊天室相关操作）进行回调。若不指定该参数，规则对发送方或操作者不限制。 |
+| To ID | 否 | 单聊的消息或事件接收方的用户 ID。每行输入一个用户 ID，一次最多输入 50 条。若不指定该参数，规则对接收方不限制。|
+| 群组/聊天室 ID | 否 | 群组或聊天室 ID。每行输入一个群组 ID 或聊天室 ID，一次最多输入 50 条。设置该参数后，声网服务器只针对该群组中的消息或事件进行回调。若不指定该参数，规则对群组和聊天室不限制。|
+| 扩展字段中的 Key | 否 | 消息扩展字段中的属性 key。每行输入一个 key，一次最多输入 50 条。设置该参数后，只针对包含该属性 Key 的消息进行回调。若不指定该参数，规则对消息扩展字段不限制。| 
+
+其中，**From ID**、**To ID**、**群组/聊天室 ID** 和**扩展字段中的 Key** 为配置发送后回调规则时需指定的高级筛选条件，配置示例如下：
+
+- 仅对单聊的回调：仅设置 **From ID** 和 **To ID**。指定的发送方向接收方发单聊消息或对该好友进行操作（如删除好友）时收到回调消息。例如，**From ID** 设置为 test 1，**To ID** 设置为 test 2，test 1 向 test 2 发单聊消息时收到回调。
+
+- 仅对群组或聊天室的回调：仅设置**群组/聊天室 ID** 参数。这种情况下，只有在指定的群组或聊天室中发送消息或进行操作时收到回调。例如，**群组/聊天室 ID** 设置为群组 ID 228978，则仅在该群组中发送消息时收到回调。
+
+- 仅对群聊中某个用户的回调：仅设置 **From ID** 和 **群组/聊天室 ID**。这种情况下，只有群组或聊天室中的指定用户发送消息或执行操作时收到回调。例如，**From ID** 设置为 test 1，**群组/聊天室 ID** 设置为群组 ID 228978，仅 test 1 用户在群组中发送消息时收到回调。
+
+:::tip
+
+若 **From ID**、 **To ID** 和**群组/聊天室 ID** 同时设置，发送方向接收方发送单聊、群聊消息时不会收到回调。
+
+:::
+
+
+![img](/images/callback/callback_post_sending.png)
 
 ## 发送后回调延时
 
@@ -31,19 +68,19 @@
 
 ## 发送后回调重试
 
-发送后回调重试，当环信服务器执行发出回调后，响应状态码非 200，则认为回调失败，然后立即重试。若再次失败，再记录一次失败。针对一条回调仅重试一次，重试失败后即丢弃。若开通了[补发回调存储信息功能](#补发回调存储信息)，则将消息放入异常存储中。
+发送后回调重试，当声网服务器执行发出回调后，响应状态码非 200，则认为回调失败，然后立即重试。若再次失败，再记录一次失败。针对一条回调仅重试一次，重试失败后即丢弃。若开通了[补发回调存储信息功能](#补发回调存储信息)，则将消息放入异常存储中。
 
 若 30 秒内累计 90 次失败，会封禁该 app 的回调规则。封禁规则为，24 小时内连续封禁计数最大为 5（若封禁次数超过 5 次，仍计为 5），首次封禁默认 5 分钟，后续封禁时间为封禁次数 * 5 分钟，即第一次封禁 5 分钟，第二次封禁 10 分钟，第三次封禁 15 分钟，第四次封禁 20 分钟，第五次封禁 25 分钟，后续封禁时间与第 5 次保持一致为 25 分钟。重试失败以及封禁期间的回调不会自动补录，可以下载历史消息记录自行补充。
 
 :::tip
-若有特殊需求不能丢失回调消息的情况下，请联系环信商务经理开通回调异常缓存功能，并使用[查询回调异常缓存](#查询回调存储详情)和[补发回调储存信息](#补发回调存储信息) 接口。
+若有特殊需求不能丢失回调消息的情况下，请联系声网商务经理开通回调异常缓存功能，并使用[查询回调异常缓存](#查询回调存储详情)和[补发回调储存信息](#补发回调存储信息) 接口。
 :::
 
 ## 回调示例
 
-消息发送或相关操作发送时，环信服务器会向你的应用服务器发送 HTTP/HTTPS POST 请求，正文部分为 JSON 格式的字符串，字符集为 UTF-8。
+消息发送或相关操作发送时，声网服务器会向你的应用服务器发送 HTTP/HTTPS POST 请求，正文部分为 JSON 格式的字符串，字符集为 UTF-8。
 
-回调时，环信服务器会对发送的正文进行 MD5 签名，使用的 MD5 为 `org.apache.commons.codec.digest.DigestUtils#md5Hex`。
+回调时，声网服务器会对发送的正文进行 MD5 签名，使用的 MD5 为 `org.apache.commons.codec.digest.DigestUtils#md5Hex`。
 
 ### 请求示例
 
@@ -69,7 +106,7 @@
 | :---------------- | :------------------------------ |
 | `callId`          | callId 为 `{appkey}\_{uuid}` 其中 UUID 为随机生成，作为每条回调的唯一标识。 |
 | `eventType`       | - `chat` 聊天消息；<br/> - `chat_offline` 离线消息。  |
-| `timestamp`       | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。  |
+| `timestamp`       | 声网服务器接收到此消息的 Unix 时间戳，单位为毫秒。  |
 | `chat_type`       | - `chat` 单聊回调；<br/> - `groupchat` 群聊回调包含了群组和聊天室的消息回调，默认全选。 |
 | `group_id`        | 回调消息所在的群组，群聊时才有此参数。       |
 | `from`            | 消息的发送方。         |
@@ -81,9 +118,9 @@
 
 ### 回调响应
 
-环信 IM 服务器不会验证响应的内容，只要应用服务器返回的 HTTP 状态码为 200，即视为消息回调成功。
+声网服务器不会验证响应的内容，只要应用服务器返回的 HTTP 状态码为 200，即视为消息回调成功。
 
-应用服务器收到回调消息后，向环信服务器发送的响应内容不能超过 1,000 个字符长度。如果连续发送超长的响应内容（30 秒内累计 90 次），会导致[回调规则封禁](#发送后回调重试)。
+应用服务器收到回调消息后，向声网服务器发送的响应内容不能超过 1,000 个字符长度。如果连续发送超长的响应内容（30 秒内累计 90 次），会导致[回调规则封禁](#发送后回调重试)。
 
 ## 查询回调存储详情
 
@@ -96,7 +133,7 @@
 
 ### 认证方式
 
-环信即时通讯 RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
+声网即时通讯 RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
 `Authorization：Bearer YourAppToken`
 
@@ -105,15 +142,15 @@
 ### HTTP 请求
 
 ```http
-GET https://{host}/{org_name}/{app_name}/callbacks/storage/info    
+GET https://{host}/app-id/{app_id}/callbacks/storage/info    
 ```
 
 ### 路径参数
 
 | 参数       | 类型   | 是否必需 | 描述       |
 | :--------- | :----- | :------- | :--------------------- |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见[获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见[获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
+| `host`     | String | 是       | 即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `app_id`     | String | 是       | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
 
 ### 请求 header
 
@@ -129,12 +166,9 @@ GET https://{host}/{org_name}/{app_name}/callbacks/storage/info
 | :---------------- | :----- | :------------------ |
 | `path`            | string | 请求路径。              |
 | `uri`             | string | 请求路径的 URI。                                                               |
-| `timestamp`       | long   | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。                         |
-| `organization`    | string | 你在环信 IM 管理后台注册的组织唯一标识。                                       |
-| `application`     | string | 你在环信 IM 管理后台注册的 App 唯一标识。                                      |
+| `timestamp`       | long   | 声网服务器接收到此消息的 Unix 时间戳，单位为毫秒。                         |
 | `action`          | string | 请求方法。   |
 | `duration`        | long   | 请求耗时，单位为毫秒。                                                         |
-| `applicationName` | string | 你在环信 IM 管理后台注册的 App 名称。                                          |
 | `data`            | object | 响应数据内容。包括以下三个参数：`date`、`size` 和 `retry`。                    |
 | - `date`            | String | 当前的 date key，即每 10 分钟内的消息和事件。key 为 10 分钟的起点。              |
 | - `size`            | Int    | 该 date key 内的消息数量。                                                               |
@@ -147,7 +181,7 @@ GET https://{host}/{org_name}/{app_name}/callbacks/storage/info
 #### 请求示例
 
 ```shell
-curl -X GET 'https://a1.easemob.com/easemob-demo/easeim/callbacks/storage/info' \
+curl -X GET 'https://XXXX/app-id/XXXX/callbacks/storage/info' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
 
@@ -156,10 +190,8 @@ curl -X GET 'https://a1.easemob.com/easemob-demo/easeim/callbacks/storage/info' 
 ```json
 {
   "path": "/callbacks",
-  "uri": "https://XXXX/XXXX/XXXX/callbacks",
+  "uri": "https://XXXX/XXXX/XXXX/callbacks/storage/info",
   "timestamp": 1631193031254,
-  "organization": "XXXX",
-  "application": "8dfb1641-XXXX-XXXX-bbe9-d8d45a3be39f",
   "action": "post",
   "data": [
     {
@@ -173,8 +205,7 @@ curl -X GET 'https://a1.easemob.com/easemob-demo/easeim/callbacks/storage/info' 
       "retry": 1
     }
   ],
-  "duration": 153,
-  "applicationName": "XXXX"
+  "duration": 153
 }
 ```
 
@@ -185,15 +216,15 @@ curl -X GET 'https://a1.easemob.com/easemob-demo/easeim/callbacks/storage/info' 
 ### HTTP 请求
 
 ```http
-POST https://{host}/{org_name}/{app_name}/callbacks/storage/retry  
+POST https://{host}/app-id/{app_id}/callbacks/storage/retry  
 ```
 
 #### 路径参数
 
 | 参数       | 类型   | 是否必需 | 描述           |
 | :--------- | :----- | :------- | :---------------------------- |
-| `org_name` | String | 是       | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识。详见[获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
-| `app_name` | String | 是       | 你在环信即时通讯云控制台创建应用时填入的应用名称。详见[获取环信即时通讯 IM 的信息](enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。 |
+| `host`     | String | 是       | 即时通讯 IM 分配的用于访问 RESTful API 的域名。 | 
+| `app_id`     | String | 是       | 声网为每个项目自动分配的 App ID，作为项目唯一标识。 | 
 
 #### 请求 header
 
@@ -234,7 +265,7 @@ POST https://{host}/{org_name}/{app_name}/callbacks/storage/retry
 #### 请求示例
 
 ```shell
-curl -X POST 'https://XXXX/XXXX/XXXX/callback/storage/retry' \
+curl -X POST 'https://XXXX/app-id/XXXX/callback/storage/retry' \
 -H 'Authorization: Bearer <YourAppToken>' \
 -H 'Content-Type: application/json' \
 --data-raw '{
@@ -249,7 +280,7 @@ curl -X POST 'https://XXXX/XXXX/XXXX/callback/storage/retry' \
 ```json
 {
   "path": "/callbacks",
-  "uri": "https://XXXX/XXXX/XXXX/callbacks",
+  "uri": "https://XXXX/XXXX/XXXX/callback/storage/retry",
   "timestamp": 1631194031721,
   "organization": "XXXX",
   "application": "8dfb1641-XXXX-XXXX-bbe9-d8d45a3be39f",
