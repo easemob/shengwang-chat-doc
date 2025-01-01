@@ -1,3 +1,3 @@
 ---
-title: SDK/REST 集成
+title: SDK/服务端集成
 ---

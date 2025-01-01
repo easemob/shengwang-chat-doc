@@ -73,7 +73,7 @@ export const zhNavbar = navbar([
     ]
   },
   {
-    text: 'SDK/REST 集成',
+    text: 'SDK/服务端集成',
     children: [
       {
         text: '平台',
@@ -123,16 +123,16 @@ export const zhNavbar = navbar([
             icon: '/icon-unity.svg',
             link: '/document/unity/quickstart.html'
           },
-          // {
-          //   text: '小程序',
-          //  icon: '/icon-mini-program.svg',
-          //  link: '/document/applet/overview.html'
-          // },
-          // {
-          //  text: 'uni-app',
-          //  icon: '/icon-uni-app.svg',
-          //  link: '/document/applet/uniapp.html'
-          // },
+          {
+            text: '小程序',
+            icon: '/icon-mini-program.svg',
+            link: '/document/applet/overview.html'
+          },
+          {
+            text: 'uni-app',
+            icon: '/icon-uni-app.svg',
+           link: '/document/applet/uniapp.html'
+          }
         ]
       },
       {
