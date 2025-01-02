@@ -21,21 +21,29 @@
 
 参考以下步骤注册用户：
 
-1. 在**项目管理**页面，点击你要使用的项目的**操作**一栏中的**配置**。
+1. 登录[声网控制台](https://console.shengwang.cn/overview)。
 
-2. 在**服务配置**页面，点击**即时通讯**中的**配置**。
+2. 在左上角下拉框中选择想要开通消息回调服务的项目，然后点击左侧导航栏的**全部产品**，点击**基础能力**分组下的**即时通讯 IM**，进入**运营管理**标签页。
 
-3. 在左侧导航栏，选择**运营管理** > **用户**，点击**创建IM用户**。
+3. 在**用户**页签下，点击**创建IM用户**。
 
-4. 在**创建IM用户**对话框中，填写用户信息并点击**保存**，创建用户。
+4. 在**添加IM用户**对话框中，填写用户信息并点击**保存**，创建用户。
+
+![img](/images/server-side/token_authentication_user_register.png)
 
 #### 生成 Token
 
-在左侧导航栏选择**基本信息 > 应用信息**，在**数据中心**区域的 **Chat User Temp Token** 框中输入用户 ID，点击**生成**生成一个用户权限 Token，可用于调用 SDK 的 API。
+创建用户后，在**用户管理**列表中，你可以点击该用户的**操作**一栏中的**查看Token**。在弹出的**查看IM用户Token**对话框中，查看该用户的 Token 或点击**重新生成**生成新的用户权限 Token。
+
+![img](/images/server-side/token_authentication_user_token_generate.png)
 
 ### 生成 App 权限 Token
 
-在左侧导航栏选择**基本信息 > 应用信息**，点击**数据中心**区域的 **Chat App Temp Token** 对应的 **生成** 生成一个 App 权限 Token，可用于调用 RESTful API。
+1. 在[声网控制台](https://console.shengwang.cn/overview)左上角下拉框中选择想要开通消息回调服务的项目，然后点击左侧导航栏的**全部产品**，点击**基础能力**分组下的**即时通讯 IM**，进入**基础信息**标签页。
+
+2. 在**数据中心**区域，点击 **ChatAppTempToken** 旁边的 **生成**，生成临时 App 权限 Token。
+
+![img](/images/server-side/token_authentication_app_token_generate.png)
 
 为了安全考虑，在生产环境中 Token 由你的 App Server 使用 AgoraTools 生成。本文介绍如何从你的 App Server 中获取 Token 实现用户鉴权。
 
@@ -51,9 +59,9 @@
 
 ## 前提条件
 
-- 有效的[声网账号](https://docs.agora.io/cn/Agora%20Platform/get_appid_token?platform=All%20Platforms#创建声网账号)。
-- 拥有 [App 证书](https://docs.agora.io/cn/Agora%20Platform/get_appid_token?platform=All%20Platforms#获取-App-证书)和已开通即时通讯的[声网项目](https://docs.agora.io/cn/Agora%20Platform/get_appid_token?platform=All%20Platforms#创建声网项目)。详见[开启和配置即时通讯服务](./enable_agora_chat)。
-- 你的声网项目的 App ID、OrgName 和 AppName，详见[开启和配置即时通讯服务](./enable_agora_chat)。
+- 有效的[声网账号](https://docportal.shengwang.cn/cn/Agora%20Platform/get_appid_token?platform=All%20Platforms#创建声网账号)。
+- 拥有 [App 证书](https://docportal.shengwang.cn/cn/Agora%20Platform/get_appid_token?platform=All%20Platforms=All%20Platforms#获取-App-证书)和已开通即时通讯的[声网项目](https://docportal.shengwang.cn/cn/Agora%20Platform/get_appid_token?platform=All%20Platforms#创建声网账号)。
+- 你的声网项目的 App ID，详见[开启和配置即时通讯服务](enable_im.html#4-获取-app-id)。
 - [Node.js 和 npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)。
 
 如果你的网络环境部署了防火墙，为允许你在有网络访问限制的环境中使用即时通讯服务，声网提供防火墙白名单方案。如需使用请[联系技术支持](https://docs.agora.io/cn/Agora%20Platform/ticket?platform=All%20Platforms)，我们的技术服务会提供目标域名及对应的端口。
@@ -209,7 +217,7 @@ public class AgoraChatTokenController {
 
     /**
      * 获取 user 权限 token
-     * @param chatUserId chat 用户 id
+     * @param chatUserId 声网 IM 的用户 ID
      * @return user 权限 token
      */
     @GetMapping("/chat/user/{chatUserId}/token")
@@ -228,22 +236,22 @@ public class AgoraChatTokenController {
     }
 
     /**
-     * 生成 Agora Chat app token
-     * @return Agora Chat app token
+     * 生成声网 IM app 权限 token
+     * @return 声网 IM app 权限 token
      */
     private String getAgoraAppToken() {
         if (!StringUtils.hasText(appid) || !StringUtils.hasText(appcert)) {
             throw new IllegalArgumentException("appid or appcert is not empty");
         }
 
-        // Use agora App Id、App Cert to generate agora app token
+        // 利用声网 App Id、App Cert 生成 app 权限 token
         ChatTokenBuilder2 builder = new ChatTokenBuilder2();
         return builder.buildAppToken(appid, appcert, expirePeriod);
     }
 
     /**
-     * 从缓存中获取 Agora Chat App Token
-     * @return Agora Chat App Token
+     * 从缓存中获取声网 IM 的 app 权限 token
+     * @return 声网 IM app 权限 token
      */
     private String getAgoraChatAppTokenFromCache() {
         try {
@@ -307,9 +315,7 @@ return builder.buildAppToken(appid, appcert, expirePeriod);
    ```shell
    curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H "Authorization: Bearer <YourAgoraAppToken>" -i "https://XXXX/XXXX/users" -d '[
        {
-           "username": "user1",
-           "password": "123",
-           "nickname": "testuser"
+           "username": "user1"
        }
    ]'
    ```
@@ -344,7 +350,7 @@ return builder.buildAppToken(appid, appcert, expirePeriod);
 
 本节以 Web 客户端为例，介绍如何使用用户权限 Token 在客户端进行鉴权。
 
-请联系商务开通自动注册即使通讯 IM 用户的功能，这样可以使用 chatUserId 生成用户权限 Token 后，在登录即时通讯 IM 时，如果 chatUserId 未注册，那么IM 服务会自动使用 chatUserId 进行注册 IM 用户并登录。chatUserId 请符合 IM 用户名的规范。
+请联系商务开通自动注册即时通讯 IM 用户的功能，这样可以使用 chatUserId 生成用户权限 Token 后，在登录即时通讯 IM 时，如果 chatUserId 未注册，那么 IM 服务会自动使用 chatUserId 进行注册 IM 用户并登录。chatUserId 请符合 [IM 用户名的规范](account_system.html#注册单个用户)。
 
 在 App Server 中生成用户权限 Token 的核心代码：
 
@@ -448,7 +454,7 @@ return builder.buildUserToken(appid, appcert, chatUserId, expirePeriod);
 
 6. 实现 App 逻辑。
 
-   复制以下代码到 `index.js` 文件中，将 `<Your App Key>` 替换为你的 [App Key](./enable_agora_chat#获取即时通讯项目信息) 。
+   复制以下代码到 `index.js` 文件中，将 `<Your App Key>` 替换为你的 App Key 。
 
    在下列示例代码中可以看到，就客户端而言，用户权限 Token 和以下代码逻辑有关：
 
@@ -584,4 +590,4 @@ Token 过期后自动重连可确保终端用户在后台运行应用时保持�
 
 ### Token 和 RTC 产品
 
-如果你在使用即时通讯 IM 的同时也正在使用[声网 RTC SDK](https://docs.agora.io/cn/Agora%20Platform/term_agora_rtc_sdk)，即时通讯 IM 建议你升级到 [Access Token 2](./access_token_2)。
+如果你在使用即时通讯 IM 的同时也正在使用[声网 RTC SDK](https://docs.agora.io/cn/Agora%20Platform/term_agora_rtc_sdk)，即时通讯 IM 建议你升级到 Access Token 2。
