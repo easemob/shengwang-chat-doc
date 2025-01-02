@@ -1,4 +1,4 @@
-# 环信即时通讯 RESTful API 概览
+# 即时通讯 RESTful API 概览
 
 <Toc />
 
@@ -22,7 +22,7 @@
 
 ## 前提条件
 
-要调用环信即时通讯 RESTful API，请确保满足以下要求：
+要调用即时通讯 RESTful API，请确保满足以下要求：
 
 - 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置声网即时通讯 IM 服务](enable_im.html)。
 - 已从服务端获取 app token，详见 [使用 App Token 鉴权](token_authentication.html)。
@@ -40,15 +40,19 @@
 
 ## 请求域名
 
-环信不同数据中心的 RESTful API 请求域名 {host}：
+声网不同数据中心的 RESTful API 请求域名 {host}：
 
-应用所在数据中心可以在环信用户管理后台 > 应用列表找到对应的 App Key 点击 **管理** > **即时通讯** > **服务概览** 中查看：
+1. 登录[声网控制台](https://console.shengwang.cn/overview)。
+
+2. 在左上角下拉框中选择想要开通消息回调服务的项目，然后点击左侧导航栏的**全部产品**，点击**基础能力**分组下的**即时通讯 IM**，进入**功能配置**标签页。
+
+你可以在 **基础信息**页面的**访问域名**区域看到 RESTful API 的请求域名，如下图所示：
 
 ![img](/images/applet/service_overview.png)
 
 :::tip
-1. 为满足不同客户的业务需求，环信在多地部署了数据中心。不同数据中心的 REST API 请求域名不同。请根据您所在数据中心选择请求域名。
-2. 国内 VIP 区、客服专区客户请联系商务经理索要 RESTful API 请求地址。
+1. 为满足不同客户的业务需求，声网在多地部署了数据中心。不同数据中心的 REST API 请求域名不同。请根据您所在数据中心选择请求域名。
+2. 国内 VIP 区、客服专区客户请联系商务经理提供 RESTful API 请求地址。
 3. 支持 HTTP 和 HTTPS。
 :::
 
@@ -65,4 +69,4 @@
 
 ## RESTful API 概览
 
-关于各 RESTful API 的方法、接口 URL、简要介绍以及调用频率上限，详见 [Restful API 调用频率限制](limitationapi.html)。
+关于各 RESTful API 的方法、接口 URL、简要介绍以及调用频率上限，详见 [RESTful API 调用频率限制](limitationapi.html)。
