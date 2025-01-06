@@ -11,6 +11,7 @@ import 'element-plus/dist/index.css'
 import 'instantsearch.css/themes/algolia-min.css'
 import InstantSearch from 'vue-instantsearch/vue3/es/index.js'
 import BiliBiliPlayer from './components/BiliBili.vue'
+import "uno.css";
 
 export default defineClientConfig({
   enhance({ app, router, siteData }) {

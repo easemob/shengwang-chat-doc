@@ -6,6 +6,7 @@ import { hopeTheme } from 'vuepress-theme-hope'
 // import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { docsearchPlugin } from '@vuepress/plugin-docsearch'
 import { containerPlugin } from './markdown/plugin'
+import UnoCSS from 'unocss/vite'
 import theme from './theme.js'
 import path from 'node:path'
 
@@ -36,6 +37,7 @@ export default defineUserConfig({
         }
       },
       plugins: [
+        UnoCSS()
         // AutoImport({
         //   resolvers: [ElementPlusResolver({})],
         // }),
