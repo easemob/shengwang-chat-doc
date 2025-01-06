@@ -51,11 +51,11 @@
 
 1. 使用 App 权限的 Token 鉴权的流程，如下图所示：
 
-![img](/images/server-side/token_apptoken_chart.png)
+![](https://web-cdn.agora.io/docs-files/1683353354701)
 
 2. 使用用户权限 Token 鉴权的流程，如下图所示：
 
-![img](/images/server-side/token_usertoken_chart.png)
+![](https://web-cdn.agora.io/docs-files/1683353376076)
 
 ## 前提条件
 
