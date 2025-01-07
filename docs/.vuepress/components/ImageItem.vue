@@ -1,12 +1,16 @@
 <template>
   <div class="image-title">{{ title }}</div>
-  <img :src="imageSrc" :alt="title" />
+  <img :no-view="noView ? '' : null" :src="imageSrc" :alt="title" :style="style" />
 </template>
 
 <script>
 export default {
-  name: 'ImageItem',
+  name: "ImageItem",
   props: {
+    noView: {
+      type: Boolean,
+      default: false
+    },
     src: {
       type: String,
       required: true
@@ -14,19 +18,23 @@ export default {
     title: {
       type: String,
       required: true
+    },
+    style: {
+      type: String,
+      default: ''
     }
   },
   computed: {
     imageSrc() {
-      return this.src.replace('@static', '')
+      return this.src.replace("@static", "");
     },
     methods: {
       getUrl(url) {
-        return new URL(url, import.meta.url).href
+        return new URL(url, import.meta.url).href;
       }
     }
   }
-}
+};
 </script>
 
 <style>
