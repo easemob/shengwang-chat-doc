@@ -11,7 +11,7 @@
     >
       <div class="min-w-0 flex-grow-1 flex-shrink-1">
         <div class="flex items-center">
-          <img :src="icon" width="24" class="flex-shrink-0" alt="link icon" />
+          <img :src="icon" width="24" no-view class="flex-shrink-0" alt="link icon" />
           <div
             class="text-ellipsis ml-8px text-lg font-semibold text-text-title"
           >
