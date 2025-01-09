@@ -5,7 +5,7 @@ heroText: false
 tagline: false
 starter:
   - title: "客户端"
-    desc: "从下面的列表中选择合适你的 SDK 构建即时通讯应用，点击“快速开始”按钮将引导你在30分钟内实现即时通讯消息收发"
+    desc: "从下面的列表中选择合适你的 SDK 构建即时通讯应用，点击“快速开始”按钮将引导你在 30 分钟内实现即时通讯消息收发。"
     platform:
       - icon: /sdk/android.svg
         link: /document/android/quickstart.html
@@ -44,7 +44,7 @@ starter:
         text: Windows  
         desc: "学习使用 Windows SDK 构建即时通讯的 Windows 应用程序。"
   - title: "服务端 API"
-    desc: "从下面的列表中选择合适你的 SDK 构建即时通讯应用，点击“快速开始”按钮将引导你在30分钟内实现即时通讯消息收发"
+    desc: "从下面的列表中选择合适你的 SDK 构建即时通讯应用，点击“快速开始”按钮将引导你在 30 分钟内实现即时通讯消息收发。"
     platform:
       - icon: /sdk/rest.svg
         link: /document/server-side/overview.html

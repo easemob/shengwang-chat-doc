@@ -86,7 +86,7 @@
                     </svg>
                   </div>
                   <div class="tip-content">
-                    <div class="tip-title mb-12px">SDK合规信息公式</div>
+                    <div class="tip-title mb-12px">SDK 合规信息公示</div>
                     <div class="tip-desc">
                       <div class="color-#303A48 mb-12px">
                         <span class="font-600">功能介绍：</span>
@@ -98,15 +98,13 @@
                         <span class="font-600">基本信息：</span>
                       </div>
                       <div class="color-#303A48 font-400 mb-12px">
-                        【SDK 名称】实时消息
-                        SDK；【开发者】上海兆言网络科技有限公司；【版本号】见下列下载选项；【MD5
-                        值】见下列下载选项；
+                        【SDK名称】即时通讯SDK；【开发者】上海兆言网络科技有限公司；
                       </div>
                       <div class="color-#303A48 font-400">
                         【使用说明】
-                        <a href="#"> 《实时消息 SDK 合规使用说明》 </a
+                        <a href="#">《即时通讯 SDK 合规使用说明》</a
                         >；【个人信息处理规则】
-                        <a href="#">《SDK 个人信息处理规则》 </a>
+                        <a href="#">《SDK个人信息处理规则》 </a>
                       </div>
                     </div>
                   </div>
