@@ -19,6 +19,10 @@ starter:
         link: /document/web/quickstart.html
         text: Web
         desc: "学习使用 Web SDK 构建即时通讯的 Web 应用程序。"
+      - icon: /sdk/applet.svg
+        link: /document/applet/wechat.html
+        text: 小程序
+        desc: "学习使用小程序 SDK 构建即时通讯的小程序。"
       - icon: /sdk/harmonyos.svg
         link: /document/harmonyos/quickstart.html
         text: HarmonyOS 

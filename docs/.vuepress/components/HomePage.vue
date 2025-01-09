@@ -24,7 +24,7 @@
                         />
                       </div>
                       <p>{{ p.desc }}</p>
-                      <a :href="p.link" class="btn">快速开始 </a>
+                      <a :href="p.link" class="btn">快速开始 ></a>
                     </div>
                     <div
                       v-else
@@ -88,22 +88,22 @@
                   <div class="tip-content">
                     <div class="tip-title">SDK合规信息公式</div>
                     <div class="tip-desc">
-                      <p>
-                        <strong>功能介绍：</strong>
-                        <span>
+                      <p class="color-#303A48">
+                        <span class="font-600">功能介绍：</span>
+                        <span class="font-400">
                           为开发者提供低延时、高并发、可扩展、高可靠的实时消息及状态同步网络服务。
                         </span>
                       </p>
-                      <p>
-                        <strong>基本信息：</strong>
+                      <p class="color-#303A48">
+                        <span class="font-600">基本信息：</span>
                       </p>
-                      <p>
+                      <p class="color-#303A48 font-400">
                         【SDK 名称】实时消息
                         SDK；【开发者】上海兆言网络科技有限公司；【版本号】见下列下载选项；【MD5
                         值】见下列下载选项；
                       </p>
-                      <p>
-                        【更新日期】见下列下载选项；【使用说明】
+                      <p class="color-#303A48 font-400">
+                        【使用说明】
                         <a href="#"> 《实时消息 SDK 合规使用说明》 </a
                         >；【个人信息处理规则】
                         <a href="#">《SDK 个人信息处理规则》 </a>
@@ -152,9 +152,13 @@
                         <td>{{ item.package }}</td>
                         <td>{{ item.md5 }}</td>
                         <td>{{ item.updateTime }}</td>
-                        <td><a :href="item.downloadLink">点击查看</a></td>
                         <td>
-                          <a href="#">
+                          <a class="color-#2D85E9" :href="item.releaseNote"
+                            >点击查看</a
+                          >
+                        </td>
+                        <td>
+                          <a :href="item.downloadLink">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="24"
@@ -192,9 +196,25 @@
                         <td>{{ item.package }}</td>
                         <td>{{ item.md5 }}</td>
                         <td>{{ item.updateTime }}</td>
-                        <td><a :href="item.downloadLink">点击查看</a></td>
                         <td>
-                          <a href="#">
+                          <a
+                            :class="[
+                              'color-#2D85E9',
+                              { 'opacity-0': !item.releaseNote },
+                              { 'pointer-events-none': !item.releaseNote }
+                            ]"
+                            :href="item.releaseNote"
+                            >点击查看</a
+                          >
+                        </td>
+                        <td>
+                          <a
+                            :href="item.downloadLink"
+                            :class="[
+                              { 'opacity-0': !item.downloadLink },
+                              { 'pointer-events-none': !item.downloadLink }
+                            ]"
+                          >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="24"
@@ -222,56 +242,56 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import HopeHomePage from 'vuepress-theme-hope/components/HomePage.js'
-import HeroSection from './CustomHero.vue'
-import { usePageFrontmatter } from '@vuepress/client'
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import HopeHomePage from "vuepress-theme-hope/components/HomePage.js";
+import HeroSection from "./CustomHero.vue";
+import { usePageFrontmatter } from "@vuepress/client";
 import {
   clientSDKDownloadInfo,
   serverSDKDownloadInfo
-} from '../data/download.js'
-const frontmatter = usePageFrontmatter()
-const router = useRouter()
-const starter = frontmatter.value.starter || []
-const projects = frontmatter.value.projects || []
+} from "../data/download.js";
+const frontmatter = usePageFrontmatter();
+const router = useRouter();
+const starter = frontmatter.value.starter || [];
+const projects = frontmatter.value.projects || [];
 
 const downloadTableColumns = [
   {
-    title: '语言',
+    title: "语言",
     width: 100
   },
   {
-    title: '适用平台',
+    title: "适用平台",
     width: 100
   },
   {
-    title: '最新版本',
+    title: "最新版本",
     width: 80
   },
   {
-    title: '包名',
+    title: "包名",
     width: 110
   },
   {
-    title: 'MD5值',
+    title: "MD5值",
     width: 200
   },
   {
-    title: '更新日期',
+    title: "更新日期",
     width: 120
   },
   {
-    title: '更新日志',
+    title: "更新日志",
     width: 80
   },
   {
-    title: '下载',
+    title: "下载",
     width: 40
   }
-]
+];
 
-const activeTab = ref(0)
+const activeTab = ref(0);
 </script>
 
 <style scoped>
@@ -284,9 +304,9 @@ const activeTab = ref(0)
 
 .main-content {
   align-self: center;
-  margin-top: 16px;
   width: 100%;
   max-width: 1200px;
+  padding: 0 20px;
   position: relative;
 }
 
@@ -299,17 +319,29 @@ const activeTab = ref(0)
 }
 
 .section-title {
-  font-size: 26px;
+  font-size: 36px;
   color: #000;
   margin-bottom: 20px;
   text-align: left;
   border: none;
 }
 
-.section-sub-title {
-  font-size: 20px;
+.section-sub-title-desc {
   color: #000;
+  text-align: justify;
+  font-family: "PingFang SC";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+}
+
+.section-sub-title {
+  font-size: 24px;
+  color: #484644;
   margin-bottom: 20px;
+  font-weight: 600;
+  line-height: 28px;
 }
 
 .card-container {
@@ -325,8 +357,8 @@ const activeTab = ref(0)
 }
 
 .card {
-  background: #fff;
-  border: 1px solid #e0e0e0;
+  background: #f8f8f8;
+  border: 1px solid #f8f8f8;
   border-radius: 8px;
   padding: 20px;
   text-align: center;
@@ -343,21 +375,23 @@ const activeTab = ref(0)
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid #00b3ff;
 }
 
 .card img {
-  width: 50px;
-  height: 50px;
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
 }
 
 .card h3 {
-  font-size: 20px;
+  font-size: 18px;
   color: #333;
 }
 
 .card p {
-  font-size: 14px;
-  color: #666;
+  font-size: 15px;
+  color: #2d2d2d;
   text-align: left;
 }
 
@@ -366,14 +400,15 @@ const activeTab = ref(0)
   margin-top: 15px;
   width: 100%;
   padding: 10px 0;
-  background: #1890ff;
-  color: #fff;
+  background: #d9d9d9;
+  color: #0076e7;
   text-decoration: none;
   border-radius: 20px;
 }
 
 .card .btn:hover {
-  background: #167abc;
+  background: #0076e7;
+  color: #fff;
 }
 
 .table {
@@ -403,22 +438,19 @@ const activeTab = ref(0)
 }
 
 .table td:nth-child(8) svg {
-  color: #1890ff;
+  color: #2d85e9;
   transition: color 0.3s;
 }
 
-.table td:nth-child(8) svg:hover {
-  color: blue;
-  cursor: pointer;
-}
-
 .table th {
-  background: #f5f5f5;
-  color: #333;
+  background: #e6f7ff;
+  color: #283544;
+  border: none;
 }
 
 .table td {
-  color: #555;
+  color: #313c4b;
+  border: none;
 }
 
 .table .btn {
@@ -446,8 +478,8 @@ const activeTab = ref(0)
   align-items: flex-start;
   padding: 16px 18px;
   background: #e6f7ff;
-  border: 1px solid #91d5ff;
-  border-radius: 4px;
+  border: 1px solid #e6f7ff;
+  border-radius: 12px;
   margin-bottom: 24px;
 }
 
@@ -463,10 +495,10 @@ const activeTab = ref(0)
 }
 
 .tip-title {
+  color: #0076e7;
   font-size: 16px;
-  font-weight: 500;
-  color: #262626;
-  margin-bottom: 8px;
+  font-weight: 600;
+  line-height: normal;
 }
 
 .tip-desc {
@@ -485,19 +517,28 @@ const activeTab = ref(0)
 }
 
 .tab-header {
-  width: 130px;
+  width: 180px;
   display: flex;
   justify-content: space-between;
   color: #abadad;
   cursor: pointer;
 }
 
+.table tr:nth-child(odd) {
+  background-color: #fff; /* 浅色 */
+}
+
+.table tr:nth-child(even) {
+  background-color: #f4f4f4; /* 深色 */
+}
+
 .tab-btn {
-  padding: 12px 0;
+  font-size: 20px;
+  padding-bottom: 12px;
 }
 
 .active {
-  color: #1890ff;
-  border-bottom: 2px solid #1890ff;
+  color: #2d85e9;
+  border-bottom: 2px solid #2d85e9;
 }
 </style>
