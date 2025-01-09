@@ -86,28 +86,28 @@
                     </svg>
                   </div>
                   <div class="tip-content">
-                    <div class="tip-title">SDK合规信息公式</div>
+                    <div class="tip-title mb-12px">SDK合规信息公式</div>
                     <div class="tip-desc">
-                      <p class="color-#303A48">
+                      <div class="color-#303A48 mb-12px">
                         <span class="font-600">功能介绍：</span>
                         <span class="font-400">
                           为开发者提供低延时、高并发、可扩展、高可靠的实时消息及状态同步网络服务。
                         </span>
-                      </p>
-                      <p class="color-#303A48">
+                      </div>
+                      <div class="color-#303A48 mb-12px">
                         <span class="font-600">基本信息：</span>
-                      </p>
-                      <p class="color-#303A48 font-400">
+                      </div>
+                      <div class="color-#303A48 font-400 mb-12px">
                         【SDK 名称】实时消息
                         SDK；【开发者】上海兆言网络科技有限公司；【版本号】见下列下载选项；【MD5
                         值】见下列下载选项；
-                      </p>
-                      <p class="color-#303A48 font-400">
+                      </div>
+                      <div class="color-#303A48 font-400">
                         【使用说明】
                         <a href="#"> 《实时消息 SDK 合规使用说明》 </a
                         >；【个人信息处理规则】
                         <a href="#">《SDK 个人信息处理规则》 </a>
-                      </p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -303,11 +303,9 @@ const activeTab = ref(0);
 }
 
 .main-content {
-  box-sizing: border-box;
   align-self: center;
   width: 100%;
   max-width: 1200px;
-  padding: 0 20px;
   position: relative;
 }
 
@@ -360,11 +358,10 @@ const activeTab = ref(0);
 .card {
   background: #f8f8f8;
   border: 1px solid #f8f8f8;
-  border-radius: 8px;
+  border-radius: 20px;
   padding: 20px;
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: all 0.2s;
 }
 
 .card-header {
@@ -375,8 +372,11 @@ const activeTab = ref(0);
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   border: 1px solid #00b3ff;
+  .btn {
+    background: #0076e7;
+    color: #fff;
+  }
 }
 
 .card img {
@@ -391,7 +391,7 @@ const activeTab = ref(0);
 }
 
 .card p {
-  font-size: 15px;
+  font-size: 14px;
   color: #2d2d2d;
   text-align: left;
 }
@@ -407,11 +407,6 @@ const activeTab = ref(0);
   border-radius: 20px;
 }
 
-.card .btn:hover {
-  background: #0076e7;
-  color: #fff;
-}
-
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -420,7 +415,6 @@ const activeTab = ref(0);
   border-radius: 8px;
   overflow-x: auto;
   display: block;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .table th,
@@ -447,6 +441,7 @@ const activeTab = ref(0);
   background: #e6f7ff;
   color: #283544;
   border: none;
+  font-size: 16px;
 }
 
 .table td {
@@ -477,7 +472,7 @@ const activeTab = ref(0);
 .download-tip {
   display: flex;
   align-items: flex-start;
-  padding: 16px 18px;
+  padding: 16px 16px;
   background: #e6f7ff;
   border: 1px solid #e6f7ff;
   border-radius: 12px;
@@ -487,7 +482,7 @@ const activeTab = ref(0);
 .tip-icon {
   color: #1890ff;
   font-size: 18px;
-  margin-right: 14px;
+  margin-right: 12px;
   margin-top: 2px;
 }
 
@@ -536,6 +531,7 @@ const activeTab = ref(0);
 .tab-btn {
   font-size: 20px;
   padding-bottom: 12px;
+  font-weight: 600;
 }
 
 .active {
