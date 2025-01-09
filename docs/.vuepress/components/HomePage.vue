@@ -303,6 +303,7 @@ const activeTab = ref(0);
 }
 
 .main-content {
+  box-sizing: border-box;
   align-self: center;
   width: 100%;
   max-width: 1200px;
@@ -517,7 +518,7 @@ const activeTab = ref(0);
 }
 
 .tab-header {
-  width: 180px;
+  width: 170px;
   display: flex;
   justify-content: space-between;
   color: #abadad;

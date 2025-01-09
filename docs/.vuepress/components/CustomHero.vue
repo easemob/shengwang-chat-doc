@@ -15,7 +15,7 @@
         </p>
         <br />
         <p class="color-black text-justify text-16px font-400">
-          探索下面的综合文档，立即释放 IM 即时通讯的力量
+          探索下面的综合文档，立即释放 IM 即时通讯的力量。
         </p>
       </div>
       <div
