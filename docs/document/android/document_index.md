@@ -52,7 +52,7 @@ RTM 已被 3000+ 客户广泛应用在以下领域，如果你对某个场景感
 <el-row :gutter="32" style="row-gap: 32px;">
   <el-col :xs="24" :md="12" :xl="12">
     <LinkList 
-    icon="https://i.imgur.com/lSh0OxL.jpeg" 
+    icon="/landing-page/quickStart.jpeg" 
     title="首次集成 RTM" 
     :href="[{title:'开通服务', href:'./get-started/enable-service'}, {title:'实现收发消息', href:'./get-started/quick-start'}]"
     >
@@ -62,7 +62,7 @@ RTM 已被 3000+ 客户广泛应用在以下领域，如果你对某个场景感
 
   <el-col :xs="24" :md="12" :xl="12">
     <LinkList
-      icon="https://i.imgur.com/lSh0OxL.jpeg"
+      icon="/landing-page/quickStart.jpeg"
       title="从旧版本升级至 v2"
       :href="[{title:'迁移指南', href:'./overview/migration-guide'}]"
     >
