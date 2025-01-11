@@ -22,8 +22,9 @@
 | 下载文件      |  GET     | /app-id/{app_id}/chatfiles/{file_uuid}       | 100 次/秒/App ID                                                 |
 | * 获取历史消息（聊天记录）文件   |  GET     | /app-id/{app_id}/chatmessages/${time}          | 10 次/分钟/App ID                                               |
 | * 设置指定消息附件的存储方式   |  POST     | /app-id/{app_id}/users/{username}/chatfiles/lifetime          | 100 次/秒/App ID     |
-| * 服务端消息撤回    |    POST  | /app-id/{app_id}/messages/recall        | 100 次/秒/App ID                                                 |
-| 服务端单向删除会话   |    DELETE    | /app-id/{app_id}/users/{userName}/user_channel          | 5 次/分钟/单用户 ID，100 次/秒/App ID                                              |
+| * 撤回单条消息    |    POST  | /app-id/{app_id}/messages/recall        | 100 次/秒/App ID                                                 |
+| * 批量撤回消息    |    POST  | /app-id/{app_id}/messages/batch_recall        | 100 次/秒/App ID                                                 |
+| 单向删除会话   |    DELETE    | /app-id/{app_id}/users/{userName}/user_channel          | 5 次/分钟/单用户 ID，100 次/秒/App ID                                              |
 | 修改文本或自定义消息 | PUT  | /app-id/{app_id}/messages/rewrite/{msg_id} | 100 次/秒/App ID  |
 | 根据消息 ID 单向删除单聊漫游消息  | DELETE    | /app-id/{app_id}/rest/message/roaming/chat/user/{userId}?userId={userId}&msgIdList={msgIdList}    | 100 次/秒/App ID   |
 | 根据消息 ID 单向删除群聊漫游消息  | DELETE    | /app-id/{app_id}/rest/message/roaming/group/user/{userId}?groupId={groupId}&msgIdList={msgIdList}   | 100 次/秒/App ID   |
