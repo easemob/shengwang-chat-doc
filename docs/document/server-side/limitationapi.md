@@ -17,6 +17,7 @@
 | * 发送群聊消息                 | POST   | /app-id/{app_id}/messages/chatgroups           | 对于单个 app，该 REST API 存在以下三个限制：<br/> - 20 条/秒/App ID   <br/> - 20 次/秒 <br/> -  3 个群/次   |
 | * 发送定向消息                 | POST   | /app-id/{app_id}/messages/chatgroups/users           | 100 条/秒/App ID   |
 | * 发送聊天室消息               | POST   | /app-id/{app_id}/messages/chatrooms            | 对于单个 app，该 REST API 存在以下三个限制：<br/> - 100 条/秒  <br/> - 20 次/秒   <br/> -  10 个聊天室/次   |
+| * 向 app 在线用户发送广播消息 | POST | /app-id/{app_id}/messages/users/broadcast | 每分钟限 1 次，每天限 50 次（可联系商务提升该上限）。 |
 | * 发送聊天室广播消息 | POST | /app-id/{app_id}/messages/chatrooms/broadcast | 每分钟最多可发 10 次，而且每天最多可发 100 次广播消息。 |
 | 上传文件  |    POST  | /app-id/{app_id}/chatfiles       | 100 次/秒/App ID                                                 |
 | 下载文件      |  GET     | /app-id/{app_id}/chatfiles/{file_uuid}       | 100 次/秒/App ID                                                 |
