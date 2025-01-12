@@ -314,24 +314,24 @@ curl -L 'https://XXXX/app-id/XXXX/messages/users/broadcast' \
 
 **发送频率**：每分钟最多可发 10 次，而且每天最多可发 100 次广播消息。
 
-### HTTP 请求
+#### HTTP 请求
 
 ```http
 POST https://{host}/app-id/{app_id}/messages/chatrooms/broadcast
 ```
 
-#### 路径参数
+##### 路径参数
 
 参数及说明详见 [公共参数](#公共参数)。
 
-#### 请求 header
+##### 请求 header
 
 | 参数       | 类型   | 是否必需 | 描述          |
 | :-------------- | :----- | :------- | :-------------- |
 | `Content-Type`  | String | 是       | 内容类型。请填 `application/json`。       |
 | `Authorization` | String | 是       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
 
-#### 请求 body
+##### 请求 body
 
 以下为发送文本类型的广播消息的请求 body。
 
@@ -353,9 +353,9 @@ POST https://{host}/app-id/{app_id}/messages/chatrooms/broadcast
 - [发送透传消息](#发送透传消息)
 - [发送自定义消息](#发送自定义消息)
 
-### HTTP 响应
+#### HTTP 响应
 
-#### 响应 body
+##### 响应 body
 
 对于各类型的广播消息来说，响应中包含的各字段相同。
 
@@ -369,9 +369,9 @@ POST https://{host}/app-id/{app_id}/messages/chatrooms/broadcast
 
 如果返回的 HTTP 状态码非 `200`，表示请求失败。你可以参考 [响应状态码](error.html) 了解可能的原因。
 
-### 示例
+#### 示例
 
-#### 请求示例
+##### 请求示例
 
 - 发送文本广播消息
 
@@ -559,7 +559,7 @@ curl -L 'https://XXXX/app-id/XXXX/messages/chatrooms/broadcast' \
 }'
 ```
 
-#### 响应示例
+##### 响应示例
 
 ```json
 {
