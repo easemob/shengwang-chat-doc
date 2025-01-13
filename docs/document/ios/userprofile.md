@@ -2,7 +2,7 @@
 
 <Toc />
 
-环信即时通讯 IM 自 V3.8.1 开始支持用户属性管理功能。
+即时通讯 IM 支持用户属性管理功能。
 
 用户属性指实时消息互动用户的信息，如用户昵称、头像、邮箱、电话、性别、签名、生日等。
 
@@ -16,7 +16,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM iOS SDK 提供一个 `userInfoManager` 类，支持获取、设置及修改用户属性信息，其中包含如下方法：
+即时通讯 IM iOS SDK 提供一个 `userInfoManager` 类，支持获取、设置及修改用户属性信息，其中包含如下方法：
 
 - `updateOwnUserInfo` 设置和修改当前用户自己的属性信息；
 - `fetchUserInfoById` 获取指定用户的所有用户属性信息。
@@ -25,8 +25,8 @@
 
 设置用户属性前，请确保满足以下条件：
 
-- 完成 SDK 初始化，详见 [快速开始](quickstart.html)；
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 完成 SDK 初始化，详见 [初始化文档](intialization.html)；
+- 了解即时通讯 IM 的使用限制，详见 [使用限制](limitation.html)。
 
 ## 实现方法
 
@@ -36,14 +36,14 @@
 
 ### 设置当前用户的属性
 
-环信即时通讯 IM 自 V3.8.1 开始支持设置当前用户的属性。
+即时通讯 IM 开始支持设置当前用户的属性。
 
 参考如下示例代码，在你的项目中当前用户设置自己的所有属性或者仅设置某一项属性。
 
 ```objectivec
 // 设置用户所有属性。
-EMUserInfo *userInfo = [[EMUserInfo alloc] init];
-userInfo.userId = EMClient.sharedClient.currentUsername;
+AgoraChatUserInfo *userInfo = [[AgoraChatUserInfo alloc] init];
+userInfo.userId = AgoraChatClient.sharedClient.currentUsername;
 userInfo.nickName = @"EM";
 userInfo.avatarUrl = @"https://www.EM.io";
 userInfo.birth = @"2000.10.10";
@@ -52,7 +52,7 @@ userInfo.phone = @"12333333333";
 userInfo.mail = @"123456@qq.com";
 userInfo.gender = 1;
 // 异步方法
-[EMClient.sharedClient.userInfoManager updateOwnUserInfo:userInfo completion:^(EMUserInfo *aUserInfo, EMError *aError) {
+[AgoraChatClient.sharedClient.userInfoManager updateOwnUserInfo:userInfo completion:^(AgoraChatUserInfo *aUserInfo, AgoraChatError *aError) {
 
 }];
 ```
@@ -61,7 +61,7 @@ userInfo.gender = 1;
 // 以修改用户头像为例，演示如何修改指定用户属性。
 NSString *url = @"https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/IMDemo/avatar/Image1.png";
 
-[[EMClient sharedClient].userInfoManager updateOwnUserInfo:url withType:EMUserInfoTypeAvatarURL completion:^(EMUserInfo *aUserInfo, EMError *aError) {
+[[AgoraChatClient sharedClient].userInfoManager updateOwnUserInfo:url withType:AgoraChatUserInfoTypeAvatarURL completion:^(AgoraChatUserInfo *aUserInfo, AgoraChatError *aError) {
     if (aUserInfo && completion) {
         completion(aUserInfo);
     }
@@ -83,25 +83,23 @@ NSString *url = @"https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/IMD
 
 ### 获取用户属性
 
-环信即时通讯 IM 自 V3.8.1 开始支持设置获取用户的属性。
-
-用户可以获取指定一个或多个用户的全部用户属性。
+即时通讯 IM 支持设置获取用户的属性。用户可以获取指定一个或多个用户的全部用户属性。
 
 示例代码如下：
 
 ```objectivec
 // 获取用户所有属性，一次调用用户 ID 数量不能超过 100。
 // 异步方法
-[[EMClient sharedClient].userInfoManager fetchUserInfoById:@[EMClient.sharedClient.currentUsername] 		completion:^(NSDictionary *aUserDatas, EMError *aError) {
+[[AgoraChatClient sharedClient].userInfoManager fetchUserInfoById:@[AgoraChatClient.sharedClient.currentUsername] 		completion:^(NSDictionary *aUserDatas, AgoraChatError *aError) {
 }];
 ```
 
 ```objectivec
 // 获取指定用户的指定用户属性。
 NSString *userIds = @[@"user1",@"user2"];
-NSArray<NSNumber *> *userInfoTypes = @[@(EMUserInfoTypeAvatarURL),@(EMUserInfoTypePhone),@(EMUserInfoTypeMail)];
+NSArray<NSNumber *> *userInfoTypes = @[@(AgoraChatUserInfoTypeAvatarURL),@(AgoraChatUserInfoTypePhone),@(AgoraChatUserInfoTypeMail)];
 // 异步方法
-[[EMClient sharedClient].userInfoManager fetchUserInfoById:userIds type:userInfoTypes completion:^(NSDictionary *aUserDatas, EMError *aError) {
+[[AgoraChatClient sharedClient].userInfoManager fetchUserInfoById:userIds type:userInfoTypes completion:^(NSDictionary *aUserDatas, AgoraChatError *aError) {
 
 }];
 ```
@@ -122,30 +120,25 @@ NSArray<NSNumber *> *userInfoTypes = @[@(EMUserInfoTypeAvatarURL),@(EMUserInfoTy
 如果你的场景中涉及名片消息，你也可以使用自定义属性功能，并参考如下示例代码实现：
 
 ```objectivec
-// 设置自定义消息的 `event` 为 `userCard` ，并在 `ext` 中添加展示名片所需要的用户 ID、昵称和头像等字段。
-EMCustomMessageBody *body = [[EMCustomMessageBody alloc] init];
+// 设置自定义消息的 `event` 为 `userCard`，并在 `ext` 中添加展示名片所需要的用户 ID、昵称和头像等字段。
+AgoraChatCustomMessageBody *body = [[AgoraChatCustomMessageBody alloc] init];
 body.event = @"userCard";
-NSDictionary *messageExt = @{@"userId":EMClient.sharedClient.currentUsername,
+NSDictionary *messageExt = @{@"userId":AgoraChatClient.sharedClient.currentUsername,
                            @"nickname":@"nickname",
                            @"avatar":@"https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/IMDemo/avatar/Image1.png"
                         };
 body.ext = messageExt;
 // 异步方法
-EMChatMessage *message = [[EMChatMessage alloc] initWithConversationID:@"conversationID"
+AgoraChatMessage *message = [[AgoraChatMessage alloc] initWithConversationID:@"conversationID"
                                                 from:@"sender"
                                                 to:@"receiver"
                                                 body:body
                                                 ext:nil];
 // 发送消息
-[[EMClient sharedClient].chatManager sendMessage:message progress:nil completion:^(EMChatMessage *message, EMError *error) {}];
+[[AgoraChatClient sharedClient].chatManager sendMessage:message progress:nil completion:^(AgoraChatMessage *message, AgoraChatError *error) {}];
 ```
 
 如果需要在名片中展示更丰富的信息，可以在 `ext` 中增加更多字段。
-
-可参考 [示例项目](https://www.easemob.com/download/im) 中的以下类：
-
-- `EMCustomMessageBody`
-- `EMChatMessage`
 
 ### 常见问题
 
@@ -161,4 +154,4 @@ A：你可以调用[客户端](#设置当前用户的属性) 或[RESTful API](/d
 
 Q: 调用设置或获取用户属性的接口时，上报错误码 4 的原因是什么？
 
-A：设置和获取用户属性的接口，包括设置当前用户的属性、获取单个或多个用户的用户属性和获取指定用户的指定用户属性，超过调用频率限制时，会上报错误码 4 `EMErrorExceedServiceLimit`。
+A：设置和获取用户属性的接口，包括设置当前用户的属性、获取单个或多个用户的用户属性和获取指定用户的指定用户属性，超过调用频率限制时，会上报错误码 4 `AgoraChatErrorExceedServiceLimit`。

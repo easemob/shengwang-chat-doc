@@ -10,15 +10,15 @@
 
 ## 前提条件
 
-有效的环信即时通讯 IM 开发者账号和 App key，详见[环信即时通讯云控制台的相关文档](/product/enable_and_configure_IM.html#创建应用)。
+有效的环信即时通讯 IM 开发者账号和 AppId，详见[环信即时通讯云控制台的相关文档](/product/enable_and_configure_IM.html#创建应用)。
 
 ## 初始化
 
 初始化示例代码：
 
 ```java
-EMOptions options = new EMOptions();
-options.setAppKey("Your appkey");
-......// 其他 EMOptions 配置。
-EMClient.getInstance().init(context, options);
+ChatOptions options = new ChatOptions();
+options.setAppId("Your appId");
+......// 其他 ChatOptions 配置。
+ChatClient.getInstance().init(context, options);
 ```

@@ -2,15 +2,15 @@
 
 <Toc />
 
-聊天室是支持多人沟通的即时通讯系统。聊天室中的成员没有固定关系，一旦离线后，不会收到聊天室中的任何消息，（除了聊天室白名单中的成员）超过 2 分钟会自动退出聊天室。聊天室可以应用于直播、消息广播等。若需调整该时间，需联系环信商务经理。
+聊天室是支持多人沟通的即时通讯系统。聊天室中的成员没有固定关系，一旦离线后，不会收到聊天室中的任何消息，（除了聊天室白名单中的成员）超过 2 分钟会自动退出聊天室。聊天室可以应用于直播、消息广播等。若需调整该时间，需联系声网商务经理。
 
-本文介绍如何使用环信即时通讯 IM SDK 在实时互动 app 中创建和管理聊天室，并实现聊天室的相关功能。
+本文介绍如何使用声网即时通讯 IM SDK 在实时互动 app 中创建和管理聊天室，并实现聊天室的相关功能。
 
 消息内容详见 [消息管理](message_overview.html)。
 
 ## 技术原理
 
-环信即时通讯 IM SDK 支持你通过调用 API 在项目中实现如下聊天室管理功能：
+声网即时通讯 IM SDK 支持你通过调用 API 在项目中实现如下聊天室管理功能：
 
 - 创建聊天室；
 - 从服务器获取聊天室列表；
@@ -26,14 +26,14 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)；
-- 了解环信即时通讯 IM 的 API 使用限制，详见 [使用限制](/product/limitation)；
-- 了解环信即时通讯 IM 聊天室不同版本的数量限制，详见 [环信即时通讯 IM 价格](https://www.easemob.com/pricing/im)；
+- 了解声网即时通讯 IM 的 API 使用限制，详见 [使用限制](/product/limitation)；
+- 了解声网即时通讯 IM 聊天室不同版本的数量限制，详见 [声网即时通讯 IM 价格](https://www.easemob.com/pricing/im)；
 - 仅 [超级管理员](/document/server-side/chatroom_superadmin.html) 可以创建聊天室；
 - 聊天室创建者和管理员的数量之和不能超过 100 ，即管理员最多可添加 99 个。
 
 ## 实现方法
 
-本节介绍如何使用环信即时通讯 IM SDK 提供的 API 实现上述功能。
+本节介绍如何使用声网即时通讯 IM SDK 提供的 API 实现上述功能。
 
 ### 创建聊天室
 
@@ -44,13 +44,13 @@
 示例代码如下：
 
 ```javascript
-let options = {
-    name: 'chatRoomName', // 聊天室名称。
-    description: 'description', // 聊天室描述。
-    maxusers: 200, // 聊天室允许的最大成员数（包括聊天室创建者），默认值 200，最大不超过 5,000。
-    members: ['user1', 'user2'] // 聊天室成员。此属性可选，但是如果包含此项，数组元素至少一个。
-}
-conn.createChatRoom(options).then(res => console.log(res))
+const options = {
+  name: "chatRoomName", // 聊天室名称。
+  description: "description", // 聊天室描述。
+  maxusers: 200, // 聊天室允许的最大成员数（包括聊天室创建者），默认值 200，最大不超过 5,000。
+  members: ["user1", "user2"], // 聊天室成员。此属性可选，但是如果包含此项，数组元素至少一个。
+};
+chatClient.createChatRoom(options).then((res) => console.log(res));
 ```
 
 ### 从服务器获取聊天室列表
@@ -69,25 +69,25 @@ conn.createChatRoom(options).then(res => console.log(res))
 
 ```javascript
 // 获取聊天室列表，最多可获取 1000 个。
-let option = {
-    pagenum: 1,
-    pagesize: 20
+const option = {
+  pagenum: 1,
+  pagesize: 20,
 };
-conn.getChatRooms(option).then(res => console.log(res))
+chatClient.getChatRooms(option).then((res) => console.log(res));
 
 // 加入聊天室。聊天室所有成员均可调用该接口。
-let option = {
-    roomId: 'roomId',
-    // 加入聊天室时携带的扩展信息
-    ext: 'custom ext',
-    // 加入聊天室时，是否退出已加入的聊天室
-    leaveOtherRooms: false
-}
-conn.joinChatRoom(option).then(res => console.log(res))
+const option = {
+  roomId: "roomId",
+  // 加入聊天室时携带的扩展信息
+  ext: "custom ext",
+  // 加入聊天室时，是否退出已加入的聊天室
+  leaveOtherRooms: false,
+};
+chatClient.joinChatRoom(option).then((res) => console.log(res));
 
 // 监听聊天室事件
-conn.addEventHandler("CHATROOM", {
-        onChatroomEvent: (e) => {
+chatClient.addEventHandler("handlerId", {
+  onChatroomEvent: (e) => {
     switch (e.operation) {
       // 用户加入聊天室事件
       case "memberPresence":
@@ -97,7 +97,7 @@ conn.addEventHandler("CHATROOM", {
       default:
         break;
     }
-  }
+  },
 });
 ```
 
@@ -106,10 +106,10 @@ conn.addEventHandler("CHATROOM", {
 你可以调用 `getJoinedChatRooms` 方法获取当前用户加入的聊天室列表，示例代码如下：
 
 ```javascript
-conn
+chatClient
   .getJoinedChatRooms({
     pageNum: 1,
-    pageSize: 20
+    pageSize: 20,
   })
   .then((res) => {
     console.log(res);
@@ -123,10 +123,10 @@ conn
 示例代码如下：
 
 ```javascript
-let option = {
-    chatRoomId: 'chatRoomId'
-}
-conn.getChatRoomDetails(option).then(res => console.log(res))
+const option = {
+  chatRoomId: "chatRoomId",
+};
+chatClient.getChatRoomDetails(option).then((res) => console.log(res));
 ```
 
 ### 解散聊天室
@@ -136,10 +136,10 @@ conn.getChatRoomDetails(option).then(res => console.log(res))
 示例代码如下：
 
 ```javascript
-let option = {
-    chatRoomId: 'chatRoomId'
-}
-conn.destroyChatRoom(option).then(res => console.log(res))
+const option = {
+  chatRoomId: "chatRoomId",
+};
+chatClient.destroyChatRoom(option).then((res) => console.log(res));
 ```
 
 ### 监听聊天室事件
@@ -149,71 +149,71 @@ conn.destroyChatRoom(option).then(res => console.log(res))
 示例代码如下：
 
 ```javascript
-conn.addEventHandler("eventName", {
-    onChatroomEvent: function(msg){
-        switch(msg.operation){
-            // 解除聊天室一键禁言。聊天室所有成员（除操作者外）会收到该事件。
-            case 'unmuteAllMembers':
-                break;
-            // 聊天室一键禁言。聊天室所有成员（除操作者外）会收到该事件。
-            case 'muteAllMembers':
-                break;
-            // 将成员移出聊天室白名单。被移出的成员收到该事件。
-            case 'removeAllowlistMember':
-                break;
-            // 添加成员至聊天室白名单。被添加的成员收到该事件。
-            case 'addUserToAllowlist':
-                break;
-            // 删除聊天室公告。聊天室的所有成员会收到该事件。
-            case 'deleteAnnouncement':
-                break;
-            // 更新聊天室公告。聊天室的所有成员会收到该事件。
-            case 'updateAnnouncement':
-                break;
-            // 更新聊天室详情。聊天室的所有成员会收到该事件。
-            case 'updateInfo':
-                break;    
-            // 解除对指定成员的禁言。被解除禁言的成员会收到该事件。
-            case 'unmuteMember':
-                break;
-            // 有成员被移出聊天室黑名单。被移出的成员会收到该事件。
-            case 'unblockMember':
-                break;
-            // 禁言指定成员。被禁言的成员会收到该事件。
-            case 'muteMember':
-                break;
-            // 移除管理员。被移除的管理员会收到该事件。
-            case 'removeAdmin':
-                break;
-            // 设置管理员。被添加的管理员会收到该事件。
-            case 'setAdmin':
-                break;
-            // 转让聊天室。聊天室全体成员会收到该事件。
-            case 'changeOwner':
-                break;
-            // 解散聊天室。聊天室的所有成员会收到该事件。
-            case 'destroy':
-                break;   
-            // 主动退出聊天室。聊天室的所有成员（除退出的成员）会收到该事件。
-            case 'memberAbsence':
-                break;
-            // 有成员被移出聊天室。被踢出聊天室的成员会收到该事件。   
-            case 'removeMember':
-                break;
-            // 有用户加入聊天室。聊天室的所有成员（除新成员外）会收到该事件。
-            case 'memberPresence':
-                break;
-             // 有成员修改/设置聊天室自定义属性，聊天室的所有成员会收到该事件。
-            case 'updateChatRoomAttributes':
-                break;
-            // 有成员删除聊天室自定义属性，聊天室所有成员会收到该事件。
-            case 'removeChatRoomAttributes':
-                break;
-            default:
-                break;
-        }
+chatClient.addEventHandler("handlerId", {
+  onChatroomEvent: function (msg) {
+    switch (msg.operation) {
+      // 解除聊天室一键禁言。聊天室所有成员（除操作者外）会收到该事件。
+      case "unmuteAllMembers":
+        break;
+      // 聊天室一键禁言。聊天室所有成员（除操作者外）会收到该事件。
+      case "muteAllMembers":
+        break;
+      // 将成员移出聊天室白名单。被移出的成员收到该事件。
+      case "removeAllowlistMember":
+        break;
+      // 添加成员至聊天室白名单。被添加的成员收到该事件。
+      case "addUserToAllowlist":
+        break;
+      // 删除聊天室公告。聊天室的所有成员会收到该事件。
+      case "deleteAnnouncement":
+        break;
+      // 更新聊天室公告。聊天室的所有成员会收到该事件。
+      case "updateAnnouncement":
+        break;
+      // 更新聊天室详情。聊天室的所有成员会收到该事件。
+      case "updateInfo":
+        break;
+      // 解除对指定成员的禁言。被解除禁言的成员会收到该事件。
+      case "unmuteMember":
+        break;
+      // 有成员被移出聊天室黑名单。被移出的成员会收到该事件。
+      case "unblockMember":
+        break;
+      // 禁言指定成员。被禁言的成员会收到该事件。
+      case "muteMember":
+        break;
+      // 移除管理员。被移除的管理员会收到该事件。
+      case "removeAdmin":
+        break;
+      // 设置管理员。被添加的管理员会收到该事件。
+      case "setAdmin":
+        break;
+      // 转让聊天室。聊天室全体成员会收到该事件。
+      case "changeOwner":
+        break;
+      // 解散聊天室。聊天室的所有成员会收到该事件。
+      case "destroy":
+        break;
+      // 主动退出聊天室。聊天室的所有成员（除退出的成员）会收到该事件。
+      case "memberAbsence":
+        break;
+      // 有成员被移出聊天室。被踢出聊天室的成员会收到该事件。
+      case "removeMember":
+        break;
+      // 有用户加入聊天室。聊天室的所有成员（除新成员外）会收到该事件。
+      case "memberPresence":
+        break;
+      // 有成员修改/设置聊天室自定义属性，聊天室的所有成员会收到该事件。
+      case "updateChatRoomAttributes":
+        break;
+      // 有成员删除聊天室自定义属性，聊天室所有成员会收到该事件。
+      case "removeChatRoomAttributes":
+        break;
+      default:
+        break;
     }
-})
+  },
+});
 ```
 
 ### 实时更新聊天室成员人数
@@ -225,20 +225,20 @@ conn.addEventHandler("eventName", {
 2. 收到通知事件后，可以通过事件回调参数获取聊天室当前人数。
 
 ```javascript
-conn.addEventHandler("CHATROOM", {
-        onChatroomEvent: (e) => {
-          switch (e.operation) {
-            case "memberPresence":
-              // 当前聊天室在线人数
-              console.log(e?.memberCount);
-              break;
-            case "memberAbsence":
-              // 当前聊天室在线人数
-              console.log(e?.memberCount);
-              break;
-            default:
-              break;
-          }
-        }
-      });
+chatClient.addEventHandler("handlerId", {
+  onChatroomEvent: (e) => {
+    switch (e.operation) {
+      case "memberPresence":
+        // 当前聊天室在线人数
+        console.log(e?.memberCount);
+        break;
+      case "memberAbsence":
+        // 当前聊天室在线人数
+        console.log(e?.memberCount);
+        break;
+      default:
+        break;
+    }
+  },
+});
 ```

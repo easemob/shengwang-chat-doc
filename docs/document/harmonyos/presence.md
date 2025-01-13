@@ -2,15 +2,13 @@
 
 <Toc />
 
-用户在线状态（即 Presence）包含用户的在线、离线以及自定义状态。
+用户在线状态（即 Presence）包含用户的在线、离线以及自定义状态。**若你当前套餐不支持改功能，需升级产品套餐。**
 
-本文介绍如何在即时通讯应用中发布、订阅和查询用户的在线状态。
-
-关于用户的在线、离线和自定义状态的定义、变更以及用户的实时感知，详见[用户在线状态管理](/product/product_user_presence.html)。
+本文介绍如何在即时通讯应用中发布、订阅和查询用户的在线状态。关于用户的在线、离线和自定义状态的定义、变更以及用户的实时感知，详见[用户在线状态管理](product_user_presence.html)。
 
 ## 技术原理
 
-环信 IM SDK 提供 `Presence`、`PresenceManager` 和 `PresenceListener` 类，用于管理在线状态订阅，包含如下核心方法：
+即时通讯 IM SDK 提供 `Presence`、`PresenceManager` 和 `PresenceListener` 类，用于管理在线状态订阅，包含如下核心方法：
 
 - `subscribePresences`：订阅用户的在线状态；
 - `publishPresence`：发布自定义在线状态；
@@ -37,12 +35,12 @@
 使用在线状态功能前，请确保满足以下条件：
 
 1. 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
-2. 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
-3. 已联系商务开通在线状态订阅功能。
+2. 了解即时通讯 IM API 的 [使用限制](limitation.html)。
+3. 产品套餐包支持在线状态订阅功能。
 
 ## 实现方法
 
-本节介绍如何使用环信 IM SDK 提供的 API 实现上述功能。
+本节介绍如何使用声网 IM SDK 提供的 API 实现上述功能。
 
 ### 订阅指定用户的在线状态
 

@@ -2,13 +2,15 @@
 
 <Toc />
 
-子区是群组成员的子集，是支持多人沟通的即时通讯系统，本文介绍如何使用环信即时通讯 IM SDK 在实时互动 app 中创建和管理子区，并实现子区相关功能。
+子区是群组成员的子集，是支持多人沟通的即时通讯系统，子区让用户能够在群组中的特定消息上创建单独的会话，以保持主聊天界面整洁。**若你当前套餐不支持该功能，需升级产品套餐。**
+
+本文介绍如何使用环信即时通讯 IM Unity SDK 在实时互动 app 中创建和管理子区，并实现子区相关功能。
 
 如需查看消息相关内容，参见 [子区消息管理](thread_message.html)。
 
 ## 技术原理
 
-环信即时通讯 IM Unity SDK 提供 `IChatThreadManager`、`ChatThread`、`ChatThreadEvent` 和 `IChatThreadManagerDelegate` 类，用于管理子区，支持你通过调用 API 在项目中实现如下功能：
+即时通讯 IM Unity SDK 提供 `IChatThreadManager`、`ChatThread`、`ChatThreadEvent` 和 `IChatThreadManagerDelegate` 类，用于管理子区，支持你通过调用 API 在项目中实现如下功能：
 
 - 创建、解散子区
 - 加入、退出子区
@@ -24,14 +26,14 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 `1.0.5 或以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
-- 了解子区和子区成员数量限制，详见 [使用限制](/product/limitation.html)。
-- 联系商务开通子区功能。
+- 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
+- 了解即时通讯 IM 的 [使用限制](limitation.html)。
+- 产品套餐包支持子区功能。
+- 了解子区和子区成员数量限制，详见 [使用限制](limitation.html)。
 
 ## 实现方法
 
-本节介绍如何使用环信即时通讯 IM Unity SDK 提供的 API 实现上述功能。
+本节介绍如何使用即时通讯 IM Unity SDK 提供的 API 实现上述功能。
 
 ### 创建子区
 

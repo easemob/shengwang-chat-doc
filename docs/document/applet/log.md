@@ -1,6 +1,6 @@
 # SDK 日志
 
-环信即时通讯 IM 日志记录 SDK 相关的信息和事件。环信技术支持团队帮你排查问题时可能会请你发送 SDK 日志。
+声网即时通讯 IM 日志记录 SDK 相关的信息和事件。声网技术支持团队帮你排查问题时可能会请你发送 SDK 日志。
 
 ## 输出信息到日志文件
 
@@ -9,18 +9,19 @@
 ```javascript
 logger.enableAll();
 ```
+
 - 设置日志不输出到控制台：
 
 ```javascript
-logger.setConsoleLogVisibility(false)
+logger.setConsoleLogVisibility(false);
 ```
 
 - 监听 SDK 日志事件：
 
 ```javascript
-logger.onLog = (log)=>{
-  console.log('im logger', log)
-}
+logger.onLog = (log) => {
+  console.log("im logger", log);
+};
 ```
 
 关闭日志输出：
@@ -55,4 +56,4 @@ logger.download();
 
 ## 日志上报
 
-自 4.8.1 版本，小程序 SDK 支持日志上报功能, 即将日志会上传到环信服务器。该功能默认关闭，如有需要, 在初始化时，可将 `enableReportLogs` 参数设置为 `true`，然后联系商务开通日志上报功能。
+小程序 SDK 支持日志上报功能, 即将日志会上传到声网服务器。该功能默认关闭，如有需要, 可联系商务开通日志上报功能。

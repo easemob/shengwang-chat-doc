@@ -2,11 +2,11 @@
 
 <Toc />
 
-子区消息消息类型属于群聊消息类型，与普通群组消息的区别是需要添加 `isChatThread` 标记。本文介绍即时通讯 IM Flutter SDK 如何发送、接收以及撤回子区消息。
+子区消息消息类型属于群聊消息类型，与普通群组消息的区别是需要添加 `isChatThread` 标记。本文介绍即时通讯 IM Flutter SDK 如何发送、接收以及撤回子区消息。**若你当前套餐不支持子区功能，需升级产品套餐。**
 
 ## 技术原理
 
-即时通讯 IM Flutter SDK 提供 `EMChatThreadManager`、`EMMessage` 和 `EMChatThread` 类，用于管理子区消息，支持你通过调用 API 在项目中实现发送、接收、撤回和获取子区消息。
+即时通讯 IM Flutter SDK 提供 `ChatThreadManager`、`ChatMessage` 和 `ChatThread` 类，用于管理子区消息，支持你通过调用 API 在项目中实现发送、接收、撤回和获取子区消息。
 
 消息收发流程如下：
 
@@ -20,9 +20,9 @@
 
 开始前，请确保满足以下条件：
 
-- 已集成 `1.0.5 或版本` SDK 的基本功能，完成 SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
-- 联系商务开通子区功能。
+- 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
+- 了解即时通讯 IM 的使用限制，详见 [使用限制](limitation.html)。
+- 产品套餐包支持子区功能。
 
 ## 实现方法
 
@@ -37,7 +37,7 @@
 ```dart
 // `chatThreadId` 为子区 ID
 
-EMMessage msg = EMMessage.createTxtSendMessage(
+ChatMessage msg = ChatMessage.createTxtSendMessage(
   targetId: threadId,
   content: content,
   // `chatType` 设置为 `GroupChat`，即群聊
@@ -45,76 +45,76 @@ EMMessage msg = EMMessage.createTxtSendMessage(
 );
 // isChatThreadMessage: 是否是子区消息，这里设置为 `true`，即是子区消息。
 msg.isChatThreadMessage = true;
-EMClient.getInstance.chatManager.sendMessage(msg);
+ChatClient.getInstance.chatManager.sendMessage(msg);
 ```
 
 ### 接收子区消息
 
 接收消息的具体逻辑，请参考 [接收消息](message_send_receive.html#发送和接收文本消息)，此处只介绍子区消息和其他消息的区别。
 
-子区有新增消息时，子区所属群组的所有成员收到 `EMChatThreadEventHandler#onChatThreadUpdated` 事件，子区成员收到 `EMChatEventHandler#onMessagesReceived` 事件。
+子区有新增消息时，子区所属群组的所有成员收到 `ChatThreadEventHandler#onChatThreadUpdated` 事件，子区成员收到 `ChatEventHandler#onMessagesReceived` 事件。
 
 示例代码如下：
 
 ```dart
 // 注册子区监听
-EMClient.getInstance.chatThreadManager.addEventHandler(
+ChatClient.getInstance.chatThreadManager.addEventHandler(
       "UNIQUE_HANDLER_ID",
-  EMChatThreadEventHandler(
+  ChatThreadEventHandler(
     onChatThreadUpdate: (event) {},
       ),
     );
 
 // 添加消息监听
-EMClient.getInstance.chatManager.addEventHandler(
+ChatClient.getInstance.chatManager.addEventHandler(
   "UNIQUE_HANDLER_ID",
-  EMChatEventHandler(
+  ChatEventHandler(
     onMessagesReceived: (messages) {},
       ),
     );
 
 // 移除子区监听
-EMClient.getInstance.chatThreadManager.removeEventHandler("UNIQUE_HANDLER_ID");
+ChatClient.getInstance.chatThreadManager.removeEventHandler("UNIQUE_HANDLER_ID");
     // 移除消息监听
-    EMClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
+    ChatClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
 ```
 
 ### 撤回子区消息
 
 接收消息的具体逻辑，请参考 [撤回消息](message_recall.html)，此处只介绍子区消息和其他消息的区别。
 
-子区有消息撤回时，子区所属群组的所有成员收到 `EMChatThreadEventHandler#onChatThreadUpdated` 事件，子区成员收到 `EMChatEventHandler#onMessagesRecalledInfo` 事件。
+子区有消息撤回时，子区所属群组的所有成员收到 `ChatThreadEventHandler#onChatThreadUpdated` 事件，子区成员收到 `ChatEventHandler#onMessagesRecalledInfo` 事件。
 
 示例代码如下：
 
 ```dart
 // 注册子区监听
-EMClient.getInstance.chatThreadManager.addEventHandler(
+ChatClient.getInstance.chatThreadManager.addEventHandler(
   "UNIQUE_HANDLER_ID",
-  EMChatThreadEventHandler(
+  ChatThreadEventHandler(
     onChatThreadUpdate: (event) {},
   ),
 );
 
 // 添加消息监听
-EMClient.getInstance.chatManager.addEventHandler(
+ChatClient.getInstance.chatManager.addEventHandler(
   "UNIQUE_HANDLER_ID",
-  EMChatEventHandler(
+  ChatEventHandler(
     onMessagesRecalledInfo: (messages) {},
   ),
 );
 
 // 移除子区监听
-EMClient.getInstance.chatThreadManager.removeEventHandler("UNIQUE_HANDLER_ID");
+ChatClient.getInstance.chatThreadManager.removeEventHandler("UNIQUE_HANDLER_ID");
 // 移除消息监听
-EMClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
+ChatClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
 ```
 
 ### 获取子区消息
 
 从服务器还是本地数据库获取子区消息取决于你的生产环境。
 
-你可以通过 `EMConversation#isChatThread()` 判断当前会话是否为子区会话。
+你可以通过 `ChatConversation#isChatThread()` 判断当前会话是否为子区会话。
 
 #### 从服务器获取单个子区的消息 (消息漫游)
 
@@ -125,38 +125,38 @@ try {
   // 子区 ID。
   String threadId = "threadId";
   // 会话类型，设置为群聊，即 `GroupChat`。
-  EMConversationType convType = EMConversationType.GroupChat;
+  ChatConversationType convType = ChatConversationType.GroupChat;
   // 每页期望获取的消息数量。
   int pageSize = 10;
   // 搜索的起始消息 ID。
   String startMsgId = "";
-  EMCursorResult<EMMessage> result =
-      await EMClient.getInstance.chatManager.fetchHistoryMessages(
+  ChatCursorResult<ChatMessage> result =
+      await ChatClient.getInstance.chatManager.fetchHistoryMessages(
     conversationId: threadId,
     type: convType,
     startMsgId: startMsgId,
     pageSize: pageSize,
   );
-} on EMError catch (e) {}
+} on ChatError catch (e) {}
 ```
 
 #### 从本地获取单个子区的消息
 
-调用 `EMChatManager#loadAllConversations` 方法只能获取单聊或群聊会话。你可以调用以下方法从本地获取单个子区的消息：
+调用 `ChatManager#loadAllConversations` 方法只能获取单聊或群聊会话。你可以调用以下方法从本地获取单个子区的消息：
 
 ```dart
 try {
   // 子区 ID。
   String threadId = "threadId";
   // 会话类型，即群聊 `GroupChat`。
-  EMConversationType convType = EMConversationType.GroupChat;
-  EMConversation? converrsation =
-        await EMClient.getInstance.chatManager.getThreadConversation(threadId);
+  ChatConversationType convType = ChatConversationType.GroupChat;
+  ChatConversation? converrsation =
+        await ChatClient.getInstance.chatManager.getThreadConversation(threadId);
   // 搜索的起始消息 ID。
   String startMsgId = "startMsgId";
   // 每页期望获取的消息数量。
   int pageSize = 10;
-  List<EMMessage>? list = await conversation?.loadMessages(
+  List<ChatMessage>? list = await conversation?.loadMessages(
       startMsgId: startMsgId, loadCount: pageSize);
-} on EMError catch (e) {}
+} on ChatError catch (e) {}
 ```

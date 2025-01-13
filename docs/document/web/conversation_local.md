@@ -1,15 +1,16 @@
 # 管理本地会话
 
-环信即时通讯 IM Web SDK 内部使用 IndexedDB 在本地数据库中保存单聊和群聊会话，通过 `LocalCache` 模块对本地会话数据进行管理。
+声网即时通讯 IM Web SDK 内部使用 IndexedDB 在本地数据库中保存单聊和群聊会话，通过 `LocalCache` 模块对本地会话数据进行管理。
 
 :::tip
+
 1. 若使用该特性，首先要[集成本地存储插件](#集成本地存储插件)。该插件只支持通过[按需导入 SDK](import_sdk_minicore.html)的方式集成。
 2. 该特性**支持现代浏览器**，例如 Chrome、Firefox、Safari 以及使用这些引擎的其他浏览器（例如 Microsoft Edge），**不支持 Internet Explorer（IE）浏览器**。
-:::
+   :::
 
 ## 技术原理
 
-环信即时通讯 IM SDK 支持你通过调用 API 在项目中实现如下功能：
+声网即时通讯 IM SDK 支持你通过调用 API 在项目中实现如下功能：
 
 - `getLocalConversations`：获取本地会话列表；
 - `getLocalConversation`：获取单个本地会话；
@@ -22,28 +23,28 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 4.2.1 或以上版本初始化，详见 [初始化](initialization.html)文档；
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)；
+- 完成 SDK 初始化，详见 [初始化](initialization.html)文档；
+- 了解声网即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)；
 - [按需导入 SDK](import_sdk_minicore.html)，[集成本地存储插件](#集成本地存储插件)。
 
 ## 实现方法
 
-本节介绍如何使用环信即时通讯 IM Web SDK 提供的 API 实现上述功能。
+本节介绍如何使用声网即时通讯 IM Web SDK 提供的 API 实现上述功能。
 
 会话对象的结构如下所示:
 
 ```typescript
 interface ConversationItem {
-	// 会话 ID。
-	conversationId: string;
-	// 会话类型：单聊和群聊分别为 `singleChat` 和 `groupChat`。
-	conversationType: ConversationType;
-	// 会话的未读消息数。
-	unReadCount?: number;
-	// 最新的一条消息。
-	lastMessage?: LocalMessageBody;
-	// 会话自定义字段。
-	customField?: Record<string, any>;
+  // 会话 ID。
+  conversationId: string;
+  // 会话类型：单聊和群聊分别为 `singleChat` 和 `groupChat`。
+  conversationType: ConversationType;
+  // 会话的未读消息数。
+  unReadCount?: number;
+  // 最新的一条消息。
+  lastMessage?: LocalMessageBody;
+  // 会话自定义字段。
+  customField?: Record<string, any>;
 }
 ```
 
@@ -52,22 +53,22 @@ interface ConversationItem {
 若支持本地会话存储，需要集成本地存储插件。**该插件只支持通过[按需导入 SDK](import_sdk_minicore.html)的方式集成**。示例代码如下：
 
 ```javascript
-import MiniCore from "easemob-websdk/miniCore/miniCore";
-import * as contactPlugin from "easemob-websdk/contact/contact";
-import * as localCachePlugin from "easemob-websdk/localCache/localCache";
+import MiniCore from "shengwang-chat/miniCore/miniCore";
+import * as contactPlugin from "shengwang-chat/contact/contact";
+import * as localCachePlugin from "shengwang-chat/localCache/localCache";
 
 const miniCore = new MiniCore({
-  appKey: "your appKey",
+  appId: "your appId",
 });
 // 使用联系人插件, "contact" 为固定值。
 miniCore.usePlugin(contactPlugin, "contact");
 // 使用本地存储插件, "localCache" 为固定值。
 miniCore.usePlugin(localCachePlugin, "localCache");
 
-// 登录即时通讯 IM。
+// 登录Chat。
 miniCore.open({
   username: "userId",
-  password: "password",
+  accessToken: "accessToken",
 });
 ```
 
@@ -78,11 +79,10 @@ miniCore.open({
 示例代码如下：
 
 ```javascript
-
-miniCore.localCache.getLocalConversations().then((res)=>{
-   // 获取本地会话列表成功。
-   console.log(res)
-})
+miniCore.localCache.getLocalConversations().then((res) => {
+  // 获取本地会话列表成功。
+  console.log(res);
+});
 ```
 
 ### 获取单个本地会话
@@ -91,16 +91,16 @@ miniCore.localCache.getLocalConversations().then((res)=>{
 
 ```javascript
 const options = {
-   // 会话类型：单聊和群聊分别为 `singleChat` 和 `groupChat`。
-   conversationType: 'singleChat',
-   // 会话 ID。
-   conversationId: 'conversationId'
-}
+  // 会话类型：单聊和群聊分别为 `singleChat` 和 `groupChat`。
+  conversationType: "singleChat",
+  // 会话 ID。
+  conversationId: "conversationId",
+};
 
-miniCore.localCache.getLocalConversation(options).then((res)=>{
-   // 获取本地会话成功。
-   console.log(res)
-})
+miniCore.localCache.getLocalConversation(options).then((res) => {
+  // 获取本地会话成功。
+  console.log(res);
+});
 ```
 
 ### 设置会话自定义字段
@@ -110,19 +110,18 @@ miniCore.localCache.getLocalConversation(options).then((res)=>{
 示例代码如下：
 
 ```javascript
-
 const options = {
-   // 会话类型：单聊和群聊分别为 `singleChat` 和 `groupChat`。
-   conversationType: 'singleChat',
-   // 会话 ID。
-   conversationId: 'conversationId',
-   // 会话自定义字段。
-   customField: { custom: 'custom' }
-}
+  // 会话类型：单聊和群聊分别为 `singleChat` 和 `groupChat`。
+  conversationType: "singleChat",
+  // 会话 ID。
+  conversationId: "conversationId",
+  // 会话自定义字段。
+  customField: { custom: "custom" },
+};
 
-miniCore.localCache.setLocalConversationCustomField(options).then(()=>{
-   // 设置会话自定义字段成功。
-})
+miniCore.localCache.setLocalConversationCustomField(options).then(() => {
+  // 设置会话自定义字段成功。
+});
 ```
 
 ### 对会话的未读消息数清零
@@ -130,17 +129,16 @@ miniCore.localCache.setLocalConversationCustomField(options).then(()=>{
 你可以调用 `clearConversationUnreadCount` 方法对单个本地会话的未读消息数清零。示例代码如下：
 
 ```javascript
-
 const options = {
-   // 会话类型：单聊和群聊分别为 `singleChat` 和 `groupChat`。
-   conversationType: 'singleChat',
-   // 会话 ID。
-   conversationId: 'conversationId'
-}
+  // 会话类型：单聊和群聊分别为 `singleChat` 和 `groupChat`。
+  conversationType: "singleChat",
+  // 会话 ID。
+  conversationId: "conversationId",
+};
 
-miniCore.localCache.clearConversationUnreadCount(options).then(()=>{
-   // 对指定会话的未读消息数清零成功。
-})
+miniCore.localCache.clearConversationUnreadCount(options).then(() => {
+  // 对指定会话的未读消息数清零成功。
+});
 ```
 
 ### 删除单个本地会话
@@ -151,17 +149,17 @@ miniCore.localCache.clearConversationUnreadCount(options).then(()=>{
 
 ```javascript
 const options = {
-   // 会话类型：单聊和群聊分别为 `singleChat` 和 `groupChat`。
-   conversationType: 'singleChat',
-   // 会话 ID。
-   conversationId: 'conversationId',
-   // 是否删除本地消息, 默认值为 `true`。
-   isRemoveLocalMessage: true
-}
+  // 会话类型：单聊和群聊分别为 `singleChat` 和 `groupChat`。
+  conversationType: "singleChat",
+  // 会话 ID。
+  conversationId: "conversationId",
+  // 是否删除本地消息, 默认值为 `true`。
+  isRemoveLocalMessage: true,
+};
 
-miniCore.localCache.removeLocalConversation(options).then(()=>{
-   // 删除本地会话成功。
-})
+miniCore.localCache.removeLocalConversation(options).then(() => {
+  // 删除本地会话成功。
+});
 ```
 
 ### 同步服务端会话列表到本地
@@ -170,14 +168,13 @@ miniCore.localCache.removeLocalConversation(options).then(()=>{
 
 ```javascript
 const options = {
-   /** 每页期望获取的会话数量。取值范围为 [1,50]，默认为 `20`。*/
-   pageSize: 20,
-   /** 开始获取数据的游标位置。若传空字符串（''），SDK 从最新活跃的会话开始获取。*/
-   cursor: ''
-}
-miniCore.contact.getServerConversations(options).then((res)=>{
-   // 获取服务端会话列表并同步本地成功。
-   console.log(res)
-})
+  /** 每页期望获取的会话数量。取值范围为 [1,50]，默认为 `20`。*/
+  pageSize: 20,
+  /** 开始获取数据的游标位置。若传空字符串（''），SDK 从最新活跃的会话开始获取。*/
+  cursor: "",
+};
+miniCore.contact.getServerConversations(options).then((res) => {
+  // 获取服务端会话列表并同步本地成功。
+  console.log(res);
+});
 ```
-

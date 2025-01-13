@@ -2,11 +2,11 @@
 
 <Toc />
 
-聊天室是支持多人沟通的即时通讯系统。本文介绍如何使用环信即时通讯 IM SDK 在实时互动 app 中管理聊天室成员，并实现聊天室的相关功能。
+聊天室是支持多人沟通的即时通讯系统。本文介绍如何使用即时通讯 IM SDK 在实时互动 app 中管理聊天室成员，并实现聊天室的相关功能。
 
 ## 技术原理
 
-环信即时通讯 IM SDK 提供 `Room`、`IRoomManager` 和 `IRoomManagerDelegate` 类，支持对聊天室成员的管理，包括获取、添加和移出聊天室成员等，主要方法如下：
+即时通讯 IM SDK 提供 `Room`、`IRoomManager` 和 `IRoomManagerDelegate` 类，支持对聊天室成员的管理，包括获取、添加和移出聊天室成员等，主要方法如下：
 
 - 获取聊天室成员列表
 - 将成员移出聊天室
@@ -21,12 +21,12 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)；
-- 了解环信即时通讯 IM 的 [使用限制](/product/limitation.html)；
-- 了解环信即时通讯 IM 聊天室相关限制，详见 [环信即时通讯 IM 价格](https://www.easemob.com/pricing/im)。
+- 了解即时通讯 IM 的 [使用限制](limitation.html)；
+- 了解即时通讯 IM 聊天室相关限制，详见 [即时通讯 IM 价格](https://www.easemob.com/pricing/im)。
 
 ## 实现方法
 
-本节介绍如何使用环信即时通讯 IM SDK 提供的 API 实现上述功能。
+本节介绍如何使用即时通讯 IM SDK 提供的 API 实现上述功能。
 
 ### 获取聊天室成员列表
 
@@ -36,7 +36,7 @@
 
 ```csharp
 //cursor：从该游标位置开始取数据。首次调用 cursor 传空值，从最新数据开始获取。
-//pageSize：每页期望返回的成员数,最大值为 1,000。
+//pageSize：每页期望返回的成员数，最大值为 1,000。
 SDKClient.Instance.RoomManager.FetchRoomMembers(roomId, cursor, pageSize, callback: new ValueCallBack<CursorResult<string>>(
   // members 类型为 CursorResult<string>。
   onSuccess: (members) => {
@@ -102,7 +102,7 @@ SDKClient.Instance.RoomManager.DeleteRoomMembers(roomId, members, new CallBack(
 
 #### 离线后自动退出
 
-由于网络等原因，聊天室中的成员离线超过 2 分钟会自动退出聊天室。若需调整该时间，需联系环信商务。
+由于网络等原因，聊天室中的成员离线超过 2 分钟会自动退出聊天室。若需调整该时间，需联系声网商务。
 
 以下两类成员即使离线也不会退出聊天室：
 

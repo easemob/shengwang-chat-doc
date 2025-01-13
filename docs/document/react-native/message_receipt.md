@@ -146,7 +146,7 @@ ChatClient.getInstance().chatManager.addMessageListener({
 该功能开启后，接收方阅读消息后，SDK 底层会自动进行消息已读回执。
 
 ```typescript
-// 设置是否需要接受方已读确认,默认为 `true`。
+// 设置是否需要接收方已读确认,默认为 `true`。
 options.requireAck = true;
 ```
 

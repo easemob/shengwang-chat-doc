@@ -9,17 +9,17 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化并连接到服务器，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM 的使用限制，详见 [使用限制](limitation.html)。
 
 ## 技术原理
 
-环信即时通讯 IM Flutter SDK 通过 `EMChatManager` 和 `EMConversation` 类实现对本地会话的未读消息数的管理，其中核心方法如下：
+即时通讯 IM Flutter SDK 通过 `ChatManager` 和 `ChatConversation` 类实现对本地会话的未读消息数的管理，其中核心方法如下：
 
-- `EMChatManager#getUnreadMessageCount`：获取本地所有会话的未读消息数。
-- `EMConversation#unreadCount`：获取本地指定会话的未读消息数。
-- `EMChatManager#markAllConversationsAsRead`：将本地所有会话的未读消息数清零。
-- `EMConversation#markAllMessagesAsRead`：对于本地指定会话的未读消息数清零。
-- `EMConversation#markMessageAsRead`：将指定会话的单条未读消息置为已读。
+- `ChatManager#getUnreadMessageCount`：获取本地所有会话的未读消息数。
+- `ChatConversation#unreadCount`：获取本地指定会话的未读消息数。
+- `ChatManager#markAllConversationsAsRead`：将本地所有会话的未读消息数清零。
+- `ChatConversation#markAllMessagesAsRead`：对于本地指定会话的未读消息数清零。
+- `ChatConversation#markMessageAsRead`：将指定会话的单条未读消息置为已读。
 
 ## 实现方法
 
@@ -29,7 +29,7 @@
 
 ```dart
 int unreadCount =
-        await EMClient.getInstance.chatManager.getUnreadMessageCount();
+        await ChatClient.getInstance.chatManager.getUnreadMessageCount();
 ```
 
 ### 获取指定会话的未读消息数
@@ -45,7 +45,7 @@ int unreadCount = await conversation.unreadCount();
 你可以调用 `markAllConversationsAsRead` 方法将本地所有会话设为已读，即将所有会话的未读消息数清零，示例代码如下：
 
 ```dart
-await EMClient.getInstance.chatManager.markAllConversationsAsRead();
+await ChatClient.getInstance.chatManager.markAllConversationsAsRead();
 ```
 
 ### 指定会话的未读消息数清零

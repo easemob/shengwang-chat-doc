@@ -8,7 +8,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM SDK 提供 `EMChatRoomManager` 类和 `EMChatRoom` 类用于聊天室管理，支持你通过调用 API 在项目中实现如下功能：
+环信即时通讯 IM SDK 提供 `ChatRoomManager` 类和 `ChatRoom` 类用于聊天室管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 获取和更新聊天室基本属性；
 - 获取聊天室自定义属性；
@@ -37,8 +37,8 @@
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法为 asyncFetchChatRoomAnnouncement(String, EMValueCallBack)。
-String announcement = EMClient.getInstance().chatroomManager().fetchChatRoomAnnouncement(chatRoomId);
+// 异步方法为 asyncFetchChatRoomAnnouncement(String, ValueCallBack)。
+String announcement = ChatClient.getInstance().chatroomManager().fetchChatRoomAnnouncement(chatRoomId);
 ```
 
 #### 更新聊天室公告
@@ -49,8 +49,8 @@ String announcement = EMClient.getInstance().chatroomManager().fetchChatRoomAnno
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法为 asyncUpdateChatRoomAnnouncement(String, String, EMCallBack)。
-EMClient.getInstance().chatroomManager().updateChatRoomAnnouncement(chatRoomId, announcement);
+// 异步方法为 asyncUpdateChatRoomAnnouncement(String, String, CallBack)。
+ChatClient.getInstance().chatroomManager().updateChatRoomAnnouncement(chatRoomId, announcement);
 ```
 
 #### 修改聊天室名称
@@ -61,8 +61,8 @@ EMClient.getInstance().chatroomManager().updateChatRoomAnnouncement(chatRoomId, 
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法为 asyncChangeChatRoomSubject(String, String, EMValueCallBack)。
-EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().changeChatRoomSubject(chatRoomId, newSubject);
+// 异步方法为 asyncChangeChatRoomSubject(String, String, ValueCallBack)。
+ChatRoom chatRoom = ChatClient.getInstance().chatroomManager().changeChatRoomSubject(chatRoomId, newSubject);
 ```
 
 #### 修改聊天室描述
@@ -73,8 +73,8 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().changeChatRoomSub
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法为 asyncChangeChatroomDescription(String, String, EMValueCallBack)。
-EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().changeChatroomDescription(chatRoomId, newDescription);
+// 异步方法为 asyncChangeChatroomDescription(String, String, ValueCallBack)。
+ChatRoom chatRoom = ChatClient.getInstance().chatroomManager().changeChatroomDescription(chatRoomId, newDescription);
 ```
 
 ### 管理聊天室自定义属性（key-value）
@@ -91,13 +91,13 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().changeChatroomDes
  *
  * @param String conversationId     聊天室 ID。
  * @param List<String> keyList      聊天室自定义属性的 Key 列表。传 `null` 返回所有自定义属性。
- * @param callBack                  结果回调，成功时回调 {@link EMValueCallBack#onSuccess(Object)}，
- *                                  失败时回调 {@link EMValueCallBack#onError(int, String)}。
+ * @param callBack                  结果回调，成功时回调 {@link ValueCallBack#onSuccess(Object)}，
+ *                                  失败时回调 {@link ValueCallBack#onError(int, String)}。
  */
-EMClient.getInstance().chatroomManager().asyncFetchChatroomAttributesFromServer(
+ChatClient.getInstance().chatroomManager().asyncFetchChatroomAttributesFromServer(
     conversationId, 
     keyList, 
-    new EMValueCallBack<Map<String, String>>() {
+    new ValueCallBack<Map<String, String>>() {
         @Override
         public void onSuccess(Map<String, String> value) {
 
@@ -121,12 +121,12 @@ EMClient.getInstance().chatroomManager().asyncFetchChatroomAttributesFromServer(
  * 异步方法。
  *
  * @param String conversationId     聊天室 ID。
- * @param callBack                  结果回调，成功时回调 {@link EMValueCallBack#onSuccess(Object)}，
- *                                  失败时回调 {@link EMValueCallBack#onError(int, String)}。
+ * @param callBack                  结果回调，成功时回调 {@link ValueCallBack#onSuccess(Object)}，
+ *                                  失败时回调 {@link ValueCallBack#onError(int, String)}。
  */
-EMClient.getInstance().chatroomManager().asyncFetchChatRoomAllAttributesFromServer(
+ChatClient.getInstance().chatroomManager().asyncFetchChatRoomAllAttributesFromServer(
     conversationId, 
-    new EMValueCallBack<Map<String, String>>() {
+    new ValueCallBack<Map<String, String>>() {
         @Override
         public void onSuccess(Map<String, String> value) {
 
@@ -156,12 +156,12 @@ EMClient.getInstance().chatroomManager().asyncFetchChatRoomAllAttributesFromServ
  *       - （默认）`true`：是；
  *       - `false`：否。
  */
-EMClient.getInstance().chatroomManager().asyncSetChatroomAttribute(
+ChatClient.getInstance().chatroomManager().asyncSetChatroomAttribute(
     conversationId,
     attributeKey,
     attributeValue,
     autoDelete, 
-    new EMCallBack() {
+    new CallBack() {
         @Override
         public void onSuccess() {
 
@@ -191,12 +191,12 @@ EMClient.getInstance().chatroomManager().asyncSetChatroomAttribute(
  *       - （默认）`true`：是；
  *       - `false`：否。
  */
-EMClient.getInstance().chatroomManager().asyncSetChatroomAttributeForced(
+ChatClient.getInstance().chatroomManager().asyncSetChatroomAttributeForced(
     conversationId,
     attributeKey,
     attributeValue,
     autoDelete, 
-    new EMCallBack() {
+    new CallBack() {
         @Override
         public void onSuccess() {
 
@@ -225,16 +225,16 @@ EMClient.getInstance().chatroomManager().asyncSetChatroomAttributeForced(
  *       - （默认）`true`：是；
  *       - `false`：否。
  */
-EMClient.getInstance().chatroomManager().asyncSetChatroomAttributes(
+ChatClient.getInstance().chatroomManager().asyncSetChatroomAttributes(
     conversationId, 
     attributeMap, 
     autoDelete, 
-    new EMResultCallBack<Map<String, Integer>>() {
+    new ResultCallBack<Map<String, Integer>>() {
         @Override
         public void onResult(int code, Map<String, Integer> value) {
-            if (code == EMError.EM_NO_ERROR) { // onResult 返回值 code 为 EMError.EM_NO_ERROR，表明自定义属性成功添加。
+            if (code == Error.EM_NO_ERROR) { // onResult 返回值 code 为 Error.EM_NO_ERROR，表明自定义属性成功添加。
 
-            }else { // onResult 返回值不为 EMError.EM_NO_ERROR，表明一些自定义属性因长度超限等原因添加失败。
+            }else { // onResult 返回值不为 Error.EM_NO_ERROR，表明一些自定义属性因长度超限等原因添加失败。
 
             }
         }
@@ -257,16 +257,16 @@ EMClient.getInstance().chatroomManager().asyncSetChatroomAttributes(
  *       - （默认）`true`：是；
  *       - `false`：否。
  */
-EMClient.getInstance().chatroomManager().asyncSetChatroomAttributesForced(
+ChatClient.getInstance().chatroomManager().asyncSetChatroomAttributesForced(
     conversationId, 
     attributeMap, 
     autoDelete, 
-    new EMResultCallBack<Map<String, Integer>>() {
+    new ResultCallBack<Map<String, Integer>>() {
         @Override
         public void onResult(int code, Map<String, Integer> value) {
-            if (code == EMError.EM_NO_ERROR) { // onResult 返回值 code 为 EMError.EM_NO_ERROR，表明自定义属性成功添加。
+            if (code == Error.EM_NO_ERROR) { // onResult 返回值 code 为 Error.EM_NO_ERROR，表明自定义属性成功添加。
 
-            }else { // onResult 返回值不为 EMError.EM_NO_ERROR，表明一些自定义属性因长度超限等原因添加失败。
+            }else { // onResult 返回值不为 Error.EM_NO_ERROR，表明一些自定义属性因长度超限等原因添加失败。
 
             }
         }
@@ -285,12 +285,12 @@ EMClient.getInstance().chatroomManager().asyncSetChatroomAttributesForced(
  *
  * @param String conversationId     聊天室 ID。
  * @param String key                聊天室属性的 key。
- * @param callBack                  结果回调，回调 {@link EMResultCallBack#onResult(int, Object)}。
+ * @param callBack                  结果回调，回调 {@link ResultCallBack#onResult(int, Object)}。
  */
-EMClient.getInstance().chatroomManager().asyncRemoveChatRoomAttributeFromServer(
+ChatClient.getInstance().chatroomManager().asyncRemoveChatRoomAttributeFromServer(
     conversationId,
     key, 
-    new EMResultCallBack<Map<String, Integer>>() {
+    new ResultCallBack<Map<String, Integer>>() {
         @Override
         public void onResult(int code, Map<String, Integer> value) {
 
@@ -310,12 +310,12 @@ EMClient.getInstance().chatroomManager().asyncRemoveChatRoomAttributeFromServer(
  *
  * @param String conversationId     聊天室 ID。
  * @param String key                聊天室属性的 key。
- * @param callBack                  结果回调，成功时回调 {@link EMResultCallBack#onResult(int, Object)}。
+ * @param callBack                  结果回调，成功时回调 {@link ResultCallBack#onResult(int, Object)}。
  */
-EMClient.getInstance().chatroomManager().asyncRemoveChatRoomAttributeFromServerForced(
+ChatClient.getInstance().chatroomManager().asyncRemoveChatRoomAttributeFromServerForced(
     conversationId,
     key, 
-    new EMResultCallBack<Map<String, Integer>>() {
+    new ResultCallBack<Map<String, Integer>>() {
         @Override
         public void onResult(int code, Map<String, Integer> value) {
 
@@ -335,10 +335,10 @@ EMClient.getInstance().chatroomManager().asyncRemoveChatRoomAttributeFromServerF
  *
  * @param String chatRoomId         聊天室 ID。
  * @param List<String> keyList      聊天室自定义属性的 key 列表。
- * @param callBack                  结果回调，成功时回调 {@link EMResultCallBack#onSuccess(int,Object)}，
- *                                  失败时回调 {@link EMResultCallBack#onError(int, String)}。
+ * @param callBack                  结果回调，成功时回调 {@link ResultCallBack#onSuccess(int,Object)}，
+ *                                  失败时回调 {@link ResultCallBack#onError(int, String)}。
  */
-EMClient.getInstance().chatroomManager().asyncRemoveChatRoomAttributesFromServer(conversationId,keyList, new EMResultCallBack<Map<String, String>>() {
+ChatClient.getInstance().chatroomManager().asyncRemoveChatRoomAttributesFromServer(conversationId,keyList, new ResultCallBack<Map<String, String>>() {
                     @Override
                     public void onSuccess(int code,Map<String, String> value) {
 
@@ -363,12 +363,12 @@ EMClient.getInstance().chatroomManager().asyncRemoveChatRoomAttributesFromServer
  *
  * @param String conversationId     聊天室 ID。
  * @param List<String> keyList      聊天室自定义属性的 key 列表。
- * @param callBack                  结果回调，成功时回调 {@link EMResultCallBack#onResult(int, Object)}。
+ * @param callBack                  结果回调，成功时回调 {@link ResultCallBack#onResult(int, Object)}。
  */
-EMClient.getInstance().chatroomManager().asyncRemoveChatRoomAttributesFromServerForced(
+ChatClient.getInstance().chatroomManager().asyncRemoveChatRoomAttributesFromServerForced(
     conversationId,
     keyList, 
-    new EMResultCallBack<Map<String, Integer>>() {
+    new ResultCallBack<Map<String, Integer>>() {
         @Override
         public void onResult(int code,Map<String, Integer> value) {
 

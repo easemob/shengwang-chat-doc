@@ -12,10 +12,10 @@
 
 ## 前提条件
 
-- Android Studio 3.0 或以上版本；
+- Android Studio 3.6 或以上版本；
 - Android SDK API 等级 21 或以上；
 - Android 5.0 或以上版本的设备；
-- 有效的环信即时通讯 IM 开发者账号和 App key，见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
+- 有效的环信即时通讯 IM 开发者账号和 AppId，见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
 
 ## 准备开发环境
 
@@ -25,39 +25,37 @@
 
 参考以下步骤创建一个 Android 项目。
 
-1. 打开 Android Studio，点击 **Start a new Android Studio project**。
-2. 在 **Select a Project Template** 界面，选择 **Phone and Tablet > Empty Activity**，然后点击 **Next**。
-3. 在 **Configure Your Project** 界面，依次填入以下内容：
+1. 打开 Android Studio，点击 **New Project**。
+2. 在 **New Project** 界面，选择 **Empty Views Activity **，然后点击 **Next**。
+3. 在 **Empty Views Activity** 界面，依次填入以下内容：
    - **Name**：你的 Android 项目名称，如 HelloWorld。
-   - **Package name**：你的项目包的名称，如 com.hyphenate.helloworld。
+   - **Package name**：你的项目包的名称，如 io.agora.helloworld。
    - **Save location**：项目的存储路径。
    - **Language**：项目的编程语言，如 Java。
-   - **Minimum API level**：项目的最低 API 等级。
+   - **Minimum API level**：项目的最低 API 等级,如API 21。
 
 然后点击 **Finish**。根据屏幕提示，安装所需插件。
 
-上述步骤使用 **Android Studio 3.6.2** 示例。你也可以直接参考 Android Studio 官网文档 [创建首个应用](https://developer.android.com/training/basics/firstapp)。
+上述步骤使用 **Android Studio Ladybug | 2024.2.1 Patch 3** 示例。你也可以直接参考 Android Studio 官网文档 [创建应用](https://developer.android.com/studio/projects/create-project)。
 
 ### 2. 集成 SDK
 
-你可以使用 mavenCentral 自动集成。该方法仅适用于 v3.8.2 或以上版本。
+你可以使用 mavenCentral 自动集成。
 
-除此之外，你还可以通过手动复制 SDK 文件和动态加载 `.so` 库文件的方法集成 IM SDK，详见[集成文档](integration.html)。
-
-1. 在项目的 `build.gradle` 中添加 `mavenCentral()` 仓库。
+1. 在项目的 `settings.gradle` 中添加 `mavenCentral()` 仓库。
 
 ```gradle
-buildscript {
+pluginManagement {
     repositories {
-        ...
+        ……
         mavenCentral()
+        ……
     }
-    ...
 }
-
-allprojects {
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        ...
+        ……
         mavenCentral()
     }
 }
@@ -69,23 +67,15 @@ allprojects {
 ...
 dependencies {
     ...
-    // x.y.z 请填写具体版本号，如：4.5.0。
-    // 可通过 SDK 发版说明获得最新版本号。
-    implementation 'io.hyphenate:hyphenate-chat:x.x.x'
+    // x.y.z 请填写具体版本号，如：1.4.0。
+    implementation("cn.shengwang:chat-sdk:x.y.z")
 }
 ```
 
-:::tip
-如果使用 3.8.0 之前的版本，gradle 依赖需要按照下面格式添加：
-:::
-
-```gradle
-implementation 'io.hyphenate:hyphenate-sdk:3.7.5' // 完整版本，包含音视频功能
-
-implementation 'io.hyphenate:hyphenate-sdk-lite:3.7.5' // 精简版，只包含IM功能
-```
-
+// TODO：修改版本号及repo地址链接
 若要查看最新版本号，请点击[这里](releasenote.html)。
+
+除此之外，你还可以通过手动复制 SDK 文件和动态加载 `.so` 库文件的方法集成 IM SDK，详见[集成文档](integration.html)。
 
 ### 3. 添加项目权限
 
@@ -123,20 +113,20 @@ implementation 'io.hyphenate:hyphenate-sdk-lite:3.7.5' // 精简版，只包含I
 </manifest>
 ```
 
-关于 App Key 对应的 value 获取，在 [环信即时通讯 IM 管理后台](https://console.easemob.com/user/login) 创建应用后，申请 App Key 并进行相关配置。
+关于 AppId 对应的 value 获取，在 [环信即时通讯 IM 管理后台](https://console.easemob.com/user/login) 创建应用后，申请 AppId 并进行相关配置。
 
 ### 4. 防止代码混淆
 
 在 `app/proguard-rules.pro` 文件中添加如下行，防止混淆 SDK 的代码：
 
 ```java
--keep class com.hyphenate.** {*;}
--dontwarn  com.hyphenate.**
+-keep class io.agora.** {*;}
+-dontwarn  io.agora.**
 ```
 
 ### 5. 其他集成问题
 
-当同时集成环信 SDK 4.11.0 和声网 RTM SDK 2.2.0 或 RTC SDK 4.3.0 及以上版本时，由于同时包含 `libaosl.so` 库，编译时可能会出现以下错误：
+当同时集成声网 Chat SDK 1.4.0 和声网 RTM SDK 2.2.0 或 RTC SDK 4.3.0 及以上版本时，由于同时包含 `libaosl.so` 库，编译时可能会出现以下错误：
 
 ```java
 com.android.builder.merge.DuplicateRelativeFileException: More than one file was found with OS independent path 'lib/x86/libaosl.so'
@@ -144,7 +134,7 @@ com.android.builder.merge.DuplicateRelativeFileException: More than one file was
 
 可在 app 的 `build.gradle` 文件的 Android 节点中添加 `packagingOptions` 节点，指定在构建过程中优先选择第一个匹配的文件：
 
-```java
+```gradle
 android {
   // ...
   packagingOptions {
@@ -169,70 +159,48 @@ android {
 在**主进程**中进行初始化：
 
 ```java
-EMOptions options = new EMOptions();
-options.setAppKey("Your appkey");
-......// 其他 EMOptions 配置。
-EMClient.getInstance().init(context, options);
+ChatOptions options = new ChatOptions();
+options.setAppId("Your appId");
+......// 其他 ChatOptions 配置。
+ChatClient.getInstance().init(context, options);
 ```
 
 ### 2. 创建账号
 
-可以使用如下代码创建账户：
-
-```java
-try {
-        // 注册失败会抛出 HyphenateException。
-        // 同步方法，会阻塞当前线程。
-        EMClient.getInstance().createAccount(userName, pwd);
-        //成功
-        //callBack.onSuccess(createLiveData(userName));
-    } catch (HyphenateException e) {
-        //失败
-        //callBack.onError(e.getErrorCode(), e.getMessage());
-    }
-```
-
-:::tip
-该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用，需要在[环信控制台](https://console.easemob.com/user/login)中手动开通开放注册功能；正式环境中应使用服务器端调用 Restful API 注册，具体见[注册单个用户](/document/server-side/account_system.html#开放注册单个用户)。
-:::
+// TODO： 补充从console上创建账号的步骤
 
 ### 3. 登录账号
 
+// TODO： 补充从console上获取token的步骤
+
 使用如下代码实现用户登录：
-
 ```java
-EMClient.getInstance().login(mAccount, mPassword, new EMCallBack() {
-    // 登录成功回调
-    @Override
-    public void onSuccess() {
+ChatClient.getInstance().loginWithToken(mAccount, mToken, new CallBack() {
+   // 登录成功回调
+   @Override
+   public void onSuccess() {
 
-    }
+   }
 
-    // 登录失败回调，包含错误信息
-    @Override
-    public void onError(final int code, final String error) {
+   // 登录失败回调，包含错误信息
+   @Override
+   public void onError(int code, String error) {
 
-    }
-
-    @Override
-    public void onProgress(int i, String s) {
-
-    }
-
+   }
 });
 ```
 
 :::tip
 1. 除了注册监听器，其他的 SDK 操作均需在登录之后进行。
-2. 登录成功后需要调用 `EMClient.getInstance().chatManager().loadAllConversations();` 和 `EMClient.getInstance().groupManager().loadAllGroups();`，确保进入主页面后本地会话和群组均加载完毕。
-3. 如果之前登录过，App 长期在后台运行后切换到前台运行可能会导致加载到内存的群组和会话为空。为了避免这种情况，可在主页面的 `oncreate` 里也添加这两种方法，不过，最好将这两种方法放在程序的开屏页。
+2. 登录成功后需要调用 `ChatClient.getInstance().chatManager().loadAllConversations();` 和 `ChatClient.getInstance().groupManager().loadAllGroups();`，确保进入主页面后本地会话和群组均加载完毕。
+3. 如果之前登录过，App 长期在后台运行后切换到前台运行可能会导致加载到内存的群组和会话为空。为了避免这种情况，可在主页面的 `onCreate` 里也添加这两种方法，不过，最好将这两种方法放在程序的开屏页。
 :::
 
 ### 4. 发送一条单聊消息
 
 ```java
 // `content` 为要发送的文本内容，`toChatUsername` 为对方的账号。
-EMMessage message = EMMessage.createTextSendMessage(content, toChatUsername);
+ChatMessage message = ChatMessage.createTextSendMessage(content, toChatUsername);
 // 发送消息
-EMClient.getInstance().chatManager().sendMessage(message);
+ChatClient.getInstance().chatManager().sendMessage(message);
 ```

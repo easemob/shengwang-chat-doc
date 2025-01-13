@@ -3,9 +3,8 @@
 对于单聊或群组聊天会话中已经发送成功的文本消息，SDK 支持对这些消息的内容进行修改。
 
 :::tip
-1. 若使用该功能，需将 SDK 升级至 4.1.0 或以上版本。
+1. 若使用该功能，需联系声网商务开通。
 2. 聊天室会话不支持消息修改功能。
-3. 若使用该功能，需联系环信商务开通。
 :::
 
 ## 技术原理
@@ -27,44 +26,46 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html) 及 [SDK 集成概述](overview.html)。
-- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
+- 了解即时通讯 IM API 的使用限制，详见 [使用限制](limitation.html)。
+- 已开通修改消息功能。
 
 ## 实现方法
 
-你可以调用 `EMChatManager#modifyMessage` 方法修改已经发送成功的消息, 目前只支持文本消息。一条消息默认最多可修改 10 次。
+你可以调用 `ChatManager#modifyMessage` 方法修改已经发送成功的消息, 目前只支持文本消息。一条消息默认最多可修改 10 次。
 
 示例代码如下：
 
 ```dart
 try {
   // msgId: 需要修改消息的消息 ID。
-  EMMessage modified = await EMClient.getInstance.chatManager.modifyMessage(
+  ChatMessage modified = await ChatClient.getInstance.chatManager.modifyMessage(
     messageId: msgId,
     msgBody: body,
   );
-} on EMError catch (e) {}
+} on ChatError catch (e) {}
 
 ```
-消息修改后，消息的接收方会收到 `EMChatEventHandler#onMessageContentChanged` 事件，该事件中会携带修改后的消息对象、最新一次修改消息的用户以及消息的最新修改时间。对于群聊会话，除了修改消息的用户，群组内的其他成员均会收到该事件。
+
+消息修改后，消息的接收方会收到 `ChatEventHandler#onMessageContentChanged` 事件，该事件中会携带修改后的消息对象、最新一次修改消息的用户以及消息的最新修改时间。对于群聊会话，除了修改消息的用户，群组内的其他成员均会收到该事件。
 
 :::tip
-若通过 RESTful API 修改自定义消息，消息的接收方也通过 `EMChatEventHandler#onMessageContentChanged` 事件接收修改后的自定义消息。
+若通过 RESTful API 修改自定义消息，消息的接收方也通过 `ChatEventHandler#onMessageContentChanged` 事件接收修改后的自定义消息。
 :::
 
 ```dart
-final handler = EMChatEventHandler(
+final handler = ChatEventHandler(
   onMessageContentChanged: (message, operatorId, operationTime) {},
 );
 
 // 添加消息监听
-EMClient.getInstance.chatManager.addEventHandler(
+ChatClient.getInstance.chatManager.addEventHandler(
   "UNIQUE_HANDLER_ID",
   handler,
 );
   ...
 
 // 移除消息监听
-EMClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
+ChatClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
 
 ```

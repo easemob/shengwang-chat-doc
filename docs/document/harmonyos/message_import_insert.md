@@ -2,11 +2,11 @@
 
 <Toc />
 
-本文介绍环信即时通讯 IM HarmonyOS SDK 如何在本地导入和插入消息。
+本文介绍即时通讯 IM HarmonyOS SDK 如何在本地导入和插入消息。
 
 ## 技术原理
 
-环信即时通讯 IM HarmonyOS SDK 支持提供 `ChatManager` 类和 `Conversation` 类支持在本地导入和插入消息，其中包含如下主要方法：
+即时通讯 IM HarmonyOS SDK 支持提供 `ChatManager` 类和 `Conversation` 类支持在本地导入和插入消息，其中包含如下主要方法：
 
 - `ChatManager#importMessages`：批量导入消息到数据库；
 - `Conversation#insertMessage`：在本地指定会话中插入一条消息。
@@ -16,7 +16,7 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化并连接到服务器，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM 的使用限制，详见 [使用限制](limitation.html)。
 
 ## 实现方法
 

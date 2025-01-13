@@ -2,15 +2,16 @@
 
 <Toc />
 
-环信即时通讯 IM 提供消息表情回复（下文统称 “Reaction”）功能。用户可以在单聊和群聊中对消息添加、删除表情。表情可以直观地表达情绪，利用 Reaction 可以提升用户的使用体验。同时在群组中，利用 Reaction 可以发起投票，根据不同表情的追加数量来确认投票。
+即时通讯 IM 提供消息表情回复（“Reaction”）功能。用户可以在单聊和群聊中对消息添加、删除表情。表情可以直观地表达情绪，利用 Reaction 可以提升用户的使用体验。同时在群组中，利用 Reaction 可以发起投票，根据不同表情的追加数量来确认投票。
 
 :::tip
-目前 Reaction 仅适用于单聊和群组。聊天室暂不支持 Reaction 功能。
+1. 若你当前套餐不支持该功能，需升级产品套餐。
+2. 目前 Reaction 仅适用于单聊和群组，不适用于聊天室。
 :::
 
 ## 技术原理
 
-环信即时通讯 IM SDK 支持你通过调用 API 在项目中实现如下功能：
+即时通讯 IM SDK 支持你通过调用 API 在项目中实现如下功能：
 
 - `addReaction` 在消息上添加 Reaction；
 - `removeReaction` 删除消息的 Reaction；
@@ -27,9 +28,9 @@ Reaction 场景示例如下：
 
 开始前，请确保满足以下条件：
 
-1. 完成 `1.0.5 以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
-2. 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
-3. 已联系商务开通 Reaction 功能。
+1. 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
+2. 了解即时通讯 IM 的 [使用限制](limitation.html)。
+3. 产品套餐包支持 Reaction 功能。
 
 ## 实现方法
 
@@ -63,29 +64,29 @@ ChatClient.getInstance()
 
 ```dart
 try {
-  await EMClient.getInstance.chatManager.addReaction(
+  await ChatClient.getInstance.chatManager.addReaction(
     messageId: messageId,
     reaction: reaction,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
 ### 获取消息的 Reaction 列表
 
 调用 `getReactionList` 可以从服务器获取指定消息的 Reaction 概览列表，列表内容包含 Reaction 内容、添加或移除 Reaction 的用户数量以及添加或移除 Reaction 的前三个用户的用户 ID。
-对应消息 `EMMessage` 有便捷的访问方式 `reactionList`。
+对应消息 `ChatMessage` 有便捷的访问方式 `reactionList`。
 示例代码如下：
 
 ```dart
 try {
-  Map<String, List<EMMessageReaction>> map =
-      await EMClient.getInstance.chatManager.fetchReactionList(
+  Map<String, List<ChatMessageReaction>> map =
+      await ChatClient.getInstance.chatManager.fetchReactionList(
     messageIds: messageIds,
     chatType: ChatType.GroupChat,
     groupId: groupId,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
@@ -93,8 +94,8 @@ try {
 
 ```dart
 try {
-    List<EMMessageReaction> reactions = await msg.reactionList();
-}on EMError catch (e) {
+    List<ChatMessageReaction> reactions = await msg.reactionList();
+}on ChatError catch (e) {
 }
 ```
 
@@ -104,12 +105,12 @@ try {
 
 ```dart
 try {
-  EMCursorResult<EMMessageReaction> result =
-      await EMClient.getInstance.chatManager.fetchReactionDetail(
+  ChatCursorResult<ChatMessageReaction> result =
+      await ChatClient.getInstance.chatManager.fetchReactionDetail(
     messageId: messageId,
     reaction: reaction,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
@@ -117,11 +118,11 @@ try {
 
 ```dart
 // 添加监听
-    EMClient.getInstance.chatManager.addEventHandler(
+    ChatClient.getInstance.chatManager.addEventHandler(
       "UNIQUE_HANDLER_ID",
-  EMChatEventHandler(onMessageReactionDidChange: (events) {}),
+  ChatEventHandler(onMessageReactionDidChange: (events) {}),
 );
 
 // 移除监听
-EMClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
+ChatClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
 ```

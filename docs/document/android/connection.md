@@ -9,7 +9,7 @@
 你可以通过注册连接监听确认连接状态。
 
 ```java
-EMConnectionListener connectionListener = new EMConnectionListener() {
+ConnectionListener connectionListener = new ConnectionListener() {
     @Override
     public void onConnected() {
 
@@ -47,9 +47,9 @@ EMConnectionListener connectionListener = new EMConnectionListener() {
     }
 };
 // 注册连接状态监听
-EMClient.getInstance().addConnectionListener(connectionListener);
+ChatClient.getInstance().addConnectionListener(connectionListener);
 // 移除连接状态监听
-EMClient.getInstance().removeConnectionListener(connectionListener);
+ChatClient.getInstance().removeConnectionListener(connectionListener);
 ```
 
 ## 自动重连

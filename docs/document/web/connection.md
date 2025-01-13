@@ -1,19 +1,18 @@
 # 连接
 
-应用客户端成功连接到环信服务器后，才能使用环信即时通讯 SDK 的收发消息等功能。
+应用客户端成功连接到声网服务器后，才能使用声网即时通讯 SDK 的收发消息等功能。
 
-你调用 `open` 方法登录后，客户端 SDK 会自动连接环信服务器。关于登录详情，请参见[登录文档](login.html)。
+你调用 `open` 方法登录后，客户端 SDK 会自动连接声网服务器。关于登录详情，请参见[登录文档](login.html)。
 
 ## 监听连接状态
 
 ```javascript
-conn.addEventHandler("connectionListener", {
+chatClient.addEventHandler("handlerId", {
   onConnected: () => {
     console.log("连接成功");
   },
-  // 自 4.8.0 版本，`onDisconnected` 事件新增断开原因回调参数, 告知用户触发 `onDisconnected` 的原因。
-  onDisconnected: () => {
-    console.log("连接断开");
+  onDisconnected: (reason) => {
+    console.log("连接断开", reason);
   },
   onReconnecting: () => {
     console.log("重连中");
@@ -39,7 +38,10 @@ conn.addEventHandler("connectionListener", {
 - 登录时鉴权错误，例如， token 无效（错误码 104）或已过期（错误码 108）。
 - 用户在其他的设备上更改了密码，导致此设备上自动登录失败，提示错误码 216。
 - 用户的账号被从服务器端删除，提示错误码 207。
-- 用户在另一设备登录，将当前设备上登录的用户踢出，提示错误码 206。 
+- 用户在另一设备登录，将当前设备上登录的用户踢出，提示错误码 206。
 - 用户登录设备数量超过限制，提示错误码 214。
 - 应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限，提示错误码 8。
+
+```
+
 ```

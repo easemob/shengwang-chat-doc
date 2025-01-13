@@ -13,25 +13,25 @@
 如上图所示，发送和接收单聊消息的步骤如下：
 
 1. 客户端向你的应用服务器请求 Token，你的应用服务器返回 Token。
-2. 客户端 A 和客户端 B 使用获得的 Token 登录环信即时通讯系统。
-3. 客户端 A 发送消息到环信即时通讯服务器。
-4. 环信即时通讯服务器将消息发送到客户端 B，客户端 B 接收消息。
+2. 客户端 A 和客户端 B 使用获得的 Token 登录即时通讯 IM。
+3. 客户端 A 发送消息到即时通讯服务器。
+4. 即时通讯服务器将消息发送到客户端 B，客户端 B 接收消息。
 
 ## 前提条件
 
 开始前，请确保你的开发环境满足如下要求：
 
 - Xcode 12.4 或以上版本，包括命令行工具;
-- iOS 10 或以上版本;
+- iOS 11 或以上版本;
 - Android SDK API 等级 21 或以上版本；
 - Android Studio 4.0 或以上版本，包括 JDK 1.8 或以上版本;
 - CocoaPods 包管理工具;
-- Flutter 2.10 或以上版本;
-- Dart 2.16 或以上版本;
+- Flutter 3.3.0 或以上版本;
+- Dart 3.3.0 或以上版本;
 
 配置开发或者运行环境如果遇到问题，请参考 [这里](https://docs.flutter.dev/get-started/install)。
 
-- 有效的环信即时通讯 IM 开发者账号和 App Key，详见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
+- 有效的即时通讯 IM 开发者账号和 App ID，详见 [开通即时通讯服务](enable_im.html)。
 
 ## 项目设置
 
@@ -72,7 +72,7 @@ android {
 
 ### 设置 iOS
 
-iOS 需要 iOS 10.0 以上版本，
+iOS 需要 iOS 11.0 以上版本，
 
 打开文件 `quick_start/ios/Runner.xcodeproj`，修改：`TARGETS -> General -> Deployment info`, 设置 iOS 版本为 10.0。
 
@@ -92,7 +92,7 @@ flutter pub get
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:im_flutter_sdk/im_flutter_sdk.dart';
+import 'package:shengwang_chat_sdk/agora_chat_sdk.dart';
 ```
 
 修改 `_MyHomePageState` 代码：
@@ -247,21 +247,19 @@ class _MyHomePageState extends State<MyHomePage> {
 
 ```dart
 void _initSDK() async {
-    EMOptions options = EMOptions(
-        appKey: "<#Your AppKey#>",
+    ChatOptions options = ChatOptions.withAppId(
+        "<#Your AppId#>",
         autoLogin: false,
     );
-    await EMClient.getInstance.init(options);
-    // 通知 SDK UI 已准备好。该方法执行后才会收到 `EMChatRoomEventHandler`、`EMContactEventHandler` 和 `EMGroupEventHandler` 回调。
-    await EMClient.getInstance.startCallback();
+    await ChatClient.getInstance.init(options);
+    // 通知 SDK UI 已准备好。该方法执行后才会收到 `ChatRoomEventHandler`、`ChatContactEventHandler` 和 `ChatGroupEventHandler` 回调。
+    await ChatClient.getInstance.startCallback();
 }
 ```
 
-### 注册环信 IM 用户
+### 注册即时通讯 IM 用户
 
-Demo 中使用 [开放注册](/document/server-side/account_system.html#开放注册单个用户)，此操作需要在环信后台开启 `开放注册`。在开放注册模式下，允许通过 App 客户端直接注册环信用户，正式环境中请使用 [授权注册](/document/server-side/account_system.html#授权注册单个用户)。
-
-在 `_signUp` 方法中添加注册代码：
+在 `_signUp` 方法中添加注册用户的代码：
 
 ```dart
 void _signUp() async {
@@ -271,13 +269,17 @@ void _signUp() async {
   }
 
   try {
-    await EMClient.getInstance.createAccount(_username, _password);
+    await ChatClient.getInstance.createAccount(_username, _password);
     _addLogToConsole("sign up succeed, username: $_username");
-  } on EMError catch (e) {
+  } on ChatError catch (e) {
     _addLogToConsole("sign up failed, e: ${e.code} , ${e.description}");
   }
 }
 ```
+
+:::tip
+该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用。正式环境中，需要[在声网控制台中创建用户或调用 Restful API 注册用户](login.html#用户注册)。
+:::
 
 ### 添加登录
 
@@ -291,9 +293,9 @@ void _signIn() async {
     }
 
     try {
-        await EMClient.getInstance.login(_username, _password);
+        await ChatClient.getInstance.login(_username, _password);
         _addLogToConsole("sign in succeed, username: $_username");
-    } on EMError catch (e) {
+    } on ChatError catch (e) {
         _addLogToConsole("sign in failed, e: ${e.code} , ${e.description}");
     }
 }
@@ -306,9 +308,9 @@ void _signIn() async {
 ```dart
 void _signOut() async {
     try {
-        await EMClient.getInstance.logout(true);
+        await ChatClient.getInstance.logout(true);
         _addLogToConsole("sign out succeed");
-    } on EMError catch (e) {
+    } on ChatError catch (e) {
         _addLogToConsole(
             "sign out failed, code: ${e.code}, desc: ${e.description}");
     }
@@ -326,12 +328,12 @@ void _sendMessage() async {
     return;
   }
 
-  var msg = EMMessage.createTxtSendMessage(
+  var msg = ChatMessage.createTxtSendMessage(
     targetId: _chatId,
     content: _messageContent,
   );
 
-  EMClient.getInstance.chatManager.sendMessage(msg);
+  ChatClient.getInstance.chatManager.sendMessage(msg);
 }
 ```
 
@@ -343,7 +345,7 @@ void _sendMessage() async {
 void _addChatListener() {
 
   // 添加消息状态变更监听
-  EMClient.getInstance.chatManager.addMessageEvent(
+  ChatClient.getInstance.chatManager.addMessageEvent(
       // ChatMessageEvent 对应的 key。
         "UNIQUE_HANDLER_ID",
         ChatMessageEvent(
@@ -362,16 +364,16 @@ void _addChatListener() {
 
 
   // 添加收消息监听
-  EMClient.getInstance.chatManager.addEventHandler(
-    // EMChatEventHandler 对应的 key。
+  ChatClient.getInstance.chatManager.addEventHandler(
+    // ChatEventHandler 对应的 key。
     "UNIQUE_HANDLER_ID",
-    EMChatEventHandler(
+    ChatEventHandler(
       onMessagesReceived: (messages) {
         for (var msg in messages) {
           switch (msg.body.type) {
             case MessageType.TXT:
               {
-                EMTextMessageBody body = msg.body as EMTextMessageBody;
+                ChatTextMessageBody body = msg.body as ChatTextMessageBody;
                 _addLogToConsole(
                   "receive text message: ${body.content}, from: ${msg.from}",
                 );
@@ -421,7 +423,7 @@ void _addChatListener() {
               break;
             case MessageType.CMD:
               {
-                // 当前回调中不会有 CMD 类型消息，CMD 类型消息通过 `EMChatEventHandler#onCmdMessagesReceived` 回调接收
+                // 当前回调中不会有 CMD 类型消息，CMD 类型消息通过 `ChatEventHandler#onCmdMessagesReceived` 回调接收
               }
               break;
           }
@@ -440,9 +442,9 @@ void _addChatListener() {
 @override
 void dispose() {
   // 移除消息状态监听
-  EMClient.getInstance.chatManager.removeMessageEvent("UNIQUE_HANDLER_ID");
+  ChatClient.getInstance.chatManager.removeMessageEvent("UNIQUE_HANDLER_ID");
   // 移除收消息监听
-  EMClient.getInstance.chatManager.removeEventHandle("UNIQUE_HANDLER_ID");
+  ChatClient.getInstance.chatManager.removeEventHandle("UNIQUE_HANDLER_ID");
   super.dispose();
 }
 ```
@@ -461,8 +463,8 @@ flutter run
 
 参考以下步骤发送和接收文本消息：
 
-1. 输入任意用户名（如 `flutter001` 和 `flutter002`）和密码 `1`，点击 `SIGN UP` 创建用户；
-2. 以 `flutter001` 身份登录 Demo，将 `Enter the username you want to send` 输如为 `flutter002`， 发送文本消息；
+1. 输入任意用户 ID（如 `flutter001` 和 `flutter002`）和密码 `1`，点击 `SIGN UP` 创建用户。
+2. 以 `flutter001` 身份登录 Demo，将 `Enter the username you want to send` 输如为 `flutter002`，发送文本消息。
 
 <img src="/images/flutter/simulator_screen_shot2.png" width="500" />
 
@@ -472,4 +474,4 @@ flutter run
 
 ## 后续步骤
 
-为保障通信安全，在正式生产环境中，你需要在自己的 app 服务端生成 Token。详见[使用 App Token 鉴权](/product/easemob_app_token.html)。
+为保障通信安全，在正式生产环境中，你需要在自己的 app 服务端生成 Token。详见[使用 Token 鉴权](token_authentication.html)。

@@ -118,8 +118,8 @@ ChatClient.getInstance()
 // customDeviceName: 自定义设备名称。
 ChatClient.getInstance()
   .init(
-    new ChatOptions({
-      appKey: appKey,
+    ChatOptions.withAppId({
+      appId: appId,
       customDeviceName: customDeviceName,
     })
   )
@@ -153,8 +153,8 @@ ChatClient.getInstance()
 // customOSType: 自定义设备类型。取值范围 [1,100]。
 ChatClient.getInstance()
   .init(
-    new ChatOptions({
-      appKey: appKey,
+    ChatOptions.withAppId({
+      appId: appId,
       customOSType: customOSType,
     })
   )
@@ -180,8 +180,8 @@ ChatClient.getInstance()
 // 初始化设置登录额外信息
 ChatClient.getInstance()
   .init(
-    new ChatOptions({
-      appKey: "foo",
+    ChatOptions.withAppId({
+      appId: "foo",
       loginExtraInfo: "test",
     })
   )

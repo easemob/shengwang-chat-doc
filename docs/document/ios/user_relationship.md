@@ -4,18 +4,18 @@
 
 用户登录后，可进行添加联系人、获取好友列表等操作。
 
-本文介绍如何通过环信即时通讯 IM SDK 管理好友关系，包括添加、同意、拒绝、删除、查询好友，以及管理黑名单，包括添加、移出、查询黑名单。
+本文介绍如何通过即时通讯 IM SDK 管理好友关系，包括添加、同意、拒绝、删除、查询好友，以及管理黑名单，包括添加、移出、查询黑名单。
 
 SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理：
 
 - 好友列表管理：查询好友列表、申请添加好友、同意好友申请、拒绝好友申请、删除好友和设置好友备注等操作。
 - 黑名单管理：查询黑名单列表、将添加用户至黑名单以及从黑名单中移出用户等操作。
   
-此外，环信即时通信 IM 默认支持陌生人之间发送单聊消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)[开启好友关系检查](/product/enable_and_configure_IM.html#好友关系检查)。该功能开启后，SDK 会在用户发起单聊时检查好友关系，若用户向陌生人发送单聊消息，SDK 会提示错误码 221。  
+此外，即时通讯 IM 默认支持陌生人之间发送单聊消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要联系声网商务开通该功能。该功能开启后，SDK 会在用户发起单聊时检查好友关系，若用户向陌生人发送单聊消息，SDK 会提示错误码 221。  
 
 ## 技术原理
 
-环信即时通讯 IM iOS SDK 可以实现好友的添加移除，黑名单的添加移除等功能：
+即时通讯 IM iOS SDK 可以实现好友的添加移除，黑名单的添加移除等功能：
 
 - 添加、删除好友。
 - 设置好友备注。
@@ -29,9 +29,9 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化并连接到服务器，详见 [快速开始](quickstart.html)；
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)；
-- 调用好友请求相关方法之前先导入头文件 `IEMContactManager.h`；
-- 调用监听接收好友请求等回调方法 API 之前导入头文件：`EMContactManagerDelegate.h`。
+- 了解即时通讯 IM 的使用限制，详见 [使用限制](limitation.html)；
+- 调用好友请求相关方法之前先导入头文件 `IAgoraChatContactManager.h`；
+- 调用监听接收好友请求等回调方法 API 之前导入头文件：`AgoraChatContactManagerDelegate.h`。
 
 ## 实现方法
 
@@ -47,7 +47,7 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 ```objectivec
 // 异步方法
-[[EMClient sharedClient].contactManager addContact:@"aUsername" message:@"Message" completion:^(NSString *aUsername, EMError *aError) {
+[[AgoraChatClient sharedClient].contactManager addContact:@"aUsername" message:@"Message" completion:^(NSString *aUsername, AgoraChatError *aError) {
 if (!aError) {
     NSLog(@"添加好友成功 %@",aUsername);
 } else {
@@ -64,9 +64,9 @@ if (!aError) {
 
 ```objectivec
 // 注册好友回调。
-[[EMClient sharedClient].contactManager addDelegate:self delegateQueue:nil];
+[[AgoraChatClient sharedClient].contactManager addDelegate:self delegateQueue:nil];
 // 移除好友回调。
-[[EMClient sharedClient].contactManager removeDelegate:self];
+[[AgoraChatClient sharedClient].contactManager removeDelegate:self];
 
 // 好友申请已收到。
 - (void)friendRequestDidReceiveFromUser:(NSString *)aUsername
@@ -79,7 +79,7 @@ if (!aError) {
 ```objectivec
 // 同意好友申请。
 // 异步方法
-[[EMClient sharedClient].contactManager approveFriendRequestFromUser:@"aUsername" completion:^(NSString *aUsername, EMError *aError) {
+[[AgoraChatClient sharedClient].contactManager approveFriendRequestFromUser:@"aUsername" completion:^(NSString *aUsername, AgoraChatError *aError) {
 if (!aError) {
     NSLog(@"同意加好友申请成功");
 } else {
@@ -89,7 +89,7 @@ if (!aError) {
 
 // 拒绝好友申请。
 // 异步方法
-[[EMClient sharedClient].contactManager declineFriendRequestFromUser:@"aUsername" completion:^(NSString *aUsername, EMError *aError) {
+[[AgoraChatClient sharedClient].contactManager declineFriendRequestFromUser:@"aUsername" completion:^(NSString *aUsername, AgoraChatError *aError) {
 if (!aError) {
     NSLog(@"拒绝加好友申请成功");
 } else {
@@ -121,7 +121,7 @@ if (!aError) {
 ```objectivec
 // 删除好友。
 // 异步方法
-[[EMClient sharedClient].contactManager deleteContact:@"aUsername" isDeleteConversation:aIsDeleteConversation completion:^(NSString *aUsername, EMError *aError) {
+[[AgoraChatClient sharedClient].contactManager deleteContact:@"aUsername" isDeleteConversation:aIsDeleteConversation completion:^(NSString *aUsername, AgoraChatError *aError) {
 if (!aError) {
     NSLog(@"删除好友成功");
 } else {
@@ -140,12 +140,12 @@ if (!aError) {
 
 ### 设置好友备注
 
-自 4.2.0 版本开始，你可以调用 `setContactRemark` 方法设置好友备注。
+你可以调用 `setContactRemark` 方法设置好友备注。
 
 好友备注的长度不能超过 100 个字符。
 
 ```objectivec
-[EMClient.sharedClient.contactManager setContactRemark:@"userId" remark:@"remark" completion:^(EMContact * _Nullable contact, EMError * _Nullable aError) {
+[AgoraChatClient.sharedClient.contactManager setContactRemark:@"userId" remark:@"remark" completion:^(AgoraChatContact * _Nullable contact, AgoraChatError * _Nullable aError) {
             
     }];
 ```
@@ -154,12 +154,12 @@ if (!aError) {
 
 你可以从服务器获取好友列表，也可以从本地获取已保存的好友列表。
 
-自 4.2.0 版本开始，你可以调用 `getAllContactsFromServerWithCompletion` 或 `getContactsFromServerWithCursor` 方法从服务器一次性或分页获取好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
+你可以调用 `getAllContactsFromServerWithCompletion` 或 `getContactsFromServerWithCursor` 方法从服务器一次性或分页获取好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
 
 - 一次性获取服务端的好友列表。
 
 ```objectivec
-[EMClient.sharedClient.contactManager getAllContactsFromServerWithCompletion:^(NSArray<EMContact *> * _Nullable aList, EMError * _Nullable aError) {
+[AgoraChatClient.sharedClient.contactManager getAllContactsFromServerWithCompletion:^(NSArray<AgoraChatContact *> * _Nullable aList, AgoraChatError * _Nullable aError) {
             
     }];
 ```
@@ -168,7 +168,7 @@ if (!aError) {
 
 ```objectivec
 //pageSize 的取值范围为 [1,50]
-[EMClient.sharedClient.contactManager getContactsFromServerWithCursor:@"" pageSize:50 completion:^(EMCursorResult<EMContact *> * _Nullable aResult, EMError * _Nullable aError) {
+[AgoraChatClient.sharedClient.contactManager getContactsFromServerWithCursor:@"" pageSize:50 completion:^(AgoraChatCursorResult<AgoraChatContact *> * _Nullable aResult, AgoraChatError * _Nullable aError) {
         
     }];
 ```
@@ -177,7 +177,7 @@ if (!aError) {
 
 ```objectivec
 // 异步方法
-[[EMClient sharedClient].contactManager getContactsFromServerWithCompletion:^(NSArray *aList, EMError *aError) {
+[[AgoraChatClient sharedClient].contactManager getContactsFromServerWithCompletion:^(NSArray *aList, AgoraChatError *aError) {
     if (!aError) {
         NSLog(@"获取所有好友成功 %@",aList);
     } else {
@@ -192,18 +192,18 @@ if (!aError) {
 需要从服务器获取好友列表之后，才能从本地获取到好友列表。
 :::
 
-自 4.2.0 版本开始，你可以调用 `getContact` 方法从本地获取单个好友的用户 ID 和好友备注；你也可以调用 `getAllContacts` 方法一次性获取整个好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
+你可以调用 `getContact` 方法从本地获取单个好友的用户 ID 和好友备注；你也可以调用 `getAllContacts` 方法一次性获取整个好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
 
 - 获取本地单个好友。  
 
 ```objectivec
-EMContact* contact = [EMClient.sharedClient.contactManager getContact:@"userId"];
+AgoraChatContact* contact = [AgoraChatClient.sharedClient.contactManager getContact:@"userId"];
 ```
 
 - 一次性获取本地好友列表。
 
 ```objectivec
-NSArray<EMContact*>* contacts = [EMClient.sharedClient.contactManager getAllContacts];
+NSArray<AgoraChatContact*>* contacts = [AgoraChatClient.sharedClient.contactManager getAllContacts];
 ```
 
 此外，你也可以调用 `getContacts` 方法从本地一次性获取所有好友的列表，该列表只包含好友的用户 ID。
@@ -211,7 +211,7 @@ NSArray<EMContact*>* contacts = [EMClient.sharedClient.contactManager getAllCont
 示例代码如下：
 
 ```objectivec
-NSArray *userlist = [[EMClient sharedClient].contactManager getContacts];
+NSArray *userlist = [[AgoraChatClient sharedClient].contactManager getContacts];
 ```
 
 ### 查看当前用户黑名单列表
@@ -227,7 +227,7 @@ NSArray *userlist = [[EMClient sharedClient].contactManager getContacts];
 ```objectivec
 // 从服务器获取黑名单列表。
 // 异步方法
-[[EMClient sharedClient].contactManager getBlackListFromServerWithCompletion:^(NSArray *aList, EMError *aError) {
+[[AgoraChatClient sharedClient].contactManager getBlackListFromServerWithCompletion:^(NSArray *aList, AgoraChatError *aError) {
     if (!aError) {
         NSLog(@"获取黑名单列表成功 %@",aList);
     } else {
@@ -240,7 +240,7 @@ NSArray *userlist = [[EMClient sharedClient].contactManager getContacts];
 
 ```objectivec
 // 同步方法
-NSArray *blockList = [[EMClient sharedClient].contactManager getBlackList];
+NSArray *blockList = [[AgoraChatClient sharedClient].contactManager getBlackList];
 ```
 
 ### 将用户加入黑名单
@@ -253,7 +253,7 @@ NSArray *blockList = [[EMClient sharedClient].contactManager getBlackList];
 
 ```objectivec
 // 异步方法
-[[EMClient sharedClient].contactManager addUserToBlackList:@"aUsername" completion:^(NSString *aUsername, EMError *aError) {
+[[AgoraChatClient sharedClient].contactManager addUserToBlackList:@"aUsername" completion:^(NSString *aUsername, AgoraChatError *aError) {
     if (!aError) {
         NSLog(@"将用户加入黑名单成功");
     } else {
@@ -268,7 +268,7 @@ NSArray *blockList = [[EMClient sharedClient].contactManager getBlackList];
 
 ```objectivec
 // 异步方法
-[[EMClient sharedClient].contactManager removeUserFromBlackList:@"aUsername" completion:^(NSString *aUsername, EMError *aError) {
+[[AgoraChatClient sharedClient].contactManager removeUserFromBlackList:@"aUsername" completion:^(NSString *aUsername, AgoraChatError *aError) {
     if (!aError) {
         NSLog(@"将用户移出黑名单成功");
     } else {

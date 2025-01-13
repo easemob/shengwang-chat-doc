@@ -86,8 +86,8 @@
 
 ```java
 // 初始化 IM，开启荣耀推送。
-EMOptions options = new EMOptions();
-EMPushConfig.Builder builder = new EMPushConfig.Builder(context);
+ChatOptions options = new ChatOptions();
+PushConfig.Builder builder = new PushConfig.Builder(context);
 builder.enableHonorPush();// 需要在 AndroidManifest.xml 中配置 App ID。
 options.setPushConfig(builder.build());
 
@@ -100,17 +100,17 @@ if (isSupport) {
    HonorPushClient.getInstance().init(context, false);
 }
 // 设置推送配置监听。若推送初始化失败，返回相应错误。
-EMPushHelper.getInstance().setPushListener(new PushListener() {
+PushHelper.getInstance().setPushListener(new PushListener() {
     @Override
-    public void onError(EMPushType pushType, long errorCode) {
-        // 返回的 errorCode 仅 9xx 为环信内部错误，可从 EMError 中查询，其他错误请根据 pushType 去相应第三方推送网站查询。
+    public void onError(PushType pushType, long errorCode) {
+        // 返回的 errorCode 仅 9xx 为环信内部错误，可从 Error 中查询，其他错误请根据 pushType 去相应第三方推送网站查询。
         EMLog.e("PushClient", "Push client occur a error: " + pushType + " - " + errorCode);
     }
 
     @Override
-    public boolean isSupportPush(EMPushType pushType, EMPushConfig pushConfig) {
+    public boolean isSupportPush(PushType pushType, PushConfig pushConfig) {
         // 由外部实现代码判断设备是否支持荣耀推送。
-        if (pushType == EMPushType.HONORPUSH){
+        if (pushType == PushType.HONORPUSH){
             return isSupport;
         }
         return super.isSupportPush(pushType, pushConfig);
@@ -148,7 +148,7 @@ public class HONORPushService extends HonorMessageService {
       if(token != null && !token.equals("")){
           EMLog.d("HONORPush", "service register honor push token success token:" + token);
         // IM SDK 提供的上传 device token 的 API
-          EMClient.getInstance().sendHonorPushTokenToServer(token);
+          ChatClient.getInstance().sendHonorPushTokenToServer(token);
       }else{
           EMLog.e("HONORPush", "service register honor push token fail!");
       }
@@ -173,7 +173,7 @@ if (HonorPushClient.getInstance().checkSupportHonorPush(this)){
         @Override
         public void onSuccess(String token) {
             EMLog.d("HonorPushClient","getPushToken onSuccess: " + token);
-            EMClient.getInstance().sendHonorPushTokenToServer(token);
+            ChatClient.getInstance().sendHonorPushTokenToServer(token);
         }
 
         @Override
@@ -205,7 +205,7 @@ if (HonorPushClient.getInstance().checkSupportHonorPush(this)){
     "payload":{
         "ext":{
             "em_android_push_ext":{
-                "honor_click_action":"com.hyphenate.chatdemo.section.me.action"
+                "honor_click_action":"io.agora.chatdemo.section.me.action"
             }
         }
     }
@@ -216,14 +216,14 @@ if (HonorPushClient.getInstance().checkSupportHonorPush(this)){
 
 ```java
 // 下面以 TXT 消息为例，图片、文件等类型的消息设置方法相同。
-EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
-EMTextMessageBody txtBody = new EMTextMessageBody("test");
+ChatMessage message = ChatMessage.createSendMessage(ChatMessage.Type.TXT);
+TextMessageBody txtBody = new TextMessageBody("test");
 // 设置接收方：单聊为对端用户的用户 ID；群聊为群组 ID；聊天室聊天为聊天室 ID。
 message.setTo("toChatUsername");
 JSONObject jsonObject = new JSONObject();
-jsonObject.put("honor_click_action","com.hyphenate.chatdemo.section.me.action");// 设置点击推送通知栏打开的应用自定义页面的自定义标记。
+jsonObject.put("honor_click_action","io.agora.chatdemo.section.me.action");// 设置点击推送通知栏打开的应用自定义页面的自定义标记。
 message.setAttribute("em_android_push_ext",jsonObject);// 发送消息。
-EMClient.getInstance().chatManager().sendMessage(message);
+ChatClient.getInstance().chatManager().sendMessage(message);
 ```
 
 2. 在 `AndroidMainfest.xml` 中配置 Activity intent-filter。

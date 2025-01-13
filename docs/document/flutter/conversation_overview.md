@@ -5,11 +5,11 @@
 
 会话是一个单聊、群聊或者聊天室所有消息的集合。用户需在会话中发送消息、查看或清空历史消息等操作。
 
-环信即时通讯 IM SDK 提供 `EMChatManager` 和 `EMConversation` 类以会话为单位对消息数据进行管理，如获取会话列表、置顶会话、添加会话标记、删除会话和管理未读消息等。
+即时通讯 IM SDK 提供 `ChatManager` 和 `ChatConversation` 类以会话为单位对消息数据进行管理，如获取会话列表、置顶会话、添加会话标记、删除会话和管理未读消息等。
 
 ## 会话类
 
-环信即时通讯 IM 提供会话类 `EMConversation`。该类定义了以下内容：
+即时通讯 IM 提供会话类 `ChatConversation`。该类定义了以下内容：
 
 | 方法  | 描述         |
 | :--------- | :------- |
@@ -44,9 +44,9 @@
 
 ```dart
 
-EMClient.getInstance.chatManager.addEventHandler(
+ChatClient.getInstance.chatManager.addEventHandler(
       sdkEventKey,
-      EMChatEventHandler(
+      ChatEventHandler(
       // 收到会话已读的事件。该事件在以下场景中触发：
        // 1. 当消息接收放调用 `sendConversationReadAck` 方法，SDK 会执行此回调，
        // 并将本地数据库中 `Message` 的 `hasReadAck` 置为 `true`.

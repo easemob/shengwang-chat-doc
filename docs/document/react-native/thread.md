@@ -25,7 +25,7 @@
 - 完成 `1.0.5 或以上版本` SDK 初始化，详见 [初始化](initialization.html)文档。
 - 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
 - 了解子区和子区成员数量限制，详见 [使用限制](/product/limitation.html)。
-- 联系商务开通子区功能。
+- 产品套餐包支持子区功能。
 
 ## 实现方法
 

@@ -11,7 +11,7 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 ## 技术原理
 
-环信即时通讯 IM Android SDK 提供 `EMContactManager` 类实现好友的添加移除，黑名单的添加移除等功能。
+环信即时通讯 IM Android SDK 提供 `ContactManager` 类实现好友的添加移除，黑名单的添加移除等功能。
 
 - 添加、删除好友。
 - 设置和获取好友备注。
@@ -40,8 +40,8 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 
 ```java
 // 添加好友。
-// 同步方法，会阻塞当前线程。异步方法为 asyncAddContact(String, String, EMCallBack)。
-EMClient.getInstance().contactManager().addContact(toAddUsername, reason);
+// 同步方法，会阻塞当前线程。异步方法为 asyncAddContact(String, String, CallBack)。
+ChatClient.getInstance().contactManager().addContact(toAddUsername, reason);
 ```
 
 2. 添加监听
@@ -49,7 +49,7 @@ EMClient.getInstance().contactManager().addContact(toAddUsername, reason);
 请监听与好友请求相关事件的回调，这样当用户收到好友请求，可以调用接受请求的 RESTful API 添加好友。服务器不会重复下发与好友请求相关的事件，建议退出应用时保存相关的请求数据。设置监听示例代码如下：
 
 ```java
-EMClient.getInstance().contactManager().setContactListener(new EMContactListener() {
+ChatClient.getInstance().contactManager().setContactListener(new ContactListener() {
     // 对方同意了好友请求。
     @Override
     public void onFriendRequestAccepted(String username) { }
@@ -76,11 +76,11 @@ EMClient.getInstance().contactManager().setContactListener(new EMContactListener
 
 ```java
 // 同意好友申请。
-// 同步方法，会阻塞当前线程。异步方法为 asyncAcceptInvitation(String, EMCallBack)。
-EMClient.getInstance().contactManager().acceptInvitation(username);
+// 同步方法，会阻塞当前线程。异步方法为 asyncAcceptInvitation(String, CallBack)。
+ChatClient.getInstance().contactManager().acceptInvitation(username);
 // 拒绝好友申请。
-// 同步方法，会阻塞当前线程。异步方法为 asyncDeclineInvitation(String, EMCallBack)。
-EMClient.getInstance().contactManager().declineInvitation(username);
+// 同步方法，会阻塞当前线程。异步方法为 asyncDeclineInvitation(String, CallBack)。
+ChatClient.getInstance().contactManager().declineInvitation(username);
 ```
 
 当你同意或者拒绝后，对方会通过好友事件回调，收到 `onContactAgreed` 或者 `onContactRefused`。
@@ -93,8 +93,8 @@ EMClient.getInstance().contactManager().declineInvitation(username);
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法为 asyncDeleteContact(String, EMCallBack)。
-EMClient.getInstance().contactManager().deleteContact(username);
+// 异步方法为 asyncDeleteContact(String, CallBack)。
+ChatClient.getInstance().contactManager().deleteContact(username);
 ```
 
 调用 `deleteContact` 删除好友后，对方会收到 `onContactDeleted` 回调。
@@ -106,7 +106,7 @@ EMClient.getInstance().contactManager().deleteContact(username);
 好友备注的长度不能超过 100 个字符。
 
 ```java
-EMClient.getInstance().contactManager().asyncSetContactRemark(userId, remark, new EMCallBack() {
+ChatClient.getInstance().contactManager().asyncSetContactRemark(userId, remark, new CallBack() {
     @Override
     public void onSuccess() {
         
@@ -126,9 +126,9 @@ EMClient.getInstance().contactManager().asyncSetContactRemark(userId, remark, ne
 - 一次性获取服务端好友列表。
 
 ```java
-EMClient.getInstance().contactManager().asyncFetchAllContactsFromServer(new EMValueCallBack<List<EMContact>>() {
+ChatClient.getInstance().contactManager().asyncFetchAllContactsFromServer(new ValueCallBack<List<Contact>>() {
     @Override
-    public void onSuccess(List<EMContact> value) {
+    public void onSuccess(List<Contact> value) {
         
     }
 
@@ -143,16 +143,16 @@ EMClient.getInstance().contactManager().asyncFetchAllContactsFromServer(new EMVa
 
 ```java
 // limit 的取值范围为 [1,50]
-List<EMContact> contacts=new ArrayList<>();
+List<Contact> contacts=new ArrayList<>();
 String cursor= "";
 int limit=20;
 doAsyncFetchAllContactsFromServer(contacts,cursor,limit);
 
-private void doAsyncFetchAllContactsFromServer(List<EMContact> contacts, String cursor, int limit) {
-    EMClient.getInstance().contactManager().asyncFetchAllContactsFromServer(limit, cursor, new EMValueCallBack<EMCursorResult<EMContact>>() {
+private void doAsyncFetchAllContactsFromServer(List<Contact> contacts, String cursor, int limit) {
+    ChatClient.getInstance().contactManager().asyncFetchAllContactsFromServer(limit, cursor, new ValueCallBack<CursorResult<Contact>>() {
         @Override
-        public void onSuccess(EMCursorResult<EMContact> value) {
-            List<EMContact> data = value.getData();
+        public void onSuccess(CursorResult<Contact> value) {
+            List<Contact> data = value.getData();
             String resultCursor = value.getCursor();
             if(!CollectionUtils.isEmpty(data)) {
                 contacts.addAll(data);
@@ -172,8 +172,8 @@ private void doAsyncFetchAllContactsFromServer(List<EMContact> contacts, String 
 此外，你也可以调用 `getAllContactsFromServer` 方法从服务器获取所有好友的列表，该列表只包含好友的用户 ID。
 
 ```java
-// 同步方法，会阻塞当前线程。异步方法为 asyncGetAllContactsFromServer(EMValueCallBack)。
-List<String> usernames = EMClient.getInstance().contactManager().getAllContactsFromServer();
+// 同步方法，会阻塞当前线程。异步方法为 asyncGetAllContactsFromServer(ValueCallBack)。
+List<String> usernames = ChatClient.getInstance().contactManager().getAllContactsFromServer();
 ```
 
 ### 从本地获取好友列表
@@ -188,11 +188,11 @@ List<String> usernames = EMClient.getInstance().contactManager().getAllContactsF
 
 ```java
 try {
-    EMContact emContact = EMClient.getInstance().contactManager().fetchContactFromLocal(userId);
+    Contact emContact = ChatClient.getInstance().contactManager().fetchContactFromLocal(userId);
     String remark = emContact.getRemark();
     String username = emContact.getUsername();
     EMLog.e(TAG, "fetchContactFromLocal success, username:" + username + ",remark:" + remark);
-} catch (HyphenateException e) {
+} catch (ChatException e) {
     EMLog.e(TAG, "fetchContactFromLocal error:" + e.getMessage());
 };
 ```
@@ -200,9 +200,9 @@ try {
 - 一次性获取本地好友列表。
 
 ```java
-EMClient.getInstance().contactManager().asyncFetchAllContactsFromLocal(new EMValueCallBack<List<EMContact>>() {
+ChatClient.getInstance().contactManager().asyncFetchAllContactsFromLocal(new ValueCallBack<List<Contact>>() {
     @Override
-    public void onSuccess(List<EMContact> value) {
+    public void onSuccess(List<Contact> value) {
         
     }
 
@@ -218,7 +218,7 @@ EMClient.getInstance().contactManager().asyncFetchAllContactsFromLocal(new EMVal
 示例代码如下：
 
 ```java
-List<String> usernames = EMClient.getInstance().contactManager().getContactsFromLocal();
+List<String> usernames = ChatClient.getInstance().contactManager().getContactsFromLocal();
 ```
 
 ### 添加用户到黑名单
@@ -233,8 +233,8 @@ List<String> usernames = EMClient.getInstance().contactManager().getContactsFrom
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法为 asyncAddUserToBlackList(String, boolean, EMCallBack)。
-EMClient.getInstance().contactManager().addUserToBlackList(username,true);
+// 异步方法为 asyncAddUserToBlackList(String, boolean, CallBack)。
+ChatClient.getInstance().contactManager().addUserToBlackList(username,true);
 ```
 
 ### 将用户从黑名单移除
@@ -243,8 +243,8 @@ EMClient.getInstance().contactManager().addUserToBlackList(username,true);
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法为 asyncRemoveUserFromBlackList(String, EMCallBack)。
-EMClient.getInstance().contactManager().removeUserFromBlackList(username);
+// 异步方法为 asyncRemoveUserFromBlackList(String, CallBack)。
+ChatClient.getInstance().contactManager().removeUserFromBlackList(username);
 ```
 
 ### 从服务器获取黑名单列表
@@ -253,8 +253,8 @@ EMClient.getInstance().contactManager().removeUserFromBlackList(username);
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法为 asyncGetBlackListFromServer(EMValueCallBack)。
-EMClient.getInstance().contactManager().getBlackListFromServer();
+// 异步方法为 asyncGetBlackListFromServer(ValueCallBack)。
+ChatClient.getInstance().contactManager().getBlackListFromServer();
 ```
 
 ### 从本地数据库获取黑名单列表
@@ -264,5 +264,5 @@ EMClient.getInstance().contactManager().getBlackListFromServer();
 示例代码如下：
 
 ```java
-EMClient.getInstance().contactManager().getBlackListUsernames();
+ChatClient.getInstance().contactManager().getBlackListUsernames();
 ```

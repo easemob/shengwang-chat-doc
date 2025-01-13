@@ -2,7 +2,7 @@
 
 <Toc />
 
-环信即时通讯 IM 自 V3.5.1 开始支持管理用户属性功能。
+声网即时通讯 IM 支持管理用户属性功能。
 
 用户属性指实时消息互动用户的信息，如用户昵称、头像、邮箱、电话、性别、签名和生日等。
 
@@ -11,13 +11,14 @@
 本文介绍如何管理用户属性，包括设置、更新、存储并获取用户的相关信息。
 
 :::tip
-- 用户属性存储在环信服务器。如果你有安全方面的顾虑，环信建议你自行管理用户属性。
+
+- 用户属性存储在声网服务器。如果你有安全方面的顾虑，声网建议你自行管理用户属性。
 - 为保证信息安全，app 用户只能修改自己的用户属性。只有 app 管理员可以修改其他用户的用户属性。
-:::
+  :::
 
 ## 技术原理
 
-环信即时通讯 IM Web SDK 支持你通过调用 API 实现如下功能：
+声网即时通讯 IM Web SDK 支持你通过调用 API 实现如下功能：
 
 - 设置或修改用户属性。
 - 获取指定用户的用户属性。
@@ -27,7 +28,7 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解声网即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 
 ## 实现方法
 
@@ -42,20 +43,19 @@
 参考如下示例代码，设置所有用户属性：
 
 ```javascript
-let option = {
+const option = {
   nickname: "The nickname",
   avatarurl: "https://avatarurl",
-  mail: "123@qq.com",
-  phone: "16888888888",
-  gender: "female",
-  birth: "2000-01-01",
+  mail: "mail",
+  phone: "phone number",
+  gender: "gender",
+  birth: "birth day",
   sign: "a sign",
   ext: JSON.stringify({
     nationality: "China",
-    merit: "Hello, world！",
   }),
 };
-conn.updateUserInfo(option).then((res) => {
+chatClient.updateUserInfo(option).then((res) => {
   console.log(res);
 });
 ```
@@ -63,7 +63,7 @@ conn.updateUserInfo(option).then((res) => {
 参考如下示例代码，设置指定用户属性，例如昵称：
 
 ```javascript
-conn.updateUserInfo("nickname", "Your nickname").then((res) => {
+chatClient.updateUserInfo("nickname", "Your nickname").then((res) => {
   console.log(res);
 });
 ```
@@ -92,7 +92,7 @@ conn.updateUserInfo("nickname", "Your nickname").then((res) => {
  * @param {String|Array} users 用户 ID。可设置一个用户 ID，也可通过数组形式设置多个。
  */
 let users = "user1" || ["user1", "user2"];
-conn.fetchUserInfoById(users).then((res) => {
+chatClient.fetchUserInfoById(users).then((res) => {
   console.log(res);
 });
 ```
@@ -104,12 +104,12 @@ conn.fetchUserInfoById(users).then((res) => {
  * @param {String|Array} users 用户 ID。可设置一个用户 ID，也可通过数组形式设置多个。
  * @param {String|Array} properties 查询的用户属性。
  */
-conn.fetchUserInfoById("userId", "nickname").then((res) => {
+chatClient.fetchUserInfoById("userId", "nickname").then((res) => {
   console.log(res);
 });
 
 // 同时查询多个用户属性。
-conn
+chatClient
   .fetchUserInfoById(["user1", "user2"], ["nickname", "avatarurl"])
   .then((res) => {
     console.log(res);
@@ -120,7 +120,7 @@ conn
 
 ### 管理用户头像
 
-环信 IM SDK 仅支持存储头像文件的 URL 地址，不存储头像文件本身。要管理用户头像，你需要使用第三方文件存储服务。
+声网 IM SDK 仅支持存储头像文件的 URL 地址，不存储头像文件本身。要管理用户头像，你需要使用第三方文件存储服务。
 
 在 app 中进行用户头像管理，需采取以下步骤：
 
@@ -141,18 +141,18 @@ conn
 
 ```javascript
 // 将自定义事件类型设置为 `userCard`。
-let customEvent = "userCard";
+const customEvent = "userCard";
 // 通过 `customExts` 将这些属性设置为自定义消息的扩展信息。
-let customExts = {
-  nickname: "昵称",
-  avatarurl: "https://avatarurl",
-  mail: "123@qq.com",
-  phone: "16888888888",
-  gender: "female",
-  birth: "2000-01-01",
+const customExts = {
+  nickname: "nickname",
+  avatarurl: "avatarurl",
+  mail: "mail",
+  phone: "phone number",
+  gender: "gender",
+  birth: "birth day",
   sign: "a sign",
 };
-let option = {
+const option = {
   // 设置消息类型。
   type: "custom",
   // 设置消息接收方。
@@ -164,8 +164,8 @@ let option = {
   chatType: "singleChat",
 };
 // 创建自定义消息。
-let msg = WebIM.message.create(option);
-conn
+const msg = ChatSDK.message.create(option);
+chatClient
   .send(msg)
   .then((res) => {
     console.log("Success");

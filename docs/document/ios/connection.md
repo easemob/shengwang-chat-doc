@@ -1,38 +1,40 @@
 # 连接
 
-应用客户端成功连接到环信服务器后，才能使用环信即时通讯 SDK 的收发消息等功能。
+应用客户端成功连接到声网服务器后，才能使用即时通讯 SDK 的收发消息等功能。
 
-你调用 `login` 方法登录后，客户端 SDK 会自动连接环信服务器。关于登录详情，请参见[登录文档](login.html)。
+你调用 `login` 方法登录后，客户端 SDK 会自动连接声网服务器。关于登录详情，请参见[登录文档](login.html)。
 
 ## 监听连接状态
 
 你可以通过注册连接监听确认连接状态。
 
-```swift
-override func viewDidLoad() {
+
+```objectivec
+void viewDidLoad {
     ...
     // 注册连接状态监听，在 SDK 初始化之后调用。
-    EMClient.shared().add(self, delegateQueue: nil)
+    [super viewDidLoad];
+    [AgoraChatClient.sharedClient addDelegate:self delegateQueue:nil];
     ...
 }
 
-extension ViewController: EMClientDelegate {
+@interface ViewController: <AgoraChatClientDelegate> {
     // 连接成功，开始从服务器拉取离线消息时触发。
     // 注意：如果本次登录服务器没有离线消息，不会触发该回调。
-    func onOfflineMessageSyncStart() {
+    -(void)onOfflinessageSyncStart {
     }
     // 离线用户上线后从服务器拉取离线消息结束时触发。
     // 注意：如果再拉取离线过程中因网络或其他原因导致连接断开，不会触发该回调。
-    func onOfflineMessageSyncFinish() {
+    -(void)onOfflineMessageSyncFinish {
     }
     
     // 连接状态变更时触发该回调
-    func connectionStateDidChange(_ aConnectionState: EMConnectionState) {
+    - (void)connectionStateDidChange:(AgoraChatConnectionState)aConnectionState {
         
     }
     
     // token 已过期
-    func tokenDidExpire(_ aErrorCode: EMErrorCode) {
+    - (void)tokenDidExpire:(AgoraChatErrorCode)aErrorCode {
         
     }
 }

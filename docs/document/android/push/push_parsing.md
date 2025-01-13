@@ -111,10 +111,10 @@ public class MiMsgReceiver extends EMMiMsgReceiver {
 
 对于版本号为 480、版本名为 3.0.0.0 及之后的推送 SDK，在启动的 `activty` 的 `intent` 中获取自定义扩展。
 
-对于版本号为 480，版本名为 3.0.0.0 之前的推送 SDK，重写 `EMVivoMsgReceiver.onNotificationMessageClicked` 方法可以在 `UPSNotificationMessage` 对象中获取自定义扩展。
+对于版本号为 480，版本名为 3.0.0.0 之前的推送 SDK，重写 `VivoMsgReceiver.onNotificationMessageClicked` 方法可以在 `UPSNotificationMessage` 对象中获取自定义扩展。
 
 ```java
-public class MyVivoMsgReceiver extends EMVivoMsgReceiver {
+public class MyVivoMsgReceiver extends VivoMsgReceiver {
     @Override
     public void onNotificationMessageClicked(Context context, UPSNotificationMessage upsNotificationMessage) {
         Map<String, String> map = upsNotificationMessage.getParams();

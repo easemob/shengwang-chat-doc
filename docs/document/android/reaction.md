@@ -5,8 +5,8 @@
 环信即时通讯 IM 提供消息表情回复（下文统称 “Reaction”）功能。用户可以在单聊和群聊中对消息添加、删除表情。表情可以直观地表达情绪，利用 Reaction 可以提升用户的使用体验。同时在群组中，利用 Reaction 可以发起投票，根据不同表情的追加数量来确认投票。
 
 :::tip
-
-目前 Reaction 仅适用于单聊和群组。聊天室暂不支持 Reaction 功能。
+1. 若你当前套餐不支持该功能，需升级产品套餐。
+2. 目前 Reaction 仅适用于单聊和群组，不适用于聊天室。
 :::
 
 ## 技术原理
@@ -17,7 +17,7 @@
 - `asyncRemoveReaction` 删除消息的 Reaction；
 - `asyncGetReactionList` 获取消息的 Reaction 列表；
 - `asyncGetReactionDetail` 获取 Reaction 详情；
-- `EMMessage.getMessageReaction()` 从 `EMMessage` 对象获取 Reaction 列表。
+- `ChatMessage.getMessageReaction()` 从 `ChatMessage` 对象获取 Reaction 列表。
 
 Reaction 场景示例如下：
 
@@ -31,7 +31,7 @@ Reaction 场景示例如下：
 
 1. 完成 `3.9.2.1 或以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
 2. 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
-3. 已联系商务开通 Reaction 功能。
+3. 产品套餐包支持 Reaction 功能。
 
 ## 实现方法
 
@@ -45,7 +45,7 @@ Reaction 场景示例如下：
 
 ```java
 // 添加 Reaction。
- EMClient.getInstance().chatManager().asyncAddReaction(message.getMsgId(), reaction, new EMCallBack() {
+ ChatClient.getInstance().chatManager().asyncAddReaction(message.getMsgId(), reaction, new CallBack() {
     @Override
     public void onSuccess() {
 
@@ -63,16 +63,16 @@ Reaction 场景示例如下：
 });
 
 // 监听 Reaction 更新。
-EMMessageListener listener = new EMMessageListener() {
+MessageListener listener = new MessageListener() {
     ...
     @Override
-    public void onReactionChanged(List<EMMessageReactionChange> messageReactionChangeList) {
+    public void onReactionChanged(List<MessageReactionChange> messageReactionChangeList) {
         // 处理 reaction 更新逻辑
     }
     ...
 };
 // 注册消息监听
-EMClient.getInstance().chatManager().addMessageListener(listener);
+ChatClient.getInstance().chatManager().addMessageListener(listener);
 ```
 
 ### 删除消息的 Reaction
@@ -83,7 +83,7 @@ EMClient.getInstance().chatManager().addMessageListener(listener);
 
 ```java
 // 删除 Reaction。
-EMClient.getInstance().chatManager().asyncRemoveReaction(message.getMsgId(), reaction, new EMCallBack() {
+ChatClient.getInstance().chatManager().asyncRemoveReaction(message.getMsgId(), reaction, new CallBack() {
     @Override
     public void onSuccess() {
 
@@ -101,16 +101,16 @@ EMClient.getInstance().chatManager().asyncRemoveReaction(message.getMsgId(), rea
 });
 
 // 监听 Reaction 更新。
-EMMessageListener listener = new EMMessageListener() {
+MessageListener listener = new MessageListener() {
     ...
     @Override
-    public void onReactionChanged(List<EMMessageReactionChange> messageReactionChangeList) {
+    public void onReactionChanged(List<MessageReactionChange> messageReactionChangeList) {
         // 处理 reaction 更新逻辑
     }
     ...
 };
 // 注册消息监听
-EMClient.getInstance().chatManager().addMessageListener(listener);
+ChatClient.getInstance().chatManager().addMessageListener(listener);
 ```
 
 ### 获取消息的 Reaction 列表
@@ -118,9 +118,9 @@ EMClient.getInstance().chatManager().addMessageListener(listener);
 调用 `asyncGetReactionList` 可以从服务器获取多条指定消息的 Reaction 概览列表，列表内容包含 Reaction 内容，添加或移除 Reaction 的用户数量，以及添加或移除 Reaction 的前三个用户的用户 ID。示例代码如下：
 
 ```java
-EMClient.getInstance().chatManager().asyncGetReactionList(msgIdList, EMMessage.ChatType.Chat, groupId, new EMValueCallBack<Map<String, List<EMMessageReaction>>>() {
+ChatClient.getInstance().chatManager().asyncGetReactionList(msgIdList, ChatMessage.ChatType.Chat, groupId, new ValueCallBack<Map<String, List<MessageReaction>>>() {
     @Override
-    public void onSuccess(Map<String, List<EMMessageReaction>> stringListMap) {
+    public void onSuccess(Map<String, List<MessageReaction>> stringListMap) {
 
     }
 
@@ -136,10 +136,10 @@ EMClient.getInstance().chatManager().asyncGetReactionList(msgIdList, EMMessage.C
 调用 `asyncGetReactionDetail` 可以从服务器获取指定 Reaction 的详情，包括 Reaction 内容，添加或移除 Reaction 的用户数量以及添加或移除 Reaction 的全部用户列表。示例代码如下：
 
 ```java
-EMClient.getInstance().chatManager().asyncGetReactionDetail(mMsgId, emojiconId,
-                pageCursor, 30, new EMValueCallBack<EMCursorResult<EMMessageReaction>>() {
+ChatClient.getInstance().chatManager().asyncGetReactionDetail(mMsgId, emojiconId,
+                pageCursor, 30, new ValueCallBack<CursorResult<MessageReaction>>() {
     @Override
-    public void onSuccess(EMCursorResult<EMMessageReaction> messageReactionCursorResult) {
+    public void onSuccess(CursorResult<MessageReaction> messageReactionCursorResult) {
 
     }
 

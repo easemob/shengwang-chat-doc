@@ -2,28 +2,28 @@
 
 <Toc />
 
-本文介绍环信即时通讯 IM Flutter SDK 如何从服务器和本地获取历史消息。
+本文介绍即时通讯 IM Flutter SDK 如何从服务器和本地获取历史消息。
 
-- 环信即时通讯 IM 提供消息漫游功能，即将用户的所有会话的历史消息保存在消息服务器，用户在任何一个终端设备上都能获取到历史信息，使用户在多个设备切换使用的情况下也能保持一致的会话场景。
+- 即时通讯 IM 提供消息漫游功能，即将用户的所有会话的历史消息保存在消息服务器，用户在任何一个终端设备上都能获取到历史信息，使用户在多个设备切换使用的情况下也能保持一致的会话场景。
 
 - SDK 内部使用 SQLite 保存本地消息，你可以获取本地消息。
 
 ## 技术原理
 
-环信即时通讯 IM Flutter SDK 通过 `EMChatManager` 和 `EMConversation` 类实现对本地消息的管理，其中核心方法如下：
+即时通讯 IM Flutter SDK 通过 `ChatManager` 和 `ChatConversation` 类实现对本地消息的管理，其中核心方法如下：
 
-- `EMChatManager#fetchHistoryMessages`：根据 `FetchMessageOptions` 类获取服务器保存的指定会话中的消息。
-- `EMChatManager.getConversation`：读取本地指定会话的消息。
-- `EMChatManager.loadMessage`：根据消息 ID 获取消息。
-- `EMConversation.loadMessagesWithMsgType`：获取本地存储的指定会话中特定类型的消息。
-- `EMConversation.loadMessagesFromTime`：获取一定时间段内本地指定会话中发送和接收的消息
+- `ChatManager#fetchHistoryMessages`：根据 `FetchMessageOptions` 类获取服务器保存的指定会话中的消息。
+- `ChatManager#getConversation`：读取本地指定会话的消息。
+- `ChatManager#load#Message`：根据消息 ID 获取消息。
+- `ChatConversation#loadMessagesWithMsgType`：获取本地存储的指定会话中特定类型的消息。
+- `ChatConversation#loadMessagesFromTime`：获取一定时间段内本地指定会话中发送和接收的消息
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM API 的使用限制，详见 [使用限制](limitation.html)。
 
 ## 实现方法
 
@@ -41,9 +41,8 @@
 - 对于群组聊天，你可以设置 `from` 参数拉取群组中单个成员发送的历史消息。
 
 :::tip
-1. 若使用该 API，需将 SDK 版本升级至 V4.0.2 版本或以上。
-2. **默认可获取单聊和群组聊天的历史消息。若要获取聊天室的历史消息，需升级至 4.5.0 版本，并联系环信商务。**
-3. 历史消息在服务器上的存储时间与产品的套餐包相关，详见[产品套餐包详情](/product/pricing.html#套餐包功能详情)。
+1. **默认可获取单聊和群组聊天的历史消息。若要获取聊天室的历史消息，需联系声网商务。**
+2. 历史消息在服务器上的存储时间与产品的套餐包相关，详见[产品套餐包详情](/product/pricing.html#套餐包功能详情)。
 :::
 
 ```dart
@@ -66,8 +65,8 @@
     // options: 查询条件。
     // cursor: 分页查询时的游标， 首次可以传 null 或不传，如果是分页查询，传上一次查询结果的游标 result.cursor。
     // pageSize: 每页查询的消息数量。
-    EMCursorResult<EMMessage> result =
-        await EMClient.getInstance.chatManager.fetchHistoryMessagesByOption(
+    ChatCursorResult<ChatMessage> result =
+        await ChatClient.getInstance.chatManager.fetchHistoryMessagesByOption(
       conversationId,
       type,
       options: options,
@@ -85,19 +84,19 @@ try {
   // 会话 ID
   String convId = "convId";
   // 会话类型：Chat 为单聊；GroupChat 为群聊；ChatRoom 为聊天室。
-  EMConversationType convType = EMConversationType.Chat;
+  ChatConversationType convType = ChatConversationType.Chat;
   // 获取的最大消息数
   int pageSize = 10;
   // 搜索的起始消息 ID
   String startMsgId = "";
-  EMCursorResult<EMMessage?> cursor =
-      await EMClient.getInstance.chatManager.fetchHistoryMessages(
+  ChatCursorResult<ChatMessage?> cursor =
+      await ChatClient.getInstance.chatManager.fetchHistoryMessages(
     conversationId: convId,
     type: convType,
     pageSize: pageSize,
     startMsgId: startMsgId,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
@@ -110,16 +109,16 @@ try {
 String convId = "convId";
 // 如果会话不存在是否创建。设置为 `true`，则会返回会话对象。
 bool createIfNeed = true;
-// 会话类型。详见 `EMConversationType` 枚举类型。
-EMConversationType conversationType = EMConversationType.Chat;
+// 会话类型。详见 `ChatConversationType` 枚举类型。
+ChatConversationType conversationType = ChatConversationType.Chat;
 // 执行操作。
-EMConversation? conversation =
-    await EMClient.getInstance.chatManager.getConversation(
+ChatConversation? conversation =
+    await ChatClient.getInstance.chatManager.getConversation(
   convId,
   conversationType,
   true,
 );
-List<EMMessage>? list = await conversation?.loadMessages();
+List<ChatMessage>? list = await conversation?.loadMessages();
 ```
 
 ### 根据消息 ID 获取消息
@@ -128,7 +127,7 @@ List<EMMessage>? list = await conversation?.loadMessages();
 
 ```dart
 // msgId：要获取消息的消息 ID。
-EMMessage? msg = await EMClient.getInstance.chatManager.loadMessage("msgId");
+ChatMessage? msg = await ChatClient.getInstance.chatManager.loadMessage("msgId");
 ```
 
 ### 获取指定会话中特定类型的消息
@@ -138,15 +137,15 @@ EMMessage? msg = await EMClient.getInstance.chatManager.loadMessage("msgId");
 每次最多可获取 400 条消息。若未获取到任何消息，SDK 返回空列表。
 
 ```dart
-EMConversation? conv =
-        await EMClient.getInstance.chatManager.getConversation("convId");
-    List<EMMessage>? list = await conv?.loadMessagesWithMsgType(
+ChatConversation? conv =
+        await ChatClient.getInstance.chatManager.getConversation("convId");
+    List<ChatMessage>? list = await conv?.loadMessagesWithMsgType(
       // 消息类型。
       type: MessageType.TXT,
       // 每次获取的消息数量。取值范围为 [1,400]。
       count: 50,
       // 消息搜索方向：（默认）`UP`：按消息时间戳的逆序搜索；`DOWN`：按消息时间戳的正序搜索。
-      direction: EMSearchDirection.Up,
+      direction: ChatSearchDirection.Up,
     );
 ```
 
@@ -157,9 +156,9 @@ EMConversation? conv =
 每次最多可获取 400 条消息。
 
 ```dart
-EMConversation? conv =
-        await EMClient.getInstance.chatManager.getConversation("convId");
-    List<EMMessage>? list = await conv?.loadMessagesFromTime(
+ChatConversation? conv =
+        await ChatClient.getInstance.chatManager.getConversation("convId");
+    List<ChatMessage>? list = await conv?.loadMessagesFromTime(
       // 查询的起始时间戳，单位为毫秒。
       startTime: startTime,
       // 查询的结束时间戳，单位为毫秒。
@@ -174,10 +173,10 @@ EMConversation? conv =
 你可以调用 `loadMessagesFromTime` 方法从 SDK 本地数据库中获取会话在某个时间段内的全部消息数。
 
 ```dart
-EMConversation? conversation =
-    await EMClient.getInstance.chatManager.getConversation(conversationId);
+ChatConversation? conversation =
+    await ChatClient.getInstance.chatManager.getConversation(conversationId);
 if (conversation != null) {
-    List<EMMessage> messages = await conversation.loadMessagesFromTime(
+    List<ChatMessage> messages = await conversation.loadMessagesFromTime(
     startTime: startMs,
     endTime: endMs,
     );

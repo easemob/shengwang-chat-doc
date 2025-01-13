@@ -12,13 +12,13 @@
 打开终端，添加依赖到项目中
 
 ```sh
-yarn add react-native-chat-sdk
+yarn add react-native-shengwang-chat
 ```
 
 or
 
 ```sh
-npm i --save react-native-chat-sdk
+npm i --save react-native-shengwang-chat
 ```
 
 ## 添加权限

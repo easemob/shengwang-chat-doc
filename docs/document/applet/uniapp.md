@@ -2,25 +2,14 @@
 
 <Toc />
 
-环信小程序 SDK 为各端小程序开发提供一套完整的技术解决方案，在各端小程序的开发环境下，集成 IM 相关的功能更加便捷、高效。让您的小程序快速获得安全稳定的 IM 能力，集成简单，使用方便，帮助您快速拓展业务，赢得先机。
+声网小程序 SDK 为各端小程序开发提供一套完整的技术解决方案，在各端小程序的开发环境下，集成 IM 相关的功能更加便捷、高效。让您的小程序快速获得安全稳定的 IM 能力，集成简单，使用方便，帮助您快速拓展业务，赢得先机。
 
 :::tip
+
 - uniapp SDK 目前支持微信、支付宝、QQ、百度小程序、抖音（请使用低于 1.70.0 以下的版本基础库）、uni-app 编译的 原生 Android 以及 iOS。
 - uniapp SDK 4.11.0 及以上版本支持鸿蒙系统。
-:::
-
-## 体验小程序
-
-扫描下方小程序二维码，或者微信搜索 **环信 IM Uniapp** 即可快速体验环信小程序 Demo 在线版本
-
-![img](/images/applet/applet-demo.png)
-
-:::tip
-
-- 小程序 Demo 只包含部分 IM 功能，详细参考 **功能说明**。
-- Uni-app Demo Git 源码地址 [https://github.com/easemob/webim-uniapp-demo](https://github.com/easemob/webim-uniapp-demo)
   :::
-  
+
 ## 功能说明
 
 - 支持账户注册登录
@@ -46,22 +35,22 @@
 
 ### 配置服务器域名（以微信为例）
 
-为满足不同客户的业务需求，环信在多地部署了数据中心。不同数据中心的 REST API 请求域名、WebSocket 访问域名不同。请根据您所在数据中心进行配置。
+为满足不同客户的业务需求，声网在多地部署了数据中心。不同数据中心的 REST API 请求域名、WebSocket 访问域名不同。请根据您所在数据中心进行配置。
 
-环信不同数据中心的 REST API 请求域名、WebSocket 访问域名：
+声网不同数据中心的 REST API 请求域名、WebSocket 访问域名：
 
-| 数据中心      | REST API 请求地址      | WebSocket 访问域名          |
-| ------------- | ------------------ | -------------------------------- |
-| 国内 1 区   | a1.easemob.com    | im-api-wechat.easemob.com 或 im-api-wechat.easecdn.com   |
-| 国内 2 区   | a31.easemob.com   | im-api-wechat-31.easemob.com 或 im-api-wechat-31.easecdn.com |
-| 国内 VIP 区 | 请咨询商务经理    | 请咨询商务经理     |
-| 客服专用    | 请咨询商务经理    | 请咨询商务经理   |
-| 新加坡 1 区   | a1-sgp.easemob.com 或 a1-sgp.easecdn.com | im-api-wechat-sgp.easemob.com  或 im-api-wechat-sgp.easecdn.com  |
-| 新加坡 2 区   | a61.easemob.com 或 a61.easecdn.com | im-api-wechat-61.easemob.com 或 im-api-wechat-61.easecdn.com |
-| 美东 1 区     | a41.easemob.com 或 a41.easecdn.com       | im-api-wechat-41.easemob.com 或 im-api-wechat-41.easecdn.com   |
-| 德国 2 区 | a71.easemob.com 或 a71.easecdn.com       | im-api-wechat-71.easemob.com 或 im-api-wechat-71.easecdn.com   |
+| 数据中心    | REST API 请求地址                        | WebSocket 访问域名                                             |
+| ----------- | ---------------------------------------- | -------------------------------------------------------------- |
+| 国内 1 区   | a1.easemob.com                           | im-api-wechat.easemob.com 或 im-api-wechat.easecdn.com         |
+| 国内 2 区   | a31.easemob.com                          | im-api-wechat-31.easemob.com 或 im-api-wechat-31.easecdn.com   |
+| 国内 VIP 区 | 请咨询商务经理                           | 请咨询商务经理                                                 |
+| 客服专用    | 请咨询商务经理                           | 请咨询商务经理                                                 |
+| 新加坡 1 区 | a1-sgp.easemob.com 或 a1-sgp.easecdn.com | im-api-wechat-sgp.easemob.com 或 im-api-wechat-sgp.easecdn.com |
+| 新加坡 2 区 | a61.easemob.com 或 a61.easecdn.com       | im-api-wechat-61.easemob.com 或 im-api-wechat-61.easecdn.com   |
+| 美东 1 区   | a41.easemob.com 或 a41.easecdn.com       | im-api-wechat-41.easemob.com 或 im-api-wechat-41.easecdn.com   |
+| 德国 2 区   | a71.easemob.com 或 a71.easecdn.com       | im-api-wechat-71.easemob.com 或 im-api-wechat-71.easecdn.com   |
 
-应用所在数据中心可以在环信用户管理后台>应用信息中查看：Console 中查看请求域名
+应用所在数据中心可以在声网用户管理后台>应用信息中查看：Console 中查看请求域名
 
 ![img](/images/applet/service_overview.png)
 
@@ -82,7 +71,7 @@ request 合法域名，uploadFile 合法域名，downloadFile 合法域名
 10. https://a1-chatfile.easemob.com
 11. https://rs.chat.agora.io
 12. https://rs.easemob.com
-:::
+    :::
 
 :::tip
 socket 合法域名:
@@ -91,7 +80,7 @@ socket 合法域名:
 2. wss://im-api-wechat-31.easemob.com
 3. wss://im-api-alipay.easemob.com/websocket（支付宝小程序专用）
 4. wss://im-api-alipay-31.easemob.com/websocket（支付宝小程序专用）
-:::
+   :::
 
 ### 各端小程序 WebSocket 连接数量
 
@@ -106,12 +95,12 @@ socket 合法域名:
 
 可以通过以下方式获取 SDK：
 
-- 从 npm [easemob-websdk](https://www.npmjs.com/package/easemob-websdk/) 中获取。
+- 从 npm [shengwang-chat](https://www.npmjs.com/package/shengwang-chat/) 中获取。
 
 #### 引入 SDK
 
 - 开始一个全新的项目：
-  1. 安装 `easemob-websdk` npm 包。
+  1. 安装 `shengwang-chat` npm 包。
   2. 直接使用 `import/require` 方式获取引用，如果使用 mpvue 保持引文件方式的统一。
 - 基于 Demo 二次开发。
 
@@ -121,31 +110,29 @@ socket 合法域名:
 
 若项目之前未使用 npm 管理依赖（项目根目录下无 package.json 文件），先在项目根目录执行命令初始化 npm 工程：
 
-```bash 
+```bash
 npm init -y
 ```
+
 在项目根目录执行命令安装 npm 包：
 
-```bash 
-npm i easemob-websdk
+```bash
+npm i shengwang-chat
 ```
+
 引入 uniApp SDK
 
 ```javascript
-import SDK from 'easemob-websdk/uniApp/Easemob-chat';
+import ChatSDK from "shengwang-chat/uniApp/Shengwang-chat";
 ```
 
 #### 实例调用方式
 
-实例化 SDK，并挂载在全局对象下。
+实例化 SDK。
 
 ```javascript
 // 实例化 SDK 对象
-const WebIM = wx.WebIM = SDK;
-const conn = new WebIM.connection({
-    appKey: 'your appKey', //注意这里的 "K" 需大写
-    url: 'wss://im-api-wechat.easemob.com/websocket', // websocket 连接地址
-    apiUrl: 'https://a1.easemob.com',// REST API 连接地址
-    useOwnUploadFun: true // 是否使用自己的上传方式（如将图片文件等上传到自己的服务器，构建消息时只传 URL）
+const chatClient = new ChatSDK.connection({
+  appId: "your appId",
 });
 ```

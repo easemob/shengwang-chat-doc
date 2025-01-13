@@ -6,10 +6,10 @@
 
 ## 技术原理
 
-环信即时通讯 IM Android SDK 支持提供 `EMChatManager` 类支持在本地导入和插入消息，其中包含如下主要方法：
+环信即时通讯 IM Android SDK 支持提供 `ChatManager` 类支持在本地导入和插入消息，其中包含如下主要方法：
 
-- `EMChatManager#importMessages`：批量导入消息到数据库；
-- `EMChatManager#insertMessage`：在本地指定会话中插入一条消息。
+- `ChatManager#importMessages`：批量导入消息到数据库；
+- `ChatManager#insertMessage`：在本地指定会话中插入一条消息。
 
 ## 前提条件
 
@@ -22,7 +22,7 @@
 
 ### 批量导入消息到数据库
 
-如果你需要使用批量导入方式在本地会话中插入消息，可以调用 `importMessages` 方法，构造 `EMMessage` 对象，将消息导入本地数据库。
+如果你需要使用批量导入方式在本地会话中插入消息，可以调用 `importMessages` 方法，构造 `ChatMessage` 对象，将消息导入本地数据库。
 
 当前用户只能导入自己发送或接收的消息。导入后，消息按照其包含的时间戳添加到对应的会话中。
 
@@ -31,7 +31,7 @@
 示例代码如下：
 
 ```java
-EMClient.getInstance().chatManager().importMessages(msgs);
+ChatClient.getInstance().chatManager().importMessages(msgs);
 ```
 
 ### 插入消息
@@ -46,9 +46,9 @@ EMClient.getInstance().chatManager().importMessages(msgs);
 
 ```java
 // 将消息插入到指定会话中。
-EMConversation conversation = EMClient.getInstance().chatManager().getConversation(username);
+Conversation conversation = ChatClient.getInstance().chatManager().getConversation(username);
 conversation.insertMessage(message);
 // 直接插入消息。
-EMClient.getInstance().chatManager().saveMessage(message);
+ChatClient.getInstance().chatManager().saveMessage(message);
 ```
 

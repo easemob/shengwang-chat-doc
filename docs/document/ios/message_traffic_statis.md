@@ -2,7 +2,7 @@
 
 <Toc />
 
-即时通讯 IM 提供本地消息的流量统计功能。该功能默认关闭。若要使用该功能，需在 SDK 初始化前设置 `EMOptions#enableStatistics` 开启。
+即时通讯 IM 提供本地消息的流量统计功能。该功能默认关闭。若要使用该功能，需在 SDK 初始化前设置 `AgoraChatOptions#enableStatistics` 开启。
 
 SDK 只支持统计该功能开启后最近 30 天内发送和接收的消息。各类消息的流量计算方法如下：
 
@@ -22,18 +22,18 @@ SDK 仅统计本地消息的流量，而非消息的实际流量。一般而言�
  
 ## 技术原理
 
-环信即时通讯 IM Android SDK 提供 `IEMStatisticsManager` 类支持获取本地消息的流量统计信息，包含如下主要方法：
+即时通讯 IM Android SDK 提供 `IAgoraChatStatisticsManager` 类支持获取本地消息的流量统计信息，包含如下主要方法：
 
-- `IEMStatisticsManager#getMessageStatisticsById`：根据消息 ID 获取消息流量统计信息；
-- `IEMStatisticsManager#getMessageCountWithStart`：获取一定时间段内发送和/或接收的指定或全部类型的消息条数；
-- `IEMStatisticsManager#getMessageStatisticsSizeWithStart`：获取一定时间段内发送和/或接收的指定或全部类型的消息的总流量。
+- `IAgoraChatStatisticsManager#getMessageStatisticsById`：根据消息 ID 获取消息流量统计信息；
+- `IAgoraChatStatisticsManager#getMessageCountWithStart`：获取一定时间段内发送和/或接收的指定或全部类型的消息条数；
+- `IAgoraChatStatisticsManager#getMessageStatisticsSizeWithStart`：获取一定时间段内发送和/或接收的指定或全部类型的消息的总流量。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM 的使用限制，详见 [使用限制](limitation.html)。
 
 ## 实现方法
 
@@ -44,7 +44,7 @@ SDK 仅统计本地消息的流量，而非消息的实际流量。一般而言�
 示例代码如下：
 
 ```objectivec
-EMChatMessageStatistics * msgStatistics = [[[EMClient sharedClient] statisticsManager] getMessageStatisticsById:@"msgId"];
+AgoraChatMessageStatistics * msgStatistics = [[[AgoraChatClient sharedClient] statisticsManager] getMessageStatisticsById:@"msgId"];
 ```
 
 ### 获取一定时间段内发送和/或接收的消息条数
@@ -52,7 +52,7 @@ EMChatMessageStatistics * msgStatistics = [[[EMClient sharedClient] statisticsMa
 你可以统计一定时间段内发送和/或接收的指定或全部类型的消息，示例代码如下：
 
 ```objectivec
-NSInteger count = [EMClient.sharedClient.statisticsManager getMessageCountWithStart:startTime end:endTime direction:EMMessageStatisticsDirectionAll type:EMMessageStatisticsTypeText];
+NSInteger count = [AgoraChatClient.sharedClient.statisticsManager getMessageCountWithStart:startTime end:endTime direction:AgoraChatMessageStatisticsDirectionAll type:AgoraChatMessageStatisticsTypeText];
 ```
 
 ### 获取一定时间段内发送和/或接收的消息的总流量
@@ -62,5 +62,5 @@ NSInteger count = [EMClient.sharedClient.statisticsManager getMessageCountWithSt
 示例代码如下：
 
 ```objectivec
-NSInteger bytes = [EMClient.sharedClient.statisticsManager getMessageStatisticsSizeWithStart:startTime end:endTime direction:EMMessageStatisticsDirectionAll type:EMMessageStatisticsTypeAll];
+NSInteger bytes = [AgoraChatClient.sharedClient.statisticsManager getMessageStatisticsSizeWithStart:startTime end:endTime direction:AgoraChatMessageStatisticsDirectionAll type:AgoraChatMessageStatisticsTypeAll];
 ```

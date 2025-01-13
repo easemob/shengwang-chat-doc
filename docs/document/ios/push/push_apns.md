@@ -110,13 +110,19 @@
 
 ## **上传推送证书**
 
-在[环信即时通讯云控制台](https://console.easemob.com/user/login)上传 APNs 推送证书。
+在[声网控制台](https://console.shengwang.cn/overview)上传 APNs 推送证书。
 
-1. 在[环信即时通讯云控制台](https://console.easemob.com/user/login)首页的**应用列表**中，点击目标应用的**操作**栏中的**管理**。
+1. 展开控制台左上角下拉框，选择需要开通即时通讯 IM 服务的项目。
 
-2. 在左侧导航栏中，选择**即时通讯** > **功能配置** > **消息推送** > **证书管理**，点击**添加推送证书**。
+2. 点击左侧导航栏的**全部产品**。
 
-3. 在**添加推送证书**对话框中选择**苹果**页签，配置 APNs 推送参数。
+3. 在下拉列表中找到**即时通讯 IM** 并点击。
+
+4. 在**即时通讯 IM** 页面，进入**功能配置**标签页。
+
+5. 在**推送证书**页签下，点击**添加推送证书**。
+
+3. 在弹出的对话框中选择**苹果**页签，配置 APNs 推送参数。
 
 ![image](/images/ios/push/push_ios_25_upload_cert.png)
 
@@ -126,9 +132,9 @@
 | **证书名称**      | String  | 是 | 消息推送证书名称。[创建推送证书](#在苹果开发者平台创建推送证书)的[步骤四](#步骤四-生成推送证书)中创建的消息推送证书名称。 |
 | **推送密钥**      | String  | 是 | 消息推送证书密钥。填写在[创建推送证书](#在苹果开发者平台创建推送证书)的[步骤四](#步骤四-生成推送证书)中导出消息推送证书文件时设置的证书密钥。该参数仅在使用 p12 证书时需要配置。  |
 | **上传文件**      | File  | 是 | 点击 **上传证书** 上传[创建推送证书](#在苹果开发者平台创建推送证书)的[步骤四](#步骤四-生成推送证书)中获取的消息推送证书文件。  |
-| **key id**      | String  | 是 | 输入推送证书的 Key ID。该参数仅在使用 p8 证书时需要配置。  |
-| **team id**      | String  | 是 | 输入推送证书的 Team ID。该参数仅在使用 p8 证书时需要配置。  |
-| **集成环境**      | | 是 | 集成环境：<br/> - **Development**：开发环境；<br/> - **Production**：生产环境。 |
+| **Key ID**      | String  | 是 | 输入推送证书的 Key ID。该参数仅在使用 p8 证书时需要配置。  |
+| **Team ID**      | String  | 是 | 输入推送证书的 Team ID。该参数仅在使用 p8 证书时需要配置。  |
+| **集成环境**      | | 是 | 集成环境：<br/> - 开发环境<br/> - 生产环境。 |
 | **Bundle ID**      | String  | 是 | 绑定 ID。[创建推送证书](#在苹果开发者平台创建推送证书)的[步骤二](#步骤二-创建-app-id)中创建 App ID 时设置的 Bundle ID。 |
 | **铃声**      | String  | 否 | 接收方收到推送通知时的铃声提醒。 |
 
@@ -147,13 +153,12 @@
   // 注册推送。
   [application registerForRemoteNotifications];
 
-  // 初始化 `Options`，设置 App Key。
-  EMOptions *options = [EMOptions optionsWithAppkey:@"easemob-demo#easeim"];
+  AgoraChatOptions *options = [AgoraChatOptions optionsWithAppId:@"Appid"];
 
   // 填写上传证书时设置的名称。
   options.apnsCertName = @"PushCertName";
 
-  [EMClient.sharedClient initializeSDKWithOptions:options];
+  [AgoraChatClient.sharedClient initializeSDKWithOptions:options];
 
   return YES;
   }
@@ -167,7 +172,7 @@ DeviceToken 注册后，iOS 系统会通过以下方式将 DeviceToken 回调给
 ```objectivec
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
   // 异步方法
-  [EMClient.sharedClient registerForRemoteNotificationsWithDeviceToken:deviceToken completion:^(EMError *aError) {
+  [AgoraChatClient.sharedClient registerForRemoteNotificationsWithDeviceToken:deviceToken completion:^(AgoraChatError *aError) {
       if (aError) {
           NSLog(@"bind deviceToken error: %@", aError.errorDescription);
       }
@@ -197,24 +202,24 @@ DeviceToken 注册后，iOS 系统会通过以下方式将 DeviceToken 回调给
 
 2. 杀掉应用进程。
    
-3. 在[环信即时通讯控制台](https://console.easemob.com/user/login)发送测试消息。
+3. 在[声网控制台](https://console.shengwang.cn/overview)发送测试消息。
    
-  在左侧导航栏中选择 **即时通讯** > **运营服务** > **用户管理**。在**用户管理**页面中，在对应用户 ID 的**操作**栏中点击**更多**，然后选择**发送rest消息**。在弹出的对话框中选择消息类型，输入消息内容，然后点击**发送**。
+ 展开控制台左上角下拉框，选择需要开通即时通讯 IM 服务的项目。点击左侧导航栏的**全部产品**。在下拉列表中找到**即时通讯 IM** 并点击。 在**即时通讯 IM** 页面，进入**运营管理**标签页。在**用户**页签下，在对应用户 ID 的**操作**栏中点击**更多**，然后选择**发送rest消息**。在弹出的对话框中选择消息类型，输入消息内容，然后点击**发送**。
 
   :::tip
-  在**证书管理**页面中证书列表中，在每个证书的**操作**一栏中，点击 **更多** > **测试**，这里是直接调用第三方接口推送，而**用户管理**页面中的消息发送测试是先调用即时通讯 IM 的发消息的接口，满足条件后（即用户离线、推送证书有效且绑定了 device token）再调第三方的接口进行推送。
+  在**推送证书**页面中证书列表中，在每个证书的**操作**一栏中，点击 **更多** > **测试**，这里是直接调用第三方接口推送，而**用户**页面中的消息发送测试是先调用即时通讯 IM 的发消息的接口，满足条件后（即用户离线、推送证书有效且绑定了 device token）再调第三方的接口进行推送。
   :::
 
-1. 查看设备是否收到推送通知。
+4. 查看设备是否收到推送通知。
 
 ### **故障排除**
 
 1. 检查在即时通讯 IM 中是否正确集成或启用了 APNs 推送。
    
-   在左侧导航栏中选择**运营服务** > **用户管理**。在**用户管理**页面中，在对应用户 ID 的**操作**栏中选择**查看IM用户绑定推送证书**。在弹出框中查看是否正确显示了证书名称和 device token。
+   在左侧导航栏中选择**即时通讯 IM** > **运营管理** > **用户**。在**用户**页面中，在对应用户 ID 的**操作**栏中选择**查看IM用户绑定推送证书**。在弹出框中查看是否正确显示了证书名称和 device token。
 
-2. 检查是否在[环信即时通讯控制台](https://console.easemob.com/user/login)上传了正确的 APNs 证书且设置了正确的证书环境。
+2. 检查是否在[声网控制台](https://console.shengwang.cn/overview)上传了正确的 APNs 证书且设置了正确的证书环境。
    
 3. 检查是否在聊天室中推送消息。聊天室不支持离线消息推送。
    
-4. 检查发送消息时是否设置了只发在线(`EMChatMessage#deliverOnlineOnly = YES`)。只发在线的消息不推送。
+4. 检查发送消息时是否设置了只发在线(`AgoraChatMessage#deliverOnlineOnly = YES`)。只发在线的消息不推送。

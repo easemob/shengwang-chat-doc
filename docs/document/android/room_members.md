@@ -6,7 +6,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM SDK 提供 `EMChatRoomManager` 类 和 `EMChatRoom` 类，支持对聊天室成员的管理，包括获取、添加和移出聊天室成员等，主要方法如下：
+环信即时通讯 IM SDK 提供 `ChatRoomManager` 类 和 `ChatRoom` 类，支持对聊天室成员的管理，包括获取、添加和移出聊天室成员等，主要方法如下：
 
 - 获取聊天室成员列表
 - 退出聊天室
@@ -36,10 +36,10 @@
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法为 asyncFetchChatRoomMembers(String, String, int, EMValueCallBack)。
+// 异步方法为 asyncFetchChatRoomMembers(String, String, int, ValueCallBack)。
 //cursor：从该游标位置开始取数据。首次调用 cursor 传空值，从最新数据开始获取。
 //pageSize：每页期望返回的成员数,最大值为 1,000。
-public EMCursorResult<String> fetchChatRoomMembers(String chatRoomId, String cursor, int pageSize);
+public CursorResult<String> fetchChatRoomMembers(String chatRoomId, String cursor, int pageSize);
 ```
 
 ### 退出聊天室
@@ -52,25 +52,25 @@ public EMCursorResult<String> fetchChatRoomMembers(String chatRoomId, String cur
 
 ```java
 // 异步方法。
-EMClient.getInstance().chatroomManager().leaveChatRoom(chatRoomId);
+ChatClient.getInstance().chatroomManager().leaveChatRoom(chatRoomId);
 ```
 
-退出聊天室时，SDK 默认删除该聊天室所有本地消息，若要保留这些消息，可在 SDK 初始化时将 `com.hyphenate.chat.EMOptions#setDeleteMessagesAsExitChatRoom` 设置为 `false`。
+退出聊天室时，SDK 默认删除该聊天室所有本地消息，若要保留这些消息，可在 SDK 初始化时将 `io.agora.chat.ChatOptions#setDeleteMessagesAsExitChatRoom` 设置为 `false`。
 
 示例代码如下：
 
 ```java
-EMOptions options = new EMOptions();
+ChatOptions options = new ChatOptions();
 options.setDeleteMessagesAsExitChatRoom(false);
 ```
 
-与群主无法退出群组不同，聊天室所有者可以离开聊天室，重新进入聊天室仍是该聊天室的所有者。若 `EMOptions#allowChatroomOwnerLeave` 参数在初始化时设置为 `true` 时，聊天室所有者可以离开聊天室；若该参数设置为 `false`，聊天室所有者调用 `leaveChatRoom` 方法离开聊天室时会提示错误 706 `CHATROOM_OWNER_NOT_ALLOW_LEAVE`。
+与群主无法退出群组不同，聊天室所有者可以离开聊天室，重新进入聊天室仍是该聊天室的所有者。若 `ChatOptions#allowChatroomOwnerLeave` 参数在初始化时设置为 `true` 时，聊天室所有者可以离开聊天室；若该参数设置为 `false`，聊天室所有者调用 `leaveChatRoom` 方法离开聊天室时会提示错误 706 `CHATROOM_OWNER_NOT_ALLOW_LEAVE`。
 
 #### 被移出
 
-仅聊天室所有者和管理员可调用 `EMChatRoomManager#removeChatRoomMembers` 方法将单个或多个成员移出聊天室。
+仅聊天室所有者和管理员可调用 `ChatRoomManager#removeChatRoomMembers` 方法将单个或多个成员移出聊天室。
 
-被移出后，该成员收到 `onRemovedFromChatRoom` 回调，其他成员收到 `EMChatRoomChangeListener#onMemberExited` 回调。
+被移出后，该成员收到 `onRemovedFromChatRoom` 回调，其他成员收到 `ChatRoomChangeListener#onMemberExited` 回调。
 
 被移出的成员可以重新进入聊天室。
 
@@ -78,8 +78,8 @@ options.setDeleteMessagesAsExitChatRoom(false);
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法为 asyncRemoveChatRoomMembers(String, List, EMValueCallBack)。
-EMClient.getInstance().chatroomManager().removeChatRoomMembers(chatRoomId, members);
+// 异步方法为 asyncRemoveChatRoomMembers(String, List, ValueCallBack)。
+ChatClient.getInstance().chatroomManager().removeChatRoomMembers(chatRoomId, members);
 ```
 
 #### 离线后自动退出
@@ -95,9 +95,9 @@ EMClient.getInstance().chatroomManager().removeChatRoomMembers(chatRoomId, membe
 
 #### 将成员加入聊天室黑名单
 
-仅聊天室所有者和管理员可调用 `EMChatRoomManager#blockChatroomMembers` 方法将指定成员添加至黑名单。
+仅聊天室所有者和管理员可调用 `ChatRoomManager#blockChatroomMembers` 方法将指定成员添加至黑名单。
 
-被加入黑名单后，该成员收到 `EMChatRoomChangeListener#onRemovedFromChatRoom` 回调，其他成员收到 `EMChatRoomChangeListener#onMemberExited` 回调。移出原因为 `EMAChatRoomManagerListener#BE_KICKED`。
+被加入黑名单后，该成员收到 `ChatRoomChangeListener#onRemovedFromChatRoom` 回调，其他成员收到 `ChatRoomChangeListener#onMemberExited` 回调。移出原因为 `EMAChatRoomManagerListener#BE_KICKED`。
 
 被加入黑名单后，该成员无法再收发聊天室消息并被移出聊天室，黑名单中的成员如想再次加入聊天室，聊天室所有者或管理员必须先将其移出黑名单列表。
 
@@ -105,32 +105,32 @@ EMClient.getInstance().chatroomManager().removeChatRoomMembers(chatRoomId, membe
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法为 asyncBlockChatroomMembers(String, List, EMValueCallBack)。
-EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().blockChatroomMembers(chatRoomId, members);
+// 异步方法为 asyncBlockChatroomMembers(String, List, ValueCallBack)。
+ChatRoom chatRoom = ChatClient.getInstance().chatroomManager().blockChatroomMembers(chatRoomId, members);
 ```
 
 #### 将成员移出聊天室黑名单
 
-仅聊天室所有者和管理员可以调用 `EMChatRoomManager#unblockChatRoomMembers` 方法将成员移出聊天室黑名单。
+仅聊天室所有者和管理员可以调用 `ChatRoomManager#unblockChatRoomMembers` 方法将成员移出聊天室黑名单。
 
 示例代码如下：
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法为 asyncBlockChatroomMembers(String, List, EMValueCallBack)。
-EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().unblockChatRoomMembers(chatRoomId, members);
+// 异步方法为 asyncBlockChatroomMembers(String, List, ValueCallBack)。
+ChatRoom chatRoom = ChatClient.getInstance().chatroomManager().unblockChatRoomMembers(chatRoomId, members);
 ```
 
 #### 获取聊天室黑名单列表
 
-仅聊天室所有者和管理员可以调用 `EMChatRoomManager#fetchChatRoomBlackList` 方法获取当前聊天室黑名单。
+仅聊天室所有者和管理员可以调用 `ChatRoomManager#fetchChatRoomBlackList` 方法获取当前聊天室黑名单。
 
 示例代码如下：
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法为 asyncFetchChatRoomBlackList(String, int, int, EMValueCallBack)。
-EMChatRoom chatroom = EMClient.getInstance().chatroomManager().fetchChatRoomBlackList(chatRoomId, pageNum, pageSize);
+// 异步方法为 asyncFetchChatRoomBlackList(String, int, int, ValueCallBack)。
+ChatRoom chatroom = ChatClient.getInstance().chatroomManager().fetchChatRoomBlackList(chatRoomId, pageNum, pageSize);
 ```
 
 ### 管理聊天室白名单
@@ -146,7 +146,7 @@ EMChatRoom chatroom = EMClient.getInstance().chatroomManager().fetchChatRoomBlac
 示例代码如下：
 
 ```java
-EMClient.getInstance().chatroomManager().fetchChatRoomWhiteList(chatRoomId, new EMValueCallBack<List<String>>() {
+ChatClient.getInstance().chatroomManager().fetchChatRoomWhiteList(chatRoomId, new ValueCallBack<List<String>>() {
     @Override
     public void onSuccess(List<String> value) {
     }
@@ -161,7 +161,7 @@ EMClient.getInstance().chatroomManager().fetchChatRoomWhiteList(chatRoomId, new 
 所有聊天室成员可以调用 `checkIfInChatRoomWhiteList` 方法检查自己是否在聊天室白名单中，示例代码如下：
 
 ```java
-EMClient.getInstance().chatroomManager().checkIfInChatRoomWhiteList(chatRoomId, new EMValueCallBack<Boolean>() {
+ChatClient.getInstance().chatroomManager().checkIfInChatRoomWhiteList(chatRoomId, new ValueCallBack<Boolean>() {
     @Override
     public void onSuccess(Boolean value) {
     }
@@ -178,9 +178,9 @@ EMClient.getInstance().chatroomManager().checkIfInChatRoomWhiteList(chatRoomId, 
 示例代码如下：
 
 ```java
-EMClient.getInstance().chatroomManager().addToChatRoomWhiteList(chatRoomId, members, new EMValueCallBack<EMChatRoom>() {
+ChatClient.getInstance().chatroomManager().addToChatRoomWhiteList(chatRoomId, members, new ValueCallBack<ChatRoom>() {
     @Override
-    public void onSuccess(EMChatRoom value) {
+    public void onSuccess(ChatRoom value) {
     }
     @Override
     public void onError(int error, String errorMsg) {
@@ -195,9 +195,9 @@ EMClient.getInstance().chatroomManager().addToChatRoomWhiteList(chatRoomId, memb
 示例代码如下：
 
 ```java
-EMClient.getInstance().chatroomManager().removeFromChatRoomWhiteList(chatRoomId, members, new EMValueCallBack<EMChatRoom>() {
+ChatClient.getInstance().chatroomManager().removeFromChatRoomWhiteList(chatRoomId, members, new ValueCallBack<ChatRoom>() {
     @Override
-    public void onSuccess(EMChatRoom value) {
+    public void onSuccess(ChatRoom value) {
     }
     @Override
     public void onError(int error, String errorMsg) {
@@ -210,7 +210,7 @@ EMClient.getInstance().chatroomManager().removeFromChatRoomWhiteList(chatRoomId,
 
 #### 添加成员至聊天室禁言列表
 
-仅聊天室所有者和管理员可以调用 `EMChatRoomManager#muteChatRoomMembers` 方法将指定成员添加至聊天室禁言列表。被禁言的成员和其他未操作的聊天室管理员或聊天室所有者收到 `EMChatRoomChangeListener#onMuteListAdded` 回调。
+仅聊天室所有者和管理员可以调用 `ChatRoomManager#muteChatRoomMembers` 方法将指定成员添加至聊天室禁言列表。被禁言的成员和其他未操作的聊天室管理员或聊天室所有者收到 `ChatRoomChangeListener#onMuteListAdded` 回调。
 
 :::tip
 聊天室所有者可禁言聊天室所有成员，聊天室管理员可禁言聊天室普通成员。
@@ -220,14 +220,14 @@ EMClient.getInstance().chatroomManager().removeFromChatRoomWhiteList(chatRoomId,
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法为 asyncMuteChatRoomMembers(String, List, long, EMValueCallBack)。
+// 异步方法为 asyncMuteChatRoomMembers(String, List, long, ValueCallBack)。
 // `duration`：禁言时间。传 -1 表示永久禁言。
-EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().muteChatRoomMembers(chatRoomId, members, duration);
+ChatRoom chatRoom = ChatClient.getInstance().chatroomManager().muteChatRoomMembers(chatRoomId, members, duration);
 ```
 
 #### 将成员移出聊天室禁言列表
 
-仅聊天室所有者和管理员可以调用 `EMChatRoomManager#unMuteChatRoomMembers` 方法将成员移出聊天室禁言列表。被解除禁言的成员和其他未操作的聊天室管理员或聊天室所有者收到 `EMChatRoomChangeListener#onMuteListRemoved` 回调。
+仅聊天室所有者和管理员可以调用 `ChatRoomManager#unMuteChatRoomMembers` 方法将成员移出聊天室禁言列表。被解除禁言的成员和其他未操作的聊天室管理员或聊天室所有者收到 `ChatRoomChangeListener#onMuteListRemoved` 回调。
 
 :::tip
 聊天室所有者可对聊天室所有成员解除禁言，聊天室管理员可对聊天室普通成员解除禁言。
@@ -237,8 +237,8 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().muteChatRoomMembe
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法为 asyncUnMuteChatRoomMembers(String, List, EMValueCallBack)。
-EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().unMuteChatRoomMembers(chatRoomId, members);
+// 异步方法为 asyncUnMuteChatRoomMembers(String, List, ValueCallBack)。
+ChatRoom chatRoom = ChatClient.getInstance().chatroomManager().unMuteChatRoomMembers(chatRoomId, members);
 ```
 
 #### 获取聊天室禁言列表
@@ -249,8 +249,8 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().unMuteChatRoomMem
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法为 asyncFetchChatRoomMuteList(String, int, int, EMValueCallBack)。
-Map<String, Long> memberMap =  EMClient.getInstance().chatroomManager().fetchChatRoomMuteList(chatRoomId, pageNum, pageSize);
+// 异步方法为 asyncFetchChatRoomMuteList(String, int, int, ValueCallBack)。
+Map<String, Long> memberMap =  ChatClient.getInstance().chatroomManager().fetchChatRoomMuteList(chatRoomId, pageNum, pageSize);
 ```
 
 ### 开启和关闭聊天室全员禁言
@@ -259,16 +259,16 @@ Map<String, Long> memberMap =  EMClient.getInstance().chatroomManager().fetchCha
 
 #### 开启全员禁言
 
-仅聊天室所有者和管理员可以调用 `EMChatRoomManager#muteAllMembers` 方法开启全员禁言。全员禁言开启后不会在一段时间内自动解除禁言，需要调用 `EMChatRoomManager#unmuteAllMembers` 方法解除禁言。
+仅聊天室所有者和管理员可以调用 `ChatRoomManager#muteAllMembers` 方法开启全员禁言。全员禁言开启后不会在一段时间内自动解除禁言，需要调用 `ChatRoomManager#unmuteAllMembers` 方法解除禁言。
 
-全员禁言开启后，除了在白名单中的成员，其他成员不能发言。调用成功后，聊天室成员会收到 `EMChatRoomChangeListener#onAllMemberMuteStateChanged` 回调。
+全员禁言开启后，除了在白名单中的成员，其他成员不能发言。调用成功后，聊天室成员会收到 `ChatRoomChangeListener#onAllMemberMuteStateChanged` 回调。
 
 示例代码如下：
 
 ```java
-EMClient.getInstance().chatroomManager().muteAllMembers(chatRoomId, new EMValueCallBack<EMChatRoom>() {
+ChatClient.getInstance().chatroomManager().muteAllMembers(chatRoomId, new ValueCallBack<ChatRoom>() {
     @Override
-    public void onSuccess(EMChatRoom value) {
+    public void onSuccess(ChatRoom value) {
     }
     @Override
     public void onError(int error, String errorMsg) {
@@ -278,14 +278,14 @@ EMClient.getInstance().chatroomManager().muteAllMembers(chatRoomId, new EMValueC
 
 #### 关闭全员禁言
 
-仅聊天室所有者和管理员可以调用 `EMChatRoomManager#unmuteAllMembers` 方法取消全员禁言。调用成功后，聊天室成员会收到 `EMChatRoomChangeListener#onAllMemberMuteStateChanged` 回调。
+仅聊天室所有者和管理员可以调用 `ChatRoomManager#unmuteAllMembers` 方法取消全员禁言。调用成功后，聊天室成员会收到 `ChatRoomChangeListener#onAllMemberMuteStateChanged` 回调。
 
 示例代码如下：
 
 ```java
-EMClient.getInstance().chatroomManager().unmuteAllMembers(chatRoomId, new EMValueCallBack<EMChatRoom>() {
+ChatClient.getInstance().chatroomManager().unmuteAllMembers(chatRoomId, new ValueCallBack<ChatRoom>() {
     @Override
-    public void onSuccess(EMChatRoom value) {
+    public void onSuccess(ChatRoom value) {
     }
     @Override
     public void onError(int error, String errorMsg) {
@@ -297,38 +297,38 @@ EMClient.getInstance().chatroomManager().unmuteAllMembers(chatRoomId, new EMValu
 
 #### 变更聊天室所有者
 
-仅聊天室所有者可以调用 `EMChatRoomManager#changeOwner` 方法将权限移交给聊天室中指定成员。成功移交后，原聊天室所有者变为聊天室成员，新的聊天室所有者和聊天室管理员收到 `EMChatRoomChangeListener#onOwnerChanged` 回调。
+仅聊天室所有者可以调用 `ChatRoomManager#changeOwner` 方法将权限移交给聊天室中指定成员。成功移交后，原聊天室所有者变为聊天室成员，新的聊天室所有者和聊天室管理员收到 `ChatRoomChangeListener#onOwnerChanged` 回调。
 
 示例代码如下：
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法为 asyncChangeOwner(String, String, EMValueCallBack)。
-EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().changeOwner(chatRoomId, newOwner);
+// 异步方法为 asyncChangeOwner(String, String, ValueCallBack)。
+ChatRoom chatRoom = ChatClient.getInstance().chatroomManager().changeOwner(chatRoomId, newOwner);
 ```
 
 #### 添加聊天室管理员
 
-仅聊天室所有者可以调用 `EMChatRoomManager#addChatRoomAdmin` 方法添加聊天室管理员。成功添加后，新管理员及其他管理员收到 `EMChatRoomChangeListener#onAdminAdded` 回调。
+仅聊天室所有者可以调用 `ChatRoomManager#addChatRoomAdmin` 方法添加聊天室管理员。成功添加后，新管理员及其他管理员收到 `ChatRoomChangeListener#onAdminAdded` 回调。
 
 示例代码如下：
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法为 asyncAddChatRoomAdmin(String, String, EMValueCallBack)。
-EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().addChatRoomAdmin(chatRoomId, admin);
+// 异步方法为 asyncAddChatRoomAdmin(String, String, ValueCallBack)。
+ChatRoom chatRoom = ChatClient.getInstance().chatroomManager().addChatRoomAdmin(chatRoomId, admin);
 ```
 
 #### 移除聊天室管理员
 
-仅聊天室所有者可以调用 `EMChatRoomManager#removeChatRoomAdmin` 方法移除聊天室管理员。成功移除后，被移除的管理员及其他管理员收到 `EMChatRoomChangeListener#onAdminRemoved` 回调。
+仅聊天室所有者可以调用 `ChatRoomManager#removeChatRoomAdmin` 方法移除聊天室管理员。成功移除后，被移除的管理员及其他管理员收到 `ChatRoomChangeListener#onAdminRemoved` 回调。
 
 示例代码如下：
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法为 asyncRemoveChatRoomAdmin(String, String, EMValueCallBack)。
-EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().removeChatRoomAdmin(chatRoomId, admin);
+// 异步方法为 asyncRemoveChatRoomAdmin(String, String, ValueCallBack)。
+ChatRoom chatRoom = ChatClient.getInstance().chatroomManager().removeChatRoomAdmin(chatRoomId, admin);
 ```
 
 ### 监听聊天室事件

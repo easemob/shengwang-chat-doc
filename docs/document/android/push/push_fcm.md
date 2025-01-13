@@ -129,30 +129,30 @@ plugins {
 3. 在环信即时通讯 IM SDK 中启用 FCM。
 
 ```java
-EMOptions options = new EMOptions();
+ChatOptions options = new ChatOptions();
 ...
-EMPushConfig.Builder builder = new EMPushConfig.Builder(this);
+PushConfig.Builder builder = new PushConfig.Builder(this);
 // 替换为你的 FCM 发送方的用户 ID
 builder.enableFCM("Your FCM sender id");
-// 将 pushconfig 设置到 EMOptions 中
+// 将 pushconfig 设置到 ChatOptions 中
 options.setPushConfig(builder.build());
 // 初始化即时通讯 IM SDK
-EMClient.getInstance().init(this, options);
+ChatClient.getInstance().init(this, options);
 // 即时通讯 IM SDK 初始化后
-EMPushHelper.getInstance().setPushListener(new PushListener() {
+PushHelper.getInstance().setPushListener(new PushListener() {
     @Override
-    public void onBindTokenSuccess(EMPushType pushType, String pushToken) {
+    public void onBindTokenSuccess(PushType pushType, String pushToken) {
         EMLog.e("PushClient", "Push client bind token to easemob server success: " + pushType + " - " + pushToken);
     }
    @Override
-   public void onError(EMPushType pushType, long errorCode) {
+   public void onError(PushType pushType, long errorCode) {
        EMLog.e("PushClient", "Push client occur a error: " + pushType + " - " + errorCode);
    }
    @Override
    // 选择推送类型。当设备同时支持 FCM 推送和其它推送时，可以使用 isSupportPush 选择使用其中一种推送。
-   public boolean isSupportPush(EMPushType pushType, EMPushConfig pushConfig) {
+   public boolean isSupportPush(PushType pushType, PushConfig pushConfig) {
        // 设置是否支持 FCM。
-       if(pushType == EMPushType.FCM) {
+       if(pushType == PushType.FCM) {
            return GoogleApiAvailabilityLight.getInstance().isGooglePlayServicesAvailable(MainActivity.this)
                     == ConnectionResult.SUCCESS;
        }
@@ -179,7 +179,7 @@ FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteL
     }
     // 获取新的 FCM 注册 token
     String token = task.getResult();
-    EMClient.getInstance().sendFCMTokenToServer(token);
+    ChatClient.getInstance().sendFCMTokenToServer(token);
     }
 });
 
@@ -206,8 +206,8 @@ public class MyFCMMSGService extends FirebaseMessagingService {
     public void onNewToken(@NonNull String token) {
         Log.i("MessagingService", "onNewToken: " + token);
         // 若要对该应用实例发送消息或管理服务端的应用订阅，将 FCM 注册 token 发送至你的应用服务器。
-        if(EMClient.getInstance().isSdkInited()) {
-            EMClient.getInstance().sendFCMTokenToServer(token);
+        if(ChatClient.getInstance().isSdkInited()) {
+            ChatClient.getInstance().sendFCMTokenToServer(token);
         }
     }
 }

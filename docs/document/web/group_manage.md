@@ -2,13 +2,13 @@
 
 <Toc />
 
-群组是支持多人沟通的即时通讯系统，本文介绍如何使用环信即时通讯 IM Web SDK 在实时互动 app 中创建和管理群组，并实现群组相关功能。
+群组是支持多人沟通的即时通讯系统，本文介绍如何使用声网即时通讯 IM Web SDK 在实时互动 app 中创建和管理群组，并实现群组相关功能。
 
 如需查看消息相关内容，参见 [消息管理](message_overview.html)。
 
 ## 技术原理
 
-环信即时通讯 IM Web SDK 支持你通过调用 API 在项目中实现以下群组管理功能：
+声网即时通讯 IM Web SDK 支持你通过调用 API 在项目中实现以下群组管理功能：
 
 - 创建、解散群组
 - 获取群组详情信息
@@ -22,7 +22,7 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM API 的接口调用频率限制，详见 [使用限制](/product/limitation.html)。
+- 了解声网即时通讯 IM API 的接口调用频率限制，详见 [使用限制](/product/limitation.html)。
 - 了解群组和群成员数量限制，详见 [使用限制](/product/limitation.html)。
 
 ## 实现方法
@@ -35,22 +35,22 @@
 
 创建群组时，需设置以下参数：
 
-| 参数                | 类型   | 描述          |
-| :------------- | :----- | :--------------------------------------------- |
-| `groupname`         | String | 群组名称。|
-| `desc`              | String | 群组描述。|
-| `members`           | Array  | 群成员的用户 ID 组成的数组，不包含群主的用户 ID。|
-| `public`            | Bool   | 是否为公开群：<br/> - `true`：是；<br/> - `false`：否。该群组为私有群。   |
-| `approval`          | Bool   | 入群申请是否需群主或管理员审批：<br/> - `true`：需要；<br/> - `false`：不需要。<br/>由于私有群不支持用户申请入群，只能通过邀请方式进群，因此该参数仅对公开群有效，即 `public` 设置为 `true` 时，对私有群无效。       |
+| 参数                | 类型   | 描述                                                                                                                                                                                                                                                                   |
+| :------------------ | :----- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `groupname`         | String | 群组名称。                                                                                                                                                                                                                                                             |
+| `desc`              | String | 群组描述。                                                                                                                                                                                                                                                             |
+| `members`           | Array  | 群成员的用户 ID 组成的数组，不包含群主的用户 ID。                                                                                                                                                                                                                      |
+| `public`            | Bool   | 是否为公开群：<br/> - `true`：是；<br/> - `false`：否。该群组为私有群。                                                                                                                                                                                                |
+| `approval`          | Bool   | 入群申请是否需群主或管理员审批：<br/> - `true`：需要；<br/> - `false`：不需要。<br/>由于私有群不支持用户申请入群，只能通过邀请方式进群，因此该参数仅对公开群有效，即 `public` 设置为 `true` 时，对私有群无效。                                                         |
 | `allowinvites`      | Bool   | 是否允许普通群成员邀请人入群：<br/> - `true`：允许；<br/> - `false`：不允许。只有群主和管理员才可以向群组添加用户。<br/>该参数仅对私有群有效，即 `public` 设置为 `false` 时， 因为公开群（public：`true`）仅支持群主和群管理员邀请人入群，不支持普通群成员邀请人入群。 |
-| `inviteNeedConfirm` | Bool   | 邀请加群时是否需要受邀用户确认：<br/> - `true`：受邀用户需同意才会加入群组；<br/> - `false`：受邀用户直接加入群组，无需确认。  |
-| `maxusers`          | Int    | 群组最大成员数，默认为 `200`。不同套餐支持的人数上限不同，详见 [产品价格](/product/pricing.html#套餐包功能详情)。            |
-| `ext`          | String    | 群组扩展信息，例如可以给群组添加业务相关的标记，不要超过 8 KB。           |
+| `inviteNeedConfirm` | Bool   | 邀请加群时是否需要受邀用户确认：<br/> - `true`：受邀用户需同意才会加入群组；<br/> - `false`：受邀用户直接加入群组，无需确认。                                                                                                                                          |
+| `maxusers`          | Int    | 群组最大成员数，默认为 `200`。不同套餐支持的人数上限不同，详见 [产品价格](/product/pricing.html#套餐包功能详情)。                                                                                                                                                      |
+| `ext`               | String | 群组扩展信息，例如可以给群组添加业务相关的标记，不要超过 8 KB。                                                                                                                                                                                                        |
 
 创建群组的示例代码如下：
 
 ```javascript
-let option = {
+const option = {
   data: {
     groupname: "groupName",
     desc: "A description of a group",
@@ -63,7 +63,7 @@ let option = {
     ext: "group detail extensions",
   },
 };
-conn.createGroup(option).then((res) => console.log(res));
+chatClient.createGroup(option).then((res) => console.log(res));
 ```
 
 2、邀请用户入群。
@@ -75,7 +75,10 @@ conn.createGroup(option).then((res) => console.log(res));
 1. 群成员调用 `inviteUsersToGroup` 方法邀请用户入群。
 
 ```javascript
-conn.inviteUsersToGroup({ groupId: "groupId", users: ["user1", "user2"] });
+chatClient.inviteUsersToGroup({
+  groupId: "groupId",
+  users: ["user1", "user2"],
+});
 ```
 
 2. 受邀用户会收到 `inviteToJoin` 事件，自动进群或确认是否加入群组。
@@ -88,13 +91,13 @@ conn.inviteUsersToGroup({ groupId: "groupId", users: ["user1", "user2"] });
      - 受邀用户同意加入群组，需要调用 `acceptGroupJoinRequest` 方法。用户加入成功后，邀请人会收到 `acceptInvite` 事件，群组所有成员会收到 `memberPresence` 事件。
 
      ```javascript
-     conn.acceptGroupInvite({ invitee: "myUserId", groupId: "groupId" });
+     chatClient.acceptGroupInvite({ invitee: "myUserId", groupId: "groupId" });
      ```
 
      - 受邀用户拒绝入群，需要调用 `rejectGroupJoinRequest` 方法。邀请人会收到 `rejectInvite` 事件。
 
      ```javascript
-     conn.rejectGroupInvite({ invitee: "myUserId", groupId: "groupId" });
+     chatClient.rejectGroupInvite({ invitee: "myUserId", groupId: "groupId" });
      ```
 
 3、用户加入群组后，可以收发群消息。
@@ -106,10 +109,10 @@ conn.inviteUsersToGroup({ groupId: "groupId", users: ["user1", "user2"] });
 示例代码如下：
 
 ```javascript
-let option = {
+const option = {
   groupId: "groupId",
 };
-conn.destroyGroup(option).then((res) => console.log(res));
+chatClient.destroyGroup(option).then((res) => console.log(res));
 ```
 
 ### 获取群组详情信息
@@ -123,11 +126,11 @@ conn.destroyGroup(option).then((res) => console.log(res));
 示例代码如下：
 
 ```javascript
-let option = {
+const option = {
   // 单个群组 ID 或群组 ID 数组。
   groupId: "groupId",
 };
-conn.getGroupInfo(option).then((res) => {
+chatClient.getGroupInfo(option).then((res) => {
   console.log(res);
 });
 ```
@@ -139,14 +142,12 @@ conn.getGroupInfo(option).then((res) => {
 示例代码如下：
 
 ```javascript
-let pageNum = 1,
-  pageSize = 100;
-let option = {
-  pageNum: pageNum,
-  pageSize: pageSize,
+const option = {
+  pageNum: 1,
+  pageSize: 100,
   groupId: "groupId",
 };
-conn.listGroupMembers(option).then((res) => console.log(res));
+chatClient.listGroupMembers(option).then((res) => console.log(res));
 ```
 
 ### 获取群组列表
@@ -154,7 +155,7 @@ conn.listGroupMembers(option).then((res) => console.log(res));
 - 用户可以调用 `getJoinedGroups` 方法获取当前用户加入和创建的群组列表，代码如下：
 
 ```javascript
-conn.getJoinedGroups({
+chatClient.getJoinedGroups({
   pageNum: 0,
   pageSize: 20,
   needAffiliations: true,
@@ -167,9 +168,9 @@ conn.getJoinedGroups({
 ```javascript
 let option = {
   limit: 20,
-  cursor: cursor,
+  cursor: "",
 };
-conn.getPublicGroups(option).then((res) => console.log(res));
+chatClient.getPublicGroups(option).then((res) => console.log(res));
 ```
 
 ### 监听群组事件
@@ -181,7 +182,7 @@ SDK 提供 `addEventHandler` 方法用于注册监听事件。开发者可以通
 ```javascript
 // 创建一个群组事件监听器
 // 在该方法的举例中，用户 A 表示当前用户。
-conn.addEventHandler("eventName", {
+chatClient.addEventHandler("eventName", {
   onGroupEvent: function (msg) {
     switch (msg.operation) {
       // 有新群组创建。群主的其他设备会收到该回调。
@@ -213,7 +214,7 @@ conn.addEventHandler("eventName", {
         break;
       // 更新群组信息，如群组名称和群组描述。群组所有成员会收到该回调。
       case "updateInfo":
-        break;  
+        break;
       // 有成员被移出禁言列表。被解除禁言的成员及群主和群管理员（除操作者外）会收到该回调。
       case "unmuteMember":
         break;
@@ -264,7 +265,7 @@ conn.addEventHandler("eventName", {
         break;
       // 设置群成员的自定义属性。群组内其他成员均会收到该回调。
       case "memberAttributesUpdate":
-        break;  
+        break;
       default:
         break;
     }

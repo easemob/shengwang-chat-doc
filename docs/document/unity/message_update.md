@@ -2,11 +2,11 @@
 
 <Toc />
 
-本文介绍环信即时通讯 IM SDK 如何更新本地消息。
+本文介绍即时通讯 IM SDK 如何更新本地消息。
 
 ## 技术原理
 
-环信即时通讯 IM SDK 使用 `IChatManager` 和 `Conversation` 支持更新本地数据库中的消息，其中包含如下主要方法：
+即时通讯 IM SDK 使用 `IChatManager` 和 `Conversation` 支持更新本地数据库中的消息，其中包含如下主要方法：
 
 - `UpdateMessage`：更新 SDK 本地数据库中的消息。
 
@@ -15,7 +15,7 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM 的使用限制，详见 [使用限制](limitation.html)。
 
 ## 实现方法
 

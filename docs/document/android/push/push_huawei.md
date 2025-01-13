@@ -64,7 +64,7 @@
      */
     public void getHMSToken(Activity activity){
         // 判断是否启用 FCM 推送
-        if (EMClient.getInstance().isFCMAvailable()) {
+        if (ChatClient.getInstance().isFCMAvailable()) {
             return;
         }
         try {
@@ -90,7 +90,7 @@
                                     //没有失败回调，假定 token 失败时 token 为 null
                                     EMLog.d("HWHMSPush", "register huawei hms push token success token:" + token);
                                     // 上传华为推送 token
-                                    EMClient.getInstance().sendHMSPushTokenToServer(token);
+                                    ChatClient.getInstance().sendHMSPushTokenToServer(token);
                                 }else{
                                     EMLog.e("HWHMSPush", "register huawei hms push token fail!");
                                 }
@@ -114,12 +114,12 @@
 4. 在即时通讯 IM SDK 初始化时，配置启用华为推送。
 
    ```java
-   EMOptions options = new EMOptions();
+   ChatOptions options = new ChatOptions();
    ...
-   EMPushConfig.Builder builder = new EMPushConfig.Builder(this);
+   PushConfig.Builder builder = new PushConfig.Builder(this);
    builder.enableHWPush();
    // 将 pushconfig 设置为 ChatOptions
    options.setPushConfig(builder.build());
    // 初始化 IM SDK
-   EMClient.getInstance().init(this, options);
+   ChatClient.getInstance().init(this, options);
    ```

@@ -16,16 +16,16 @@
 
 ```java
 // 需要异步处理。
-EMClient.getInstance().pushManager().updatePushNickname("pushNickname");
+ChatClient.getInstance().pushManager().updatePushNickname("pushNickname");
 ```
 
 你也可以调用 `updatePushDisplayStyle` 设置推送通知的显示样式，如下代码示例所示：
 
 ```java
 // 设置为简单样式。
-EMPushManager.DisplayStyle displayStyle = EMPushManager.DisplayStyle.SimpleBanner;
+PushManager.DisplayStyle displayStyle = PushManager.DisplayStyle.SimpleBanner;
 // 需要异步处理。
-EMClient.getInstance().pushManager().updatePushDisplayStyle(displayStyle);
+ChatClient.getInstance().pushManager().updatePushDisplayStyle(displayStyle);
 ```
 
 若要在通知栏中显示消息内容，需要设置通知显示样式 `DisplayStyle`。`DisplayStyle` 是枚举类型，有如下两种设置：
@@ -50,11 +50,11 @@ EMClient.getInstance().pushManager().updatePushDisplayStyle(displayStyle);
 你可以调用 `getPushConfigsFromServer` 获取推送通知中的显示属性，如以下代码示例所示：
 
 ```java
-EMPushConfigs pushConfigs = EMClient.getInstance().pushManager().getPushConfigsFromServer();
+PushConfigs pushConfigs = ChatClient.getInstance().pushManager().getPushConfigsFromServer();
 // 获取推送显示昵称。
 String nickname = pushConfigs.getDisplayNickname();
 // 获取推送通知的显示样式。
-EMPushManager.DisplayStyle style = pushConfigs.getDisplayStyle();
+PushManager.DisplayStyle style = pushConfigs.getDisplayStyle();
 ```
 
 ## 使用推送模板
@@ -98,8 +98,8 @@ EMPushManager.DisplayStyle style = pushConfigs.getDisplayStyle();
 
 ```java
 // 下面以文本消息为例，其他类型的消息设置方法相同。
-EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
-EMTextMessageBody txtBody = new EMTextMessageBody("消息内容");
+ChatMessage message = ChatMessage.createSendMessage(ChatMessage.Type.TXT);
+TextMessageBody txtBody = new TextMessageBody("消息内容");
 message.setTo("6006");
 // 设置推送模板。
 JSONObject pushObject = new JSONObject();
@@ -115,9 +115,9 @@ try {
 // 将推送扩展设置到消息中。
 message.setAttribute("em_push_template", pushObject);
 // 设置消息状态回调。
-message.setMessageStatusCallback(new EMCallBack() {...});
+message.setMessageStatusCallback(new CallBack() {...});
 // 发送消息。
-EMClient.getInstance().chatManager().sendMessage(message);
+ChatClient.getInstance().chatManager().sendMessage(message);
 ```
 
 2. 使用自定义或者默认推送模板，模板中的推送标题和推送内容使用以下内置参数：
@@ -154,8 +154,8 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 ```java
 // 下面以文本消息为例，其他类型的消息设置方法相同。
-EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
-EMTextMessageBody txtBody = new EMTextMessageBody("消息内容");
+ChatMessage message = ChatMessage.createSendMessage(ChatMessage.Type.TXT);
+TextMessageBody txtBody = new TextMessageBody("消息内容");
 message.setTo("6006");
 // 设置推送模板。设置前需在环信即时通讯云管理后台或调用 REST 接口创建推送模板。
 JSONObject pushObject = new JSONObject();
@@ -180,9 +180,9 @@ try {
 // 将推送扩展设置到消息中。
 message.setAttribute("em_push_template", pushObject);
 // 设置消息状态回调。
-message.setMessageStatusCallback(new EMCallBack() {...});
+message.setMessageStatusCallback(new CallBack() {...});
 // 发送消息。
-EMClient.getInstance().chatManager().sendMessage(message);
+ChatClient.getInstance().chatManager().sendMessage(message);
 ```
 
 ### 消息接收方使用推送模板
@@ -194,7 +194,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 :::
 
 ```java
-EMClient.getInstance().pushManager().setPushTemplate("Template Name", new EMCallBack() {
+ChatClient.getInstance().pushManager().setPushTemplate("Template Name", new CallBack() {
     @Override
     public void onSuccess() {
 
@@ -213,8 +213,8 @@ EMClient.getInstance().pushManager().setPushTemplate("Template Name", new EMCall
 
 ```java
 // 这里以文本消息为例，附件等类型的消息设置方法相同。
-EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
-EMTextMessageBody txtBody = new EMTextMessageBody("message content");
+ChatMessage message = ChatMessage.createSendMessage(ChatMessage.Type.TXT);
+TextMessageBody txtBody = new TextMessageBody("message content");
 // 设置要发送用户的用户 ID。
 message.setTo("toChatUsername");
 // 设置自定义推送提示。
@@ -232,7 +232,7 @@ message.addBody(txtBody);
 // 设置消息回调。
 message.setMessageStatusCallback(new CallBack() {...});
 // 发送消息。
-EMClient.getInstance().chatManager().sendMessage(message);
+ChatClient.getInstance().chatManager().sendMessage(message);
 ```
 
 | 参数              | 描述          |

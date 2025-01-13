@@ -2,7 +2,7 @@
 
 <Toc />
 
-本文介绍如何快速集成环信即时通讯 IM HarmonyOS SDK 实现单聊。
+本文介绍如何快速集成即时通讯 IM HarmonyOS SDK 实现单聊。
 
 
 ## 实现原理
@@ -15,11 +15,11 @@
 
 - DevEco Studio NEXT Release（5.0.3.900）及以上；
 - HarmonyOS SDK API 12 及以上；
-- 有效的环信即时通讯 IM 开发者账号和 App key，见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
+- 有效的即时通讯 IM 开发者账号和 App ID，详见 [开通即时通讯服务](enable_im.html)。
 
 ## 准备开发环境
 
-本节介绍如何创建项目，将环信即时通讯 IM HarmonyOS SDK 集成到你的项目中，并添加相应的设备权限。
+本节介绍如何创建项目，将即时通讯 IM HarmonyOS SDK 集成到你的项目中，并添加相应的设备权限。
 
 ### 1. 创建 HarmonyOS 项目
 
@@ -29,7 +29,7 @@
 2. 在 **Choose Your Ability Template** 界面，选择 **Application > Empty Ability**，然后点击 **Next**。
 3. 在 **Configure Your Project** 界面，依次填入以下内容：
    - **Project name**：你的 HarmonyOS 项目名称，如 HelloWorld。
-   - **Bundle name**：你的项目包的名称，如 com.hyphenate.helloworld。
+   - **Bundle name**：你的项目包的名称，如 cn.shengwang.helloworld。
    - **Save location**：项目的存储路径。
    - **Compatible SDK**：项目的支持的最低 API 等级，选择 `5.0.0(12)` 及以上。
    - **Module name**：module的名称，默认为 `entry`。
@@ -58,14 +58,9 @@
 }
 ```
 
-:::tip
-- 此配置需要将 `DevEco Studio` 升级到 `Beta2（5.0.3.502）` 及以上版本。
-- SDK 1.3.0 及以上版本采用字节码构建方式打包，必须设置 `useNormalizedOHMUrl` 为 `true`。
-:::
-
 ### 2. 集成 SDK
 
-打开 [SDK 下载](https://www.easemob.com/download/im)页面，获取最新版的环信即时通讯 IM HarmonyOS SDK，得到 `har` 形式的 SDK 文件。
+打开 [SDK 下载](https://www.easemob.com/download/im)页面，获取最新版的即时通讯 IM HarmonyOS SDK，得到 `har` 形式的 SDK 文件。
 
 将 SDK 文件，拷贝到 `Harmony` 工程，例如放至 `HelloWorld` 工程下 `entry` 模块下的 `libs` 目录。
 
@@ -80,7 +75,7 @@
   "author": "",
   "license": "",
   "dependencies": {
-    "@easemob/chatsdk": "file:./libs/chatsdk-x.x.x.har"
+    "@shengwang/chatsdk": "file:./libs/chatsdk-x.x.x.har"
   }
 }
 ```
@@ -112,9 +107,11 @@
 ### 1. SDK 初始化
 
 ```typescript
-let options = new ChatOptions("Your appkey");
+let options = new ChatOptions({
+  appId: "Your AppId"
+})
 ......// 其他 ChatOptions 配置。
-// 初始化时传入上下文以及options
+// 初始化时传入上下文以及选项
 ChatClient.getInstance().init(context, options);
 ```
 
@@ -129,7 +126,7 @@ ChatClient.getInstance().createAccount(userId, pwd).then(()=> {
 ```
 
 :::tip
-该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用，需要在[环信控制台](https://console.easemob.com/user/login)中手动开通开放注册功能；正式环境中应使用服务器端调用 Restful API 注册，具体见[注册单个用户](/document/server-side/account_system.html#开放注册单个用户)。
+该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用。正式环境中，需要[在声网控制台中创建用户或调用 Restful API 注册用户](login.html#用户注册)。
 :::
 
 ### 3. 登录账号

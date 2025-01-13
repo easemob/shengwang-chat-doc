@@ -16,7 +16,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM Android SDK 提供一个 `EMUserInfoManager` 类，支持获取、设置及修改用户属性信息，其中包含如下方法：
+环信即时通讯 IM Android SDK 提供一个 `UserInfoManager` 类，支持获取、设置及修改用户属性信息，其中包含如下方法：
 
 - `updateOwnInfo` 设置和修改当前用户自己的属性信息；
 - `updateOwnInfoByAttribute` 设置和修改用户信息中的某个属性；
@@ -42,8 +42,8 @@
 
 ```java
 // 设置所有用户属性。
-EMUserInfo userInfo = new EMUserInfo();
-userInfo.setUserId(EMClient.getInstance().getCurrentUser());
+UserInfo userInfo = new UserInfo();
+userInfo.setUserId(ChatClient.getInstance().getCurrentUser());
 userInfo.setNickname("easemob");
 userInfo.setAvatarUrl("https://www.easemob.com");
 userInfo.setBirth("2000.10.10");
@@ -51,7 +51,7 @@ userInfo.setSignature("hello world");
 userInfo.setPhoneNumber("13333333333");
 userInfo.setEmail("123456@qq.com");
 userInfo.setGender(1);
-EMClient.getInstance().userInfoManager().updateOwnInfo(userInfo, new EMValueCallBack<String>() {
+ChatClient.getInstance().userInfoManager().updateOwnInfo(userInfo, new ValueCallBack<String>() {
     @Override
     public void onSuccess(String value) {
     }
@@ -62,7 +62,7 @@ EMClient.getInstance().userInfoManager().updateOwnInfo(userInfo, new EMValueCall
 });
 // 以修改用户头像为例，演示如何修改指定用户属性。
 String url = "https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/IMDemo/avatar/Image1.png";
-EMClient.getInstance().userInfoManager().updateOwnInfoByAttribute(EMUserInfoType.AVATAR_URL, url, new EMValueCallBack<String>() {
+ChatClient.getInstance().userInfoManager().updateOwnInfoByAttribute(UserInfoType.AVATAR_URL, url, new ValueCallBack<String>() {
     @Override
     public void onSuccess(String value) {
     }
@@ -97,7 +97,7 @@ EMClient.getInstance().userInfoManager().updateOwnInfoByAttribute(EMUserInfoType
 String[] userId = new String[1];
 //username 指用户 ID。
 userId[0] = username;
-EMClient.getInstance().userInfoManager().fetchUserInfoByUserId(userId, new EMValueCallBack<Map<String, EMUserInfo>>() {});
+ChatClient.getInstance().userInfoManager().fetchUserInfoByUserId(userId, new ValueCallBack<Map<String, UserInfo>>() {});
 ```
 
 ### 获取指定用户的指定用户属性
@@ -106,12 +106,12 @@ EMClient.getInstance().userInfoManager().fetchUserInfoByUserId(userId, new EMVal
 
 ```java
 String[] userId = new String[1];
-userId[0] = EMClient.getInstance().getCurrentUser();
-EMUserInfo.EMUserInfoType[] userInfoTypes = new EMUserInfo.EMUserInfoType[2];
-userInfoTypes[0] = EMUserInfo.EMUserInfoType.NICKNAME;
-userInfoTypes[1] = EMUserInfo.EMUserInfoType.AVATAR_URL;
-EMClient.getInstance().userInfoManager().fetchUserInfoByAttribute(userId, userInfoTypes,
-    new EMValueCallBack<Map<String, EMUserInfo>>() {});
+userId[0] = ChatClient.getInstance().getCurrentUser();
+UserInfo.UserInfoType[] userInfoTypes = new UserInfo.UserInfoType[2];
+userInfoTypes[0] = UserInfo.UserInfoType.NICKNAME;
+userInfoTypes[1] = UserInfo.UserInfoType.AVATAR_URL;
+ChatClient.getInstance().userInfoManager().fetchUserInfoByAttribute(userId, userInfoTypes,
+    new ValueCallBack<Map<String, UserInfo>>() {});
 ```
 
 ## 更多功能
@@ -131,8 +131,8 @@ EMClient.getInstance().userInfoManager().fetchUserInfoByAttribute(userId, userIn
 
 ```java
 //设置自定义消息的 `event` 为 `"userCard"`，并在 `ext` 中添加展示名片所需要的用户 ID 、昵称和头像等字段。
-EMMessage message = EMMessage.createSendMessage(EMMessage.Type.CUSTOM);
-EMCustomMessageBody body = new EMCustomMessageBody(DemoConstant.USER_CARD_EVENT);
+ChatMessage message = ChatMessage.createSendMessage(ChatMessage.Type.CUSTOM);
+CustomMessageBody body = new CustomMessageBody(DemoConstant.USER_CARD_EVENT);
 Map<String,String> params = new HashMap<>();
 params.put(DemoConstant.USER_CARD_ID,userId);
 params.put(DemoConstant.USER_CARD_NICK,user.getNickname());
@@ -140,7 +140,7 @@ params.put(DemoConstant.USER_CARD_AVATAR,user.getAvatarUrl());
 body.setParams(params);
 message.setBody(body);
 message.setTo(toUser);
-EMClient.getInstance().chatManager().sendMessage(message);
+ChatClient.getInstance().chatManager().sendMessage(message);
 ```
 
 如果需要在名片中展示更丰富的信息，可以在 `ext` 中增加更多字段。

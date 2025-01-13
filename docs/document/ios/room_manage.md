@@ -1,16 +1,16 @@
-# 创建和管理聊天室以及监听器介绍
+# 创建和管理聊天室以及监听器
 
 <Toc />
 
-聊天室是支持多人沟通的即时通讯系统。聊天室中的成员没有固定关系，一旦离线后，不会收到聊天室中的任何消息，（除了聊天室白名单中的成员）超过 2 分钟会自动退出聊天室。聊天室可以应用于直播、消息广播等。若需调整该时间，需联系环信商务经理。
+聊天室是支持多人沟通的即时通讯系统。聊天室中的成员没有固定关系，一旦离线后，不会收到聊天室中的任何消息，（除了聊天室白名单中的成员）超过 2 分钟会自动退出聊天室。聊天室可以应用于直播、消息广播等。若需调整该时间，需联系声网商务经理。
 
-本文介绍如何使用环信即时通讯 IM SDK 在实时互动 app 中创建和管理聊天室，并实现聊天室的相关功能。
+本文介绍如何使用即时通讯 IM SDK 在实时互动 app 中创建和管理聊天室，并实现聊天室的相关功能。
 
 消息相关内容见 [消息管理](message_overview.html)。
 
 ## 技术原理
 
-环信即时通讯 IM iOS SDK 提供 `IEMChatroomManager` 类、`EMChatroomManagerDelegate` 类和 `EMChatroom` 类用于聊天室管理，支持你通过调用 API 在项目中实现如下功能：
+即时通讯 IM iOS SDK 提供 `IAgoraChatroomManager` 类、`AgoraChatroomManagerDelegate` 类和 `AgoraChatroom` 类用于聊天室管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 创建聊天室
 - 从服务器获取聊天室列表
@@ -24,15 +24,15 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM 的 [使用限制](/product/limitation.html)。
-- 了解环信即时通讯 IM 不同版本的聊天室相关数量限制，详见 [环信即时通讯 IM 价格](https://www.easemob.com/pricing/im)。
+- 完成 SDK 初始化，详见 [初始化文档](initialization.html)。
+- 了解即时通讯 IM 的 [使用限制](limitation.html)。
+- 了解即时通讯 IM 不同版本的聊天室相关数量限制，详见 [即时通讯 IM 价格](https://www.easemob.com/pricing/im)。
 - 只有超级管理员才有创建聊天室的权限，因此你还需要确保已调用 RESTful API 添加了超级管理员，详见 [添加聊天室超级管理员](/document/server-side/chatroom_superadmin.html)。
 - 聊天室创建者和管理员的数量之和不能超过 100 ，即管理员最多可添加 99 个。
 
 ## 实现方法
 
-本节介绍如何使用环信即时通讯 IM SDK 提供的 API 实现上述功能。
+本节介绍如何使用即时通讯 IM SDK 提供的 API 实现上述功能。
 
 ### 创建聊天室
 
@@ -43,8 +43,8 @@
 示例代码如下：
 
 ```objectivec
-EMError *error;
-    EMChatroom *chatroom = [[EMClient sharedClient].roomManager createChatroomWithSubject:@"Subject" description:@"description" invitees:@[@"user1",@"user2"] message:@"message" maxMembersCount:100 error:&error];
+AgoraChatError *error;
+    AgoraChatroom *chatroom = [[AgoraChatClient sharedClient].roomManager createChatroomWithSubject:@"Subject" description:@"description" invitees:@[@"user1",@"user2"] message:@"message" maxMembersCount:100 error:&error];
 ```
 
 ### 加入聊天室
@@ -59,28 +59,31 @@ EMError *error;
 ```objectivec
 // 获取公开聊天室列表，每次最多可获取 1,000 个。
 // 异步方法
-[[EMClient sharedClient].roomManager getChatroomsFromServerWithPage:1 pageSize:50 completion:nil];
+[[AgoraChatClient sharedClient].roomManager getChatroomsFromServerWithPage:1 pageSize:50 completion:nil];
 
 // 加入聊天室
 // 异步方法
-[[EMClient sharedClient].roomManager joinChatroom:@"aChatroomId" completion:nil];
+[[AgoraChatClient sharedClient].roomManager joinChatroom:@"aChatroomId" completion:nil];
 ```
 
-同时，你可以调用 `EMChatroomManager#joinChatroom:ext:leaveOtherRooms:completion:` 方法，设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。调用该方法后，聊天室内其他成员会收到 `EMChatroomManagerDelegate#userDidJoinChatroom:user:ext:` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
+同时，你可以调用 `AgoraChatroomManager#joinChatroom:ext:leaveOtherRooms:completion:` 方法，设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。调用该方法后，聊天室内其他成员会收到 `AgoraChatroomManagerDelegate#userDidJoinChatroom:user:ext:` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
 
-```swift
+```objectivec
 // 加入聊天室时，传入 ext (以昵称为例)，同时退出其他聊天室
-EMClient.shared().roomManager?.joinChatroom("roomId", ext: "nickname=myNickname", leaveOtherRooms: true, completion: { room, err in
-    
-})
+        [AgoraChatClient.sharedClient.roomManager joinChatroom:@"chatroom id" ext:@"" leaveOtherRooms:YES completion:^(AgoraChatroom * _Nullable aChatroom, AgoraChatError * _Nullable aError) {
+            
+        }];
 
 
 // 收到其他人加入聊天室的回调
-extension ViewController: EMChatroomManagerDelegate {
-    func userDidJoin(_ aChatroom: EMChatroom, user aUsername: String, ext: String?) {
-        
-}
+@interface ViewController:UIViewController<EMChatroomManagerDelegate>  
+   - (void)userDidJoinChatroom:(AgoraChatroom *)aChatroom
+                       user:(NSString *)aUsername
+                        ext:(NSString* _Nullable)ext {
+
+                        }
 ```
+
 
 ### 获取聊天室详情
 
@@ -90,7 +93,7 @@ extension ViewController: EMChatroomManagerDelegate {
 
 ```objectivec
 // 异步方法
-EMChatroom *chatroom = [[EMClient sharedClient].roomManager getChatroomSpecificationFromServerWithId:@“chatroomId” completion:nil];
+AgoraChatroom *chatroom = [[AgoraChatClient sharedClient].roomManager getChatroomSpecificationFromServerWithId:@“chatroomId” completion:nil];
 ```
 
 ### 解散聊天室
@@ -101,7 +104,7 @@ EMChatroom *chatroom = [[EMClient sharedClient].roomManager getChatroomSpecifica
 
 ```objectivec
 // 异步方法
-[[EMClient sharedClient].roomManager destroyChatroom:self.chatroom.chatroomId completion:nil];
+[[AgoraChatClient sharedClient].roomManager destroyChatroom:self.chatroom.chatroomId completion:nil];
 ```
 
 ### 监听聊天室事件
@@ -112,81 +115,81 @@ SDK 中提供了聊天室事件的监听接口。你可以通过注册聊天室�
 
 ```objectivec
 // 注册聊天室回调。
-[[EMClient sharedClient].roomManager addDelegate:self delegateQueue:nil];
+[[AgoraChatClient sharedClient].roomManager addDelegate:self delegateQueue:nil];
 // 移除聊天室回调。
-[[EMClient sharedClient].roomManager removeDelegate:self];
+[[AgoraChatClient sharedClient].roomManager removeDelegate:self];
 ```
 
 具体事件如下：
 
 ```objectivec
 // 有用户加入聊天室。聊天室的所有成员（除新成员外）会收到该事件。
-- (void)userDidJoinChatroom:(EMChatroom *)aChatroom
+- (void)userDidJoinChatroom:(AgoraChatroom *)aChatroom
       user:(NSString *)aUsername {
 }
 
 // 有成员主动退出聊天室。聊天室的所有成员（除退出成员外）会收到该事件。
-- (void)userDidLeaveChatroom:(EMChatroom *)aChatroom
+- (void)userDidLeaveChatroom:(AgoraChatroom *)aChatroom
          user:(NSString *)aUsername {
 }
 
 // 有成员被踢出聊天室。被踢出聊天室的成员会收到该事件。
-- (void)didDismissFromChatroom:(EMChatroom *)aChatroom
-      reason:(EMChatroomBeKickedReason)aReason {
+- (void)didDismissFromChatroom:(AgoraChatroom *)aChatroom
+      reason:(AgoraChatroomBeKickedReason)aReason {
   }
 
 // 聊天室详情有变更。聊天室的所有成员会收到该事件。
-- (void)chatroomSpecificationDidUpdate:(EMChatroom *)aChatroom {
+- (void)chatroomSpecificationDidUpdate:(AgoraChatroom *)aChatroom {
   
   }
 
 // 有成员被添加至聊天室白名单。被添加的成员收到该事件。
-- (void)chatroomWhiteListDidUpdate:(EMChatroom *)aChatroom
+- (void)chatroomWhiteListDidUpdate:(AgoraChatroom *)aChatroom
               addedWhiteListMembers:(NSArray<NSString *> *)aMembers {
   
   }
 
 // 有成员被移出白名单。被移出的成员收到该事件。
-- (void)chatroomWhiteListDidUpdate:(EMChatroom *)aChatroom
+- (void)chatroomWhiteListDidUpdate:(AgoraChatroom *)aChatroom
             removedWhiteListMembers:(NSArray<NSString *> *)aMembers {
   
   }
 
 // 聊天室一键禁言状态变化。聊天室所有成员（除操作者外）会收到该事件。
-- (void)chatroomAllMemberMuteChanged:(EMChatroom *)aChatroom
+- (void)chatroomAllMemberMuteChanged:(AgoraChatroom *)aChatroom
                      isAllMemberMuted:(BOOL)aMuted {
   
   }
 
 // 更新聊天室公告。聊天室的所有成员会收到该事件。
-- (void)chatroomAnnouncementDidUpdate:(EMChatroom *)aChatroom
+- (void)chatroomAnnouncementDidUpdate:(AgoraChatroom *)aChatroom
                           announcement:(NSString *_Nullable)aAnnouncement {
   
   }
 
 // 有成员被加入禁言列表。被禁言的成员会收到该事件。
 
-- (void)chatroomMuteListDidUpdate:(EMChatroom *)aChatroom
+- (void)chatroomMuteListDidUpdate:(AgoraChatroom *)aChatroom
                 addedMutedMembers:(NSDictionary<NSString *,NSNumber*> *)aMutes {
 }
 
 // 有成员被移除禁言列表。被解除禁言的成员会收到该事件。
-- (void)chatroomMuteListDidUpdate:(EMChatroom *)aChatroom
+- (void)chatroomMuteListDidUpdate:(AgoraChatroom *)aChatroom
       removedMutedMembers:(NSArray *)aMutes {
   }
 
 // 有成员被设为管理员。被添加的管理员会收到该事件。
-- (void)chatroomAdminListDidUpdate:(EMChatroom *)aChatroom
+- (void)chatroomAdminListDidUpdate:(AgoraChatroom *)aChatroom
       addedAdmin:(NSString *)aAdmin {
   }
 
 // 有成员被移除管理员权限。被移除权限的管理员会收到该事件。
-- (void)chatroomAdminListDidUpdate:(EMChatroom *)aChatroom
+- (void)chatroomAdminListDidUpdate:(AgoraChatroom *)aChatroom
       removedAdmin:(NSString *)aAdmin {
   }
 
 // 聊天室所有者变更。聊天室全体成员会收到该事件。
-- (void)chatroomOwnerDidUpdate:(EMChatroom *)aChatroom
+- (void)chatroomOwnerDidUpdate:(AgoraChatroom *)aChatroom
                       newOwner:(NSString *)aNewOwner
                       oldOwner:(NSString *)aOldOwner {
 
@@ -208,17 +211,20 @@ SDK 中提供了聊天室事件的监听接口。你可以通过注册聊天室�
 
 1. 聊天室内有成员加入时，其他成员会收到 `userDidJoinChatroom:user:` 事件。有成员主动或被动退出时，其他成员会收到 `userDidLeaveChatroom:user:`  事件。
 
-2. 收到通知事件后，通过 `EMChatroom#occupantsCount` 获取聊天室当前人数。
+2. 收到通知事件后，通过 `AgoraChatroom#occupantsCount` 获取聊天室当前人数。
 
-```swift
-extension ViewController: EMChatroomManagerDelegate {
-    func userDidJoin(_ aChatroom: EMChatroom, user aUsername: String) {
-        let memberCount = aChatroom.occupantsCount
-    }
-    func userDidLeave(_ aChatroom: EMChatroom, user aUsername: String) {
-        let memberCount = aChatroom.occupantsCount
-    }
-}
+```objectivec
+@interface ViewController:UIViewController<EMChatroomManagerDelegate>  
+   - (void)userDidJoinChatroom:(AgoraChatroom *)aChatroom
+                       user:(NSString *)aUsername
+                        ext:(NSString* _Nullable)ext {
 
-EMClient.shared().roomManager?.add(self, delegateQueue: nil)
+                        }
+    - (void)userDidLeaveChatroom:(AgoraChatroom *)aChatroom
+                        user:(NSString *)aUsername {
+
+                        }
+
+
+[AgoraChatClient.sharedClient.roomManager addDelegate:self delegateQueue:nil];
 ```

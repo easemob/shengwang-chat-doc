@@ -2,13 +2,13 @@
 
 <Toc />
 
-群组是支持多人沟通的即时通讯系统，本文介绍如何使用环信即时通讯 IM SDK 在实时互动 app 中创建和管理群组，并实现群组相关功能。
+群组是支持多人沟通的即时通讯系统，本文介绍如何使用即时通讯 IM SDK 在实时互动 app 中创建和管理群组，并实现群组相关功能。
 
 如需查看消息相关内容，参见 [消息管理](message_overview.html)。
 
 ## 技术原理
 
-环信即时通讯 IM iOS SDK 提供 `IEMGroupManager` 类和 `EMGroup` 类用于管理群组，支持你通过调用 API 在项目中实现如下功能：
+即时通讯 IM iOS SDK 提供 `IAgoraChatGroupManager` 类和 `AgoraChatGroup` 类用于管理群组，支持你通过调用 API 在项目中实现如下功能：
 
 - 创建、解散群组
 - 获取群组详情
@@ -22,71 +22,71 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM 的使用限制，详见 [使用限制](limitation.html)。
 - 了解群组和群成员的数量限制，详见 [套餐包详情](https://www.easemob.com/pricing/im)。
 
 ## 实现方法
 
-本节介绍如何使用环信即时通讯 IM SDK 提供的 API 实现上述功能。
+本节介绍如何使用即时通讯 IM SDK 提供的 API 实现上述功能。
 
 ### 创建群组
 
 群组可分为私有群和公有群。私有群不可被搜索到，公开群可以通过群组 ID 搜索到。
 
-用户可以创建群组，设置群组的名称、描述、群组成员、创建群组的原因等属性。用户还可以设置 `EMGroupStyle` 参数指定群组的大小和类型。创建群组后，群组创建者自动成为群主。
+用户可以创建群组，设置群组的名称、描述、群组成员、创建群组的原因等属性。用户还可以设置 `AgoraChatGroupStyle` 参数指定群组的大小和类型。创建群组后，群组创建者自动成为群主。
 
-创建群组前，需设置群组类型（`EMGroupStyle`）和进群邀请是否需要对方同意 (`EMGroupOptions#IsInviteNeedConfirm`)。
+创建群组前，需设置群组类型（`AgoraChatGroupStyle`）和进群邀请是否需要对方同意 (`AgoraChatGroupOptions#IsInviteNeedConfirm`)。
 
-- 群组类型（`EMGroupStyle`）可以设置为如下值：
+- 群组类型（`AgoraChatGroupStyle`）可以设置为如下值：
 
-  - `EMGroupStylePrivateOnlyOwnerInvite`——私有群，只有群主和管理员可以邀请人进群；
-  - `EMGroupStylePrivateMemberCanInvite`——私有群，所有群成员均可以邀请人进群；
-  - `EMGroupStylePublicJoinNeedApproval`——公开群，申请人通过群主和群管理同意后才能进群；
-  - `EMGroupStylePublicOpenJoin`——公开群，任何人都可以进群，无需群主和群管理同意。
+  - `AgoraChatGroupStylePrivateOnlyOwnerInvite`——私有群，只有群主和管理员可以邀请人进群；
+  - `AgoraChatGroupStylePrivateMemberCanInvite`——私有群，所有群成员均可以邀请人进群；
+  - `AgoraChatGroupStylePublicJoinNeedApproval`——公开群，申请人通过群主和群管理同意后才能进群；
+  - `AgoraChatGroupStylePublicOpenJoin`——公开群，任何人都可以进群，无需群主和群管理同意。
 
-- 邀请进群是否需要对方同意（`EMGroupOptions#IsInviteNeedConfirm`）
+- 邀请进群是否需要对方同意（`AgoraChatGroupOptions#IsInviteNeedConfirm`）
 
-公开群只支持群主和管理员邀请用户入群。对于私有群，除了群主和群管理员，群成员是否也能邀请其他用户进群取决于群组类型 `EMGroupStyle` 的设置。
+公开群只支持群主和管理员邀请用户入群。对于私有群，除了群主和群管理员，群成员是否也能邀请其他用户进群取决于群组类型 `AgoraChatGroupStyle` 的设置。
 
-邀请入群是否需受邀用户确认取决于群组选项 `EMGroupOptions#IsInviteNeedConfirm` 和受邀用户的参数 `isAutoAcceptGroupInvitation` 的设置，前者的优先级高于后者，即若 `EMGroupOptions#IsInviteNeedConfirm` 设置为 `false`，不论 `isAutoAcceptGroupInvitation` 设置为何值，受邀用户无需确认直接进群。
+邀请入群是否需受邀用户确认取决于群组选项 `AgoraChatGroupOptions#IsInviteNeedConfirm` 和受邀用户的参数 `isAutoAcceptGroupInvitation` 的设置，前者的优先级高于后者，即若 `AgoraChatGroupOptions#IsInviteNeedConfirm` 设置为 `false`，不论 `isAutoAcceptGroupInvitation` 设置为何值，受邀用户无需确认直接进群。
 
 1. 受邀用户无需确认，直接进群。
 
 以下两种设置的情况下，用户直接进群：
 
-- 若 `EMGroupOptions#IsInviteNeedConfirm` 设置为 `false`，不论 `isAutoAcceptGroupInvitation` 设置为 `false` 或 `true`，受邀用户均无需确认，直接进群。
-- 若 `EMGroupOptions#IsInviteNeedConfirm` 和 `isAutoAcceptGroupInvitation` 均设置为 `true`，用户自动接受群组邀请，直接进群。
+- 若 `AgoraChatGroupOptions#IsInviteNeedConfirm` 设置为 `false`，不论 `isAutoAcceptGroupInvitation` 设置为 `false` 或 `true`，受邀用户均无需确认，直接进群。
+- 若 `AgoraChatGroupOptions#IsInviteNeedConfirm` 和 `isAutoAcceptGroupInvitation` 均设置为 `true`，用户自动接受群组邀请，直接进群。
 
 受邀用户直接进群，会收到如下回调：
 
-- 新成员会收到 `EMGroupManagerDelegate#didJoinGroup` 回调；
-- 邀请人收到 `EMGroupManagerDelegate#groupInvitationDidAccept` 回调和 `EMGroupManagerDelegate#userDidJoinGroup` 回调；
-- 其他群成员收到 `EMGroupManagerDelegate#userDidJoinGroup` 回调。
+- 新成员会收到 `AgoraChatGroupManagerDelegate#didJoinGroup` 回调；
+- 邀请人收到 `AgoraChatGroupManagerDelegate#groupInvitationDidAccept` 回调和 `AgoraChatGroupManagerDelegate#userDidJoinGroup` 回调；
+- 其他群成员收到 `AgoraChatGroupManagerDelegate#userDidJoinGroup` 回调。
 
 2. 受邀用户需要确认才能进群。
 
-只有 `EMGroupOptions#IsInviteNeedConfirm` 设置为 `true` 和 `isAutoAcceptGroupInvitation` 设置为 `false` 时，受邀用户需要确认才能进群。这种情况下，受邀用户收到 `EMGroupManagerDelegate#onInvitationReceived` 回调，并选择同意或拒绝进群邀请：
+只有 `AgoraChatGroupOptions#IsInviteNeedConfirm` 设置为 `true` 和 `isAutoAcceptGroupInvitation` 设置为 `false` 时，受邀用户需要确认才能进群。这种情况下，受邀用户收到 `AgoraChatGroupManagerDelegate#onInvitationReceived` 回调，并选择同意或拒绝进群邀请：
 
-- 用户同意入群邀请后，邀请人收到 `EMGroupManagerDelegate#groupInvitationDidAccept` 回调和 `EMGroupManagerDelegate#userDidJoinGroup` 回调；其他群成员收到 `EMGroupManagerDelegate#userDidJoinGroup` 回调；
-- 用户拒绝入群邀请后，邀请人收到 `EMGroupManagerDelegate#groupInvitationDidDecline` 回调。
+- 用户同意入群邀请后，邀请人收到 `AgoraChatGroupManagerDelegate#groupInvitationDidAccept` 回调和 `AgoraChatGroupManagerDelegate#userDidJoinGroup` 回调；其他群成员收到 `AgoraChatGroupManagerDelegate#userDidJoinGroup` 回调；
+- 用户拒绝入群邀请后，邀请人收到 `AgoraChatGroupManagerDelegate#groupInvitationDidDecline` 回调。
 
-用户可以调用 `createGroup` 方法创建群组，并通过 `EMGroupOptions` 中的参数设置群组名称、群组描述、群组成员和建群原因。
+用户可以调用 `createGroup` 方法创建群组，并通过 `AgoraChatGroupOptions` 中的参数设置群组名称、群组描述、群组成员和建群原因。
 
 用户加入群组后，将可以收到群消息。
 
 示例代码如下：
 
 ```objectivec
-EMGroupOptions *options = [[EMGroupOptions alloc] init];
+AgoraChatGroupOptions *options = [[AgoraChatGroupOptions alloc] init];
 // 设置群组最大成员数量。
 options.maxUsersCount = self.maxMemNum;
 // 设置 `IsInviteNeedConfirm` 为 `YES`，则邀请用户入群需要用户确认。
 options.IsInviteNeedConfirm = YES;
 // 设置群组类型。此处示例为成员可以邀请用户入群的私有群组。
-options.style = EMGroupStylePrivateMemberCanInvite;
+options.style = AgoraChatGroupStylePrivateMemberCanInvite;
 NSArray *members = @{@"member1",@"member2"};
-// 调用 `createGroupWithSubject` 创建群组。同步方法，异步方法见 [EMGroupManager createGroupWithSubject:description:invitees:message:setting:completion:]
-[[EMClient sharedClient].groupManager createGroupWithSubject:@"subject"
+// 调用 `createGroupWithSubject` 创建群组。同步方法，异步方法见 [AgoraChatGroupManager createGroupWithSubject:description:invitees:message:setting:completion:]
+[[AgoraChatClient sharedClient].groupManager createGroupWithSubject:@"subject"
                          description:@"description"
                          invitees:members
                          message:@"message"
@@ -107,15 +107,14 @@ NSArray *members = @{@"member1",@"member2"};
 示例代码如下：
 
 ```objectivec
-//群组解散后，群成员将会收到 `EMGroupManagerDelegate#didLeaveGroup` 回调。
-// 同步方法，异步方法见 [EMGroupManager destroyGroup:finishCompletion:]
-[[EMClient sharedClient].groupManager destroyGroup:@"groupID"];
+//群组解散后，群成员将会收到 `AgoraChatGroupManagerDelegate#didLeaveGroup` 回调。
+// 同步方法，异步方法见 [AgoraChatGroupManager destroyGroup:finishCompletion:]
+[[AgoraChatClient sharedClient].groupManager destroyGroup:@"groupID"];
 ```
 
 ### 获取群组详情
 
 :::tip
-从 3.7.4 版本开始支持是否获取群组成员参数 `fetchMembers`。
 对于公有群，用户即使不加入群也能获取群组详情，而对于私有群，用户只有加入了群组才能获取群详情。
 :::
 
@@ -125,12 +124,12 @@ NSArray *members = @{@"member1",@"member2"};
 // 原型 异步方法
 - (void)getGroupSpecificationFromServerWithId:(NSString *)aGroupId
                                    fetchMembers:(BOOL)fetchMembers
-                                   completion:(void (^)(EMGroup *aGroup, EMError *aError))aCompletionBlock;
+                                   completion:(void (^)(AgoraChatGroup *aGroup, AgoraChatError *aError))aCompletionBlock;
 
 // 根据群组 ID 从服务器获取群组详情。
-[[EMClient sharedClient].groupManager getGroupSpecificationFromServerWithId:self.group.groupId fetchMembers:YES completion:^(EMGroup *aGroup, EMError *aError) {
+[[AgoraChatClient sharedClient].groupManager getGroupSpecificationFromServerWithId:self.group.groupId fetchMembers:YES completion:^(AgoraChatGroup *aGroup, AgoraChatError *aError) {
     if (!aError) {
-        // EMGroup 中包含了很多群组属性，比如群组 ID、群组成员和是否屏蔽群组消息(isBlocked 属性)等。详情请查看 SDK 中 EMGroup.h 头文件查看。
+        // AgoraChatGroup 中包含了很多群组属性，比如群组 ID、群组成员和是否屏蔽群组消息(isBlocked 属性)等。详情请查看 SDK 中 AgoraChatGroup.h 头文件查看。
         NSLog(@"获取群组详情成功");
     } else {
         NSLog(@"获取群组详情失败的原因 --- %@", aError.errorDescription);
@@ -148,8 +147,8 @@ NSArray *admins = aGroup.adminList;
 
 ```objectivec
 // 第二个参数传入 TRUE，默认取 200 人的群成员列表。
-// 同步方法，异步方法见 [EMGroupManager getGroupSpecificationFromServerWithId:fetchMembers:completion:]
-EMGroup *group = [[EMClient sharedClient].groupManager
+// 同步方法，异步方法见 [AgoraChatGroupManager getGroupSpecificationFromServerWithId:fetchMembers:completion:]
+AgoraChatGroup *group = [[AgoraChatClient sharedClient].groupManager
                                           getGroupSpecificationFromServerWithId:@"groupID"
                                           fetchMembers:YES
                                           error:nil];
@@ -159,17 +158,17 @@ NSArray *memberList = group.memberList;
 - 当群成员数量大于等于 200 时，你可以首先调用 `getGroupSpecificationFromServerWithId` 方法获取群主和群管理员，然后调用 `getGroupMemberListFromServerWithId` 方法获取普通群成员列表：
 
 ```objectivec
-EMGroup *group = [[EMClient sharedClient].groupManager
+AgoraChatGroup *group = [[AgoraChatClient sharedClient].groupManager
                                           getGroupSpecificationFromServerWithId:@"groupID"
                                           fetchMembers:NO
                                           error:nil];
 NSMutableArray *memberList = [[NSMutableArray alloc]init];
 NSInteger pageSize = 50;
 NSString *cursor = nil;
-EMCursorResult *result = [[EMCursorResult alloc]init];
+AgoraChatCursorResult *result = [[AgoraChatCursorResult alloc]init];
 do {
-  // 同步方法，异步方法见 [EMGroupManager getGroupMemberListFromServerWithId:cursor:pageSize:completion:]
-    result = [[EMClient sharedClient].groupManager
+  // 同步方法，异步方法见 [AgoraChatGroupManager getGroupMemberListFromServerWithId:cursor:pageSize:completion:]
+    result = [[AgoraChatClient sharedClient].groupManager
                                       getGroupMemberListFromServerWithId:@"groupID"
                                       cursor:cursor
                                       pageSize:pageSize
@@ -185,7 +184,7 @@ do {
 
 ```objectivec
 // 异步方法
-NSArray *groupList = [[EMClient sharedClient].groupManager getJoinedGroupsFromServerWithPage:0 pageSize:20 needMemberCount:YES needRole:YES completion:^(NSArray<EMGroup *> * _Nullable aList, EMError * _Nullable aError) {
+NSArray *groupList = [[AgoraChatClient sharedClient].groupManager getJoinedGroupsFromServerWithPage:0 pageSize:20 needMemberCount:YES needRole:YES completion:^(NSArray<AgoraChatGroup *> * _Nullable aList, AgoraChatError * _Nullable aError) {
         // got group list
     }];
 ```
@@ -194,7 +193,7 @@ NSArray *groupList = [[EMClient sharedClient].groupManager getJoinedGroupsFromSe
 
 ```objectivec
 // 同步方法，本地缓存加载
-NSArray *groupList = [[EMClient sharedClient].groupManager getJoinedGroups];
+NSArray *groupList = [[AgoraChatClient sharedClient].groupManager getJoinedGroups];
 ```
 
 - 用户还可以调用 `getPublicGroupsFromServerWithCursor` 方法分页获取公开群列表：
@@ -203,10 +202,10 @@ NSArray *groupList = [[EMClient sharedClient].groupManager getJoinedGroups];
 NSMutableArray *memberList = [[NSMutableArray alloc]init];
 NSInteger pageSize = 50;
 NSString *cursor = nil;
-EMCursorResult *result = [[EMCursorResult alloc]init];
+AgoraChatCursorResult *result = [[AgoraChatCursorResult alloc]init];
 do {
-  // 同步方法，异步方法见 [EMGroupManager getPublicGroupsFromServerWithCursor:pageSize:completion:]
-    result = [[EMClient sharedClient].groupManager
+  // 同步方法，异步方法见 [AgoraChatGroupManager getPublicGroupsFromServerWithCursor:pageSize:completion:]
+    result = [[AgoraChatClient sharedClient].groupManager
                                       getPublicGroupsFromServerWithCursor:cursor
                                       pageSize:50
                                       error:nil];
@@ -217,10 +216,10 @@ do {
 
 ### 查询当前用户已加入的群组数量
 
-自 4.2.0 版本开始，你可以调用 `EMGroupManager#getJoinedGroupsCountFromServerWithCompletion` 方法用于从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于你订阅的即时通讯的套餐包，详见[产品价格](/product/pricing.html#套餐包功能详情)。
+你可以调用 `AgoraChatGroupManager#getJoinedGroupsCountFromServerWithCompletion` 方法用于从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于你订阅的即时通讯的套餐包，详见[产品价格](/product/pricing.html#套餐包功能详情)。
 
 ```objectivec
-[EMClient.sharedClient.groupManager getJoinedGroupsCountFromServerWithCompletion:^(NSInteger groupCount, EMError * _Nullable aError) {
+[AgoraChatClient.sharedClient.groupManager getJoinedGroupsCountFromServerWithCompletion:^(NSInteger groupCount, AgoraChatError * _Nullable aError) {
             
     }];
 ```
@@ -232,8 +231,8 @@ do {
 群成员可以调用 `blockGroup` 方法屏蔽群消息。屏蔽群消息后，该成员不再从指定群组接收群消息，群主和群管理员不能进行此操作。示例代码如下：
 
 ```objectivec
-// 同步方法，异步方法见 [EMGroupManager blockGroup:completion:]
-[[EMClient sharedClient].groupManager blockGroup:@"groupID" error:nil];
+// 同步方法，异步方法见 [AgoraChatGroupManager blockGroup:completion:]
+[[AgoraChatClient sharedClient].groupManager blockGroup:@"groupID" error:nil];
 ```
 
 #### 解除屏蔽群消息
@@ -241,17 +240,17 @@ do {
 群成员可以调用 `unblockGroup` 方法解除屏蔽群消息。示例代码如下：
 
 ```objectivec
-// 同步方法，异步方法见 [EMGroupManager unblockGroup:completion:]
-[[EMClient sharedClient].groupManager unblockGroup:@"groupID" error:nil];
+// 同步方法，异步方法见 [AgoraChatGroupManager unblockGroup:completion:]
+[[AgoraChatClient sharedClient].groupManager unblockGroup:@"groupID" error:nil];
 ```
 
 #### 检查是否已经屏蔽群消息
 
-群成员可以调用 `EMGroup#isBlocked` 检查是否屏蔽了该群的消息。为了保证检查结果的准确性，调用该方法前需先从服务器获取群详情，即调用 `EMGroup#getGroupSpecificationFromServerWithId`。
+群成员可以调用 `AgoraChatGroup#isBlocked` 检查是否屏蔽了该群的消息。为了保证检查结果的准确性，调用该方法前需先从服务器获取群详情，即调用 `AgoraChatGroup#getGroupSpecificationFromServerWithId`。
 
 ### 监听群组事件
 
-`IEMGroupManager` 中提供群组事件的监听接口。开发者可以通过设置此监听，获取群组中的事件，并做出相应处理。如果不再使用该监听，需要移除，防止出现内存泄漏。
+`IAgoraChatGroupManager` 中提供群组事件的监听接口。开发者可以通过设置此监听，获取群组中的事件，并做出相应处理。如果不再使用该监听，需要移除，防止出现内存泄漏。
 
 示例代码如下：
 
@@ -260,12 +259,12 @@ do {
 - (void)viewDidLoad
   {
     [super viewDidLoad];
-    [[EMClient sharedClient].groupManager addDelegate:self delegateQueue:nil];
+    [[AgoraChatClient sharedClient].groupManager addDelegate:self delegateQueue:nil];
   }
 // 移除代理。
 - (void)dealloc
   {
-    [[EMClient sharedClient].groupManager removeDelegate:self];
+    [[AgoraChatClient sharedClient].groupManager removeDelegate:self];
   }
 ```
 
@@ -279,13 +278,13 @@ do {
   }
 
 // 群主或群管理员收到进群申请。群主和所有管理员收到该回调。
-- (void)joinGroupRequestDidReceive:(EMGroup *)aGroup user:(NSString *)aUsername reason:(NSString *)aReason
+- (void)joinGroupRequestDidReceive:(AgoraChatGroup *)aGroup user:(NSString *)aUsername reason:(NSString *)aReason
   {
 
   }
 
 // 群主或群管理员同意用户的进群申请。申请人、群主和管理员（除操作者）收到该回调。
-- (void)joinGroupRequestDidApprove:(EMGroup *)aGroup
+- (void)joinGroupRequestDidApprove:(AgoraChatGroup *)aGroup
   {
 
   }
@@ -297,109 +296,109 @@ do {
   }
 
 // 用户同意进群邀请。邀请人收到该回调。
-- (void)groupInvitationDidAccept:(EMGroup *)aGroup invitee:(NSString *)aInvitee
+- (void)groupInvitationDidAccept:(AgoraChatGroup *)aGroup invitee:(NSString *)aInvitee
   {
 
   }
 
 // 用户拒绝进群邀请。邀请人收到该回调。
-- (void)groupInvitationDidDecline:(EMGroup *)aGroup invitee:(NSString *)aInvitee reason:(NSString *)aReason
+- (void)groupInvitationDidDecline:(AgoraChatGroup *)aGroup invitee:(NSString *)aInvitee reason:(NSString *)aReason
   {
 
   }
 
 // 有用户自动同意加入群组。邀请人收到该回调。
-- (void)didJoinGroup:(EMGroup *)aGroup inviter:(NSString *)aInviter message:(NSString *)aMessage
+- (void)didJoinGroup:(AgoraChatGroup *)aGroup inviter:(NSString *)aInviter message:(NSString *)aMessage
   {
 
   }
 
 // 有成员被加入群组禁言列表。被禁言的成员及群主和群管理员（除操作者外）会收到该回调。
-- (void)groupMuteListDidUpdate:(EMGroup *)aGroup addedMutedMembers:(NSArray *)aMutedMembers muteExpire:(NSInteger)aMuteExpire
+- (void)groupMuteListDidUpdate:(AgoraChatGroup *)aGroup addedMutedMembers:(NSArray *)aMutedMembers muteExpire:(NSInteger)aMuteExpire
   {
 
   }
 
 // 有成员被移出禁言列表。被解除禁言的成员及群主和群管理员（除操作者外）会收到该回调。
-- (void)groupMuteListDidUpdate:(EMGroup *)aGroup removedMutedMembers:(NSArray *)aMutedMembers
+- (void)groupMuteListDidUpdate:(AgoraChatGroup *)aGroup removedMutedMembers:(NSArray *)aMutedMembers
   {
 
   }
 
 // 有成员被加入群组白名单。被添加的成员及群主和群管理员（除操作者外）会收到该回调。
-- (void)groupWhiteListDidUpdate:(EMGroup *)aGroup addedWhiteListMembers:(NSArray *)aMembers
+- (void)groupWhiteListDidUpdate:(AgoraChatGroup *)aGroup addedWhiteListMembers:(NSArray *)aMembers
   {
 
   }
 
 // 有成员被移出群组白名单。被移出的成员及群主和群管理员（除操作者外）会收到该回调。
-- (void)groupWhiteListDidUpdate:(EMGroup *)aGroup removedWhiteListMembers:(NSArray *)aMembers
+- (void)groupWhiteListDidUpdate:(AgoraChatGroup *)aGroup removedWhiteListMembers:(NSArray *)aMembers
   {
 
   }
 
 // 全员禁言状态变化。群组所有成员（除操作者外）会收到该回调。
-- (void)groupAllMemberMuteChanged:(EMGroup *)aGroup isAllMemberMuted:(BOOL)aMuted
+- (void)groupAllMemberMuteChanged:(AgoraChatGroup *)aGroup isAllMemberMuted:(BOOL)aMuted
   {
 
   }
 
 // 设置管理员。群主、新管理员和其他管理员会收到该回调。
-- (void)groupAdminListDidUpdate:(EMGroup *)aGroup addedAdmin:(NSString *)aAdmin
+- (void)groupAdminListDidUpdate:(AgoraChatGroup *)aGroup addedAdmin:(NSString *)aAdmin
   {
 
   }
 
 // 群组管理员被移除。被移出的成员及群主和群管理员（除操作者外）会收到该回调。
-- (void)groupAdminListDidUpdate:(EMGroup *)aGroup removedAdmin:(NSString *)aAdmin
+- (void)groupAdminListDidUpdate:(AgoraChatGroup *)aGroup removedAdmin:(NSString *)aAdmin
   {
 
   }
 
 // 群主变更。新群主会收到该回调。
-- (void)groupOwnerDidUpdate:(EMGroup *)aGroup newOwner:(NSString *)aNewOwner oldOwner:(NSString *)aOldOwner
+- (void)groupOwnerDidUpdate:(AgoraChatGroup *)aGroup newOwner:(NSString *)aNewOwner oldOwner:(NSString *)aOldOwner
   {
 
   }
 
 // 有新成员加入群组。除了新成员，其他群成员会收到该回调。
-- (void)userDidJoinGroup:(EMGroup *)aGroup user:(NSString *)aUsername
+- (void)userDidJoinGroup:(AgoraChatGroup *)aGroup user:(NSString *)aUsername
   {
 
   }
 
 // 有成员主动退出群。除了退群的成员，其他群成员会收到该回调。
-- (void)userDidLeaveGroup:(EMGroup *)aGroup user:(NSString *)aUsername
+- (void)userDidLeaveGroup:(AgoraChatGroup *)aGroup user:(NSString *)aUsername
   {
 
   }
 
 // 有成员被移出群组。被移出的成员收到该事件。
-- (void)didLeaveGroup:(EMGroup *_Nonnull)aGroup reason:(EMGroupLeaveReason)aReason
+- (void)didLeaveGroup:(AgoraChatGroup *_Nonnull)aGroup reason:(AgoraChatGroupLeaveReason)aReason
   {
     
   }  
 
 // 群组公告更新。群组所有成员会收到该回调。
-- (void)groupAnnouncementDidUpdate:(EMGroup *)aGroup announcement:(NSString *)aAnnouncement
+- (void)groupAnnouncementDidUpdate:(AgoraChatGroup *)aGroup announcement:(NSString *)aAnnouncement
   {
 
   }
 
 // 有成员新上传群组共享文件。群组所有成员会收到该回调。
-- (void)groupFileListDidUpdate:(EMGroup *)aGroup addedSharedFile:(EMGroupSharedFile *)aSharedFile
+- (void)groupFileListDidUpdate:(AgoraChatGroup *)aGroup addedSharedFile:(AgoraChatGroupSharedFile *)aSharedFile
   {
 
   }
 
 // 群组共享文件被删除。群组所有成员会收到该回调。
-- (void)groupFileListDidUpdate:(EMGroup *)aGroup removedSharedFile:(NSString *)aFileId
+- (void)groupFileListDidUpdate:(AgoraChatGroup *)aGroup removedSharedFile:(NSString *)aFileId
   {
 
   }
 
 // 群组详情变更。群组所有成员会收到该回调。
-- (void)groupSpecificationDidUpdate:(EMGroup *)aGroup
+- (void)groupSpecificationDidUpdate:(AgoraChatGroup *)aGroup
   {
 
   }

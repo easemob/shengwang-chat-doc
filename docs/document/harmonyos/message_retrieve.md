@@ -2,15 +2,15 @@
 
 <Toc />
 
-本文介绍环信即时通讯 IM HarmonyOS SDK 如何从服务器和本地获取历史消息。
+本文介绍即时通讯 IM HarmonyOS SDK 如何从服务器和本地获取历史消息。
 
-- 环信即时通讯 IM 提供消息漫游功能，即将用户的所有会话的历史消息保存在消息服务器，用户在任何一个终端设备上都能获取到历史信息，使用户在多个设备切换使用的情况下也能保持一致的会话场景。
+- 即时通讯 IM 提供消息漫游功能，即将用户的所有会话的历史消息保存在消息服务器，用户在任何一个终端设备上都能获取到历史信息，使用户在多个设备切换使用的情况下也能保持一致的会话场景。
 
 - SDK 内部使用 SQLite 保存本地消息，你可以获取本地消息。
 
 ## 技术原理
 
-环信即时通讯 IM HarmonyOS SDK 提供 `ChatManager` 和 `Conversation` 类支持获取服务器和本地的消息，包含如下主要方法：
+即时通讯 IM HarmonyOS SDK 提供 `ChatManager` 和 `Conversation` 类支持获取服务器和本地的消息，包含如下主要方法：
 
 - `ChatManager.fetchHistoryMessages`：根据 `FetchMessageOption` 类从服务端分页获取指定会话的历史消息；
 - `ChatManager.getMessage`：根据消息 ID 获取本地消息；
@@ -21,7 +21,7 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化并连接到服务器，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM 的使用限制，详见 [使用限制](limitation.html)。
 
 ## 实现方法
 
@@ -39,8 +39,9 @@
 - 对于群组聊天，你可以设置 `from` 参数拉取群组中单个成员发送的历史消息。
 
 :::tip
-1. **默认可获取单聊和群组聊天的历史消息。若要获取聊天室的历史消息，需联系环信商务。**
-2. 历史消息在服务器上的存储时间与产品的套餐包相关，详见[产品套餐包详情](/product/pricing.html#套餐包功能详情)。
+1. **默认可获取单聊和群组聊天的历史消息。若要获取聊天室的历史消息，需联系声网商务。**
+2. 对于单聊消息，从服务器拉取历史消息时会读取服务端的消息已读和送达状态。该功能默认关闭，如果需要，请联系声网商务开通。
+3. 历史消息在服务器上的存储时间与产品的套餐包相关，详见[产品套餐包详情](/product/pricing.html#套餐包功能详情)。
 :::
 
 ```typescript
@@ -48,7 +49,7 @@ ChatClient.getInstance().chatManager()?.fetchHistoryMessages(conversationId, con
   let cursor = result.getNextCursor();
   let list = result.getResult();
   if (cursor && list.length === pageSize) {
-    // get more history messages logic
+    // 获取更多的历史消息的逻辑
   }
 })
 ```

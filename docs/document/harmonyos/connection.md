@@ -1,8 +1,8 @@
 # 连接
 
-应用客户端成功连接到环信服务器后，才能使用环信即时通讯 SDK 的收发消息等功能。
+应用客户端成功连接到声网服务器后，才能使用声网即时通讯 SDK 的收发消息等功能。
 
-你调用 `loginWithToken` 或 `login` 方法登录后，客户端 SDK 会自动连接环信服务器。关于登录详情，请参见[登录文档](login.html)。
+你调用 `loginWithToken` 或 `login` 方法登录后，客户端 SDK 会自动连接声网服务器。关于登录详情，请参见[登录文档](login.html)。
 
 ## 监听连接状态
 
@@ -44,7 +44,7 @@ ChatClient.getInstance().removeConnectionListener(connectionListener);
 
 登录后，如果由于网络信号弱、切换网络等引起的连接中断，SDK 会自动尝试重连。重连成功或者失败时分别会收到 `onConnected` 和 `onDisconnected` 通知。
 
-不过，SDK 在以下情况下会停止自动重连。你需要调用 `login` 方法登录。
+不过，SDK 在以下情况下会停止自动重连。你需要调用 `loginWithToken` 方法登录。
 
 - 用户调用了 SDK 的登出方法 `logout` 主动退出登录。
 - 登录时鉴权错误，例如， token 无效（错误码 104）或已过期（错误码 108）。
