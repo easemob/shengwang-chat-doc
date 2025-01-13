@@ -13,13 +13,13 @@
 
 div[class*=language-] {
   padding-top: 2px;
-} 
+}
 
 div[class*=language-]::before {
   right: 5em;
 }
 
-div[class*=language-] > button.copy-code-button:not(.fancy) {
+div[class*=language-]>button.copy-code-button:not(.fancy) {
   right: 1em;
 }
 
@@ -37,7 +37,7 @@ div[class*=language-] > button.copy-code-button:not(.fancy) {
 }
 
 .el-anchor .el-anchor__list .el-anchor__item a {
-  font-size: 14px; 
+  font-size: 14px;
 }
 
 .el-anchor .el-anchor__list .el-anchor__link:first-child {
@@ -48,11 +48,11 @@ div[class*=language-] > button.copy-code-button:not(.fancy) {
   padding: 7px 0;
 }
 
-.el-anchor > .el-anchor__list >.el-anchor__item  {
-    > .el-anchor__link {
-      font-size:16px;
-      color: #000;
-    }
+.el-anchor>.el-anchor__list>.el-anchor__item {
+  >.el-anchor__link {
+    font-size: 16px;
+    color: #000;
+  }
 }
 
 
@@ -62,24 +62,30 @@ $fade-amount: 20; // 每级字体颜色变淡的递减值
 
 #sidebar {
   background-color: rgb(245, 247, 250);
-  > .sidebar-links > li {
-    > a {
+
+  >.sidebar-links>li {
+    >a {
       font-weight: 600;
     }
-    > .sidebar-group {
-      > p span.title {
+
+    >.sidebar-group {
+      >p span.title {
         font-weight: 600;
       }
-      > button.sidebar-heading {
+
+      >button.sidebar-heading {
         font-weight: 600;
       }
-      > .sidebar-links {
+
+      >.sidebar-links {
         border-left: 1px solid #ccc;
         margin-left: 12px;
-        > li > .sidebar-link {
+
+        >li>.sidebar-link {
           padding-inline-start: 0.7rem;
         }
-        > li > .sidebar-group {
+
+        >li>.sidebar-group {
           padding-inline-start: 0.2rem;
         }
       }
@@ -88,13 +94,16 @@ $fade-amount: 20; // 每级字体颜色变淡的递减值
     @for $i from 1 through $sidebar-levels {
       $color: lighten($base-color, $i * $fade-amount);
       $selector: '';
+
       @for $j from 1 through $i {
         $selector: #{$selector} + '.sidebar-group > .sidebar-links ';
       }
+
       #{$selector} {
-        > li > a {
+        >li>a {
           color: $color;
         }
+
         .title {
           color: $color;
         }

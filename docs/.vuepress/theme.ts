@@ -10,7 +10,7 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
   hostname: 'https://im.shengwang.cn/',
   home: '/',
   iconAssets: 'iconfont',
-  logo: '/logo.ico',
+  // logo: '/logo.svg',
   // repo: 'easemob/easemob-doc',
   // docsBranch: 'doc-v2',
   // docsDir: 'docs',
