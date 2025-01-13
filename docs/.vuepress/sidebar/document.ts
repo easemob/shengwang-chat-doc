@@ -275,7 +275,7 @@ const documentSidebar = [
          { text: '修改消息', link: 'message_modify.html' },
          { text: '删除消息', link: 'message_delete.html' },
          { text: '置顶消息', link: 'message_pin.html' }, 
-         { text: '翻译消息', link: 'message_translation.html' },
+         // { text: '翻译消息', link: 'message_translation.html' },
          { text: '只投在线用户', link: 'message_deliver_only_online.html'},  
          { text: '消息审核（举报）', link: 'moderation.html'},      
        ]
