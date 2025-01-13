@@ -4,11 +4,11 @@
 
 ## 步骤一 继承自定义消息 Cell
 
-根据需求继承 `EaseChatUIKit` 中的自定义消息 Cell。
+根据需求继承 `ShengwangChatUIKit` 中的自定义消息 Cell。
 
 ```swift
 import UIKit
-import EaseChatUIKit
+import ShengwangChatUIKit
 
 class RedPackageCell: CustomMessageCell {
 
@@ -35,11 +35,11 @@ class RedPackageCell: CustomMessageCell {
 
 ## 步骤二 继承 Cell 的渲染模型
 
-根据需求继承 `EaseChatUIKit` 中的 Cell 的渲染模型 `MessageEntity`，并指定气泡大小，其中 `redPackageIdentifier` 为红包的自定义消息的 `event` 事件。
+根据需求继承 `ShengwangChatUIKit` 中的 Cell 的渲染模型 `MessageEntity`，并指定气泡大小，其中 `redPackageIdentifier` 为红包的自定义消息的 `event` 事件。
 
 ```swift
 import UIKit
-import EaseChatUIKit
+import ShengwangChatUIKit
 
 final class MineMessageEntity: MessageEntity {
     
@@ -78,46 +78,17 @@ final class MineMessageEntity: MessageEntity {
         Appearance.chat.inputExtendActions.append(redPackage)
 ```
 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/ios/red_package_attachment.png" title="新增的附件消息类型" />
+</ImageGallery>
+
 ## 步骤四 处理新增的附件消息类型的点击事件
 
 继承 `MessageListController`，处理新增的附件消息类型的点击事件。
 
 ```swift
 class CustomMessageListController: MessageListController {
-
-        //要实现微信样式（followInput），需要同时重载下面的方法以及仿系统 UIActionSheet 样式（ActionSheet）的方法
-    override func processFollowInputAttachmentAction() {
-        if Appearance.chat.messageAttachmentMenuStyle == .followInput {
-            if let fileItem = Appearance.chat.inputExtendActions.first(where: { $0.tag == "File" }) {
-                fileItem.action = { [weak self] item,object in
-                    self?.handleAttachmentAction(item: item)
-                }
-            }
-            if let photoItem = Appearance.chat.inputExtendActions.first(where: { $0.tag == "Photo" }) {
-                photoItem.action = { [weak self] item,object in
-                    self?.handleAttachmentAction(item: item)
-                }
-            }
-            if let cameraItem = Appearance.chat.inputExtendActions.first(where: { $0.tag == "Camera" }) {
-                cameraItem.action = { [weak self] item,object in
-                    self?.handleAttachmentAction(item: item)
-                }
-            }
-            if let contactItem = Appearance.chat.inputExtendActions.first(where: { $0.tag == "Contact" }) {
-                contactItem.action = { [weak self] item,object in
-                    self?.handleAttachmentAction(item: item)
-                }
-            }
-            if let redPackageItem = Appearance.chat.inputExtendActions.first(where: { $0.tag == "Red" }) {
-                redPackageItem.action = { [weak self] item,object in
-                    self?.handleAttachmentAction(item: item)
-                }
-            }
-            
-        }
-    }
     
-    //仿系统 UIActionSheet 样式（ActionSheet）只需要重载以下方法
     override func handleAttachmentAction(item: any ActionSheetItemProtocol) {
         switch item.tag {
         case "File": self.selectFile()
@@ -140,20 +111,16 @@ let redPackageIdentifier = "redPackage"
 
 ```
 
-<ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/ios/red_package_attachment.png" title="红包消息" />
-</ImageGallery>
-
 ## 步骤五 增加发送新类型附件消息的方法
 
-在 `EaseChatUIKit` 的 `MessageListViewModel` 中增加发送红包消息的方法。
+在 `ShengwangChatUIKit` 的 `MessageListViewModel` 中增加发送红包消息的方法。
 
 ```swift
 extension MessageListViewModel {
     func sendRedPackageMessage() {
         var ext = Dictionary<String,Any>()
         ext["something"] = "发红包"
-        let json = EaseChatUIKitContext.shared?.currentUser?.toJsonObject() ?? [:]
+        let json = ChatUIKitContext.shared?.currentUser?.toJsonObject() ?? [:]
         ext.merge(json) { _, new in
             new
         }
@@ -184,14 +151,15 @@ extension MessageListViewModel {
 
 ## 步骤六 注册继承的对象
 
-将上述继承的对象初始化后，在 `EaseChatUIKit` 中进行注册。
+将上述继承的对象初始化后，在 `ShengwangChatUIKit` 中进行注册。
 
 ```swift
         
         ComponentsRegister.shared.MessageRenderEntity = MineMessageEntity.self
         ComponentsRegister.shared.Conversation = MineConversationInfo.self
         ComponentsRegister.shared.MessageViewController = CustomMessageListController.self
-        ComponentsRegister.shared.registerCustomizeCellClass(cellType: RedPackageCell.self)
+        //redPackageIdentifier 为Cell的唯一标识，也是声网自定义消息的时间类型
+        ComponentsRegister.shared.registerCustomCellClasses(cellType: RedPackageCell.self,identifier: redPackageIdentifier)
 ```
 
 这里的 `ComponentsRegister.shared.Conversation = MineConversationInfo.self` 用于在会话列表中展示收到的新类型的自定义消息内容。
@@ -200,7 +168,7 @@ extension MessageListViewModel {
   
 ```swift
 import UIKit
-import EaseChatUIKit
+import ShengwangChatUIKit
 
 
 final class MineConversationInfo: ConversationInfo {
@@ -211,7 +179,7 @@ final class MineConversationInfo: ConversationInfo {
         
         let from = message.from
         let mentionText = "Mentioned".chat.localize
-        let user = EaseChatUIKitContext.shared?.userCache?[from]
+        let user = ChatUIKitContext.shared?.userCache?[from]
         var nickName = user?.remark ?? ""
         if nickName.isEmpty {
             nickName = user?.nickname ?? ""

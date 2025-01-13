@@ -18,8 +18,8 @@
 
 ```jsx
 import React from "react";
-import { Chat } from "easemob-chat-uikit";
-import "easemob-chat-uikit/style.css";
+import { Chat } from "shengwang-chat-uikit";
+import "shengwang-chat-uikit/style.css";
 
 const ChatContainer = () => {
   return (
@@ -46,17 +46,17 @@ const ChatContainer = () => {
 
 ```jsx
 import React from "react";
-import { Chat, MessageList, TextMessage } from "easemob-chat-uikit";
-import "easemob-chat-uikit/style.css";
+import { Chat, MessageList, TextMessage } from "shengwang-chat-uikit";
+import "shengwang-chat-uikit/style.css";
 
 const ChatContainer = () => {
-  const renderTxtMsg = msg => {
+  const renderTxtMsg = (msg) => {
     return (
       <TextMessage
-        bubbleStyle={{ background: 'hsl(135.79deg 88.79% 36.46%)' }}
+        bubbleStyle={{ background: "hsl(135.79deg 88.79% 36.46%)" }}
         shape="square"
         status={msg.status}
-        avatar={<Avatar style={{ background: 'pink' }}>A</Avatar>}
+        avatar={<Avatar style={{ background: "pink" }}>A</Avatar>}
         textMessage={msg}
       ></TextMessage>
     );
@@ -81,7 +81,6 @@ const ChatContainer = () => {
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/web/custom_message_cell.png" title="头像粉红且字体为白色" />
 </ImageGallery>
-
 
 ### 设置消息日期和时间格式
 
@@ -164,35 +163,35 @@ const ChatContainer = () => {
 你可以配置消息输入框的功能，包括是否显示发送语音按钮、是否显示消息输入框、是否显示消息表情按钮和更多操作按钮、是否启用正在输入功能、是否显示发送按钮等。
 
 ```jsx
-import React from 'react';
-import { Chat, Icon, MessageInput } from 'easemob-chat-uikit';
-import 'easemob-chat-uikit/style.css';
+import React from "react";
+import { Chat, Icon, MessageInput } from "shengwang-chat-uikit";
+import "shengwang-chat-uikit/style.css";
 
 const ChatContainer = () => {
   return (
-    <div style={{ width: '70%', height: '100%' }}>
+    <div style={{ width: "70%", height: "100%" }}>
       <Chat
         renderMessageInput={() => (
           <MessageInput
             actions={[
               {
                 // 发送语音功能
-                name: 'RECORDER',
+                name: "RECORDER",
                 visible: true,
               },
               {
                 // 消息输入框
-                name: 'TEXTAREA',
+                name: "TEXTAREA",
                 visible: true,
               },
               {
                 // 表情
-                name: 'EMOJI',
+                name: "EMOJI",
                 visible: true,
               },
               {
                 // 更多操作
-                name: 'MORE',
+                name: "MORE",
                 visible: true,
               },
             ]}
@@ -202,8 +201,8 @@ const ChatContainer = () => {
             row={1} // Input 行数
             placeHolder="请输入内容" // 默认占位符
             enabledMention={true} // 是否开启群 @ 功能
-            onSendMessage={message => {}} //发送消息的回调
-            onBeforeSendMessage={message => {}} // 消息发送前回调，该回调返回 promise，如果返回的 promise 的状态为已解决（resolved），则发送消息；如果返回的 promise 的状态为已失败（rejected），则不发送消息。
+            onSendMessage={(message) => {}} //发送消息的回调
+            onBeforeSendMessage={(message) => {}} // 消息发送前回调，该回调返回 promise，如果返回的 promise 的状态为已解决（resolved），则发送消息；如果返回的 promise 的状态为已失败（rejected），则不发送消息。
           />
         )}
       />
@@ -220,20 +219,20 @@ const ChatContainer = () => {
 2. 使用 `actions` 自定义 `MessageInput` 组件。
 
 ```jsx
-import React from 'react';
-import { Chat, Icon, MessageInput } from 'easemob-chat-uikit';
-import 'easemob-chat-uikit/style.css';
+import React from "react";
+import { Chat, Icon, MessageInput } from "shengwang-chat-uikit";
+import "shengwang-chat-uikit/style.css";
 
 const ChatContainer = () => {
   // 自定义要添加的图标
   const CustomIcon = {
     visible: true,
-    name: 'CUSTOM',
+    name: "CUSTOM",
     icon: (
       <Icon
         type="DOC"
         onClick={() => {
-          console.log('click custom icon');
+          console.log("click custom icon");
         }}
       ></Icon>
     ),
@@ -243,7 +242,7 @@ const ChatContainer = () => {
   // 在消息输入框中添加图标
   actions.splice(2, 0, CustomIcon);
   return (
-    <div style={{ width: '70%', height: '100%' }}>
+    <div style={{ width: "70%", height: "100%" }}>
       <Chat renderMessageInput={() => <MessageInput actions={actions} />} />
     </div>
   );
@@ -272,8 +271,8 @@ import {
   rootStore,
   MessageInput,
   Icon,
-} from "easemob-chat-uikit";
-import "easemob-chat-uikit/style.css";
+} from "shengwang-chat-uikit";
+import "shengwang-chat-uikit/style.css";
 
 const ChatContainer = () => {
   // 展示自定义消息

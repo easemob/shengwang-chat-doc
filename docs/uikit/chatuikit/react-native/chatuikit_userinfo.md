@@ -84,7 +84,7 @@ export function App() {
 
   return (
     <Container
-      options={{ appKey: "appKey" }}
+      options={{ appId: "<your app ID>" }}
       onGroupsHandler={onGroupsHandler}
       onUsersHandler={onUsersHandler}
     >

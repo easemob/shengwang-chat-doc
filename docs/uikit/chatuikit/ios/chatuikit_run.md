@@ -2,7 +2,7 @@
 
 <Toc />
 
-环信提供一个开源的聊天示例项目，演示了如何使用该 UIKit 快速搭建聊天页面，实现完整业务。
+声网提供一个开源的聊天示例项目，演示了如何使用该 UIKit 快速搭建聊天页面，实现完整业务。
 
 本文展示如何编译并运行 iOS 平台的聊天 UIKit 示例项目。
 
@@ -18,11 +18,11 @@
 
 ### 第一步 下载示例代码
 
-前往 [GitHub 源码](https://github.com/easemob/chatuikit-ios)下载示例代码到本机。
+前往 [GitHub 源码](https://github.com/AgoraIO-Usecase/ShengwangChat-ios)下载示例代码到本机。
 
 ### 第二步 执行 pod 命令
 
-1. 点击打开 `chatuikit-ios` 文件夹。
+1. 点击打开 `ShengwangChatUIKit` 文件夹。
 
 2. 将 `Example` 文件夹拖拽到终端。
 
@@ -40,13 +40,29 @@ pod install --repo-update
 
 ![img](/images/uikit/chatuikit/ios/buildError.png) 
 
-3. 在[环信即时通讯控制台](https://console.easemob.com/user/login)创建有效的环信即时通讯 IM 开发者账号和 [App Key](/product/enable_and_configure_IM.html#创建应用)。然后，将 App Key 填入 `appKey` 字段，运行项目。
+1. 在[声网控制台](https://console.shengwang.cn/overview)创建有效的即时通讯 IM 开发者账号和 [App Key](/product/enable_and_configure_IM.html#创建应用)。然后，将 App ID 填入 `appId` 字段，运行项目。
 
 在键盘上按 `cmd+B` 重新编译程序即可跑通项目。
 
-4. [创建有效的环信 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，将用户的 ID 和 token 分别填入下图的两个输入框，点击 **Login**。
+4. 创建有效的即时通讯 IM 用户，将用户的 ID 和 token 分别填入下图的两个输入框，点击 **Login**。
 
-![img](/images/uikit/chatuikit/ios/login.png)
+在[声网控制台](https://console.shengwang.cn/overview)按照如下步骤创建用户：
+
+(1). 展开控制台左上角下拉框，选择需要开通即时通讯 IM 服务的项目。
+
+(2). 点击左侧导航栏的**全部产品**。
+
+(3). 在下拉列表中找到**即时通讯 IM** 并点击。
+
+(4). 在**即时通讯 IM** 页面，进入**运营管理**标签页。
+
+(5). 在**用户** 页签下，点击**创建IM用户**。
+
+(6). 在弹出的对话框中，配置用户相关参数，点击**确定**。
+
+在用户列表中，在新创建的用户的**操作**一栏中，点击**更多**，选择**查看Token**，查看该用户的 token。
+
+<img src="/images/uikit/chatuikit/ios/login.png" width="600" >
 
 ### 第四步 体验项目
 

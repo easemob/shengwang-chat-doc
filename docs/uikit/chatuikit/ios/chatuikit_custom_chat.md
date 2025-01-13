@@ -1,6 +1,6 @@
 # 聊天消息
 
-环信单群聊 UIKit 的聊天页面提供如下功能：
+单群聊 UIKit 的聊天页面提供如下功能：
 
 - 发送和接收消息, 包括文本、表情、图片、语音、视频、文件和名片消息。
 - 对消息进行复制、引用、撤回、删除、编辑、重新发送和审核。
@@ -9,7 +9,7 @@
 
 消息相关功能，详见[功能介绍文档](chatfeature_message.html)。
 
-你可以配置聊天页面的导航栏、消息列表项、输入框和跳转事件等。详见 [MessageListController.swift](https://github.com/easemob/easemob-uikit-ios/blob/main/Sources/EaseChatUIKit/Classes/UI/Components/Chat/Controllers/MessageListController.swift)。
+你可以配置聊天页面的导航栏、消息列表项、输入框和跳转事件等。详见 [MessageListController.swift](https://github.com/AgoraIO-Usecase/ShengwangChat-ios/blob/main/Sources/EaseChatUIKit/Classes/UI/Components/Chat/Controllers/MessageListController.swift)。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/ios/custom_chat.png" title="聊天页面" />
@@ -27,7 +27,7 @@
 
 要自定义消息表中列表项的内容，即各种消息类型的 Cell，你需要执行以下步骤：
 
-1. 继承 `EaseChatUIKit` 中对应的消息 Cell 类，注册新的自定义类。
+1. 继承 `ShengwangChatUIKit` 中对应的消息 Cell 类，注册新的自定义类。
 
 2. 重载对应的方法。
    
@@ -70,7 +70,11 @@
 
 你可以通过 `Appearance.chat.contentStyle = [.withReply,.withAvatar,.withNickName,.withDateAndTime]` 设置聊天页面消息中显示内容的可配项数组，默认展示回复消息气泡，消息发送方头像，消息发送方昵称，消息的日期时间。
 
-你可以将不需要的功能移除，也还可添加表情回应（`MessageReaction`）和话题（`MessageThread`）。**注意，添加表情回应和话题功能前，需在[环信即时通讯控制台](https://console.easemob.com/user/login)开通。** 
+你可以将不需要的功能移除，也还可添加表情回应（`MessageReaction`）和话题（`MessageThread`）。
+
+:::tip
+添加话题功能前，需在[声网控制台](https://console.shengwang.cn/overview)的**即时通讯 IM** > **功能配置** > **消息功能**页签开通。
+:::
 
 ```swift
         //是否显示消息话题。
@@ -171,7 +175,7 @@
 ### 设置消息翻译
 
 - `Appearance.chat.enableTranslation = value`：是否开启文本消息长按翻译功能，默认为 `false`，即该功能默认关闭。如需开启该特性，需设置为 `true`。
-- `Appearance.chat.targetLanguage= .Chinese` 翻译目标语言，默认为中文。文本消息长按后出现**翻译**菜单，点击**翻译**后，设置翻译的目标语言。使用前，你需在[环信即时通讯云控制台](https://console.easemob.com/user/login)申请试用翻译功能，然后将 `Appearance.chat.enableTranslation` 设置为 `true`，才会出现文本消息长按的翻译功能。若后台申请翻译未通过，前端无法成功调用 API 进行翻译。
+- `Appearance.chat.targetLanguage= .Chinese` 翻译目标语言，默认为中文。文本消息长按后出现**翻译**菜单，点击**翻译**后，设置翻译的目标语言。使用前，你需在[声网控制台](https://console.shengwang.cn/overview)申请试用翻译功能，然后将 `Appearance.chat.enableTranslation` 设置为 `true`，才会出现文本消息长按的翻译功能。若后台申请翻译未通过，前端无法成功调用 API 进行翻译。
 - `Appearance.chat.receiveTranslationColor = value`：消息接收方翻译文本颜色。
 - `Appearance.chat.sendTranslationColor = value`：消息发送方翻译文本颜色。
 

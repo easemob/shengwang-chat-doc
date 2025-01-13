@@ -161,7 +161,7 @@ ChatUIKitAlphabetSortHelper.instance.sortHandler = (showName) {
 
 单群聊提供了两类事件回调，以便于你在使用时可以及时得到操作结果。
 
-当实现 `ChatSDKEventsObserver` 后，环信 IM SDK（`im_flutter_sdk`）方法调用开始时会通过 `void onChatSDKEventBegin(ChatSDKEvent event)` 回调通知你调用开始，当结束时会通过 `void onChatSDKEventEnd(ChatSDKEvent event, ChatError? error)` 方法告知你调用结束，同时是否报错也会通过这里的 `error` 告知。
+当实现 `ChatSDKEventsObserver` 后，即时通讯 IM SDK（`im_flutter_sdk`）方法调用开始时会通过 `void onChatSDKEventBegin(ChatSDKEvent event)` 回调通知你调用开始，当结束时会通过 `void onChatSDKEventEnd(ChatSDKEvent event, ChatError? error)` 方法告知你调用结束，同时是否报错也会通过这里的 `error` 告知。
 
 当实现 `ChatUIKitEventsObservers` 后，单群聊 UIKit 相关的事件会通过 `void onChatUIKitEventsReceived(ChatUIKitEvent event)` 回调通知你。
 
@@ -181,12 +181,12 @@ class _ToastPageState extends State<ToastPage> with ChatSDKEventsObserver, ChatU
     super.dispose();
   }
 
-  // 环信 IM SDK 方法调用开始。
+  // 即时通讯 IM SDK 方法调用开始。
   @override
   void onChatSDKEventBegin(ChatSDKEvent event) {
   }
 
-  // 环信 IM SDK 方法调用结束。
+  // 即时通讯 IM SDK 方法调用结束。
   @override
   void onChatSDKEventEnd(ChatSDKEvent event, ChatError? error) {
   }
@@ -221,11 +221,11 @@ ChatUIKitSettings.searchBarRadius = CornerRadius.large;
 
 ### 配置默认头像
 
-默认为 `packages/em_chat_uikit/assets/images/default_avatar.png`。
+默认为 `packages/shengwang_chat_uikit/assets/images/default_avatar.png`。
 
 ```dart
 ChatUIKitSettings.avatarPlaceholder = const AssetImage(
-  'packages/em_chat_uikit/assets/images/default_avatar.png',
+  'packages/shengwang_chat_uikit/assets/images/default_avatar.png',
 );
 ```
 
@@ -255,11 +255,11 @@ ChatUIKitSettings.showConversationListUnreadCount = true;
 
 ### 配置会话列表显示的静音图标
 
-默认为 `packages/em_chat_uikit/assets/images/no_disturb.png`。
+默认为 `packages/shengwang_chat_uikit/assets/images/no_disturb.png`。
 
 ```dart
 ChatUIKitSettings.conversationListMuteImage = const AssetImage(
-  'packages/em_chat_uikit/assets/images/no_disturb.png',
+  'packages/shengwang_chat_uikit/assets/images/no_disturb.png',
 )
 ```
 
@@ -289,7 +289,7 @@ ChatUIKitSettings.conversationListMuteImage = const AssetImage(
 
 消息话题（即 `Thread`）指用户可以在群组聊天中根据一条消息创建话题进行深入探讨，讨论和追踪特定项目任务，而不影响其他聊天内容。
 
-使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/)上已开通该功能。
+使用该特性前，请确保在[声网控制台](https://console.shengwang.cn/overview)上已开通该功能。
 
 消息话题特性在 `ChatUIKitSettings.enableChatThreadMessage` 中提供开关，默认值为 `false`。要开启该特性，需将该参数设置为 `true`。
 
@@ -303,7 +303,7 @@ ChatUIKitSettings.conversationListMuteImage = const AssetImage(
 
 消息翻译是指用户可以将一条消息翻译成其他语言。消息翻译可以帮助使用不同语言的用户进行沟通。
 
-使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/)上已试用该功能。
+使用该特性前，请确保在[声网控制台](https://console.shengwang.cn/overview)上已试用该功能。
 
 1. 开启消息翻译特性。
 
@@ -329,7 +329,7 @@ ChatUIKitSettings.conversationListMuteImage = const AssetImage(
 
 表情回复（即 `Reaction`）指用户可以使用表情符号回复消息。表情回复可以帮助用户表达情绪、态度、进行调查或投票。在单群聊 UIKit 中，用户可以长按单条消息触发消息拓展功能菜单，选择表情回复。
 
-使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/)上已开通该功能。
+使用该特性前，请确保在[声网控制台](https://console.shengwang.cn/overview)上已开通该功能。
 
 单群聊 UiKit 的 `ChatUIKitSettings` 对象中提供了 `enableMessageReaction` 属性用于设置是否开启 `Reaction` 功能, 默认值为 `false`。要开启该功能，将该参数设置为 `true`。示例代码如下：
 

@@ -28,7 +28,7 @@
 
 5. 在**基础信息**页面可查看应用的数据中心。
 
-![img](/images/product/data_center_view.png)
+![img](/images/product/enable_im/data_center_view.png)
 
 ## 集成说明
 

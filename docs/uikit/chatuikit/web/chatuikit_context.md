@@ -84,7 +84,7 @@ rootStore 包含以下数据模块:
 ## 使用示例
 
 ```javascript
-import { rootStore } from "easemob-chat-uikit";
+import { rootStore } from "shengwang-chat-uikit";
 ```
 
 ## 调用 API 改变全局 state
@@ -99,7 +99,7 @@ import { rootStore } from "easemob-chat-uikit";
 
 ```javascript
 import React from "react";
-import { useConversationContext } from "easemob-chat-uikit";
+import { useConversationContext } from "shengwang-chat-uikit";
 
 const ChatAPP = () => {
   const { conversationList, setCurrentConversation } = useConversationContext();
@@ -172,7 +172,7 @@ const ChatAPP = () => {
 
 ```javascript
 import React from "react";
-import { useChatContext, useSDK } from "easemob-chat-uikit";
+import { useChatContext, useSDK } from "shengwang-chat-uikit";
 
 const ChatAPP = () => {
   const { chatSDK } = useSDK(); // 获取即时通讯 IM SDK
@@ -283,7 +283,7 @@ const ChatAPP = () => {
 
 ```javascript
 import React from "react";
-import { useAddressContext } from "easemob-chat-uikit";
+import { useAddressContext } from "shengwang-chat-uikit";
 
 const ChatAPP = () => {
   const { appUsersInfo } = useAddressContext();

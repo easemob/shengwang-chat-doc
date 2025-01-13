@@ -14,7 +14,7 @@
 
 ## 安装
 
-你可以使用 CocoaPods 安装 EaseChatUIKit 作为 Xcode 项目的依赖项。
+你可以使用 CocoaPods 安装 ShengwangChatUIKit 作为 Xcode 项目的依赖项。
 
 ## CocoaPods
 
@@ -27,7 +27,7 @@ platform :ios, '13.0'
 target 'YourTarget' do
   use_frameworks!
   
-  pod 'EaseChatUIKit'
+  pod 'ShengwangChatUIKit'
 end
 
 post_install do |installer|

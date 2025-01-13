@@ -23,7 +23,7 @@
             title = getString(R.string.detail_item_audio),
             resourceId = R.drawable.uikit_phone_pick,
             menuId = R.id.contact_item_audio_call,
-            titleColor = ContextCompat.getColor(this, com.hyphenate.easeui.R.color.ease_color_primary),
+            titleColor = ContextCompat.getColor(this, io.agora.chat.uikit.R.color.ease_color_primary),
             order = 2
         )
 
@@ -31,7 +31,7 @@
             title = getString(R.string.detail_item_video),
             resourceId = R.drawable.uikit_video_camera,
             menuId = R.id.contact_item_video_call,
-            titleColor = ContextCompat.getColor(this, com.hyphenate.easeui.R.color.ease_color_primary),
+            titleColor = ContextCompat.getColor(this, io.agora.chat.uikit.R.color.ease_color_primary),
             order = 3
         )
         list?.add(audioItem)

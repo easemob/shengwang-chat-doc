@@ -52,7 +52,7 @@ import 'package:em_chat_uikit/chat_uikit.dart';
 ```dart
 void main() {
   ChatUIKit.instance
-      .init(options: Options(appKey: appkey, autoLogin: false))
+      .init(options: Options.withAppId(appId, autoLogin: false))
       .then((value) {
     runApp(const MyApp());
   });

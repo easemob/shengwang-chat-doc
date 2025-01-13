@@ -2,7 +2,7 @@
 
 <Toc />
 
-利用环信单群聊 UIKit，你可以轻松实现单群和群聊。本文介绍如何快速实现在单聊会话中发送消息。
+利用声网单群聊 UIKit，你可以轻松实现单群和群聊。本文介绍如何快速实现在单聊会话中发送消息。
 
 ## 前提条件
 
@@ -10,13 +10,13 @@
 
 - React 16.8.0 或以上版本；
 - React DOM 16.8.0 或以上版本；
-- 已在[环信即时通讯云控制台](https://console.easemob.com/user/login)创建了有效的环信即时通讯 IM 开发者账号，并[获取了 App Key](/product/enable_and_configure_IM.html#获取环信即时通讯-im-的信息)。
+- 已在[声网即时通讯云控制台](https://console.shengwnag.com/user/login)创建了有效的声网即时通讯 IM 开发者账号，并[获取了 appId](/product/enable_and_configure_IM.html#获取声网即时通讯-im-的信息)。
 
 ## 支持的浏览器
 
 | 浏览器    | 支持的版本 |
 | --------- | ---------- |
-| IE 浏览器  | 11 或以上  |
+| IE 浏览器 | 11 或以上  |
 | Edge      | 43 或以上  |
 | Firefox   | 10 或以上  |
 | Chrome    | 54 或以上  |
@@ -52,29 +52,29 @@ cd my-app
 └── yarn.lock
 ```
 
-### 第二步 集成 easemob-chat-uikit
+### 第二步 集成 shengwnag-chat-uikit
 
-#### 安装 easemob-chat-uikit
+#### 安装 shengwnag-chat-uikit
 
 - 若通过 npm 安装，运行以下命令：
 
 ```bash
-npm install easemob-chat-uikit --save
+npm install shengwnag-chat-uikit
 ```
 
 - 若通过 yarn 安装，运行以下命令：
 
 ```bash
-yarn add easemob-chat-uikit
+yarn add shengwnag-chat-uikit
 ```
 
-#### 使用 easemob-chat-uikit 组件构建应用
+#### 使用 shengwnag-chat-uikit 组件构建应用
 
-为了方便快速体验，你可以在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**应用概览** > **用户认证**页面创建用户并查看用户 token。**用户认证**页面中的用户仅用于快速体验或调试目的。
+为了方便快速体验，你可以在[声网即时通讯云控制台](https://console.shengwnag.com/user/login)的**应用概览** > **用户认证**页面创建用户并查看用户 token。**用户认证**页面中的用户仅用于快速体验或调试目的。
 
-在开发环境中，你需要在环信控制台[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，从你的 App Server 获取用户 token，详见[使用环信用户 token 鉴权](/product/easemob_user_token.html) 。
+在开发环境中，你需要在声网控制台[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，从你的 App Server 获取用户 token，详见[使用声网用户 token 鉴权](/product/shengwnag_user_token.html) 。
 
-将 easemob-chat-uikit 库导入你的代码中：
+将 shengwnag-chat-uikit 库导入你的代码中：
 
 ```javascript
 // App.js
@@ -85,8 +85,8 @@ import {
   ConversationList,
   useClient,
   rootStore,
-} from "easemob-chat-uikit";
-import "easemob-chat-uikit/style.css";
+} from "shengwnag-chat-uikit";
+import "shengwnag-chat-uikit/style.css";
 
 const ChatApp = () => {
   const client = useClient();
@@ -95,7 +95,7 @@ const ChatApp = () => {
       client
         .open({
           user: "",
-          token: "",
+          accessToken: "",
         })
         .then((res) => {
           // 创建会话
@@ -125,7 +125,7 @@ class App extends Component {
     return (
       <Provider
         initConfig={{
-          appKey: "your app key",
+          appId: "your appId",
         }}
       >
         <ChatApp />
@@ -150,7 +150,9 @@ npm run start
 2. 输入你的第一条消息并发送。
 
 :::tip
-使用自定义 App Key 时，由于没有联系人，需先添加好友。
+使用新创建的 appId 时，由于没有联系人，需先添加好友。
 :::
 
-![img](/images/uikit/chatuikit/web/message_first.png) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/message_first.png" title="发送第一条消息" />
+</ImageGallery>

@@ -12,7 +12,7 @@
 
 以下是 `Chat UIKit SDK` 项目的结构概览。
 
-```sh
+```bash
 ├── CHANGELOG.md // 更新日志
 ├── CODE_OF_CONDUCT.md // 行为准则
 ├── CONTRIBUTING.md  // 贡献指南

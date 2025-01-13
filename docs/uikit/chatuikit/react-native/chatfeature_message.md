@@ -135,14 +135,14 @@
 
 ```tsx
 import { NavigationContainer } from "@react-navigation/native";
-import { Container as UIKitContainer } from "react-native-chat-uikit";
+import { Container as UIKitContainer } from "react-native-shengwang-chat-uikit";
 export function App() {
   // 默认为开启。若关闭，设置为 false。
   const enableMessagePin = true;
   return (
     <UIKitContainer
       options={{
-        appKey: gAppKey,
+        appId: '<your app ID>',
       }}
       enableMessagePin={enableMessagePin}
     >

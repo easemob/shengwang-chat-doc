@@ -29,7 +29,7 @@
 
   - Gradle 7.0 之前 
 
-    在 `/Gradle Scripts/build.gradle.kts(Project: <projectname>)` 文件内，检查是否有 **mavenCentral** 仓库。
+    在 Project的`build.gradle.kts` 文件中添加 `mavenCentral()` 仓库。
 
     ```kotlin
     buildscript {
@@ -40,12 +40,20 @@
     ```
   - Gradle 7.0 即之后
 
-    在 `/Gradle Scripts/settings.gradle.kts(Project Settings)` 文件内，检查是否有 **mavenCentral** 仓库。
+    在Project的 `settings.gradle` 文件中添加 `mavenCentral()` 仓库。
 
-    ```kotlin
+    ```gradle
+    pluginManagement {
+        repositories {
+            ……
+            mavenCentral()
+            ……
+        }
+    }
     dependencyResolutionManagement {
         repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
         repositories {
+            ……
             mavenCentral()
         }
     }
@@ -56,27 +64,29 @@
 
 在 app 项目 build.gradle.kts 中添加以下依赖：
 
+// TODO: 替换为最新版本号和仓库地址
 ```kotlin
-implementation("io.hyphenate:ease-chat-kit:4.11.1")
+implementation("cn.shengwang:chat-uikit:1.3.2")
 ```
+// TODO: 替换链接
 若要查看 UIKit 的最新版本号，请点击[这里](https://central.sonatype.com/artifact/io.hyphenate/ease-chat-kit/versions)。
 
 **本地依赖**
-
+// TODO: 替换链接
 从 GitHub 获取[单群聊 UIKit](https://github.com/easemob/chatuikit-android) 源码，按照下面的方式集成：
 
-- 在根目录 `settings.gradle.kts` 文件（/Gradle Scripts/settings.gradle.kts）中添加如下代码：
+- 在Project的 `settings.gradle.kts` 文件中添加如下代码：
 
 ```kotlin
-include(":ease-im-kit")
-project(":ease-im-kit").projectDir = File("../chatuikit-android/ease-im-kit")
+include(":chat-uikit")
+project(":chat-uikit").projectDir = File("../AgoraChat-UIKit-android/ease-im-kit")
 ```
 
-- 在 app 的 `build.gradle.kts` 文件（/Gradle Scripts/build.gradle）中添加如下代码：
+- 在 app 的 `build.gradle.kts` 文件中添加如下代码：
 
 ```kotlin
 //chatuikit-android
-implementation(project(mapOf("path" to ":ease-im-kit")))
+implementation(project(mapOf("path" to ":chat-uikit")))
 ```
 
 4. 防止代码混淆
@@ -84,8 +94,8 @@ implementation(project(mapOf("path" to ":ease-im-kit")))
 在 `/Gradle Scripts/proguard-rules.pro` 文件中添加如下代码：
 
   ```
-  -keep class com.hyphenate.** {*;}
-    -dontwarn  com.hyphenate.**
+  -keep class io.agora.** {*;}
+  -dontwarn  io.agora.**
   ```
   
 ## 实现发送第一条单聊消息
@@ -100,12 +110,12 @@ implementation(project(mapOf("path" to ":ease-im-kit")))
 <resources>
     <string name="app_name">quickstart</string>
 
-    <string name="app_key">[你申请的 app key]</string>
+    <string name="app_id">[你申请的 App ID]</string>
 </resources>
 
 ```
 :::tip
-你需要将 **app_key** 替换为你申请的 App Key。
+你需要将 **app_id** 替换为你申请的 App ID。
 :::
 
 2. 打开 `app/res/layout/activity_main.xml` 文件，并替换为如下内容：
@@ -190,13 +200,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.easemob.quickstart.databinding.ActivityMainBinding
-import com.hyphenate.easeui.ChatUIKitClient
-import com.hyphenate.easeui.common.ChatLog
-import com.hyphenate.easeui.common.ChatOptions
-import com.hyphenate.easeui.common.extensions.showToast
-import com.hyphenate.easeui.feature.chat.enums.ChatUIKitType
-import com.hyphenate.easeui.feature.chat.activities.UIKitChatActivity
-import com.hyphenate.easeui.interfaces.ChatUIKitConnectionListener
+import io.agora.chat.uikit.ChatUIKitClient
+import io.agora.chat.uikit.common.ChatLog
+import io.agora.chat.uikit.common.ChatOptions
+import io.agora.chat.uikit.common.extensions.showToast
+import io.agora.chat.uikit.feature.chat.enums.ChatUIKitType
+import io.agora.chat.uikit.feature.chat.activities.UIKitChatActivity
+import io.agora.chat.uikit.interfaces.ChatUIKitConnectionListener
 
 class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -222,15 +232,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initSDK() {
-        val appkey = getString(R.string.app_key)
-        if (appkey.isEmpty()) {
-            applicationContext.showToast("You should set your AppKey first!")
-            ChatLog.e(TAG, "You should set your AppKey first!")
+        val appId = getString(R.string.app_id)
+        if (appId.isEmpty()) {
+            applicationContext.showToast("You should set your appId first!")
+            ChatLog.e(TAG, "You should set your appId first!")
             return
         }
         ChatOptions().apply {
-            // 设置你自己的 app key
-            this.appKey = appkey
+            // 设置你自己的 app id
+            this.appId = appId
             // 设置为手动登录
             this.autoLogin = false
             // 设置是否需要接收方发送已达回执。默认为 `false`，即不需要。
@@ -322,7 +332,9 @@ fun Context.showToast(msg: String) {
 
 在聊天页面下方输入消息，然后点击**发送**按钮发送消息。
 
-![img](/images/uikit/chatuikit/android/message_first.png =300x650) 
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/android/message_first.png" title="发送第一条消息" />
+</ImageGallery>
 
 ## 测试应用
 

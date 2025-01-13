@@ -19,26 +19,28 @@
 在 app 项目 `build.gradle.kts` 中添加以下依赖：
 
 ```kotlin
-implementation("io.hyphenate:ease-chat-kit:4.11.1")
+// TODO: 替换为最新版本号和仓库地址
+implementation("cn.shengwang:chat-uikit:1.3.2")
 ```
+// TODO: 替换链接
 若要查看最新版本号，请点击[这里](https://central.sonatype.com/artifact/io.hyphenate/ease-chat-kit/versions)。
 
 ### 本地依赖
-
+// TODO: 替换链接
 从 GitHub 获取[单群聊 UIKit](https://github.com/easemob/chatuikit-android) 源码，按照下面的方式集成：
 
-1. 在根目录 `settings.gradle.kts` 文件（/Gradle Scripts/settings.gradle.kts）中添加如下代码：
+1. 在根目录 `settings.gradle.kts` 文件中添加如下代码：
 
 ```kotlin
-include(":ease-im-kit")
-project(":ease-im-kit").projectDir = File("../chatuikit-android/ease-im-kit")
+include(":chat-uikit")
+project(":chat-uikit").projectDir = File("../AgoraChat-UIKit-android/ease-im-kit")
 ```
 
-2. 在 app 的 `build.gradle.kts` 文件（/Gradle Scripts/build.gradle）中添加如下代码：
+2. 在 app 的 `build.gradle.kts` 文件中添加如下代码：
 
 ```kotlin
 //chatuikit-android
-implementation(project(mapOf("path" to ":ease-im-kit")))
+implementation(project(mapOf("path" to ":chat-uikit")))
 ```
 
 ### 防止代码混淆
@@ -46,8 +48,8 @@ implementation(project(mapOf("path" to ":ease-im-kit")))
 在 `app/proguard-rules.pro` 文件中添加如下行，防止代码混淆：
 
 ```kotlin
--keep class com.hyphenate.** {*;}
--dontwarn  com.hyphenate.**
+-keep class io.agora.** {*;}
+-dontwarn  io.agora.**
 ```
 
 ## 初始化
@@ -59,7 +61,7 @@ class DemoApplication: Application() {
     
     override fun onCreate() {
         val options = ChatOptions()
-        options.appKey = "你的appkey"
+        options.appId = "你的appId"
         ChatUIKitClient.init(this, options)
     }
 }

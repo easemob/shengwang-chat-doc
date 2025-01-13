@@ -5,8 +5,9 @@
 ## 前提条件
 
 开始前，确保你的开发环境满足如下条件：
+
 - 已安装 [Node.js](https://nodejs.org/)。
-- [即时通讯 IM 应用和 App Key](/product/enable_and_configure_IM.html#创建应用)。
+- [即时通讯 IM 应用和 appId](/product/enable_and_configure_IM.html#创建应用)。
 
 ## 操作步骤
 
@@ -87,14 +88,14 @@ export default defineConfig({
     // vueJsx(),
     // type 设为 vue 时, 所有名为 `react_app` 目录中的文件的 jsx 将被 react jsx 编译，其他文件里的 jsx 将以 vue jsx 编译。
     veauryVitePlugins({
-      type: "vue"
-    })
+      type: "vue",
+    }),
   ],
   resolve: {
     alias: {
-      "@": fileURLToPath(new URL("./src", import.meta.url))
-    }
-  }
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
+    },
+  },
 });
 ```
 
@@ -107,37 +108,37 @@ export default defineConfig({
 1. 安装 UIKit。
 
    ```bash
-   npm i easemob-chat-uikit --save;
+   npm i shengwang-chat-uikit --save;
    ```
 
-2. 创建 `react_app/chat.jsx` 文件，导入 UIKit，使用环信即时通讯 IM 的 App Key 和用户信息初始化 UIKit。
-   
-  ![img](/images/uikit/chatuikit/web/vue_initialization.png)
+2. 创建 `react_app/chat.jsx` 文件，导入 UIKit，使用声网即时通讯 IM 的 appId 和用户信息初始化 UIKit。
+
+<img src="/images/uikit/chatuikit/web/vue_initialization.png" width="500" >
 
 代码如下：
 
 ```jsx
 // 导入 UIKit 到 react_app/chat.jsx 文件
-import { UIKitProvider, Chat, ConversationList } from "easemob-chat-uikit";
+import { UIKitProvider, Chat, ConversationList } from "shengwang-chat-uikit";
 // 引入 UIKit 样式
-import 'easemob-chat-uikit/style.css'
+import "shengwang-chat-uikit/style.css";
 
-const appKey = "your appkey";
+const appId = "your appId";
 const userId = "userId";
 const password = "password";
 
-const EaseChat = (props) => {
+const ChatApp = (props) => {
   // 父组件传入的 theme 属性
   const { theme } = props;
   return (
     <UIKitProvider
       initConfig={{
-        appKey,
+        appId,
         userId,
-        password
+        password,
       }}
       theme={{
-        mode: theme
+        mode: theme,
       }}
     >
       <div className="chat-wrap">
@@ -152,28 +153,28 @@ const EaseChat = (props) => {
   );
 };
 
-export default EaseChat;
+export default ChatApp;
 ```
 
 ### 第四步 将 UIKit 添加到 Vue 页面
 
-将 EaseChat 添加 Vue 页面, 删除当前 `views/HomeView.vue` 中的所有代码并添加下面的代码。
+将 ChatApp 添加 Vue 页面, 删除当前 `views/HomeView.vue` 中的所有代码并添加下面的代码。
 
 该代码执行以下操作：
 
-1. 导入 Veaury 和 EaseChat 聊天组件。
+1. 导入 Veaury 和 ChatApp 聊天组件。
 2. 使用 Veaury 的 `applyPureReactInVue` 函数将我们的 React 组件转换为 Vue 组件。
-3. 定义 `theme` 变量，传递给 EaseChat 组件，用于切换 UIKit 的主题。
+3. 定义 `theme` 变量，传递给 ChatApp 组件，用于切换 UIKit 的主题。
 4. 添加一些样式，美化界面。
 
 ```javascript
 <script setup>
 import { ref } from "vue";
 import { applyPureReactInVue } from "veaury";
-import EaseChat from "../react_app/chat";
+import ChatApp from "../react_app/chat";
 import Logo from "../assets/logo.svg";
 
-const Chat = applyPureReactInVue(EaseChat);
+const Chat = applyPureReactInVue(ChatApp);
 
 const theme = ref("light");
 
@@ -233,17 +234,22 @@ const switchTheme = () => {
 </style>
 
 ```
+
 删除 `App.vue` 文件 `template` 中的无关代码，仅保留 RouterView，当访问 http://localhost:5173 时，界面如下：
 
-![img](/images/uikit/chatuikit/web/vue_initial_page.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/vue_initial_page.png" title="浅色主题" />
+</ImageGallery>
 
 点击右上角的 **Switch Theme** 切换主题：
 
-![img](/images/uikit/chatuikit/web/vue_switch_theme.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/vue_switch_theme.png" title="深色主题" />
+</ImageGallery>
 
 ## 相关参考
 
-- [示例项目源码](https://github.com/easemob/webim-vue-demo/tree/chat-uikit-vue-demo)
-- [组件库源码](https://github.com/easemob/Easemob-UIKit-web)
-- [其他示例 demo](https://github.com/easemob/easemob-uikit-react/tree/main/demo)
-- [`UIKitProvider` 文档](https://doc.easemob.com/uikit/chatuikit/web/chatuikit_provider.html)
+- [示例项目源码](https://github.com/shengwang/webim-vue-demo/tree/chat-uikit-vue-demo)
+- [组件库源码](https://github.com/shengwang/shengwang-UIKit-web)
+- [其他示例 demo](https://github.com/shengwang/shengwang-uikit-react/tree/main/demo)
+- [`UIKitProvider` 文档](https://doc.shengwang.com/uikit/chatuikit/web/chatuikit_provider.html)
