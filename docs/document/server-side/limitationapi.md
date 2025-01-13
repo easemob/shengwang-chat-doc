@@ -17,13 +17,15 @@
 | * 发送群聊消息                 | POST   | /app-id/{app_id}/messages/chatgroups           | 对于单个 app，该 REST API 存在以下三个限制：<br/> - 20 条/秒/App ID   <br/> - 20 次/秒 <br/> -  3 个群/次   |
 | * 发送定向消息                 | POST   | /app-id/{app_id}/messages/chatgroups/users           | 100 条/秒/App ID   |
 | * 发送聊天室消息               | POST   | /app-id/{app_id}/messages/chatrooms            | 对于单个 app，该 REST API 存在以下三个限制：<br/> - 100 条/秒  <br/> - 20 次/秒   <br/> -  10 个聊天室/次   |
+| * 向 app 在线用户发送广播消息 | POST | /app-id/{app_id}/messages/users/broadcast | 每分钟限 1 次，每天限 50 次（可联系商务提升该上限）。 |
 | * 发送聊天室广播消息 | POST | /app-id/{app_id}/messages/chatrooms/broadcast | 每分钟最多可发 10 次，而且每天最多可发 100 次广播消息。 |
 | 上传文件  |    POST  | /app-id/{app_id}/chatfiles       | 100 次/秒/App ID                                                 |
 | 下载文件      |  GET     | /app-id/{app_id}/chatfiles/{file_uuid}       | 100 次/秒/App ID                                                 |
 | * 获取历史消息（聊天记录）文件   |  GET     | /app-id/{app_id}/chatmessages/${time}          | 10 次/分钟/App ID                                               |
 | * 设置指定消息附件的存储方式   |  POST     | /app-id/{app_id}/users/{username}/chatfiles/lifetime          | 100 次/秒/App ID     |
-| * 服务端消息撤回    |    POST  | /app-id/{app_id}/messages/recall        | 100 次/秒/App ID                                                 |
-| 服务端单向删除会话   |    DELETE    | /app-id/{app_id}/users/{userName}/user_channel          | 5 次/分钟/单用户 ID，100 次/秒/App ID                                              |
+| * 撤回单条消息    |    POST  | /app-id/{app_id}/messages/recall        | 100 次/秒/App ID                                                 |
+| * 批量撤回消息    |    POST  | /app-id/{app_id}/messages/batch_recall        | 100 次/秒/App ID                                                 |
+| 单向删除会话   |    DELETE    | /app-id/{app_id}/users/{userName}/user_channel          | 5 次/分钟/单用户 ID，100 次/秒/App ID                                              |
 | 修改文本或自定义消息 | PUT  | /app-id/{app_id}/messages/rewrite/{msg_id} | 100 次/秒/App ID  |
 | 根据消息 ID 单向删除单聊漫游消息  | DELETE    | /app-id/{app_id}/rest/message/roaming/chat/user/{userId}?userId={userId}&msgIdList={msgIdList}    | 100 次/秒/App ID   |
 | 根据消息 ID 单向删除群聊漫游消息  | DELETE    | /app-id/{app_id}/rest/message/roaming/group/user/{userId}?groupId={groupId}&msgIdList={msgIdList}   | 100 次/秒/App ID   |
