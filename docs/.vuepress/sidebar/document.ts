@@ -116,9 +116,9 @@ const documentSidebar = [
           { text: '更新消息', link: 'message_update.html', except: ['web']},
           { text: '删除消息', link: 'message_delete.html' },    
           { text: '置顶消息', link: 'message_pin.html'},         
-          { text: '翻译消息', link: 'message_translation.html', except: ['harmonyos']},
+          // { text: '翻译消息', link: 'message_translation.html', except: ['harmonyos']},
           { text: '只投在线用户', link: 'message_deliver_only_online.html'},
-          { text: '消息审核（举报）', link: 'moderation.html', except: ['harmonyos']},
+          // { text: '消息审核（举报）', link: 'moderation.html', except: ['harmonyos']},
           { text: '获取消息流量统计', link: 'message_traffic_statis.html', only: ['android', 'ios'] },
         ]
       },
