@@ -76,7 +76,7 @@ const onChange = (platform) => {
   if (nextPlatformDocRouters.indexOf(nextPathPath) > -1) {
     router.push(nextPathPath)
   } else {
-    router.push('/docs/sdk/'+platform+'/overview.html')
+    router.push('/docs/sdk/'+platform+'/document_index.html')
   }
 }
 

@@ -240,7 +240,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
 import HopeHomePage from "vuepress-theme-hope/components/HomePage.js";
 import HeroSection from "./CustomHero.vue";
@@ -253,14 +253,6 @@ const frontmatter = usePageFrontmatter();
 const router = useRouter();
 const starter = frontmatter.value.starter || [];
 const projects = frontmatter.value.projects || [];
-
-onMounted(() => {
-  document.getElementsByClassName("navbar-center")[0].style.display = "none";
-});
-
-onUnmounted(() => {
-  document.getElementsByClassName("navbar-center")[0].style.display = "";
-});
 
 const downloadTableColumns = [
   {

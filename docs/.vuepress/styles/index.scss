@@ -10,6 +10,11 @@
   }
 }
 
+.no-sidebar {
+  .navbar-center {  
+    display: none !important;
+  }
+}
 
 div[class*=language-] {
   padding-top: 2px;
