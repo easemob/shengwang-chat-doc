@@ -88,10 +88,10 @@ const router = useRouter();
 watch(
   () => route.path,
   () => {
-    if (route.path.indexOf("/uikit") == 0) {
+    if (route.path.indexOf("/docs/uikit") == 0) {
       const splitRoute = route.path.split("/");
-      kitType.value = splitRoute[2];
-      platform.value = splitRoute[3];
+      kitType.value = splitRoute[3];
+      platform.value = splitRoute[4];
     }
   },
   { immediate: true }
@@ -103,7 +103,7 @@ const onChange = (platform) => {
     .filter(
       (item) =>
         item.hasOwnProperty("name") &&
-        item?.path.indexOf(`/uikit/${kitType.value}/${platform}`) == 0
+        item?.path.indexOf(`/docs/uikit/${kitType.value}/${platform}`) == 0
     )
     .map((item) => item.path);
 
@@ -116,12 +116,12 @@ const onChange = (platform) => {
   } else {
     if (kitType.value == "chatuikit") {
       router.push(
-        `/uikit/${kitType.value}/${platform}/chatuikit_overview.html`
+        `/docs/uikit/${kitType.value}/${platform}/chatuikit_overview.html`
       );
     }
     if (kitType.value == "chatroomuikit") {
       router.push(
-        `/uikit/${kitType.value}/${platform}/roomuikit_overview.html`
+        `/docs/uikit/${kitType.value}/${platform}/roomuikit_overview.html`
       );
     }
   }

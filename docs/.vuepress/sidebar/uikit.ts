@@ -5,8 +5,8 @@ const getSubDirectories = (dir) =>
   fs
     .readdirSync(dir)
     .filter((item) => fs.statSync(path.join(dir, item)).isDirectory());
-const CHAT_DOC_PATH = path.resolve(__dirname, "../../uikit/chatuikit");
-// const CHATROOM_DOC_PATH = path.resolve(__dirname, "../../uikit/chatroomuikit");
+const CHAT_DOC_PATH = path.resolve(__dirname, "../../docs/uikit/chatuikit");
+// const CHATROOM_DOC_PATH = path.resolve(__dirname, "../../docs/uikit/chatroomuikit");
 const chatPlatformList = getSubDirectories(CHAT_DOC_PATH);
 // const chatroomPlatformList = getSubDirectories(CHATROOM_DOC_PATH);
 
@@ -298,7 +298,7 @@ const chatroomUikitSidebar = [
 function buildChatUikitSidebar() {
   const result = {};
   chatPlatformList.forEach((platform) => {
-    const key = `/uikit/chatuikit/${platform}/`;
+    const key = `/docs/uikit/chatuikit/${platform}/`;
     result[key] = chatUikitSidebar
       .map((sidebar) =>
         handleSidebarItem(platform, sidebar, CHAT_DOC_PATH, "chatuikit")
@@ -311,7 +311,7 @@ function buildChatUikitSidebar() {
 function buildChatroomUikitSidebar() {
   // const result = {};
   // chatroomPlatformList.forEach((platform) => {
-  //   const key = `/uikit/chatroomuikit/${platform}/`;
+  //   const key = `/docs/uikit/chatroomuikit/${platform}/`;
   //   result[key] = chatroomUikitSidebar
   //     .map((sidebar) =>
   //       handleSidebarItem(platform, sidebar, CHATROOM_DOC_PATH, "chatroomuikit")
@@ -359,7 +359,7 @@ function handleSidebarItem(platform, sidebar, docPath, kitType) {
     }
   } else {
     if (linkExists(platform, sidebar.link, docPath)) {
-      const newLink = `/uikit/${kitType}/${platform}/${sidebar.link}`;
+      const newLink = `/docs/uikit/${kitType}/${platform}/${sidebar.link}`;
       return { ...sidebar, link: newLink };
     }
   }

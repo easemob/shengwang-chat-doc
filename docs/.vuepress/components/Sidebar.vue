@@ -13,8 +13,8 @@
   watch(pageData, ()=> {
     const pagePath = pageData.value.path
     showPrivateSwitch.value = pagePath.indexOf('/private/') == 0
-    showPlatformSwitch.value = pagePath.indexOf('/document/') == 0
-    showUIKitSwitch.value = pagePath.indexOf('/uikit/') == 0
+    showPlatformSwitch.value = pagePath.indexOf('/docs/sdk/') == 0
+    showUIKitSwitch.value = pagePath.indexOf('/docs/uikit/') == 0
   }, {immediate:true})
 
 

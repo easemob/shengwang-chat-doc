@@ -2,7 +2,7 @@ import path from "node:path"
 import fs from "node:fs"
 
 const getSubDirectories = (dir) => fs.readdirSync(dir).filter(item => fs.statSync(path.join(dir, item)).isDirectory())
-const DOC_PATH = path.resolve(__dirname, '../../document')
+const DOC_PATH = path.resolve(__dirname, '../../docs/sdk')
 const platformList = getSubDirectories(DOC_PATH)
 
 const documentSidebar = [
@@ -526,7 +526,7 @@ const documentSidebar = [
 function buildDocSidebar() {
   const result = {}
   platformList.forEach(platform => {
-    const key = `/document/${platform}/`
+    const key = `/docs/sdk/${platform}/`
     result[key] = documentSidebar.map(sidebar => handleSidebarItem(platform, sidebar)).filter(s => s)
   });
   return result
@@ -555,7 +555,7 @@ function linkExists(platform: string, link: string): boolean {
 //         }
 //       }
 //     } else if (linkExists(platform, item.link)) {
-//       const documentLink = `/document/${platform}/${item.link.replace(/.html$/, '')}`;
+//       const documentLink = `/docs/sdk/${platform}/${item.link.replace(/.html$/, '')}`;
 //       newchildren.push({ ...item, link: documentLink });
 //     }
 //   }
@@ -593,7 +593,7 @@ function handleSidebarItem(platform, sidebar) {
     }
   } else {
     if (linkExists(platform, sidebar.link)) {
-      const newLink = `/document/${platform}/${sidebar.link}`
+      const newLink = `/docs/sdk/${platform}/${sidebar.link}`
       return {...sidebar, link:newLink}
     }
   }

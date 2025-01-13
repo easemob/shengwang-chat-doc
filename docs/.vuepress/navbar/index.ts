@@ -11,32 +11,32 @@ export const zhNavbar = navbar([
           {
             text: 'Android',
             icon: '/icon-Android.svg',
-            link: '/uikit/chatuikit/android/chatuikit_overview.html'
+            link: '/docs/uikit/chatuikit/android/chatuikit_overview.html'
           },
           {
             text: 'iOS',
             icon: '/icon-iOS.svg',
-            link: '/uikit/chatuikit/ios/chatuikit_overview.html'
+            link: '/docs/uikit/chatuikit/ios/chatuikit_overview.html'
           },
           {
             text: 'Web',
             icon: '/icon-web.svg',
-            link: '/uikit/chatuikit/web/chatuikit_overview.html'
+            link: '/docs/uikit/chatuikit/web/chatuikit_overview.html'
           },
           // {
           //   text: 'Uniapp',
           //   icon: '/icon-uni-app.svg',
-          //   link: '/uikit/chatuikit/uniapp/chatuikit_overview.html'
+          //   link: '/docs/uikit/chatuikit/uniapp/chatuikit_overview.html'
           // },
           {
             text: 'React Native',
             icon: '/icon-ReactNative.svg',
-            link: '/uikit/chatuikit/react-native/chatuikit_overview.html'
+            link: '/docs/uikit/chatuikit/react-native/chatuikit_overview.html'
           },
           {
             text: 'Flutter',
             icon: '/icon-flutter.svg',
-            link: '/uikit/chatuikit/flutter/chatuikit_overview.html'
+            link: '/docs/uikit/chatuikit/flutter/chatuikit_overview.html'
           }
         ]
       },
@@ -46,27 +46,27 @@ export const zhNavbar = navbar([
  //          {
  //            text: 'Android',
  //            icon: '/icon-Android.svg',
- //            link: '/uikit/chatroomuikit/android/roomuikit_overview.html'
+ //            link: '/docs/uikit/chatroomuikit/android/roomuikit_overview.html'
  //          },
  //          {
  //            text: 'iOS',
  //            icon: '/icon-iOS.svg',
- //            link: '/uikit/chatroomuikit/ios/roomuikit_overview.html'
+ //            link: '/docs/uikit/chatroomuikit/ios/roomuikit_overview.html'
  //          },
  //          {
  //            text: 'Web',
  //            icon: '/icon-web.svg',
- //            link: '/uikit/chatroomuikit/web/roomuikit_overview.html'
+ //            link: '/docs/uikit/chatroomuikit/web/roomuikit_overview.html'
  //          },
  //          {
  //            text: 'React Native',
  //            icon: '/icon-ReactNative.svg',
- //           link: '/uikit/chatroomuikit/react-native/roomuikit_overview.html'
+ //           link: '/docs/uikit/chatroomuikit/react-native/roomuikit_overview.html'
  //         },
  //         {
  //            text: 'Flutter',
  //            icon: '/icon-flutter.svg',
- //           link: '/uikit/chatroomuikit/flutter/roomuikit_overview.html'
+ //           link: '/docs/uikit/chatroomuikit/flutter/roomuikit_overview.html'
 //         }
 //        ]
 //      }
@@ -81,27 +81,27 @@ export const zhNavbar = navbar([
           {
             text: 'Android',
             icon: '/icon-Android.svg',
-            link: '/document/android/quickstart.html'
+            link: '/docs/sdk/android/quickstart.html'
           },
           {
             text: 'iOS',
             icon: '/icon-iOS.svg',
-            link: '/document/ios/quickstart.html'
+            link: '/docs/sdk/ios/quickstart.html'
           },
           {
             text: 'Web',
             icon: '/icon-web.svg',
-            link: '/document/web/quickstart.html'
+            link: '/docs/sdk/web/quickstart.html'
           },
           {
             text: 'HarmonyOS',
             icon: '/icon-harmonyos.svg',
-            link: '/document/harmonyos/quickstart.html'
+            link: '/docs/sdk/harmonyos/quickstart.html'
           },
           {
             text: 'Windows',
             icon: '/icon-windows.svg',
-            link: '/document/windows/quickstart.html'
+            link: '/docs/sdk/windows/quickstart.html'
           },
         ]
       },
@@ -111,27 +111,27 @@ export const zhNavbar = navbar([
           {
             text: 'React Native',
             icon: '/icon-ReactNative.svg',
-            link: '/document/react-native/quickstart.html'
+            link: '/docs/sdk/react-native/quickstart.html'
           },
           {
             text: 'Flutter',
             icon: '/icon-flutter.svg',
-            link: '/document/flutter/quickstart.html'
+            link: '/docs/sdk/flutter/quickstart.html'
           },
           {
             text: 'Unity',
             icon: '/icon-unity.svg',
-            link: '/document/unity/quickstart.html'
+            link: '/docs/sdk/unity/quickstart.html'
           },
           {
             text: '小程序',
             icon: '/icon-mini-program.svg',
-            link: '/document/applet/overview.html'
+            link: '/docs/sdk/applet/overview.html'
           },
           {
             text: 'uni-app',
             icon: '/icon-uni-app.svg',
-           link: '/document/applet/uniapp.html'
+           link: '/docs/sdk/applet/uniapp.html'
           }
         ]
       },
@@ -141,17 +141,17 @@ export const zhNavbar = navbar([
           {
             text: 'REST API',
             icon: '/icon-platform.svg',
-            link: '/document/server-side/overview.html'
+            link: '/docs/sdk/server-side/overview.html'
           },
           // {
           //   text: 'Java',
           //   icon: '/icon-platform.svg',
-          //   link: '/document/server-side/java_server_sdk_2.0.html'
+          //   link: '/docs/sdk/server-side/java_server_sdk_2.0.html'
           // },
           // {
           //   text: 'PHP',
           //   icon: '/icon-platform.svg',
-          //   link: '/document/server-side/php_server_sdk.html'
+          //   link: '/docs/sdk/server-side/php_server_sdk.html'
           // }
         ]
       }

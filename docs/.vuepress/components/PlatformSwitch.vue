@@ -59,24 +59,24 @@ const platformIcon = computed(() => PLATFORM_ICON_MAP[platform.value]?.activeIco
 const route = useRoute()
 const router = useRouter()
 watch(()=>route.path, ()=> {
-  if (route.path.indexOf('/document') == 0) {
-    platform.value = route.path.split('/')[2]
+  if (route.path.indexOf('/docs/sdk') == 0) {
+    platform.value = route.path.split('/')[3]
   }
 }, {immediate:true})
 
 
 // 切换平台，如果有相同路径的route就直接跳转
 const onChange = (platform) => {
-  const nextPlatformDocRouters = router.options.routes.filter(item=>item.hasOwnProperty('name') && item?.path.indexOf('/document/'+platform) == 0).map(item=>item.path)
+  const nextPlatformDocRouters = router.options.routes.filter(item=>item.hasOwnProperty('name') && item?.path.indexOf('/docs/sdk/'+platform) == 0).map(item=>item.path)
 
   let newPath = route.path.split('/')
-  newPath[2] = platform
+  newPath[3] = platform
   const nextPathPath = newPath.join('/')
 
   if (nextPlatformDocRouters.indexOf(nextPathPath) > -1) {
     router.push(nextPathPath)
   } else {
-    router.push('/document/'+platform+'/overview.html')
+    router.push('/docs/sdk/'+platform+'/overview.html')
   }
 }
 
