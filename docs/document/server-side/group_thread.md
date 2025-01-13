@@ -1,6 +1,6 @@
 # 子区管理
 
-即时通讯 IM 提供多个接口实现子区管理，包括子区的创建、获取、修改和删除等。
+即时通讯 IM 提供多个接口实现子区管理，包括子区的创建、获取、修改和删除等。**若你当前套餐不支持该功能，需升级产品套餐。**
 
 单个 app 下的子区总数默认为 10 万，如需调整请联系声网商务。
 
@@ -8,7 +8,7 @@
 
 要调用声网即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置即时通讯 IM 服务](enable_im.html)。
+- 产品套餐包支持子区功能。
 - 已从服务端获取 app token，详见 [使用 Token 鉴权](token_authentication.html)。
 - 了解即时通讯 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
