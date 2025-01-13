@@ -5,16 +5,18 @@
 - `ChatClient` 类是聊天 SDK 的入口，提供登录和登出即时通讯 IM 的方法，并管理 SDK 与聊天服务器之间的连接。
 - `ChatManager` 类提供发送和接收消息、管理会话（包括加载和删除会话）以及下载附件的方法。
 - `ChatMessage` 类定义消息的属性。
-- `Conversation` 类提供管理会话的方法。
-- `ContactManager` 类提供管理聊天联系人（如添加、获取、修改和删除联系人）的方法。
-- `GroupManager` 类提供群组管理的方法，如群组创建和解散以及成员管理。
+- `ChatConversation` 类提供管理会话的方法。
+- `ChatContactManager` 类提供管理聊天联系人（如添加、获取、修改和删除联系人）的方法。
+- `ChatGroupManager` 类提供群组管理的方法，如群组创建和解散以及成员管理。
 - `ChatRoomManager` 类提供聊天室管理的方法，如加入和离开聊天室、获取聊天室列表，以及管理成员权限。
-- `PresenceManager` 类提供管理用户在线状态订阅的方法。
+- `ChatPresenceManager` 类提供管理用户在线状态订阅的方法。
 - `ChatThreadManager` 类提供了管理子区的方法，包括创建、解散子区以及成员管理。
-- `PushManager` 类提供了配置离线推送服务的方法。
-- `UserInfoManager` 类提供了管理用户属性的方法，包括获取和更新用户属性。
+- `ChatPushManager` 类提供了配置离线推送服务的方法。
+- `ChatUserInfoManager` 类提供了管理用户属性的方法，包括获取和更新用户属性。
 
 ## 连接与初始化
+
+**ChatClient** 类提供登录和登出即时通讯 IM 的方法和事件，并管理 SDK 与聊天服务器之间的连接。
 
 | 方法             | 描述           |
 | :---------------------------------------------- | :------------------------------------------------ |
@@ -27,13 +29,13 @@
 | isLoginBefore          | 检查用户是否已登录聊天应用。             |
 | addConnectionEventHandler              | 添加监听。         |
 | removeConnectionEventHandler             | 移除监听。         |
-| groupManager           | 获取 `GroupManager` 类。               |
-| pushManager              | 获取 `PushManager` 类。            |
-| chatRoomManager             | 获取 `RoomManager` 类。         |
+| groupManager           | 获取 `ChatGroupManager` 类。               |
+| pushManager              | 获取 `ChatPushManager` 类。            |
+| chatRoomManager             | 获取 `ChatRoomManager` 类。         |
 | chatManager      | 获取 `ChatManager` 类。           |
-| userInfoManager           | 获取 `UserInfoManager` 类。            |
-| contactManager      | 获取 `ContactManager` 类。            |
-| presenceManager  | 获取 `presenceManager` 类。            |
+| userInfoManager           | 获取 `ChatUserInfoManager` 类。            |
+| contactManager      | 获取 `ChatContactManager` 类。            |
+| presenceManager  | 获取 `ChatPresenceManager` 类。            |
 | chatThreadManager      | 获取 `ChatThreadManager` 类。         |
 
 | 事件         | 描述            |
@@ -52,6 +54,12 @@
 | onUserKickedByOtherDevice               | 被其他设备踢掉回调。  |
 
 ## 发送消息
+
+- `ChatManager` 类提供发送和接收消息、管理会话（包括加载和删除会话）以及下载附件的方法和事件。
+
+- `ChatMessageEvent` 类提供消息状态事件，包括消息发送或下载成功和失败以及上传或下载进度。
+
+- `ChatEventHandler` 类用于监听收消息，已读回执等事件。
 
 | 方法             | 描述             |
 | :------------------------------------------------ | :------------------------------------------------ |
@@ -102,6 +110,9 @@
 
 ## 消息与会话
 
+- `ChatMessage` 类定义消息的属性。
+- `ChatConversation` 类提供管理会话的方法。
+
 | 方法              | 描述              |
 | :-------------------------------------------------- | :-------------------------------------------------- |
 | Conversation.id | 获取会话 ID。              |
@@ -141,6 +152,9 @@
 
 ## 联系人
 
+- `ChatContactManager` 类提供管理聊天联系人（如添加、获取、修改和删除联系人）的方法。
+- `ChatContactEventHandler` 类提供联系人事件监听。
+
 | 方法              | 描述      |
 | :------------------------------------------------- | :------------------------------------------------- |
 | fetchAllContacts   | 从服务器获取所有联系人。              |
@@ -164,6 +178,9 @@
 | onFriendRequestDeclined | 当好友请求被拒绝时触发。        |
 
 ## 群组
+
+- `ChatGroupManager` 类提供群组管理的方法，如群组创建和解散以及成员管理。
+- `ChatGroupEventHandler`类提供群组管理事件监听。
 
 | 方法            | 描述              |
 | :-------------------------------------------------- | :-------------------------------------------------- |
@@ -237,6 +254,9 @@
 
 ## 聊天室
 
+- `ChatRoomManager` 类提供聊天室管理的方法，如加入和离开聊天室、获取聊天室列表，以及管理成员权限。
+- `ChatRoomEventHandler` 类提供聊天室事件监听。
+
 | 方法              | 描述               |
 | :------------------------------------------------------- | :------------------------------------------------------- |
 | createChatRoom         | 创建聊天室。              |
@@ -290,6 +310,9 @@
 
 ## 用户在线状态订阅
 
+- `ChatPresenceManager` 类提供管理用户在线状态订阅的方法。
+- `ChatPresenceEventHandler` 类提供订阅用户状态变更监听。
+
 | 方法            | 描述            |
 | :-------------------------------------------------------- | :--------------------------------------------------- |
 | publishPresence    | 发布自定义的在线状态。            |
@@ -305,6 +328,9 @@
 | onPresenceStatusChanged | 当订阅的用户的在线状态更新时触发。 |
 
 ## 子区
+
+- `ChatThreadManager` 类提供了管理子区的方法，包括创建、解散子区以及成员管理。
+- `ChatThreadEvent` 类提供子区事件监听。
 
 | 方法               | 描述             |
 | :---------------------------------------------------------- | :------------------------------------------------------- |
@@ -332,6 +358,8 @@
 
 ## 离线推送
 
+`PushManager` 类提供了配置离线推送服务的方法。
+
 | 方法              | 描述            |
 | :---------------------------------------------------------- | :---------------------------------------------------- |
 | fetchPushConfigsFromServer  | 从服务器获取推送配置。              |
@@ -345,6 +373,8 @@
 | bindDeviceToken         | 绑定 APNs Token。            |
 
 ## 用户属性
+
+`UserInfoManager` 类提供了管理用户属性的方法，包括获取和更新用户属性。
 
 | 方法              | 描述      |
 | :------------------------------------------------- | :------------------------------------------------- |
