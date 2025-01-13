@@ -8,7 +8,7 @@
 
 环信即时通讯 IM Android SDK 支持更新本地数据库中的消息，其中包含如下主要方法：
 
-- `EMConversation#updateMessage`：更新消息到本地数据库。
+- `Conversation#updateMessage`：更新消息到本地数据库。
 
 ## 前提条件
 
@@ -23,16 +23,16 @@
 
 你可以通过以下方式更新本地数据库中的消息：
 
-- 直接调用 `EMChatManager#updateMessage` 方法更新 SDK 本地数据库中的消息。
+- 直接调用 `ChatManager#updateMessage` 方法更新 SDK 本地数据库中的消息。
 
 ```java 
-EMClient.getInstance().chatManager().updateMessage(message);
+ChatClient.getInstance().chatManager().updateMessage(message);
 ```
 
-- 若正在使用 `EMConversation` 类，可以先获取会话，再调用 `EMConversation#updateMessage` 方法更新 SDK 本地数据库会话中的消息。
+- 若正在使用 `Conversation` 类，可以先获取会话，再调用 `Conversation#updateMessage` 方法更新 SDK 本地数据库会话中的消息。
 
 ```java
-EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
+Conversation conversation = ChatClient.getInstance().chatManager().getConversation(conversationId);
 conversation.updateMessage(message);
 ```
 

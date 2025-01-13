@@ -2,7 +2,7 @@
 
 <Toc />
 
-即时通讯 IM 提供本地消息的流量统计功能。该功能默认关闭。若要使用该功能，需在 SDK 初始化前设置 `EMOptions#setEnableStatistics(boolean)` 开启。
+即时通讯 IM 提供本地消息的流量统计功能。该功能默认关闭。若要使用该功能，需在 SDK 初始化前设置 `ChatOptions#setEnableStatistics(boolean)` 开启。
 
 SDK 只支持统计该功能开启后最近 30 天内发送和接收的消息。各类消息的流量计算方法如下：
 
@@ -22,11 +22,11 @@ SDK 仅统计本地消息的流量，而非消息的实际流量。一般而言�
 
 ## 技术原理
 
-环信即时通讯 IM Android SDK 提供 `EMStatisticsManager` 类支持获取本地消息的流量统计信息，包含如下主要方法：
+环信即时通讯 IM Android SDK 提供 `ChatStatisticsManager` 类支持获取本地消息的流量统计信息，包含如下主要方法：
 
-- `EMStatisticsManager#getMessageStatistics`：根据消息 ID 获取消息流量统计信息；
-- `EMStatisticsManager#getMessageCount`：获取一定时间段内发送和/或接收的指定或全部类型的消息条数；
-- `EMStatisticsManager#getMessageSize`：获取一定时间段内发送和/或接收的指定或全部类型的消息的总流量。
+- `ChatStatisticsManager#getMessageStatistics`：根据消息 ID 获取消息流量统计信息；
+- `ChatStatisticsManager#getMessageCount`：获取一定时间段内发送和/或接收的指定或全部类型的消息条数；
+- `ChatStatisticsManager#getMessageSize`：获取一定时间段内发送和/或接收的指定或全部类型的消息的总流量。
 
 ## 前提条件
 
@@ -44,7 +44,7 @@ SDK 仅统计本地消息的流量，而非消息的实际流量。一般而言�
 示例代码如下：
 
 ```java
-EMMessageStatistics statistics = EMClient.getInstance().statisticsManager().getMessageStatistics(messageId);
+MessageStatistics statistics = ChatClient.getInstance().statisticsManager().getMessageStatistics(messageId);
 ```
 
 ### 获取一定时间段内发送和/或接收的消息条数
@@ -52,7 +52,7 @@ EMMessageStatistics statistics = EMClient.getInstance().statisticsManager().getM
 你可以统计一定时间段内发送和/或接收的指定或全部类型的消息，示例代码如下：
 
 ```java
-int number = EMClient.getInstance().statisticsManager().getMessageCount(startTime, endTime, direct, style);
+int number = ChatClient.getInstance().statisticsManager().getMessageCount(startTime, endTime, direct, style);
 ```
 
 ### 获取一定时间段内发送和/或接收的消息的总流量
@@ -62,5 +62,5 @@ int number = EMClient.getInstance().statisticsManager().getMessageCount(startTim
 示例代码如下：
 
 ```java
-long size = EMClient.getInstance().statisticsManager().getMessageSize(startTime, endTime, direct, style);
+long size = ChatClient.getInstance().statisticsManager().getMessageSize(startTime, endTime, direct, style);
 ```

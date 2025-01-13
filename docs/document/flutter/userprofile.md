@@ -14,7 +14,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM Flutter SDK 提供一个 `EMUserInfoManager` 类，支持获取、设置及修改用户属性信息，其中包含如下方法：
+即时通讯 IM Flutter SDK 提供一个 `ChatUserInfoManager` 类，支持获取、设置及修改用户属性信息，其中包含如下方法：
 
 - `updateUserInfo` 设置和修改当前用户自己的属性信息；
 - `fetchUserInfoById` 获取指定用户的属性信息；
@@ -25,7 +25,7 @@
 设置用户属性前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM 的使用限制，详见 [使用限制](limitation.html)。
 
 ## 实现方法
 
@@ -39,8 +39,8 @@
 
 ```dart
 try {
-  EMClient.getInstance.userInfoManager.updateUserInfo(userInfo);
-} on EMError catch (e) {
+  ChatClient.getInstance.userInfoManager.updateUserInfo(userInfo);
+} on ChatError catch (e) {
   // 更新用户属性失败，返回错误信息。
 }
 ```
@@ -68,9 +68,9 @@ try {
 // 获取一个或多个用户的所有属性，一次调用用户 ID 数量不超过 100。
 List<String> list = ["tom", "json"];
 try {
-  Map<String, EMUserInfo> userInfos =
-      await EMClient.getInstance.userInfoManager.fetchUserInfoById(list);
-} on EMError catch (e) {
+  Map<String, ChatUserInfo> userInfos =
+      await ChatClient.getInstance.userInfoManager.fetchUserInfoById(list);
+} on ChatError catch (e) {
   // 获取用户属性失败，返回错误信息。
 }
 ```
@@ -81,9 +81,9 @@ try {
 
 ```dart
 try {
-  EMUserInfo? userInfo =
-      await EMClient.getInstance.userInfoManager.fetchOwnInfo();
-} on EMError catch (e) {
+  ChatUserInfo? userInfo =
+      await ChatClient.getInstance.userInfoManager.fetchOwnInfo();
+} on ChatError catch (e) {
   // 获取当前用户属性失败，返回错误信息。
 }
 ```

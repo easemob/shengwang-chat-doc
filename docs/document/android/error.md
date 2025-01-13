@@ -4,9 +4,9 @@
 
 本文介绍环信即时通讯 Android SDK 中接口调用或者回调中的错误码。可以根据具体错误码判断具体错误原因。
 
-Android 中错误码的类为 `EMError`。
+Android 中错误码的类为 `Error`。
 
-如：注册时用户返回已存在的错误可以这样检测：`EMError.USER_ALREADY_EXIST`。
+如：注册时用户返回已存在的错误可以这样检测：`Error.USER_ALREADY_EXIST`。
 
 | 错误码<div style="width: 50px;"></div> |  错误信息     | 可能原因  |
 | :-----: | :----------------------------- | :--------------------------- |
@@ -94,7 +94,7 @@ Android 中错误码的类为 `EMError`。
 | 703    |   CHATROOM_PERMISSION_DENIED    | 无权限的聊天室操作：例如，聊天室普通成员没有权限设置聊天室管理员。 |
 | 704    |      CHATROOM_MEMBERS_FULL      | 聊天室已满：聊天室成员数量已达到创建聊天室时设置的最大人数。 |
 | 705    |       CHATROOM_NOT_EXIST        | 聊天室不存在：尝试对不存在的聊天室进行操作时提示该错误。   |
-| 706    |       CHATROOM_OWNER_NOT_ALLOW_LEAVE        | 聊天室所有者不允许离开聊天室。若初始化时，`EMOptions#allowChatroomOwnerLeave` 参数设置为 `false`，聊天室所有者调用 `leaveChatRoom` 方法离开聊天室时会提示该错误。   |
+| 706    |       CHATROOM_OWNER_NOT_ALLOW_LEAVE        | 聊天室所有者不允许离开聊天室。若初始化时，`ChatOptions#allowChatroomOwnerLeave` 参数设置为 `false`，聊天室所有者调用 `leaveChatRoom` 方法离开聊天室时会提示该错误。   |
 | 707    |       CHATROOM_USER_IN_BLOCKLIST        | 该用户在聊天室黑名单中。聊天室黑名单中的用户进行某些操作时，例如，加入聊天室，会提示该错误。   |
 | 900    |    USERINFO_USERCOUNT_EXCEED    | 获取用户属性的用户个数超过 100。               |
 | 901    |   USERINFO_DATALENGTH_EXCEED    | 设置的用户属性太长。单个用户的所有属性数据不能超过 2 KB，单个 app 所有用户属性数据不能超过 10 GB。 |

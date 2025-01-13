@@ -71,7 +71,7 @@ ChatClient.getInstance()
 示例代码如下：
 
 ```typescript
-ChatOptions options = new ChatOptions();
+ChatOptions options = ChatOptions.withAppId();
 options.deleteMessagesAsExitChatRoom = false;
 ```
 

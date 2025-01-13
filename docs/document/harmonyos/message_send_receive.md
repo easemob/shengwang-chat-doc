@@ -1,25 +1,25 @@
 # 发送和接收消息
 
-环信即时通讯 IM HarmonyOS SDK 通过 `EMChatManager` 类和 `EMMessage` 类实现文本、图片、音频、视频和文件等类型的消息的发送和接收。
+即时通讯 IM HarmonyOS SDK 通过 `ChatManager` 类和 `ChatMessage` 类实现文本、图片、音频、视频和文件等类型的消息的发送和接收。
 
-- 对于单聊，环信即时通信 IM 默认支持陌生人之间发送消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要[开启好友关系检查](/product/enable_and_configure_IM.html#好友关系检查)。
+- 对于单聊，即时通信 IM 默认支持陌生人之间发送消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要联系声网商务开通。
 
 - 对于群组和聊天室，用户每次只能向所属的单个群组和聊天室发送消息。
 
-单聊、群组聊天和聊天室的消息发送控制，详见[消息发送控制](/document/android/product_message_overview.html#消息发送控制)文档。
+单聊、群组聊天和聊天室的消息发送控制，详见[消息发送控制](product_message_overview.html#消息发送控制)文档。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [初始化文档](initialization.html)。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM 的使用限制，详见 [使用限制](limitation.html)。
 
 ## 发送和接收文本消息
 
 1. 首先，利用 `ChatMessage` 类构造一条消息。
 
-默认情况下，SDK 对单个用户发送消息的频率未做限制。如果你联系了环信商务设置了该限制，一旦在单聊、群聊或聊天室中单个用户的消息发送频率超过设定的上限，SDK 会上报错误，即错误码 509 `MESSAGE_CURRENT_LIMITING`。
+默认情况下，SDK 对单个用户发送消息的频率未做限制。如果你联系了声网商务设置了该限制，一旦在单聊、群聊或聊天室中单个用户的消息发送频率超过设定的上限，SDK 会上报错误，即错误码 509 `MESSAGE_CURRENT_LIMITING`。
 
 ```typescript
 // 创建一条文本消息，`content` 为消息文字内容。
@@ -58,7 +58,7 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 
 在新消息到来时，你会收到 `onMessageReceived` 的回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。
 
-对于聊天室消息，你可以通过消息的 `ChatMessage#isBroadcast` 属性判断该消息是否为[通过 REST API 发送的聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
+对于聊天室消息，你可以通过消息的 `ChatMessage#isBroadcast` 属性判断该消息是否为[通过 RESTful API 发送的聊天室全局广播消息](/document/server-side/message_broadcast.html#发送聊天室全局广播消息)。
 
 ```typescript
 let msgListener: ChatMessageListener = {
@@ -78,7 +78,7 @@ ChatClient.getInstance().chatManager()?.removeMessageListener(msgListener);
 
 附件消息的发送和接收过程如下：
 
-1. 创建和发送附件类型消息。SDK 将附件上传到环信服务器。
+1. 创建和发送附件类型消息。SDK 将附件上传到声网服务器。
 2. 接收附件消息。SDK 自动下载语音消息，默认自动下载图片和视频的缩略图。若下载原图、视频和文件，需调用 `downloadAttachment` 方法。
 3. 获取附件的服务器地址和本地路径。
 
@@ -87,7 +87,7 @@ ChatClient.getInstance().chatManager()?.removeMessageListener(msgListener);
 发送和接收语音消息的过程如下：
 
 1. 发送语音消息前，在应用层录制语音文件。
-2. 发送方调用 `createVoiceSendMessage` 方法传入接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）、语音文件的路径和语音时长创建语音消息，然后调用 `sendMessage` 方法发送消息。SDK 会将语音文件上传至环信服务器。
+2. 发送方调用 `createVoiceSendMessage` 方法传入接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）、语音文件的路径和语音时长创建语音消息，然后调用 `sendMessage` 方法发送消息。SDK 会将语音文件上传至声网服务器。
 
 ```typescript
 // `filePathOrUri` 为语音文件的本地路径或者文件的 URI，`duration` 为语音时长（单位为秒）。
@@ -117,7 +117,7 @@ let voiceLocalPath = voiceBody.getLocalPath();
 
 发送和接收图片消息的流程如下：
 
-1. 发送方调用 `createImageSendMessage` 方法传入图片的本地资源标志符 URI、设置是否发送原图以及接收方的用户 ID （群聊或聊天室分别为群组 ID 或聊天室 ID）创建图片消息，然后调用 `sendMessage` 方法发送该消息。SDK 会将图片上传至环信服务器，服务器自动生成图片缩略图。
+1. 发送方调用 `createImageSendMessage` 方法传入图片的本地资源标志符 URI、设置是否发送原图以及接收方的用户 ID （群聊或聊天室分别为群组 ID 或聊天室 ID）创建图片消息，然后调用 `sendMessage` 方法发送该消息。SDK 会将图片上传至声网服务器，服务器自动生成图片缩略图。
    
 ```typescript
 // `imageFilePathOrUri` 为图片本地路径或者Uri。
@@ -242,7 +242,7 @@ let localThumbPath = body.getThumbnailLocalPath();
 
 发送和接收文件消息的流程如下：
 
-1. 发送方调用 `createFileSendMessage` 方法传入接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）和文件的本地路径创建文件消息，然后调用 `sendMessage` 方法发送文件消息。SDK 将文件上传至环信服务器。
+1. 发送方调用 `createFileSendMessage` 方法传入接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）和文件的本地路径创建文件消息，然后调用 `sendMessage` 方法发送文件消息。SDK 将文件上传至声网服务器。
 
 ```typescript
 // `fileLocalPathOrUri` 为本地文件路径或者本地文件Uri。
@@ -364,7 +364,7 @@ let event = "gift";
 let customBody = new CustomMessageBody(event);
 // `params` 类型为 `Map<string, string>`。
 customBody.setParams(params);
-// 创建一条发送消息，`to` 指另一方环信用户 ID（或者群组 ID，聊天室 ID）；
+// 创建一条发送消息，`to` 指另一方声网用户 ID（或者群组 ID，聊天室 ID）；
 // 如果是群聊，设置 `ChatType` 为 `GroupChat`，该参数默认是单聊（`Chat`）。
 let customMessage = ChatMessage.createSendMessage(to, customBody, ChatType.GroupChat);
 // 发送消息
@@ -401,7 +401,7 @@ ChatClient.getInstance().chatManager()?.sendMessage(customMessage);
 
 :::tip
 1. 合并转发支持嵌套，最多支持 10 层嵌套，每层最多 300 条消息。
-2. 不论 `ChatOptions#setAutoTransferMessageAttachments` 设置为 `false` 或 `true`，SDK 都会将合并消息附件上传到环信服务器。
+2. 不论 `ChatOptions#setAutoTransferMessageAttachments` 设置为 `false` 或 `true`，SDK 都会将合并消息附件上传到声网服务器。
 3. 合并消息不支持搜索。
 :::
 
@@ -538,8 +538,4 @@ message.setMessageStatusCallback(callback);
  // 发送消息。
 ChatClient.getInstance().chatManager()?.sendMessage(message);
 ```
-
-### 发送消息前的内容审核
-
-[内容审核服务会关注消息 body 中指定字段的内容，不同类型的消息审核不同的字段](/product/moderation/moderation_mechanism.html)，若创建消息时在这些字段中传入了很多业务信息，可能会影响审核效果。因此，创建消息时需要注意内容审核的字段不涉及业务信息，建议业务信息放在扩展字段中。
 

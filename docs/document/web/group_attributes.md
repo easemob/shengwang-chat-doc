@@ -2,11 +2,11 @@
 
 <Toc />
 
-群组是支持多人沟通的即时通讯系统，本文指导你如何使用环信即时通讯 IM Web SDK 在实时互动 app 中实现群组属性相关功能。
+群组是支持多人沟通的即时通讯系统，本文指导你如何使用声网即时通讯 IM Web SDK 在实时互动 app 中实现群组属性相关功能。
 
 ## 技术原理
 
-环信即时通讯 IM Web SDK 提供群组管理，支持你通过调用 API 在项目中实现如下功能：
+声网即时通讯 IM Web SDK 提供群组管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 修改群组信息；
 - 管理群公告；
@@ -15,7 +15,7 @@
 ## 前提条件
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM API 的接口调用频率限制，详见 [使用限制](/product/limitation.html)。
+- 了解声网即时通讯 IM API 的接口调用频率限制，详见 [使用限制](/product/limitation.html)。
 
 ## 实现方法
 
@@ -28,13 +28,13 @@
 示例代码如下：
 
 ```javascript
-let option = {
-    groupId: "groupId",
-    groupName: "groupName",
-    description: "A description of group",
-    ext: "group detail extensions",
+const option = {
+  groupId: "groupId",
+  groupName: "groupName",
+  description: "A description of group",
+  ext: "group detail extensions",
 };
-conn.modifyGroup(option).then(res => console.log(res))
+chatClient.modifyGroup(option).then((res) => console.log(res));
 ```
 
 ### 管理群公告
@@ -46,10 +46,10 @@ conn.modifyGroup(option).then(res => console.log(res))
 示例代码如下：
 
 ```javascript
-let option = {
-    groupId: "groupId"
+const option = {
+  groupId: "groupId",
 };
-conn.fetchGroupAnnouncement(option).then(res => console.log(res))
+chatClient.fetchGroupAnnouncement(option).then((res) => console.log(res));
 ```
 
 #### 设置/更新群公告
@@ -61,11 +61,11 @@ conn.fetchGroupAnnouncement(option).then(res => console.log(res))
 示例代码如下：
 
 ```javascript
-let option = {
-    groupId: "groupId",
-    announcement: "A announcement of group"
+const option = {
+  groupId: "groupId",
+  announcement: "A announcement of group",
 };
-conn.updateGroupAnnouncement(option).then(res => console.log(res))
+chatClient.updateGroupAnnouncement(option).then((res) => console.log(res));
 ```
 
 ### 管理共享文件
@@ -75,15 +75,15 @@ conn.updateGroupAnnouncement(option).then(res => console.log(res))
 所有群组成员均可调用 `uploadGroupSharedFile` 方法上传共享文件至群组，单个群共享文件大小限制为 10 MB。上传共享文件后，其他群成员收到 `uploadFile` 事件。
 
 ```javascript
-let option = {
-    groupId: "groupId",
-    file: file, // <input type="file"/>获取的文件对象。
-    onFileUploadProgress: function(resp) {},   // 上传进度的回调。
-    onFileUploadComplete: function(resp) {},   // 上传完成时的回调。
-    onFileUploadError: function(e) {},         // 上传失败的回调。
-    onFileUploadCanceled: function(e) {}       // 上传取消的回调。
+const option = {
+  groupId: "groupId",
+  file: file, // <input type="file"/>获取的文件对象。
+  onFileUploadProgress: function (resp) {}, // 上传进度的回调。
+  onFileUploadComplete: function (resp) {}, // 上传完成时的回调。
+  onFileUploadError: function (e) {}, // 上传失败的回调。
+  onFileUploadCanceled: function (e) {}, // 上传取消的回调。
 };
-conn.uploadGroupSharedFile(option);
+chatClient.uploadGroupSharedFile(option);
 ```
 
 #### 下载共享文件
@@ -91,13 +91,13 @@ conn.uploadGroupSharedFile(option);
 所有群成员均可调用 `downloadGroupSharedFile` 方法下载共享文件。
 
 ```javascript
-let option = {
-    groupId: "groupId",
-    fileId: "fileId", // 文件 ID。
-    onFileDownloadComplete: function(resp) {}, // 下载成功的回调。
-    onFileDownloadError: function(e) {},       // 下载失败的回调。
+const option = {
+  groupId: "groupId",
+  fileId: "fileId", // 文件 ID。
+  onFileDownloadComplete: function (resp) {}, // 下载成功的回调。
+  onFileDownloadError: function (e) {}, // 下载失败的回调。
 };
-conn.downloadGroupSharedFile(option);
+chatClient.downloadGroupSharedFile(option);
 ```
 
 #### 删除群共享文件
@@ -109,11 +109,11 @@ conn.downloadGroupSharedFile(option);
 示例代码如下：
 
 ```javascript
-let option = {
-    groupId: "groupId",
-    fileId: "fileId", // 文件 ID。
+const option = {
+  groupId: "groupId",
+  fileId: "fileId", // 文件 ID。
 };
-conn.deleteGroupSharedFile(option).then(res => console.log(res))
+chatClient.deleteGroupSharedFile(option).then((res) => console.log(res));
 ```
 
 #### 获取群共享文件列表
@@ -121,11 +121,12 @@ conn.deleteGroupSharedFile(option).then(res => console.log(res))
 所有群成员均可调用 `getGroupSharedFilelist` 方法获取群组的共享文件列表。
 
 ```javascript
-let option = {
-    groupId: "groupId"
+const option = {
+  groupId: "groupId",
 };
-conn.getGroupSharedFilelist(option).then(res => console.log(res))
+chatClient.getGroupSharedFilelist(option).then((res) => console.log(res));
 ```
+
 ### 监听群组事件
 
 有关详细信息，请参阅 [监听群组事件](group_manage.html#监听群组事件)。

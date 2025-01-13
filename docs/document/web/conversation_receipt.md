@@ -4,11 +4,11 @@
 
 会话已读回执指接收方进入指定会话后就阅读了该会话中的所有未读消息。例如，当接收方进入会话页面，向服务器发送会话已读回执，服务器将该回执下发给发送方，并将接收方的指定会话的未读消息数置为 0。
 
-目前，单聊和群组聊天支持会话已读回执。本文介绍如何使用环信即时通讯 IM Web SDK 实现会话已读回执功能。
-        
+目前，单聊和群组聊天支持会话已读回执。本文介绍如何使用声网即时通讯 IM Web SDK 实现会话已读回执功能。
+
 会话已读回执的效果示例，如下图所示：
 
-![img](/images/uikit/chatuikit/feature/web/conversation/conversation_read.png) 
+![img](/images/uikit/chatuikit/feature/web/conversation/conversation_read.png)
 
 ## 技术原理
 
@@ -22,7 +22,7 @@
 
 开始前，请确保满足以下要求：
 
-- 已经集成和初始化环信 IM SDK，并实现了注册账号和登录功能。详情请参见 [快速开始](quickstart.html)。
+- 已经集成和初始化声网 IM SDK，并实现了注册账号和登录功能。详情请参见 [快速开始](quickstart.html)。
 - 了解 [使用限制](/product/limitation.html) 中的 API 调用频率限制。
 
 ## 实现方法
@@ -34,13 +34,13 @@
 若会话中存在多条未读消息，建议发送会话已读回执，因为若发送消息已读回执，则需要调用多次。
 
 ```javascript
-let option = {
+const option = {
   chatType: "singleChat", // 会话类型，设置为单聊。
   type: "channel", // 消息类型。channel 表示会话已读回执。
   to: "userId", // 接收消息对象的用户 ID。
 };
-let msg = WebIM.message.create(option);
-conn.send(msg);
+const msg = ChatSDK.message.create(option);
+chatClient.send(msg);
 ```
 
 2. 消息发送方在 `onChannelMessage` 回调中收到会话已读回执。
@@ -52,7 +52,7 @@ conn.send(msg);
 :::
 
 ```javascript
-conn.addEventHandler("customEvent", {
+chatClient.addEventHandler("customEvent", {
   onChannelMessage: (message) => {},
 });
 ```
@@ -64,11 +64,11 @@ conn.addEventHandler("customEvent", {
 - 对于群聊会话，你可以调用以下接口发送已读回执，清空指定群组会话的未读数。与单聊会话不同，对于群聊会话，调用以下接口只会清空服务端的群组会话的未读数，不会触发 `onChannelMessage` 回调。
 
 ```javascript
-let option = {
+const option = {
   chatType: "groupChat", // 会话类型，设置为群聊。
   type: "channel", // 消息类型。channel 表示会话已读回执。
   to: "groupId", // 接收消息对象的用户 ID。
 };
-let msg = WebIM.message.create(option);
-conn.send(msg);
+const msg = ChatSDK.message.create(option);
+chatClient.send(msg);
 ```

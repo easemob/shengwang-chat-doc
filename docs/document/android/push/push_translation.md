@@ -8,8 +8,8 @@
 
 ```java
 // 设置离线推送的首选语言。
-EMClient.getInstance().pushManager().setPreferredNotificationLanguage("en", new EMCallBack(){});
+ChatClient.getInstance().pushManager().setPreferredNotificationLanguage("en", new CallBack(){});
 
 // 获取设置的离线推送的首选语言。
-EMClient.getInstance().pushManager().getPreferredNotificationLanguage(new EMValueCallBack<String>(){});
+ChatClient.getInstance().pushManager().getPreferredNotificationLanguage(new ValueCallBack<String>(){});
 ```

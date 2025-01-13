@@ -39,7 +39,6 @@ SDKClient.Instance.Login(username, passwd,
 | 3      | DATABASE_ERROR                        | 数据库操作失败：打开本地数据库失败。  |
 | 4      | EXCEED_SERVICE_LIMIT                  | 超过服务限制：超过服务版本的数量限制，比如创建的用户 ID 数量超过购买服务的限制时提示该错误。            |
 | 8      | APP_ACTIVE_NUMBER_REACH_LIMITATION    | 应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限。                        |
-| 100    | INVALID_APP_KEY                       | App Key 不合法：你的 App Key 格式不正确。可在[环信即时通讯控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看 App Key。    |
 | 101    | INVALID_USER_NAME                     | 用户 ID 不正确：一般是用户 ID 为空时提示该错误，比如使用邀请好友 API 时 username 参数为空字符。     |
 | 102    | INVALID_PASSWORD                      | 用户密码不正确：登录时提供的密码为空或不正确。  |
 | 104    | INVALID_TOKEN                         | 登录时提供的 token 为空或不正确。     |
@@ -63,7 +62,7 @@ SDKClient.Instance.Login(username, passwd,
 | 216    | USER_KICKED_BY_CHANGE_PASSWORD        | 用户密码更新：当前登录的用户密码被修改后，当前登录会断开并提示该错误。   |
 | 217    | USER_KICKED_BY_OTHER_DEVICE           | 用户被踢下线：开启多设备后，如果用户在其他设备上通过调用 API 或者管理后台将当前设备登录的 ID 强制退出登录，SDK 会提示该错误。   |
 | 218    | USER_ALREADY_LOGIN_ANOTHER            | 其他用户已登录：SDK 未退出登录前又被使用不同的账户登录。     |
-| 219    | USER_MUTED_BY_ADMIN                   | 用户被禁言：用户在当前 app key 被禁言后发送消息时提示该错误。   |
+| 219    | USER_MUTED_BY_ADMIN                   | 用户被禁言：用户被禁言后发送消息时提示该错误。   |
 | 220    | USER_DEVICE_CHANGED                   | 用户的登录设备与上次不一致。该错误在单设备自动登录场景中且打开不踢掉其他设备上的登录的开关时才会出现。例如，用户自动登录设备 A，之后手动登录设备 B。用户再次自动登录设备 A 时登录失败且提示该错误。 |
 | 221    | USER_NOT_FRIEND                       | 非好友禁止发消息：开通非好友禁止发消息后，非好友间发消息提示此错误。你可以在[环信即时通讯控制台](https://console.easemob.com/user/login)的**即时通讯 > 服务概览**页面的**设置**区域开启好友关系检查功能。  |
 | 300    | SERVER_NOT_REACHABLE                  | 请求服务失败：发送或撤回消息时，如果 SDK 与消息服务器未保持连接，会返回该错误；操作群组、好友等请求时，如果因网络连接太差而不成功，也会返回该错误。                                   |

@@ -2,11 +2,13 @@
 
 <Toc />
 
-子区消息消息类型属于群聊消息类型，与普通群组消息的区别是需要添加 `isChatThread` 标记。本文介绍环信即时通讯 IM SDK 如何发送、接收以及撤回子区消息。
+子区消息消息类型属于群聊消息类型，与普通群组消息的区别是需要添加 `isChatThread` 标记。**若你当前套餐不支持子区功能，需升级产品套餐。**
+
+本文介绍声网即时通讯 IM SDK 如何发送、接收以及撤回子区消息。
 
 ## 技术原理
 
-环信即时通讯 IM SDK 支持你通过调用 API 在项目中用于管理子区消息，包括发送、接收、撤回和获取子区消息。
+声网即时通讯 IM SDK 支持你通过调用 API 在项目中用于管理子区消息，包括发送、接收、撤回和获取子区消息。
 
 消息收发流程如下：
 
@@ -22,14 +24,14 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 4.0.7 及以上版本 SDK 初始化，详见 [快速开始](quickstart.html)；
-- 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
+- 完成 SDK 初始化，详见 [快速开始](quickstart.html)；
+- 产品套餐包支持子区功能。
+- 了解声网即时通讯 IM API 的 [使用限制](/product/limitation.html)。
 - 了解子区和子区成员数量限制，详见 [使用限制](/product/limitation.html)。
-- 联系商务开通子区功能。
 
 ## 实现方法
 
-本节介绍如何使用环信即时通讯 IM SDK 提供的 API 实现上述功能。
+本节介绍如何使用声网即时通讯 IM SDK 提供的 API 实现上述功能。
 
 ### 发送子区消息
 
@@ -42,23 +44,23 @@
 ```javascript
 // 在子区内发送文本消息
 function sendTextMessage() {
-    let option = {
+    const option = {
         // 会话类型，设置为群聊。
-        chatType: 'groupChat',  
+        chatType: 'groupChat',
         // 消息类型。
-        type: 'txt',   
+        type: 'txt',
         // 消息接收方（子区 ID)。
-        to: 'chatThreadId',     
+        to: 'chatThreadId',
         // 消息内容。
-        msg: 'message content'  
+        msg: 'message content'
         // 是否为子区消息。
-        isChatThread: 'true',   
+        isChatThread: 'true',
     }
-    let msg = WebIM.message.create(option); 
-    connection.send(msg).then(() => {
-        console.log('send text message success');  
+    const msg = ChatSDK.message.create(option);
+    chatClient.send(msg).then(() => {
+        console.log('send text message success');
     }).catch((e) => {
-        console.log("send text message error");  
+        console.log("send text message error");
     })
 };
 ```
@@ -71,13 +73,13 @@ function sendTextMessage() {
 
 ```javascript
 // 监听收到的文本消息
-connection.addEventHandler('THREADMESSAGE',{
-  onTextMessage:(message) => {
-    if(message.chatThread && JSON.stringify(message.chatThread)!=='{}'){
-      console.log(message)
-        // 接收到子区消息，添加处理逻辑。
-      }
-    },
+chatClient.addEventHandler("handlerId", {
+  onTextMessage: (message) => {
+    if (message.chatThread && JSON.stringify(message.chatThread) !== "{}") {
+      console.log(message);
+      // 接收到子区消息，添加处理逻辑。
+    }
+  },
 });
 ```
 
@@ -90,7 +92,7 @@ connection.addEventHandler('THREADMESSAGE',{
 示例代码如下：
 
 ```javascript
-let option = {
+const option = {
   // 设置要撤回消息的 ID。
   mid: 'msgId',
   // 设置消息接收方（子区 ID)。
@@ -100,7 +102,7 @@ let option = {
   // 设置是否为子区消息。
   isChatThread: 'true'
 };
-connection.recallMessage(option).then((res) => {
+chatClient.recallMessage(option).then((res) => {
   console.log('success', res)
 }).catch((error) => {
   // 消息撤回失败 (超过 2 分钟)。
@@ -108,11 +110,11 @@ connection.recallMessage(option).then((res) => {
 })
 
 // 监听要撤回的消息：
-conn.addEventHandler('MESSAGES',{
+chatClient.addEventHandler('MESSAGES',{
    onRecallMessage: => (msg) {
        // 接收到子区消息被撤回，添加处理逻辑。
-       console.log('撤回成功'，msg) 
-   }, 
+       console.log('撤回成功'，msg)
+   },
 })
 ```
 
@@ -121,7 +123,7 @@ conn.addEventHandler('MESSAGES',{
 调用 `getHistoryMessages` 方法从服务器获取子区消息。从服务器获取子区消息与获取群组消息的唯一区别为前者需传入子区 ID，后者需传入群组 ID。
 
 ```javascript
-let options = {
+const options = {
   // 子区 ID。
   targetId: "threadId",
   // 每页期望获取的消息条数。取值范围为 [1,50]，默认值为 20。
@@ -133,7 +135,7 @@ let options = {
   // 消息搜索方向：（默认）`up`：按服务器收到消息的时间的逆序获取；`down`：按服务器收到消息的时间的正序获取。
   searchDirection: "up",
 };
-conn
+chatClient
   .getHistoryMessages(options)
   .then((res) => {
     // 成功获取历史消息。

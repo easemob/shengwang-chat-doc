@@ -2,18 +2,7 @@
 
 <Toc />
 
-使用 环信小程序 SDK 在 **`HBuilderX`** 中编译 Android、iOS 应用，可实现一套代码多端同时打包。IM 相关的集成方式同 Web、小程序一样便捷、高效。
-
-## 体验 IM 应用
-
-- 安卓： [https://www.pgyer.com/h4XF](https://www.pgyer.com/h4XF)
-- iOS： [https://www.pgyer.com/9ISC](https://www.pgyer.com/9ISC)
-
-:::tip
-
-- Demo 只包含部分 IM 功能，详细参考 **功能说明**
-- Uni-app Demo Git 源码地址 [https://github.com/easemob/webim-uniapp-demo](https://github.com/easemob/webim-uniapp-demo)
-:::
+使用声网小程序 SDK 在 **`HBuilderX`** 中编译 Android、iOS 应用，可实现一套代码多端同时打包。IM 相关的集成方式同 Web、小程序一样便捷、高效。
 
 ## 功能说明
 
@@ -61,24 +50,17 @@
 
 ```javascript
 //使用示例
-import SDK from "../sdk/webimSDK3.x.x"; // 3.0sdk
+import ChatSDK from "../sdk/Shengwang-chat";
 ```
 
 #### 实例调用方式
 
-实例化 SDK，并挂载在全局对象下。
+实例化 SDK。
 
 ```javascript
 //实例化 SDK 对象
-const WebIM = (wx.WebIM = SDK);
-WebIM.conn = new WebIM.connection({
-  isMultiLoginSessions: false, //是否可以登录多个，并在所有端上接收消息
-  https: false, //是否使用 HTTPS
-  url: "wss://im-api-wechat.easemob.com/websocket", // socket server (3.0 SDK)
-  apiUrl: "https://a1.easemob.com", // rest server
-  heartBeatWait: 30000, //心跳间隔
-  autoReconnectNumMax: 2, //自动重连次数
-  useOwnUploadFun: false, // 是否使用自己的上传方式（如将图片文件等上传到自己的服务器，构建消息时只传url）
+const chatClient = new ChatSDK.connection({
+  appId: "your appId",
 });
 ```
 
@@ -89,14 +71,9 @@ IM 基本功能，请参考 [消息管理](message_overview.html)。
 1. 原生 App-云打包：HBuilder 编辑器 → 发行 → 原生 App-云打包 （app 图标，启动页等详细配置可在 **`manifest.json`** 进行配置）
 2. 原生 App-离线打包：HBuilder 编辑器 → 发行 → 生成本地打包 App 资源 （详细打包方案请看 **`iOS、Android 本地打包指南`**。）
 
-## Demo 兼容性
-
-Demo 在以下安卓机器中存在一定兼容性能问题：
-
-- 魅族魅蓝 E （无法运行）
-- 华为 p20（运行卡顿）
-
 ## APP 开发者常见问题（重要）
+
+TODO
 
 - App/uni-app 离线本地存储方案：[https://ask.dcloud.net.cn/article/166](https://ask.dcloud.net.cn/article/166)
 - uni-app 实现全局变量：[https://ask.dcloud.net.cn/article/35021](https://ask.dcloud.net.cn/article/35021)

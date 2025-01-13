@@ -2,11 +2,11 @@
 
 <Toc />
 
-群组是支持多人沟通的即时通讯系统。本文介绍如何使用环信即时通讯 IM SDK 在实时互动 app 中实现群组成员管理相关功能。
+群组是支持多人沟通的即时通讯系统。本文介绍如何使用声网即时通讯 IM SDK 在实时互动 app 中实现群组成员管理相关功能。
 
 ## 技术原理
 
-环信即时通讯 IM Web SDK 提供以下群成员管理功能：
+声网即时通讯 IM Web SDK 提供以下群成员管理功能：
 
 - 加入、退出群组
 - 管理群成员自定义属性
@@ -20,7 +20,7 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解声网即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
 - 了解群成员角色，详见 [群组概述](group_overview.html)。
 
 ## 实现方法
@@ -37,42 +37,44 @@
 2. 调用 `joinGroup` 方法传入群组 ID，申请加入对应群组。示例代码如下：
 
 ```javascript
-let option = {
-    groupId: "groupId",
-    message: "I am Tom"
+const option = {
+  groupId: "groupId",
+  message: "I am Tom",
 };
-conn.joinGroup(option).then(res => console.log(res))
+chatClient.joinGroup(option).then((res) => console.log(res));
 ```
 
 任何用户均可申请入群，是否需要群主和群管理员审批，取决于 `approval` 选项的设置：
+
 - `approval` 为 `false` 时，用户可直接加入群组，无需群主和群管理员审批。其他群成员会收到 `memberPresence` 事件。
 - `approval` 为 `true` 时，群主和群管理员审批后，用户才能加入群组。群主和群管理员会收到 `requestToJoin` 事件。
-    - 若同意用户加入群组，群主或管理员需要调用 `acceptGroupJoinRequest` 方法。
-    
-    申请人会收到 `acceptRequest` 事件且加入群组，其他成员会收到 `memberPresence` 事件。
-    
-    示例代码如下：
-    
-    ```javascript
-    conn.acceptGroupJoinRequest({
-        applicant: "userId",
-        groupId: "groupId",
-    });
-    ```
-    
-    - 若拒绝用户加入群组，群主或管理员需要调用 `rejectGroupJoinRequest` 方法。
-    
-    申请人会收到 `joinPublicGroupDeclined` 事件。
-    
-    示例代码如下：
 
-    ```javascript
-    conn.rejectGroupJoinRequest({
-      applicant: "userId",
-      groupId: "groupId",
-      reason: "sorry, who are you?",
-    });
-    ```
+  - 若同意用户加入群组，群主或管理员需要调用 `acceptGroupJoinRequest` 方法。
+
+  申请人会收到 `acceptRequest` 事件且加入群组，其他成员会收到 `memberPresence` 事件。
+
+  示例代码如下：
+
+  ```javascript
+  chatClient.acceptGroupJoinRequest({
+    applicant: "userId",
+    groupId: "groupId",
+  });
+  ```
+
+  - 若拒绝用户加入群组，群主或管理员需要调用 `rejectGroupJoinRequest` 方法。
+
+  申请人会收到 `joinPublicGroupDeclined` 事件。
+
+  示例代码如下：
+
+  ```javascript
+  chatClient.rejectGroupJoinRequest({
+    applicant: "userId",
+    groupId: "groupId",
+    reason: "sorry, who are you?",
+  });
+  ```
 
 ### 退出群组
 
@@ -83,10 +85,10 @@ conn.joinGroup(option).then(res => console.log(res))
 示例代码如下：
 
 ```javascript
-let option = {
-    groupId: "groupId"
+const option = {
+  groupId: "groupId",
 };
-conn.leaveGroup(option).then(res => console.log(res))
+chatClient.leaveGroup(option).then((res) => console.log(res));
 ```
 
 #### 群成员被移出群组
@@ -96,17 +98,20 @@ conn.leaveGroup(option).then(res => console.log(res))
 - 移出单个群成员，示例代码如下：
 
 ```javascript
-let option = {
-    groupId: "groupId",
-    username: "username"
+const option = {
+  groupId: "groupId",
+  username: "username",
 };
-conn.removeGroupMember(option).then(res => console.log(res))
+chatClient.removeGroupMember(option).then((res) => console.log(res));
 ```
 
 - 批量移出群成员，示例代码如下：
 
 ```javascript
-connection.removeGroupMembers({groupId: 'groupId', users: ['user1', 'user2']})
+chatClient.removeGroupMembers({
+  groupId: "groupId",
+  users: ["user1", "user2"],
+});
 ```
 
 ### 管理群成员自定义属性
@@ -126,19 +131,22 @@ connection.removeGroupMembers({groupId: 'groupId', users: ['user1', 'user2']})
 示例代码如下：
 
 ```javascript
-    let options = {
-        groupId: 'groupId',
-        userId: 'userId',
-        memberAttributes: {
-            key: 'value'
-        },
-    }   
+const options = {
+  groupId: "groupId",
+  userId: "userId",
+  memberAttributes: {
+    key: "value",
+  },
+};
 
-    WebIM.conn.setGroupMemberAttributes(options).then((res) => {
-        console.log(res)
-    }).catch((e) => {
-        console.log(e)
-    })
+chatClient
+  .setGroupMemberAttributes(options)
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((e) => {
+    console.log(e);
+  });
 ```
 
 #### 获取单个群成员的所有自定义属性
@@ -148,16 +156,19 @@ connection.removeGroupMembers({groupId: 'groupId', users: ['user1', 'user2']})
 示例代码如下：
 
 ```javascript
-    let options = {
-        groupId: 'groupId',
-        userId: 'userId'
-    }   
+const options = {
+  groupId: "groupId",
+  userId: "userId",
+};
 
-    WebIM.conn.getGroupMemberAttributes(options).then((res) => {
-        console.log(res)
-    }).catch((e) => {
-        console.log(e)
-    })
+chatClient
+  .getGroupMemberAttributes(options)
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((e) => {
+    console.log(e);
+  });
 ```
 
 #### 根据属性 key 获取多个群成员的自定义属性
@@ -171,18 +182,21 @@ connection.removeGroupMembers({groupId: 'groupId', users: ['user1', 'user2']})
 示例代码如下：
 
 ```javascript
-    let options = {
-        groupId: 'groupId',
-        userIds: ['userId'],
-        // 要获取自定义属性的 key 的数组。若 keys 为空数组或不传则获取这些成员的所有自定义属性。
-        keys: ['key1', 'key2']
-    }   
+const options = {
+  groupId: "groupId",
+  userIds: ["userId"],
+  // 要获取自定义属性的 key 的数组。若 keys 为空数组或不传则获取这些成员的所有自定义属性。
+  keys: ["key1", "key2"],
+};
 
-    WebIM.conn.getGroupMembersAttributes(options).then((res) => {
-        console.log(res)
-    }).catch((e) => {
-        console.log(e)
-    })
+chatClient
+  .getGroupMembersAttributes(options)
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((e) => {
+    console.log(e);
+  });
 ```
 
 ### 管理群主及群管理员
@@ -192,11 +206,11 @@ connection.removeGroupMembers({groupId: 'groupId', users: ['user1', 'user2']})
 仅群主可以调用 `changeGroupOwner` 方法将群所有权移交给指定群成员。成功移交后，原群主变为普通成员，新群主会收到 `changeOwner` 事件。
 
 ```javascript
-let option = {
-    groupId: "groupId",
-    newOwner: "userId"
+const option = {
+  groupId: "groupId",
+  newOwner: "userId",
 };
-conn.changeGroupOwner(option).then(res => console.log(res))
+chatClient.changeGroupOwner(option).then((res) => console.log(res));
 ```
 
 #### 添加群组管理员
@@ -208,11 +222,11 @@ conn.changeGroupOwner(option).then(res => console.log(res))
 示例代码如下：
 
 ```javascript
-let option = {
-    groupId: "groupId",
-    username: "userId"
+const option = {
+  groupId: "groupId",
+  username: "userId",
 };
-conn.setGroupAdmin(option).then(res => console.log(res))
+chatClient.setGroupAdmin(option).then((res) => console.log(res));
 ```
 
 #### 将管理员移出管理员列表
@@ -224,11 +238,11 @@ conn.setGroupAdmin(option).then(res => console.log(res))
 示例代码如下：
 
 ```javascript
-let option = {
-    groupId: "groupId",
-    username: "userId"
+const option = {
+  groupId: "groupId",
+  username: "userId",
 };
-conn.removeGroupAdmin(option).then(res => console.log(res))
+chatClient.removeGroupAdmin(option).then((res) => console.log(res));
 ```
 
 #### 获取群组管理员列表
@@ -236,12 +250,12 @@ conn.removeGroupAdmin(option).then(res => console.log(res))
 所有群成员均可调用 `getGroupAdmin` 获取群组下所有管理员，示例代码如下：
 
 ```javascript
-let option = {
-    groupId: "groupId"
+const option = {
+  groupId: "groupId",
 };
-conn.getGroupAdmin(option).then((res) => {
-    console.log(res)
-})
+chatClient.getGroupAdmin(option).then((res) => {
+  console.log(res);
+});
 ```
 
 也可以通过 [获取群组详情信息](group_manage.html#获取群组详情信息) 获取管理员列表。
@@ -259,11 +273,11 @@ conn.getGroupAdmin(option).then((res) => {
 示例代码如下：
 
 ```javascript
-let option = {
-    groupId: "groupId",
-    users: ["user1", "user2"]
+const option = {
+  groupId: "groupId",
+  users: ["user1", "user2"],
 };
-conn.addUsersToGroupAllowlist(option).then(res => console.log(res));
+chatClient.addUsersToGroupAllowlist(option).then((res) => console.log(res));
 ```
 
 #### 将成员移出群组白名单
@@ -273,11 +287,11 @@ conn.addUsersToGroupAllowlist(option).then(res => console.log(res));
 示例代码如下：
 
 ```javascript
-let option = {
-    groupId: "groupId",
-    userName: "userId"
-}
-conn.removeGroupAllowlistMember(option).then(res => console.log(res));
+const option = {
+  groupId: "groupId",
+  userName: "userId",
+};
+chatClient.removeGroupAllowlistMember(option).then((res) => console.log(res));
 ```
 
 #### 检查当前用户是否在群组白名单中
@@ -287,11 +301,11 @@ conn.removeGroupAllowlistMember(option).then(res => console.log(res));
 示例代码如下：
 
 ```javascript
-let option = {
-    groupId: "groupId",
-    userName: "userId"
-}
-conn.isInGroupAllowlist(option).then(res => console.log(res));
+const option = {
+  groupId: "groupId",
+  userName: "userId",
+};
+chatClient.isInGroupAllowlist(option).then((res) => console.log(res));
 ```
 
 #### 获取群组白名单
@@ -301,10 +315,10 @@ conn.isInGroupAllowlist(option).then(res => console.log(res));
 示例代码如下：
 
 ```javascript
-let option = {
-    groupId: "groupId"
-}
-conn.getGroupAllowlist(option).then(res => console.log(res));
+const option = {
+  groupId: "groupId",
+};
+chatClient.getGroupAllowlist(option).then((res) => console.log(res));
 ```
 
 ### 管理群组黑名单
@@ -316,11 +330,11 @@ conn.getGroupAllowlist(option).then(res => console.log(res));
 示例代码如下：
 
 ```javascript
-let option = {
-    groupId: "groupId",
-    usernames: ["user1", "user2"]
+const option = {
+  groupId: "groupId",
+  usernames: ["user1", "user2"],
 };
-conn.blockGroupMembers(option).then(res => console.log(res))
+chatClient.blockGroupMembers(option).then((res) => console.log(res));
 ```
 
 ### 将成员移出群组黑名单
@@ -330,11 +344,11 @@ conn.blockGroupMembers(option).then(res => console.log(res))
 示例代码如下：
 
 ```javascript
-let option = {
-    groupId: "groupId",
-    usernames: ["user1", "user2"]
-}
-conn.unblockGroupMembers(option).then(res => console.log(res))
+const option = {
+  groupId: "groupId",
+  usernames: ["user1", "user2"],
+};
+chatClient.unblockGroupMembers(option).then((res) => console.log(res));
 ```
 
 #### 获取群组黑名单列表
@@ -344,10 +358,10 @@ conn.unblockGroupMembers(option).then(res => console.log(res))
 示例代码如下：
 
 ```javascript
-let option = {
-    groupId: "groupId",
+const option = {
+  groupId: "groupId",
 };
-conn.getGroupBlocklist(option).then(res => console.log(res))
+chatClient.getGroupBlocklist(option).then((res) => console.log(res));
 ```
 
 ### 管理群组禁言
@@ -363,12 +377,12 @@ conn.getGroupBlocklist(option).then(res => console.log(res))
 示例代码如下：
 
 ```javascript
-let option = {
-    groupId: "groupId",
-    username: "user1" || ["user1", "user2"],
-    muteDuration: 886400000 // 禁言时长，单位为毫秒，传 -1 表示永久禁言。
+const option = {
+  groupId: "groupId",
+  username: "user1" || ["user1", "user2"],
+  muteDuration: 886400000, // 禁言时长，单位为毫秒，传 -1 表示永久禁言。
 };
-conn.muteGroupMember(option).then(res => console.log(res))
+chatClient.muteGroupMember(option).then((res) => console.log(res));
 ```
 
 #### 将成员移出群组禁言列表
@@ -378,11 +392,11 @@ conn.muteGroupMember(option).then(res => console.log(res))
 示例代码如下：
 
 ```javascript
-let option = {
-    groupId: "groupId",
-    username: "user1" || ["user1", "user2"]
+const option = {
+  groupId: "groupId",
+  username: "user1" || ["user1", "user2"],
 };
-conn.unmuteGroupMember(option).then(res => console.log(res))
+chatClient.unmuteGroupMember(option).then((res) => console.log(res));
 ```
 
 #### 获取群组禁言列表
@@ -392,10 +406,10 @@ conn.unmuteGroupMember(option).then(res => console.log(res))
 示例代码如下：
 
 ```javascript
-let option = {
-    groupId: "groupId"
+const option = {
+  groupId: "groupId",
 };
-conn.getGroupMutelist(option).then(res => console.log(res))
+chatClient.getGroupMutelist(option).then((res) => console.log(res));
 ```
 
 #### 开启群组全员禁言
@@ -407,10 +421,10 @@ conn.getGroupMutelist(option).then(res => console.log(res))
 示例代码如下：
 
 ```javascript
-let option = {
-    groupId: "groupId",
+const option = {
+  groupId: "groupId",
 };
-conn.disableSendGroupMsg(option).then(res => console.log(res))
+chatClient.disableSendGroupMsg(option).then((res) => console.log(res));
 ```
 
 #### 关闭群组全员禁言
@@ -420,10 +434,10 @@ conn.disableSendGroupMsg(option).then(res => console.log(res))
 示例代码如下：
 
 ```javascript
-let option = {
-    groupId: "groupId",
+const option = {
+  groupId: "groupId",
 };
-conn.enableSendGroupMsg(option).then(res => console.log(res))
+chatClient.enableSendGroupMsg(option).then((res) => console.log(res));
 ```
 
 ### 监听群组事件

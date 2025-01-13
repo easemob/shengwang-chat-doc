@@ -14,7 +14,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM Unity SDK 提供一个 `IUserInfoManager` 类，支持获取、设置及修改用户属性信息，其中包含如下方法：
+即时通讯 IM Unity SDK 提供一个 `IUserInfoManager` 类，支持获取、设置及修改用户属性信息，其中包含如下方法：
 
 - `UpdateOwnInfo` 设置和修改当前用户自己的属性信息；
 - `FetchUserInfoByUserId` 获取指定用户的所有用户属性信息；
@@ -24,7 +24,7 @@
 设置用户属性前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM 的使用限制，详见 [使用限制](limitation.html)。
 
 ## 实现方法
 

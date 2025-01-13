@@ -3,9 +3,8 @@
 对于单聊或群组聊天会话中已经发送成功的文本消息，SDK 支持对这些消息的内容进行修改。
 
 :::tip
-1. 若使用该功能，需将 SDK 升级至 4.2.0 或以上版本。
+1. 若使用该功能，需联系声网商务开通。
 2. 聊天室会话不支持消息修改功能。
-3. 若使用该功能，需联系环信商务开通。
 :::
 
 ## 技术原理
@@ -28,7 +27,8 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html) 及 [初始化](initialization.html)文档。
-- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解声网即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 已开通修改消息功能。
 
 ## 实现方法
 
@@ -43,33 +43,28 @@
 示例代码如下：
 
 ```javascript
-
 // 注册修改消息事件
-conn.addEventHandler("modifiedMessage", {
-    onModifiedMessage: message => {
-        console.log('onModifiedMessage', message)
-    },
+chatClient.addEventHandler("modifiedMessage", {
+  onModifiedMessage: (message) => {
+    console.log("onModifiedMessage", message);
+  },
 });
 
-const textMessage = WebIM.message.create({
-    type: 'txt',
-    msg: 'message content',
-    to: 'username',
-    chatType: 'singleChat',
+const textMessage = ChatSDK.message.create({
+  type: "txt",
+  msg: "message content",
+  to: "username",
+  chatType: "singleChat",
 });
 
-
-conn.modifyMessage({ messageId: 'messageId', modifiedMessage: textMessage })
-    .then((res) => {
-      console.log(res.message)
-    })
-    .catch((e) => {
-      console.log(e)
-    });
-
+chatClient
+  .modifyMessage({ messageId: "messageId", modifiedMessage: textMessage })
+  .then((res) => {
+    console.log(res.message);
+  })
+  .catch((e) => {
+    console.log(e);
+  });
 ```
 
 你可以从`res.message` 中获取消息的最新修改时间（`operationTime`）、最新修改的操作者（`operatorId`）以及消息修改次数（`operationCount`）。
-
-
-

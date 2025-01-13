@@ -9,18 +9,18 @@
 ```javascript
 // 下面以文本消息为例，其他类型的消息设置方法相同。
 const sendTextMsg = () => {
-  let option: AgoraChat.CreateTextMsgParameters = {
+  let option: ShengwangChat.CreateTextMsgParameters = {
     chatType: chatType,
     type: "txt",
     to: targetUserId,
     msg: msgContent,
     ext: {
       // 设置是否为强制推送，该字段为内置内置字段，取值如下：`YES`：强制推送；（默认）`NO`：非强制推送。
-      em_force_notification: "YES"
+      em_force_notification: "YES",
     },
   };
-  let msg = AC.message.create(option);
-  connection.send(msg);
+  const msg = ChatSDK.message.create(option);
+  chatClient.send(msg);
 };
 ```
 
@@ -33,17 +33,17 @@ const sendTextMsg = () => {
 ```javascript
 // 下面以文本消息为例，其他类型的消息设置方法相同。
 const sendTextMsg = () => {
-  let option: AgoraChat.CreateTextMsgParameters = {
+  const option: ShengwangChat.CreateTextMsgParameters = {
     chatType: chatType,
     type: "txt",
     to: targetUserId,
     msg: msgContent,
     ext: {
-      // 设置是否发送静默消息。该字段为内置内置字段，取值如下：`YES`：发送静默消息；（默认）`NO`：推送该消息。 
-      em_ignore_notification: "NO"
+      // 设置是否发送静默消息。该字段为内置内置字段，取值如下：`YES`：发送静默消息；（默认）`NO`：推送该消息。
+      em_ignore_notification: "NO",
     },
   };
-  let msg = AC.message.create(option);
-  connection.send(msg);
+  const msg = ChatSDK.message.create(option);
+  chatClient.send(msg);
 };
 ```

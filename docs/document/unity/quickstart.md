@@ -1,8 +1,8 @@
-# 环信即时通讯 IM 快速开始
+# 即时通讯 IM 快速开始
 
 <Toc />
 
-本文介绍如何快速集成环信即时通讯 IM Unity SDK 实现发送和接收单聊文本消息。
+本文介绍如何快速集成即时通讯 IM Unity SDK 实现发送和接收单聊文本消息。
 
 ## 技术原理
 
@@ -13,9 +13,9 @@
 如上图所示，发送和接收单聊消息的步骤如下：
 
 1. 客户端向你的应用服务器请求 Token，你的应用服务器返回 Token。
-2. 客户端 A 和客户端 B 使用获得的 Token 登录环信即时通讯系统。
-3. 客户端 A 发送消息到环信即时通讯服务器。
-4. 环信即时通讯服务器将消息发送到客户端 B，客户端 B 接收消息。
+2. 客户端 A 和客户端 B 使用获得的 Token 登录即时通讯系统。
+3. 客户端 A 发送消息到即时通讯服务器。
+4. 即时通讯服务器将消息发送到客户端 B，客户端 B 接收消息。
 
 ## 前提条件
 
@@ -23,7 +23,6 @@
 
 - Unity Editor 2019.4.28 或以上版本
 - Unity SDK 1.0.5 或以上
-- 目前 Unity SDK 仅支持 x86 指令集及 Intel 芯片。
 - 操作系统与编译器要求：
 
 | 开发平台                | 操作系统版本    | 编译器版本                                                         |
@@ -33,8 +32,8 @@
 | macOS        | macOS 10.0 或以上  |  Xcode 9.0 或以上，Visual Studio for Mac 2019 或以上   |
 | Windows              | Windows 10 或以上 | Microsoft Visual Studio 2019 或以上            |
 
-- 有效的环信即时通讯 IM 开发者账号和 App Key，见 [环信即时通讯云管理后台](https://console.easemob.com/user/login)。
-- 如果你的网络环境部署了防火墙，请联系环信技术支持设置白名单。
+- 有效的即时通讯 IM 开发者账号和 App ID，详见 [开通即时通讯服务](enable_im.html)。
+- 如果你的网络环境部署了防火墙，请联系声网技术支持设置白名单。
 
 ## 项目设置
 
@@ -63,7 +62,7 @@
    在**Help**菜单下，点击**Reset Packages to defaults**将包恢复默认设置。
    :::
 
-### 2. 集成环信即时通讯 SDK
+### 2. 集成即时通讯 SDK
 
 你可以参考以下步骤集成 SDK：
 
@@ -99,7 +98,7 @@ using AgoraChat.MessageBody;
 在 `InitSDK` 方法中添加以下代码完成 SDK 初始化：
 
 ```csharp
-var options = new Options("appkey"); //将该参数设置为你的 App Key
+var options = Options.InitOptionsWithAppId("YourAppId"); //将该参数设置为你的 App Id
 SDKClient.Instance.InitWithOptions(options);
 ```
 
@@ -119,7 +118,7 @@ SDKClient.Instance.CreateAccount(username: Username.text, Password.text, callbac
 ```
 
 :::tip
-该注册模式在客户端实现，简单方便，主要用于测试，但不推荐在正式环境中使用。正式环境中应使用服务器端调用 Restful API 进行注册，详见 [注册单个用户](/document/server-side/account_system.html#开放注册单个用户)。
+该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用。正式环境中，需要[在声网控制台中创建用户或调用 Restful API 注册用户](login.html#用户注册)。
 :::
 
 ### 5. 登录账号
@@ -136,7 +135,7 @@ SDKClient.Instance.Login(username: Username.text, pwdOrToken: Password.text, cal
   }
 ));
 
-// 说明：从 1.3.0 版本之后，建议使用 LoginWithToken 替代 Login。Password.text中的内容需要由输入密码改为输入token
+// Password.text中的内容需要由输入密码改为输入token
 SDKClient.Instance.LoginWithToken(username: Username.text, pwdOrToken: Password.text, callback: new CallBack(
     onSuccess: () =>
     {

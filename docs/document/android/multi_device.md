@@ -62,30 +62,30 @@ Android SDK 初始化时会生成登录 ID 用于在多设备登录和消息推�
 你可以调用 `getSelfIdsOnOtherPlatform` 方法获取其他登录设备的登录 ID 列表，然后选择目标登录 ID 作为消息接收方向指定设备发送消息。
 
 ```java
-// 同步方法，会阻塞当前线程。异步方法为 asyncGetSelfIdsOnOtherPlatform(EMValueCallBack)。
-List<String> ids = EMClient.getInstance().contactManager().getSelfIdsOnOtherPlatform();
+// 同步方法，会阻塞当前线程。异步方法为 asyncGetSelfIdsOnOtherPlatform(ValueCallBack)。
+List<String> ids = ChatClient.getInstance().contactManager().getSelfIdsOnOtherPlatform();
 // 选择一个登录 ID 作为消息接收方。
 String toChatUsername = ids.get(0);
 // 创建一条文本消息，content 为消息文字内容，toChatUsername 传入登录 ID 作为消息接收方。
-EMMessage message = EMMessage.createTxtSendMessage(content, toChatUsername); 
+ChatMessage message = ChatMessage.createTxtSendMessage(content, toChatUsername); 
 // 发送消息。
-EMClient.getInstance().chatManager().sendMessage(message); 
+ChatClient.getInstance().chatManager().sendMessage(message); 
 ```
 
 ### 获取指定账号的在线登录设备列表  
 
-你可以调用 `getLoggedInDevicesFromServer` 或 `getLoggedInDevicesFromServerWithToken` 方法通过传入用户 ID 和登录密码或用户 token 从服务器获取指定账号的在线登录设备的列表。调用该方法后，在 SDK 返回的信息中，`EMDeviceInfo` 中的 `mDeviceName` 属性表示自定义设备名称，若未自定义设备名称，返回设备型号。
+你可以调用 `getLoggedInDevicesFromServer` 或 `getLoggedInDevicesFromServerWithToken` 方法通过传入用户 ID 和登录密码或用户 token 从服务器获取指定账号的在线登录设备的列表。调用该方法后，在 SDK 返回的信息中，`DeviceInfo` 中的 `mDeviceName` 属性表示自定义设备名称，若未自定义设备名称，返回设备型号。
 
 ```java
     try {
-        List<EMDeviceInfo> deviceInfos = EMClient.getInstance().getLoggedInDevicesFromServer("username","pwd");
-    } catch (HyphenateException e) {
+        List<DeviceInfo> deviceInfos = ChatClient.getInstance().getLoggedInDevicesFromServer("username","pwd");
+    } catch (ChatException e) {
         e.printStackTrace();
     }
 
     try {
-        List<EMDeviceInfo> deviceInfos = EMClient.getInstance().getLoggedInDevicesFromServerWithToken("username","token");
-    } catch (HyphenateException e) {
+        List<DeviceInfo> deviceInfos = ChatClient.getInstance().getLoggedInDevicesFromServerWithToken("username","token");
+    } catch (ChatException e) {
         e.printStackTrace();
     }
 ```
@@ -94,18 +94,18 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 即时通讯 IM 自 4.1.0 版本开始支持自定义设置设备名称，这样在多设备场景下，若有设备被踢下线，被踢设备就能知道是被哪个设备挤下线的。
 
-初始化 SDK 时，你可以调用 `EMOptions#setCustomDeviceName` 方法设置登录设备的名称。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时，被踢设备收到的 `EMConnectionListener#onLogout` 回调会包含导致该设备被踢下线的自定义设备名称。
+初始化 SDK 时，你可以调用 `ChatOptions#setCustomDeviceName` 方法设置登录设备的名称。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时，被踢设备收到的 `ConnectionListener#onLogout` 回调会包含导致该设备被踢下线的自定义设备名称。
 
 :::tip
 登录成功后才会将该设置发送到服务器。
 :::
 
 ```java
-    EMOptions options =  new EMOptions();
+    ChatOptions options =  new ChatOptions();
     options.setCustomDeviceName("你的自定义设备名称");
-    EMClient.getInstance().init(context,options);
+    ChatClient.getInstance().init(context,options);
 
-    EMClient.getInstance().addConnectionListener(new EMConnectionListener() {
+    ChatClient.getInstance().addConnectionListener(new ConnectionListener() {
             @Override
             public void onConnected() {
 
@@ -117,9 +117,9 @@ EMClient.getInstance().chatManager().sendMessage(message);
             }
 
             @Override
-            public void onLogout(int errorCode, EMLoginExtensionInfo info) {
-                //自 4.7.0 开始，原有的 EMConnectionListener#onLogout(int, java.lang.String) 方法废弃，自定义设备信息包装在 EMLoginExtensionInfo 类中。
-               // 当 errorCode 为 {@link EMError#USER_LOGIN_ANOTHER_DEVICE}，info.deviceInfo 表示将当前设备踢出/挤下线的自定义设备名称，若这种情况下设备未设置自定义名称，默认回调设备的型号。其他错误码场景下，info.deviceInfo为空。
+            public void onLogout(int errorCode, LoginExtensionInfo info) {
+                //自 4.7.0 开始，原有的 ConnectionListener#onLogout(int, java.lang.String) 方法废弃，自定义设备信息包装在 LoginExtensionInfo 类中。
+               // 当 errorCode 为 {@link Error#USER_LOGIN_ANOTHER_DEVICE}，info.deviceInfo 表示将当前设备踢出/挤下线的自定义设备名称，若这种情况下设备未设置自定义名称，默认回调设备的型号。其他错误码场景下，info.deviceInfo为空。
             }
         });
 ```
@@ -136,34 +136,34 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 ![img](/images/common/multidevice_device_platform.png)
 
-2. 初始化 SDK 时，调用 `EMOptions#setCustomOSPlatform` 方法自定义设置登录设备的平台。确保该方法中的 `platform` 参数的值与环信控制台的**添加自定义平台**对话框中设置的**设备平台**的值相同。
+2. 初始化 SDK 时，调用 `ChatOptions#setCustomOSPlatform` 方法自定义设置登录设备的平台。确保该方法中的 `platform` 参数的值与环信控制台的**添加自定义平台**对话框中设置的**设备平台**的值相同。
 
 :::tip
 登录成功后才会将该设置发送到服务器。
 :::
 
 ```java
-    EMOptions options=new EMOptions();
+    ChatOptions options=new ChatOptions();
     options.setCustomOSPlatform(1);
-    EMClient.getInstance().init(context,options);
+    ChatClient.getInstance().init(context,options);
 ```
 
 ### 设置登录设备的扩展信息
 
 即时通讯 IM 自 4.7.0 版本开始支持设备的自定义扩展信息，这样在多设备场景下，若有设备被踢下线，被踢设备能获得该设备的自定义扩展信息。
 
-初始化 SDK 时，你可以调用 `EMOptions#setLoginCustomExt` 方法设置登录设备的自定义扩展信息。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时（`206` 错误，`USER_LOGIN_ANOTHER_DEVICE`），被踢设备收到的 `EMConnectionListener#onLogout` 回调会包含导致该设备被踢下线的新登录设备的自定义扩展信息。
+初始化 SDK 时，你可以调用 `ChatOptions#setLoginCustomExt` 方法设置登录设备的自定义扩展信息。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时（`206` 错误，`USER_LOGIN_ANOTHER_DEVICE`），被踢设备收到的 `ConnectionListener#onLogout` 回调会包含导致该设备被踢下线的新登录设备的自定义扩展信息。
 
 :::tip
 登录成功后才会将该设置发送到服务器。
 :::
 
 ```java
-    EMOptions options =  new EMOptions();
+    ChatOptions options =  new ChatOptions();
     options.setLoginCustomExt("你的自定义扩展信息json字符串");
-    EMClient.getInstance().init(context,options);
+    ChatClient.getInstance().init(context,options);
 
-    EMClient.getInstance().addConnectionListener(new EMConnectionListener() {
+    ChatClient.getInstance().addConnectionListener(new ConnectionListener() {
         @Override
         public void onConnected() {
 
@@ -175,9 +175,9 @@ EMClient.getInstance().chatManager().sendMessage(message);
         }
 
         @Override
-        public void onLogout(int errorCode, EMLoginExtensionInfo info) {
+        public void onLogout(int errorCode, LoginExtensionInfo info) {
             //当前登录账号在其它设备登录时，当前的登录设备被踢下线时会触发该回调。
-            //errorCode 为 {@link EMError#USER_LOGIN_ANOTHER_DEVICE}。
+            //errorCode 为 {@link Error#USER_LOGIN_ANOTHER_DEVICE}。
             //info.deviceExt 是将当前设备挤下线的新登录设备的自定义扩展信息。
             //其他错误码场景下 info.deviceExt 为空。
         }
@@ -186,7 +186,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 ### 强制指定账号从单个设备下线
 
-你可以调用 `kickDevice` 或 `kickDeviceWithToken` 方法通过传入用户 ID 和登录密码或用户 token 将指定账号从单个登录设备踢下线。调用这两种方法前，你需要首先通过 `EMClient#getLoggedInDevicesFromServer` 和 `EMDeviceInfo#getResource` 方法获取设备 ID。
+你可以调用 `kickDevice` 或 `kickDeviceWithToken` 方法通过传入用户 ID 和登录密码或用户 token 将指定账号从单个登录设备踢下线。调用这两种方法前，你需要首先通过 `ChatClient#getLoggedInDevicesFromServer` 和 `DeviceInfo#getResource` 方法获取设备 ID。
 
 :::tip
 不登录也可以使用该接口。
@@ -194,10 +194,10 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 ```java
 // username：账户名称，password：账户密码。需要在异步线程中执行。
-List<EMDeviceInfo> deviceInfos = EMClient.getInstance().getLoggedInDevicesFromServer(username, password);
+List<DeviceInfo> deviceInfos = ChatClient.getInstance().getLoggedInDevicesFromServer(username, password);
 // username：账户名称，password：账户密码, resource：设备 ID。需要在异步线程中执行。
-EMClient.getInstance().kickDevice(username, password, deviceInfos.get(selectedIndex).getResource());
-//EMClient.getInstance().kickDeviceWithToken(username, token, deviceInfos.get(selectedIndex).getResource());
+ChatClient.getInstance().kickDevice(username, password, deviceInfos.get(selectedIndex).getResource());
+//ChatClient.getInstance().kickDeviceWithToken(username, token, deviceInfos.get(selectedIndex).getResource());
 ```
 
 ### 强制指定账号从所有设备下线
@@ -210,14 +210,14 @@ EMClient.getInstance().kickDevice(username, password, deviceInfos.get(selectedIn
 
 ```java
     try {
-        EMClient.getInstance().kickAllDevices("username","pwd");
-    } catch (HyphenateException e) {
+        ChatClient.getInstance().kickAllDevices("username","pwd");
+    } catch (ChatException e) {
         e.printStackTrace();
     }
 
     try {
-        EMClient.getInstance().kickAllDevicesWithToken("username","token");
-    } catch (HyphenateException e) {
+        ChatClient.getInstance().kickAllDevicesWithToken("username","token");
+    } catch (ChatException e) {
         e.printStackTrace();
     }
 ```
@@ -226,15 +226,15 @@ EMClient.getInstance().kickDevice(username, password, deviceInfos.get(selectedIn
 
 例如，账号 A 同时在设备 A 和 B 上登录，账号 A 在设备 A 上进行操作，设备 B 会收到这些操作对应的通知。
 
-你需要先实现 `EMMultiDeviceListener` 类监听其他设备上的操作，然后调用 `addMultiDeviceListener` 方法添加多设备监听。
+你需要先实现 `MultiDeviceListener` 类监听其他设备上的操作，然后调用 `addMultiDeviceListener` 方法添加多设备监听。
 
 :::tip
 多端多设备场景下，无聊天室操作相关事件，只支持聊天室中发送和接收消息的同步。
 :::
 
 ```java
-//实现 `EMMultiDeviceListener` 监听其他设备上的操作。
-private class ChatEMMultiDeviceListener implements EMMultiDeviceListener {
+//实现 `MultiDeviceListener` 监听其他设备上的操作。
+private class ChatEMMultiDeviceListener implements MultiDeviceListener {
 //@param event 事件。
     @Override
     //@param target 好友的用户 ID； @param ext 事件扩展信息。
@@ -361,7 +361,7 @@ private class ChatEMMultiDeviceListener implements EMMultiDeviceListener {
         }
 
         @Override
-        public void onConversationEvent(int event, String conversationId, EMConversation.EMConversationType type) {
+        public void onConversationEvent(int event, String conversationId, Conversation.ConversationType type) {
             EMLog.i(TAG, "onConversationEvent event"+event);
             switch (event) {
                 case CONVERSATION_PINNED:
@@ -390,10 +390,10 @@ private class ChatEMMultiDeviceListener implements EMMultiDeviceListener {
 ChatMultiDeviceListener chatMultiDeviceListener = new ChatMultiDeviceListener();
 
 //设置多设备监听。
-EMClient.getInstance().addMultiDeviceListener(chatMultiDeviceListener);
+ChatClient.getInstance().addMultiDeviceListener(chatMultiDeviceListener);
 
 //移除多设备监听。
-EMClient.getInstance().removeMultiDeviceListener(chatMultiDeviceListener);
+ChatClient.getInstance().removeMultiDeviceListener(chatMultiDeviceListener);
 ```
 
 ### 典型示例
@@ -401,5 +401,5 @@ EMClient.getInstance().removeMultiDeviceListener(chatMultiDeviceListener);
 当 PC 端和移动端登录同一个账号时，在移动端可以通过调用方法获取到 PC 端的登录 ID。该登录 ID 相当于特殊的好友用户 ID，可以直接使用于聊天，使用方法与好友的用户 ID 类似。
 
 ```java
-List<String> selfIds = EMClient.getInstance().contactManager().getSelfIdsOnOtherPlatform();
+List<String> selfIds = ChatClient.getInstance().contactManager().getSelfIdsOnOtherPlatform();
 ```

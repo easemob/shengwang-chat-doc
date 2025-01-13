@@ -48,7 +48,7 @@
        android:name="com.vivo.push.sdk.service.CommandClientService"
        android:permission="com.push.permission.UPSTAGESERVICE"
        android:exported="true" />
-   <receiver android:name="com.hyphenate.push.platform.vivo.EMVivoMsgReceiver" >
+   <receiver android:name="io.agora.push.platform.vivo.VivoMsgReceiver" >
        <intent-filter>
            <!-- 接收推送消息 -->
            <action android:name="com.vivo.pushclient.action.RECEIVE" />
@@ -68,9 +68,9 @@
 3. 在即时通讯 IM SDK 初始化的时，配置启用 VIVO 推送。
 
    ```java
-   EMOptions options = new EMOptions();
+   ChatOptions options = new ChatOptions();
    ...
-   EMPushConfig.Builder builder = new EMPushConfig.Builder(this);
+   PushConfig.Builder builder = new PushConfig.Builder(this);
    // 需设置 agreePrivacyStatement boolean类型参数，明确是否同意隐私声明：
    // true：若用户未同意隐私声明，而这里设为 `true`，可能存在合规风险，需业务自己承担合规风险。
    // false：不同意隐私声明, 会影响推送功能
@@ -79,7 +79,7 @@
    // 将 pushconfig 设置为 ChatOptions
    options.setPushConfig(builder.build());
    // 初始化 IM SDK
-   EMClient.getInstance().init(this, options);
+   ChatClient.getInstance().init(this, options);
    ```
 
 4. VIVO 设备安装应用后默认没有打开允许通知权限，测试前请先在设置中打开该应用的允许通知权限。

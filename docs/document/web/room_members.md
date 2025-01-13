@@ -2,11 +2,11 @@
 
 <Toc />
 
-聊天室是支持多人沟通的即时通讯系统。本文介绍如何使用环信即时通讯 IM Web SDK 在实时互动 app 中管理聊天室成员，并实现聊天室的相关功能。
+聊天室是支持多人沟通的即时通讯系统。本文介绍如何使用声网即时通讯 IM Web SDK 在实时互动 app 中管理聊天室成员，并实现聊天室的相关功能。
 
 ## 技术原理
 
-环信即时通讯 IM SDK 支持对聊天室成员的管理，包括获取、添加和移出聊天室成员等：
+声网即时通讯 IM SDK 支持对聊天室成员的管理，包括获取、添加和移出聊天室成员等：
 
 - 获取聊天室成员列表；
 - 退出聊天室；
@@ -20,8 +20,8 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)；
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation)；
-- 了解环信即时通讯 IM 聊天室不同套餐相关限制，详见 [环信即时通讯 IM 价格](https://www.easemob.com/pricing/im)。
+- 了解声网即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation)；
+- 了解声网即时通讯 IM 聊天室不同套餐相关限制，详见 [声网即时通讯 IM 价格](https://www.easemob.com/pricing/im)。
 
 ## 实现方法
 
@@ -34,12 +34,12 @@
 ```javascript
 //pageNum：当前页码，从 1 开始。
 //pageSize：每页期望返回的成员数,最大值为 1,000。
-let option = {
-    pageNum: 1,
-    pageSize: 10,
-    chatRoomId: 'chatRoomId'
-}
-conn.listChatRoomMembers(option).then(res => console.log(res))
+const option = {
+  pageNum: 1,
+  pageSize: 10,
+  chatRoomId: "chatRoomId",
+};
+chatClient.listChatRoomMembers(option).then((res) => console.log(res));
 ```
 
 ### 退出聊天室
@@ -51,10 +51,10 @@ conn.listChatRoomMembers(option).then(res => console.log(res))
 示例代码如下：
 
 ```javascript
-let option = {
-    roomId: 'roomId'
-}
-conn.leaveChatRoom(option).then(res => console.log(res))
+const option = {
+  roomId: "roomId",
+};
+chatClient.leaveChatRoom(option).then((res) => console.log(res));
 ```
 
 #### 被移出
@@ -64,16 +64,16 @@ conn.leaveChatRoom(option).then(res => console.log(res))
 示例代码如下：
 
 ```javascript
-let option = {
-    chatRoomId: "chatRoomId",
-    username: "userId"
+const option = {
+  chatRoomId: "chatRoomId",
+  username: "userId",
 };
-conn.removeChatRoomMember(option).then(res => console.log(res))
+chatClient.removeChatRoomMember(option).then((res) => console.log(res));
 ```
 
 #### 离线后自动退出
 
-由于网络等原因，聊天室中的成员离线超过 2 分钟会自动退出聊天室。若需调整该时间，需联系环信商务。
+由于网络等原因，聊天室中的成员离线超过 2 分钟会自动退出聊天室。若需调整该时间，需联系声网商务。
 
 以下两类成员即使离线也不会退出聊天室：
 
@@ -89,10 +89,10 @@ conn.removeChatRoomMember(option).then(res => console.log(res))
 示例代码如下：
 
 ```javascript
-let option = {
-    chatRoomId: "chatRoomId",
+const option = {
+  chatRoomId: "chatRoomId",
 };
-conn.getChatRoomBlocklist(option);
+chatClient.getChatRoomBlocklist(option);
 ```
 
 #### 将成员添加至聊天室黑名单
@@ -106,11 +106,11 @@ conn.getChatRoomBlocklist(option);
 示例代码如下：
 
 ```javascript
-let option = {
-    chatRoomId: 'chatRoomId',
-    usernames: ['user1', 'user2'] // 用户 ID 数组。
+const option = {
+  chatRoomId: "chatRoomId",
+  usernames: ["user1", "user2"], // 用户 ID 数组。
 };
-conn.blockChatRoomMembers(option).then(res => console.log(res));
+chatClient.blockChatRoomMembers(option).then((res) => console.log(res));
 ```
 
 #### 将成员移出聊天室黑名单
@@ -120,11 +120,11 @@ conn.blockChatRoomMembers(option).then(res => console.log(res));
 示例代码如下：
 
 ```javascript
-let option = {
-    chatRoomId: "chatRoomId",
-    usernames: ["user1", "user2"] // 用户 ID 数组。
-}
-conn.unblockChatRoomMembers(option).then(res => console.log(res));
+const option = {
+  chatRoomId: "chatRoomId",
+  usernames: ["user1", "user2"], // 用户 ID 数组。
+};
+chatClient.unblockChatRoomMembers(option).then((res) => console.log(res));
 ```
 
 ### 管理聊天室白名单
@@ -140,10 +140,10 @@ conn.unblockChatRoomMembers(option).then(res => console.log(res));
 示例代码如下：
 
 ```javascript
-let option = {
-    chatRoomId: "chatRoomId"
-}
-conn.getChatRoomAllowlist(option).then(res => console.log(res));
+const option = {
+  chatRoomId: "chatRoomId",
+};
+chatClient.getChatRoomAllowlist(option).then((res) => console.log(res));
 ```
 
 #### 检查自己是否在聊天室白名单中
@@ -157,11 +157,11 @@ conn.getChatRoomAllowlist(option).then(res => console.log(res));
 示例代码如下：
 
 ```javascript
-let option = {
-    chatRoomId: "chatRoomId",
-    userName: "user"
-}
-conn.isInChatRoomAllowlist(option);
+const option = {
+  chatRoomId: "chatRoomId",
+  userName: "user",
+};
+chatClient.isInChatRoomAllowlist(option);
 ```
 
 #### 将成员加入聊天室白名单
@@ -171,11 +171,11 @@ conn.isInChatRoomAllowlist(option);
 示例代码如下：
 
 ```javascript
-let option = {
-    chatRoomId: "chatRoomId",
-    users: ["user1", "user2"] // 成员 ID 列表。
+const option = {
+  chatRoomId: "chatRoomId",
+  users: ["user1", "user2"], // 成员 ID 列表。
 };
-conn.addUsersToChatRoomAllowlist(option);
+chatClient.addUsersToChatRoomAllowlist(option);
 ```
 
 #### 将成员移出聊天室白名单
@@ -185,11 +185,11 @@ conn.addUsersToChatRoomAllowlist(option);
 示例代码如下：
 
 ```javascript
-let option = {
-    chatRoomId: "chatRoomId",
-    userName: "userId"
-}
-conn.removeChatRoomAllowlistMember(option);
+const option = {
+  chatRoomId: "chatRoomId",
+  userName: "userId",
+};
+chatClient.removeChatRoomAllowlistMember(option);
 ```
 
 ### 管理禁言
@@ -203,10 +203,10 @@ conn.removeChatRoomAllowlistMember(option);
 示例代码如下：
 
 ```javascript
-let option = {
-    chatRoomId: "chatRoomId"
+const option = {
+  chatRoomId: "chatRoomId",
 };
-conn.getChatRoomMuteList(option).then(res => console.log(res))
+chatClient.getChatRoomMuteList(option).then((res) => console.log(res));
 ```
 
 #### 将成员添加至聊天室禁言列表
@@ -220,12 +220,12 @@ conn.getChatRoomMuteList(option).then(res => console.log(res))
 示例代码如下：
 
 ```javascript
-let option = {
-    chatRoomId: "chatRoomId", // 聊天室 ID。
-    username: 'userId',     // 被禁言的聊天室成员的 ID。
-    muteDuration: -1000       // 禁言时长，单位为毫秒。若传 “-1,000” 表示永久禁言。
+const option = {
+  chatRoomId: "chatRoomId", // 聊天室 ID。
+  username: "userId", // 被禁言的聊天室成员的 ID。
+  muteDuration: -1000, // 禁言时长，单位为毫秒。若传 “-1,000” 表示永久禁言。
 };
-conn.muteChatRoomMember(option).then(res => console.log(res))
+chatClient.muteChatRoomMember(option).then((res) => console.log(res));
 ```
 
 #### 将成员移出聊天室禁言列表
@@ -239,27 +239,26 @@ conn.muteChatRoomMember(option).then(res => console.log(res))
 示例代码如下：
 
 ```javascript
-let option = {
-    chatRoomId: "chatRoomId",
-    username: 'username'
+const option = {
+  chatRoomId: "chatRoomId",
+  username: "username",
 };
-conn.unmuteChatRoomMember(option).then(res => console.log(res))
+chatClient.unmuteChatRoomMember(option).then((res) => console.log(res));
 ```
 
 #### 开启全员禁言
 
 仅聊天室所有者和管理员可调用 `disableSendChatRoomMsg` 方法设置全员禁言。全员禁言开启后不会在一段时间内自动取消禁言，需要调用 `enableSendChatRoomMsg` 方法取消全员禁言。
 
-
 全员禁言开启后，除了在白名单中的群成员，其他成员不能发言。调用成功后，聊天室成员会收到 `muteAllMembers` 事件。
 
 示例代码如下：
 
 ```javascript
-let option = {
-    chatRoomId: "chatRoomId"
+const option = {
+  chatRoomId: "chatRoomId",
 };
-conn.disableSendChatRoomMsg(option).then(res => console.log(res))
+chatClient.disableSendChatRoomMsg(option).then((res) => console.log(res));
 ```
 
 #### 关闭全员禁言
@@ -269,12 +268,12 @@ conn.disableSendChatRoomMsg(option).then(res => console.log(res))
 示例代码如下：
 
 ```javascript
-let option = {
-    chatRoomId: "chatRoomId"
+const option = {
+  chatRoomId: "chatRoomId",
 };
-conn.enableSendChatRoomMsg(option).then((res) => {
-    console.log(res)
-})
+chatClient.enableSendChatRoomMsg(option).then((res) => {
+  console.log(res);
+});
 ```
 
 ### 管理聊天室管理员
@@ -286,11 +285,11 @@ conn.enableSendChatRoomMsg(option).then((res) => {
 示例代码如下：
 
 ```javascript
-let option = {
-    chatRoomId: 'chatRoomId',
-    username: 'userId'
-}
-conn.setChatRoomAdmin(option).then(res => console.log(res))
+const option = {
+  chatRoomId: "chatRoomId",
+  username: "userId",
+};
+chatClient.setChatRoomAdmin(option).then((res) => console.log(res));
 ```
 
 #### 移除聊天室管理员
@@ -300,12 +299,13 @@ conn.setChatRoomAdmin(option).then(res => console.log(res))
 示例代码如下：
 
 ```javascript
-let option = {
-    chatRoomId: 'chatRoomId',
-    username: 'userId'
-}
-conn.removeChatRoomAdmin(option).then(res => console.log(res))
+const option = {
+  chatRoomId: "chatRoomId",
+  username: "userId",
+};
+chatClient.removeChatRoomAdmin(option).then((res) => console.log(res));
 ```
+
 ### 监听聊天室事件
 
 有关详细信息，请参阅 [聊天室事件](room_manage.html#监听聊天室事件)。

@@ -30,10 +30,10 @@
 
 ```java
 //获取指定的会话 ID。
-EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
+Conversation conversation = ChatClient.getInstance().chatManager().getConversation(conversationId);
 
 // 删除指定会话。如果需要保留服务端和本地的历史消息，`isDeleteServerMessages` 传 `false`。
-EMClient.getInstance().chatManager().deleteConversationFromServer(conversationId, conversationType, isDeleteServerMessages, new EMCallBack() {
+ChatClient.getInstance().chatManager().deleteConversationFromServer(conversationId, conversationType, isDeleteServerMessages, new CallBack() {
     @Override
     public void onSuccess() {
 
@@ -52,11 +52,11 @@ EMClient.getInstance().chatManager().deleteConversationFromServer(conversationId
 
 ```java
 // 删除指定用户的会话，如果需要保留历史消息，传 `false`。
-EMClient.getInstance().chatManager().deleteConversation(conversationId, true);
+ChatClient.getInstance().chatManager().deleteConversation(conversationId, true);
 ```
 
 ```java
 // 删除指定会话中指定的一条历史消息。
-EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
+Conversation conversation = ChatClient.getInstance().chatManager().getConversation(conversationId);
 conversation.removeMessage(deleteMsg.msgId);
 ```

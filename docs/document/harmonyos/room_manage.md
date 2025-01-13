@@ -2,15 +2,15 @@
 
 <Toc />
 
-聊天室是支持多人沟通的即时通讯系统。聊天室中的成员没有固定关系，一旦离线后，不会收到聊天室中的任何消息，超过 2 分钟会自动退出聊天室。聊天室可以应用于直播、消息广播等。若需调整该时间，需联系环信商务经理。
+聊天室是支持多人沟通的即时通讯系统。聊天室中的成员没有固定关系，一旦离线后，不会收到聊天室中的任何消息，超过 2 分钟会自动退出聊天室。聊天室可以应用于直播、消息广播等。若需调整该时间，需联系声网商务。
  
-本文介绍如何使用环信即时通讯 IM SDK 在实时互动 app 中创建和管理聊天室，并实现聊天室的相关功能。
+本文介绍如何使用即时通讯 IM SDK 在实时互动 app 中创建和管理聊天室，并实现聊天室的相关功能。
 
 消息相关内容见 [消息管理](message_overview.html)。
 
 ## 技术原理
 
-环信即时通讯 IM SDK 提供 `ChatRoomManager` 类 和 `ChatRoom` 类用于聊天室管理，支持你通过调用 API 在项目中实现如下功能：
+即时通讯 IM SDK 提供 `ChatRoomManager` 类 和 `ChatRoom` 类用于聊天室管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 创建聊天室
 - 从服务器获取聊天室列表
@@ -24,14 +24,14 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM 的 [使用限制](/product/limitation.html)。
-- 了解环信即时通讯 IM 不同版本的聊天室相关数量限制，详见 [环信即时通讯 IM 价格](https://www.easemob.com/pricing/im)。
+- 了解即时通讯 IM 的 [使用限制](limitation.html)。
+- 了解即时通讯 IM 的聊天室相关数量限制，详见 [即时通讯 IM 价格](https://www.easemob.com/pricing/im)。
 - 只有超级管理员才有创建聊天室的权限，因此你还需要确保已调用 RESTful API 添加了超级管理员，详见 [添加聊天室超级管理员](/document/server-side/chatroom_superadmin.html)。
 - 聊天室创建者和管理员的数量之和不能超过 100，即管理员最多可添加 99 个。
 
 ## 实现方法
 
-本节介绍如何使用环信即时通讯 IM SDK 提供的 API 实现上述功能。
+本节介绍如何使用即时通讯 IM SDK 提供的 API 实现上述功能。
 
 ### 创建聊天室
 
@@ -107,7 +107,7 @@ interface ChatroomListener{
      * 有成员被禁言。
      * 被添加的成员收到该事件。禁言期间成员不能发送发消息。
      */
-    onMutelistAdded?: (roomId: string, mutes: Array<string>, expireTime: number) => void;
+    onMuteMapAdded?: (roomId: string, mutes: Map<string, number>) => void;
     /**
      * 有成员从禁言列表中移除。
      * 被解除禁言的成员会收到该事件。

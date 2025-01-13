@@ -36,7 +36,7 @@ SDK 支持你通过调用 API 在项目中实现如下功能：
 
 ```java
 //获取支持的翻译语言。
-EMClient.getInstance().chatManager().fetchSupportLanguages(new EMValueCallBack<List<EMLanguage>>{});
+ChatClient.getInstance().chatManager().fetchSupportLanguages(new ValueCallBack<List<Language>>{});
 ```
 
 ### 按需翻译
@@ -47,17 +47,17 @@ EMClient.getInstance().chatManager().fetchSupportLanguages(new EMValueCallBack<L
 List<String> languageList = new ArrayList<>();
 languageList.add("en");
 ...
-EMClient.getInstance().chatManager().translateMessage(
+ChatClient.getInstance().chatManager().translateMessage(
     message,
     languageList,
-    new EMValueCallBack<EMMessage>() {});
+    new ValueCallBack<ChatMessage>() {});
 ```
 
 翻译成功之后，译文信息会保存到消息中。调用 `getTranslations` 获取译文内容。示例代码如下：
 
 ```java
-EMTextMessageBody body = (EMTextMessageBody)message.getBody();
-List<EMTranslationInfo> infoList = body.getTranslations();
+TextMessageBody body = (TextMessageBody)message.getBody();
+List<TranslationInfo> infoList = body.getTranslations();
 ```
 
 ### 设置自动翻译
@@ -66,7 +66,7 @@ List<EMTranslationInfo> infoList = body.getTranslations();
 
 ```java
 ...
-EMTextMessageBody body = new EMTextMessageBody("文本内容");
+TextMessageBody body = new TextMessageBody("文本内容");
 body.setTargetLanguages(languageList);
 ...
 ```
@@ -76,8 +76,8 @@ body.setTargetLanguages(languageList);
 接收方收到消息后，调用 `getTranslations` 获取消息的译文列表，示例代码如下：
 
 ```java
-EMTextMessageBody body = (EMTextMessageBody)message.getBody();
-List<EMTranslationInfo> infoList = body.getTranslations();
+TextMessageBody body = (TextMessageBody)message.getBody();
+List<TranslationInfo> infoList = body.getTranslations();
 ```
 
 ## 参考

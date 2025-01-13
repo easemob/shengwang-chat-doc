@@ -4,18 +4,18 @@
 
 会话是一个单聊、群聊或者聊天室所有消息的集合。用户需在会话中发送消息、查看或清空历史消息等操作。
 
-环信即时通讯 IM SDK 提供 `IEMChatManager` 和 `EMConversation` 类以会话为单位对消息数据进行管理，如获取会话列表、置顶会话、添加会话标记、删除会话和管理未读消息等。
+即时通讯 IM SDK 提供 `IAgoraChatManager` 和 `AgoraChatConversation` 类以会话为单位对消息数据进行管理，如获取会话列表、置顶会话、添加会话标记、删除会话和管理未读消息等。
 
 ## 会话类
 
-环信即时通讯 IM 提供会话类 `EMConversation`。该类定义了以下内容：
+即时通讯 IM 提供会话类 `AgoraChatConversation`。该类定义了以下内容：
 
 | 类/方法  | 描述         |
 | :--------- | :------- | 
-| EMConversationType | 会话类型枚举。<br/> - `Chat`：单聊会话；<br/> - `GroupChat`：群聊会话；<br/> - `ChatRoom`：聊天室会话。 <br/> - `HelpDesk`：客服会话。    |  
-| EMMarkType  | 会话标记枚举类型：EMMarkType0、EMMarkType1、EMMarkType2、EMMarkType3、EMMarkType4、EMMarkType5、EMMarkType6、EMMarkType7、EMMarkType8、EMMarkType9、EMMarkType10、EMMarkType11、EMMarkType12、EMMarkType13、EMMarkType14、EMMarkType15、EMMarkType16、EMMarkType16、EMMarkType17、EMMarkType18 和 EMMarkType19。     |  
-| EMMessageSearchDirection  | 消息搜索方向枚举。<br/> - EMMessageSearchDirectionUp：按照消息中的 Unix 时间戳的逆序搜索。<br/> - EMMessageSearchDirectionDown：按照消息中的时间戳的正序搜索。      |   
-| EMConversation    | 聊天会话类。     |
+| AgoraChatConversationType | 会话类型枚举。<br/> - `Chat`：单聊会话；<br/> - `GroupChat`：群聊会话；<br/> - `ChatRoom`：聊天室会话。 <br/> - `HelpDesk`：客服会话。    |  
+| AgoraChatMarkType  | 会话标记枚举类型：AgoraChatMarkType0、AgoraChatMarkType1、AgoraChatMarkType2、AgoraChatMarkType3、AgoraChatMarkType4、AgoraChatMarkType5、AgoraChatMarkType6、AgoraChatMarkType7、AgoraChatMarkType8、AgoraChatMarkType9、AgoraChatMarkType10、AgoraChatMarkType11、AgoraChatMarkType12、AgoraChatMarkType13、AgoraChatMarkType14、AgoraChatMarkType15、AgoraChatMarkType16、AgoraChatMarkType16、AgoraChatMarkType17、AgoraChatMarkType18 和 AgoraChatMarkType19。     |  
+| AgoraChatMessageSearchDirection  | 消息搜索方向枚举。<br/> - AgoraChatMessageSearchDirectionUp：按照消息中的 Unix 时间戳的逆序搜索。<br/> - AgoraChatMessageSearchDirectionDown：按照消息中的时间戳的正序搜索。      |   
+| AgoraChatConversation    | 聊天会话类。     |
 | conversationId   | 会话 ID，取决于会话类型。<br/> - 单聊：会话 ID 为对方的用户 ID；<br/> - 群聊：会话 ID 为群组 ID；<br/> - 聊天室：会话 ID 为聊天室的 ID。     |
 | type    | 会话类型。     |
 | messagesCount    | 会话中的消息数量。     |
@@ -25,8 +25,8 @@
 | pinnedTime    | 会话置顶的 UNIX 时间戳，单位为毫秒。未置顶时值为 `0`。    |
 | marks    | 会话标记。     |
 | lastReceivedMessage    | 获取会话中收到的最新一条消息，即当前用户收到的对端用户发送的最新消息。     |
-| insertMessage    | 插入一条消息在 SDK 本地数据库。消息的会话 ID 应与会话的 ID 保持一致。消息会根据消息里的时间戳被插入 SDK 本地数据库，SDK 会更新会话的 `EMChatMessage#latestMessage` 等属性。    |
-| appendMessage   | 插入一条消息到 SDK 本地数据库会话尾部。消息的会话 ID 应该和目标会话的 ID 一致。消息会被插入 SDK 本地数据库，并且更新会话的 `EMChatMessage#latestMessage` 等属性。     |
+| insertMessage    | 插入一条消息在 SDK 本地数据库。消息的会话 ID 应与会话的 ID 保持一致。消息会根据消息里的时间戳被插入 SDK 本地数据库，SDK 会更新会话的 `AgoraChatMessage#latestMessage` 等属性。    |
+| appendMessage   | 插入一条消息到 SDK 本地数据库会话尾部。消息的会话 ID 应该和目标会话的 ID 一致。消息会被插入 SDK 本地数据库，并且更新会话的 `AgoraChatMessage#latestMessage` 等属性。     |
 | deleteMessageWithId    | 从 SDK 本地数据库删除一条消息。     |
 | deleteAllMessages    | 清除内存和数据库中指定会话中的消息。     |
 | removeMessagesFromServerMessageIds    | 从会话中删除消息（包括本地存储和服务器存储）。     |
@@ -44,7 +44,7 @@
 
 ## 会话事件
 
-`EMChatManagerDelegate` 中提供会话事件的监听接口。开发者可以通过设置此监听，获取会话事件，并做出相应处理。如果不再使用该监听，需要移除，防止出现内存泄漏。
+`AgoraChatManagerDelegate` 中提供会话事件的监听接口。开发者可以通过设置此监听，获取会话事件，并做出相应处理。如果不再使用该监听，需要移除，防止出现内存泄漏。
 
 示例代码如下：
 

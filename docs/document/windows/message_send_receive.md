@@ -6,7 +6,7 @@
 
 - 对于群组和聊天室，用户每次只能向所属的单个群组和聊天室发送消息。
 
-单聊、群组聊天和聊天室的消息发送控制，详见[消息发送控制](/document/android/product_message_overview.html#消息发送控制)文档。
+单聊、群组聊天和聊天室的消息发送控制，详见[消息发送控制](/product/product_message_overview.html#消息发送控制)文档。
 
 ## 前提条件
 
@@ -53,7 +53,7 @@ SDKClient.Instance.ChatManager.SendMessage(ref msg, new CallBack(
 
 在新消息到来时，你会收到 `OnMessagesReceived` 的回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。若在初始化时打开了 `Options#IncludeSendMessageInMessageListener` 开关，则该回调中会返回发送成功的消息。
 
-对于聊天室消息，你可以通过消息的 `Message#Broadcast` 属性判断该消息是否为[通过 REST API 发送的聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
+对于聊天室消息，你可以通过消息的 `Message#Broadcast` 属性判断该消息是否为[通过 REST API 发送的聊天室全局广播消息](/document/server-side/message_broadcast.html#发送聊天室全局广播消息)。
 
 ```csharp
 //继承并实现 IChatManagerDelegate。
@@ -489,10 +489,9 @@ SDKClient.Instance.ChatManager.FetchCombineMessageDetail(msg, new ValueCallBack<
 该功能适用于文本消息、图片消息和音视频消息等全类型消息，最多可向群组或聊天室的 20 个成员发送定向消息。
 
 :::tip
-1. 仅 SDK 1.2.0 及以上版本支持。
-2. 定向消息不写入服务端会话列表，不计入服务端会话的未读消息计数。
-3. 群组定向消息的漫游功能默认关闭，使用前需联系商务开通。
-4. 聊天室定向消息的漫游功能默认关闭，使用前需联系商务开通聊天室消息漫游和定向消息漫游功能。
+1. 定向消息不写入服务端会话列表，不计入服务端会话的未读消息计数。
+2. 群组定向消息的漫游功能默认关闭，使用前需联系商务开通。
+3. 聊天室定向消息的漫游功能默认关闭，使用前需联系商务开通聊天室消息漫游和定向消息漫游功能。
 :::
 
 发送定向消息的流程与发送普通消息相似，唯一区别是需要设置消息的接收方，具体操作如下：

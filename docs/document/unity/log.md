@@ -1,6 +1,6 @@
 # SDK 日志
 
-环信即时通讯 IM 日志记录 SDK 相关的信息和事件。环信技术支持团队帮你排查问题时可能会请你发送 SDK 日志。
+即时通讯 IM 日志记录 SDK 相关的信息和事件。声网技术支持团队帮你排查问题时可能会请你发送 SDK 日志。
 
 ## 输出信息到日志文件
 
@@ -11,7 +11,7 @@
 SDK 默认不输出调试信息（所有日志，包括调试信息、警告和错误），只需输出错误日志。若需调试信息，首先要开启调试模式。
 
 ```csharp
-Options options = new Options("YourAppKey");
+Options options = Options.InitOptionsWithAppId("YourAppId");
 options.DebugMode = true;
 SDKClient.Instance.InitWithOptions(options);
 ```

@@ -10,8 +10,8 @@
 
 ```java
 // 下面以文本消息为例，附件等类型的消息设置方法相同。
-EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
-EMTextMessageBody txtBody = new EMTextMessageBody("message content");
+ChatMessage message = ChatMessage.createSendMessage(ChatMessage.Type.TXT);
+TextMessageBody txtBody = new TextMessageBody("message content");
 // 设置要发送的用户 ID。
 message.setTo("toChatUsername");
 // 设置自定义推送扩展。
@@ -32,7 +32,7 @@ message.addBody(txtBody);
 // 设置消息回调。
 message.setMessageStatusCallback(new CallBack() {...});
 // 发送消息。
-EMClient.getInstance().chatManager().sendMessage(message);
+ChatClient.getInstance().chatManager().sendMessage(message);
 ```
 
 自定义字段的数据结构如下：
@@ -62,8 +62,8 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 ```java
 // 下面以文本消息为例，图片、文件等类型的消息设置方法相同。
-EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
-EMTextMessageBody txtBody = new EMTextMessageBody("test");
+ChatMessage message = ChatMessage.createSendMessage(ChatMessage.Type.TXT);
+TextMessageBody txtBody = new TextMessageBody("test");
 // 设置接收方：单聊为对端用户的用户 ID；群聊为群组 ID；聊天室聊天为聊天室 ID。
 message.setTo("toChatUsername");
 // 设置是否为强制推送，该字段为内置扩展字段：`true`：强制推送；（默认）`false`：非强制推送。
@@ -71,7 +71,7 @@ message.setAttribute("em_force_notification", true);
 // 设置消息回调。
 message.setMessageStatusCallback(new CallBack() {...});
 // 发送消息。
-EMClient.getInstance().chatManager().sendMessage(message);
+ChatClient.getInstance().chatManager().sendMessage(message);
 ```
 
 ## 发送静默消息
@@ -82,8 +82,8 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 ```java
 // 下面以文本消息为例，图片、文件等类型的消息设置方法相同。
-EMMessage message = EMMessage.createSendMessage(EMMessage.Type.TXT);
-EMTextMessageBody txtBody = new EMTextMessageBody("test");
+ChatMessage message = ChatMessage.createSendMessage(ChatMessage.Type.TXT);
+TextMessageBody txtBody = new TextMessageBody("test");
 // 设置接收方：单聊为对端用户的用户 ID；群聊为群组 ID；聊天室聊天为聊天室 ID。
 message.setTo("toChatUsername");
 // 设置是否发送静默消息。该字段为内置扩展字段：`true`：发送静默消息；（默认）`false`：推送该消息。
@@ -91,7 +91,7 @@ message.setAttribute("em_ignore_notification", true);
 // 设置消息回调。
 message.setMessageStatusCallback(new CallBack() {...});
 // 发送消息。
-EMClient.getInstance().chatManager().sendMessage(message);
+ChatClient.getInstance().chatManager().sendMessage(message);
 ```
 
 

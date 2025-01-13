@@ -12,7 +12,7 @@
 
  单聊会话已读回执实现的流程如下：
 
-  1. 设置 `EMOptions#setRequireAck` 为 `true` 开启已读回执功能。
+  1. 设置 `ChatOptions#setRequireAck` 为 `true` 开启已读回执功能。
   2. 消息接收方进入会话页面，阅读消息后，调用 `ackConversationRead` 方法发送会话已读回执。
   3. 消息发送方通过监听 `OnConversationRead` 回调接收会话已读回执。
 
@@ -27,10 +27,10 @@
 
  参考以下步骤在单聊中实现会话已读回执：
 
- 1. 开启已读回执功能，即 SDK 初始化时设置 `EMOptions#setRequireAck` 为 `true`。
+ 1. 开启已读回执功能，即 SDK 初始化时设置 `ChatOptions#setRequireAck` 为 `true`。
 
  ```java
-// 设置是否需要接受方已读确认,默认为 true
+// 设置是否需要接收方已读确认,默认为 true
 options.setRequireAck(true);
  ```
 
@@ -42,8 +42,8 @@ options.setRequireAck(true);
 
 ```java
 try {
-    EMClient.getInstance().chatManager().ackConversationRead(conversationId);
-} catch (HyphenateException e) {
+    ChatClient.getInstance().chatManager().ackConversationRead(conversationId);
+} catch (ChatException e) {
     e.printStackTrace();
 }
 ```
@@ -57,7 +57,7 @@ try {
 :::
 
 ```java
-EMClient.getInstance().chatManager().addConversationListener(new EMConversationListener() {
+ChatClient.getInstance().chatManager().addConversationListener(new ConversationListener() {
         ……
         @Override
         public void onConversationRead(String from, String to) {
@@ -68,4 +68,4 @@ EMClient.getInstance().chatManager().addConversationListener(new EMConversationL
 
 ## 会话已读回执和消息未读数
 
-消息接收方调用 `ackConversationRead` 方法发送会话已读回执，开发者可调用 `EMConversation#markAllMessagesAsRead` 方法将所有未读消息设置为已读，即将该会话的未读消息数清零。
+消息接收方调用 `ackConversationRead` 方法发送会话已读回执，开发者可调用 `Conversation#markAllMessagesAsRead` 方法将所有未读消息设置为已读，即将该会话的未读消息数清零。

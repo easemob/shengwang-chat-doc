@@ -1,14 +1,14 @@
 # 连接
 
-应用客户端成功连接到环信服务器后，才能使用环信即时通讯 SDK 的收发消息等功能。
+应用客户端成功连接到声网服务器后，才能使用即时通讯 IM SDK 的收发消息等功能。
 
-你调用 `loginWithToken` 或 `login` 方法登录后，客户端 SDK 会自动连接环信服务器。关于登录详情，请参见[登录文档](login.html)。
+你调用 `loginWithToken` 或 `login` 方法登录后，客户端 SDK 会自动连接声网服务器。关于登录详情，请参见[登录文档](login.html)。
 
 ## 监听连接状态
 
 你可以通过注册连接监听确认连接状态。
 
-```C-Sharp
+```csharp
 
 // 监听器建议在初始化完成之后，登录之前设置，这样可确保收到登录通知。
 class ConnectionDelegate : IConnectionDelegate

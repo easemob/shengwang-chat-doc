@@ -10,7 +10,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM 通过 `EMMessage` 类支持只将消息投递给在线用户：
+环信即时通讯 IM 通过 `ChatMessage` 类支持只将消息投递给在线用户：
 
 - `deliverOnlineOnly`：设置消息是否只投递给在线用户。
 
@@ -23,19 +23,19 @@
 
 ## 实现方法
 
-要将消息只投递给在线用户，你需要在发送消息时将 `EMMessage#deliverOnlineOnly` 设置为 `true`。
+要将消息只投递给在线用户，你需要在发送消息时将 `ChatMessage#deliverOnlineOnly` 设置为 `true`。
 
 下面以发送文本消息为例进行说明：
 
 ```java
 // 创建一条文本消息，`content` 为消息文字内容。
 // `conversationId` 为消息接收方，单聊时为对端用户 ID、群聊时为群组 ID。
-EMMessage message = EMMessage.createTextSendMessage(content, conversationId);
+ChatMessage message = ChatMessage.createTextSendMessage(content, conversationId);
 // 消息是否只投递在线用户。（默认）`false`：不论用户是否在线均投递；`true`：只投递给在线用户。若用户离线，消息不投递。
 message.deliverOnlineOnly(true);
-// 会话类型：单聊为 EMMessage.ChatType.Chat，群聊为 EMMessage.ChatType.GroupChat，默认为单聊。
-message.setChatType(EMMessage.ChatType.Chat);
+// 会话类型：单聊为 ChatMessage.ChatType.Chat，群聊为 ChatMessage.ChatType.GroupChat，默认为单聊。
+message.setChatType(ChatMessage.ChatType.Chat);
 // 发送消息。
-EMClient.getInstance().chatManager().sendMessage(message);
+ChatClient.getInstance().chatManager().sendMessage(message);
 ```
 

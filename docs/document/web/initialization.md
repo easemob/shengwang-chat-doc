@@ -4,18 +4,17 @@
 
 ## 前提条件
 
-有效的环信即时通讯 IM 开发者账号和 App key，详见[环信即时通讯云控制台的相关文档](enable_and_configure_IM.html#创建应用)。
+有效的声网即时通讯 IM 开发者账号和 appId，详见[声网即时通讯云控制台的相关文档](enable_and_configure_IM.html#创建应用)。
 
 ## 初始化参数说明
 
 ```javascript
-import ChatSDK from "easemob-websdk";
-const conn = new ChatSDK.connection({
-  appKey: "Your appKey",
+import ChatSDK from "shengwang-chat";
+const chatClient = new ChatSDK.connection({
+  appId: "Your appId",
 });
 ```
 
-| 参数          | 类型   | 是否必需 | 描述                       |
-| ------------- | ------ | -------- | -------------------------- |
-| appKey        | String | 是       | 环信应用的唯一标识         |
-
+| 参数  | 类型   | 是否必需 | 描述               |
+| ----- | ------ | -------- | ------------------ |
+| appId | String | 是       | 声网应用的唯一标识 |

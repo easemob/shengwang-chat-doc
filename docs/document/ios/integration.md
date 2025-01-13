@@ -1,6 +1,6 @@
 # 集成 SDK
 
-本文介绍如何将环信即时通讯 IM SDK 集成到你的 iOS 项目。
+本文介绍如何将即时通讯 IM SDK 集成到你的 iOS 项目。
 
 ## 开发环境要求
 
@@ -10,7 +10,7 @@
 
 ## 集成 SDK
 
-选择如下任意一种方式将环信即时通讯 IM SDK 集成到你的项目中。
+选择如下任意一种方式将即时通讯 IM SDK 集成到你的项目中。
 
 :::tip
 
@@ -27,20 +27,16 @@
 ```ruby
 # platform :ios, '10.0'
 
- target 'EMChatQuickstart' do
-     pod 'HyphenateChat'
+ target 'AgoraChatQuickstart' do
+     pod 'AgoraChat'
  end
  ```
 
 2. 运行 `pod update` 命令更新本地库版本。
-3. 运行 `pod install` 命令安装 HyphenateChat SDK。成功安装后，**Terminal** 中会显示 Pod installation complete!，此时项目文件夹下会生成一个 `xcworkspace` 文件。
+3. 运行 `pod install` 命令安装 AgoraChat SDK。成功安装后，**Terminal** 中会显示 Pod installation complete!，此时项目文件夹下会生成一个 `xcworkspace` 文件。
 
 ### 方法二：手动复制 SDK 文件
 
-打开 SDK 下载页面，获取最新版的环信即时通讯 IM SDK SDK，然后解压。
+打开 SDK 下载页面，获取最新版的即时通讯 IM SDK，然后解压。
 
-将 SDK 包内的 `HyphenateChat.xcframework` 拖入到你的工程中。
-
-:::tip
-如果使用`4.11.0`及以上版本的SDK，需要将`aosl.xcframework`和`HyphenateChat.xcframework`同时导入到工程中。
-:::
+将 SDK 包内的 `AgoraChat.xcframework` 拖入到你的工程中。

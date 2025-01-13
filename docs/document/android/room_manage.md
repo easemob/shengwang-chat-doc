@@ -10,7 +10,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM SDK 提供 `EMChatRoomManager` 类 和 `EMChatRoom` 类用于聊天室管理，支持你通过调用 API 在项目中实现如下功能：
+环信即时通讯 IM SDK 提供 `ChatRoomManager` 类 和 `ChatRoom` 类用于聊天室管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 创建聊天室
 - 从服务器获取聊天室列表
@@ -43,7 +43,7 @@
 
 ```java
 // 异步方法
-EMChatRoom  chatRoom = EMClient.getInstance().chatroomManager().createChatRoom(subject, description, welcomMessage, maxUserCount, members);
+ChatRoom  chatRoom = ChatClient.getInstance().chatroomManager().createChatRoom(subject, description, welcomMessage, maxUserCount, members);
 ```
 
 ### 加入聊天室
@@ -57,13 +57,13 @@ EMChatRoom  chatRoom = EMClient.getInstance().chatroomManager().createChatRoom(s
 
 ```java
 // 获取公开聊天室列表，每次最多可获取 1,000 个。
-// 同步方法，会阻塞当前线程。异步方法为 asyncFetchPublicChatRoomsFromServer(int, int, EMValueCallBack)。
-EMPageResult<EMChatRoom> chatRooms = EMClient.getInstance().chatroomManager().fetchPublicChatRoomsFromServer(pageNumber, pageSize);
+// 同步方法，会阻塞当前线程。异步方法为 asyncFetchPublicChatRoomsFromServer(int, int, ValueCallBack)。
+PageResult<ChatRoom> chatRooms = ChatClient.getInstance().chatroomManager().fetchPublicChatRoomsFromServer(pageNumber, pageSize);
 
 // 加入聊天室
-EMClient.getInstance().chatroomManager().joinChatRoom(chatRoomId, new EMValueCallBack<EMChatRoom>() {
+ChatClient.getInstance().chatroomManager().joinChatRoom(chatRoomId, new ValueCallBack<ChatRoom>() {
     @Override
-    public void onSuccess(EMChatRoom value) {
+    public void onSuccess(ChatRoom value) {
 
     }
 
@@ -74,14 +74,14 @@ EMClient.getInstance().chatroomManager().joinChatRoom(chatRoomId, new EMValueCal
 });
 ```
 
-同时，你可以调用 `EMChatRoomManager#joinChatRoom(java.lang.String, boolean, java.lang.String, EMValueCallBack<EMChatRoom>)` 方法，设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。调用该方法后，聊天室内其他成员会收到 `EMChatRoomChangeListener#onMemberJoined(java.lang.String, java.lang.String, java.lang.String)` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
+同时，你可以调用 `ChatRoomManager#joinChatRoom(java.lang.String, boolean, java.lang.String, ValueCallBack<ChatRoom>)` 方法，设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。调用该方法后，聊天室内其他成员会收到 `ChatRoomChangeListener#onMemberJoined(java.lang.String, java.lang.String, java.lang.String)` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
 
 ```java
 String ext= "your ext info";
 boolean leaveOtherRooms=true;
-EMClient.getInstance().chatroomManager().joinChatRoom(chatRoomID,leaveOtherRooms,ext, new EMValueCallBack<com.hyphenate.chat.EMChatRoom>() {
+ChatClient.getInstance().chatroomManager().joinChatRoom(chatRoomID,leaveOtherRooms,ext, new ValueCallBack<io.agora.chat.ChatRoom>() {
     @Override
-    public void onSuccess(com.hyphenate.chat.EMChatRoom value) {
+    public void onSuccess(io.agora.chat.ChatRoom value) {
         EMLog.i(TAG, "joinChatRoom onSuccess value:" + value);
     }
 
@@ -91,7 +91,7 @@ EMClient.getInstance().chatroomManager().joinChatRoom(chatRoomID,leaveOtherRooms
     }
 });
 
-EMChatRoomChangeListener chatRoomChangeListener = new EMChatRoomChangeListener() {
+ChatRoomChangeListener chatRoomChangeListener = new ChatRoomChangeListener() {
     ……
 
     @Override
@@ -99,7 +99,7 @@ EMChatRoomChangeListener chatRoomChangeListener = new EMChatRoomChangeListener()
         EMLog.e(TAG, "onMemberJoined roomId:" + roomId + " participant:" + participant + " ext:" + ext);
     }
 }
-EMClient.getInstance().chatroomManager().addChatRoomChangeListener(chatRoomChangeListener);
+ChatClient.getInstance().chatroomManager().addChatRoomChangeListener(chatRoomChangeListener);
 
 ```
 
@@ -111,8 +111,8 @@ EMClient.getInstance().chatroomManager().addChatRoomChangeListener(chatRoomChang
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法为 asyncFetchChatRoomFromServer(String, EMValueCallBack)。
-EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().fetchChatRoomFromServer(chatRoomId);
+// 异步方法为 asyncFetchChatRoomFromServer(String, ValueCallBack)。
+ChatRoom chatRoom = ChatClient.getInstance().chatroomManager().fetchChatRoomFromServer(chatRoomId);
 ```
 
 ### 解散聊天室
@@ -123,29 +123,29 @@ EMChatRoom chatRoom = EMClient.getInstance().chatroomManager().fetchChatRoomFrom
 
 ```java
 // 同步方法，会阻塞当前线程。
-// 异步方法为 asyncDestroyChatRoom(String, EMCallBack)。
-EMClient.getInstance().chatroomManager().destroyChatRoom(chatRoomId);
+// 异步方法为 asyncDestroyChatRoom(String, CallBack)。
+ChatClient.getInstance().chatroomManager().destroyChatRoom(chatRoomId);
 ```
 
 ### 监听聊天室事件
 
-`EMChatRoomChangeListener` 类中提供了聊天室事件的监听接口。你可以通过注册聊天室监听器，获取聊天室事件，并作出相应处理。如不再使用该监听器，需要移除，防止出现内存泄露。
+`ChatRoomChangeListener` 类中提供了聊天室事件的监听接口。你可以通过注册聊天室监听器，获取聊天室事件，并作出相应处理。如不再使用该监听器，需要移除，防止出现内存泄露。
 
 示例代码如下：
 
 
 ```java
 // 注册聊天室回调
-EMClient.getInstance().chatroomManager().addChatRoomChangeListener(chatRoomChangeListener);
+ChatClient.getInstance().chatroomManager().addChatRoomChangeListener(chatRoomChangeListener);
 // 移除聊天室回调
-EMClient.getInstance().chatroomManager().removeChatRoomListener(chatRoomChangeListener);
+ChatClient.getInstance().chatroomManager().removeChatRoomListener(chatRoomChangeListener);
 ```
 
 具体事件如下：
 
 
 ```java
-public interface EMChatRoomChangeListener {
+public interface ChatRoomChangeListener {
     // 聊天室被解散。聊天室的所有成员会收到该事件。
     void onChatRoomDestroyed(final String roomId, final String roomName);
 
@@ -189,7 +189,7 @@ public interface EMChatRoomChangeListener {
     void onOwnerChanged(final String chatRoomId, final String newOwner, final String oldOwner);
 
     // 聊天室详情有变更。聊天室的所有成员会收到该事件。
-    default void onSpecificationChanged(EMChatRoom chatRoom) {}
+    default void onSpecificationChanged(ChatRoom chatRoom) {}
     // 聊天室公告变更。聊天室的所有成员会收到该事件。
     void onAnnouncementChanged(String chatRoomId, String announcement);
 
@@ -208,21 +208,21 @@ public interface EMChatRoomChangeListener {
 
 1. 聊天室内有成员加入时，其他成员会收到 `onMemberJoined` 事件。有成员主动或被动退出时，其他成员会收到 `onMemberExited` 和 `onRemovedFromChatRoom` 事件。
 
-2. 收到通知事件后，调用 `EMChatRoomManager#getChatRoom` 方法获取本地聊天室详情，再通过`EMChatRoom#getMemberCount`获取聊天室当前人数。
+2. 收到通知事件后，调用 `ChatRoomManager#getChatRoom` 方法获取本地聊天室详情，再通过`ChatRoom#getMemberCount`获取聊天室当前人数。
 
 ```java
-EMClient.getInstance().chatroomManager().addChatRoomChangeListener(new EMChatRoomChangeListener() {
+ChatClient.getInstance().chatroomManager().addChatRoomChangeListener(new ChatRoomChangeListener() {
 
             @Override
             public void onMemberJoined(String roomId, String participant) {
                 //获取聊天室在线人数
-                int memberCount = EMClient.getInstance().chatroomManager().getChatRoom(roomId).getMemberCount();
+                int memberCount = ChatClient.getInstance().chatroomManager().getChatRoom(roomId).getMemberCount();
 
             }
 
             @Override
             public void onMemberExited(String roomId, String roomName, String participant) {
-                //int memberCount = EMClient.getInstance().chatroomManager().getChatRoom(roomId).getMemberCount();
+                //int memberCount = ChatClient.getInstance().chatroomManager().getChatRoom(roomId).getMemberCount();
             }
 
             ……

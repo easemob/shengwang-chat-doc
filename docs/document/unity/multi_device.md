@@ -2,18 +2,14 @@
 
 <Toc />
 
-即时通讯 IM 支持同一账号在多个设备上登录，使用该服务前，你需要在[环信即时通讯控制台](https://console.easemob.com/user/login)的 **即时通讯** > **功能配置** > **功能配置总览** > **基础功能** 页面上查找**多端多设备在线**，开启该功能。
-
-多端多设备登录场景下，所有已登录的设备同步以下信息和操作：
+即时通讯 IM 支持同一账号在多个设备上登录。多端多设备登录场景下，所有已登录的设备同步以下信息和操作：
 
 - 消息：包括在线消息、离线消息、推送通知（若开启了第三方推送服务，离线设备收到）以及对应的回执和已读状态等；
 - 好友和群组相关操作；
 - 子区相关操作；
 - 会话相关操作。
 
-多端登录时，即时通讯 IM 每端默认最多支持 4 个设备同时在线。如需增加支持的设备数量，可以联系环信即时通讯 IM 的商务经理。你可以在环信控制台的**基础功能**页签下点击**多端多设备在线**操作栏中的**设置**，在弹出的对话框中设置各端设备的数量：
-
-![img](/images/common/multidevice_device_count.png)
+多端登录时，即时通讯 IM 每端默认最多支持 4 个设备同时在线。如需增加支持的设备数量，可以联系声网商务。
 
 单端和多端登录场景下的互踢策略和自动登录时安全检查如下：
 
@@ -27,7 +23,7 @@
     <tr>
       <td height="52">单端登录</td>
       <td>新登录的设备会将当前在线设备踢下线。</td>
-      <td rowspan="2">对于自动登录的设备，下线后设备会自动重连环信服务器。若重连成功，默认会踢掉当前登录设备（对于多设备登录，则踢掉最早的登录设备）。若要保留当前登录设备不被踢下线，请联系环信商务。该场景下，自动登录的设备登录失败，收到错误 214，提示当前登录的设备数量超过限制。</td>
+      <td rowspan="2">对于自动登录的设备，下线后设备会自动重连声网服务器。若重连成功，默认会踢掉当前登录设备（对于多设备登录，则踢掉最早的登录设备）。若要保留当前登录设备不被踢下线，请联系声网商务。该场景下，自动登录的设备登录失败，收到错误 214，提示当前登录的设备数量超过限制。</td>
     </tr>
     <tr>
       <td height="156">多端登录</td>
@@ -39,7 +35,7 @@
 
 ## 技术原理
 
-用户在端上初始化 SDK 时会生成设备识别 ID，用于多设备登录和推送。服务器会将新消息发送到已登录的设备。环信即时通讯 IM SDK 提供以下多设备场景功能：
+用户在端上初始化 SDK 时会生成设备识别 ID，用于多设备登录和推送。服务器会将新消息发送到已登录的设备。即时通讯 IM SDK 提供以下多设备场景功能：
 
 - 获取当前用户的其他已登录设备的登录 ID 列表；
 - 获取指定账号的在线登录设备列表；
@@ -57,7 +53,7 @@
 
 ## 实现方法
 
-### 获取当前用户的其他已登录设备的登录 ID 列表，并向这些设备发送消息
+### 获取当前用户的其他已登录设备的登录 ID 列表
 
 你可以调用 `GetSelfIdsOnOtherPlatform` 方法获取其他登录设备的登录 ID 列表，然后选择目标登录 ID 作为消息接收方向指定设备发送消息。
 
@@ -94,6 +90,10 @@ SDKClient.Instance.ContactManager.GetSelfIdsOnOtherPlatform(new ValueCallBack<Li
 
 你可以调用 `GetLoggedInDevicesFromServer` 或 `GetLoggedInDevicesFromServerWithToken` 方法通过传入用户 ID 和登录密码或用户 token 从服务器获取指定账号的在线登录设备的列表。
 
+调用该方法后，在 SDK 返回的信息中，`DeviceInfo` 中的 `DeviceName` 属性的含义如下：
+- 若指定账号自定义了设备名称，该属性表示自定义设备名称。
+- 若未自定义设备的名称，该属性默认为设备型号。
+
 ```csharp
 SDKClient.Instance.GetLoggedInDevicesFromServer(username, password,
 	callback: new ValueCallBack<List<DeviceInfo>>(
@@ -126,16 +126,11 @@ SDKClient.Instance.GetLoggedInDevicesFromServerWithToken(username, token,
 );
 ```
 
-调用该方法后，在 SDK 返回的信息中，`DeviceInfo` 中的 `DeviceName` 属性的含义如下：
-- 若指定账号自定义了设备名称，该属性表示自定义设备名称。
-- 若未自定义设备的名称，该属性默认为设备型号。
-
-
 ### 设置登录设备的名称
 
-即时通讯 IM 自 1.2.0 版本开始支持自定义设置设备名称，这样在多设备场景下，若有设备被踢下线，你就能知道是被哪个设备挤下线的。
+即时通讯 IM 支持自定义设置设备名称，这样在多设备场景下，若有设备被踢下线，你就能知道是被哪个设备挤下线的。
 
-初始化 SDK 时，你可以调用 `Options#CustomDeviceName` 方法设置登录设备的名称。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时，被踢设备收到的 `IConnectionDelegate#OnLoggedOtherDevice` 回调会包含导致该设备被踢下线的自定义设备名称。
+初始化 SDK 时，你可以利用 `Options#CustomDeviceName` 设置登录设备的名称。设置后，若因达到了登录设备数量限制而导致在已登录的设备上强制退出时，被踢设备收到的 `IConnectionDelegate#OnLoggedOtherDevice` 回调会包含导致该设备被踢下线的自定义设备名称。
 
 :::tip
 登录成功后才会将该设置发送到服务器。
@@ -143,7 +138,7 @@ SDKClient.Instance.GetLoggedInDevicesFromServerWithToken(username, token,
 
 ```csharp
 // 设置设备名称并进行初始化
-Options options = new Options("YouAppKey");
+Options options = Options.InitOptionsWithAppId("YourAppId");
 ooptions.CustomDeviceName = "MyDeviceName";
 SDKClient.Instance.InitWithOptions(options);
 
@@ -166,24 +161,16 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
 
 ### 设置登录设备的平台
 
-即时通讯 IM 自 1.2.0 版本开始支持自定义设置登录设备的平台，方便用户精细化控制同一平台的登录设备数量及平台间互踢等行为。
+即时通讯 IM 支持自定义设置登录设备的平台，方便用户精细化控制同一平台的登录设备数量及平台间互踢等行为。
 
-你可以按照以下步骤设置登录设备所属的平台：
-
-1. 在环信控制台的**功能配置** > **功能配置总览**页面，点击**基础功能**页签，然后点击**多端多设备在线**对应的**设置**。在弹出的对话框中点击 **新增自定义平台**，在**添加自定义平台**对话框中设置**设备平台**和**设备数量**。
-
-**设备平台**的取值范围为 [1,100]，**设备数量**的取值范围为 [0,4]。
-
-![img](/images/common/multidevice_device_platform.png)
-
-2. 初始化 SDK 时，调用 `Options#CustomOSType` 方法自定义设置登录设备的平台。确保该方法中的 `platform` 参数的值与环信控制台的**添加自定义平台**对话框中设置的**设备平台**的值相同。
+初始化 SDK 时，利用 `Options#CustomOSType` 自定义设置登录设备的平台。
 
 :::tip
 登录成功后才会将该设置发送到服务器。
 :::
 
 ```csharp
-Options options = new Options("YouAppKey");
+Options options = Options.InitOptionsWithAppId("YourAppId");
 ooptions.CustomOSType = 1;
 SDKClient.Instance.InitWithOptions(options);
 ```

@@ -1,12 +1,12 @@
 # 发送和接收消息
 
-环信即时通讯 IM Android SDK 通过 `EMChatManager` 类和 `EMMessage` 类实现文本、图片、音频、视频和文件等类型的消息的发送和接收。
+环信即时通讯 IM Android SDK 通过 `ChatManager` 类和 `ChatMessage` 类实现文本、图片、音频、视频和文件等类型的消息的发送和接收。
 
 - 对于单聊，环信即时通信 IM 默认支持陌生人之间发送消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要[开启好友关系检查](/product/enable_and_configure_IM.html#好友关系检查)。
 
 - 对于群组和聊天室，用户每次只能向所属的单个群组和聊天室发送消息。
 
-单聊、群组聊天和聊天室的消息发送控制，详见[消息发送控制](/document/android/product_message_overview.html#消息发送控制)文档。
+单聊、群组聊天和聊天室的消息发送控制，详见[消息发送控制](/product/product_message_overview.html#消息发送控制)文档。
 
 ## 前提条件
 
@@ -17,7 +17,7 @@
 
 ## 发送和接收文本消息
 
-1. 首先，利用 `EMMessage` 类构造一条消息。
+1. 首先，利用 `ChatMessage` 类构造一条消息。
 
 默认情况下，SDK 对单个用户发送消息的频率未做限制。如果你联系了环信商务设置了该限制，一旦在单聊、群聊或聊天室中单个用户的消息发送频率超过设定的上限，SDK 会上报错误，即错误码 509 `MESSAGE_CURRENT_LIMITING`。
 
@@ -26,18 +26,18 @@
 ```java
 // 创建一条文本消息，`content` 为消息文字内容。
 // `conversationId` 为消息接收方，单聊时为对端用户 ID、群聊时为群组 ID，聊天室时为聊天室 ID。
-EMMessage message = EMMessage.createTextSendMessage(content, conversationId);
-// 会话类型：单聊为 EMMessage.ChatType.Chat，群聊为 EMMessage.ChatType.GroupChat, 聊天室为EMMessage.ChatType.ChatRoom，默认为单聊。
-message.setChatType(EMMessage.ChatType.Chat);
+ChatMessage message = ChatMessage.createTextSendMessage(content, conversationId);
+// 会话类型：单聊为 ChatMessage.ChatType.Chat，群聊为 ChatMessage.ChatType.GroupChat, 聊天室为EMMessage.ChatType.ChatRoom，默认为单聊。
+message.setChatType(ChatMessage.ChatType.Chat);
 // 发送消息。
-EMClient.getInstance().chatManager().sendMessage(message);
+ChatClient.getInstance().chatManager().sendMessage(message);
 ```
 
-2. 通过 `EMChatManager` 将该消息发出。发送消息时可以设置 `EMCallBack` 的实例，获取消息发送状态。
+2. 通过 `ChatManager` 将该消息发出。发送消息时可以设置 `CallBack` 的实例，获取消息发送状态。
 
 ```java
-// 发送消息时可以设置 `EMCallBack` 的实例，获得消息发送的状态。可以在该回调中更新消息的显示状态。例如消息发送失败后的提示等等。
-message.setMessageStatusCallback(new EMCallBack() {
+// 发送消息时可以设置 `CallBack` 的实例，获得消息发送的状态。可以在该回调中更新消息的显示状态。例如消息发送失败后的提示等等。
+message.setMessageStatusCallback(new CallBack() {
      @Override
      public void onSuccess() {
          // 发送消息成功
@@ -53,28 +53,28 @@ message.setMessageStatusCallback(new EMCallBack() {
 
  });
  // 发送消息。
-EMClient.getInstance().chatManager().sendMessage(message);
+ChatClient.getInstance().chatManager().sendMessage(message);
 ```
 
-3. 你可以用注册监听 `EMMessageListener` 接收消息。该 `EMMessageListener` 可以多次添加，请记得在不需要的时候移除 `listener`，如在 `activity` 的 `onDestroy()` 时。
+3. 你可以用注册监听 `MessageListener` 接收消息。该 `MessageListener` 可以多次添加，请记得在不需要的时候移除 `listener`，如在 `activity` 的 `onDestroy()` 时。
 
-在新消息到来时，你会收到 `onMessageReceived` 的回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。若在初始化时打开了 `EMOptions#setIncludeSendMessageInMessageListener` 开关，则该回调中会返回发送成功的消息。
+在新消息到来时，你会收到 `onMessageReceived` 的回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。若在初始化时打开了 `ChatOptions#setIncludeSendMessageInMessageListener` 开关，则该回调中会返回发送成功的消息。
 
-对于聊天室消息，你可以通过消息的 `EMMessage#isBroadcast` 属性判断该消息是否为[通过 REST API 发送的聊天室全局广播消息](/document/server-side/message_chatroom.html#发送聊天室全局广播消息)。
+对于聊天室消息，你可以通过消息的 `ChatMessage#isBroadcast` 属性判断该消息是否为[通过 REST API 发送的聊天室全局广播消息](/document/server-side/message_broadcast.html#发送聊天室全局广播消息)。
 
 ```java
-EMMessageListener msgListener = new EMMessageListener() {
+MessageListener msgListener = new MessageListener() {
 
    // 收到消息，遍历消息队列，解析和显示。
    @Override
-   public void onMessageReceived(List<EMMessage> messages) {
+   public void onMessageReceived(List<ChatMessage> messages) {
 
    }
 };
 // 注册消息监听
-EMClient.getInstance().chatManager().addMessageListener(msgListener);
+ChatClient.getInstance().chatManager().addMessageListener(msgListener);
 // 解注册消息监听
-EMClient.getInstance().chatManager().removeMessageListener(msgListener);
+ChatClient.getInstance().chatManager().removeMessageListener(msgListener);
 ```
 
 ## 发送和接收附件类型的消息
@@ -96,11 +96,11 @@ EMClient.getInstance().chatManager().removeMessageListener(msgListener);
 
 ```java
 // `voiceUri` 为语音文件的本地资源标志符，`duration` 为语音时长（单位为秒）。
-EMMessage message = EMMessage.createVoiceSendMessage(voiceUri, duration, toChatUsername);
-// 设置会话类型，即`EMMessage` 类的 `ChatType` 属性，包含 `Chat`、`GroupChat` 和 `ChatRoom`，表示单聊、群聊或聊天室，默认为单聊。
+ChatMessage message = ChatMessage.createVoiceSendMessage(voiceUri, duration, toChatUsername);
+// 设置会话类型，即`ChatMessage` 类的 `ChatType` 属性，包含 `Chat`、`GroupChat` 和 `ChatRoom`，表示单聊、群聊或聊天室，默认为单聊。
 message.setChatType(ChatType.GroupChat);
 // 发送消息
-EMClient.getInstance().chatManager().sendMessage(message);
+ChatClient.getInstance().chatManager().sendMessage(message);
 ```
 
 3. 接收方收到语音消息时，自动下载语音文件。
@@ -108,7 +108,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 4. 接收方收到 [onMessageReceived 回调](#发送和接收文本消息)，调用 `getRemoteUrl` 或 `getLocalUri` 方法获取语音文件的服务器地址或本地路径，从而获取语音文件。
 
 ```java
-EMVoiceMessageBody voiceBody = (EMVoiceMessageBody) msg.getBody();
+VoiceMessageBody voiceBody = (VoiceMessageBody) msg.getBody();
 // 获取语音文件在服务器的地址。
 String voiceRemoteUrl = voiceBody.getRemoteUrl();
 // 本地语音文件的资源路径。
@@ -123,27 +123,27 @@ Uri voiceLocalUri = voiceBody.getLocalUri();
    
 ```java
 // `imageUri` 为图片本地资源标志符，`false` 为不发送原图（默认超过 100 KB 的图片会压缩后发给对方），若需要发送原图传 `true`，即设置 `original` 参数为 `true`。
-EMMessage message = EMMessage.createImageSendMessage(imageUri, false, toChatUsername);
+ChatMessage message = ChatMessage.createImageSendMessage(imageUri, false, toChatUsername);
 // 会话类型，包含 `Chat`、`GroupChat` 和 `ChatRoom`，表示单聊、群聊或聊天室，默认为单聊。
 if (chatType == CHATTYPE_GROUP)
     message.setChatType(ChatType.GroupChat);
 // 发送消息
-EMClient.getInstance().chatManager().sendMessage(message);
+ChatClient.getInstance().chatManager().sendMessage(message);
 ```
 
 2. 接收方收到图片消息，自动下载图片缩略图。
 
-- 默认情况下，SDK 自动下载缩略图，即 `EMClient.getInstance().getOptions().setAutoDownloadThumbnail(true)`。
-- 若设置为手动下载缩略图，即 `EMClient.getInstance().getOptions().setAutoDownloadThumbnail(false)`，需调用 `EMClient.getInstance().chatManager().downloadThumbnail(message)` 下载。
+- 默认情况下，SDK 自动下载缩略图，即 `ChatClient.getInstance().getOptions().setAutoDownloadThumbnail(true)`。
+- 若设置为手动下载缩略图，即 `ChatClient.getInstance().getOptions().setAutoDownloadThumbnail(false)`，需调用 `ChatClient.getInstance().chatManager().downloadThumbnail(message)` 下载。
 
 3. 接收方收到 [onMessageReceived 回调](#发送和接收文本消息)，调用 `downloadAttachment` 下载原图。
 
 ```java
 @Override
-public void onMessageReceived(List<EMMessage> messages) {
-    for(EMMessage message : messages) {
+public void onMessageReceived(List<ChatMessage> messages) {
+    for(ChatMessage message : messages) {
         if (message.getType() == Type.IMAGE) {
-            message.setMessageStatusCallback(new EMCallBack() {
+            message.setMessageStatusCallback(new CallBack() {
                @Override
                public void onSuccess() {
                    // 附件下载成功
@@ -160,7 +160,7 @@ public void onMessageReceived(List<EMMessage> messages) {
 
            });
            // 下载附件
-           EMClient.getInstance().chatManager().downloadAttachment(message);
+           ChatClient.getInstance().chatManager().downloadAttachment(message);
         }
     }
 }
@@ -169,7 +169,7 @@ public void onMessageReceived(List<EMMessage> messages) {
 4. 获取图片消息的缩略图和附件。
 
 ```java
-EMImageMessageBody imgBody = (EMImageMessageBody) message.getBody();
+ImageMessageBody imgBody = (ImageMessageBody) message.getBody();
 // 从服务器端获取图片文件。
 String imgRemoteUrl = imgBody.getRemoteUrl();
 // 从服务器端获取图片缩略图。
@@ -191,77 +191,23 @@ Uri thumbnailLocalUri = imgBody.thumbnailLocalUri();
 ```java
 // 在应用层获取视频首帧
 String thumbPath = getThumbPath(videoUri);
-EMMessage message = EMMessage.createVideoSendMessage(videoUri, thumbPath, videoLength, toChatUsername);
+ChatMessage message = ChatMessage.createVideoSendMessage(videoUri, thumbPath, videoLength, toChatUsername);
 // 会话类型，包含 `Chat`、`GroupChat` 和 `ChatRoom`，表示单聊、群聊或聊天室，默认为单聊。
 if (chatType == CHATTYPE_GROUP)
     message.setChatType(ChatType.GroupChat);
 // 发送消息
-EMClient.getInstance().chatManager().sendMessage(message);
+ChatClient.getInstance().chatManager().sendMessage(message);
 ```
 
 3. 接收方收到视频消息时，自动下载视频缩略图。你可以设置自动或手动下载视频缩略图，该设置与图片缩略图相同，详见[设置图片缩略图自动下载](#发送和接收图片消息)。
 
-4. 接收方收到 [onMessageReceived 回调](#发送和接收文本消息)，可以调用 `EMClient.getInstance().chatManager().downloadAttachment(message)` 方法下载视频原文件。
+4. 接收方收到 [onMessageReceived 回调](#发送和接收文本消息)，可以调用 `ChatClient.getInstance().chatManager().downloadAttachment(message)` 方法下载视频原文件。
 
 ```java
 /**
  * 下载视频文件。
  */
-private void downloadVideo(final EMMessage message) {
-    message.setMessageStatusCallback(new EMCallBack() {
-        @Override
-        public void onSuccess() {
-        }
-
-        @Override
-        public void onProgress(final int progress,String status) {
-        }
-
-        @Override
-        public void onError(final int error, String msg) {
-        }
-    });
-    // 下载附件
-    EMClient.getInstance().chatManager().downloadAttachment(message);
-}
-```
-
-5. 获取视频缩略图和视频原文件。
-
-```java
-// 从服务器端获取视频文件。
-String imgRemoteUrl = ((EMVideoMessageBody) body).getRemoteUrl();
-// 从服务器获取视频缩略图文件。
-String thumbnailUrl = ((EMVideoMessageBody) body).getThumbnailUrl();
-// 从本地获取视频文件文件。
-Uri localUri = ((EMVideoMessageBody) body).getLocalUri();
-// 从本地获取视频缩略图文件。
-Uri localThumbUri = ((EMVideoMessageBody) body).thumbnailLocalUri();
-```
-
-### 发送和接收文件消息
-
-发送和接收文件消息的流程如下：
-
-1. 发送方调用 `createFileSendMessage` 方法传入文件的本地资源标志符和接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）创建文件消息，然后调用 `sendMessage` 方法发送文件消息。SDK 将文件上传至环信服务器。
-
-```java
-// `fileLocalUri` 为本地资源标志符。
-EMMessage message = EMMessage.createFileSendMessage(fileLocalUri, toChatUsername);
-// 如果是群聊，设置 `ChatType` 为 `GroupChat`，该参数默认是单聊（`Chat`）。
-if (chatType == CHATTYPE_GROUP)    
-    message.setChatType(ChatType.GroupChat);
-// 发送消息
-EMClient.getInstance().chatManager().sendMessage(message);
-```
-
-2. 接收方收到 [onMessageReceived 回调](#发送和接收文本消息)，调用 `downloadAttachment` 方法下载文件。
-
-```java
-/**
- * 下载文件。
- */
-private void downloadFile(final EMMessage message) {
+private void downloadVideo(final ChatMessage message) {
     message.setMessageStatusCallback(new CallBack() {
         @Override
         public void onSuccess() {
@@ -276,14 +222,68 @@ private void downloadFile(final EMMessage message) {
         }
     });
     // 下载附件
-    EMClient.getInstance().chatManager().downloadAttachment(message);
+    ChatClient.getInstance().chatManager().downloadAttachment(message);
+}
+```
+
+5. 获取视频缩略图和视频原文件。
+
+```java
+// 从服务器端获取视频文件。
+String imgRemoteUrl = ((VideoMessageBody) body).getRemoteUrl();
+// 从服务器获取视频缩略图文件。
+String thumbnailUrl = ((VideoMessageBody) body).getThumbnailUrl();
+// 从本地获取视频文件文件。
+Uri localUri = ((VideoMessageBody) body).getLocalUri();
+// 从本地获取视频缩略图文件。
+Uri localThumbUri = ((VideoMessageBody) body).thumbnailLocalUri();
+```
+
+### 发送和接收文件消息
+
+发送和接收文件消息的流程如下：
+
+1. 发送方调用 `createFileSendMessage` 方法传入文件的本地资源标志符和接收方的用户 ID（群聊或聊天室分别为群组 ID 或聊天室 ID）创建文件消息，然后调用 `sendMessage` 方法发送文件消息。SDK 将文件上传至环信服务器。
+
+```java
+// `fileLocalUri` 为本地资源标志符。
+ChatMessage message = ChatMessage.createFileSendMessage(fileLocalUri, toChatUsername);
+// 如果是群聊，设置 `ChatType` 为 `GroupChat`，该参数默认是单聊（`Chat`）。
+if (chatType == CHATTYPE_GROUP)    
+    message.setChatType(ChatType.GroupChat);
+// 发送消息
+ChatClient.getInstance().chatManager().sendMessage(message);
+```
+
+2. 接收方收到 [onMessageReceived 回调](#发送和接收文本消息)，调用 `downloadAttachment` 方法下载文件。
+
+```java
+/**
+ * 下载文件。
+ */
+private void downloadFile(final ChatMessage message) {
+    message.setMessageStatusCallback(new CallBack() {
+        @Override
+        public void onSuccess() {
+        }
+
+        @Override
+        public void onProgress(final int progress,String status) {
+        }
+
+        @Override
+        public void onError(final int error, String msg) {
+        }
+    });
+    // 下载附件
+    ChatClient.getInstance().chatManager().downloadAttachment(message);
 }
 ```
 
 3. 调用以下方法从服务器或本地获取文件附件：
 
 ```java
-EMNormalFileMessageBody fileMessageBody = (EMNormalFileMessageBody) message.getBody();
+NormalFileMessageBody fileMessageBody = (NormalFileMessageBody) message.getBody();
 // 从服务器获取文件。
 String fileRemoteUrl = fileMessageBody.getRemoteUrl();
 // 从本地获取文件。
@@ -298,12 +298,12 @@ Uri fileLocalUri = fileMessageBody.getLocalUri();
 
 ```java
 // `latitude` 为纬度，`longitude` 为经度，`locationAddress` 为具体位置内容。
-EMMessage message = EMMessage.createLocationSendMessage(latitude, longitude, locationAddress, toChatUsername);
+ChatMessage message = ChatMessage.createLocationSendMessage(latitude, longitude, locationAddress, toChatUsername);
 // 如果是群聊，设置 `ChatType` 为 `GroupChat`，该参数默认是单聊（`Chat`）。
 if (chatType == CHATTYPE_GROUP)    
     message.setChatType(ChatType.GroupChat);
 // 发送消息
-EMClient.getInstance().chatManager().sendMessage(message);
+ChatClient.getInstance().chatManager().sendMessage(message);
 ```
 
 2. 接收位置消息与文本消息一致，详见[接收文本消息](#发送和接收文本消息)。
@@ -324,35 +324,35 @@ EMClient.getInstance().chatManager().sendMessage(message);
 1. 创建和发送透传消息。
 
 ```java
-EMMessage cmdMsg = EMMessage.createSendMessage(EMMessage.Type.CMD);
+ChatMessage cmdMsg = ChatMessage.createSendMessage(ChatMessage.Type.CMD);
 // 支持单聊、群聊和聊天室，默认为单聊。
 // 若为群聊，添加下行代码。
-cmdMsg.setChatType(EMMessage.ChatType.GroupChat);
+cmdMsg.setChatType(ChatMessage.ChatType.GroupChat);
 // 若为聊天室，添加下行代码。
-// cmdMsg.setChatType(EMMessage.ChatType.ChatRoom);
+// cmdMsg.setChatType(ChatMessage.ChatType.ChatRoom);
 
 String action="action1";
 // `action` 可以自定义。
-EMCmdMessageBody cmdBody = new EMCmdMessageBody(action);
+CmdMessageBody cmdBody = new CmdMessageBody(action);
 String toUsername = "test1";
 // 发送给特定用户。
 cmdMsg.setTo(toUsername);
 cmdMsg.addBody(cmdBody);
 // 发送消息
-EMClient.getInstance().chatManager().sendMessage(cmdMsg);
+ChatClient.getInstance().chatManager().sendMessage(cmdMsg);
 ```
 
 2. 接收方通过 `onMessageReceived` 和 `onCmdMessageReceived` 回调接收透传消息，方便用户进行不同的处理。
 
 ```java
-EMMessageListener msgListener = new EMMessageListener(){
+MessageListener msgListener = new MessageListener(){
   // 收到消息。
   @Override
-  public void onMessageReceived(List<EMMessage> messages) {
+  public void onMessageReceived(List<ChatMessage> messages) {
   }
   // 收到透传消息。
   @Override
-  public void onCmdMessageReceived(List<EMMessage> messages) {
+  public void onCmdMessageReceived(List<ChatMessage> messages) {
   }
 }
 ```
@@ -364,10 +364,10 @@ EMMessageListener msgListener = new EMMessageListener(){
 1. 创建和发送自定义类型消息。
 
 ```java
-EMMessage customMessage = EMMessage.createSendMessage(EMMessage.Type.CUSTOM);
+ChatMessage customMessage = ChatMessage.createSendMessage(ChatMessage.Type.CUSTOM);
 // `event` 为需要传递的自定义消息事件，比如礼物消息，可以设置：
 String event = "gift";
-EMCustomMessageBody customBody = new EMCustomMessageBody(event);
+CustomMessageBody customBody = new CustomMessageBody(event);
 // `params` 类型为 `Map<String, String>`。
 customBody.setParams(params);
 customMessage.addBody(customBody);
@@ -376,7 +376,7 @@ customMessage.setTo(to);
 // 如果是群聊，设置 `ChatType` 为 `GroupChat`，该参数默认是单聊（`Chat`）。
 customMessage.setChatType(chatType);
 // 发送消息
-EMClient.getInstance().chatManager().sendMessage(customMessage);
+ChatClient.getInstance().chatManager().sendMessage(customMessage);
 ```
 
 2. 接收自定义消息与其他类型消息一致，详见[接收文本消息](#发送和接收文本消息)。
@@ -409,7 +409,7 @@ EMClient.getInstance().chatManager().sendMessage(customMessage);
 
 :::tip
 1. 合并转发支持嵌套，最多支持 10 层嵌套，每层最多 300 条消息。
-2. 不论 `EMOptions#setAutoTransferMessageAttachments` 设置为 `false` 或 `true`，SDK 都会将合并消息附件上传到环信服务器。
+2. 不论 `ChatOptions#setAutoTransferMessageAttachments` 设置为 `false` 或 `true`，SDK 都会将合并消息附件上传到环信服务器。
 3. 合并消息不支持搜索。
 :::
 
@@ -419,8 +419,8 @@ EMClient.getInstance().chatManager().sendMessage(customMessage);
 String title = "A和B的聊天记录";
 String summary = "A:这是A的消息内容\nB:这是B的消息内容";
 String compatibleText = "您当前的版本不支持该消息，请升级到最新版本";
-EMMessage message = EMMessage.createCombinedSendMessage(title, summary, compatibleText, msgIdList, receiverId);
-message.setMessageStatusCallback(new EMCallBack() {
+ChatMessage message = ChatMessage.createCombinedSendMessage(title, summary, compatibleText, msgIdList, receiverId);
+message.setMessageStatusCallback(new CallBack() {
     @Override
     public void onSuccess() {
         // 消息发送成功的处理逻辑
@@ -431,7 +431,7 @@ message.setMessageStatusCallback(new EMCallBack() {
         // 消息发送失败的处理逻辑
     }
 });
-EMClient.getInstance().chatManager().sendMessage(message);
+ChatClient.getInstance().chatManager().sendMessage(message);
 ```
 
 #### 接收和解析合并消息
@@ -448,9 +448,9 @@ EMClient.getInstance().chatManager().sendMessage(message);
 - 若附件不存在，该方法首先下载附件，然后解析附件并返回原始消息列表。
 
 ```java
-EMClient.getInstance().chatManager().downloadAndParseCombineMessage(combineMessage, new EMValueCallBack<List<EMMessage>>() {
+ChatClient.getInstance().chatManager().downloadAndParseCombineMessage(combineMessage, new ValueCallBack<List<ChatMessage>>() {
     @Override
-    public void onSuccess(List<EMMessage> value) {
+    public void onSuccess(List<ChatMessage> value) {
         // 处理并展示消息列表
     }
 
@@ -468,10 +468,9 @@ EMClient.getInstance().chatManager().downloadAndParseCombineMessage(combineMessa
 该功能适用于文本消息、图片消息和音视频消息等全类型消息，最多可向群组或聊天室的 20 个成员发送定向消息。
 
 :::tip
-1. 仅 SDK 4.0.3 及以上版本支持。
-2. 定向消息不写入服务端会话列表，不计入服务端会话的未读消息数。
-3. 群组定向消息的漫游功能默认关闭，使用前需联系商务开通。
-4. 聊天室定向消息的漫游功能默认关闭，使用前需联系商务开通聊天室消息漫游和定向消息漫游功能。
+1. 定向消息不写入服务端会话列表，不计入服务端会话的未读消息数。
+2. 群组定向消息的漫游功能默认关闭，使用前需联系商务开通。
+3. 聊天室定向消息的漫游功能默认关闭，使用前需联系商务开通聊天室消息漫游和定向消息漫游功能。
 :::
 
 发送定向消息的流程与发送普通消息相似，唯一区别是需要设置消息的接收方，具体操作如下：
@@ -484,15 +483,15 @@ EMClient.getInstance().chatManager().downloadAndParseCombineMessage(combineMessa
 
 ```java
 // 创建一条文本消息。
-EMMessage message = EMMessage.createTextSendMessage(content, groupId);
+ChatMessage message = ChatMessage.createTextSendMessage(content, groupId);
         // 会话类型：群组和聊天室聊天，分别为 `GroupChat` 和 `ChatRoom`。
-        message.setChatType(EMMessage.ChatType.GroupChat);
+        message.setChatType(ChatMessage.ChatType.GroupChat);
         List<String> receives=new ArrayList<>();
         receives.add("张三");
         receives.add("李四");
         // 设置消息接收方列表。最多可传 20 个接收方的用户 ID。若传入 `null`，则消息发送给群组或聊天室的所有成员。
         message.setReceiverList(receives);
-EMClient.getInstance().chatManager().sendMessage(message);
+ChatClient.getInstance().chatManager().sendMessage(message);
 ```
 
 接收群定向消息与接收普通消息的操作相同，详见[接收文本消息](#发送和接收文本消息)。
@@ -504,12 +503,12 @@ EMClient.getInstance().chatManager().sendMessage(message);
 当目前消息类型不满足用户需求时，可以在扩展部分保存更多信息，例如消息中需要携带被回复的消息内容或者是图文消息等场景。
 
 ```java
-EMMessage message = EMMessage.createTxtSendMessage(content, toChatUsername);
+ChatMessage message = ChatMessage.createTxtSendMessage(content, toChatUsername);
 // 增加自定义属性。
 message.setAttribute("attribute1", "value");
 message.setAttribute("attribute2", true);
 // 接收消息的时候获取扩展属性。
-EMClient.getInstance().chatManager().sendMessage(message);
+ChatClient.getInstance().chatManager().sendMessage(message);
 // 获取自定义属性，第 2 个参数为没有此定义的属性时返回的默认值。
 message.getStringAttribute("attribute1",null);
 message.getBooleanAttribute("attribute2", false)
@@ -524,7 +523,7 @@ message.getBooleanAttribute("attribute2", false)
 对于聊天室消息，可设置消息优先级。示例代码如下：
 
 ```java
-   EMMessage message = EMMessage.createTextSendMessage(content, conversationId);
+   ChatMessage message = ChatMessage.createTextSendMessage(content, conversationId);
    message.setChatType(ChatType.ChatRoom);
    // 聊天室消息的优先级。如果不设置，默认值为 `PriorityNormal`，即“普通”优先级。
    message.setPriority(EMChatRoomMessagePriority.PriorityHigh);
@@ -536,8 +535,8 @@ message.getBooleanAttribute("attribute2", false)
 发送附件类型消息时，可以在 `onProgress` 回调中获取附件上传的进度，以百分比表示，示例代码如下：
 
 ```java
-// 发送消息时可以设置 `EMCallBack` 的实例，获得消息发送的状态。可以在该回调中更新消息的显示状态。例如，消息发送失败后的提示等等。
- message.setMessageStatusCallback(new EMCallBack() {
+// 发送消息时可以设置 `CallBack` 的实例，获得消息发送的状态。可以在该回调中更新消息的显示状态。例如，消息发送失败后的提示等等。
+ message.setMessageStatusCallback(new CallBack() {
      @Override
      public void onSuccess() {
          // 发送消息成功
@@ -556,7 +555,7 @@ message.getBooleanAttribute("attribute2", false)
 
  });
  // 发送消息
- EMClient.getInstance().chatManager().sendMessage(message);
+ ChatClient.getInstance().chatManager().sendMessage(message);
 ```
 
 ### 发送消息前的内容审核
@@ -567,7 +566,7 @@ message.getBooleanAttribute("attribute2", false)
 
 - 设置发送方收到内容审核替换后的内容
 
-若初始化时打开了 `EMOptions#setUseReplacedMessageContents` 开关，发送文本消息时如果被内容审核（Moderation）进行了内容替换，发送方会收到替换后的内容。若该开关为关闭状态，则发送方不会收到替换后的内容。
+若初始化时打开了 `ChatOptions#setUseReplacedMessageContents` 开关，发送文本消息时如果被内容审核（Moderation）进行了内容替换，发送方会收到替换后的内容。若该开关为关闭状态，则发送方不会收到替换后的内容。
 
 
 

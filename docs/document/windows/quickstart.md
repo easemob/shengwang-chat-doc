@@ -21,11 +21,11 @@
 
 开始前，请确保你的开发环境满足以下条件：
 
-- Windows SDK 0.1.0 或以上；
+- Windows SDK 1.0.5 或以上；
 - Visual Studio IDE 2019 或以上；
 - .Net Framework 4.5.2 或以上；
 - 目前 Windows SDK 仅支持 64 位运行模式；
-- 有效的环信即时通讯 IM 开发者账号和 App Key，见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
+- 有效的环信即时通讯 IM 开发者账号和 App Id，见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
 
 ## 项目设置
 
@@ -76,7 +76,7 @@ using AgoraChat.MessageBody;
 在 `InitSDK` 函数中添加以下代码完成 SDK 初始化：
 
 ```csharp
-var options = new Options("appkey"); //此处填入你的appkey
+var options = Options.InitOptionsWithAppId("YourAppId"); //此处填入你的appId
 options.UsingHttpsOnly = true;
 SDKClient.Instance.InitWithOptions(options);
 ```

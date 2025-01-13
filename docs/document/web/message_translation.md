@@ -2,7 +2,8 @@
 
 <Toc />
 
-为方便用户在聊天过程中对文字消息进行翻译，环信即时通讯 IM SDK 集成了 Microsoft Azure Translation API，支持在发送或接收消息时对文本消息进行按需翻译或自动翻译：
+为方便用户在聊天过程中对文字消息进行翻译，声网即时通讯 IM SDK 集成了 Microsoft Azure Translation API，支持在发送或接收消息时对文本消息进行按需翻译或自动翻译：
+
 - 按需翻译：接收方在收到文本消息后，将消息内容翻译为目标语言。
 - 自动翻译：发送方发送消息时，SDK 根据发送方设置的目标语言自动翻译文本内容，然后将消息原文和译文一起发送给接收方。
 
@@ -10,9 +11,9 @@
 
 开始前，请确保满足以下条件：
 
-1. 完成 4.0.4 或以上版本 SDK 初始化，详见 [快速开始](quickstart.html)。
-2. 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
-3. 已在 [环信即时通讯云控制台](https://console.easemob.com/user/login) 开通开通翻译功能。
+1. 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
+2. 了解声网即时通讯 IM API 的 [使用限制](/product/limitation.html)。
+3. 已在 [声网即时通讯云控制台](https://console.easemob.com/user/login) 开通开通翻译功能。
 4. 该功能由 Microsoft Azure Translation API 提供，因此开始前请确保你了解该功能支持的目标语言。详见 [翻译语言支持](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support)。
 
 ## 技术原理
@@ -30,7 +31,7 @@ SDK 支持你通过调用 API 在项目中实现如下功能：
 无论是按需翻译还是自动翻译，都需先调用 `getSupportLanguages` 获取支持的翻译语言。示例代码如下：
 
 ```javascript
-conn.getSupportedLanguages().then(res => console.log(res))
+chatClient.getSupportedLanguages().then((res) => console.log(res));
 ```
 
 ### 按需翻译
@@ -38,7 +39,7 @@ conn.getSupportedLanguages().then(res => console.log(res))
 接收方调用 `translateMessage` 将接收到的消息翻译成目标语言。示例代码如下：
 
 ```javascript
-conn.translateMessage({text: 'hello', languages: [zh-Hans]})
+chatClient.translateMessage({ text: "hello", languages: ["zh-Hans"] });
 ```
 
 ### 自动翻译
@@ -49,22 +50,22 @@ conn.translateMessage({text: 'hello', languages: [zh-Hans]})
 
 ```javascript
 // 发送消息。
-let option = {
-    chatType: 'singleChat',
-    type: 'txt',
-    to: 'userId',
-    msg: 'hello',
-    msgConfig:{ languages: ['zh-Hans'] } // 设置目标语言。
-}
-let msg = WebIM.message.create(option);
-conn.send(msg)
+const option = {
+  chatType: "singleChat",
+  type: "txt",
+  to: "userId",
+  msg: "hello",
+  msgConfig: { languages: ["zh-Hans"] }, // 设置目标语言。
+};
+const msg = ChatSDK.message.create(option);
+chatClient.send(msg);
 
 // 接收消息。
-conn.addEventHandler('MESSAGE', {
-    onTextMessage: (message) => {
-        console.log('message', message.translations)
-    }
-})
+chatClient.addEventHandler("handlerId", {
+  onTextMessage: (message) => {
+    console.log("message", message.translations);
+  },
+});
 ```
 
 ## 参考

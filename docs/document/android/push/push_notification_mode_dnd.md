@@ -58,11 +58,11 @@
 
 ### 从服务器获取所有会话的推送通知方式设置
 
-你可以调用 `EMPushManager#syncSilentModeConversationsFromServer` 方法从服务器同步所有会话的推送通知方式设置。同步后成功后的结果会存储到本地数据库，然后你可以通过`EMConversation#pushRemindType` 查询当前会话的推送通知方式。
+你可以调用 `PushManager#syncSilentModeConversationsFromServer` 方法从服务器同步所有会话的推送通知方式设置。同步后成功后的结果会存储到本地数据库，然后你可以通过`Conversation#pushRemindType` 查询当前会话的推送通知方式。
 
 ```java
 //同步会话的推送通知方式
-EMClient.getInstance().pushManager().syncSilentModeConversationsFromServer(new EMCallBack() {
+ChatClient.getInstance().pushManager().syncSilentModeConversationsFromServer(new CallBack() {
     @Override
     public void onSuccess() {
         EMLog.i(TAG, "syncNoDisturb onSuccess");
@@ -76,25 +76,25 @@ EMClient.getInstance().pushManager().syncSilentModeConversationsFromServer(new E
 
 //查询会话的推送通知方式
 String conversationId = "pu";
-EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
+Conversation conversation = ChatClient.getInstance().chatManager().getConversation(conversationId);
 if(conversation!=null) {
-    EMPushManager.EMPushRemindType emPushRemindType = conversation.pushRemindType();
+    PushManager.PushRemindType emPushRemindType = conversation.pushRemindType();
     EMLog.i(TAG, "conversationRemindType emPushRemindType:" + emPushRemindType);
 }
 ```
 
 ### 本地设置推送通知方式
 
-在本机上调用 `EMPushManager#setSilentModeForConversation` 设置会话的推送通知方式，在多设备事件 `EMMultiDeviceListener#onConversationEvent` 里会回调当前操作,此时参数 `event` 的值为 `EMMultiDeviceListener#CONVERSATION_MUTE_INFO_CHANGED`。
+在本机上调用 `PushManager#setSilentModeForConversation` 设置会话的推送通知方式，在多设备事件 `MultiDeviceListener#onConversationEvent` 里会回调当前操作,此时参数 `event` 的值为 `MultiDeviceListener#CONVERSATION_MUTE_INFO_CHANGED`。
 
 ```java
 //对会话设置推送通知方式
 String conversationId = "pu";
-EMSilentModeParam emSilentModeParam = new EMSilentModeParam(EMSilentModeParam.EMSilentModeParamType.REMIND_TYPE);
-emSilentModeParam.setRemindType(EMPushManager.EMPushRemindType.NONE);
-EMClient.getInstance().pushManager().setSilentModeForConversation(conversationId, EMConversation.EMConversationType.Chat, emSilentModeParam, new EMValueCallBack<EMSilentModeResult>() {
+SilentModeParam emSilentModeParam = new SilentModeParam(SilentModeParam.SilentModeParamType.REMIND_TYPE);
+emSilentModeParam.setRemindType(PushManager.PushRemindType.NONE);
+ChatClient.getInstance().pushManager().setSilentModeForConversation(conversationId, Conversation.ConversationType.Chat, emSilentModeParam, new ValueCallBack<SilentModeResult>() {
     @Override
-    public void onSuccess(EMSilentModeResult value) {
+    public void onSuccess(SilentModeResult value) {
         EMLog.i(TAG, "conversationRemindType onSuccess value:" + value);
     }
 
@@ -106,11 +106,11 @@ EMClient.getInstance().pushManager().setSilentModeForConversation(conversationId
 
 
 //多设备事件
-EMClient.getInstance().addMultiDeviceListener(new EMMultiDeviceListener() {
+ChatClient.getInstance().addMultiDeviceListener(new MultiDeviceListener() {
     ……
 
     @Override
-    public void onConversationEvent(int event, String conversationId, EMConversation.EMConversationType type) {
+    public void onConversationEvent(int event, String conversationId, Conversation.ConversationType type) {
         EMLog.i(TAG, "onConversationEvent event:" + event + " conversationId:" + conversationId + " type:" + type);
     }
 });
@@ -140,23 +140,23 @@ EMClient.getInstance().addMultiDeviceListener(new EMMultiDeviceListener() {
 
 ## 设置 app 的推送通知
 
-你可以调用 `setSilentModeForAll` 方法设置 app 级别的推送通知，并通过指定 `EMSilentModeParam` 字段设置推送通知方式和免打扰模式，如下代码示例所示：
+你可以调用 `setSilentModeForAll` 方法设置 app 级别的推送通知，并通过指定 `SilentModeParam` 字段设置推送通知方式和免打扰模式，如下代码示例所示：
 
 ```java
 //设置推送通知方式为 `MENTION_ONLY`。
-EMSilentModeParam param = new EMSilentModeParam(EMSilentModeParam.EMSilentModeParamType.REMIND_TYPE)
-                                .setRemindType(EMPushManager.EMPushRemindType.MENTION_ONLY);
+SilentModeParam param = new SilentModeParam(SilentModeParam.SilentModeParamType.REMIND_TYPE)
+                                .setRemindType(PushManager.PushRemindType.MENTION_ONLY);
 
 //设置离线推送免打扰时长为 15 分钟。
-EMSilentModeParam param = new EMSilentModeParam(EMSilentModeParam.EMSilentModeParamType.SILENT_MODE_DURATION)
+SilentModeParam param = new SilentModeParam(SilentModeParam.SilentModeParamType.SILENT_MODE_DURATION)
                                 .setSilentModeDuration(15);
 
 //设置离线推送的免打扰时间段为 8:30 到 15:00。
-EMSilentModeParam param = new EMSilentModeParam(EMSilentModeParam.EMSilentModeParamType.SILENT_MODE_INTERVAL)
-                                .setSilentModeInterval(new EMSilentModeTime(8, 30), new EMSilentModeTime(15, 0));
+SilentModeParam param = new SilentModeParam(SilentModeParam.SilentModeParamType.SILENT_MODE_INTERVAL)
+                                .setSilentModeInterval(new SilentModeTime(8, 30), new SilentModeTime(15, 0));
 
 //设置 app 的离线推送。
-EMClient.getInstance().pushManager().setSilentModeForAll(param, new EMValueCallBack<EMSilentModeResult>(){});
+ChatClient.getInstance().pushManager().setSilentModeForAll(param, new ValueCallBack<SilentModeResult>(){});
 ```
 
 ## 获取 app 的推送通知设置
@@ -164,22 +164,22 @@ EMClient.getInstance().pushManager().setSilentModeForAll(param, new EMValueCallB
 你可以调用 `getSilentModeForAll` 方法获取 app 级别的推送通知设置，如以下代码示例所示：
 
 ```java
-EMClient.getInstance().pushManager().getSilentModeForAll(new EMValueCallBack<EMSilentModeResult>(){
+ChatClient.getInstance().pushManager().getSilentModeForAll(new ValueCallBack<SilentModeResult>(){
     @Override
-    public void onSuccess(EMSilentModeResult result) {
+    public void onSuccess(SilentModeResult result) {
         //获取 app 的推送通知方式。
-        EMPushManager.EMPushRemindType remindType = result.getRemindType();
+        PushManager.PushRemindType remindType = result.getRemindType();
 
         //获取 app 的离线推送免打扰过期的 Unix 时间戳。
         long timestamp = result.getExpireTimestamp();
 
         //获取 app 的离线推送免打扰时间段的开始时间。
-        EMSilentModeTime startTime = result.getSilentModeStartTime();
+        SilentModeTime startTime = result.getSilentModeStartTime();
         startTime.getHour();//免打扰时间段的开始时间中的小时数。
         startTime.getMinute();//免打扰时间段的开始时间中的分钟数。
 
         //获取 app 的离线推送免打扰时间段的结束时间。
-        EMSilentModeTime endTime = result.getSilentModeEndTime();
+        SilentModeTime endTime = result.getSilentModeEndTime();
     }
 
     @Override
@@ -189,18 +189,18 @@ EMClient.getInstance().pushManager().getSilentModeForAll(new EMValueCallBack<EMS
 
 ## 设置单个会话的推送通知
 
-你可以调用 `setSilentModeForConversation` 方法设置指定会话的推送通知，并通过指定 `EMSilentModeParam` 字段设置推送通知方式和免打扰模式，如以下代码示例所示：
+你可以调用 `setSilentModeForConversation` 方法设置指定会话的推送通知，并通过指定 `SilentModeParam` 字段设置推送通知方式和免打扰模式，如以下代码示例所示：
 
 ```java
 // 设置推送通知方式为 `MENTION_ONLY`。
-EMSilentModeParam param = new EMSilentModeParam(EMSilentModeParam.EMSilentModeParamType.REMIND_TYPE)
-                                .setRemindType(EMPushManager.EMPushRemindType.MENTION_ONLY);
+SilentModeParam param = new SilentModeParam(SilentModeParam.SilentModeParamType.REMIND_TYPE)
+                                .setRemindType(PushManager.PushRemindType.MENTION_ONLY);
 
 // 设置离线推送免打扰时长为 15 分钟。
-EMSilentModeParam param = new EMSilentModeParam(EMSilentModeParam.EMSilentModeParamType.SILENT_MODE_DURATION)
+SilentModeParam param = new SilentModeParam(SilentModeParam.SilentModeParamType.SILENT_MODE_DURATION)
                                 .setSilentDuration(15);
 // 设置会话的离线推送免打扰模式。目前暂不支持设置会话免打扰时间段。
-EMClient.getInstance().pushManager().setSilentModeForConversation(conversationId, conversationType, param, new EMValueCallBack<EMSilentModeResult>(){});
+ChatClient.getInstance().pushManager().setSilentModeForConversation(conversationId, conversationType, param, new ValueCallBack<SilentModeResult>(){});
 ```
 
 ## 获取单个会话的推送通知设置
@@ -208,15 +208,15 @@ EMClient.getInstance().pushManager().setSilentModeForConversation(conversationId
 你可以调用 `getSilentModeForConversation` 方法获取指定会话的推送通知设置，如以下代码示例所示：
 
 ```java
-EMClient.getInstance().pushManager().getSilentModeForConversation(conversationId, conversationType, new EMValueCallBack<EMSilentModeResult>(){
+ChatClient.getInstance().pushManager().getSilentModeForConversation(conversationId, conversationType, new ValueCallBack<SilentModeResult>(){
     @Override
-    public void onSuccess(EMSilentModeResult result) {
+    public void onSuccess(SilentModeResult result) {
         // 获取会话是否设置了推送通知方式。
         boolean enable = result.isConversationRemindTypeEnabled();
         // 检查会话是否设置了推送通知方式。
         if(enable){
             // 获取会话的推送通知方式。
-            EMPushManager.EMPushRemindType remindType = result.getRemindType();
+            PushManager.PushRemindType remindType = result.getRemindType();
         }
 
         // 获取会话的离线推送免打扰过期 Unix 时间戳。
@@ -237,7 +237,7 @@ EMClient.getInstance().pushManager().getSilentModeForConversation(conversationId
 你可以调用 `getSilentModeForConversations` 方法获取多个会话的推送通知设置，如以下代码示例所示：
 
 ```java
-EMClient.getInstance().pushManager().getSilentModeForConversations(conversationList, new EMValueCallBack<Map<String, EMSilentModeResult>>(){
+ChatClient.getInstance().pushManager().getSilentModeForConversations(conversationList, new ValueCallBack<Map<String, SilentModeResult>>(){
     @Override
     public void onSuccess(Map<String, SilentModeResult> value) {}
 
@@ -251,5 +251,5 @@ EMClient.getInstance().pushManager().getSilentModeForConversations(conversationL
 你可以调用 `clearRemindTypeForConversation` 方法清除指定会话的推送通知方式的设置。清除后，默认情况下，此会话会继承 app 的设置。
 
 ```java
-EMClient.getInstance().pushManager().clearRemindTypeForConversation(conversationId, conversationType, new EMCallBack(){});
+ChatClient.getInstance().pushManager().clearRemindTypeForConversation(conversationId, conversationType, new CallBack(){});
 ```

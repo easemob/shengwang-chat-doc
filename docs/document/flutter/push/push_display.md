@@ -16,14 +16,14 @@
 
 ```dart
 try {
-  EMClient.getInstance.pushManager.updatePushNickname('nickname');
-} on EMError catch (e) {}
+  ChatClient.getInstance.pushManager.updatePushNickname('nickname');
+} on ChatError catch (e) {}
 ```
 
 ```dart
 try {
-  EMClient.getInstance.pushManager.updatePushDisplayStyle(DisplayStyle.Simple);
-} on EMError catch (e) {}
+  ChatClient.getInstance.pushManager.updatePushDisplayStyle(DisplayStyle.Simple);
+} on ChatError catch (e) {}
 ```
 
 若要在通知栏中显示消息内容，需要设置通知显示样式 `DisplayStyle`。该参数有如下两种设置：
@@ -49,26 +49,21 @@ try {
 
 ```dart
 try {
-  EMPushConfigs configs = await EMClient.getInstance.pushManager.fetchPushConfigsFromServer();
+  ChatPushConfigs configs = await ChatClient.getInstance.pushManager.fetchPushConfigsFromServer();
   // 获取推送显示昵称。
   String? pushNickname = configs.displayName;
   // 获取推送通知的显示样式。
   DisplayStyle pushDisplayStyle = configs.displayStyle;
-} on EMError catch (e) {}
+} on ChatError catch (e) {}
 ```
 
 ## 使用推送模板 
 
 推送模板主要用于服务器提供的默认配置不满足你的需求时，可使你设置全局范围的推送标题和推送内容。例如，服务器提供的默认设置为中文和英文的推送标题和内容，你若需要使用韩语或日语的推送标题和内容，则可以设置对应语言的推送模板。推送模板包括默认推送模板 `default` 和自定义推送模板。对于群组消息，你可以使用定向模板将离线通知只发送给特定用户，或向某些用户推送与其他用户不同的离线通知。
 
-你可以通过以下两种方式设置：
-
-- [调用 REST API 配置](/document/server-side/push.html#使用推送模板)。
-- 在[环信即时通讯云控制台](https://console.easemob.com/user/login)设置推送模板，详见[控制台文档](/product/enable_and_configure_IM.html#配置推送模板)。
-
 使用推送模板有以下优势：
 
-1. 自定义修改环信服务端默认推送内容。   
+1. 自定义修改声网服务端默认推送内容。   
 
 2. 接收方可以决定使用哪个模板。 
 
@@ -79,9 +74,59 @@ try {
    - 若发送方发消息时设置了推送模板，接收方即使设置了推送模板，收到推送通知后也按照发送方设置的推送模板显示。
 
 :::tip
-1. 设置推送模板为推送的高级功能，使用前需要在[环信即时通讯控制台](https://console.easemob.com/user/login)的**即时通讯 > 功能配置 > 功能配置总览**页面激活推送高级功能。如需关闭推送高级功能必须联系商务，因为该操作会删除所有相关配置。
-2. 推送模板相关的数据结构，详见[推送扩展字段](/document/server-side/push_extension.html)。
+- 设置推送模板为推送的高级功能，默认为开启状态。如需关闭推送高级功能必须联系商务，因为该操作会删除所有相关配置。
+- 推送模板相关的数据结构，详见[推送扩展字段](/document/server-side/push_extension.html)。
 :::
+
+### 配置推送模板
+
+你可以通过以下两种方式设置：
+
+1. [调用 RESTful API 配置](/document/server-side/push.html#使用推送模板)。
+
+2. 在[声网控制台](https://console.shengwang.cn/overview)设置推送模板。
+
+  展开控制台左上角下拉框，选择需要开通即时通讯 IM 服务的项目。点击左侧导航栏的**全部产品**。在下拉列表中找到**即时通讯 IM** 并点击。 在**即时通讯 IM** 页面，进入**功能配置**标签页。在**推送模板**页签下，点击**添加推送模板**，配置相关参数，添加推送模板。
+
+| 推送模板参数       | 类型 |参数描述|
+| :------------------- | :------------------- |
+| 模板名称     | String    | 推送模板名称，默认模板为 `default`。<br/> 该参数必须填写。模板名称最多可包含 64 个字符，支持以下字符集：<br/>- 26 个小写英文字母 a-z<br/>- 26 个大写英文字母 A-Z<br/>- 10 个数字 0-9|
+| 标题/内容     | Array    | 推送标题/内容。该参数必须填写。这两个参数的设置方式如下：<br/>- 输入固定的推送标题/内容，例如，标题为 “您好”，内容为“您有一条新消息”。<br/>- 内置参数填充：1. `{$dynamicFrom}`：按优先级从高到底的顺序填充好友备注、群昵称（仅限群消息）和推送昵称。2. `{$fromNickname}`：推送昵称。3. `{$msg}`：消息内容。<br/>-  自定义参数填充：模板输入数组索引占位符，格式为: {0} {1} {2} ... {n} <br/> 对于默认模板 `default`，参数的前两种设置方式在创建消息时无需传入该参数，第三种设置方式则需要通过扩展字段传入。使用自定义模板时，这两个参数无论通过哪种方式设置，创建消息时均需通过扩展字段传入。|
+
+推送模板参数在消息扩展 `ext.em_push_template` 中。推送模板参数的 JSON 结构如下：
+
+```json
+{
+    "ext":{
+        "em_push_template":{
+            "title_args":[
+                "声网"
+            ],
+            "content_args":[
+                "欢迎使用im-push",
+                "加油"
+            ]
+        }
+    }
+}
+
+# title: {0} = "声网"
+# content: {0} = "欢迎使用im-push" {1} = "加油"
+```
+
+群昵称即群成员在群组中的昵称，群成员在发送群消息时通过扩展字段设置，JSON 结构如下：
+
+```json
+  {
+    "ext":{
+            "em_push_ext":{
+                "group_user_nickname":"Jane"
+            }
+        }
+  }      
+```
+// TODO：重新截图
+![img](https://doc.easemob.com/images/product/push/push_template_add.png)
 
 ### 发消息时使用推送模板 
 
@@ -96,7 +141,7 @@ try {
 这种情况下，创建消息时无需传入 `title_args` 和 `content_args` 参数。 
 
 ```dart
-    final msg = EMMessage.createTxtSendMessage(
+    final msg = ChatMessage.createTxtSendMessage(
       targetId: 'userId',
       content: '消息内容',
     );
@@ -106,7 +151,7 @@ try {
       'em_push_template': {'name': 'test7'},
     };
 
-    await EMClient.getInstance.chatManager.sendMessage(msg);
+    await ChatClient.getInstance.chatManager.sendMessage(msg);
 ```
 
 2. 使用自定义或者默认推送模板，模板中的推送标题和推送内容使用以下内置参数：
@@ -127,8 +172,6 @@ try {
   }      
 ```
 
-内置参数的介绍，详见[环信即时通讯控制台文档](/product/enable_and_configure_IM.html#使用默认推送模板)。
-
 这种方式的示例代码与“使用固定内容的推送模板”的相同。
 
 3. 使用自定义推送模板，而且推送标题和推送内容为自定义参数：
@@ -142,7 +185,7 @@ try {
 ![img](/images/android/push/push_template_custom_example.png)
 
 ```dart
-    final msg = EMMessage.createTxtSendMessage(
+    final msg = ChatMessage.createTxtSendMessage(
       targetId: 'userId',
       content: '消息内容',
     );
@@ -156,7 +199,7 @@ try {
       },
     };
 
-    await EMClient.getInstance.chatManager.sendMessage(msg);
+    await ChatClient.getInstance.chatManager.sendMessage(msg);
 ```
 
 ### 消息接收方使用推送模板
@@ -169,8 +212,8 @@ try {
 
 ```dart
 try {
-  await EMClient.getInstance.pushManager.setPushTemplate('Template Name');
-} on EMError catch (e) {}
+  await ChatClient.getInstance.pushManager.setPushTemplate('Template Name');
+} on ChatError catch (e) {}
 ```
 
 ## 使用消息扩展字段
@@ -178,7 +221,7 @@ try {
 创建推送消息时，你可以设置消息扩展字段自定义要显示的推送标题 `em_push_title` 和推送内容 `em_push_content`。
 
 ```dart
-EMMessage msg = EMMessage.createTxtSendMessage(
+ChatMessage msg = ChatMessage.createTxtSendMessage(
   targetId: 'receiveId',
   content: 'content',
 );
@@ -193,8 +236,8 @@ msg.attributes = {
 };
 
 try {
-  await EMClient.getInstance.chatManager.sendMessage(msg);
-} on EMError catch (e) {}
+  await ChatClient.getInstance.chatManager.sendMessage(msg);
+} on ChatError catch (e) {}
 ```
 
 自定义显示字段的数据结构如下：

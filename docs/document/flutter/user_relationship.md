@@ -9,11 +9,11 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 - 好友列表管理：查询好友列表、申请添加好友、同意好友申请、拒绝好友申请、删除好友和设置好友备注等操作。
 - 黑名单管理：查询黑名单列表、添加用户至黑名单以及将用户移除黑名单等操作。
   
-此外，环信即时通信 IM 默认支持陌生人之间发送单聊消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)[开启好友关系检查](/product/enable_and_configure_IM.html#好友关系检查)。该功能开启后，SDK 会在用户发起单聊时检查好友关系，若用户向陌生人发送单聊消息，SDK 会提示错误码 221。
+此外，即时通讯 IM 默认支持陌生人之间发送单聊消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要联系声网商务开通该功能。该功能开启后，SDK 会在用户发起单聊时检查好友关系，若用户向陌生人发送单聊消息，SDK 会提示错误码 221。
 
 ## 技术原理
 
-环信即时通讯 IM Flutter SDK 提供 `EMContactManager` 类实现好友的添加移除，黑名单的添加移除等功能。主要方法如下：
+即时通讯 IM Flutter SDK 提供 `ChatContactManager` 类实现好友的添加移除，黑名单的添加移除等功能。主要方法如下：
 
 - `addContact` 申请添加好友；
 - `deleteContact` 删除好友；
@@ -34,7 +34,7 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM 的使用限制，详见 [使用限制](limitation.html)。
 
 ## 实现方法
 
@@ -48,8 +48,8 @@ String userId = "foo";
 // 申请加为好友的理由
 String reason = "Request to add a friend.";
 try{
-  await EMClient.getInstance.contactManager.addContact(userId, reason);
-} on EMError catch (e) {
+  await ChatClient.getInstance.contactManager.addContact(userId, reason);
+} on ChatError catch (e) {
 }
 ```
 
@@ -61,8 +61,8 @@ try{
 // 用户 ID
 String userId = "bar";
 try{
-  await EMClient.getInstance.contactManager.acceptInvitation(userId);
-} on EMError catch (e) {
+  await ChatClient.getInstance.contactManager.acceptInvitation(userId);
+} on ChatError catch (e) {
 }
 ```
 
@@ -72,8 +72,8 @@ try{
 // 用户 ID
 String userId = "bar";
 try{
-  await EMClient.getInstance.contactManager.declineInvitation(userId);
-} on EMError catch (e) {
+  await ChatClient.getInstance.contactManager.declineInvitation(userId);
+} on ChatError catch (e) {
 }
 ```
 
@@ -81,30 +81,30 @@ try{
 
 ```dart
 // 注册监听
-    EMClient.getInstance.contactManager.addEventHandler(
+    ChatClient.getInstance.contactManager.addEventHandler(
       "UNIQUE_HANDLER_ID",
-      EMContactEventHandler(
+      ChatContactEventHandler(
     onFriendRequestAccepted: (userId, reason) {},
       ),
     );
 
 // 移除监听
-EMClient.getInstance.contactManager.removeEventHandler("UNIQUE_HANDLER_ID");
+ChatClient.getInstance.contactManager.removeEventHandler("UNIQUE_HANDLER_ID");
 ```
 
 4. 对方拒绝，收到监听事件 `onFriendRequestDeclined`。
 
 ```dart
 // 注册监听
-    EMClient.getInstance.contactManager.addEventHandler(
+    ChatClient.getInstance.contactManager.addEventHandler(
       "UNIQUE_HANDLER_ID",
-      EMContactEventHandler(
+      ChatContactEventHandler(
         onFriendRequestDeclined: (userId) {},
       ),
     );
 
 // 移除监听
-    EMClient.getInstance.contactManager.removeEventHandler("UNIQUE_HANDLER_ID");
+    ChatClient.getInstance.contactManager.removeEventHandler("UNIQUE_HANDLER_ID");
 ```
 
 ### 删除好友
@@ -119,28 +119,28 @@ String userId = "tom";
 // 是否保留聊天会话
 bool keepConversation = true;
 try {
-  await EMClient.getInstance.contactManager.deleteContact(
+  await ChatClient.getInstance.contactManager.deleteContact(
     userId,
     keepConversation,
   );
-} on EMError catch (e) {
+} on ChatError catch (e) {
 }
 ```
 
 ### 设置好友备注
 
-自 4.2.0 版本开始，你可以调用 `asyncSetContactRemark` 方法设置单个好友的备注。
+你可以调用 `asyncSetContactRemark` 方法设置单个好友的备注。
 
 好友备注的长度不能超过 100 个字符。
 
 ```dart
 void updateRemark(String userId, String newRemark) async {
   try {
-    await EMClient.getInstance.contactManager.setContactRemark(
+    await ChatClient.getInstance.contactManager.setContactRemark(
       userId: userId,
       remark: newRemark,
     );
-  } on EMError catch (e) {
+  } on ChatError catch (e) {
     // error.
   }
 }
@@ -148,15 +148,15 @@ void updateRemark(String userId, String newRemark) async {
 
 ### 从服务端获取好友列表
 
-自 4.2.0 版本开始，你可以调用 `fetchAllContactsFromServer` 方法从服务器一次性或分页获取好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
+你可以调用 `fetchAllContactsFromServer` 方法从服务器一次性或分页获取好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
 
 - 一次性获取服务端好友列表。
 
 ```dart
 void fetchAllContactsFromServer() async {
   try {
-    List<EMContact> list = await EMClient.getInstance.contactManager.fetchAllContacts();
-  } on EMError catch (e) {
+    List<ChatContact> list = await ChatClient.getInstance.contactManager.fetchAllContacts();
+  } on ChatError catch (e) {
     // error.
   }
 }
@@ -168,12 +168,12 @@ void fetchAllContactsFromServer() async {
 // pageSize 的取值范围为 [1,50]
 void fetchContactsFromServer(String cursor, int pageSize) async {
   try {
-    EMCursorResult<EMContact> result =
-        await EMClient.getInstance.contactManager.fetchContacts(
+    ChatCursorResult<ChatContact> result =
+        await ChatClient.getInstance.contactManager.fetchContacts(
       cursor: cursor,
       pageSize: pageSize,
     );
-  } on EMError catch (e) {
+  } on ChatError catch (e) {
     // error.
   }
 }
@@ -185,8 +185,8 @@ void fetchContactsFromServer(String cursor, int pageSize) async {
 void fetchAllContactIds() async {
   try {
     List<String> userIds =
-        await EMClient.getInstance.contactManager.fetchAllContactIds();
-  } on EMError catch (e) {
+        await ChatClient.getInstance.contactManager.fetchAllContactIds();
+  } on ChatError catch (e) {
     // error.
   }
 }
@@ -194,7 +194,7 @@ void fetchAllContactIds() async {
 
 ### 从本地获取好友列表
 
-自 4.2.0 版本开始，你可以调用 `getContact` 方法从本地获取单个好友的用户 ID 和好友备注；你也可以调用 `getAllContacts` 方法一次性获取整个好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
+你可以调用 `getContact` 方法从本地获取单个好友的用户 ID 和好友备注；你也可以调用 `getAllContacts` 方法一次性获取整个好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
 
 :::tip
 需要从服务器获取好友列表之后，才能从本地获取到好友列表。
@@ -205,9 +205,9 @@ void fetchAllContactIds() async {
 ```dart
 void getLocalContact(String userId) async {
   try {
-    EMContact? contact =
-        await EMClient.getInstance.contactManager.getContact(userId: userId);
-  } on EMError catch (e) {
+    ChatContact? contact =
+        await ChatClient.getInstance.contactManager.getContact(userId: userId);
+  } on ChatError catch (e) {
     // error.
   }
 }
@@ -218,9 +218,9 @@ void getLocalContact(String userId) async {
 ```dart
 void getAllLocalContact() async {
   try {
-    List<EMContact> contacts =
-        await EMClient.getInstance.contactManager.getAllContacts();
-  } on EMError catch (e) {
+    List<ChatContact> contacts =
+        await ChatClient.getInstance.contactManager.getAllContacts();
+  } on ChatError catch (e) {
     // error.
   }
 }
@@ -234,8 +234,8 @@ void getAllLocalContact() async {
 void getAllLocalContactIds() async {
   try {
     List<String> userIds =
-        await EMClient.getInstance.contactManager.getAllContactIds();
-  } on EMError catch (e) {
+        await ChatClient.getInstance.contactManager.getAllContactIds();
+  } on ChatError catch (e) {
     // error.
   }
 }
@@ -255,8 +255,8 @@ void getAllLocalContactIds() async {
 // 用户 ID
 String userId = "tom";
 try {
-  await EMClient.getInstance.contactManager.addUserToBlockList(userId);
-} on EMError catch (e) {
+  await ChatClient.getInstance.contactManager.addUserToBlockList(userId);
+} on ChatError catch (e) {
 }
 ```
 
@@ -269,8 +269,8 @@ try {
 ```dart
 try {
   List<String> list =
-      await EMClient.getInstance.contactManager.getBlockListFromServer();
-} on EMError catch (e) {
+      await ChatClient.getInstance.contactManager.getBlockListFromServer();
+} on ChatError catch (e) {
 }
 ```
 
@@ -279,8 +279,8 @@ try {
 ```dart
 try {
   List<String> list =
-      await EMClient.getInstance.contactManager.getBlockListFromDB();
-} on EMError catch (e) {
+      await ChatClient.getInstance.contactManager.getBlockListFromDB();
+} on ChatError catch (e) {
 }
 ```
 
@@ -291,7 +291,7 @@ try {
 ```dart
 String userId = "tom";
 try {
-  await EMClient.getInstance.contactManager.removeUserFromBlockList(userId);
-} on EMError catch (e) {
+  await ChatClient.getInstance.contactManager.removeUserFromBlockList(userId);
+} on ChatError catch (e) {
 }
 ```

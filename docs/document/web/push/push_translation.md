@@ -11,14 +11,13 @@
 	language: string, // 推送通知的首选语言。
 */
 const params = {
-  language: 'EU'
-}
-WebIM.conn.setPushPerformLanguage(params)
+  language: "EU",
+};
+chatClint.setPushPerformLanguage(params);
 ```
 
 你可以调用 `getPushPerformLanguage` 获取推送通知的首选语言，示例代码如下：
 
 ```javascript
-WebIM.conn.getPushPerformLanguage() // 无需传参数，直接调用。
+chatClint.getPushPerformLanguage(); // 无需传参数，直接调用。
 ```
-

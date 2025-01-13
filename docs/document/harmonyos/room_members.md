@@ -2,11 +2,11 @@
 
 <Toc />
 
-聊天室是支持多人沟通的即时通讯系统。本文介绍如何使用环信即时通讯 IM HarmonyOS SDK 在实时互动 app 中管理聊天室成员，并实现聊天室的相关功能。
+聊天室是支持多人沟通的即时通讯系统。本文介绍如何使用即时通讯 IM HarmonyOS SDK 在实时互动 app 中管理聊天室成员，并实现聊天室的相关功能。
 
 ## 技术原理
 
-环信即时通讯 IM SDK 提供 `ChatroomManager` 类 和 `ChatRoom` 类，支持对聊天室成员的管理，包括获取、添加和移出聊天室成员等，主要方法如下：
+即时通讯 IM SDK 提供 `ChatroomManager` 类 和 `ChatRoom` 类，支持对聊天室成员的管理，包括获取、添加和移出聊天室成员等，主要方法如下：
 
 - 获取聊天室成员列表
 - 退出聊天室
@@ -21,12 +21,12 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM 的 [使用限制](/product/limitation.html)。
-- 了解环信即时通讯 IM 聊天室和成员的数量限制，详见 [环信即时通讯 IM 价格](https://www.easemob.com/pricing/im)。
+- 了解即时通讯 IM 的 [使用限制](limitation.html)。
+- 了解即时通讯 IM 聊天室和成员的数量限制，详见 [即时通讯 IM 价格](https://www.easemob.com/pricing/im)。
 
 ## 实现方法
 
-本节介绍如何使用环信即时通讯 IM HarmonyOS SDK 提供的 API 实现上述功能。
+本节介绍如何使用即时通讯 IM HarmonyOS SDK 提供的 API 实现上述功能。
 
 ### 获取聊天室成员列表
 
@@ -61,7 +61,9 @@ ChatClient.getInstance().chatroomManager()?.leaveChatroom(chatRoomId).then(()=> 
 示例代码如下：
 
 ```typescript
-let options = new ChatOptions();
+let options = new ChatOptions({
+    appId: "Your AppId"
+});
 options.setDeleteMessagesOnLeaveChatroom(false);
 ```
 
@@ -85,7 +87,7 @@ ChatClient.getInstance().chatroomManager()?.removeChatroomMembers(chatroomId, me
 
 #### 离线后自动退出
 
-由于网络等原因，聊天室中的成员离线超过 2 分钟会自动退出聊天室。若需调整该时间，需联系环信商务。
+由于网络等原因，聊天室中的成员离线超过 2 分钟会自动退出聊天室。若需调整该时间，需联系声网商务。
 
 以下两类成员即使离线也不会退出聊天室：
 
@@ -98,7 +100,7 @@ ChatClient.getInstance().chatroomManager()?.removeChatroomMembers(chatroomId, me
 
 仅聊天室所有者和管理员可调用 `ChatroomManager#blockChatroomMembers` 方法将指定成员添加至黑名单。
 
-被加入黑名单后，该成员收到 `ChatroomListener#onRemovedFromChatRoom` 回调，移出原因为 `EMAChatroomManagerListener#BE_KICKED`。其他成员收到 `ChatroomListener#onMemberExited` 回调。
+被加入黑名单后，该成员收到 `ChatroomListener#onRemovedFromChatRoom` 回调，移出原因为 `LEAVE_REASON#BE_KICKED`。其他成员收到 `ChatroomListener#onMemberExited` 回调。
 
 被加入黑名单后，该成员无法再收发聊天室消息并被移出聊天室，黑名单中的成员如想再次加入聊天室，聊天室所有者或管理员必须先将其移出黑名单列表。
 
@@ -190,7 +192,7 @@ ChatClient.getInstance().chatroomManager()?.removeFromChatroomWhitelist(chatroom
 
 #### 添加成员至聊天室禁言列表
 
-仅聊天室所有者和管理员可以调用 `ChatroomManager#muteChatroomMembers` 方法将指定成员添加至聊天室禁言列表，操作者外其他成员收到 `ChatroomListener#onMutelistAdded` 回调。
+仅聊天室所有者和管理员可以调用 `ChatroomManager#muteChatroomMembers` 方法将指定成员添加至聊天室禁言列表，操作者外其他成员收到 `ChatroomListener#onMuteMapAdded` 回调。
 
 :::tip
 聊天室所有者可禁言聊天室所有成员，聊天室管理员可禁言聊天室普通成员。

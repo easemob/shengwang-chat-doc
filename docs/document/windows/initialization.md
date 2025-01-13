@@ -10,14 +10,14 @@
 
 ## 前提条件
 
-有效的环信即时通讯 IM 开发者账号和 App key，详见[环信即时通讯云控制台的相关文档](enable_and_configure_IM.html#创建应用)。
+有效的环信即时通讯 IM 开发者账号和 App Id，详见[环信即时通讯云控制台的相关文档](enable_and_configure_IM.html#创建应用)。
 
 ## 初始化
 
 初始化示例代码：
 
 ```csharp
-var options = new Options("appkey"); //将该参数设置为你的 App Key
+var options = Options.InitOptionsWithAppId("YourAppId");; //将该参数设置为你的 App Id
 //其他 Options 配置。
 SDKClient.Instance.InitWithOptions(options);
 ```

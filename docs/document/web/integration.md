@@ -1,6 +1,6 @@
 # 集成 SDK
 
-本文介绍如何将环信即时通讯 IM SDK 集成到你的 Web 项目。
+本文介绍如何将声网即时通讯 IM SDK 集成到你的 Web 项目。
 
 ## 开发环境要求
 
@@ -12,7 +12,7 @@
 ## 1. 使用 npm 安装 SDK
 
 ```bash
-npm install easemob-websdk
+npm install shengwang-chat
 ```
 
 ## 2. 引入 SDK
@@ -26,21 +26,21 @@ SDK 提供了灵活的模块化设计，允许开发者根据需求引入功能�
 miniCore 是一个基座，支持登录登出和发送消息等[基础功能](https://doc.easemob.com/jsdoc/classes/Connection.Connection-1.html)，而且包含消息对象。因此，若只使用收发消息功能，则只需引入 miniCore。若使用其他功能，miniCore 支持使用插件的方式引入其他功能模块。按需引入模块的方式实现了不同模块的灵活组合，从而避免不必要的代码加载，减小了应用程序的体积。
 
 :::tip
+
 1. 只有按需导入 SDK 的方式才支持[本地会话管理功能](conversation_local.html)。
-2. 小程序 uniapp 不支持使用 miniCore 的集成方式。
-:::
+   :::
 
 #### 支持按需导入的 SDK 模块
 
-| 功能        | 导入文件     | 使用方式          |
-| :--------------- | :--------------------------- | :---------------- |
-| 联系人和消息管理 | import \* as contactPlugin from "easemob-websdk/contact/contact";     | miniCore.usePlugin(contactPlugin, "contact");         |
-| 群组             | import \* as groupPlugin from "easemob-websdk/group/group";    | miniCore.usePlugin(groupPlugin, "group");             |
-| 聊天室           | import \* as chatroomPlugin from "easemob-websdk/chatroom/chatroom";  | miniCore.usePlugin(chatroomPlugin, "chatroom");       |
-| 子区             | import \* as threadPlugin from "easemob-websdk/thread/thread";    | miniCore.usePlugin(threadPlugin, "thread");           |
-| 翻译             | import \* as translationPlugin from "easemob-websdk/translation/translation"; | miniCore.usePlugin(translationPlugin, "translation"); |
-| 在线状态订阅     | import \* as presencePlugin from "easemob-websdk/presence/presence";   | miniCore.usePlugin(presencePlugin, "presence");       |
-| 会话免打扰     |  import \* as silentPlugin from "easemob-websdk/silent/silent";          | miniCore.usePlugin(silentPlugin, "silent");       |
+| 功能             | 导入文件                                                                      | 使用方式                                              |
+| :--------------- | :---------------------------------------------------------------------------- | :---------------------------------------------------- |
+| 联系人和消息管理 | import \* as contactPlugin from "shengwang-chat/contact/contact";             | miniCore.usePlugin(contactPlugin, "contact");         |
+| 群组             | import \* as groupPlugin from "shengwang-chat/group/group";                   | miniCore.usePlugin(groupPlugin, "group");             |
+| 聊天室           | import \* as chatroomPlugin from "shengwang-chat/chatroom/chatroom";          | miniCore.usePlugin(chatroomPlugin, "chatroom");       |
+| 子区             | import \* as threadPlugin from "shengwang-chat/thread/thread";                | miniCore.usePlugin(threadPlugin, "thread");           |
+| 翻译             | import \* as translationPlugin from "shengwang-chat/translation/translation"; | miniCore.usePlugin(translationPlugin, "translation"); |
+| 在线状态订阅     | import \* as presencePlugin from "shengwang-chat/presence/presence";          | miniCore.usePlugin(presencePlugin, "presence");       |
+| 会话免打扰       | import \* as silentPlugin from "shengwang-chat/silent/silent";                | miniCore.usePlugin(silentPlugin, "silent");           |
 
 #### 按需导入 SDK 模块
 
@@ -50,10 +50,10 @@ miniCore 是一个基座，支持登录登出和发送消息等[基础功能](ht
 
 ```bash
 # npm
-npm install easemob-websdk
+npm install shengwang-chat
 
 # yarn
-yarn add easemob-websdk
+yarn add shengwang-chat
 ```
 
 ##### 2. 引入 SDK 和所需模块
@@ -61,8 +61,8 @@ yarn add easemob-websdk
 根据项目需求引入相应的功能模块。例如，引入用户关系模块：
 
 ```javascript
-import MiniCore from "easemob-websdk/miniCore/miniCore";
-import * as contactPlugin from "easemob-websdk/contact/contact";
+import MiniCore from "shengwang-chat/miniCore/miniCore";
+import * as contactPlugin from "shengwang-chat/contact/contact";
 ```
 
 ##### 3. 注册模块到 miniCore
@@ -71,7 +71,7 @@ import * as contactPlugin from "easemob-websdk/contact/contact";
 
 ```javascript
 const miniCore = new MiniCore({
-  appKey: "your appKey",
+  appId: "your appId",
 });
 
 // "contact" 为固定值
@@ -124,10 +124,10 @@ miniCore.addEventHandler("handlerId", {
 示例代码如下：
 
 ```javascript
-import { EasemobChat } from "easemob-websdk";
+import { ShengwangChat } from "shengwang-chat";
 //发送文本消息
 const sendTextMsg = () => {
-  const option: EasemobChat.CreateTextMsgParameters = {
+  const option: ShengwangChat.CreateTextMsgParameters = {
     chatType: "singleChat",
     type: "txt",
     to: "to",
@@ -148,20 +148,20 @@ const sendTextMsg = () => {
 ### 引入 JavaScript SDK
 
 ```javascript
-import EC from "easemob-websdk";
+import ChatSDK from "shengwang-chat";
 ```
 
 ### 引入 TypeScript SDK
 
-在下面的导入代码中，`EasemobChat` 是 SDK 类型的命名空间。
+在下面的导入代码中，`ShengwangChat` 是 SDK 类型的命名空间。
 
-```javascript
-import EC, { EasemobChat } from "easemob-websdk";
+```typescript
+import ChatSDK, { ShengwangChat } from "shengwang-chat";
 ```
 
 ### 从官网获取并导入 SDK
 
-1. 下载 [Easemob Chat SDK for Web](https://www.easemob.com/download/im)。将 Web SDK 中的 `Easemob-chat.js` 文件保存到你的项目下。
+1. 下载 [ShengwangChat Chat SDK for Web](https://www.easemob.com/download/im)。将 Web SDK 中的 `Shengwang-chat.js` 文件保存到你的项目下。
 
 2. 在 `index.html` 文件中，对 `index.js` 文件进行引用。
 
@@ -178,34 +178,33 @@ import EC, { EasemobChat } from "easemob-websdk";
 ```javascript
 export default {
   mounted: () => {
-    import("easemob-websdk").then((res) => {
+    import("shengwang-chat").then((res) => {
       const EC = res.default;
       console.log(EC, "easemob websdk");
       const conn = new EC.connection({
-        appKey: "your appkey"
+        appId: "your appId",
       });
     });
-  }
+  },
 };
 ```
 
 2. 对于 Next 项目, 要使用客户端组件，你可以在文件顶部的导入上方添加 `use client` 指令。
 
 ```typescript
-'use client'
- 
-import { useEffect } from 'react'
- 
+"use client";
+
+import { useEffect } from "react";
+
 export default function Home() {
   useEffect(() => {
-    import('easemob-websdk').then((res)=>{
+    import("shengwang-chat").then((res) => {
       const EC = res.default;
       console.log(EC, "easemob websdk");
       const conn = new EC.connection({
-        appKey: "your appkey"
+        appId: "your appId",
       });
-    }) 
-  }, [])
+    });
+  }, []);
 }
 ```
-

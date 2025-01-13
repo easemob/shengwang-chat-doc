@@ -9,14 +9,14 @@
 ```objectivec
 //设置离线推送的首选语言。
 // 异步方法
-[[EMClient sharedClient].pushManager setPreferredNotificationLanguage:@"EU" completion:^(EMError *aError) {
+[[AgoraChatClient sharedClient].pushManager setPreferredNotificationLanguage:@"EU" completion:^(AgoraChatError *aError) {
     if (aError) {
         NSLog(@"setPushPerformLanguageCompletion error---%@",aError.errorDescription);
     }
 }];
 
 //获取离线推送的首选语言。
-[[EMClient sharedClient].pushManager getPreferredNotificationLanguageCompletion:^(NSString *aLanguageCode, EMError *aError) {
+[[AgoraChatClient sharedClient].pushManager getPreferredNotificationLanguageCompletion:^(NSString *aLanguageCode, AgoraChatError *aError) {
     if (!aError) {
         NSLog(@"getPushPerformLanguage---%@",aLanguageCode);
     }

@@ -79,9 +79,9 @@ SDK 内部会按照以上顺序检测设备的推送支持情况。如果未设�
 你需要在 SDK 初始化时进行推送接口的配置。
 
 ```java
-EMOptions options = new EMOptions();
+ChatOptions options = new ChatOptions();
 ...
-EMPushConfig.Builder builder = new EMPushConfig.Builder(this);
+PushConfig.Builder builder = new PushConfig.Builder(this);
 // 设置支持哪家手机厂商推送。
 builder.enableMiPush(String appId, String appKey)
        //开发者需要调用该方法开启华为推送。
@@ -89,7 +89,7 @@ builder.enableMiPush(String appId, String appKey)
 // 将 pushconfig 设置为 ChatOptions.
 options.setPushConfig(builder.build());
 // 初始化即时通讯 IM SDK。
-EMClient.getInstance().init(this, options);
+ChatClient.getInstance().init(this, options);
 ```
 
 ## 混淆
@@ -97,8 +97,8 @@ EMClient.getInstance().init(this, options);
 如果你在项目中开启了混淆，请将以下规则添加到你的混淆规则中：
 
 ```java
--keep class com.hyphenate.** {*;}
--dontwarn  com.hyphenate.**
+-keep class io.agora.** {*;}
+-dontwarn  io.agora.**
 ```
 
 除此之外，你还需要添加第三方推送的混淆规则，详见各厂商的开发者平台文档。

@@ -117,12 +117,12 @@
 4. 在即时通讯 IM SDK 初始化的时候，配置启用小米推送。
 
    ```java
-   EMOptions options = new EMOptions();
+   ChatOptions options = new ChatOptions();
    ...
-   EMPushConfig.Builder builder = new EMPushConfig.Builder(this);
+   PushConfig.Builder builder = new PushConfig.Builder(this);
    builder.enableMiPush(String appId, String appKey);
    // 将 pushconfig 设置为 ChatOptions
    options.setPushConfig(builder.build());
    // 初始化 IM SDK
-   EMClient.getInstance().init(this, options);
+   ChatClient.getInstance().init(this, options);
    ```

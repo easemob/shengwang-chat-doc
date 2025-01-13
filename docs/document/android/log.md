@@ -12,16 +12,16 @@ SDK 默认输出调试信息（所有日志，包括调试信息、警告和错�
 
 ```java
 // 需要在 SDK 初始化后调用
-EMClient.getInstance().setDebugMode(false);
+ChatClient.getInstance().setDebugMode(false);
 ```
 
 ## 获取本地日志
 
 打开以下目录，获取本地日志。在下列代码中，你需要进行如下替换：
 
-- `{应用包名}` 替换为应用的包名，例如 `com.hyphenate.chatuidemo`。
-- `{App Key}` 需要替换为应用的环信 App Key。
+- `{应用包名}` 替换为应用的包名，例如 `io.agora.chatuidemo`。
+- `{AppId}` 需要替换为应用的环信 AppId。
 
 ```shell
-adb pull /sdcard/android/data/{应用包名}/{App Key}/core_log
+adb pull /sdcard/android/data/{应用包名}/{AppId}/core_log
 ```

@@ -11,8 +11,8 @@
 示例代码如下所示：  
   
  ```java
-// 注册失败会抛出 HyphenateException。
-EMClient.getInstance().createAccount(mAccount, mPassword);// 同步方法。
+// 注册失败会抛出 ChatException。
+ChatClient.getInstance().createAccount(mAccount, mPassword);// 同步方法。
 ``` 
 
 - 授权注册：通过环信提供的 REST API 注册环信用户账号，注册后保存到你的服务器或返给客户端。要使用授权注册，你需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)的**即时通讯** > **服务概览**的**设置**区域，将**用户注册模式**设置为**授权注册**。相关的 REST API 介绍，详见[授权注册单个用户](/document/server-side/account_system.html#授权注册单个用户)和[批量授权注册用户](/document/server-side/account_system.html#批量授权注册用户)的接口介绍。
@@ -23,12 +23,15 @@ EMClient.getInstance().createAccount(mAccount, mPassword);// 同步方法。
 
 1. **用户 ID + token** 是更加安全的登录方式。
 
-测试环境下，你在[环信即时通讯云控制台](https://console.easemob.com/user/login)创建用户后，环信服务器会自动为这些用户分配用户 Token，详见[测试环境下创建用户的介绍](/product/enable_and_configure_IM.html#测试环境)。
+你在[环信即时通讯云控制台](https://console.easemob.com/user/login)创建用户后，环信服务器会自动为这些用户分配用户 Token，详见[测试环境下创建用户的介绍](/product/enable_and_configure_IM.html#测试环境)。
+
+// TODO： 补上快速获取token的步骤
 
 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
 
+
 ```java
-EMClient.getInstance().loginWithToken(mAccount, mToken, new EMCallBack() {
+ChatClient.getInstance().loginWithToken(mAccount, mToken, new CallBack() {
     // 登录成功回调
     @Override
     public void onSuccess() {
@@ -46,7 +49,7 @@ EMClient.getInstance().loginWithToken(mAccount, mToken, new EMCallBack() {
 2. **用户 ID + 密码**登录是传统的登录方式。用户名和密码均由你的终端用户自行决定，密码需要符合[密码规则要求](/document/server-side/account_system.html#开放注册单个用户)。
 
 ```java
-EMClient.getInstance().login(mAccount, mPassword, new EMCallBack() {
+ChatClient.getInstance().login(mAccount, mPassword, new CallBack() {
     // 登录成功回调
     @Override
     public void onSuccess() {
@@ -64,15 +67,15 @@ EMClient.getInstance().login(mAccount, mPassword, new EMCallBack() {
 
 ## 自动登录
 
-初始化时，你可以设置 `EMOptions#setAutoLogin` 选项确定是否自动登录。如果设置为自动登录，则登录成功之后，后续初始化 SDK 时会自动登录。
+初始化时，你可以设置 `ChatOptions#setAutoLogin` 选项确定是否自动登录。如果设置为自动登录，则登录成功之后，后续初始化 SDK 时会自动登录。
 
 ## 获取当前登录的用户
 
-你可以调用 `EMClient#getCurrentUser` 方法获取当前登录用户的用户 ID。
+你可以调用 `ChatClient#getCurrentUser` 方法获取当前登录用户的用户 ID。
 
 ## 获取登录状态
 
-你可以调用 `EMClient#isLoggedIn` 方法获取当前用户的登录状态。
+你可以调用 `ChatClient#isLoggedIn` 方法获取当前用户的登录状态。
 
 ## 退出登录
 
@@ -81,13 +84,13 @@ EMClient.getInstance().login(mAccount, mPassword, new EMCallBack() {
 同步方法：
 
 ```java
-EMClient.getInstance().logout(true);
+ChatClient.getInstance().logout(true);
 ```
 
 异步方法：
 
 ```java
-EMClient.getInstance().logout(true, new EMCallBack() {
+ChatClient.getInstance().logout(true, new CallBack() {
 
     @Override
     public void onSuccess() {

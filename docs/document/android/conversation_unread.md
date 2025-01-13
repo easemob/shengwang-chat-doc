@@ -13,13 +13,13 @@
 
 ## 技术原理
 
-环信即时通讯 IM Android SDK 通过 `EMChatManager` 和 `EMConversation` 类实现对本地会话的未读消息数的管理，其中核心方法如下：
+环信即时通讯 IM Android SDK 通过 `ChatManager` 和 `Conversation` 类实现对本地会话的未读消息数的管理，其中核心方法如下：
 
-- `EMChatManager#getUnreadMessageCount`：获取本地所有会话的未读消息数。
-- `EMConversation#getUnreadMsgCount`：获取本地指定会话的未读消息数。
-- `EMChatManager#markAllConversationsAsRead`：将本地所有会话的未读消息数清零。
-- `EMConversation#markAllMessagesAsRead`：对于本地指定会话的未读消息数清零。
-- `EMConversation#markMessageAsRead`：将指定会话的单条未读消息置为已读。
+- `ChatManager#getUnreadMessageCount`：获取本地所有会话的未读消息数。
+- `Conversation#getUnreadMsgCount`：获取本地指定会话的未读消息数。
+- `ChatManager#markAllConversationsAsRead`：将本地所有会话的未读消息数清零。
+- `Conversation#markAllMessagesAsRead`：对于本地指定会话的未读消息数清零。
+- `Conversation#markMessageAsRead`：将指定会话的单条未读消息置为已读。
 
 ## 实现方法
 
@@ -28,7 +28,7 @@
 你可以调用 `getUnreadMessageCount` 方法获取本地所有会话的未读消息数量，示例代码如下：
 
 ```java
-EMClient.getInstance().chatManager().getUnreadMessageCount();
+ChatClient.getInstance().chatManager().getUnreadMessageCount();
 ```
 
 ### 获取指定会话的未读消息数
@@ -36,7 +36,7 @@ EMClient.getInstance().chatManager().getUnreadMessageCount();
 你可以调用 `getUnreadMsgCount` 获取本地指定会话的未读消息数，示例代码如下：
 
 ```java
-EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
+Conversation conversation = ChatClient.getInstance().chatManager().getConversation(conversationId);
 conversation.getUnreadMsgCount();
 ```
 
@@ -45,7 +45,7 @@ conversation.getUnreadMsgCount();
 你可以调用 `markAllConversationsAsRead` 方法将本地所有会话设为已读，即将所有会话的未读消息数清零，示例代码如下：
 
 ```java
-EMClient.getInstance().chatManager().markAllConversationsAsRead();
+ChatClient.getInstance().chatManager().markAllConversationsAsRead();
 ```
 
 ### 指定会话的未读消息数清零
@@ -53,7 +53,7 @@ EMClient.getInstance().chatManager().markAllConversationsAsRead();
 你可以调用 `markAllMessagesAsRead` 方法对指定会话的未读消息数清零，示例代码如下：
 
 ```java
-EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
+Conversation conversation = ChatClient.getInstance().chatManager().getConversation(conversationId);
 conversation.markAllMessagesAsRead();
 ```
 
@@ -62,6 +62,6 @@ conversation.markAllMessagesAsRead();
 你可以调用 `markMessageAsRead` 方法将指定会话的单条未读消息置为已读。
 
 ```java
-EMConversation conversation = EMClient.getInstance().chatManager().getConversation(conversationId);
+Conversation conversation = ChatClient.getInstance().chatManager().getConversation(conversationId);
 conversation.markMessageAsRead(messageId);
 ```

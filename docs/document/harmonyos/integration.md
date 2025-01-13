@@ -1,6 +1,6 @@
 # 集成 SDK
 
-本文介绍如何将环信即时通讯 IM SDK 集成到你的 HarmonyOS 项目。
+本文介绍如何将即时通讯 IM SDK 集成到你的 HarmonyOS 项目。
 
 ## 开发环境要求
 
@@ -10,7 +10,7 @@
 
 ## 集成 SDK
 
-打开 [SDK 下载](https://www.easemob.com/download/im)页面，获取最新版的环信即时通讯 IM HarmonyOS SDK，得到 `har` 形式的 SDK 文件。
+打开 [SDK 下载](https://www.easemob.com/download/im)页面，获取最新版的即时通讯 IM HarmonyOS SDK，得到 `har` 形式的 SDK 文件。
 
 将 SDK 文件，拷贝到 `entry` 模块或者其他需要的模块下的 `libs` 目录。
 
@@ -19,7 +19,7 @@
 ```json
 {
   "dependencies": {
-    "@easemob/chatsdk": "file:./libs/chatsdk-x.x.x.har"
+    "@shengwang/chatsdk": "file:./libs/chatsdk-x.x.x.har"
   }
 }
 ```
@@ -63,8 +63,3 @@
   }
 }
 ````
-
-:::tip
-- 此配置需要将 `DevEco Studio` 升级到 `Beta2（5.0.3.502）` 及以上版本。
-- SDK 1.3.0 及以上版本采用字节码构建方式打包，必须设置 `useNormalizedOHMUrl` 为 `true`。
-:::

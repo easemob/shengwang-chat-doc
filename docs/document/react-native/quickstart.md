@@ -41,7 +41,7 @@
 
 ### 其他要求
 
-有效的环信即时通讯 IM 开发者账号和 App key，见 [环信即时通讯云管理后台](https://console.easemob.com/user/login)。
+有效的环信即时通讯 IM 开发者账号和 App ID，见 [环信即时通讯云管理后台](https://console.easemob.com/user/login)。
 
 ## 项目设置
 
@@ -61,7 +61,7 @@ yarn
 3. 在终端命令行，输入以下命令添加依赖：
 
 ```sh
-yarn add react-native-chat-sdk
+yarn add react-native-shengwang-chat
 ```
 
 4. 在目标平台执行脚本
@@ -69,7 +69,7 @@ yarn add react-native-chat-sdk
 Android：
 
 ```sh
-cd node_modules/react-native-chat-sdk/native_src/cpp && sh generate.sh --type rn && cd ../../../..
+cd node_modules/react-native-shengwang-chat/native_src/cpp && sh generate.sh --type rn && cd ../../../..
 ```
 
 iOS：
@@ -85,8 +85,8 @@ cd ios && pod install && cd ..
 建议使用 `visual studio code` 打开文件夹 `simple_demo`，打开文件 `App.js`，删除全部内容，并添加如下内容:
 
 ```javascript
-// 导入依赖库
-import React, {useEffect} from 'react';
+// Import depend packages.
+import React, { useEffect } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -94,40 +94,45 @@ import {
   Text,
   TextInput,
   View,
-} from 'react-native';
+} from "react-native";
 import {
   ChatClient,
   ChatOptions,
   ChatMessageChatType,
   ChatMessage,
-} from 'react-native-chat-sdk';
+} from "react-native-shengwang-chat";
 
-// 创建 app
+// Defines the App object.
 const App = () => {
-  // 进行 app 设置
-  const title = 'ChatQuickstart';
-  const [appKey, setAppKey] = React.useState('easemob-demo#easeim');
-  const [username, setUsername] = React.useState('asterisk001');
-  const [password, setPassword] = React.useState('qwer');
-  const [userId, setUserId] = React.useState('');
-  const [content, setContent] = React.useState('');
-  const [logText, setWarnText] = React.useState('Show log area');
+  // Defines the variable.
+  const title = "AgoraChatQuickstart";
+  // Replaces <your appId> with your app key.
+  const appId = "<your appId>";
+  // Replaces <your userId> with your user ID.
+  const [username, setUsername] = React.useState("<your userId>");
+  // Replaces <your agoraToken> with your Agora token.
+  const [chatToken, setChatToken] = React.useState("<your agoraToken>");
+  const [targetId, setTargetId] = React.useState("");
+  const [content, setContent] = React.useState("");
+  const [logText, setWarnText] = React.useState("Show log area");
+  const chatClient = ChatClient.getInstance();
+  const chatManager = chatClient.chatManager;
 
-  // 输出 console log 文件
+  // Outputs console logs.
   useEffect(() => {
-    logText.split('\n').forEach((value, index, array) => {
+    logText.split("\n").forEach((value, index, array) => {
       if (index === 0) {
         console.log(value);
       }
     });
   }, [logText]);
 
-  // 输出 UI log 文件
-  const rollLog = text => {
-    setWarnText(preLogText => {
+  // Outputs UI logs.
+  const rollLog = (text) => {
+    setWarnText((preLogText) => {
       let newLogText = text;
       preLogText
-        .split('\n')
+        .split("\n")
         .filter((value, index, array) => {
           if (index > 8) {
             return false;
@@ -135,130 +140,117 @@ const App = () => {
           return true;
         })
         .forEach((value, index, array) => {
-          newLogText += '\n' + value;
+          newLogText += "\n" + value;
         });
       return newLogText;
     });
   };
 
-  // 设置消息监听器。
-  const setMessageListener = () => {
-    let msgListener = {
-      onMessagesReceived(messages) {
-        for (let index = 0; index < messages.length; index++) {
-          rollLog('received msgId: ' + messages[index].msgId);
-        }
-      },
-      onCmdMessagesReceived: messages => {},
-      onMessagesRead: messages => {},
-      onGroupMessageRead: groupMessageAcks => {},
-      onMessagesDelivered: messages => {},
-      onMessagesRecalledInfo: messages => {},
-      onConversationsUpdate: () => {},
-      onConversationRead: (from, to) => {},
+  useEffect(() => {
+    // Registers listeners for messaging.
+    const setMessageListener = () => {
+      let msgListener = {
+        onMessagesReceived(messages) {
+          for (let index = 0; index < messages.length; index++) {
+            rollLog("received msgId: " + messages[index].msgId);
+          }
+        },
+        onCmdMessagesReceived: (messages) => {},
+        onMessagesRead: (messages) => {},
+        onGroupMessageRead: (groupMessageAcks) => {},
+        onMessagesDelivered: (messages) => {},
+        onMessagesRecalled: (messages) => {},
+        onConversationsUpdate: () => {},
+        onConversationRead: (from, to) => {},
+      };
+
+      chatManager.removeAllMessageListener();
+      chatManager.addMessageListener(msgListener);
     };
 
-    ChatClient.getInstance().chatManager.removeAllMessageListener();
-    ChatClient.getInstance().chatManager.addMessageListener(msgListener);
-  };
-
-  // SDK 初始化。
-  // 调用任何接口之前，请先进行初始化。
-  const init = () => {
-    let o = new ChatOptions({
-      autoLogin: false,
-      appKey: appKey,
-    });
-    ChatClient.getInstance().removeAllConnectionListener();
-    ChatClient.getInstance()
-      .init(o)
-      .then(() => {
-        rollLog('init success');
-        this.isInitialized = true;
-        let listener = {
-          onTokenWillExpire() {
-            rollLog('token expire.');
-          },
-          onTokenDidExpire() {
-            rollLog('token did expire');
-          },
-          onConnected() {
-            rollLog('login success.');
-            setMessageListener();
-          },
-          onDisconnected(errorCode) {
-            rollLog('login fail: ' + errorCode);
-          },
-        };
-        ChatClient.getInstance().addConnectionListener(listener);
-      })
-      .catch(error => {
-        rollLog(
-          'init fail: ' +
-            (error instanceof Object ? JSON.stringify(error) : error),
-        );
+    // Initializes the SDK.
+    // Initializes any interface before calling it.
+    const init = () => {
+      let o = ChatOptions.withAppId({
+        autoLogin: false,
+        appId: appId,
       });
-  };
+      chatClient.removeAllConnectionListener();
+      chatClient
+        .init(o)
+        .then(() => {
+          rollLog("init success");
+          this.isInitialized = true;
+          let listener = {
+            onTokenWillExpire() {
+              rollLog("token expire.");
+            },
+            onTokenDidExpire() {
+              rollLog("token did expire");
+            },
+            onConnected() {
+              rollLog("onConnected");
+              setMessageListener();
+            },
+            onDisconnected(errorCode) {
+              rollLog("onDisconnected:" + errorCode);
+            },
+          };
+          chatClient.addConnectionListener(listener);
+        })
+        .catch((error) => {
+          rollLog(
+            "init fail: " +
+              (error instanceof Object ? JSON.stringify(error) : error),
+          );
+        });
+    };
 
-  // 注册账号。
-  const registerAccount = () => {
+    init();
+  }, [chatClient, chatManager, appId]);
+
+  // Logs in with an account ID and a token.
+  const login = () => {
     if (this.isInitialized === false || this.isInitialized === undefined) {
-      rollLog('Perform initialization first.');
+      rollLog("Perform initialization first.");
       return;
     }
-    rollLog('start register account ...');
-    ChatClient.getInstance()
-      .createAccount(username, password)
-      .then(response => {
-        rollLog(`register success: userName = ${username}, password = ******`);
-      })
-      .catch(error => {
-        rollLog('register fail: ' + JSON.stringify(error));
-      });
-  };
-
-  // 用环信即时通讯 IM 账号和密码登录。
-  const loginWithPassword = () => {
-    if (this.isInitialized === false || this.isInitialized === undefined) {
-      rollLog('Perform initialization first.');
-      return;
-    }
-    rollLog('start login ...');
-    ChatClient.getInstance()
-      .login(username, password)
+    rollLog("start login ...");
+    chatClient
+      .loginWithToken(username, chatToken)
       .then(() => {
-        rollLog('login operation success.');
+        rollLog("login operation success.");
       })
-      .catch(reason => {
-        rollLog('login fail: ' + JSON.stringify(reason));
+      .catch((reason) => {
+        rollLog("login fail: " + JSON.stringify(reason));
       });
   };
 
-  // 登出。
+  // Logs out from server.
   const logout = () => {
     if (this.isInitialized === false || this.isInitialized === undefined) {
-      rollLog('Perform initialization first.');
+      rollLog("Perform initialization first.");
       return;
     }
-    rollLog('start logout ...');
-    ChatClient.getInstance()
+    rollLog("start logout ...");
+    chatClient
       .logout()
       .then(() => {
-        rollLog('logout success.');
+        rollLog("logout success.");
       })
-      .catch(reason => {
-        rollLog('logout fail:' + JSON.stringify(reason));
+      .catch((reason) => {
+        rollLog("logout fail:" + JSON.stringify(reason));
       });
   };
 
-  // 发送一条文本消息。
+  // Sends a text message to somebody.
   const sendmsg = () => {
     if (this.isInitialized === false || this.isInitialized === undefined) {
-      rollLog('Perform initialization first.');
+      rollLog("Perform initialization first.");
       return;
     }
     let msg = ChatMessage.createTextMessage(
-      userId,
+      targetId,
       content,
       ChatMessageChatType.PeerChat,
     );
@@ -270,21 +262,21 @@ const App = () => {
         rollLog(`send message fail: ${locaMsgId}, ${JSON.stringify(error)}`);
       }
       onSuccess(message) {
-        rollLog('send message success: ' + message.localMsgId);
+        rollLog("send message success: " + message.localMsgId);
       }
     })();
-    rollLog('start send message ...');
-    ChatClient.getInstance()
-      .chatManager.sendMessage(msg, callback)
+    rollLog("start send message ...");
+    chatClient.chatManager
+      .sendMessage(msg, callback)
       .then(() => {
-        rollLog('send message: ' + msg.localMsgId);
+        rollLog("send message: " + msg.localMsgId);
       })
-      .catch(reason => {
-        rollLog('send fail: ' + JSON.stringify(reason));
+      .catch((reason) => {
+        rollLog("send fail: " + JSON.stringify(reason));
       });
   };
 
-  // UI 组件渲染。
+  // Renders the UI.
   return (
     <SafeAreaView>
       <View style={styles.titleContainer}>
@@ -295,22 +287,8 @@ const App = () => {
           <TextInput
             multiline
             style={styles.inputBox}
-            placeholder="Enter appkey"
-            onChangeText={text => setAppKey(text)}
-            value={appKey}
-          />
-        </View>
-        <View style={styles.buttonCon}>
-          <Text style={styles.btn2} onPress={init}>
-            INIT SDK
-          </Text>
-        </View>
-        <View style={styles.inputCon}>
-          <TextInput
-            multiline
-            style={styles.inputBox}
             placeholder="Enter username"
-            onChangeText={text => setUsername(text)}
+            onChangeText={(text) => setUsername(text)}
             value={username}
           />
         </View>
@@ -318,16 +296,13 @@ const App = () => {
           <TextInput
             multiline
             style={styles.inputBox}
-            placeholder="Enter password"
-            onChangeText={text => setPassword(text)}
-            value={password}
+            placeholder="Enter chatToken"
+            onChangeText={(text) => setChatToken(text)}
+            value={chatToken}
           />
         </View>
         <View style={styles.buttonCon}>
-          <Text style={styles.eachBtn} onPress={registerAccount}>
-            SIGN UP
-          </Text>
-          <Text style={styles.eachBtn} onPress={loginWithPassword}>
+          <Text style={styles.eachBtn} onPress={login}>
             SIGN IN
           </Text>
           <Text style={styles.eachBtn} onPress={logout}>
@@ -339,8 +314,8 @@ const App = () => {
             multiline
             style={styles.inputBox}
             placeholder="Enter the username you want to send"
-            onChangeText={text => setUserId(text)}
-            value={userId}
+            onChangeText={(text) => setTargetId(text)}
+            value={targetId}
           />
         </View>
         <View style={styles.inputCon}>
@@ -348,7 +323,7 @@ const App = () => {
             multiline
             style={styles.inputBox}
             placeholder="Enter content"
-            onChangeText={text => setContent(text)}
+            onChangeText={(text) => setContent(text)}
             value={content}
           />
         </View>
@@ -373,66 +348,66 @@ const App = () => {
   );
 };
 
-// 设置 UI。
+// Sets UI styles.
 const styles = StyleSheet.create({
   titleContainer: {
     height: 60,
-    backgroundColor: '#6200ED',
+    backgroundColor: "#6200ED",
   },
   title: {
     lineHeight: 60,
     paddingLeft: 15,
-    color: '#fff',
+    color: "#fff",
     fontSize: 20,
-    fontWeight: '700',
+    fontWeight: "700",
   },
   inputCon: {
-    marginLeft: '5%',
-    width: '90%',
+    marginLeft: "5%",
+    width: "90%",
     height: 60,
     paddingBottom: 6,
     borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+    borderBottomColor: "#ccc",
   },
   inputBox: {
     marginTop: 15,
-    width: '100%',
+    width: "100%",
     fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   buttonCon: {
-    marginLeft: '2%',
-    width: '96%',
-    flexDirection: 'row',
+    marginLeft: "2%",
+    width: "96%",
+    flexDirection: "row",
     marginTop: 20,
     height: 26,
-    justifyContent: 'space-around',
-    alignItems: 'center',
+    justifyContent: "space-around",
+    alignItems: "center",
   },
   eachBtn: {
     height: 40,
-    width: '28%',
+    width: "28%",
     lineHeight: 40,
-    textAlign: 'center',
-    color: '#fff',
+    textAlign: "center",
+    color: "#fff",
     fontSize: 16,
-    backgroundColor: '#6200ED',
+    backgroundColor: "#6200ED",
     borderRadius: 5,
   },
   btn2: {
     height: 40,
-    width: '45%',
+    width: "45%",
     lineHeight: 40,
-    textAlign: 'center',
-    color: '#fff',
+    textAlign: "center",
+    color: "#fff",
     fontSize: 16,
-    backgroundColor: '#6200ED',
+    backgroundColor: "#6200ED",
     borderRadius: 5,
   },
   logText: {
     padding: 10,
     marginTop: 10,
-    color: '#ccc',
+    color: "#ccc",
     fontSize: 14,
     lineHeight: 20,
   },

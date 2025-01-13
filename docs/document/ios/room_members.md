@@ -2,11 +2,11 @@
 
 <Toc />
 
-聊天室是支持多人沟通的即时通讯系统。本文介绍如何使用环信即时通讯 IM iOS SDK 在实时互动 app 中管理聊天室成员，并实现聊天室的相关功能。
+聊天室是支持多人沟通的即时通讯系统。本文介绍如何使用即时通讯 IM iOS SDK 在实时互动 app 中管理聊天室成员，并实现聊天室的相关功能。
 
 ## 技术原理
 
-环信即时通讯 IM iOS SDK 提供 `IEMChatroomManager` 类、 `EMChatroomManagerDelegate` 类 和 `EMChatroom` 类，支持对聊天室成员的管理，包括获取、添加和移出聊天室成员等，主要方法如下：
+即时通讯 IM iOS SDK 提供 `IAgoraChatroomManager` 类、 `AgoraChatroomManagerDelegate` 类 和 `AgoraChatroom` 类，支持对聊天室成员的管理，包括获取、添加和移出聊天室成员等，主要方法如下：
 
 - 获取聊天室成员列表
 - 退出聊天室
@@ -20,13 +20,13 @@
 
 开始前，请确保满足以下条件：
 
-- 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM 的 [使用限制](/product/limitation.html)。
-- 了解环信即时通讯 IM 聊天室相关限制，详见 [环信即时通讯 IM 价格](https://www.easemob.com/pricing/im)。
+- 完成 SDK 初始化，详见 [初始化文档](initialization.html)。
+- 了解即时通讯 IM 的 [使用限制](limitation.html)。
+- 了解即时通讯 IM 聊天室相关限制，详见 [即时通讯 IM 价格](https://www.easemob.com/pricing/im)。
 
 ## 实现方法
 
-本节介绍如何使用环信即时通讯 IM iOS SDK 提供的 API 实现上述功能。
+本节介绍如何使用即时通讯 IM iOS SDK 提供的 API 实现上述功能。
 
 ### 获取聊天室成员列表
 
@@ -35,11 +35,11 @@
 示例代码如下：
 
 ```objectivec
-// 同步方法，阻塞线程，异步方法参见[EMChatroomManager getChatroomMemberListFromServerWithId:cursor:pageSize:completion]
+// 同步方法，阻塞线程，异步方法参见[AgoraChatroomManager getChatroomMemberListFromServerWithId:cursor:pageSize:completion]
 //cursor：从该游标位置开始取数据。首次调用 cursor 传空值，从最新数据开始获取。
 //pageSize：每页期望返回的成员数,最大值为 1,000。
-EMError *error = nil;
-EMCursorResult<NSString*> * result = [[EMClient sharedClient].roomManager getChatroomMemberListFromServerWithId:@"chatroomId" cursor:1 pageSize:20 error:&error];
+AgoraChatError *error = nil;
+AgoraChatCursorResult<NSString*> * result = [[AgoraChatClient sharedClient].roomManager getChatroomMemberListFromServerWithId:@"chatroomId" cursor:1 pageSize:20 error:&error];
 ```
 
 ### 退出聊天室
@@ -52,7 +52,7 @@ EMCursorResult<NSString*> * result = [[EMClient sharedClient].roomManager getCha
 
 ```objectivec
 // 异步方法
-[[EMClient sharedClient].roomManager leaveChatroom:@"aChatroomId" completion:nil];
+[[AgoraChatClient sharedClient].roomManager leaveChatroom:@"aChatroomId" completion:nil];
 ```
 
 退出聊天室时，SDK 默认删除该聊天室所有本地消息，若要保留这些消息，可在 SDK 初始化时将 `isDeleteMessagesWhenExitChatRoom` 设置为 `NO`。
@@ -64,32 +64,32 @@ EMCursorResult<NSString*> * result = [[EMClient sharedClient].roomManager getCha
 示例代码如下：
 
 ```objectivec
-EMOptions *retOpt = [EMOptions optionsWithAppkey:@"appkey"];
+AgoraChatOptions *retOpt = [AgoraChatOptions optionsWithAppId:@"Appid"];
 retOpt.isDeleteMessagesWhenExitChatRoom = NO;
 ```
 
-与群主无法退出群组不同，聊天室所有者可以离开聊天室，重新进入聊天室仍是该聊天室的所有者。若 `EMOptions#canChatroomOwnerLeave` 参数在初始化时设置为 `YES` 时，聊天室所有者可以离开聊天室；若该参数设置为 `NO`，聊天室所有者调用 `leaveChatroom` 方法离开聊天室时会提示错误 706 `EMErrorChatroomOwnerNotAllowLeave`。
+与群主无法退出群组不同，聊天室所有者可以离开聊天室，重新进入聊天室仍是该聊天室的所有者。若 `AgoraChatOptions#canChatroomOwnerLeave` 参数在初始化时设置为 `YES` 时，聊天室所有者可以离开聊天室；若该参数设置为 `NO`，聊天室所有者调用 `leaveChatroom` 方法离开聊天室时会提示错误 706 `AgoraChatErrorChatroomOwnerNotAllowLeave`。
 
 #### 被移出
 
 仅聊天室所有者和管理员可调用 `removeMembers` 方法将单个或多个成员移出聊天室。
 
-被移出后，该成员收到 `didDismissFromChatroom` 回调，其他成员收到 `EMChatRoomChangeListener#userDidLeaveChatroom` 回调。
+被移出后，该成员收到 `didDismissFromChatroom` 回调，其他成员收到 `AgoraChatRoomChangeListener#userDidLeaveChatroom` 回调。
 
 被移出的成员可以重新进入聊天室。
 
 示例代码如下：
 
 ```objectivec
-// 同步方法，阻塞线程，异步方法参见[EMChatroomManager removeMembers:fromChatroom:completion]
- [EMClient.sharedClient.roomManager removeMembers:@[@"member1",@"member2"] fromChatroom:@"roomId" completion:^(EMChatroom * _Nullable aChatroom, EMError * _Nullable aError) {
+// 同步方法，阻塞线程，异步方法参见[AgoraChatroomManager removeMembers:fromChatroom:completion]
+ [AgoraChatClient.sharedClient.roomManager removeMembers:@[@"member1",@"member2"] fromChatroom:@"roomId" completion:^(AgoraChatroom * _Nullable aChatroom, AgoraChatError * _Nullable aError) {
             
     }];
 ```
 
 #### 离线后自动退出
 
-由于网络等原因，聊天室中的成员离线超过 2 分钟会自动退出聊天室。若需调整该时间，需联系环信商务。
+由于网络等原因，聊天室中的成员离线超过 2 分钟会自动退出聊天室。若需调整该时间，需联系声网商务。
 
 以下两类成员即使离线也不会退出聊天室：
 
@@ -102,16 +102,16 @@ retOpt.isDeleteMessagesWhenExitChatRoom = NO;
 
 仅聊天室所有者和管理员可调用 `blockMembers` 方法将指定成员添加至黑名单。
 
-被加入黑名单后，该成员收到 `didDismissFromChatroom` 回调，其他成员收到 `userDidLeaveChatroom` 回调。移出原因为 `EMChatroomBeKickedReasonBeRemoved`。
+被加入黑名单后，该成员收到 `didDismissFromChatroom` 回调，其他成员收到 `userDidLeaveChatroom` 回调。移出原因为 `AgoraChatroomBeKickedReasonBeRemoved`。
 
 被加入黑名单后，该成员无法再收发聊天室消息并被移出聊天室，黑名单中的成员如想再次加入聊天室，聊天室所有者或管理员必须先将其移出黑名单列表。
 
 示例代码如下：
 
 ```objectivec
-// 同步方法，阻塞线程，异步方法参见[EMChatroomManager blockMembers:fromChatroom:completion]
-EMError *error = nil;
-[[EMClient sharedClient].roomManager blockMembers:@[@"userName"] fromChatroom:@"chatroomId" error:&error];
+// 同步方法，阻塞线程，异步方法参见[AgoraChatroomManager blockMembers:fromChatroom:completion]
+AgoraChatError *error = nil;
+[[AgoraChatClient sharedClient].roomManager blockMembers:@[@"userName"] fromChatroom:@"chatroomId" error:&error];
 ```
 
 #### 将成员移出聊天室黑名单
@@ -121,9 +121,9 @@ EMError *error = nil;
 示例代码如下：
 
 ```objectivec
-// 同步方法，阻塞线程，异步方法参见[EMChatroomManager unblockMembers:fromChatroom:completion]
-EMError *error = nil;
-[[EMClient sharedClient].roomManager unblockMembers:@[@"userName"] fromChatroom:@"chatroomId" error:&error];
+// 同步方法，阻塞线程，异步方法参见[AgoraChatroomManager unblockMembers:fromChatroom:completion]
+AgoraChatError *error = nil;
+[[AgoraChatClient sharedClient].roomManager unblockMembers:@[@"userName"] fromChatroom:@"chatroomId" error:&error];
 ```
 
 #### 获取聊天室黑名单列表
@@ -133,9 +133,9 @@ EMError *error = nil;
 示例代码如下：
 
 ```objectivec
-// 同步方法，阻塞线程，异步方法参见[EMChatroomManager getChatroomBlacklistFromServerWithId:pageNumber:pageSize:completion]
-EMError *error = nil;
-NSArray<NSString *> * blockMembers = [[EMClient sharedClient].roomManager getChatroomBlacklistFromServerWithId:@"chatroomId" pageNumber:1 pageSize:20 error:&error];
+// 同步方法，阻塞线程，异步方法参见[AgoraChatroomManager getChatroomBlacklistFromServerWithId:pageNumber:pageSize:completion]
+AgoraChatError *error = nil;
+NSArray<NSString *> * blockMembers = [[AgoraChatClient sharedClient].roomManager getChatroomBlacklistFromServerWithId:@"chatroomId" pageNumber:1 pageSize:20 error:&error];
 ```
 
 ### 管理聊天室白名单
@@ -151,9 +151,9 @@ NSArray<NSString *> * blockMembers = [[EMClient sharedClient].roomManager getCha
 示例代码如下：
 
 ```objectivec
-// 同步方法，阻塞线程，异步方法参见[EMChatroomManager getChatroomWhiteListFromServerWithId:completion]
-EMError *error = nil;
-NSArray<NSString *> *allowMembers = [EMClient.sharedClient.roomManager getChatroomWhiteListFromServerWithId:@"aChatroomId" error:&error];
+// 同步方法，阻塞线程，异步方法参见[AgoraChatroomManager getChatroomWhiteListFromServerWithId:completion]
+AgoraChatError *error = nil;
+NSArray<NSString *> *allowMembers = [AgoraChatClient.sharedClient.roomManager getChatroomWhiteListFromServerWithId:@"aChatroomId" error:&error];
 ```
 
 #### 检查自己是否在聊天室白名单中
@@ -161,9 +161,9 @@ NSArray<NSString *> *allowMembers = [EMClient.sharedClient.roomManager getChatro
 所有聊天室成员可以调用 `isMemberInWhiteListFromServerWithChatroomId` 方法检查自己是否在白名单中，示例代码如下：
 
 ```objectivec
-// 同步方法，阻塞线程，异步方法参见[EMChatroomManager isMemberInWhiteListFromServerWithChatroomId:completion]
-EMError *error = nil;
-BOOL isAllowed = [EMClient.sharedClient.roomManager isMemberInWhiteListFromServerWithChatroomId:@"aChatroomId" error:&error];
+// 同步方法，阻塞线程，异步方法参见[AgoraChatroomManager isMemberInWhiteListFromServerWithChatroomId:completion]
+AgoraChatError *error = nil;
+BOOL isAllowed = [AgoraChatClient.sharedClient.roomManager isMemberInWhiteListFromServerWithChatroomId:@"aChatroomId" error:&error];
 ```
 
 #### 将成员加入聊天室白名单
@@ -173,9 +173,9 @@ BOOL isAllowed = [EMClient.sharedClient.roomManager isMemberInWhiteListFromServe
 示例代码如下：
 
 ```objectivec
-// 同步方法，阻塞线程，异步方法参见[EMChatroomManager addWhiteListMembers:fromChatroom:completion]
-EMError *error = nil;
-[EMClient.sharedClient.roomManager addWhiteListMembers:@[@"userId1",@"userId2"] fromChatroom:@"aChatroomId" error:&error];
+// 同步方法，阻塞线程，异步方法参见[AgoraChatroomManager addWhiteListMembers:fromChatroom:completion]
+AgoraChatError *error = nil;
+[AgoraChatClient.sharedClient.roomManager addWhiteListMembers:@[@"userId1",@"userId2"] fromChatroom:@"aChatroomId" error:&error];
 ```
 
 #### 将成员移出聊天室白名单列表
@@ -185,9 +185,9 @@ EMError *error = nil;
 示例代码如下：
 
 ```objectivec
-// 同步方法，阻塞线程，异步方法参见[EMChatroomManager removeWhiteListMembers:fromChatroom:completion]
-EMError *error = nil;
-[EMClient.sharedClient.roomManager removeWhiteListMembers:@[@"userId1",@"userId2"] fromChatroom:@"aChatroomId" error:&error];
+// 同步方法，阻塞线程，异步方法参见[AgoraChatroomManager removeWhiteListMembers:fromChatroom:completion]
+AgoraChatError *error = nil;
+[AgoraChatClient.sharedClient.roomManager removeWhiteListMembers:@[@"userId1",@"userId2"] fromChatroom:@"aChatroomId" error:&error];
 ```
 
 ### 管理聊天室禁言列表
@@ -203,10 +203,10 @@ EMError *error = nil;
 示例代码如下：
 
 ```objectivec
-// 同步方法，阻塞线程，异步方法参见[EMChatroomManager muteMembers:muteMilliseconds:fromChatroom:completion]
+// 同步方法，阻塞线程，异步方法参见[AgoraChatroomManager muteMembers:muteMilliseconds:fromChatroom:completion]
 // `muteMilliseconds`：禁言时间。传 -1 表示永久禁言。
-EMError *error = nil;
-[[EMClient sharedClient].roomManager muteMembers:@[@"userName"] muteMilliseconds:-1 fromChatroom:@"chatroomId" error:&error];
+AgoraChatError *error = nil;
+[[AgoraChatClient sharedClient].roomManager muteMembers:@[@"userName"] muteMilliseconds:-1 fromChatroom:@"chatroomId" error:&error];
 ```
 
 #### 将成员移出聊天室禁言列表
@@ -220,9 +220,9 @@ EMError *error = nil;
 示例代码如下：
 
 ```objectivec
-// 同步方法，阻塞线程，异步方法参见[EMChatroomManager unmuteMembers:fromChatroom:completion]
-EMError *error = nil;
-[[EMClient sharedClient].roomManager unmuteMembers:@[@"userName"] fromChatroom:@"chatroomId" error:&error];
+// 同步方法，阻塞线程，异步方法参见[AgoraChatroomManager unmuteMembers:fromChatroom:completion]
+AgoraChatError *error = nil;
+[[AgoraChatClient sharedClient].roomManager unmuteMembers:@[@"userName"] fromChatroom:@"chatroomId" error:&error];
 ```
 
 #### 获取聊天室禁言列表
@@ -232,9 +232,9 @@ EMError *error = nil;
 示例代码如下：
 
 ```objectivec
-// 同步方法，阻塞线程，异步方法参见[EMChatroomManager getChatroomMuteListFromServerWithId:pageNumber:pageSize:completion]
-EMError *error = nil;
-NSArray<NSString *> * muteMembers = [[EMClient sharedClient].roomManager getChatroomMuteListFromServerWithId:@"chatroomId" pageNumber:1 pageSize:20 error:&error];
+// 同步方法，阻塞线程，异步方法参见[AgoraChatroomManager getChatroomMuteListFromServerWithId:pageNumber:pageSize:completion]
+AgoraChatError *error = nil;
+NSArray<NSString *> * muteMembers = [[AgoraChatClient sharedClient].roomManager getChatroomMuteListFromServerWithId:@"chatroomId" pageNumber:1 pageSize:20 error:&error];
 ```
 
 ### 开启和关闭聊天室全员禁言
@@ -250,9 +250,9 @@ NSArray<NSString *> * muteMembers = [[EMClient sharedClient].roomManager getChat
 示例代码如下：
 
 ```objectivec
-// 同步方法，阻塞线程，异步方法参见[EMChatroomManager muteAllMembersFromChatroom:completion]
-EMError *error = nil;
-[EMClient.sharedClient.roomManager muteAllMembersFromChatroom:@"chatRoomId" error:&error];
+// 同步方法，阻塞线程，异步方法参见[AgoraChatroomManager muteAllMembersFromChatroom:completion]
+AgoraChatError *error = nil;
+[AgoraChatClient.sharedClient.roomManager muteAllMembersFromChatroom:@"chatRoomId" error:&error];
 ```
 
 #### 关闭聊天室全员禁言
@@ -262,9 +262,9 @@ EMError *error = nil;
 示例代码如下：
 
 ```objectivec
-// 同步方法，阻塞线程，异步方法参见[EMChatroomManager unmuteAllMembersFromChatroom:completion]
-EMError *error = nil;
-[EMClient.sharedClient.roomManager unmuteAllMembersFromChatroom:@"chatRoomId" error:&error];
+// 同步方法，阻塞线程，异步方法参见[AgoraChatroomManager unmuteAllMembersFromChatroom:completion]
+AgoraChatError *error = nil;
+[AgoraChatClient.sharedClient.roomManager unmuteAllMembersFromChatroom:@"chatRoomId" error:&error];
 ```
 
 ### 管理聊天室所有者和管理员
@@ -276,9 +276,9 @@ EMError *error = nil;
 示例代码如下：
 
 ```objectivec
-// 同步方法，阻塞线程，异步方法参见[EMChatroomManager updateChatroomOwner:newOwner:completion]
-EMError *error = nil;
-[[EMClient sharedClient].roomManager updateChatroomOwner:@"chatroomId" newOwner:@"textString" error:&error];
+// 同步方法，阻塞线程，异步方法参见[AgoraChatroomManager updateChatroomOwner:newOwner:completion]
+AgoraChatError *error = nil;
+[[AgoraChatClient sharedClient].roomManager updateChatroomOwner:@"chatroomId" newOwner:@"textString" error:&error];
 ```
 
 #### 添加聊天室管理员
@@ -288,9 +288,9 @@ EMError *error = nil;
 示例代码如下：
 
 ```objectivec
-// 同步方法，阻塞线程，异步方法参见[EMChatroomManager addAdmin:toChatroom:completion]
-EMError *error = nil;
-[[EMClient sharedClient].roomManager addAdmin:@"userName" toChatroom:@"chatroomId" error:&error];
+// 同步方法，阻塞线程，异步方法参见[AgoraChatroomManager addAdmin:toChatroom:completion]
+AgoraChatError *error = nil;
+[[AgoraChatClient sharedClient].roomManager addAdmin:@"userName" toChatroom:@"chatroomId" error:&error];
 ```
 
 #### 移除聊天室管理员
@@ -300,9 +300,9 @@ EMError *error = nil;
 示例代码如下：
 
 ```objectivec
-// 同步方法，阻塞线程，异步方法参见[EMChatroomManager removeAdmin:fromChatroom:completion]
-EMError *error = nil;
-[[EMClient sharedClient].roomManager removeAdmin:@"userName" fromChatroom:@"chatroomId" error:&error];
+// 同步方法，阻塞线程，异步方法参见[AgoraChatroomManager removeAdmin:fromChatroom:completion]
+AgoraChatError *error = nil;
+[[AgoraChatClient sharedClient].roomManager removeAdmin:@"userName" fromChatroom:@"chatroomId" error:&error];
 ```
 
 ## 更多操作
