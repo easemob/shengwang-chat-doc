@@ -73,7 +73,7 @@
 
 在本机上调用 `AgoraChatPushManager#setSilentModeForConversation:conversationType:params:completion` 设置会话的推送通知方式，在多设备事件 `AgoraChatMultiDevicesDelegate#onConversationEvent:conversationId:conversationType` 里会回调当前操作，此时参数 `event` 的值为 `AgoraChatMultiDevicesEventConversationMuteInfoChanged`。
 
-``objectivec
+```objectivec
 //对会话设置推送通知方式
 AgoraChatSilentModeParam *param = [[AgoraChatSilentModeParam alloc] initWithParamType:SilentModeParamTypeRemindType];
 param.remindType = AgoraChatPushRemindTypeAll;
