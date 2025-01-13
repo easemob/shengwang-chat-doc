@@ -19,7 +19,7 @@ yarn add react-native-shengwang-chat
 - `appId`：在[环信即时通讯云控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看。
 - `pushId`：推送证书名称。不同厂商的推送证书名称也不同。
 
-![img](/images/react-native/push/push_get_appId.png)
+![img](/images/react-native/push/push_get_appkey.png)
 
 ![img](/images/react-native/push/push_get_certificate_name.png)
 
