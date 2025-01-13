@@ -2,15 +2,15 @@
 
 <Toc />
 
-消息表情回复（“Reaction”）指用户在单聊和群聊场景中对单条消息回复表情，可丰富用户聊天时的互动方式。对于单个消息，一个消息表情即为一个 Reaction，若不同用户重复添加同一消息表情，Reaction 数量计为 1。每条消息默认可添加 20 个 Reaction，若需提升该上限，需联系声网商务。
+消息表情回复（“Reaction”）指用户在单聊和群聊场景中对单条消息回复表情，可丰富用户聊天时的互动方式。**若你当前套餐不支持该功能，需升级产品套餐。**
 
-本页介绍如何使用即时通讯 IM RESTful API 实现 Reaction 功能。
+对于单个消息，一个消息表情即为一个 Reaction，若不同用户重复添加同一消息表情，Reaction 数量计为 1。每条消息默认可添加 20 个 Reaction，若需提升该上限，需联系声网商务。
 
 ## 前提条件
 
 要调用声网即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置声网即时通讯 IM 服务](enable_im.html)。
+- 产品套餐包支持 Reaction 功能。
 - 已从服务端获取 app token，详见 [使用 Token 鉴权](token_authentication.html)。
 - 了解声网即时通讯 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
