@@ -2,7 +2,7 @@
 
 通讯录页面提供联系人搜索，添加联系人，好友申请列表入口，群组列表入口，联系人列表。
 
-你可以自定义联系人列表页面的导航栏、联系人列表 Header、联系人列表和联系人列表项。详见[ContactViewController](https://github.com/easemob/easemob-uikit-ios/tree/main/Documentation/EaseChatUIKit.doccarchive/documentation/easechatuikit/contactviewcontroller)。
+你可以自定义联系人列表页面的导航栏、联系人列表 Header、联系人列表和联系人列表项。详见[ContactViewController](https://github.com/AgoraIO-Usecase/ShengwangChat-ios/tree/main/Documentation/ShengwangChatUIKit.doccarchive/documentation/easechatuikit/contactviewcontroller)。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/ios/custom_contact_list.png" title="通讯录" />
@@ -56,7 +56,7 @@
 
 ## 自定义联系人列表
 
-自定义联系人列表 TableView，需要重载联系人列表页面中的 `createContactList` 方法后，返回你继承 `EaseChatUIKit` 中 `ContactView` 后的类对象。关于在导航栏中实现业务逻辑，详见 `ContactView.swift` 类。示例代码如下：
+自定义联系人列表 TableView，需要重载联系人列表页面中的 `createContactList` 方法后，返回你继承 `ShengwangChatUIKit` 中 `ContactView` 后的类对象。关于在导航栏中实现业务逻辑，详见 `ContactView.swift` 类。示例代码如下：
 
 ```swift
     override open func createContactList() -> ContactView {
@@ -68,7 +68,7 @@
 
 要自定义联系人列表中列表项 `ContactCell` 的内容，你需要执行以下步骤：
 
-1. 继承 `EaseChatUIKit` 中的 `ContactCell` 类创建新的自定义类 `CustomContactCell`，然后进行如下代码设置：
+1. 继承 `ShengwangChatUIKit` 中的 `ContactCell` 类创建新的自定义类 `CustomContactCell`，然后进行如下代码设置：
 
 ```swift
     ComponentsRegister.shared.ContactsCell = CustomContactCell.self
@@ -79,7 +79,7 @@
    如果需要复用已有逻辑再增加新逻辑，则只需重载对应方法后调用 `super.xxx`，例如：
 
 ```swift
-    override open func refresh(profile: EaseProfileProtocol) {
+    override open func refresh(profile: ChatUserProfileProtocol) {
        super.refresh(profile: profile)
        //继续你的新逻辑
     }

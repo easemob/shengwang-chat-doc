@@ -9,7 +9,7 @@
 使用时需要配置如下参数，可参考 [Callkit 集成文档](https://www.npmjs.com/package/chat-callkit)。
 
 ```javascript
-import { Chat } from "easemob-chat-uikit";
+import { Chat } from "shengwang-chat-uikit";
 
 const ChatApp = () => {
   return (

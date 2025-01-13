@@ -1,4 +1,4 @@
- # 国际化
+# 国际化
 
 目前，单群聊 UIKit 默认支持中文和英文，作为界面展示语言。你可以使用默认语言包，也可以增加其他语言包，传入对应的 `resources` 和 `lng`，即语言的 ISO 代码，例如，`en` 表示英语，`zh` 表示中文。
 
@@ -7,9 +7,9 @@
 ```javascript
 // 初始化 UIKit 时设置 local 参数
 <UIKitProvider
- local={{
-  lng: 'zh', // 设置要使用的语言
- }}
+  local={{
+    lng: "zh", // 设置要使用的语言
+  }}
 ></UIKitProvider>
 ```
 
@@ -19,17 +19,17 @@ UIKit 中使用 `i18next` 做的国际化，可以按转 `i18next` 的设置增�
 
 ```javascript
 // 引入语言包
-import en from './en.json';
+import en from "./en.json";
 
 <UIKitProvider
- local={{
-  lng: 'en',
-  resources: {
-   en: {
-    translation: en, // 设置语言包
-   },
-  },
- }}
+  local={{
+    lng: "en",
+    resources: {
+      en: {
+        translation: en, // 设置语言包
+      },
+    },
+  }}
 ></UIKitProvider>;
 ```
 
@@ -37,7 +37,7 @@ import en from './en.json';
 
 ```json
 {
-  "conversationTitle": "Conversation List", 
+  "conversationTitle": "Conversation List",
   "deleteCvs": "Delete"
    ...
 }

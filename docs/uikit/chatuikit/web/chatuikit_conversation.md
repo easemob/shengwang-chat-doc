@@ -21,20 +21,22 @@
 ## 使用示例
 
 ```jsx
-import React, { useEffect, useState } from 'react';
-import { ConversationList } from 'easemob-chat-uikit';
-import 'easemob-chat-uikit/style.css';
+import React, { useEffect, useState } from "react";
+import { ConversationList } from "shengwang-chat-uikit";
+import "shengwang-chat-uikit/style.css";
 
 const Conversation = () => {
   return (
-    <div style={{ width: '30%', height: '100%' }}>
+    <div style={{ width: "30%", height: "100%" }}>
       <ConversationList />
     </div>
   );
 };
 ```
 
-![img](/images/uikit/chatuikit/web/cvs-header1.png)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/cvs-header1.png" title="会话列表页面示例" />
+</ImageGallery>
 
 ## 自定义会话列表页面
 
@@ -45,14 +47,14 @@ const Conversation = () => {
 1. 对组件添加 `className` 定义样式。
 
 ```jsx
-import React from 'react';
-import { ConversationList } from 'easemob-chat-uikit';
-import 'easemob-chat-uikit/style.css';
-import './index.css';
+import React from "react";
+import { ConversationList } from "shengwang-chat-uikit";
+import "shengwang-chat-uikit/style.css";
+import "./index.css";
 
 const Conversation = () => {
   return (
-    <div style={{ width: '30%', height: '100%' }}>
+    <div style={{ width: "30%", height: "100%" }}>
       <ConversationList className="conversation" />
     </div>
   );
@@ -63,26 +65,28 @@ const Conversation = () => {
 
 ```css
 .conversation {
-  background-color: '#03A9F4';
+  background-color: "#03A9F4";
   height: 100%;
   width: 100%;
 }
 ```
 
-![img](/images/uikit/chatuikit/web/cvs-bg.png =300x800)
+<ImageGallery>
+  <ImageItem src="/images/uikit/chatuikit/web/cvs-bg.png" title="自定义会话列表页面示例" />
+</ImageGallery>
 
 ## 自定义会话列表页面的 header
 
 你可以自定义 `ConversationList` 组件的 header 元素，例如，标题名称为 `custom header`。
 
 ```jsx
-import React from 'react';
-import { ConversationList, Header, Avatar } from 'easemob-chat-uikit';
-import 'easemob-chat-uikit/style.css';
+import React from "react";
+import { ConversationList, Header, Avatar } from "shengwang-chat-uikit";
+import "shengwang-chat-uikit/style.css";
 
 const Conversation = () => {
   return (
-    <div style={{ width: '30%', height: '100%' }}>
+    <div style={{ width: "30%", height: "100%" }}>
       <ConversationList
         renderHeader={() => (
           <Header
@@ -92,9 +96,9 @@ const Conversation = () => {
               visible: true,
               actions: [
                 {
-                  content: 'my info',
+                  content: "my info",
                   onClick: () => {
-                    console.log('my info');
+                    console.log("my info");
                   },
                 },
               ],
@@ -113,7 +117,6 @@ const Conversation = () => {
 
 ## 自定义会话列表项
 
-
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/web/custom_list_item.png" title="会话列表项" />
 </ImageGallery>
@@ -124,28 +127,30 @@ const Conversation = () => {
 - 使用 `ConversationItem` 组件的属性自定义组件。
 
 ```jsx
-import React from 'react';
-import { ConversationList, ConversationItem, Avatar } from 'easemob-chat-uikit';
-import 'easemob-chat-uikit/style.css';
-import './index.css';
+import React from "react";
+import {
+  ConversationList,
+  ConversationItem,
+  Avatar,
+} from "shengwang-chat-uikit";
+import "shengwang-chat-uikit/style.css";
+import "./index.css";
 
 const Conversation = () => {
   // 在单聊中，将对端用户的用户 ID 与其用户昵称进行映射。
   const idToName = {
-    userId1: 'name1',
-    zd2: 'Henry 2',
+    userId1: "name1",
+    zd2: "Henry 2",
   };
   return (
-    <div style={{ width: '30%', height: '100%' }}>
+    <div style={{ width: "30%", height: "100%" }}>
       <ConversationList
         className="conversation"
-        renderItem={cvs => {
+        renderItem={(cvs) => {
           return (
             <ConversationItem
               avatar={
-                <Avatar
-                  style={{ background: 'yellow', color: 'black' }}
-                >
+                <Avatar style={{ background: "yellow", color: "black" }}>
                   {idToName[cvs.conversationId] || cvs.conversationId}
                 </Avatar>
               }
@@ -193,16 +198,16 @@ const Conversation = () => {
       visible: true, // 是否显示更多操作
       actions: [
         {
-          content: 'DELETE', // 删除会话
+          content: "DELETE", // 删除会话
         },
         {
-          content: 'PIN', // 置顶会话
+          content: "PIN", // 置顶会话
         },
         {
-          content: 'SILENT', // 会话免打扰
+          content: "SILENT", // 会话免打扰
         },
         {
-          content: '自定义功能',
+          content: "自定义功能",
           onClick: () => {},
           icon: <Icon type="STAR" />,
         },
@@ -219,7 +224,7 @@ const Conversation = () => {
 ```jsx
 <ConversationList
   itemProps={{
-    renderMessageContent: message => {
+    renderMessageContent: (message) => {
       return <div>自定义消息内容</div>;
     },
   }}
@@ -233,9 +238,9 @@ const Conversation = () => {
 ```jsx
 <ConversationList
   itemProps={{
-    badgeColor: 'red', // 气泡颜色
-    avatarSize: 50, // 头像大小  
-    avatarShape: 'circle', // 头像形状
+    badgeColor: "red", // 气泡颜色
+    avatarSize: 50, // 头像大小
+    avatarShape: "circle", // 头像形状
   }}
 />
 ```
@@ -248,16 +253,21 @@ const Conversation = () => {
 - 使用 `addConversation` 方法添加一个会话。
 
 ```jsx
-import React from 'react';
-import { ConversationList, ConversationItem, rootStore, Button } from 'easemob-chat-uikit';
-import 'easemob-chat-uikit/style.css';
+import React from "react";
+import {
+  ConversationList,
+  ConversationItem,
+  rootStore,
+  Button,
+} from "shengwang-chat-uikit";
+import "shengwang-chat-uikit/style.css";
 
 const Conversation = () => {
   // 置顶会话。
   const topConversation = () => {
     rootStore.conversationStore.topConversation({
-      chatType: 'singleChat', // 群聊为 `groupChat`。
-      conversationId: 'userID', // 输入从会话列表获取的会话 ID。
+      chatType: "singleChat", // 群聊为 `groupChat`。
+      conversationId: "userID", // 输入从会话列表获取的会话 ID。
       lastMessage: {},
     });
   };
@@ -265,16 +275,16 @@ const Conversation = () => {
   // 创建新会话。
   const createConversation = () => {
     rootStore.conversationStore.addConversation({
-      chatType: 'singleChat',
-      conversationId: 'conversationId',
+      chatType: "singleChat",
+      conversationId: "conversationId",
       lastMessage: {},
       unreadCount: 3,
     });
   };
   return (
-    <div style={{ width: '30%', height: '100%' }}>
+    <div style={{ width: "30%", height: "100%" }}>
       <ConversationList
-        renderItem={cvs => {
+        renderItem={(cvs) => {
           return (
             <ConversationItem
               moreAction={{
@@ -282,10 +292,10 @@ const Conversation = () => {
                 actions: [
                   {
                     // UIKit 默认提供会话删除事件。
-                    content: 'DELETE',
+                    content: "DELETE",
                   },
                   {
-                    content: 'Top Conversation',
+                    content: "Top Conversation",
                     onClick: topConversation,
                   },
                 ],

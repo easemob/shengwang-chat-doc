@@ -10,16 +10,16 @@
 
 - React 16.8.0 或以上版本；
 - React DOM 16.8.0 或以上版本；
-- [即时通讯 IM 应用和 App Key](/product/enable_and_configure_IM.html#创建应用)。
+- [即时通讯 IM 应用和 appId](/product/enable_and_configure_IM.html#创建应用)。
 
 ## 操作步骤
 
 ### 第一步 安装单群聊 UIKit
 
-使用 `npm` 或者 `yarn` 安装 `easemob-chat-uikit`：
+使用 `npm` 或者 `yarn` 安装 `shengwang-chat-uikit`：
 
 ```bash
-npm i easemob-chat-uikit --save;
+npm i shengwang-chat-uikit --save;
 ```
 
 ### 第二步 引入所需组件
@@ -33,29 +33,29 @@ import {
   Chat,
   ConversationList,
   // ...
-} from "easemob-chat-uikit";
+} from "shengwang-chat-uikit";
 
 // 导入样式
-import "easemob-chat-uikit/style.css";
+import "shengwang-chat-uikit/style.css";
 ```
 
 ### 第三步 初始化
 
 项目中用到的组件都需要在 `UIKitProvider` 内部使用。使用单群聊 UIKit 时，首先要配置 `UIKitProvider` 参数，示例如下：
 
-若要实现自动登录，初始化时需传入 `userId`、`password` 或 `token`。 
+若要实现自动登录，初始化时需传入 `userId`、`password` 或 `token`。
 
-你需要在环信控制台[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，获取用户 ID 和密码。如果使用 token，你需要从你的 App Server 获取用户 token，详见[使用环信用户 token 鉴权](/product/easemob_user_token.html) 。
+你需要在声网控制台[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，获取用户 ID 和密码。如果使用 token，你需要从你的 App Server 获取用户 token，详见[使用声网用户 token 鉴权](/product/shengwang_user_token.html) 。
 
 ```jsx
 import React from 'react';
-import { UIKitProvider } from 'easemob-chat-uikit';
-import 'easemob-chat-uikit/style.css';
+import { UIKitProvider } from 'shengwang-chat-uikit';
+import 'shengwang-chat-uikit/style.css';
 ReactDOM.createRoot(document.getElementById('root') as Element).render(
   <div>
     <UIKitProvider
       initConfig={{
-        appKey: 'your app key', // 你的 app key
+        appId: 'your appId', // 你的 appId
         userId: 'user ID', // 用户 ID
         password: 'password', // 如果使用密码登录，传入密码。
       }}
@@ -82,8 +82,8 @@ ReactDOM.createRoot(document.getElementById('root') as Element).render(
 
 ```jsx
 import React from "react";
-import { Chat, MessageList, TextMessage } from "easemob-chat-uikit";
-import "easemob-chat-uikit/style.css";
+import { Chat, MessageList, TextMessage } from "shengwang-chat-uikit";
+import "shengwang-chat-uikit/style.css";
 
 const App = () => {
   return (
@@ -101,5 +101,5 @@ const App = () => {
 
 ## 相关参考
 
-- [组件库源码](https://github.com/easemob/Easemob-UIKit-web)
-- [其他示例 demo](https://github.com/easemob/Easemob-UIKit-web/tree/main/demo)
+- [组件库源码](https://github.com/shengwang/shengwang-UIKit-web)
+- [其他示例 demo](https://github.com/shengwang/shengwang-UIKit-web/tree/main/demo)

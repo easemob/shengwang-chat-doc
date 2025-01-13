@@ -27,7 +27,7 @@ export function App() {
 
   return (
     <Container
-      options={{ appKey: "appKey" }}
+      options={{ appId: "<your app ID>" }}
       palette={palette}
       theme={theme === "light" ? light : dark}
     >
@@ -74,7 +74,7 @@ export function App() {
   const light = useLightTheme(p, "global");
 
   return (
-    <Container options={{ appKey: "appKey" }} palette={palette} theme={light}>
+    <Container options={{ appId: "<your app ID>" }} palette={palette} theme={light}>
       {/* 添加子组件。 */}
     </Container>
   );
@@ -105,7 +105,7 @@ export function App() {
 
   return (
     <Container
-      options={{ appKey: "appKey" }}
+      options={{ appId: "<your app ID>" }}
       palette={palette}
       theme={theme === "light" ? light : dark}
     >

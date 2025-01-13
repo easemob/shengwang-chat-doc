@@ -21,13 +21,13 @@
 你可以切换为浅色或深色主题：
 
 ```jsx
-import { UIKitProvider } from 'easemob-chat-uikit';
+import { UIKitProvider } from "shengwang-chat-uikit";
 
 const App = () => {
   return (
     <UIKitProvider
       theme={{
-        mode: 'light', // 浅色或深色主题
+        mode: "light", // 浅色或深色主题
       }}
     ></UIKitProvider>
   );
@@ -41,13 +41,13 @@ const App = () => {
 ![img](/images/uikit/chatuikit/web/image.png)
 
 ```javascript
-import { UIKitProvider } from 'agora-chat-uikit';
+import { UIKitProvider } from "shengwang-chat-uikit";
 
 const App = () => {
   return (
     <UIKitProvider
       theme={{
-        primaryColor: '#00CE76', // 16 进制颜色值
+        primaryColor: "#00CE76", // 16 进制颜色值
       }}
     ></UIKitProvider>
   );
@@ -59,13 +59,13 @@ const App = () => {
 默认情况下，组件为大圆角形状。你可以设置 `componentsShape` 修改消息气泡、头像和输入框的圆角。
 
 ```javascript
-import { UIKitProvider } from 'easemob-chat-uikit';
+import { UIKitProvider } from "shengwang-chat-uikit";
 
 const App = () => {
   return (
     <UIKitProvider
       theme={{
-        componentsShape: 'square', // 小圆角（square）或大圆角（ground）
+        componentsShape: "square", // 小圆角（square）或大圆角（round）
       }}
     ></UIKitProvider>
   );
@@ -76,18 +76,18 @@ const App = () => {
 
 单群聊 UIKit 内部使用 SCSS，并定义了一些全局变量。如果你的项目也使用 SCSS，可以通过覆盖这些全局变量修改主题，不过，这种用法并不推荐。
 
-你可以点击[这里](https://github.com/easemob/Easemob-UIKit-web/blob/dev/common/style/themes/default.scss)查看定义的变量。
+你可以点击[这里](https://github.com/shengwang/shengwang-UIKit-web/blob/dev/common/style/themes/default.scss)查看定义的变量。
 
 下文介绍如何修改这些变量。
 
-### 在 Create React App 项目中修改 SCSS 变量 
+### 在 Create React App 项目中修改 SCSS 变量
 
-在使用 Create React App 创建的项目中，你可以创建一个 SCSS 文件用于覆盖默认的变量。在以下示例中，我们将创建的文件命名为 `your-theme.scss`，然后按照下面的顺序引入文件。 
+在使用 Create React App 创建的项目中，你可以创建一个 SCSS 文件用于覆盖默认的变量。在以下示例中，我们将创建的文件命名为 `your-theme.scss`，然后按照下面的顺序引入文件。
 
 ```scss
-@import 'easemob-chat-uikit/style.scss'; // easemob-chat-uikit 主题
-@import 'your-theme.scss'; // 你的主题文件
-@import 'easemob-chat-uikit/components.scss'; // UIKit 组件样式
+@import "shengwang-chat-uikit/style.scss"; // shengwang-chat-uikit 主题
+@import "your-theme.scss"; // 你的主题文件
+@import "shengwang-chat-uikit/components.scss"; // UIKit 组件样式
 ```
 
 ### 通过修改 Webpack 配置覆盖 SCSS 变量
@@ -101,10 +101,10 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          'style-loader',
-          'css-loader',
+          "style-loader",
+          "css-loader",
           {
-            loader: 'sass-loader',
+            loader: "sass-loader",
             options: {
               additionalData: `@import "@/styles/index.scss";`,
             },

@@ -28,19 +28,19 @@
 
 ### 下载项目
 
-可以通过 [GitHub 地址](https://github.com/easemob/react-native-chat-library)下载项目。
+可以通过 [GitHub 地址](https://github.com/shengwang/react-native-chat-library)下载项目。
 
 ### 初始化项目
 
 下载完成之后，打开文件目录。运行以下命令初始化项目：
 
-```sh
+```bash
 yarn && yarn uikit-prepack
 ```
 
 - 对于 iOS 平台，运行 `pod install` 初始化原生部分的依赖配置。
 
-```sh
+```bash
 cd example/ios && pod install
 ```
 
@@ -50,23 +50,23 @@ cd example/ios && pod install
 
 ### 本地配置
 
-登录[环信即时通讯控制台](https://console.easemob.com/user/login)，获取 App Key。将 App Key、用户 ID 和用户 token 填入 `example` 的配置文件 `example/src/env.ts` 中。
+登录[环信即时通讯控制台](https://console.shengwang.com/user/login)，获取 App ID。将 App ID、用户 ID 和用户 token 填入 `example` 的配置文件 `example/src/env.ts` 中。
 
 例如：
 
-```js
+```javascript
 export const useSendBox = false;
 export const isDevMode = true;
-export const appKey = "xxx";
-export const accountType = "easemob"; // agora or easemob
+export const appId = "xxx";
+export const accountType = "shengwang"; // agora or shengwang
 export const agoraAppId = "xxx";
 export const fcmSenderId = "xxx";
 export const account = [{ id: "xxx", token: "xxx" }];
 ```
 
-手动设置区域，目前支持国内和海外。配置文件在 `packages/react-native-chat-uikit/src/config.local.ts`
+手动设置区域，目前支持国内和海外。配置文件在 `packages/react-native-shengwang-chat-uikit/src/config.local.ts`
 
-```js
+```javascript
 export const language = "zh-Hans"; // 'en' or 'zh-Hans'
 export const release_area = "china"; // 'china' or 'global'
 ```
@@ -75,13 +75,13 @@ export const release_area = "china"; // 'china' or 'global'
 
 在 debug 模式下，运行本地服务，在调试过程中可以修改 JavaScript 文件，查看修改后的效果。
 
-```sh
+```bash
 yarn run ios
 ```
 
 或者
 
-```sh
+```bash
 yarn run android
 ```
 

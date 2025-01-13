@@ -8,7 +8,7 @@
 
 消息复制是指用户可以将一条消息复制到剪贴板。消息复制可以帮助用户将消息保存到其他地方，或将其粘贴到其他应用程序中。
 
-![img](/images/uikit/chatuikit/feature/web/message/message_copy.png) 
+![img](/images/uikit/chatuikit/feature/web/message/message_copy.png)
 
 ## 消息删除
 
@@ -80,11 +80,11 @@ features.chat.message.reply = false;
 
 该功能在 UIKit 里的 `TextMessage` 组件中。
 
-![img](/images/uikit/chatuikit/feature/web/message/message_translate.png) 
+![img](/images/uikit/chatuikit/feature/web/message/message_translate.png)
 
 #### 如何使用
 
-1. 使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已申请试用该功能。
+1. 使用该特性前，请确保在[声网即时通信控制台](https://console.easemob.com/user/login)上已申请试用该功能。
 
 消息翻译特性默认开启，若要在全局配置中关闭，可以进行如下设置：
 
@@ -108,11 +108,11 @@ features.chat.message.translate = false;
 
 该功能在 UIKit 里的消息组件中，如 `TextMessage`、`AudioMessage`、`FileMessage` 等。
 
-![img](/images/uikit/chatuikit/feature/web/message/message_reactions.png) 
+![img](/images/uikit/chatuikit/feature/web/message/message_reactions.png)
 
 #### 如何使用
 
-使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
+使用该特性前，请确保在[声网即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
 
 表情回复特性默认开启，若要在全局配置中关闭，可以进行如下设置：
 
@@ -128,11 +128,11 @@ features.chat.message.reaction = false;
 
 该功能在 UIKit 里的 `TextMessage` 组件中。
 
-![img](/images/uikit/chatuikit/feature/web/message/message_thread.png) 
+![img](/images/uikit/chatuikit/feature/web/message/message_thread.png)
 
 #### 如何使用
 
-1. 使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
+1. 使用该特性前，请确保在[声网即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
 
 消息话题特性默认开启，若要在全局配置中关闭，可以进行如下设置：
 
@@ -148,7 +148,7 @@ features.chat.message.thread = false;
 
 该功能在 UIKit 里的消息组件中，如 `TextMessage`、`AudioMessage`、`FileMessage` 等。
 
-![img](/images/uikit/chatuikit/feature/web/message/messages_forward.png) 
+![img](/images/uikit/chatuikit/feature/web/message/messages_forward.png)
 
 #### 如何使用
 
@@ -205,7 +205,7 @@ features.chat.message.select = false;
 
 该功能在 UIKit 里的消息组件中，如 `TextMessage`、`AudioMessage`、`FileMessage` 等。
 
-![img](/images/uikit/chatuikit/feature/web/message/message_forward.png) 
+![img](/images/uikit/chatuikit/feature/web/message/message_forward.png)
 
 #### 如何使用
 
@@ -224,14 +224,14 @@ features.chat.message.forward = false;
 <Chat
   messageListProps={{
     messageProps: {
-        onForwardMessage: (msg) => {
-            forwardedMessages = {...msg}
-            forwardedMessages.id = Date.now() + ""; // 设置新的消息 ID
-            forwardedMessages.from = rootStore.client.user; // 设置为自己的用户 ID
-            setContactListVisible(true); // 显示联系人组件
-        }
-  }
-}}
+      onForwardMessage: (msg) => {
+        forwardedMessages = { ...msg };
+        forwardedMessages.id = Date.now() + ""; // 设置新的消息 ID
+        forwardedMessages.from = rootStore.client.user; // 设置为自己的用户 ID
+        setContactListVisible(true); // 显示联系人组件
+      },
+    },
+  }}
 ></Chat>
 
 // 联系人组件与合并转发的相同
@@ -243,7 +243,7 @@ features.chat.message.forward = false;
 
 目前，单群聊 UIKit 支持消息置顶。该功能在 UIKit 的消息组件中，如 `TextMessage`、`AudioMessage`、`FileMessage` 等，置顶消息列表功能在 `PinnedMessage` 组件中。
 
-![img](/images/uikit/chatuikit/feature/web/message/message_pin.png) 
+![img](/images/uikit/chatuikit/feature/web/message/message_pin.png)
 
 #### 如何使用
 
@@ -260,7 +260,7 @@ features.chat.message.pin = false;
 
 该功能在 UIKit 里的 `Typing` 组件中。
 
-![img](/images/uikit/chatuikit/feature/web/common/typing_indicator.png) 
+![img](/images/uikit/chatuikit/feature/web/common/typing_indicator.png)
 
 #### 如何使用
 
@@ -273,4 +273,3 @@ features.chat.messageInput.typing = false;
 #### 自定义
 
 本功能使用 SDK 的透传消息实现，详见 [SDK 相关文档](/document/product/typing_indication.html)。
-

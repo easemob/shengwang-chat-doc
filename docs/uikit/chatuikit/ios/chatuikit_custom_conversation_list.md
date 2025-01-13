@@ -14,7 +14,7 @@
 
 会话列表相关功能，详见[功能介绍文档](chatfeature_conversation.html)。
 
-你可以配置会话列表页面的导航栏、会话列表项。详见 [ConversationListController.swift](https://github.com/easemob/easemob-uikit-ios/blob/main/Sources/EaseChatUIKit/Classes/UI/Components/Conversation/Controllers/ConversationListController.swift)。
+你可以配置会话列表页面的导航栏、会话列表项。详见 [ConversationListController.swift](https://github.com/AgoraIO-Usecase/ShengwangChat-ios/blob/main/Sources/EaseChatUIKit/Classes/UI/Components/Conversation/Controllers/ConversationListController.swift)。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/ios/custom_conversation_list.png" title="会话列表" />
@@ -24,7 +24,7 @@
 
 会话列表页面、聊天页面、联系人列表页面、群详情页面和联系人详情页面的导航栏均使用 `EaseChatNavigationBar`。如果会话列表页面的导航栏不满足需求，建议自定义导航栏，重载方法传入自定义的导航类。
 
-1. 在 Demo 中继承 `EaseChatUIKit` 中的 `EaseChatNavigationBar` 类创建自己的会话列表页面导航栏，例如 `CustomConversationNavigationBar`。
+1. 在 Demo 中继承 `ShengwangChatUIKit` 中的 `EaseChatNavigationBar` 类创建自己的会话列表页面导航栏，例如 `CustomConversationNavigationBar`。
 2. 重载 `createNavigation()` 方法并返回你使用 `CustomConversationNavigationBar` 创建的对象。示例代码如下：
 
 ```swift
@@ -95,7 +95,7 @@
 
 ## 自定义会话列表
 
-自定义会话列表 TableView，需要重载会话列表页面中的 `createList` 方法后，返回你继承 `EaseChatUIKit` 中 `ConversationList` 后的类对象。关于在导航栏中实现业务逻辑，详见 `ConversationList.swift` 类。示例代码如下：
+自定义会话列表 TableView，需要重载会话列表页面中的 `createList` 方法后，返回你继承 `ShengwangChatUIKit` 中 `ConversationList` 后的类对象。关于在导航栏中实现业务逻辑，详见 `ConversationList.swift` 类。示例代码如下：
 
 ```swift
     override open func createList() -> ConversationList {
@@ -107,7 +107,7 @@
 
 要自定义会话列表中列表项的内容，你需要执行以下步骤：
 
-1. 继承 `EaseChatUIKit` 中的 `ConversationCell` 类创建新的自定义类 `CustomConversationCell`，然后进行如下代码设置：
+1. 继承 `ShengwangChatUIKit` 中的 `ConversationCell` 类创建新的自定义类 `CustomConversationCell`，然后进行如下代码设置：
 
 ```swift
     ComponentsRegister.shared.ConversationCell = CustomConversationCell.self

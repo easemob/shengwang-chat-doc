@@ -2,26 +2,26 @@
 
 <Toc />
 
-`easemob-chat-uikit` 提供 `UIKitProvider` 组件管理数据。`UIKitProvider` 不渲染任何 UI, 只用于为其他组件提供全局的 context，自动监听 SDK 事件, 在组件树中向下传递数据来驱动组件更新。单群聊 UIKit 中其他组件必须用 `UIKitProvider` 包裹。
+`shengwang-chat-uikit` 提供 `UIKitProvider` 组件管理数据。`UIKitProvider` 不渲染任何 UI, 只用于为其他组件提供全局的 context，自动监听 SDK 事件, 在组件树中向下传递数据来驱动组件更新。单群聊 UIKit 中其他组件必须用 `UIKitProvider` 包裹。
 
 ## 使用示例
 
 ```jsx
 import React from 'react';
-import { UIKitProvider } from 'easemob-chat-uikit';
-import 'easemob-chat-uikit/style.css';
+import { UIKitProvider } from 'shengwang-chat-uikit';
+import 'shengwang-chat-uikit/style.css';
 import ChatApp from './ChatApp'
 ReactDOM.createRoot(document.getElementById('root') as Element).render(
   <div>
     <UIKitProvider
       initConfig={{
-        appKey: 'your app key',
+        appId: 'your appId',
         userId: 'userId',
         token: 'token',
         translationTargetLanguage: 'zh-Hans', // 翻译功能的目标语言
         useUserInfo: true, // 是否使用用户属性功能展示头像昵称（UIKit 内部会获取用户属性，需要用户自己设置）
       }}
-      // 查看所有 UI 文本: https://github.com/easemob/Easemob-UIKit-web/tree/dev/local
+      // 查看所有 UI 文本: https://github.com/shengwang/shengwang-UIKit-web/tree/dev/local
       local={{
         fallbackLng: 'en',
         lng: 'en',
@@ -100,8 +100,8 @@ UIKit 直接使用不做任何设置时，默认展示用户的用户 ID, 头像
 
 ```javascript
 rootStore.client.updateUserInfo({
-  nickname: 'nickname',
-  avatarurl: 'https://example.com/image',
+  nickname: "nickname",
+  avatarurl: "https://example.com/image",
 });
 ```
 
@@ -124,18 +124,18 @@ rootStore.client.updateUserInfo({
 然后监听联系人数据，自己获取每个用户的头像和昵称后设置到 UIKit 中，示例代码如下所示：
 
 ```jsx
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 useEffect(() => {
   if (rootStore.loginState) {
     // 筛选出没有用户信息的用户 ID。
     const userIds = rootStore.addressStore.contacts
-      .filter(item => !rootStore.addressStore.appUsersInfo[item.id])
-      .map(item => {
+      .filter((item) => !rootStore.addressStore.appUsersInfo[item.id])
+      .map((item) => {
         return item.id;
       });
     // 从自己的服务器获取用户头像昵称。
-    getUserInfo(userIds).then(usersInfo => {
+    getUserInfo(userIds).then((usersInfo) => {
       //usersInfo: {[userId]: {avatarurl: '', nickname: '', userId: ''}}
       rootStore.addressStore.setAppUserInfo(usersInfo);
     });
@@ -156,12 +156,12 @@ useEffect(() => {
   if (rootStore.loginState) {
     const groupIds =
       rootStore.addressStore.groups
-        .filter(item => !item.avatarUrl)
-        .map(item => {
+        .filter((item) => !item.avatarUrl)
+        .map((item) => {
           return item.groupid;
         }) || [];
     // 获取群组头像
-    getGroupAvatar(groupIds).then(res => {
+    getGroupAvatar(groupIds).then((res) => {
       // res: {[groupId]: 'avatarurl'}
       for (let groupId in res) {
         rootStore.addressStore.updateGroupAvatar(groupId, res[groupId]);
@@ -170,7 +170,6 @@ useEffect(() => {
   }
 }, [rootStore.loginState, rootStore.addressStore.groups.length]);
 ```
-
 
 ## UIKitProvider 属性概览
 
@@ -187,7 +186,7 @@ useEffect(() => {
       <td style=font-size:15px>
         ProviderProps['initConfig']
       </td>
-	  <td style=font-size:15px>初始化参数，如设置 appKey、userId、token、是否使用用户属性、翻译的目标语言</td>
+	  <td style=font-size:15px>初始化参数，如设置 appId、userId、token、是否使用用户属性、翻译的目标语言</td>
       </tr>
 	   <tr>
 	   <td style=font-size:15px>
