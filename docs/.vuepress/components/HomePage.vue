@@ -240,7 +240,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { useRouter } from "vue-router";
 import HopeHomePage from "vuepress-theme-hope/components/HomePage.js";
 import HeroSection from "./CustomHero.vue";
@@ -253,6 +253,14 @@ const frontmatter = usePageFrontmatter();
 const router = useRouter();
 const starter = frontmatter.value.starter || [];
 const projects = frontmatter.value.projects || [];
+
+onMounted(() => {
+  document.getElementsByClassName("navbar-center")[0].style.display = "none";
+});
+
+onUnmounted(() => {
+  document.getElementsByClassName("navbar-center")[0].style.display = "";
+});
 
 const downloadTableColumns = [
   {
@@ -415,6 +423,10 @@ const activeTab = ref(0);
   display: block;
 }
 
+.table th {
+  padding: 13.75px 0 !important;
+}
+
 .table th,
 .table td {
   border: 1px solid #e0e0e0;
@@ -422,7 +434,7 @@ const activeTab = ref(0);
   font-size: 14px;
   white-space: nowrap;
   min-width: 80px;
-  padding: 15px 0;
+  padding: 11.5px 0;
 }
 
 .table th:nth-child(5),

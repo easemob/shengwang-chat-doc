@@ -4,7 +4,7 @@ title: 导航页
 heroText: false
 tagline: false
 starter:
-  - title: "客户端"
+  - title: "客户端 SDK"
     desc: "从下面的列表中选择合适你的 SDK 构建即时通讯应用，点击“快速开始”按钮将引导你在 30 分钟内实现即时通讯消息收发。"
     platform:
       - icon: /sdk/android.svg
@@ -43,6 +43,29 @@ starter:
         link: /document/windows/quickstart.html
         text: Windows  
         desc: "学习使用 Windows SDK 构建即时通讯的 Windows 应用程序。"
+  - title: "客户端 UIKit"
+    desc: "从下面的列表中选择合适你的 UIKIT 构建即时通讯应用，点击“快速开始”按钮将引导你在 30 分钟内实现即时通讯应用。"
+    platform:
+      - icon: /sdk/android.svg
+        link: /uikit/chatuikit/android/chatuikit_overview.html
+        text: Android
+        desc: "学习使用 Android UIKit 构建即时通讯的 Android 应用程序。"
+      - icon: /sdk/iOS.svg
+        link: /uikit/chatuikit/ios/chatuikit_overview.html
+        text: iOS 
+        desc: "学习使用 iOS UIKit 构建即时通讯的 iOS 应用程序。"
+      - icon: /sdk/web.svg
+        link: /uikit/chatuikit/web/chatuikit_overview.html
+        text: Web
+        desc: "学习使用 Web UIKit 构建即时通讯的 Web 应用程序。"
+      - icon: /sdk/flutter.svg
+        link: /uikit/chatuikit/flutter/chatuikit_overview.html
+        text: Flutter
+        desc: "学习使用 Flutter UIKit 构建即时通讯的 跨平台 应用程序。"
+      - icon: /sdk/react.svg
+        link: /uikit/chatuikit/react-native/chatuikit_overview.html
+        text: React Native
+        desc: "学习使用 React-Native UIKit 构建即时通讯的 跨平台 应用程序。"
   - title: "服务端 API"
     desc: "从下面的列表中选择合适你的 SDK 构建即时通讯应用，点击“快速开始”按钮将引导你在 30 分钟内实现即时通讯消息收发。"
     platform:
