@@ -31,7 +31,6 @@
 | isLoginBefore | 检查当前用户是否登录。 |
 | getAccessToken | 获取登录 token。 |
 | createAccount | 注册新用户（开放注册）。 |
-| login | 通过密码或环信 token 登录 IM 服务器。 |
 | loginWithToken | 通过用户 ID 和 token 登录。 |
 | loginWithAgoraToken | 通过用户 ID 和 token 登录。 |
 | renewAgoraToken | 更新声网 token。 |
