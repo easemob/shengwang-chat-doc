@@ -179,38 +179,38 @@
 - `chatClient` 提供聊天室管理的方法，如加入和离开聊天室、获取聊天室列表，以及管理成员权限。
 - `EventHandler` 类提供聊天室事件监听。
 
-  | 方法 | 描述 |
-  | :-------------------------------- | :----------------- |
-  | joinChatRoom | 加入聊天室。 |
-  | leaveChatRoom | 离开聊天室。 |
-  | getChatRooms | 分页获取聊天室列表。 |
-  | listChatRoomMembers | 分页列出聊天室的所有成员。 |
-  | modifyChatRoom | 修改聊天室详情。 |
-  | fetchChatRoomAnnouncement | 获取聊天室公告。 |
-  | updateChatRoomAnnouncement | 更新聊天室公告。 |
-  | setChatRoomAdmin | 设置聊天室管理员。该方法只有聊天室所有者才有权限调用。 |
-  | removeChatRoomAdmin | 移除聊天室管理员。该方法只有聊天室所有者才有权限调用。 |
-  | getChatRoomAdmin | 获取聊天室的所有管理员。 |
-  | blockChatRoomMember | 添加单个成员至聊天室黑名单。仅聊天室所有者和管理员有权限调用该方法。 |
-  | unblockChatRoomMember | 将单个用户从聊天室黑名单移除。仅聊天室所有者和管理员有权限调用该方法。 |
-  | blockChatRoomMembers | 批量添加成员至聊天室黑名单。仅聊天室所有者和管理员有权限调用该方法。 |
-  | unblockChatRoomMembers | 批量将成员从聊天室黑名单移除。仅聊天室所有者和管理员有权限调用该方法。 |
-  | getChatRoomBlocklist | 获取聊天室黑名单。 |
-  | muteChatRoomMember | 禁止聊天室用户发言。该方法只有聊天室所有者才有权限调用。 |
-  | unmuteChatRoomMember | 解除对聊天室用户的禁言。仅聊天室所有者和管理员有权限调用该方法。 |
-  | disableSendChatRoomMsg | 聊天室全员禁言。仅聊天室创建者和管理员可调用此方法。 |
-  | enableSendChatRoomMsg | 聊天室解除全员禁言。仅聊天室创建者和管理员可调用此方法。 |
-  | getChatRoomMutelist | 获取聊天室所有被禁言成员。 |
-  | addUsersToChatRoomAllowlist | 批量增加聊天室白名单成员。仅聊天室所有者和管理员有权限调用该方法。 |
-  | removeChatRoomAllowlistMember | 批量移除聊天室白名单成员。仅聊天室所有者和管理员有权限调用该方法。 |
-  | isInChatRoomAllowlist | 查询聊天室成员是否是在白名单中。普通成员可查询自己是否在聊天室白名单中；聊天室所有者和管理员可查询其他成员是否在白名单中。 |
-  | getChatRoomAllowlist | 获取聊天室白名单列表。仅聊天室所有者和管理员有权调用该方法。 |
-  | setChatRoomAttribute | 设置单个聊天室自定义属性。 |
-  | setChatRoomAttributes | 批量设置聊天室属性。 |
-  | removeChatRoomAttribute | 移除单个聊天室自定义属性。 |
-  | removeChatRoomAttributes | 批量移除聊天室属性。 |
-  | getChatRoomAttributes | 获取聊天室全部的自定义属性。 |
-  | getJoinedChatRooms | 获取用户加入的聊天室列表 |
+| 方法 | 描述 |
+| :-------------------------------- | :----------------- |
+| joinChatRoom | 加入聊天室。 |
+| leaveChatRoom | 离开聊天室。 |
+| getChatRooms | 分页获取聊天室列表。 |
+| listChatRoomMembers | 分页列出聊天室的所有成员。 |
+| modifyChatRoom | 修改聊天室详情。 |
+| fetchChatRoomAnnouncement | 获取聊天室公告。 |
+| updateChatRoomAnnouncement | 更新聊天室公告。 |
+| setChatRoomAdmin | 设置聊天室管理员。该方法只有聊天室所有者才有权限调用。 |
+| removeChatRoomAdmin | 移除聊天室管理员。该方法只有聊天室所有者才有权限调用。 |
+| getChatRoomAdmin | 获取聊天室的所有管理员。 |
+| blockChatRoomMember | 添加单个成员至聊天室黑名单。仅聊天室所有者和管理员有权限调用该方法。 |
+| unblockChatRoomMember | 将单个用户从聊天室黑名单移除。仅聊天室所有者和管理员有权限调用该方法。 |
+| blockChatRoomMembers | 批量添加成员至聊天室黑名单。仅聊天室所有者和管理员有权限调用该方法。 |
+| unblockChatRoomMembers | 批量将成员从聊天室黑名单移除。仅聊天室所有者和管理员有权限调用该方法。 |
+| getChatRoomBlocklist | 获取聊天室黑名单。 |
+| muteChatRoomMember | 禁止聊天室用户发言。该方法只有聊天室所有者才有权限调用。 |
+| unmuteChatRoomMember | 解除对聊天室用户的禁言。仅聊天室所有者和管理员有权限调用该方法。 |
+| disableSendChatRoomMsg | 聊天室全员禁言。仅聊天室创建者和管理员可调用此方法。 |
+| enableSendChatRoomMsg | 聊天室解除全员禁言。仅聊天室创建者和管理员可调用此方法。 |
+| getChatRoomMutelist | 获取聊天室所有被禁言成员。 |
+| addUsersToChatRoomAllowlist | 批量增加聊天室白名单成员。仅聊天室所有者和管理员有权限调用该方法。 |
+| removeChatRoomAllowlistMember | 批量移除聊天室白名单成员。仅聊天室所有者和管理员有权限调用该方法。 |
+| isInChatRoomAllowlist | 查询聊天室成员是否是在白名单中。普通成员可查询自己是否在聊天室白名单中；聊天室所有者和管理员可查询其他成员是否在白名单中。 |
+| getChatRoomAllowlist | 获取聊天室白名单列表。仅聊天室所有者和管理员有权调用该方法。 |
+| setChatRoomAttribute | 设置单个聊天室自定义属性。 |
+| setChatRoomAttributes | 批量设置聊天室属性。 |
+| removeChatRoomAttribute | 移除单个聊天室自定义属性。 |
+| removeChatRoomAttributes | 批量移除聊天室属性。 |
+| getChatRoomAttributes | 获取聊天室全部的自定义属性。 |
+| getJoinedChatRooms | 获取用户加入的聊天室列表 |
 
 | 事件            | 描述                   |
 | :-------------- | :--------------------- |
