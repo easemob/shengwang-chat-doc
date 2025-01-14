@@ -135,7 +135,7 @@ SDKClient.Instance.Login(username: Username.text, pwdOrToken: Password.text, cal
   }
 ));
 
-// Password.text中的内容需要由输入密码改为输入token
+// Password.text中的内容需要需输入token
 SDKClient.Instance.LoginWithToken(username: Username.text, pwdOrToken: Password.text, callback: new CallBack(
     onSuccess: () =>
     {

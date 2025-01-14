@@ -51,7 +51,7 @@ SDKClient.Instance.Login(username, passwd,
 | 202    | USER_AUTHENTICATION_FAILED            | 用户鉴权失败：<br/> - 若使用用户 ID 和密码登录，用户 ID 或密码不正确时会上报改错误；<br/> - 若使用用户 ID 和用户 token 登录，一般为用户 token 无效或已过期。 |
 | 203    | USER_ALREADY_EXIST                    | 用户已经存在：注册用户时，传入的的用户 ID 已经存在会提示该错误。 |
 | 204    | USER_NOT_FOUND                        | 用户不存在：例如，登录或获取用户会话列表时，用户 ID 不存在。 |
-| 205    | USER_ILLEGAL_ARGUMENT                 | 用户参数不正确：例如，创建用户或更新用户属性时，用户 ID 为空或无效。 |
+| 205    | USER_ILLEGAL_ARGUMENT                 | 用户参数不正确：比如创建用户 ID 时不符合格式要求， 或者更新用户属性时用户参数为空等。 |
 | 206    | USER_LOGIN_ANOTHER_DEVICE             | 用户在其他设备登录：如果未开启多设备登录，则在其他设备登录会将当前登录设备踢下线，用户会在当前设备收到该错误。 |
 | 207    | USER_REMOVED                          | 用户已被注销：当前的登录用户 ID 从[声网控制台](https://console.shengwang.cn/overview)删除会收到该错误。 |
 | 208    | USER_REG_FAILED                       | 用户注册失败：例如，注册用户之前未开启开放注册功能等原因。|
@@ -68,7 +68,7 @@ SDKClient.Instance.Login(username, passwd,
 | 300    | SERVER_NOT_REACHABLE                  | 服务器不可达：例如，发送或撤回消息时，如果 SDK 与消息服务器未保持连接，会返回该错误；操作群组、好友等请求时因网络不稳定导致失败，也会返回该错误。|
 | 301    | SERVER_TIMEOUT                        | 请求服务超时：如果调用 API 在特定时间内服务器未响应则返回该错误，一般为 30 秒或 60 秒。  |
 | 302    | SERVER_BUSY                           | 服务器忙碌：服务器当前忙碌会返回该错误，建议稍后再尝试请求。 |
-| 303    | SERVER_UNKNOWN_ERROR                  | 服务请求的通用错误：请求服务器未成功时的默认错误。  |
+| 303    | SERVER_UNKNOWN_ERROR                  | 服务请求的通用错误：请求服务器未成功时的默认错误。该错误发生情况较多，需要根据日志进一步排查。  |
 | 304    | SERVER_GET_DNSLIST_FAILED             | 获取服务器配置信息失败：SDK 获取当前应用的服务器配置时失败。  |
 | 305    | SERVER_SERVICE_RESTRICTED             | 当前 app 被禁用：若在 app 被禁用时调用 API 会返回该错误。 |
 | 400    | FILE_NOT_FOUND                        | 文件未找到：例如，用户获取不到日志文件，或者下载附件失败时提示该错误。 |
@@ -78,6 +78,7 @@ SDKClient.Instance.Login(username, passwd,
 | 404    | FILE_DELETE_FAILED                    | 删除日志文件错误：通过 API 获取日志文件时会将旧的日志文件删除，然后生成新的日志文件。如果删除旧日志文件失败会提示该错误。 |
 | 405    | FILE_TOO_LARGE                        | 文件太大：例如，消息附件或群共享文件超过文件大小限制时提示该错误。 |
 | 406    | FILE_CONTENT_IMPROPER                 | 文件内容不合规：例如，消息附件或群共享文件内容不合规时提示该错误。|
+| 407    | FILE_IS_EXPIRED                 | 文件已过期：例如，用户下载过期的消息附件或群共享文件时提示该错误。消息附件和群共享文件默认可存储 7 天。要提升存储时间上限，请联系商务。 |
 | 500    | MESSAGE_INVALID                       | 消息异常：例如，发送消息时，若消息对象或消息 ID 为空或者消息的发送方 ID 与当前登录 ID 不同则会提示该错误。 |
 | 501    | MESSAGE_INCLUDE_ILLEGAL_CONTENT       | 消息含有非法内容：如果消息被过滤系统识别为非法消息时返回该错误。|
 | 502    | MESSAGE_SEND_TRAFFIC_LIMIT            | 消息限流：发送消息过快时提示该错误，建议降低发送频率或者减少消息内容的大小。 |

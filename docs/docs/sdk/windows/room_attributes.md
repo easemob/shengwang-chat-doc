@@ -8,7 +8,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM SDK 提供 `Room`、`IRoomManager` 和 `IRoomManagerDelegate` 类用于聊天室管理，支持你通过调用 API 在项目中实现如下功能：
+即时通讯 IM SDK 提供 `Room`、`IRoomManager` 和 `IRoomManagerDelegate` 类用于聊天室管理，支持你通过调用 API 在项目中实现如下功能：
 
 - 获取和更新聊天室基本属性；
 - 获取聊天室自定义属性；
@@ -20,7 +20,7 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)；
-- 了解环信即时通讯 IM 的 [使用限制](/product/limitation.html)；
+- 了解即时通讯 IM 的 [使用限制](limitation.html)；
 - 了解聊天室的数量限制，详见 [套餐包详情](https://www.easemob.com/pricing/im)。
 
 ## 实现方法

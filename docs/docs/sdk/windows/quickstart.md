@@ -1,8 +1,8 @@
-# 环信 IM Windows SDK 快速入门
+# 即时通讯 IM 快速开始
 
 <Toc />
 
-本文介绍如何快速集成环信 IM Windows SDK 实现发送和接收单聊文本消息。
+本文介绍如何快速集成即时通讯 IM Windows SDK 实现发送和接收单聊文本消息。
 
 ## 技术原理
 
@@ -13,9 +13,9 @@
 如上图所示，发送和接收单聊消息的步骤如下：
 
 1. 客户端向你的应用服务器请求 Token，你的应用服务器返回 Token。
-2. 客户端 A 和客户端 B 使用获得的 Token 登录环信即时通讯系统。
-3. 客户端 A 发送消息到环信即时通讯服务器。
-4. 环信即时通讯服务器将消息发送到客户端 B，客户端 B 接收消息。
+2. 客户端 A 和客户端 B 使用获得的 Token 登录即时通讯系统。
+3. 客户端 A 发送消息到即时通讯服务器。
+4. 即时通讯服务器将消息发送到客户端 B，客户端 B 接收消息。
 
 ## 前提条件
 
@@ -25,7 +25,8 @@
 - Visual Studio IDE 2019 或以上；
 - .Net Framework 4.5.2 或以上；
 - 目前 Windows SDK 仅支持 64 位运行模式；
-- 有效的环信即时通讯 IM 开发者账号和 App Id，见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
+- 有效的即时通讯 IM 开发者账号和 App ID，详见 [开通即时通讯服务](enable_im.html)。
+- 如果你的网络环境部署了防火墙，请联系声网技术支持设置白名单。
 
 ## 项目设置
 
@@ -40,7 +41,7 @@
 3. 双击打开 `windows-example.sln` 打开 Visual Studio 开发工具；
 4. 在 Visual Studio 上部的下拉菜单中，选择解决方案配置为: `Debug`；解决方案平台为: x64;
 
-### 2. 集成环信即时通讯 SDK
+### 2. 集成即时通讯 SDK
 
 你可以参考以下步骤集成 SDK：
 
@@ -76,7 +77,7 @@ using AgoraChat.MessageBody;
 在 `InitSDK` 函数中添加以下代码完成 SDK 初始化：
 
 ```csharp
-var options = Options.InitOptionsWithAppId("YourAppId"); //此处填入你的appId
+var options = Options.InitOptionsWithAppId("YourAppId"); //将该参数设置为你的 App Id
 options.UsingHttpsOnly = true;
 SDKClient.Instance.InitWithOptions(options);
 ```
@@ -99,7 +100,7 @@ SDKClient.Instance.CreateAccount(username, password, callback: new CallBack(
 ```
 
 :::tip
-该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用；正式环境中应使用服务器端调用 Restful API 注册，具体见：[注册单个用户](https://docs-im.easemob.com/ccim/rest/accountsystem#注册单个用户)。
+该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用。正式环境中，需要[在声网控制台中创建用户或调用 Restful API 注册用户](login.html#用户注册)。
 :::
 
 ### 5. 登录账号
@@ -118,7 +119,7 @@ SDKClient.Instance.Login(UserIdTextBox.Text,  PasswordTextBox.Text, false, callb
      }
 ));
 
-// 说明：从1.3.0版本之后，建议使用LoginWithToken替代Login。PasswordTextBox中的内容需要由输入密码改为输入token
+// PasswordTextBox中的内容需输入token
 SDKClient.Instance.LoginWithToken(UserIdTextBox.Text, PasswordTextBox.Text, callback: new CallBack(
     onSuccess: () =>
     {
