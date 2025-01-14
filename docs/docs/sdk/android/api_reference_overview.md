@@ -180,34 +180,6 @@
 | CallBack#onError()        | 发生错误时的回调，详见 Error 。 |
 | CallBack#onProgress()  | 进度更新的回调。                                  |
 
-## 联系人管理
-
-`ContactManager` 类提供聊天联系人管理方法，例如添加、获取、修改和删除联系人。
-
-| 方法名称                                                                                                 | 描述                      |
-| ---------------------------------------------------------------------------------------------------- | ----------------------- |
-| ContactManager#asyncAddContact()                                | 添加联系人。                  |
-| ContactManager#asyncDeleteContact()                          | 删除好友。                   |
-| ContactManager#asyncGetAllContactsFromServer()    | 从服务器获取所有的好友。            |
-| ContactManager#asyncAddUserToBlackList()                | 把指定用户加入到黑名单中。           |
-| ContactManager#asyncSaveBlackList()                          | 上传黑名单列表到服务器。            |
-| ContactManager#asyncRemoveUserFromBlackList()      | 将用户从黑名单中移除。             |
-| ContactManager#getBlackListUsernames()                    | 从本地获取黑名单列表。             |
-| ContactManager#asyncGetBlackListFromServer()        | 从服务器获取黑名单列表。            |
-| ContactManager#asyncAcceptInvitation()                    | 接受加好友的邀请。               |
-| ContactManager#asyncDeclineInvitation()                  | 拒绝加好友的邀请。               |
-| ContactManager#getContactsFromLocal()                      | 从数据库获取好友列表。             |
-| ContactManager#asyncGetSelfIdsOnOtherPlatform()  | 从服务器获取登录用户在其他设备上登录的 ID。 |
-| ContactManager#setContactListener()                          | 注册联系人监听。                |
-
-| 事件                                                                                | 描述                       |
-| ---------------------------------------------------------------------------------- | ------------------------ |
-| ContactListener#onContactAdded()                    | 增加联系人时回调此方法。             |
-| ContactListener#onContactDeleted()                | 删除联系人时回调此方法。被删除的用户收到该回调。 |
-| ContactListener#onContactInvited()                | 收到好友邀请。                  |
-| ContactListener#onFriendRequestAccepted()  | 同意好友请求。发送好友请求的用户收到该事件。   |
-| ContactListener#onFriendRequestDeclined()  | 拒绝好友请求。发送好友请求的用户收到该事件。   |
-
 ## 群组
 
 `GroupManager` 类提供群组管理方法，例如群组创建和解散以及成员管理。
@@ -284,7 +256,7 @@
 | GroupChangeListener#onAnnouncementChanged()                      | 群公告更新回调。                                                                                                  |
 | GroupChangeListener#onSharedFileAdded()                              | 群组中添加共享文件的回调。                                                                                             |
 | GroupChangeListener#onSharedFileDeleted()                          | 群组中删除共享文件回调。                                                                                              |
-| GroupChangeListener#onSpecificationChanged()                    | 群组详情更新回调，需调用 `GroupManager#asyncGetGroupFromServer() asyncGetGroupFromServer` 获取最新群组信息。 |
+| GroupChangeListener#onSpecificationChanged()                    | 群组详情更新回调，需调用 `GroupManager#asyncGetGroupFromServer()` 获取最新群组信息。 |
 | GroupChangeListener#onStateChanged()                                    | 群组禁用或启动状态回调。                                                                                              |
 
 ## 子区
@@ -377,6 +349,34 @@
 | ChatRoomChangeListener#onSpecificationChanged()            | 聊天室信息有更新。               |
 | ChatRoomChangeListener#onAttributesUpdate()                    | 聊天室自定义属性（key-value）有更新。 |
 | ChatRoomChangeListener#onAttributesRemoved()                  | 聊天室自定义属性被移除。            |
+
+## 联系人
+
+`ContactManager` 类提供聊天联系人管理方法，例如添加、获取、修改和删除联系人。
+
+| 方法名称                                                                                                 | 描述                      |
+| ---------------------------------------------------------------------------------------------------- | ----------------------- |
+| ContactManager#asyncAddContact()                                | 添加联系人。                  |
+| ContactManager#asyncDeleteContact()                          | 删除好友。                   |
+| ContactManager#asyncGetAllContactsFromServer()    | 从服务器获取所有的好友。            |
+| ContactManager#asyncAddUserToBlackList()                | 把指定用户加入到黑名单中。           |
+| ContactManager#asyncSaveBlackList()                          | 上传黑名单列表到服务器。            |
+| ContactManager#asyncRemoveUserFromBlackList()      | 将用户从黑名单中移除。             |
+| ContactManager#getBlackListUsernames()                    | 从本地获取黑名单列表。             |
+| ContactManager#asyncGetBlackListFromServer()        | 从服务器获取黑名单列表。            |
+| ContactManager#asyncAcceptInvitation()                    | 接受加好友的邀请。               |
+| ContactManager#asyncDeclineInvitation()                  | 拒绝加好友的邀请。               |
+| ContactManager#getContactsFromLocal()                      | 从数据库获取好友列表。             |
+| ContactManager#asyncGetSelfIdsOnOtherPlatform()  | 从服务器获取登录用户在其他设备上登录的 ID。 |
+| ContactManager#setContactListener()                          | 注册联系人监听。                |
+
+| 事件                                                                                | 描述                       |
+| ---------------------------------------------------------------------------------- | ------------------------ |
+| ContactListener#onContactAdded()                    | 增加联系人时回调此方法。             |
+| ContactListener#onContactDeleted()                | 删除联系人时回调此方法。被删除的用户收到该回调。 |
+| ContactListener#onContactInvited()                | 收到好友邀请。                  |
+| ContactListener#onFriendRequestAccepted()  | 同意好友请求。发送好友请求的用户收到该事件。   |
+| ContactListener#onFriendRequestDeclined()  | 拒绝好友请求。发送好友请求的用户收到该事件。   |
 
 ## 用户属性
 
