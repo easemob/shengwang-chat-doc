@@ -28,7 +28,7 @@
 ![img](/images/product/enable_im/console_enable_im_projectcreate.png)
 
 :::tip
-如果项目的鉴权机制为**安全模式**，则你需要在初始化 SDK 时填入 Token。详见[获取临时 Token](https://doc.shengwang.cn/doc/rtm2/android/get-started/enable-service#5-获取临时-token) 和[初始配置](https://doc.shengwang.cn/api-ref/rtm2/android/toc-configuration/configuration)。// TODO：添加各端初始配置链接
+如果项目的鉴权机制为**安全模式**，则你需要在初始化 SDK 时填入 Token。详见[获取临时 Token](https://doc.shengwang.cn/doc/rtm2/android/get-started/enable-service#5-获取临时-token)。
 ::: 
 
 ### 现有项目中开通

@@ -2,6 +2,6 @@
 
 <Toc />
 
-[Android 错误码：](/docs/sdk/android/error.html)
+[Android 错误码](/docs/sdk/android/error.html)
 
-[iOS 错误码：](/docs/sdk/ios/error.html)  
+[iOS 错误码](/docs/sdk/ios/error.html)  
