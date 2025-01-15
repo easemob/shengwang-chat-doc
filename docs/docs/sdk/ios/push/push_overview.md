@@ -14,7 +14,21 @@
 
 ## 离线推送高级功能
 
-离线推送的高级功能包括[推送通知方式](push_notification_mode_dnd.html#推送通知方式)、[免打扰模式](push_notification_mode_dnd.html#免打扰模式)和[推送模板](push_display.html#使用推送模板)。默认情况下，这些高级功能在[声网控制台](https://console.shengwang.cn/overview)的**即时通讯 IM > 功能配置 > 推送模板**页面默认开启。**如需关闭推送高级功能必须联系声网商务，因为该操作会删除所有相关配置。**
+如果需要离线推送的高级功能，需在[声网控制台](https://console.shengwang.cn/overview)开启。高级功能包括[推送通知方式](push_notification_mode_dnd.html#推送通知方式)、[免打扰模式](push_notification_mode_dnd.html#免打扰模式)和[推送模板](push_display.html#使用推送模板)。**如需关闭推送高级功能必须联系商务，因为该操作会删除所有相关配置。**
+
+1. 展开控制台左上角下拉框，选择需要开通即时通讯 IM 服务的项目。
+
+2. 点击左侧导航栏的**全部产品**。
+
+3. 在下拉列表中找到**即时通讯 IM** 并点击。
+
+4. 在**即时通讯 IM** 页面，进入**功能配置**标签页。
+
+5. 在**推送模板** 页签下，点击**启用**。
+
+6. 在弹出的对话框中，配置用户相关参数，点击**确定**。
+
+![image](/images/android/push/push_android_enable_push.png)
 
 ## 多设备离线推送策略
 
