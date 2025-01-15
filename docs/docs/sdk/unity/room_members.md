@@ -9,7 +9,7 @@
 即时通讯 IM SDK 提供 `Room`、`IRoomManager` 和 `IRoomManagerDelegate` 类，支持对聊天室成员的管理，包括获取、添加和移出聊天室成员等，主要方法如下：
 
 - 获取聊天室成员列表
-- 将成员移出聊天室
+- 退出聊天室
 - 管理聊天室黑名单
 - 管理聊天室白名单
 - 管理聊天室禁言列表
@@ -86,16 +86,10 @@ options. DeleteMessagesAsExitRoom = false;
 示例代码如下：
 
 ```csharp
-List<string> members = new List<string>();
-members.Add("member1");
-members.Add("member2");
-
 SDKClient.Instance.RoomManager.DeleteRoomMembers(roomId, members, new CallBack(
     onSuccess: () => {
-        Console.WriteLine($"DeleteRoomMembers success.");
     },
     onError: (code, desc) => {
-        Console.WriteLine($"DeleteRoomMembers failed, code:{code}, desc:{desc}");
     }
 ));
 ```
@@ -251,7 +245,7 @@ SDKClient.Instance.RoomManager.MuteRoomMembers(roomId, members, new CallBack(
 
 #### 将成员移出聊天室禁言列表
 
-仅聊天室所有者和管理员可以调用 `UnMuteRoomMembers` 方法将成员移出聊天室禁言列表。被移出的群成员及其他未操作的管理员或者群主将会收到群组事件 `OnMuteListRemovedFromRoom`。
+仅聊天室所有者和管理员可以调用 `UnMuteRoomMembers` 方法将成员移出聊天室禁言列表。被移出的成员及其他未操作的管理员或者聊天室所有者将会收到聊天室事件 `OnMuteListRemovedFromRoom`。
 
 :::tip
 聊天室所有者可对聊天室所有成员解除禁言，聊天室管理员可对聊天室普通成员解除禁言。

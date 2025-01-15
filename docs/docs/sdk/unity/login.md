@@ -52,7 +52,7 @@ SDKClient.Instance.LoginWithToken(username, token,
 );
 ```
 
-1. **用户 ID + 密码**登录是传统的登录方式。用户 ID 和密码均由你的终端用户自行决定，密码需要符合[密码规则要求](/docs/sdk/server-side/account_system.html#注册单个用户)。
+2. **用户 ID + 密码**登录是传统的登录方式。用户 ID 和密码均由你的终端用户自行决定，密码需要符合[密码规则要求](/docs/sdk/server-side/account_system.html#注册单个用户)。
 
 ```csharp
 SDKClient.Instance.Login(username, password,
@@ -114,7 +114,7 @@ SDKClient.Instance.Logout(false,
 ```
 
 :::tip
-1. 如果调用退出方法，在收到 `onSuccess` 回调后才能去调用 IM 相关方法，例如 `Login`。
+如果调用退出方法，在收到 `onSuccess` 回调后才能去调用 IM 相关方法，例如 `Login`。
 :::
 
 ## 账号切换

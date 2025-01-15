@@ -124,7 +124,6 @@ SDKClient.Instance.ContactManager.DeclineInvitation(username, callback: new Call
 
 调用 `DeleteContact` 删除指定联系人。被删除的用户收到 `OnContactDeleted` 回调。删除联系人时会同时删除对方联系人列表中的该用户，建议执行双重确认，以免发生误删操作。删除操作不需要对方同意或者拒绝。
 
-删除好友后，对方会收到 `OnContactDeleted` 回调。
 
 ```csharp
 SDKClient.Instance.ContactManager.DeleteContact(username, callback: new CallBack(

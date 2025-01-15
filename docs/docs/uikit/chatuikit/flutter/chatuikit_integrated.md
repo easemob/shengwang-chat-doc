@@ -105,6 +105,6 @@ class _ConversationsState extends State<Conversations> {
 安卓打包时，需要在 `project/android/app/proguard-rules.pro` 文件中（如不存在，新建一个即可）增加以下代码：
 
 ```dart
--keep class com.hyphenate.** {*;}
--dontwarn  com.hyphenate.**
+-keep class io.agora.** {*;}
+-dontwarn  io.agora.**
 ```

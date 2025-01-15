@@ -9,7 +9,7 @@
 - 子区相关操作；
 - 会话相关操作。
 
-多端登录时，即时通讯 IM 每端默认最多支持 4 个设备同时在线。如需增加支持的设备数量，可以联系声网商务。
+多端登录时，即时通讯 IM 每端默认最多支持 5 个设备同时在线。如需增加支持的设备数量，可以联系声网商务。
 
 单端和多端登录场景下的互踢策略和自动登录时安全检查如下：
 
@@ -171,7 +171,7 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(adelegate);
 
 ```csharp
 Options options = Options.InitOptionsWithAppId("YourAppId");
-ooptions.CustomOSType = 1;
+options.CustomOSType = 1;
 SDKClient.Instance.InitWithOptions(options);
 ```
 

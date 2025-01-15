@@ -92,7 +92,7 @@ SDKClient.Instance.ChatManager.RemoveChatManagerDelegate(myDelegate);
 options.RequireAck = true;
 ```
 
-1. 接收方发送消息已读回执。
+2. 接收方发送消息已读回执。
 
 - 聊天页面未打开时，若有未读消息，进入聊天页面，发送会话已读回执。这种方式可避免发送多个消息已读回执。
 

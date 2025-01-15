@@ -36,8 +36,8 @@ android {
 3. 在 `quick_start/android/app/proguard-rules.pro` 中设置免混淆规则：
 
 ```java
--keep class com.hyphenate.** {*;}
--dontwarn  com.hyphenate.**
+-keep class io.agora.** {*;}
+-dontwarn  io.agora.**
 ```
 
 ### 设置 iOS
