@@ -29,7 +29,7 @@ jobs:
         run: npm install
 
       - name: Build production bundle
-        run: npm run build
+        run: npm run docs:build
 
       # 上传打包资源
       - name: Deploy
