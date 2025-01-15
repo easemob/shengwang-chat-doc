@@ -4,8 +4,6 @@
 
 ## 用户注册
 
-## 用户注册
-
 即时通讯 IM 提供以下两种方式创建用户：
 
 - 调用 [RESTful API](/docs/sdk/server-side/account_system.html#注册用户) 注册用户账号，注册后保存到你的服务器或返给客户端。
@@ -23,6 +21,8 @@
 5. 在**用户** 页签下，点击**创建IM用户**。
 
 6. 在弹出的对话框中，配置用户相关参数，点击**确定**。
+
+![img](/images/android/user_create.png)
 
 ## 主动登录
 
