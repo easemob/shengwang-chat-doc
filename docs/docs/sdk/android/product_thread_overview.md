@@ -32,7 +32,7 @@
 
 ## 子区事件回调
 
-你可以实现发送后回调，使环信 IM 服务器通过 HTTP/HTTPS POST 请求将子区事件（例如，对子区中的一条消息进行相关操作，包括发送、撤回或修改）同步给你的应用服务器，详见[子区事件回调文档](/docs/sdk/server-side/callback_thread.html)。
+你可以实现发送后回调，使即时通讯 IM 服务器通过 HTTP/HTTPS POST 请求将子区事件（例如，对子区中的一条消息进行相关操作，包括发送、撤回或修改）同步给你的应用服务器，详见[子区事件回调文档](/docs/sdk/server-side/callback_thread.html)。
 
 ## 子区限制
 

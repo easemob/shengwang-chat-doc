@@ -1,18 +1,24 @@
 # 在即时通讯 IM 中集成荣耀推
 
-环信即时通讯 IM SDK 4.0.3 版本中集成了荣耀推送。本节介绍如何集成荣耀厂商的离线推送通道，使消息通过荣耀推送服务推送至离线的用户。
+即时通讯 IM SDK 中集成了荣耀推送。本节介绍如何集成荣耀厂商的离线推送通道，使消息通过荣耀推送服务推送至离线的用户。
 
 ## **步骤一 在[荣耀开发者服务平台](https://developer.hihonor.com/cn/)创建应用并申请开通推送服务**
 
 详见[荣耀推送官网说明](https://developer.honor.com/cn/docs/11002/guides/kit-history)。
 
-## **步骤二 在环信即时通讯云控制台上传荣耀推送证书**
+## **步骤二 在声网控制台上传荣耀推送证书**
 
-1. 在[环信即时通讯云控制台](https://console.easemob.com/user/login)首页的**应用列表**中，点击目标应用的**操作**栏中的**管理**。
-   
-2. 在左侧导航栏中，选择**即时通讯** > **功能配置** > **消息推送** > **证书管理**，点击**添加推送证书**。
-   
-3. 在**添加推送证书**对话框中选择**荣耀**页签，配置荣耀推送参数。
+1. 展开控制台左上角下拉框，选择需要开通即时通讯 IM 服务的项目。
+
+2. 点击左侧导航栏的**全部产品**。
+
+3. 在下拉列表中找到**即时通讯 IM** 并点击。
+
+4. 在**即时通讯 IM** 页面，进入**功能配置**标签页。
+
+5. 在**推送证书** 页签下，点击**添加推送证书**。
+
+6. 在弹出的对话框中，选择**荣耀**页签，配置相关参数，点击**保存**。
 
 ![image](/images/android/push/add_honor_push_template.png)
 
@@ -103,7 +109,7 @@ if (isSupport) {
 PushHelper.getInstance().setPushListener(new PushListener() {
     @Override
     public void onError(PushType pushType, long errorCode) {
-        // 返回的 errorCode 仅 9xx 为环信内部错误，可从 Error 中查询，其他错误请根据 pushType 去相应第三方推送网站查询。
+        // 返回的 errorCode 仅 9xx 为声网内部错误，可从 Error 中查询，其他错误请根据 pushType 去相应第三方推送网站查询。
         EMLog.e("PushClient", "Push client occur a error: " + pushType + " - " + errorCode);
     }
 
@@ -162,7 +168,7 @@ public class HONORPushService extends HonorMessageService {
 
 ## **步骤五 将 device token 与 IM 的登录账号绑定**
 
-打开应用，初始化环信 IM SDK 成功且成功登录后，获取一次 device token，将 token 上传至环信服务器，与 IM 的登录账号绑定。
+打开应用，初始化即时通讯 IM SDK 成功且成功登录后，获取一次 device token，将 token 上传至声网服务器，与 IM 的登录账号绑定。
 
 如果当前 IM 的登录账号已经绑定了 device token，则 IM SDK 不会上传 token。
 
@@ -194,11 +200,11 @@ if (HonorPushClient.getInstance().checkSupportHonorPush(this)){
 
 1. 设置 `action` 参数。
 
-在环信即时通讯云控制台的**添加推送证书**对话框中设置 `action` 参数。该参数需要与客户端 `AndroidManifest.xml` 文件中注册启动的 `Activity` 类中 `intent-filter` 标签中设置的 `action` 一致。该配置只能实现跳转到无需前置参数的页面。若启动应用自定义页面需要前置参数，你还需要在消息扩展中添加前置参数。
+在声网控制台的**添加推送证书**对话框中设置 `action` 参数。该参数需要与客户端 `AndroidManifest.xml` 文件中注册启动的 `Activity` 类中 `intent-filter` 标签中设置的 `action` 一致。该配置只能实现跳转到无需前置参数的页面。若启动应用自定义页面需要前置参数，你还需要在消息扩展中添加前置参数。
 
 若推送不同的消息时，接收方收到后点击推送通知栏打开不同应用自定义页面，你可以添加相应的消息扩展属性实现。
 
-以下为环信 IM 提供的通知栏消息点击动作的扩展字段：
+以下为即时通讯 IM 提供的通知栏消息点击动作的扩展字段：
 
 ```java
 {

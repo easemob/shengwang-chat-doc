@@ -2,15 +2,15 @@
 
 <Toc />
 
-本文介绍环信即时通讯 IM Android SDK 如何从服务器和本地获取历史消息。
+本文介绍即时通讯 IM Android SDK 如何从服务器和本地获取历史消息。
 
-- 环信即时通讯 IM 提供消息漫游功能，即将用户的所有会话的历史消息保存在消息服务器，用户在任何一个终端设备上都能获取到历史信息，使用户在多个设备切换使用的情况下也能保持一致的会话场景。
+- 即时通讯 IM 提供消息漫游功能，即将用户的所有会话的历史消息保存在消息服务器，用户在任何一个终端设备上都能获取到历史信息，使用户在多个设备切换使用的情况下也能保持一致的会话场景。
 
 - SDK 内部使用 SQLite 保存本地消息，你可以获取本地消息。
 
 ## 技术原理
 
-环信即时通讯 IM Android SDK 提供 `ChatManager` 和 `Conversation` 类支持获取服务器和本地的消息，包含如下主要方法：
+即时通讯 IM Android SDK 提供 `ChatManager` 和 `Conversation` 类支持获取服务器和本地的消息，包含如下主要方法：
 
 - `ChatManager#asyncFetchHistoryMessages`：根据 `FetchMessageOption` 类从服务端分页获取指定会话的历史消息；
 - `Conversation#getAllMessages/loadMoreMsgFromDB`：读取本地指定会话的消息；
@@ -24,7 +24,7 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化并连接到服务器，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
 
 ## 实现方法
 

@@ -1,6 +1,6 @@
 # 在即时通讯 IM 中集成小米推送
 
-环信即时通讯 IM SDK 中已经集成了小米推送（基于 ` MiPush_SDK_Client_6_0_1-C_3rd.aar`）相关逻辑，你还需要完成以下步骤。
+即时通讯 IM SDK 中已经集成了小米推送（基于 `MiPush_SDK_Client_6_0_1-C_3rd.aar`）相关逻辑，你还需要完成以下步骤。
 
 ## **步骤一 在小米开放平台创建应用**
 
@@ -8,13 +8,19 @@
 
 ## **步骤二 上传推送证书**
 
-在[环信即时通讯云控制台](https://console.easemob.com/user/login)上传推送证书：
+在[声网控制台](https://console.shengwang.cn/overview)上传推送证书：
 
-1. 在[环信即时通讯云控制台](https://console.easemob.com/user/login)首页的**应用列表**中，点击目标应用的**操作**栏中的**管理**。
-   
-2. 在左侧导航栏中，选择**即时通讯** > **功能配置** > **消息推送** > **证书管理**，点击**添加推送证书**。
-   
-3. 在**添加推送证书**对话框中选择**小米**页签，配置小米推送参数。参数相关信息，详见你在 [小米开放平台](https://dev.mi.com/platform) 创建的应用信息中的 App ID 和 Secret Key 以及程序的包名。
+1. 展开控制台左上角下拉框，选择需要开通即时通讯 IM 服务的项目。
+
+2. 点击左侧导航栏的**全部产品**。
+
+3. 在下拉列表中找到**即时通讯 IM** 并点击。
+
+4. 在**即时通讯 IM** 页面，进入**功能配置**标签页。
+
+5. 在**推送证书** 页签下，点击**添加推送证书**。
+
+6. 在弹出的对话框中，选择**小米**页签，配置相关参数，点击**保存**。
    
 ![image](/images/android/push/add_xiaomi_push_certificate.png) 
 
@@ -98,7 +104,7 @@
    </receiver>
    ```
 
-3. 自定义一个继承自环信即时通讯 IM SDK 中 `EMMiMsgReceiver` 类的 `BroadcastReceiver`，并进行注册：
+3. 自定义一个继承自即时通讯 IM SDK 中 `EMMiMsgReceiver` 类的 `BroadcastReceiver`，并进行注册：
 
    ```xml
    <receiver android:name=".common.receiver.MiMsgReceiver">

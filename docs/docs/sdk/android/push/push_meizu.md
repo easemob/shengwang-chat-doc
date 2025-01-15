@@ -1,6 +1,6 @@
 # 在即时通讯 IM 中集成魅族推送
 
-环信即时通讯 IM SDK 中已集成魅族推送相关逻辑，你还需要完成以下步骤。
+即时通讯 IM SDK 中已集成魅族推送相关逻辑，你还需要完成以下步骤。
 
 ## **步骤一 在魅族开发者后台创建应用**
 
@@ -8,13 +8,19 @@
 
 ## **步骤二 上传推送证书**
 
-在[环信即时通讯云控制台](https://console.easemob.com/user/login)上传魅族推送证书。
+在[声网控制台](https://console.shengwang.cn/overview)上传魅族推送证书。
 
-1. 在[环信即时通讯云控制台](https://console.easemob.com/user/login)首页的**应用列表**中，点击目标应用的**操作**栏中的**管理**。
-   
-2. 在左侧导航栏中，选择**即时通讯** > **功能配置** > **消息推送** > **证书管理**，点击**添加推送证书**。
-   
-3. 在**添加推送证书**对话框中选择 **魅族** 页签，配置魅族推送参数。参数相关信息，详见你在 [flyme 推送平台](https://login.flyme.cn/sso?appuri=https%3A%2F%2Fapiopen.flyme.cn%2Flogin&useruri=https%3A%2F%2Fopen.flyme.cn%3Ft%3D1722914343470&sid=node0mpa52w0llp341dncyz6wr7yi56208487&service=open&autodirct=true)创建的应用的 `APP ID` 和 `APP SECRET` 以及程序的 `包名`。
+1. 展开控制台左上角下拉框，选择需要开通即时通讯 IM 服务的项目。
+
+2. 点击左侧导航栏的**全部产品**。
+
+3. 在下拉列表中找到**即时通讯 IM** 并点击。
+
+4. 在**即时通讯 IM** 页面，进入**功能配置**标签页。
+
+5. 在**推送证书** 页签下，点击**添加推送证书**。
+
+6. 在弹出的对话框中，选择**魅族**页签，配置相关参数，点击**保存**。参数相关信息，详见你在 [flyme 推送平台](https://login.flyme.cn/sso?appuri=https%3A%2F%2Fapiopen.flyme.cn%2Flogin&useruri=https%3A%2F%2Fopen.flyme.cn%3Ft%3D1722914343470&sid=node0mpa52w0llp341dncyz6wr7yi56208487&service=open&autodirct=true)创建的应用的 `APP ID` 和 `APP SECRET` 以及程序的 `包名`。
 
 ![image](/images/android/push/add_meizu_push_certificate.png)
 
@@ -24,7 +30,7 @@
 | `推送密钥`     | String | 是     | 填写魅族 App Secret。|
 | `应用包名`     | String | 是     | 填写魅族 App package name。   |
 | `Activity`| String | 否     | 选择点击通知后的动作。  |
-| `推送送达回执`     | String |  否    | <br/> - **开启**；<br/> - **关闭**   |
+| `推送送达回执`     | String |  否    | <br/> - **开启**<br/> - **关闭**   |
 
 ## **步骤三 集成魅族推送 SDK** 
 

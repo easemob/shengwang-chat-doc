@@ -2,7 +2,7 @@
 
 <Toc />
 
-本文介绍如何快速集成环信即时通讯 IM Android SDK 实现单聊。
+本文介绍如何快速集成即时通讯 IM Android SDK 实现单聊。
 
 ## 实现原理
 
@@ -15,11 +15,11 @@
 - Android Studio 3.6 或以上版本；
 - Android SDK API 等级 21 或以上；
 - Android 5.0 或以上版本的设备；
-- 有效的环信即时通讯 IM 开发者账号和 AppId，见 [环信即时通讯云控制台](https://console.easemob.com/user/login)。
+- 有效的即时通讯 IM 开发者账号和 AppId，见 [声网控制台](https://console.shengwang.cn/overview)。
 
 ## 准备开发环境
 
-本节介绍如何创建项目，将环信即时通讯 IM Android SDK 集成到你的项目中，并添加相应的设备权限。
+本节介绍如何创建项目，将即时通讯 IM Android SDK 集成到你的项目中，并添加相应的设备权限。
 
 ### 1. 创建 Android 项目
 
@@ -113,7 +113,7 @@ dependencies {
 </manifest>
 ```
 
-关于 AppId 对应的 value 获取，在 [环信即时通讯 IM 管理后台](https://console.easemob.com/user/login) 创建应用后，申请 AppId 并进行相关配置。
+关于 AppId 对应的 value 获取，在 [即时通讯 IM 管理后台](https://console.shengwang.cn/overview) 创建应用后，申请 AppId 并进行相关配置。
 
 ### 4. 防止代码混淆
 

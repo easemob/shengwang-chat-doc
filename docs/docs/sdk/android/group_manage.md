@@ -2,13 +2,13 @@
 
 <Toc />
 
-群组是支持多人沟通的即时通讯系统，本文介绍如何使用环信即时通讯 IM SDK 在实时互动 app 中创建和管理群组，并实现群组相关功能。
+群组是支持多人沟通的即时通讯系统，本文介绍如何使用即时通讯 IM SDK 在实时互动 app 中创建和管理群组，并实现群组相关功能。
 
 如需查看消息相关内容，参见 [消息管理](message_overview.html)。
 
 ## 技术原理
 
-环信即时通讯 IM Android SDK 提供 `GroupManager` 类和 `Group` 类用于管理群组，支持你通过调用 API 在项目中实现如下功能：
+即时通讯 IM Android SDK 提供 `GroupManager` 类和 `Group` 类用于管理群组，支持你通过调用 API 在项目中实现如下功能：
 
 - 创建、解散群组
 - 获取群组详情
@@ -22,12 +22,12 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM 的使用限制，详见 [使用限制](limitation.html)。
 - 了解群组和群成员的数量限制，详见 [套餐包详情](https://www.easemob.com/pricing/im)。
 
 ## 实现方法
 
-本节介绍如何使用环信即时通讯 IM SDK 提供的 API 实现上述功能。
+本节介绍如何使用即时通讯 IM SDK 提供的 API 实现上述功能。
 
 ### 创建群组
 
@@ -215,7 +215,7 @@ String cursor = result.getCursor();
 
 ### 查询当前用户已加入的群组数量
 
-自 4.2.1 版本开始，你可以调用 `GroupManager#asyncGetJoinedGroupsCountFromServer` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见[产品价格](/product/pricing.html#套餐包功能详情)。
+你可以调用 `GroupManager#asyncGetJoinedGroupsCountFromServer` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见[产品价格](/product/pricing.html#套餐包功能详情)。
 
 ```java
 ChatClient.getInstance().groupManager().asyncGetJoinedGroupsCountFromServer(new ValueCallBack<Integer>() {

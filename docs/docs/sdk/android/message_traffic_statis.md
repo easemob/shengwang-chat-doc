@@ -22,7 +22,7 @@ SDK 仅统计本地消息的流量，而非消息的实际流量。一般而言�
 
 ## 技术原理
 
-环信即时通讯 IM Android SDK 提供 `ChatStatisticsManager` 类支持获取本地消息的流量统计信息，包含如下主要方法：
+即时通讯 IM Android SDK 提供 `ChatStatisticsManager` 类支持获取本地消息的流量统计信息，包含如下主要方法：
 
 - `ChatStatisticsManager#getMessageStatistics`：根据消息 ID 获取消息流量统计信息；
 - `ChatStatisticsManager#getMessageCount`：获取一定时间段内发送和/或接收的指定或全部类型的消息条数；
@@ -33,7 +33,7 @@ SDK 仅统计本地消息的流量，而非消息的实际流量。一般而言�
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化并连接到服务器，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
 
 ## 实现方法
 

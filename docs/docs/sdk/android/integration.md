@@ -1,6 +1,6 @@
 # 集成 SDK
 
-本文介绍如何将环信即时通讯 IM SDK 集成到你的 Android 项目。
+本文介绍如何将即时通讯 IM SDK 集成到你的 Android 项目。
 
 ## 开发环境要求
 
@@ -10,7 +10,7 @@
 
 ## 集成 SDK
 
-选择如下任意一种方式将环信即时通讯 IM SDK 集成到你的项目中。
+选择如下任意一种方式将即时通讯 IM SDK 集成到你的项目中。
 
 :::tip
 
@@ -54,10 +54,9 @@ dependencies {
 // TODO：修改版本号及repo地址链接
 若要查看最新版本号，请点击[这里](releasenote.html)。
 
-
 ### 方法二：手动复制 SDK 文件
 
-打开 SDK 下载页面，获取最新版的环信即时通讯 IM Android SDK，然后解压。
+打开 SDK 下载页面，获取最新版的即时通讯 IM Android SDK，然后解压。
 
 ![img](@static/images/android/sdk-files.png)
 
@@ -65,7 +64,7 @@ dependencies {
 
 | 文件或文件夹                 | 项目路径               |
 |:-----------------------| :--------------------- |
-| `agorachat_xxx.jar` 文件 | `/app/libs/ `            |
+| `agorachat_xxx.jar` 文件 | `/app/libs/`            |
 | `arm64-v8a` 文件夹        | `/app/src/main/jniLibs/` |
 | `armeabi-v7a` 文件夹      | `/app/src/main/jniLibs/` |
 | `x86` 文件夹              | `/app/src/main/jniLibs/` |
@@ -94,7 +93,7 @@ dependencies {
 :::
 
 ```java
-//假设用户已经通过动态下发的方式，将环信 SDK 中的 libcipherdb.so 和 libagora-chat-sdk.so、libaosl.so 三个 so 库，放到 app 的 /data/data/packagename/files 目录下。
+//假设用户已经通过动态下发的方式，将即时通讯 IM SDK 中的 libcipherdb.so 和 libagora-chat-sdk.so、libaosl.so 三个 so 库，放到 app 的 /data/data/packagename/files 目录下。
 String filesPath = mContext.getFilesDir().getAbsolutePath();
 
 ChatOptions options = new ChatOptions();
