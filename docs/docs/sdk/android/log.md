@@ -1,6 +1,6 @@
 # SDK 日志
 
-环信即时通讯 IM 日志记录 SDK 相关的信息和事件。环信技术支持团队帮你排查问题时可能会请你发送 SDK 日志。
+即时通讯 IM 日志记录 SDK 相关的信息和事件。声网技术支持团队帮你排查问题时可能会请你发送 SDK 日志。
 
 ## 输出信息到日志文件
 
@@ -20,7 +20,7 @@ ChatClient.getInstance().setDebugMode(false);
 打开以下目录，获取本地日志。在下列代码中，你需要进行如下替换：
 
 - `{应用包名}` 替换为应用的包名，例如 `io.agora.chatuidemo`。
-- `{AppId}` 需要替换为应用的环信 AppId。
+- `{AppId}` 需要替换为应用的声网 App ID。
 
 ```shell
 adb pull /sdcard/android/data/{应用包名}/{AppId}/core_log

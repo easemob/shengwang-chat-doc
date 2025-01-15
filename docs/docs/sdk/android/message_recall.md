@@ -12,7 +12,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM 通过 `ChatManager` 和 `ChatMessage` 类支持你撤回一条发送成功的消息：
+即时通讯 IM 通过 `ChatManager` 和 `ChatMessage` 类支持你撤回一条发送成功的消息：
 
 - `recallMessage`：撤回一条发送成功的消息。
 
@@ -21,7 +21,7 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 - 产品套餐包支持消息撤回功能。
 
 ## 实现方法

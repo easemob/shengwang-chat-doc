@@ -1,6 +1,6 @@
 # 在即时通讯 IM 中集成 FCM
 
-环信即时通讯 IM SDK 中已集成 FCM 推送相关逻辑，你还需要完成以下步骤。
+即时通讯 IM SDK 中已集成 FCM 推送相关逻辑，你还需要完成以下步骤。
 
 ## **FCM 推送集成**
 
@@ -14,15 +14,15 @@
 
 ![image](/images/android/push/fcmproject.png)
 
-1. 选择该项目下的应用。
+2. 选择该项目下的应用。
 
 ![image](/images/android/push/appsetting.png)
 
-1. 选择**服务账号**页签，点击**生成新的私钥**。
+3. 选择**服务账号**页签，点击**生成新的私钥**。
 
 ![image](/images/android/push/v1json.png)
 
-1. 下载证书，保存备用。
+4. 下载证书，保存备用。
 
 下载证书文件，例如 `myapplication-72d8c-firebase-adminsdk-yqa7z-4766fefcaf.json`。
 
@@ -44,41 +44,33 @@
 
 ### **步骤三 上传推送证书**
 
-1. 在[环信即时通讯云控制台](https://console.easemob.com/user/login)上传推送证书，选择你的应用 > **即时通讯** > **功能配置** > **消息推送** > **证书管理**。
+在[声网控制台](https://console.shengwang.cn/overview)上传推送证书。
+   
+1. 展开控制台左上角下拉框，选择需要开通即时通讯 IM 服务的项目。
+
+2. 点击左侧导航栏的**全部产品**。
+
+3. 在下拉列表中找到**即时通讯 IM** 并点击。
+
+4. 在**即时通讯 IM** 页面，进入**功能配置**标签页。
+
+5. 在**推送证书** 页签下，点击**添加推送证书**。
+
+6. 在弹出的对话框中，默认打开**谷歌**页签，配置相关参数，点击**保存**。
 
 ![image](/images/android/push/fcm_certificate_v1.png)
 
-1. 点击 **添加推送证书**。在默认打开的 **谷歌** 页签中，配置 FCM 推送：
-- **证书类型** 选择 **V1**。
-- 点击 **上传证书** 上传获取的 FCM V1 版本证书文件（.json 文件）。
-- **证书名称** 设置为 FCM 的发送者 ID。你需要在[Firebase 控制台](https://console.firebase.google.com/?hl=zh-cn)的 **项目设置** > **云消息传递** 页面中，在 **Firebase Cloud Messaging API（V1）** 区域中获取发送者 ID，如下图所示。
-- 设置 **铃声**、**推送优先级设置** 和 **推送消息类型** 参数。
+| 参数       | 是否必需 | 描述         |
+| :--------- | :------- | :---------------- |
+| `证书类型`     | 是     | 值为 **V1**。  |
+| `上传文件`     | 是     | 点击 **上传证书** 上传获取的 FCM V1 版本证书文件（.json 文件）。|
+| `证书名称`     | 是     | 设置为 FCM 的发送者 ID。你需要在[Firebase 控制台](https://console.firebase.google.com/?hl=zh-cn)的 **项目设置** > **云消息传递** 页面中，在 **Firebase Cloud Messaging API（V1）** 区域中获取发送者 ID，如下图所示。 |
+| `铃声`      | 否     | 铃声。                     |
+| `推送优先级设置`     | 否    | 消息的推送优先级：<br/>- 高优先级消息 <br/>- 低优先级消息                        |
+| `推送消息类型`       | 否    | 推送消息类型：<br/>- 数据 <br/>- 通知  <br/>- 数据+通知                   |
+| `APNs跨平台推送支持`| 否     | 是否支持 APNs 跨平台推送：<br/>- 开启 <br/>- 关闭 |
 
 ![image](/images/android/push/fcm_v1.png)
-
-#### **旧版证书无缝切换至 V1 证书**
-
-若你仍使用旧版证书，即 **证书类型** 选择 **旧版**，你需要将 **证书名称** 设置为 FCM 的发送者 ID，**推送密钥** 设置为 FCM 的服务器密钥。你需在 [Firebase 控制台](https://console.firebase.google.com/?hl=zh-cn)的 **项目设置 > 云消息传递** 页面中，在 **Cloud Messaging API（旧版）** 区域中获取发送者 ID 和服务器密钥，如下图所示。配置完毕，设置 **铃声**、**推送优先级设置** 和 **推送消息类型** 参数。
-
-![image](/images/android/push/fcm_old_version.png)
-
-**旧版 HTTP 或 XMPP API 于 2024 年 6 月 20 日停用，请尽快迁移到最新的 FCM API（HTTP v1）版本证书。详见 [FCM 控制台](https://console.firebase.google.com)。请确保 V1 证书可用，因为执行转换证书后，旧证书会被删除，若此时新证书不可用，会导致推送失败。**
-
-你可以参考以下步骤从旧版证书无缝切换到 V1 新证书：
-
-1. 在 **证书管理** 页面的旧版证书的 **操作** 栏中点击 **编辑**。
-
-![image](/images/android/push/hxconsoleedit.png)
-
-1. 在**编辑推送证书** 窗口的 **谷歌** 页签，将**证书类型**切换为 **V1**。
-
-![fcmapp](/images/android/push/old2V1.png)
-
-3. 点击 **上传证书** 上传本地保存的 V1 证书文件（.json）。
-
-![fcmapp](/images/android/push/v1Chosefile.png)
-
-4. 点击 **保存** 完成切换。
 
 ### **步骤四 FCM 推送集成**
 
@@ -126,7 +118,7 @@ plugins {
 </service>
 ```
 
-3. 在环信即时通讯 IM SDK 中启用 FCM。
+3. 在即时通讯 IM SDK 中启用 FCM。
 
 ```java
 ChatOptions options = new ChatOptions();
@@ -142,7 +134,7 @@ ChatClient.getInstance().init(this, options);
 PushHelper.getInstance().setPushListener(new PushListener() {
     @Override
     public void onBindTokenSuccess(PushType pushType, String pushToken) {
-        EMLog.e("PushClient", "Push client bind token to easemob server success: " + pushType + " - " + pushToken);
+        EMLog.e("PushClient", "Push client bind token to agora server success: " + pushType + " - " + pushToken);
     }
    @Override
    public void onError(PushType pushType, long errorCode) {
@@ -161,9 +153,9 @@ PushHelper.getInstance().setPushListener(new PushListener() {
 });
 ```
 
-4. 环信即时通讯 IM SDK 登录成功后，上传 FCM 的 device token。
+4. 即时通讯 IM SDK 登录成功后，上传 FCM 的 device token。
 
-在应用初始化时，FCM SDK 会为用户的设备上的客户端应用生成唯一的注册 token。由于 FCM 使用该 token 确定要将推送消息发送给哪个设备，因此，环信服务器需要获得客户端应用的注册 token 才能将通知请求发送给 FCM，然后 FCM 验证注册 token，将通知消息发送给 Android 设备。建议该段代码放在成功登录即时通讯 IM 后的主页面。
+在应用初始化时，FCM SDK 会为用户的设备上的客户端应用生成唯一的注册 token。由于 FCM 使用该 token 确定要将推送消息发送给哪个设备，因此，声网服务器需要获得客户端应用的注册 token 才能将通知请求发送给 FCM，然后 FCM 验证注册 token，将通知消息发送给 Android 设备。建议该段代码放在成功登录即时通讯 IM 后的主页面。
 
 ```java
 // 查看是否支持 FCM
@@ -187,11 +179,11 @@ FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteL
 
 5. 监控 device token 生成。
 
-重写 `FirebaseMessagingService` 中的 `onNewToken` 方法，device token 更新后及时更新到环信即时通讯 IM SDK。
+重写 `FirebaseMessagingService` 中的 `onNewToken` 方法，device token 更新后及时更新到即时通讯 IM SDK。
 
 ```java
 public class MyFCMMSGService extends FirebaseMessagingService {
-    private static final String TAG = "EMFCMMSGService";
+    private static final String TAG = "FCMMSGService";
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -232,14 +224,14 @@ public class MyFCMMSGService extends FirebaseMessagingService {
    可以查看日志或调用[获取用户详情的 RESTful 接口](https://doc.easemob.com/docs/sdk/server-side/account_system.html#获取单个用户的详情)确认 device token 是否绑定成功。成功后在 `entities` 字段下会有 `pushInfo` 字段，且 `pushInfo` 下会有 `device_Id`、`device_token`、`notifier_name` 等相关信息。
 2. 开启应用通知栏权限。
 3. 杀掉应用进程。
-4. 在[环信即时通讯云控制台](https://console.easemob.com/user/login)发送测试消息。
-   在左侧导航栏中选择 **即时通讯** > **运营服务** > **用户管理**。在**用户管理**页面中，在对应用户 ID 的**操作**栏中点击**更多**，然后选择**发送rest消息**。在弹出的对话框中选择消息类型，输入消息内容，然后点击**发送**。
+4. 在[声网控制台](https://console.shengwang.cn/overview)发送测试消息。
+   在左侧导航栏中选择**即时通讯 IM** > **运营管理** > **用户**。在**用户**页面中，在对应用户 ID 的**操作**栏中点击**更多**，然后选择**发送rest消息**。在弹出的对话框中选择消息类型，输入消息内容，然后点击**发送**。
 5. 查看设备是否收到推送通知。
 
 ### **故障排除**
 
 1. 检查在即时通讯 IM 中是否正确集成或启用了 FCM 推送。
-   在左侧导航栏中选择 **即时通讯 > 运营服务 > 用户管理**。在**用户管理**页面中，在对应用户 ID 的 **更多** 栏中选择 **查看IM用户绑定推送证书**。在弹出框中查看是否正确显示了证书名称和 device token。
+   在左侧导航栏中选择**即时通讯 IM** > **运营管理** > **用户**。在**用户**页面中，在对应用户 ID 的 **更多** 栏中选择 **查看IM用户绑定推送证书**。在弹出框中查看是否正确显示了证书名称和 device token。
 2. 检查是否在控制台上传了正确的 FCM 证书。
 3. 检查是否在聊天室中推送消息。聊天室不支持离线消息推送。
 4. 检查设备是否为国行手机的 ROM。一些品牌的国产手机不支持 GMS 服务，需替换为海外发售的设备。

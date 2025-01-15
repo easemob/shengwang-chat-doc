@@ -73,11 +73,11 @@
 
 1. 在**总览**页面的**项目信息**栏，点击**临时 Token 生成器**。
 2. 在**生成临时 Token** 页面，点击**添加产品**。
-3. 选择 **RTM** 产品，输入用户 ID，例如 `user1`。然后保存好输入的内容。
+3. 选择 **即时通讯 IM** 产品，设置 **Token 类型**，可选择 **App Token** 或 **User Token**。在下图中，选择 **App Token**。
 4. 点击**确认**。
 5. 成功生成临时 Token 后，点击 Token 右侧的复制按钮，保存好复制的 Token。
 
-// TODO：这里目前还无法选择即时通讯 IM 产品，因此无法获取临时 token。
+![img](/images/product/enable_im/console_enable_im_token_generation.png)
 
 ## 5. 获取 App 证书
 

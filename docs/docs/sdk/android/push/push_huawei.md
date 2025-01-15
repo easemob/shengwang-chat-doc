@@ -1,6 +1,6 @@
 # 在即时通讯 IM 中集成华为 HMS 推送
 
-环信即时通讯 IM SDK 中已集成华为 HMS 推送相关逻辑，你还需要完成以下步骤。
+即时通讯 IM SDK 中已集成华为 HMS 推送相关逻辑，你还需要完成以下步骤。
 
 ## **步骤一 在华为开发者后台创建应用**
 
@@ -8,15 +8,21 @@
 
 详见华为官方介绍：[华为 HMS 消息推送服务集成](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-config-agc-0000001050170137#section19884105518498)。
 
-## **步骤二 在环信即时通讯云控制台上传推送证书**
+## **步骤二 在声网控制台上传推送证书**
 
-在[环信即时通讯云控制台](https://console.easemob.com/user/login)上传华为推送证书。
+在[声网控制台](https://console.shengwang.cn/overview)上传华为推送证书。
 
-1. 在[环信即时通讯云控制台](https://console.easemob.com/user/login)首页的**应用列表**中，点击目标应用的**操作**栏中的**管理**。
-   
-2. 在左侧导航栏中，选择**即时通讯** > **功能配置** > **消息推送** > **证书管理**，点击**添加推送证书**。
-   
-3. 在**添加推送证书**对话框中选择**华为**页签，配置华为推送参数。参数相关信息，详见你在华为开发者后台创建的[应用信息中的 App ID 和 SecretKey 以及程序的包名](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-config-agc-0000001050170137#section125831926193110)。
+1. 展开控制台左上角下拉框，选择需要开通即时通讯 IM 服务的项目。
+
+2. 点击左侧导航栏的**全部产品**。
+
+3. 在下拉列表中找到**即时通讯 IM** 并点击。
+
+4. 在**即时通讯 IM** 页面，进入**功能配置**标签页。
+
+5. 在**推送证书** 页签下，点击**添加推送证书**。
+
+6. 在弹出的对话框中，选择**华为**页签，配置相关参数，点击**保存**。参数相关信息，详见你在华为开发者后台创建的[应用信息中的 App ID 和 SecretKey 以及程序的包名](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-config-agc-0000001050170137#section125831926193110)。
 
 ![image](/images/android/push/add_huawei_push_certificate.png)
 
@@ -25,7 +31,7 @@
 | `证书名称`     | String | 是     | 填写华为 Client ID。  |
 | `推送密钥`     | String | 是     | 填写华为 Client Secret。|
 | `应用包名`     | String | 是     | 填写华为 App package name。   |
-| `项目 ID`      | String | 是     | 填写项目 ID。                     |
+| `项目 ID`      | String | 否     | 填写项目 ID。                     |
 | `Category`     | String |  否    | 选择 category 类型。                       |
 | `Action`       | String |  否    | 选择点击通知后的动作。                     |
 | `ActivityClass`| String | 否     | 填写 ActivityClass。                      |
@@ -49,7 +55,7 @@
 
 3. [获取 Token 及自动初始化](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/android-client-dev-0000001050042041)。
 
-打开应用，初始化环信 IM SDK 成功且成功登录后，获取一次华为推送 token，将 token 上传至环信服务器，与 IM 的登录账号绑定。
+打开应用，初始化即时通讯 IM SDK 成功且成功登录后，获取一次华为推送 token，将 token 上传至声网服务器，与 IM 的登录账号绑定。
 
 ```java
 /**

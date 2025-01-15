@@ -11,11 +11,11 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
-- 了解即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM API 的使用限制，详见 [使用限制](limitation.html)。
 
 ## 技术原理
 
-环信即时通讯 IM 支持从服务器和本地获取会话列表，主要方法如下：
+即时通讯 IM 支持从服务器和本地获取会话列表，主要方法如下：
 
 - `asyncFetchConversationsFromServer`：从服务器获取会话列表。
 - `asyncFilterConversationsFromDB`：获取本地所有会话或筛选要获取的会话。
@@ -65,10 +65,6 @@ ChatClient.getInstance().chatManager().asyncFetchConversationsFromServer(limit, 
 
 如果要筛选会话，你需要自己实现 `CustomConversationFilter` 接口中的过滤器 `filter`，根据 `filter` 方法中传递过来的会话对象 `emConversation` 自己决定是返回 `true` 还是 `false`。如果返回 `true`，这条会话会被添加到内存中，并最终在 `callback` 中返回给调用者，如果返回 `false`，会话会被舍弃，不会被添加到内存中，不会在 `callback` 中返回给调用者。
 
-:::tip
-若使用该功能，需将 SDK 升级至 4.6.0。
-:::
-
 ```java
 ChatClient.getInstance().chatManager().asyncFilterConversationsFromDB(new CustomConversationFilter() {
     @Override
@@ -99,10 +95,6 @@ ChatClient.getInstance().chatManager().asyncFilterConversationsFromDB(new Custom
 ### 一次性获取本地所有会话
 
 - 要一次性获取本地所有会话，你可以调用 `getAllConversationsBySort` 方法。SDK 首先从内存中获取会话，若会话未从本地数据库加载过，SDK 会先将数据库中的会话加载到内存。获取会话后，SDK 按照会话活跃时间（最新一条消息的时间戳）的倒序返回会话，置顶会话在前，非置顶会话在后，会话列表为 `List<Conversation>` 结构。
-
-:::tip
-若使用该功能，需将 SDK 升级至 4.0.3。
-:::
 
 示例代码如下：
 

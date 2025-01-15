@@ -6,7 +6,7 @@
 
 ### 新增特性
 
-- [IM SDK] 新增[拉取服务器漫游消息](message_retrieve.html#从服务器获取指定会话的消息)时会读取服务端的消息已读和送达状态。该功能只适用于单聊消息，默认关闭，如果需要，请联系环信商务开通。 
+- [IM SDK] 新增[拉取服务器漫游消息](message_retrieve.html#从服务器获取指定会话的消息)时会读取服务端的消息已读和送达状态。该功能只适用于单聊消息，默认关闭，如果需要，请联系声网商务开通。 
 - [IM SDK] 聊天室成员禁言回调：
   - 新增聊天室禁言回调 `EMChatRoomChangeListener#onMuteListAdded(java.lang.String, java.util.Map<java.lang.String,java.lang.Long>)`，在回调中使用 `Map<String,Long> muteInfo` 参数表示被禁言的用户 ID 和禁言到期时间戳。
   - 废弃原来的回调 `EMChatRoomChangeListener#onMuteListAdded(java.lang.String, java.util.List<java.lang.String>, long)`。
@@ -196,7 +196,7 @@
 
 ### 优化
 
-- [IM SDK] 添加绑定推送 token 成功的回调，详见 [FCM 推送集成](/docs/sdk/android/push/push_fcm.html)步骤四中的在环信即时通讯 IM SDK 中启用 FCM 的描述。
+- [IM SDK] 添加绑定推送 token 成功的回调，详见 [FCM 推送集成](/docs/sdk/android/push/push_fcm.html)步骤四中的在即时通讯 IM SDK 中启用 FCM 的描述。
 - [IM SDK] `onMessageRecalled` 已过时，请用 `onMessageRecalledWithExt` 代替。
 
 ### 修复

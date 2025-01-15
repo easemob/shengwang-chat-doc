@@ -2,7 +2,7 @@
 
 <Toc />
 
-为方便用户在聊天过程中对文字消息进行翻译，环信即时通讯 IM SDK 集成了 Microsoft Azure Translation API，支持在发送或接收消息时对文本消息进行按需翻译或自动翻译：
+为方便用户在聊天过程中对文字消息进行翻译，即时通讯 IM SDK 集成了 Microsoft Azure Translation API，支持在发送或接收消息时对文本消息进行按需翻译或自动翻译：
 
 - 按需翻译：接收方在收到文本消息后，将消息内容翻译为目标语言。
 - 自动翻译：发送方发送消息时，SDK 根据发送方设置的目标语言自动翻译文本内容，然后将消息原文和译文一起发送给接收方。
@@ -11,9 +11,9 @@
 
 开始前，请确保满足以下条件：
 
-1. 完成 `3.9.1 或以上版本` SDK 初始化，详见 [快速开始](quickstart.html)。
-2. 了解环信即时通讯 IM API 的 [使用限制](/product/limitation.html)。
-3. 已在 [环信即时通讯云控制台](https://console.easemob.com/user/login) 开通翻译功能。
+1. 完成即时通讯 IM SDK 初始化，详见 [快速开始](quickstart.html)。
+2. 了解即时通讯 IM API 的 [使用限制](limitation.html)。
+3. 已在 [声网控制台](https://console.shengwang.cn/overview) 开通翻译功能。
 4. 该功能由 Microsoft Azure Translation API 提供，因此开始前请确保你了解该功能支持的目标语言。详见 [翻译语言支持](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support)。
 
 ## 技术原理
