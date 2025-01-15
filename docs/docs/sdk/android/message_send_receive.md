@@ -558,15 +558,5 @@ message.getBooleanAttribute("attribute2", false)
  ChatClient.getInstance().chatManager().sendMessage(message);
 ```
 
-### 发送消息前的内容审核
-
-- 内容审核关注消息 body
-
-[内容审核服务会关注消息 body 中指定字段的内容，不同类型的消息审核不同的字段](/product/moderation/moderation_mechanism.html)，若创建消息时在这些字段中传入了很多业务信息，可能会影响审核效果。因此，创建消息时需要注意内容审核的字段不涉及业务信息，建议业务信息放在扩展字段中。
-
-- 设置发送方收到内容审核替换后的内容
-
-若初始化时打开了 `ChatOptions#setUseReplacedMessageContents` 开关，发送文本消息时如果被内容审核（Moderation）进行了内容替换，发送方会收到替换后的内容。若该开关为关闭状态，则发送方不会收到替换后的内容。
-
 
 
