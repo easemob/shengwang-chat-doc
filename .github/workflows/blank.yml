@@ -2,7 +2,7 @@ name: note build
 # 触发workflow的条件
 on:
   push:
-    branches: ['doc']
+    branches: ["doc"]
 
 env:
   SERVER_PRIVATE_KEY: ${{ secrets.SERVER_PRIVATE_KEY }} # 服务器私钥
@@ -23,25 +23,21 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 22
 
       - name: Run install
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: install
+        run: npm install
 
       - name: Build production bundle
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: docs:build
+        run: npm run build
 
       # 上传打包资源
       - name: Deploy
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_PRIVATE_KEY }}
-          ARGS: '-rltgoDzvO --delete'
-          SOURCE: 'docs/.vuepress/dist/'
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: "docs/.vuepress/dist/"
           REMOTE_HOST: ${{ secrets.SERVER_HOST }}
           REMOTE_PORT: ${{ secrets.SERVER_PORT }} -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa
           REMOTE_USER: ${{ secrets.SERVER_USER_NAME }}
