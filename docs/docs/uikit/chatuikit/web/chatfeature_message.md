@@ -269,7 +269,3 @@ features.chat.message.pin = false;
 ```jsx
 features.chat.messageInput.typing = false;
 ```
-
-#### 自定义
-
-本功能使用 SDK 的透传消息实现，详见 [SDK 相关文档](/docs/sdk/product/typing_indication.html)。
