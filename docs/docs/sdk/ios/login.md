@@ -26,12 +26,29 @@
 
 ## 主动登录
 
+1. **用户 ID + token** 是更加安全的登录方式。
+
 通过用户 ID 和 token 进行登录。使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
 
 ```objectivec
         [AgoraChatClient.sharedClient loginWithUsername:@"" token:@"" completion:^(NSString * _Nonnull aUsername, AgoraChatError * _Nullable aError) {
             
         }];
+```
+
+2. **用户 ID + 密码** 是传统的登录方式。用户名和密码均由你的终端用户自行决定，密码需要符合密码规则要求。
+
+```objectivec
+    //SDK 初始化 `AgoraChatOptions` 时可以传入 `loginExtensionInfo` 属性投递给被踢下线的设备。该属性需要开启多设备登录的情况下才能生效。
+    AgoraChatOptions *options = [AgoraChatOptions optionsWithAppkey:<#AppKey#>];
+    options.loginExtensionInfo = @"you was kicked out by other device";
+    [AgoraChatClient.sharedClient initializeSDKWithOptions:options];
+// 异步方法
+[[AgoraChatClient sharedClient] loginWithUsername:@"username"
+                                     password:@"your password"
+                                   completion:^(NSString *aUsername, AgoraChatError *aError) {
+
+}];
 ```
 
 ## 自动登录
