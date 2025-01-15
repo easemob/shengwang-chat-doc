@@ -51,4 +51,4 @@
 使用 APNs 推送前，确保满足以下条件：
 
 - 完成 SDK 初始化，并连接到服务器，详见[初始化文档](/docs/sdk/ios/initialization.html)。
-- 了解即时通讯 IM 的使用限制，详见[使用限制](limitation.html)。
+- 了解即时通讯 IM 的使用限制，详见[使用限制](/docs/sdk/ios/limitation.html)。

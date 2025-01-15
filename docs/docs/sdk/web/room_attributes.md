@@ -74,7 +74,7 @@ const option = {
 chatClient.updateChatRoomAnnouncement(option).then((res) => console.log(res));
 ```
 
-### 管理聊天室自定义属性（key-value）
+### 管理聊天室自定义属性（KV）
 
 #### 获取聊天室自定义属性
 

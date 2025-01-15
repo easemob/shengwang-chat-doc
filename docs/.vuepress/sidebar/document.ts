@@ -195,7 +195,7 @@ const documentSidebar = [
           { text: '设置通知的显示内容', link: 'push/push_display.html', only: ['android', 'ios', 'harmonyos', 'react-native', 'flutter'] },
           { text: '设置通知方式和免打扰', link: 'push/push_notification_mode_dnd.html', only: ['android', 'ios', 'web', 'harmonyos', 'react-native', 'flutter']},
           { text: '设置推送模板', link: 'push/push_template.html', only: ['web']},
-          { text: '设置推送翻译', link: 'push/push_translation.html', only: ['android', 'ios', 'web', 'react-native', 'flutter']},
+          // { text: '设置推送翻译', link: 'push/push_translation.html', only: ['android', 'ios', 'web', 'react-native', 'flutter']},
           { text: '设置推送扩展功能', link: 'push/push_extension.html', only: ['android', 'ios', 'web', 'react-native', 'flutter']},
           { text: '推送消息分类', link: 'push/push_message_classification.html', only: ['android'] },
           { text: 'FAQ', link: 'push/push_solution.html', only: ['android', 'ios','harmonyos']},

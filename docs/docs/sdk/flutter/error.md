@@ -2,6 +2,6 @@
 
 <Toc />
 
-[Android 平台设备请参见：](/docs/sdk/android/error.html)
+[Android 错误码：](/docs/sdk/android/error.html)
 
-[iOS 平台设备请参见：](/docs/sdk/ios/error.html)  
+[iOS 错误码：](/docs/sdk/ios/error.html)  

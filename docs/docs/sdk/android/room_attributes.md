@@ -77,7 +77,7 @@ ChatRoom chatRoom = ChatClient.getInstance().chatroomManager().changeChatRoomSub
 ChatRoom chatRoom = ChatClient.getInstance().chatroomManager().changeChatroomDescription(chatRoomId, newDescription);
 ```
 
-### 管理聊天室自定义属性（key-value）
+### 管理聊天室自定义属性（KV）
 
 #### 获取聊天室指定自定义属性
 
