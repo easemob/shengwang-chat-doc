@@ -6,8 +6,8 @@
 
 ## 前提条件
 
-1. 已开启声网即时通讯服务，详见 [开启和配置即时通讯服务](/product/enable_and_configure_IM.html)。
-2. 了解声网即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+1. 已开启声网即时通讯服务，详见 [开启和配置即时通讯服务](/docs/sdk/applet/enable_im.html)。
+2. 了解声网即时通讯 IM 的使用限制，详见 [使用限制](/docs/sdk/applet/limitation.html)。
 3. 你已在 [声网即时通讯控制台](https://console.easemob.com/user/login)的**即时通讯 > 功能配置 > 功能配置总览**页面激活推送高级功能。高级功能激活后，你可以设置推送通知方式、免打扰模式和自定义推送模板。**如需关闭推送高级功能必须联系商务，因为该操作会删除所有相关配置。**
 4. 各推送使用的条件：
    - 小米推送：在小米设备上可用；

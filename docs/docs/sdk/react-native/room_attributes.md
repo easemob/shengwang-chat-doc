@@ -98,7 +98,7 @@ ChatClient.getInstance()
     console.log("change desc fail.", reason);
   });
 ```
-### 管理聊天室自定义属性（key-value）
+### 管理聊天室自定义属性（KV）
 
 #### 获取聊天室属性
 

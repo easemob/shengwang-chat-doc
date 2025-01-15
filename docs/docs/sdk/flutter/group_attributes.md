@@ -59,7 +59,11 @@ try {
 
 ### 更新群公告
 
-仅群主和群管理员可以调用 `ChatGroupManager#updateGroupAnnouncement` 方法设置和更新群公告，群公告的长度限制为 512 个字符。群公告更新后，其他群成员收到 `ChatGroupEventHandler#onAnnouncementChangedFromGroup` 事件。
+仅群主和群管理员可以调用 `ChatGroupManager#updateGroupAnnouncement` 方法设置和更新群公告。
+
+群公告更新后，其他群成员收到 `ChatGroupEventHandler#onAnnouncementChangedFromGroup` 事件。
+
+群公告的长度限制为 512 个字符。
 
 示例代码如下：
 
@@ -93,7 +97,11 @@ try {
 
 #### 上传共享文件
 
-所有群组成员均可以调用 `ChatGroupManager#uploadGroupSharedFile` 方法上传共享文件至群组，单个群共享文件大小限制为 10 MB。上传共享文件后，其他群成员收到 `ChatGroupEventHandler#onSharedFileAddedFromGroup` 事件。
+所有群组成员均可以调用 `ChatGroupManager#uploadGroupSharedFile` 方法上传共享文件至群组。
+
+上传共享文件后，其他群成员收到 `ChatGroupEventHandler#onSharedFileAddedFromGroup` 事件。
+
+单个群共享文件大小限制为 10 MB。
 
 示例代码如下：
 

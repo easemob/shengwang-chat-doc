@@ -28,10 +28,9 @@
 - CocoaPods 包管理工具;
 - Flutter 3.3.0 或以上版本;
 - Dart 3.3.0 或以上版本;
+- 有效的即时通讯 IM 开发者账号和 App ID，详见 [开通即时通讯服务](enable_im.html)。
 
 配置开发或者运行环境如果遇到问题，请参考 [这里](https://docs.flutter.dev/get-started/install)。
-
-- 有效的即时通讯 IM 开发者账号和 App ID，详见 [开通即时通讯服务](enable_im.html)。
 
 ## 项目设置
 
@@ -474,4 +473,4 @@ flutter run
 
 ## 后续步骤
 
-为保障通信安全，在正式生产环境中，你需要在自己的 app 服务端生成 Token。详见[使用 Token 鉴权](token_authentication.html)。
+为保障通信安全，在正式生产环境中，你需要在自己的 app 服务端生成 Token。详见[使用 Token 鉴权](/docs/sdk/server-side/token_authentication.html)。

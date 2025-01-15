@@ -22,6 +22,8 @@
 
 6. 在弹出的对话框中，配置用户相关参数，点击**确定**。
 
+![img](/images/android/user_create.png)
+
 ## 主动登录
 
 通过用户 ID 和 token 进行登录。使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。

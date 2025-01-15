@@ -80,7 +80,7 @@ AgoraChatError *error = nil;
 [[AgoraChatClient sharedClient].roomManager updateDescription:textString forChatroom:self.chatroom.chatroomId completion:nil];
 ```
 
-### 管理聊天室自定义属性（key-value）
+### 管理聊天室自定义属性（KV）
 
 #### 获取聊天室指定自定义属性
 

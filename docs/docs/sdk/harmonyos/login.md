@@ -22,6 +22,8 @@
 
 6. 在弹出的对话框中，配置用户相关参数，点击**确定**。
 
+![img](/images/android/user_create.png)
+
 ## 主动登录
 
 **用户 ID + token** 是更加安全的登录方式。
