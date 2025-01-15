@@ -26,7 +26,7 @@
 
 ## 主动登录
 
-通过用户 ID 和 token 进行登录。使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
+1. **用户 ID + token** 是更加安全的登录方式。使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
 
 ```dart
 try {
@@ -34,6 +34,14 @@ try {
 } on ChatError catch (e) {
   debugPrint("loginWithToken error: ${e.code} ${e.description}");
 }
+```
+
+2. **用户 ID + 密码** 登录是传统的登录方式。用户名和密码都是你的终端用户自行决定，密码需要符合密码规则要求。
+
+```dart
+try {
+    await ChatClient.getInstance.login(userId, password);
+} on ChatError catch (e) {}
 ```
 
 ## 自动登录

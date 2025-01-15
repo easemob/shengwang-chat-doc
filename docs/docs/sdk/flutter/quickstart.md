@@ -14,8 +14,8 @@
 
 1. 客户端向你的应用服务器请求 Token，你的应用服务器返回 Token。
 2. 客户端 A 和客户端 B 使用获得的 Token 登录即时通讯 IM。
-3. 客户端 A 发送消息到即时通讯服务器。
-4. 即时通讯服务器将消息发送到客户端 B，客户端 B 接收消息。
+3. 客户端 A 发送消息到声网服务器。
+4. 声网服务器将消息发送到客户端 B，客户端 B 接收消息。
 
 ## 前提条件
 
@@ -73,7 +73,7 @@ android {
 
 iOS 需要 iOS 11.0 以上版本，
 
-打开文件 `quick_start/ios/Runner.xcodeproj`，修改：`TARGETS -> General -> Deployment info`, 设置 iOS 版本为 10.0。
+打开文件 `quick_start/ios/Runner.xcodeproj`，修改：`TARGETS -> General -> Deployment info`, 设置 iOS 版本为 11.0。
 
 ### 集成 SDK
 
@@ -81,7 +81,7 @@ iOS 需要 iOS 11.0 以上版本，
 
 ```bash
 cd quick_start
-flutter pub add im_flutter_sdk
+flutter pub add shengwang_chat_sdk
 flutter pub get
 ```
 
@@ -91,7 +91,7 @@ flutter pub get
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:shengwang_chat_sdk/agora_chat_sdk.dart';
+import 'package:shengwang_chat_sdk/shengwang_chat_sdk.dart';
 ```
 
 修改 `_MyHomePageState` 代码：
@@ -101,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   ScrollController scrollController = ScrollController();
   String _username = "";
-  String _password = "";
+  String _token = "";
   String _messageContent = "";
   String _chatId = "";
   final List<String> _logText = [];
@@ -130,8 +130,8 @@ class _MyHomePageState extends State<MyHomePage> {
               onChanged: (username) => _username = username,
             ),
             TextField(
-              decoration: const InputDecoration(hintText: "Enter password"),
-              onChanged: (password) => _password = password,
+              decoration: const InputDecoration(hintText: "Enter token"),
+              onChanged: (token) => _token = token,
             ),
             const SizedBox(height: 10),
             Row(
@@ -154,18 +154,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: TextButton(
                     onPressed: _signOut,
                     child: const Text("SIGN OUT"),
-                    style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all(Colors.white),
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.lightBlue),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: TextButton(
-                    onPressed: _signUp,
-                    child: const Text("SIGN UP"),
                     style: ButtonStyle(
                       foregroundColor: MaterialStateProperty.all(Colors.white),
                       backgroundColor:
@@ -221,9 +209,6 @@ class _MyHomePageState extends State<MyHomePage> {
   void _signOut() async {
   }
 
-  void _signUp() async {
-  }
-
   void _sendMessage() async {
   }
 
@@ -258,27 +243,31 @@ void _initSDK() async {
 
 ### 注册即时通讯 IM 用户
 
-在 `_signUp` 方法中添加注册用户的代码：
+#### 创建用户
 
-```dart
-void _signUp() async {
-  if (_username.isEmpty || _password.isEmpty) {
-    _addLogToConsole("username or password is null");
-    return;
-  }
+在[声网控制台](https://console.shengwang.cn/overview)按照如下步骤创建用户：
 
-  try {
-    await ChatClient.getInstance.createAccount(_username, _password);
-    _addLogToConsole("sign up succeed, username: $_username");
-  } on ChatError catch (e) {
-    _addLogToConsole("sign up failed, e: ${e.code} , ${e.description}");
-  }
-}
-```
+1. 展开控制台左上角下拉框，选择需要开通即时通讯 IM 服务的项目。
 
-:::tip
-该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用。正式环境中，需要[在声网控制台中创建用户或调用 Restful API 注册用户](login.html#用户注册)。
-:::
+2. 点击左侧导航栏的**全部产品**。
+
+3. 在下拉列表中找到**即时通讯 IM** 并点击。
+
+4. 在**即时通讯 IM** 页面，进入**运营管理**标签页。
+
+5. 在**用户** 页签下，点击**创建IM用户**。
+
+6. 在弹出的对话框中，配置用户相关参数，点击**确定**。
+
+![img](/images/android/user_create.png)
+
+#### 获取用户 token
+
+创建用户后，在用户列表点击对应的用户的**操作**一栏中的**更多**，选择**查看Token**。
+
+在弹出的对话框中，可以查看用户 Token，也可以点击**重新生成**，生成用户 token。
+
+![img](/images/android/user_create.png)
 
 ### 添加登录
 
@@ -286,13 +275,13 @@ void _signUp() async {
 
 ```dart
 void _signIn() async {
-    if (_username.isEmpty || _password.isEmpty) {
-        _addLogToConsole("username or password is null");
+    if (_username.isEmpty || _token.isEmpty) {
+        _addLogToConsole("username or token is null");
         return;
     }
 
     try {
-        await ChatClient.getInstance.login(_username, _password);
+        await ChatClient.getInstance.loginWithToken(_username, _token);
         _addLogToConsole("sign in succeed, username: $_username");
     } on ChatError catch (e) {
         _addLogToConsole("sign in failed, e: ${e.code} , ${e.description}");
@@ -418,6 +407,11 @@ void _addChatListener() {
                 _addLogToConsole(
                   "receive custom message, from: ${msg.from}",
                 );
+              }
+              break;
+            case MessageType.COMBINE:
+              {
+                  "receive combine message, from: ${msg.from}",
               }
               break;
             case MessageType.CMD:

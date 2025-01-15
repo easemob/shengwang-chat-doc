@@ -85,7 +85,7 @@ ChatUIKitSettings.enableMessageReply = false;
 
 #### 如何使用
 
-使用该特性前，请确保在[声网控制台](https://console.shengwang.cn/overview)上已申请试用该功能。
+使用该特性前，请确保已联系声网商务开通。
 
 1. 开启消息翻译特性。
 
@@ -202,8 +202,6 @@ ChatUIKitSettings.enablePinMsg = false;
 ## 输入状态指示
 
 输入状态指示功能指在单聊会话中实时显示会话的一方正在输入的状态，增强通讯互动的实时性。此功能有助于用户了解对方是否正在回复，从而优化沟通体验，提升对话流畅度。
-
-本功能使用 SDK 的透传消息实现，详见 [SDK 相关文档](/docs/sdk/product/typing_indication.html)。
 
 | 开启输入状态提示            | 关闭输入状态提示   | 
 | :-------------- | :----- | 

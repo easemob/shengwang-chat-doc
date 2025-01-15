@@ -69,7 +69,7 @@
 
 #### 如何使用
 
-使用该特性前，请确保在[环信即时通信控制台](https://console.easemob.com/user/login)上已申请试用该功能。
+使用该特性前，请确保已联系声网商务开通。
 
 1. 开启消息翻译特性。
 
@@ -289,8 +289,6 @@ class ChatThreadActivity:ChatUIKitThreadActivity() {
 ```
 
 #### 自定义输入状态指示 UI
-
-本功能使用 SDK 的透传消息实现，详见 [SDK 相关文档](/docs/sdk/product/typing_indication.html)。
 
 用户需要监听透传消息回调处理导航相关 UI 显示效果。
 

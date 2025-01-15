@@ -303,7 +303,7 @@ ChatUIKitSettings.conversationListMuteImage = const AssetImage(
 
 消息翻译是指用户可以将一条消息翻译成其他语言。消息翻译可以帮助使用不同语言的用户进行沟通。
 
-使用该特性前，请确保在[声网控制台](https://console.shengwang.cn/overview)上已试用该功能。
+使用该特性前，请确保已联系声网商务开通该功能。
 
 1. 开启消息翻译特性。
 
