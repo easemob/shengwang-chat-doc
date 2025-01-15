@@ -310,7 +310,7 @@ return builder.buildAppToken(appid, appcert, expirePeriod);
    007eJxTYPj3p2Tnb4tznzxfO/0LK5cu/GZmI71PnWPVkbVhP/aniEspMBhbJJqnGKclmVsYJ5kYWBhbJqcapqRZpJmbm5ikGRsnnT12OrGhN5pB97zpVEYGVgZGBiYGEJ+BAQBN0CGG
    ```
 
-2. 使用即时通讯 Token 调用即时通讯 RESTful API 注册一个新用户。在终端中，使用 curl 命令向即时通讯服务器发送请求注册一个新用户，示例如下：
+2. 使用即时通讯 Token 调用即时通讯 RESTful API 注册一个新用户。在终端中，使用 curl 命令向声网服务器发送请求注册一个新用户，示例如下：
 
    ```shell
    curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H "Authorization: Bearer <YourAgoraAppToken>" -i "https://XXXX/XXXX/users" -d '[
