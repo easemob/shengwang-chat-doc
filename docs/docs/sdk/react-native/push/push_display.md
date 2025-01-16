@@ -70,7 +70,7 @@ ChatClient.getInstance()
 你可以通过以下两种方式设置：
 
 - [调用 REST API 配置](/docs/sdk/server-side/push.html#使用推送模板)。
-- 在[声网控制台](https://console.easemob.com/user/login)设置推送模板，详见[控制台文档](/product/enable_and_configure_IM.html#配置推送模板)。
+- 在[声网控制台](https://console.shengwang.cn/overview)设置推送模板，详见[控制台文档](/product/enable_and_configure_IM.html#配置推送模板)。
 
 使用推送模板有以下优势：
 
@@ -85,7 +85,7 @@ ChatClient.getInstance()
    - 若发送方发消息时设置了推送模板，接收方即使设置了推送模板，收到推送通知后也按照发送方设置的推送模板显示。
 
 :::tip
-1. 设置推送模板为推送的高级功能，使用前需要在[声网控制台](https://console.easemob.com/user/login)的**即时通讯 > 功能配置 > 功能配置总览**页面激活推送高级功能。高级功能开启后，如需关闭必须联系商务，因为该操作会删除所有相关配置。
+1. 设置推送模板为推送的高级功能，使用前需要在[声网控制台](https://console.shengwang.cn/overview)的**即时通讯 > 功能配置 > 功能配置总览**页面激活推送高级功能。高级功能开启后，如需关闭必须联系商务，因为该操作会删除所有相关配置。
 
 2. 推送模板相关的数据结构，详见[推送扩展字段](/docs/sdk/server-side/push_extension.html)。
 :::

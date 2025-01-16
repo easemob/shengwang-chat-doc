@@ -4,18 +4,18 @@
 
 即时通讯 IM React Native SDK 通过 `ChatManager` 类和 `ChatMessage` 类实现文本、图片、音频、视频和文件等类型的消息的发送和接收。
 
-- 对于单聊，即时通讯 IM 默认支持陌生人之间发送消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要[开启好友关系检查](/product/enable_and_configure_IM.html#好友关系检查)。
+- 对于单聊，即时通讯 IM 默认支持陌生人之间发送消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要联系声网商务开通。
 
 - 对于群组和聊天室，用户每次只能向所属的单个群组和聊天室发送消息。
 
-单聊、群组聊天和聊天室的消息发送控制，详见[消息发送控制](/product/product_message_overview.html#消息发送控制)文档。
+单聊、群组聊天和聊天室的消息发送控制，详见[消息发送控制](product_message_overview.html#消息发送控制)文档。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [初始化文档](initialization.html)。
-- 了解即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM 的使用限制，详见 [使用限制](limitation.html)。
 
 ## 发送和接收文本消息
 
@@ -74,7 +74,7 @@ ChatClient.getInstance().chatManager.sendMessage(msg!, callback).then().catch();
 
 在新消息到来时，你会收到 `onMessagesReceived` 的回调，消息接收时可能是一条，也可能是多条。你可以在该回调里遍历消息队列，解析并显示收到的消息。若在初始化时打开了 `ChatOptions#messagesReceiveCallbackIncludeSend` 开关，则该回调中会返回发送成功的消息。
 
-对于聊天室消息，你可以通过消息的 `ChatMessage.isBroadcast` 属性判断该消息是否为[通过 REST API 发送的聊天室全局广播消息](/docs/sdk/server-side/message_broadcast.html#发送聊天室全局广播消息)。
+对于聊天室消息，你可以通过消息的 `ChatMessage#isBroadcast` 属性判断该消息是否为[通过 RESTful API 发送的聊天室全局广播消息](/docs/sdk/server-side/message_broadcast.html#发送聊天室全局广播消息)。
 
 ```typescript
 // 继承并实现 ChatMessageEventListener
@@ -470,13 +470,3 @@ ChatClient.getInstance()
   .then()
   .catch();
 ```
-
-### 发送消息前的内容审核
-
-- 内容审核关注消息 body
-
-[内容审核服务会关注消息 body 中指定字段的内容，不同类型的消息审核不同的字段](/product/moderation/moderation_mechanism.html)，若创建消息时在这些字段中传入了很多业务信息，可能会影响审核效果。因此，创建消息时需要注意内容审核的字段不涉及业务信息，建议业务信息放在扩展字段中。
-
-- 设置发送方收到内容审核替换后的内容
-
-若初始化时打开了 `ChatOptions#useReplacedMessageContents` 开关，发送文本消息时如果被内容审核（Moderation）进行了内容替换，发送方会收到替换后的内容。若该开关为关闭状态，则发送方不会收到替换后的内容。

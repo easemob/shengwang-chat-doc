@@ -29,7 +29,7 @@ Reaction 场景示例如下：
 开始前，请确保满足以下条件：
 
 1. 完成 SDK 初始化，详见 [初始化](initialization.html)文档。
-2. 了解即时通讯 IM API 的 [使用限制](/product/limitation.html)。
+2. 了解即时通讯 IM API 的 [使用限制](limitation.html)。
 3. 产品套餐包支持 Reaction 功能。
 
 ## 实现方法

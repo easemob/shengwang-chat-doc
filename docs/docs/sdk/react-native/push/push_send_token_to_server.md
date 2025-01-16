@@ -14,9 +14,9 @@ yarn add react-native-shengwang-chat
 
 ### 步骤二 获取推送证书信息
 
-从[声网控制台](https://console.easemob.com/user/login)获取推送证书信息，配置应用的 App ID（`appId`）和推送证书名称（`pushId`）信息。
+从[声网控制台](https://console.shengwang.cn/overview)获取推送证书信息，配置应用的 App ID（`appId`）和推送证书名称（`pushId`）信息。
 
-- `appId`：在[声网控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看。
+- `appId`：在[声网控制台](https://console.shengwang.cn/overview)的 **应用详情** 页面查看。
 - `pushId`：推送证书名称。不同厂商的推送证书名称也不同。
 
 ![img](/images/react-native/push/push_get_appkey.png)

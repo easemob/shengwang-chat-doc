@@ -12,7 +12,7 @@
 
 - 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
 - 产品套餐包支持[从服务端获取会话列表功能](conversation_list#从服务器分页获取会话列表)。
-- 了解即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM API 的使用限制，详见 [使用限制](limitation.html)。
 
 ## 技术原理
 
@@ -49,8 +49,6 @@ ChatClient.getInstance()
     console.log("get conversions fail.", reason);
   });
 ```
-
-若不支持 `fetchConversationsFromServerWithCursor`，你可以调用 `fetchConversationsFromServerWithPage` 接口从服务器获取会话列表。利用该接口，你总共可获取服务器存储的 100 个会话。若提升这两个上限，需联系声网商务。
 
 ### 获取本地所有会话
 

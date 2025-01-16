@@ -23,8 +23,8 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [初始化](initialization.html)文档。
-- 了解即时通讯 IM API 的 [使用限制](/product/limitation.html)。
-- 了解子区和子区成员数量限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM API 的 [使用限制](limitation.html)。
+- 了解子区和子区成员数量限制，详见 [使用限制](limitation.html)。
 - 产品套餐包支持子区功能。
 
 ## 实现方法

@@ -9,12 +9,12 @@
 本文介绍如何通过管理用户属性设置、更新、存储并获取实时消息用户的相关信息。
 
 :::tip
-为保证用户信息安全，SDK 仅支持 Chat 用户设置或更新自己的用户属性。
+为保证用户信息安全，SDK 仅支持 IM 用户设置或更新自己的用户属性。
 :::
 
 ## 技术原理
 
-即时通讯 IM React Native SDK 提供一个 `ChatUserInfoManager` 类，支持获取、设置及修改用户属性信息，其中包含如下方法：
+即时通讯 IM React Native SDK 提供 `ChatUserInfoManager` 类，支持获取、设置及修改用户属性信息，其中包含如下方法：
 
 - 设置当前用户的属性
 - 获取用户属性
@@ -25,7 +25,7 @@
 设置用户属性前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [初始化](initialization.html)文档。
-- 了解即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM 的使用限制，详见 [使用限制](limitation.html)。
 
 ## 实现方法
 
@@ -115,7 +115,7 @@ ChatClient.getInstance()
 
 1. 开通第三方文件存储服务。详见 [阿里云文件存储 NAS](https://help.aliyun.com/product/27516.html) 或其他第三方文件存储帮助文档。
 2. 将头像文件上传至上述第三方文件存储，并获取存储 URL 地址。
-3. 将该 URL 地址传入用户属性的头像字段（avatarUrl）。
+3. 将该 URL 地址传入用户属性的头像字段（`avatarUrl`）。
 4. 调用 `fetchUserInfoById` 获取头像字段，并在本地 UI 中渲染用户头像。
 
 ### 名片消息

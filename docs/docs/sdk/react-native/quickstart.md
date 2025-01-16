@@ -41,13 +41,14 @@
 
 ### 其他要求
 
-有效的即时通讯 IM 开发者账号和 App ID，见 [声网即时通讯云管理后台](https://console.easemob.com/user/login)。
+有效的即时通讯 IM 开发者账号和 App ID，见 [声网控制台](https://console.shengwang.cn/overview)。
 
 ## 项目设置
 
 创建一个 React Native 项目并将集成进去
 
-1. 根据开发系统和目标平台准备开发环境；
+1. 根据开发系统和目标平台准备开发环境。
+   
 2. 打开终端，进入需要创建项目的目录，输入命令创建 React Native 项目：
 
 ```sh
@@ -56,7 +57,7 @@ cd simple_demo
 yarn
 ```
 
-创建好的项目名称是 `simple_demo`。
+创建的项目名称为 `simple_demo`。
 
 3. 在终端命令行，输入以下命令添加依赖：
 
@@ -80,7 +81,7 @@ cd ios && pod install && cd ..
 
 ## 实现发送和接收单聊消息
 
-发送单聊消息前，终端用户需要先注册 IM 账号，登录。
+发送单聊消息前，终端用户需要先注册 IM 账号，然后登录。
 
 建议使用 `visual studio code` 打开文件夹 `simple_demo`，打开文件 `App.js`，删除全部内容，并添加如下内容:
 
@@ -102,15 +103,15 @@ import {
   ChatMessage,
 } from "react-native-shengwang-chat";
 
-// Defines the App object.
+// 定义 App 对象。
 const App = () => {
-  // Defines the variable.
-  const title = "AgoraChatQuickstart";
-  // Replaces <your appId> with your app key.
+  // 定义变量。
+  const title = "ShengwangIMQuickstart";
+  // 将 <your appId> 替换为你的 app ID。
   const appId = "<your appId>";
-  // Replaces <your userId> with your user ID.
+  // 将 <your userId> 替换为你的用户 ID。
   const [username, setUsername] = React.useState("<your userId>");
-  // Replaces <your agoraToken> with your Agora token.
+  // 将 <your agoraToken> 替换为你的声网 token。
   const [chatToken, setChatToken] = React.useState("<your agoraToken>");
   const [targetId, setTargetId] = React.useState("");
   const [content, setContent] = React.useState("");
@@ -118,7 +119,7 @@ const App = () => {
   const chatClient = ChatClient.getInstance();
   const chatManager = chatClient.chatManager;
 
-  // Outputs console logs.
+  // 输出控制台日志。
   useEffect(() => {
     logText.split("\n").forEach((value, index, array) => {
       if (index === 0) {
@@ -127,7 +128,7 @@ const App = () => {
     });
   }, [logText]);
 
-  // Outputs UI logs.
+  // 输出 UI 日志。
   const rollLog = (text) => {
     setWarnText((preLogText) => {
       let newLogText = text;
@@ -147,7 +148,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    // Registers listeners for messaging.
+    // 注册消息监听。
     const setMessageListener = () => {
       let msgListener = {
         onMessagesReceived(messages) {
@@ -168,8 +169,8 @@ const App = () => {
       chatManager.addMessageListener(msgListener);
     };
 
-    // Initializes the SDK.
-    // Initializes any interface before calling it.
+    // 初始化 SDK。
+    // 调用接口前先初始化。
     const init = () => {
       let o = ChatOptions.withAppId({
         autoLogin: false,
@@ -209,7 +210,7 @@ const App = () => {
     init();
   }, [chatClient, chatManager, appId]);
 
-  // Logs in with an account ID and a token.
+  // 通过用户 ID 和 Token 登录。
   const login = () => {
     if (this.isInitialized === false || this.isInitialized === undefined) {
       rollLog("Perform initialization first.");
@@ -226,7 +227,7 @@ const App = () => {
       });
   };
 
-  // Logs out from server.
+  // 登出
   const logout = () => {
     if (this.isInitialized === false || this.isInitialized === undefined) {
       rollLog("Perform initialization first.");
@@ -243,7 +244,7 @@ const App = () => {
       });
   };
 
-  // Sends a text message to somebody.
+  // 发送文本消息。
   const sendmsg = () => {
     if (this.isInitialized === false || this.isInitialized === undefined) {
       rollLog("Perform initialization first.");
@@ -276,7 +277,7 @@ const App = () => {
       });
   };
 
-  // Renders the UI.
+  // UI 渲染。
   return (
     <SafeAreaView>
       <View style={styles.titleContainer}>
@@ -348,7 +349,7 @@ const App = () => {
   );
 };
 
-// Sets UI styles.
+// 设置 UI 样式。
 const styles = StyleSheet.create({
   titleContainer: {
     height: 60,
@@ -469,4 +470,4 @@ demo 的界面:
 
 ## 更多操作
 
-为了保证安全性，我们推荐使用 `username + password + token` 方式创建用户，token 在你的 app server 生成供客户端获取，当 token 过期时你需要重新获取。详见 [获取 user token](/product/easemob_user_token)。
+为了保证安全性，我们推荐使用 `username + password + token` 方式创建用户，token 在你的 app server 生成供客户端获取，当 token 过期时你需要重新获取。详见 [使用 Token 验证](/sdk/server-side/token_authentication.html)。

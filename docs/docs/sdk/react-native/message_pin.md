@@ -2,14 +2,14 @@
 
 消息置顶指将会话中的消息固定在会话顶部，方便会话中的所有用户快速查看重要消息。
 
-目前，**群组和聊天室**聊天支持对消息置顶和取消置顶，单聊消息不支持该功能。
+单聊、群组聊天和聊天室均支持该功能。**若要使用该功能，需联系声网商务开通。**
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
-- 了解即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM API 的使用限制，详见 [使用限制](limitation.html)。
 
 ## 技术原理
 
@@ -67,10 +67,9 @@ ChatClient.getInstance()
 你可以调用 `ChatManager#fetchPinnedMessages` 方法从服务端获取单个会话中的置顶消息。SDK 按照消息置顶时间的倒序返回。
 
 :::tip
-
 1. 若消息置顶后，消息在服务端过期或用户从服务端单向删除了该消息，当前用户拉漫游消息时拉不到该消息，但当前用户和其他用户均可以在置顶消息列表中拉取到该消息。
 2. 若消息置顶后，用户撤回了该消息，则该消息从服务端移除，所有用户在从服务器拉取置顶消息列表时无法拉取到该消息。
-   :::
+:::
 
 ```typescript
 ChatClient.getInstance()
@@ -97,7 +96,7 @@ ChatClient.getInstance()
 // ...
 const msg: ChatMessage;
 const info = await msg.getPinInfo;
-// todo: 获取消息的pin信息
+// todo: 获取消息的置顶信息
 ```
 
 ## 监听消息置顶事件

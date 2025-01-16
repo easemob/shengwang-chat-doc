@@ -2,10 +2,10 @@
 
 <Toc />
 
-即时通讯 IM SDK 提供消息举报接口。你的用户可以在客户端举报违规消息。当服务器收到举报消息后，会将举报消息存储到数据库，并在[声网控制台](https://console.easemob.com/user/login)展示。你可在声网控制台查看举报记录，并进行相应处理。
+即时通讯 IM SDK 提供消息举报接口。你的用户可以在客户端举报违规消息。当服务器收到举报消息后，会将举报消息存储到数据库，并在[声网控制台](https://console.shengwang.cn/overview)展示。你可在声网控制台查看举报记录，并进行相应处理。
 
 :::tip
-1. 使用前，你需要在[声网控制台](https://console.easemob.com/user/login) 开通该功能。
+1. 使用前，你需要在[声网控制台](https://console.shengwang.cn/overview) 开通该功能。
 2. 消息举报功能与内容审核功能为两个独立的功能，没有任何关联，因此使用该功能无需提前开通内容审核功能。
 :::
 
@@ -20,7 +20,7 @@
 开始前，请确保满足以下条件：
 
 1. 完成 SDK 初始化，详见 [初始化](initialization.html)文档。
-2. 了解即时通讯 IM API 的 [使用限制](/product/limitation.html)。
+2. 了解即时通讯 IM API 的 [使用限制](limitation.html)。
 3. 已在 [声网控制台开通消息举报功能](/product/enable_and_configure_IM.html#消息举报)。
 
 ## 实现方法

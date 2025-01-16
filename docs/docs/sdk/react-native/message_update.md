@@ -8,14 +8,14 @@
 
 即时通讯 IM React Native SDK 通过 `ChatManager` 和 `ChatConversation` 支持更新本地数据库中的消息，其中包含如下主要方法：
 
-- `updateMessage`
+- `updateMessage`：更新消息。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，并连接到服务器，详见 [初始化](initialization.html)及[连接](connection.html)文档。
-- 了解即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM API 的使用限制，详见 [使用限制](limitation.html)。
 
 ## 实现方法
 
