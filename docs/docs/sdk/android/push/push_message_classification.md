@@ -1,6 +1,6 @@
 # 推送消息分类
 
-## 华为
+## 华为推送
 
 华为推送通道将根据应用类型对资讯营销类消息的每日推送数量进行上限管理。详情请参考[推送数量管理细则](https://developer.huawei.com/consumer/cn/doc/development/HMSCore-Guides/message-restriction-description-0000001361648361)。
 
@@ -12,7 +12,7 @@
 
 ![image](/images/android/push/huawei-notifier-category.png)
 
-## OPPO
+## OPPO 推送
 
 OPPO 推送服务将增加区分应用类型的推送频控限制，公信消息单用户限制 2~5 条，私信消息不受限。详情请登录OPPO PUSH 开发者账号，管理中心查阅《【OPPO PUSH】推送服务规则更新说明》。
 
@@ -26,7 +26,7 @@ OPPO 推送服务将增加区分应用类型的推送频控限制，公信消息
 
 ![image](/images/android/push/oppo-notifier-channelId.png)
 
-## 小米
+## 小米推送
 
 小米推送通道将分为“私信消息”和“公信消息”两个类别，不同类别对应不同的权限，若应用选择不接入私信或公信，则会接入默认通道，单个应用单个设备单日 1 条消息。详情查看[小米推送消息限制说明](https://dev.mi.com/console/doc/detail?pId=2086)。
 
@@ -38,7 +38,7 @@ OPPO 推送服务将增加区分应用类型的推送频控限制，公信消息
 
 ![image](/images/android/push/xiaomi-notifier-channelId.png)
 
-## vivo
+## vivo 推送
 
 vivo 推送通道区分 “系统消息” 和”运营消息”，消息类别决定单日单用户推送量上限（声网服务端默认”系统消息”，即 classification = 1）。
 

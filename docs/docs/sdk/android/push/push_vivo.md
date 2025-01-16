@@ -34,7 +34,7 @@
 | `Category`     | String |  否    | 选择 category 类型。                       |
 | `应用包名`     | String | 是     | 填写 VIVO App package name。   |
 | `Activity`| String | 否     | 选择点击通知后的动作。  |
-| `推送类型`     | String |  否    |<br/> - **运营消息**<br/> - **系统消息**  |
+| `推送类型`     | String |  否    |<br/> - 运营消息<br/> - 系统消息  |
 
 ## **步骤三 集成 VIVO 推送 SDK**
 
@@ -42,9 +42,7 @@
  
 在 VIVO 推送官网下载推送 SDK 包，将 `jar` 包放到 libs 目录下并 sync 。
 
-此外，也可以直接使用声网 Android IM Demo 中集成的 VIVO 推送的 `jar` 包。
-
-2. 配置 `AndroidManifest.xml` 。
+1. 配置 `AndroidManifest.xml` 。
 
    推送服务需要的 `service` 和 `receiver`，并且需要配置 VIVO 的 `app_id` 和 `app_key`：
 
@@ -71,7 +69,7 @@
    <!-- VIVO 推送配置 end -->
    ```
 
-3. 在即时通讯 IM SDK 初始化的时，配置启用 VIVO 推送。
+2. 在即时通讯 IM SDK 初始化的时，配置启用 VIVO 推送。
 
    ```java
    ChatOptions options = new ChatOptions();
@@ -88,4 +86,4 @@
    ChatClient.getInstance().init(this, options);
    ```
 
-4. VIVO 设备安装应用后默认没有打开允许通知权限，测试前请先在设置中打开该应用的允许通知权限。
+3. VIVO 设备安装应用后默认没有打开允许通知权限，测试前请先在设置中打开该应用的允许通知权限。

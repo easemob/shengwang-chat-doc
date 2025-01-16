@@ -4,6 +4,8 @@
 
 ## 用户注册
 
+### 创建用户
+
 即时通讯 IM 提供以下两种方式创建用户：
 
 - 调用 [RESTful API](/docs/sdk/server-side/account_system.html#注册用户) 注册用户账号，注册后保存到你的服务器或返给客户端。
@@ -24,13 +26,19 @@
 
 ![img](/images/android/user_create.png)
 
+### 获取用户 token
+
+创建用户后，在用户列表点击对应的用户的**操作**一栏中的**更多**，选择**查看Token**。
+
+在弹出的对话框中，可以查看用户 Token，也可以点击**重新生成**，生成用户 token。
+
+![img](/images/android/user_create.png)
+
 ## 主动登录
 
 1. **用户 ID + token** 是更加安全的登录方式。
 
 通过用户 ID 和 token 进行登录。使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
-
-// TODO： 补上快速获取token的步骤
 
 ```java
 ChatClient.getInstance().loginWithToken(mAccount, mToken, new CallBack() {
@@ -48,7 +56,7 @@ ChatClient.getInstance().loginWithToken(mAccount, mToken, new CallBack() {
 });
 ```
 
-2. **用户 ID + 密码**登录是传统的登录方式。用户名和密码均由你的终端用户自行决定，密码需要符合[密码规则要求](/docs/sdk/server-side/account_system.html#开放注册单个用户)。
+1. **用户 ID + 密码**登录是传统的登录方式。用户名和密码均由你的终端用户自行决定，密码需要符合[密码规则要求](/docs/sdk/server-side/account_system.html#开放注册单个用户)。
 
 ```java
 ChatClient.getInstance().login(mAccount, mPassword, new CallBack() {

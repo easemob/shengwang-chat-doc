@@ -30,7 +30,7 @@
 | `推送密钥`     | String | 是     | 填写魅族 App Secret。|
 | `应用包名`     | String | 是     | 填写魅族 App package name。   |
 | `Activity`| String | 否     | 选择点击通知后的动作。  |
-| `推送送达回执`     | String |  否    | <br/> - **开启**<br/> - **关闭**   |
+| `推送送达回执`     | String |  否    | <br/> - 开启<br/> - 关闭   |
 
 ## **步骤三 集成魅族推送 SDK** 
 

@@ -47,7 +47,7 @@ dependencyResolutionManagement {
 ...
 dependencies {
     ...
-    // x.y.z 请填写具体版本号，如：1.4.0。
+    // x.y.z 请填写具体版本号，如：1.3.2。
     implementation("cn.shengwang:chat-sdk:x.y.z")
 }
 ```
@@ -73,13 +73,13 @@ dependencies {
 如果对生成的 `apk` 大小比较敏感，我们建议使用 `jar` 方式，并且手工拷贝 `so`，而不是使用 `aar`，因为 `aar` 方式会把各个平台的 `so` 文件都包含在其中。采用 `jar` 方式，可以仅保留一个 `ARCH` 目录，建议仅保留 `armeabi-v7a`，这样虽然在对应平台执行的速度会降低，但是能有效减小 `apk` 的大小。
 
 ### 方法三：动态加载 .so 库文件
-// TODO：检查版本号
-为了减少应用安装包的大小，SDK 提供了 `ChatOptions#setNativeLibBasePath` 方法支持动态加载 SDK 所需的 `.so` 文件。以 SDK 1.4.0 为例，`.so` 文件包括 `libcipherdb.so` 和 `libagora-chat-sdk.so` 、 `libaosl.so` 三个文件**。
+
+为了减少应用安装包的大小，SDK 提供了 `ChatOptions#setNativeLibBasePath` 方法支持动态加载 SDK 所需的 `.so` 文件。以 SDK 1.3.2 为例，`.so` 文件包括 `libcipherdb.so` 和 `libagora-chat-sdk.so` 、 `libaosl.so` 三个文件**。
 
 该功能的实现步骤如下：
 
 1. 下载最新版本的 SDK 并解压缩。
-2. 集成 `agorachat_1.4.0.jar` 到你的项目中。
+2. 集成 `agorachat_1.3.2.jar` 到你的项目中。
 3. 将所有架构的 `.so` 文件上传到你的服务器，并确保应用程序可以通过网络下载目标架构的 `.so` 文件。
 4. 应用运行时，会检查 `.so` 文件是否存在。如果未找到，应用会下载该 `.so` 文件并将其保存到你自定义的应用程序的私有目录中。
 5. 调用 `ChatClient#init` 初始化前，将 `.so` 文件所在的 app 私有目录作为参数设置进 `ChatOptions#setNativeLibBasePath` 方法中。

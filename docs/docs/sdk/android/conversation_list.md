@@ -110,10 +110,6 @@ SDK 初始化时，你可以设置 `ChatOptions#setAutoLoadAllConversations` 方
 - `true`：数据库中的所有会话会自动加载到内存。调用 `ChatManager#getAllConversationsBySort` 或 `ChatManager#getAllConversations` 时，若内存中没有任何缓存的会话，SDK 会首先将数据库中的会话加载到内存，然后返回获取的会话。
 - `false`：会话不会自动加载，节省内存。调用 `ChatManager#getAllConversationsBySort` 或 `ChatManager#getAllConversations` 时，若内存中没有任何缓存的会话，获取到的会话数为 0，SDK 不会将数据库中的会话加载到内存。而且，这种情况下，调用 `ChatManager#getUnreadMessageCount` 方法获取到的未读消息数也为 0。这种情况下，若需要通过这三个 API 获取所有会话及未读数，需要先调用 `ChatManager#loadAllConversations` 或者 `ChatManager#asyncFilterConversationsFromDB` 方法将数据库中的会话加载到内存。
 
-:::tip
-若使用自动加载会话功能，需将 SDK 升级至 4.6.0。
-:::
-
 ### 清除内存中的会话
 
 你可以调用 `cleanConversationsMemoryCache` 方法，清除本地内存中的所有会话，从而释放内存。

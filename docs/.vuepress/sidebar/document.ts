@@ -198,7 +198,7 @@ const documentSidebar = [
           // { text: '设置推送翻译', link: 'push/push_translation.html', only: ['android', 'ios', 'web', 'react-native', 'flutter']},
           { text: '设置推送扩展功能', link: 'push/push_extension.html', only: ['android', 'ios', 'web', 'react-native', 'flutter']},
           { text: '推送消息分类', link: 'push/push_message_classification.html', only: ['android'] },
-          { text: 'FAQ', link: 'push/push_solution.html', only: ['android', 'ios','harmonyos']},
+          // { text: 'FAQ', link: 'push/push_solution.html', only: ['android', 'ios','harmonyos']},
         ]
       },
     ],

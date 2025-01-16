@@ -52,7 +52,7 @@ ChatClient.getInstance().pushManager()?.updatePushDisplayStyle(displayStyle).the
    - 若发送方发消息时设置了推送模板，接收方即使设置了推送模板，收到推送通知后也按照发送方设置的推送模板显示。
 
 :::tip
-- 设置推送模板为推送的高级功能，默认为开启状态。如需关闭推送高级功能必须联系商务，因为该操作会删除所有相关配置。
+- 设置推送模板为推送的高级功能，默认为开启状态。高级功能开启后，如需关闭必须联系商务，因为该操作会删除所有相关配置。
 - 推送模板相关的数据结构，详见[推送扩展字段](/docs/sdk/server-side/push_extension.html)。
 :::
 

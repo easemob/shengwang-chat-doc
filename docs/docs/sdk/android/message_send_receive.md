@@ -2,7 +2,7 @@
 
 即时通讯 IM Android SDK 通过 `ChatManager` 类和 `ChatMessage` 类实现文本、图片、音频、视频和文件等类型的消息的发送和接收。
 
-- 对于单聊，即时通信 IM 默认支持陌生人之间发送消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要[开启好友关系检查](/product/enable_and_configure_IM.html#好友关系检查)。
+- 对于单聊，即时通讯 IM 默认支持陌生人之间发送消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要联系声网商务开通。
 
 - 对于群组和聊天室，用户每次只能向所属的单个群组和聊天室发送消息。
 
@@ -13,7 +13,7 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [初始化文档](initialization.html)。
-- 了解即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM 的使用限制，详见 [使用限制](limitation.html)。
 
 ## 发送和接收文本消息
 
@@ -201,7 +201,9 @@ ChatClient.getInstance().chatManager().sendMessage(message);
 
 3. 接收方收到视频消息时，自动下载视频缩略图。你可以设置自动或手动下载视频缩略图，该设置与图片缩略图相同，详见[设置图片缩略图自动下载](#发送和接收图片消息)。
 
-4. 接收方收到 [onMessageReceived 回调](#发送和接收文本消息)，可以调用 `ChatClient.getInstance().chatManager().downloadAttachment(message)` 方法下载视频原文件。
+4. 接收方收到 [onMessageReceived 回调](#发送和接收文本消息)。
+
+你可以调用 `ChatClient.getInstance().chatManager().downloadAttachment(message)` 方法下载视频原文件。
 
 ```java
 /**
@@ -226,7 +228,7 @@ private void downloadVideo(final ChatMessage message) {
 }
 ```
 
-5. 获取视频缩略图和视频原文件。
+1. 获取视频缩略图和视频原文件。
 
 ```java
 // 从服务器端获取视频文件。
