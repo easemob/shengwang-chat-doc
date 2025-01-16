@@ -30,27 +30,24 @@
 
 ## 集成说明
 
-移动端 SDK 默认连接国内数据中心，目前采取的策略是随机分配用户到国内 1 区、国内 2 区，2 个集群服务没有区别。Web 端和桌面端 SDK 集成需要根据所在数据中心，填写配置对应的 webSocket 地址。
+移动端 SDK 连接国内数据中心**中国**。
 
-| 数据中心名称 | socket3.0 地址          | socket2.0(老版本)地址   |
+Web 端和小程序端 SDK 集成需要根据数据中心，填写配置对应的 webSocket 地址。
+
+| 数据中心名称 | socket 3.0 地址          | socket 2.0(老版本)地址   |
 | :--------- | :----- | :----- |
-| 国内 1 区      | im-api-v2.easemob.com 或 im-api-v2.easecdn.com       | im-api.easemob.com 或 im-api.easecdn.com       |
-| 国内 2 区      | im-api-v2-31.easemob.com 或 im-api-v2-31.easecdn.com | im-api-31.easemob.com 或 im-api-31.easecdn.com |
-| 国内 VIP 区    | 请咨询你的商务经理    |                                                |
+| 中国      | im-api-c1.chat.rtnsvc.com     | https://im-api.easemob.com 或 https://im-api.easecdn.com       |
 
-不同数据中心 RESTful 接口调用不同，具体地址如下：
+RESTful 接口请求地址如下：
 
 | 数据中心名称 | RESTful API 请求地址                   |
 | :--------- | :----- |
-| 国内 1 区      | a1.easemob.com 或 a1.easecdn.com   |
-| 国内 2 区      | a31.easemob.com 或 a31.easecdn.com |
-| 国内 VIP 区    | 请咨询你的商务经理                 |
+| 中国      | c1.chat.rtnsvc.com    |
 
-不同数据中心微信小程序、支付宝小程序的具体地址如下：
+微信小程序、支付宝小程序的具体地址如下：
 
 | 数据中心名称 | 微信小程序      | 支付宝小程序           |
 | :--------- | :----- | :----- |
-| 国内 1 区      | im-api-wechat.easemob.com 或 im-api-wechat.easecdn.com       | im-api-alipay.easemob.com 或 im-api-alipay.easecdn.com   |
-| 国内 2 区      | im-api-wechat-31.easemob.com 或 im-api-wechat-31.easecdn.com | im-api-alipay-31.easemob.com 或 im-api-alipay-31.easecdn.com |
-| 国内 VIP 区    | 请咨询你的商务经理   | 请咨询你的商务经理     |
+| 中国     | im-api-wechat-c1.chat.rtnsvc.com | im-api-alipay-c1.chat.rtnsvc.com   |
+
 
