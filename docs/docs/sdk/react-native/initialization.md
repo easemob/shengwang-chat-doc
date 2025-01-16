@@ -10,7 +10,7 @@
 
 ## 前提条件
 
-有效的环信即时通讯 IM 开发者账号和 App ID，详见[环信即时通讯云控制台的相关文档](enable_and_configure_IM.html#创建应用)。
+有效的即时通讯 IM 开发者账号和 App ID，详见[声网控制台的相关文档](enable_and_configure_IM.html#创建应用)。
 
 ## 初始化
 

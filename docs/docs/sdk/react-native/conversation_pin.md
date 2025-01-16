@@ -11,12 +11,12 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
 - 产品套餐包支持[从服务端获取会话列表功能](conversation_list#从服务器分页获取会话列表)。
 
 ## 技术原理
 
-环信即时通讯 IM 支持会话置顶，主要方法如下：
+即时通讯 IM 支持会话置顶，主要方法如下：
 
 - `ChatManager.pinConversation`：置顶/取消置顶会话。
 - `ChatManager.asyncFetchPinnedConversationsFromServer`：获取服务端置顶会话列表。

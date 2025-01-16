@@ -14,7 +14,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM React Native SDK 提供一个 `ChatUserInfoManager` 类，支持获取、设置及修改用户属性信息，其中包含如下方法：
+即时通讯 IM React Native SDK 提供一个 `ChatUserInfoManager` 类，支持获取、设置及修改用户属性信息，其中包含如下方法：
 
 - 设置当前用户的属性
 - 获取用户属性
@@ -25,7 +25,7 @@
 设置用户属性前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [初始化](initialization.html)文档。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 
 ## 实现方法
 

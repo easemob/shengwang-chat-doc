@@ -9,11 +9,11 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化并连接到服务器，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
 
 ## 技术原理
 
-环信即时通讯 IM React Native SDK 通过 `ChatManager` 类实现对本地会话的未读消息数的管理，其中核心方法如下：
+即时通讯 IM React Native SDK 通过 `ChatManager` 类实现对本地会话的未读消息数的管理，其中核心方法如下：
 
 - `ChatManager#getUnreadCount`：获取本地所有会话的未读消息数。
 - `ChatManager#getConversationUnreadCount`：获取本地指定会话的未读消息数。

@@ -9,11 +9,11 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 - 好友列表管理：查询好友列表、申请添加好友、同意好友申请、拒绝好友申请和删除好友等操作。
 - 黑名单管理：查询黑名单列表、添加用户至黑名单以及从黑名单中移出用户等操作。
 
-此外，环信即时通信 IM 默认支持陌生人之间发送单聊消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要在[环信即时通讯云控制台](https://console.easemob.com/user/login)[开启好友关系检查](/product/enable_and_configure_IM.html#好友关系检查)。该功能开启后，SDK 会在用户发起单聊时检查好友关系，若用户向陌生人发送单聊消息，SDK 会提示错误码 221。
+此外，即时通讯 IM 默认支持陌生人之间发送单聊消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要在[声网控制台](https://console.easemob.com/user/login)[开启好友关系检查](/product/enable_and_configure_IM.html#好友关系检查)。该功能开启后，SDK 会在用户发起单聊时检查好友关系，若用户向陌生人发送单聊消息，SDK 会提示错误码 221。
 
 ## 技术原理
 
-环信即时通讯 IM React Native SDK 提供 `ChatContactManager` 类实现好友的添加移除，黑名单的添加移除等功能。主要方法如下：
+即时通讯 IM React Native SDK 提供 `ChatContactManager` 类实现好友的添加移除，黑名单的添加移除等功能。主要方法如下：
 
 - `addContact` 申请添加好友。
 - `deleteContact` 删除好友。
@@ -30,7 +30,7 @@ SDK 提供用户关系管理功能，包括好友列表管理和黑名单管理�
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，并连接到服务器，详见 [初始化](initialization.html)文档。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
 
 ## 实现方法
 
@@ -140,7 +140,7 @@ ChatClient.getInstance()
 
 #### 设置好友备注
 
-自 1.3.0 版本开始，你可以调用 `setContactRemark` 方法设置单个好友的备注。
+你可以调用 `setContactRemark` 方法设置单个好友的备注。
 
 好友备注的长度不能超过 100 个字符。
 
@@ -153,7 +153,7 @@ ChatClient.getInstance()
 
 #### 从服务端获取好友列表
 
-自 1.3.0 版本开始，你可以调用 `fetchAllContacts` 或者 `fetchContacts` 方法从服务器一次性或分页获取好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
+你可以调用 `fetchAllContacts` 或者 `fetchContacts` 方法从服务器一次性或分页获取好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
 
 - 一次性获取服务端好友列表。
 
@@ -197,7 +197,7 @@ ChatClient.getInstance()
 
 #### 从本地获取好友列表
 
-自 1.3.0 版本开始，你可以调用 `getContact` 方法从本地获取单个好友的用户 ID 和好友备注；你也可以调用 `getAllContacts` 方法一次性获取整个好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
+你可以调用 `getContact` 方法从本地获取单个好友的用户 ID 和好友备注；你也可以调用 `getAllContacts` 方法一次性获取整个好友列表，其中每个好友对象包含好友的用户 ID 和好友备注。
 
 :::tip
 需要从服务器获取好友列表之后，才能从本地获取到好友列表。

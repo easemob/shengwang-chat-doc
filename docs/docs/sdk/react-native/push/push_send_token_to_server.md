@@ -1,6 +1,6 @@
-# 发送推送 Token 到环信服务器
+# 发送推送 Token 到声网服务器
 
-环信即时通讯 IM SDK 通过 `react-native-push-collection` 获取推送 token。本文介绍如何将推送 token 发送到环信服务器。
+即时通讯 IM SDK 通过 `react-native-push-collection` 获取推送 token。本文介绍如何将推送 token 发送到声网服务器。
 
 ## 实现流程
 
@@ -14,9 +14,9 @@ yarn add react-native-shengwang-chat
 
 ### 步骤二 获取推送证书信息
 
-从[环信即时通讯云控制台](https://console.easemob.com/user/login)获取推送证书信息，配置应用的 App ID（`appId`）和推送证书名称（`pushId`）信息。
+从[声网控制台](https://console.easemob.com/user/login)获取推送证书信息，配置应用的 App ID（`appId`）和推送证书名称（`pushId`）信息。
 
-- `appId`：在[环信即时通讯云控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看。
+- `appId`：在[声网控制台](https://console.easemob.com/user/login)的 **应用详情** 页面查看。
 - `pushId`：推送证书名称。不同厂商的推送证书名称也不同。
 
 ![img](/images/react-native/push/push_get_appkey.png)
@@ -27,7 +27,7 @@ yarn add react-native-shengwang-chat
 import { getPlatform, getDeviceType } from "react-native-push-collection";
 import { ChatClient, ChatOptions, ChatPushConfig } from "react-native-shengwang-chat";
 
-// 从环信即时通讯云控制台获取推送 ID、pushId
+// 从声网控制台获取推送 ID、pushId
 const pushId = "<your push id from easemob console>";
 
 // 设置推送类型

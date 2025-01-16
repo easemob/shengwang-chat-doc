@@ -2,7 +2,7 @@
 
 <Toc />
 
-本文介绍如何极简集成环信即时通讯 React-Native SDK，在你的 app 中实现发送和接收单聊文本消息。
+本文介绍如何极简集成声网即时通讯 React-Native SDK，在你的 app 中实现发送和接收单聊文本消息。
 
 ## 实现原理
 
@@ -41,7 +41,7 @@
 
 ### 其他要求
 
-有效的环信即时通讯 IM 开发者账号和 App ID，见 [环信即时通讯云管理后台](https://console.easemob.com/user/login)。
+有效的即时通讯 IM 开发者账号和 App ID，见 [声网即时通讯云管理后台](https://console.easemob.com/user/login)。
 
 ## 项目设置
 
@@ -80,7 +80,7 @@ cd ios && pod install && cd ..
 
 ## 实现发送和接收单聊消息
 
-发送单聊消息前，终端用户需要先注册 Chat 账号，登录。
+发送单聊消息前，终端用户需要先注册 IM 账号，登录。
 
 建议使用 `visual studio code` 打开文件夹 `simple_demo`，打开文件 `App.js`，删除全部内容，并添加如下内容:
 

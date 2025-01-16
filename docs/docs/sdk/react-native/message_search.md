@@ -2,11 +2,11 @@
 
 <Toc />
 
-本文介绍环信即时通讯 IM React Native SDK 如何搜索本地消息。
+本文介绍即时通讯 IM React Native SDK 如何搜索本地消息。
 
 ## 技术原理
 
-环信即时通讯 IM React Native SDK 通过 `ChatManager` 类支持搜索用户设备上存储的消息数据，其中包含如下主要方法：
+即时通讯 IM React Native SDK 通过 `ChatManager` 类支持搜索用户设备上存储的消息数据，其中包含如下主要方法：
 
 - `ChatManager#getMsgsWithKeyword`: 根据搜索范围搜索所有会话中的消息。
 - `ChatConversation#getMsgsWithKeyword`: 根据搜索范围搜索当前会话中的消息。
@@ -18,17 +18,13 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，并连接到服务器，详见 [初始化](initialization.html)及[连接](connection.html)文档。
-- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
 
 ## 实现方法
 
 ### 根据搜索范围搜索所有会话中的消息
 
 你可以调用 `ChatManager#getMsgsWithKeyword` 方法，除了设置关键字、消息时间戳、消息数量、发送方、搜索方向等条件搜索所有会话中的消息时，你还可以选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
-
-:::tip
-若使用该功能，需将 SDK 升级至 V1.4.0 或以上版本。
-:::
 
 ```typescript
 ChatClient.getInstance()
@@ -51,10 +47,6 @@ ChatClient.getInstance()
 ### 根据搜索范围搜索当前会话中的消息
 
 除了设置关键字、消息时间戳、消息数量、发送方、搜索方向等条件搜索当前会话中的消息，你还可以选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。你可以通过以下两种方式获取消息。
-
-:::tip
-若使用该功能，需将 SDK 升级至 V1.4.0 或以上版本。
-:::
 
 - 方式一：
 
@@ -109,10 +101,6 @@ conv
 
 你可以调用 `ChatManager#searchMessages` 方法除了设置消息时间戳、消息数量、发送方、搜索方向等条件搜索当前会话中的消息，你还可以设置单个或多个消息类型搜索本地数据库中所有会话的消息。
 
-:::tip
-若使用该功能，需将 SDK 升级至 V1.6.0 或以上版本。
-:::
-
 ```typescript
 ChatClient.getInstance()
   .chatManager.searchMessages({
@@ -130,10 +118,6 @@ ChatClient.getInstance()
 ### 根据消息类型搜索当前会话中的消息
 
 你可以调用 `ChatManager#searchMessagesInConversation` 方法除了设置消息时间戳、消息数量、发送方、搜索方向等条件搜索当前会话中的消息，你还可以设置单个或多个消息类型搜索本地数据库中单个会话的消息。
-
-:::tip
-若使用该功能，需将 SDK 升级至 V1.6.0 或以上版本。
-:::
 
 ```typescript
 ChatClient.getInstance()
