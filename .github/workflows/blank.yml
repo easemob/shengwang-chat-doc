@@ -43,6 +43,18 @@ jobs:
           REMOTE_USER: ${{ secrets.SERVER_USER_NAME }}
           TARGET: /data/apps/data/shengwang-chat-doc/ # 服务器目标路径
 
+      # 上传打包资源
+      - name: Deploy2
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_PRIVATE_KEY }}
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: "docs/.vuepress/dist/"
+          REMOTE_HOST: ${{ secrets.SERVER_HOST2 }}
+          REMOTE_PORT: ${{ secrets.SERVER_PORT2 }} -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa
+          REMOTE_USER: ${{ secrets.SERVER_USER_NAME }}
+          TARGET: /data/apps/data/shengwang-chat-doc/ # 服务器目标路径
+
 #       - name: CDN Refresh HTTPS
 #         uses: visionwx/ali-cdn-refresh@main
 #         with:
