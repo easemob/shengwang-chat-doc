@@ -2,7 +2,7 @@
 
 在第三方推送服务后台注册应用，获取应用信息，开启推送服务后，你需要在[声网控制台](https://console.shengwang.cn/overview)上传推送证书，实现第三方推送服务与即时通讯 IM 的通信。
 
-![img](/images/react-native/push/push_add_certificate.png)
+![image](/images/android/push/fcm_certificate_v1.png)
 
 关于各推送证书相关信息以及[声网控制台](https://console.shengwang.cn/overview)上的推送证书参数描述，详见下表中 [iOS 离线推送文档](/docs/sdk/ios/push/push_overview.html)和 [Android 离线推送文档](/docs/sdk/android/push/push_overview.html)中的相关链接。
 
