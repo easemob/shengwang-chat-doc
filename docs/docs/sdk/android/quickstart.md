@@ -36,7 +36,7 @@
 
 然后点击 **Finish**。根据屏幕提示，安装所需插件。
 
-上述步骤使用 **Android Studio Ladybug | 2024.2.1 Patch 3** 示例。你也可以直接参考 Android Studio 官网文档 [创建应用](https://developer.android.com/studio/projects/create-project)。
+上述步骤使用 **Android Studio Ladybug | 2024.2.1 Patch 3** 示例。你也可以直接参考 Android Studio 官网文档 [创建项目](https://developer.android.com/studio/projects/create-project)。
 
 ### 2. 集成 SDK
 
@@ -67,7 +67,7 @@ dependencyResolutionManagement {
 ...
 dependencies {
     ...
-    // x.y.z 请填写具体版本号，如：1.4.0。
+    // x.y.z 请填写具体版本号，如：1.3.2。
     implementation("cn.shengwang:chat-sdk:x.y.z")
 }
 ```
@@ -113,7 +113,7 @@ dependencies {
 </manifest>
 ```
 
-关于 AppId 对应的 value 获取，在 [即时通讯 IM 管理后台](https://console.shengwang.cn/overview) 创建应用后，申请 AppId 并进行相关配置。
+关于 App ID，在 [声网控制台](https://console.shengwang.cn/overview) 创建项目后，可[获取 App ID](enable_im.html#_3-获取-app-id)，并进行相关特性配置。
 
 ### 4. 防止代码混淆
 
@@ -126,7 +126,7 @@ dependencies {
 
 ### 5. 其他集成问题
 
-当同时集成声网 Chat SDK 1.4.0 和声网 RTM SDK 2.2.0 或 RTC SDK 4.3.0 及以上版本时，由于同时包含 `libaosl.so` 库，编译时可能会出现以下错误：
+当同时集成即时通讯 IM SDK 1.3.2 和声网 RTM SDK 2.2.0 或 RTC SDK 4.3.0 及以上版本时，由于同时包含 `libaosl.so` 库，编译时可能会出现以下错误：
 
 ```java
 com.android.builder.merge.DuplicateRelativeFileException: More than one file was found with OS independent path 'lib/x86/libaosl.so'
@@ -165,15 +165,38 @@ options.setAppId("Your appId");
 ChatClient.getInstance().init(context, options);
 ```
 
-### 2. 创建账号
+### 2. 注册即时通讯 IM 用户
 
-// TODO： 补充从console上创建账号的步骤
+#### 创建用户
+
+在[声网控制台](https://console.shengwang.cn/overview)按照如下步骤创建用户：
+
+1. 展开控制台左上角下拉框，选择需要开通即时通讯 IM 服务的项目。
+
+2. 点击左侧导航栏的**全部产品**。
+
+3. 在下拉列表中找到**即时通讯 IM** 并点击。
+
+4. 在**即时通讯 IM** 页面，进入**运营管理**标签页。
+
+5. 在**用户** 页签下，点击**创建IM用户**。
+
+6. 在弹出的对话框中，配置用户相关参数，点击**确定**。
+
+![img](/images/android/user_create.png)
+
+#### 获取用户 token
+
+创建用户后，在用户列表点击对应的用户的**操作**一栏中的**更多**，选择**查看Token**。
+
+在弹出的对话框中，可以查看用户 Token，也可以点击**重新生成**，生成用户 token。
+
+![img](/images/android/user_create.png)
 
 ### 3. 登录账号
 
-// TODO： 补充从console上获取token的步骤
-
 使用如下代码实现用户登录：
+
 ```java
 ChatClient.getInstance().loginWithToken(mAccount, mToken, new CallBack() {
    // 登录成功回调

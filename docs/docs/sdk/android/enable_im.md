@@ -27,10 +27,6 @@
 
 ![img](/images/product/enable_im/console_enable_im_projectcreate.png)
 
-:::tip
-如果项目的鉴权机制为**安全模式**，则你需要在初始化 SDK 时填入 Token。详见[获取临时 Token](https://doc.shengwang.cn/doc/rtm2/android/get-started/enable-service#5-获取临时-token)。
-::: 
-
 ### 现有项目中开通
 
 展开控制台左上角下拉框，选择需要开通即时通讯 IM 服务的项目，然后按照以下步骤操作：
@@ -65,9 +61,9 @@
 
 ## 4. 获取临时 Token
 
-对于鉴权机制为安全模式的项目，在后续调用 API 进行聊天等操作时，你还需要传入频道名和 Token 来对用户进行鉴权。
+对于鉴权机制为安全模式的项目，在后续调用 API 进行聊天等操作时，你还需要传入 App ID 和 Token 对用户进行鉴权。
 
-为方便体验和测试，在 App 调试阶段你可以先从控制台获取临时 Token（有效期为 24 小时），无需自行部署 Token 服务器。但在 App 正式上线前，你必须在自己的服务端部署并生成 Token。
+为方便体验和测试，在 App 调试阶段你可以先从声网控制台获取临时 Token（有效期为 24 小时），无需自行部署 Token 服务器。但在 App 正式上线前，你必须在自己的服务端部署并生成 Token。
 
 在控制台左上角的下拉框，切换到你想要获取临时 Token 的项目，然后按如下步骤获取临时 Token：
 
