@@ -15,7 +15,7 @@
 ### 第一步 安装单群聊 UIKit
 
 ```base
-flutter pub add em_chat_uikit
+flutter pub add shengwang_chat_uikit
 ```
 
 ### 第二步 添加权限
@@ -30,7 +30,7 @@ NSCameraUsageDescription
 NSMicrophoneUsageDescription
 ```
 
-- Android: `em_chat_uikit` 已经在 `AndroidManifest.xml` 中添加以下权限, 无需再重复添加。
+- Android: `shengwang_chat_uikit` 已经在 `AndroidManifest.xml` 中添加以下权限, 无需再重复添加。
 
 ```xml
   <uses-permission android:name="android.permission.CAMERA" />
@@ -42,7 +42,7 @@ NSMicrophoneUsageDescription
 
 ```dart
 // 导入头文件
-import 'package:em_chat_uikit/chat_uikit.dart';
+import 'package:shengwang_chat_uikit/chat_uikit.dart';
 ```
 
 ### 第四步 初始化单群聊 UIKit
@@ -82,7 +82,7 @@ ChatUIKit.instance.loginWithToken(userId: userId, token: token);
 下面以会话列表和聊天组件组成的界面为例：
 
 ```dart
-import 'package:em_chat_uikit/chat_uikit.dart';
+import 'package:shengwang_chat_uikit/chat_uikit.dart';
 import 'package:flutter/material.dart';
 
 class Conversations extends StatefulWidget {
