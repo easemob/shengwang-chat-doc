@@ -4,22 +4,35 @@
 
 ## 用户注册
 
-用户注册支持以下方式:
+### 创建用户
 
-- 开放注册：一般在体验 Demo 和测试环境时使用，正式环境中不推荐使用该方式注册声网账号。要使用开放注册，需要在[声网即时通讯云控制台](https://console.easemob.com/user/login)的**即时通讯** > **服务概览**的**设置**区域，将**用户注册模式**设置为**开放注册**。只有打开该开关，才能使用客户端或 [REST API](/docs/sdk/server-side/account_system.html#开放注册单个用户)开放注册用户。
+即时通讯 IM 提供以下两种方式创建用户：
 
-示例代码如下：
+- 调用 [RESTful API](/docs/sdk/server-side/account_system.html#注册用户) 注册用户账号，注册后保存到你的服务器或返给客户端。
 
-```javascript
-chatClient.registerUser({
-  username: "user1",
-  password: "xxx",
-});
-```
+- 在[声网控制台](https://console.shengwang.cn/overview)按照如下步骤创建用户：
 
-- 授权注册：通过声网提供的 REST API 注册声网用户账号，注册后保存到你的服务器或返给客户端。要使用授权注册，你需要在[声网即时通讯云控制台](https://console.easemob.com/user/login)的**即时通讯** > **服务概览**的**设置**区域，将**用户注册模式**设置为**授权注册**。相关的 REST API 介绍，详见[授权注册单个用户](/docs/sdk/server-side/account_system.html#授权注册单个用户)和[批量授权注册用户](/docs/sdk/server-side/account_system.html#批量授权注册用户)的接口介绍。
+1. 展开控制台左上角下拉框，选择需要开通即时通讯 IM 服务的项目。
 
-除此以外，可以在[声网即时通讯云控制台](https://console.easemob.com/user/login)创建正式环境下和测试环境下的用户，详见[创建用户相关介绍](/product/enable_and_configure_IM.html#创建-im-用户)。
+2. 点击左侧导航栏的**全部产品**。
+
+3. 在下拉列表中找到**即时通讯 IM** 并点击。
+
+4. 在**即时通讯 IM** 页面，进入**运营管理**标签页。
+
+5. 在**用户** 页签下，点击**创建IM用户**。
+
+6. 在弹出的对话框中，配置用户相关参数，点击**确定**。
+
+![img](/images/android/user_create.png)
+
+### 获取用户 token
+
+创建用户后，在用户列表点击对应的用户的**操作**一栏中的**更多**，选择**查看Token**。
+
+在弹出的对话框中，可以查看用户 Token，也可以点击**重新生成**，生成用户 token。
+
+![img](/images/android/user_token.png)
 
 ## 登录方式
 

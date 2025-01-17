@@ -2,15 +2,15 @@
 
 <Toc />
 
-本文介绍环信即时通讯 IM React Native SDK 如何从服务器和本地获取历史消息。
+本文介绍即时通讯 IM React Native SDK 如何从服务器和本地获取历史消息。
 
-- 环信即时通讯 IM 提供消息漫游功能，即将用户的所有会话的历史消息保存在消息服务器，用户在任何一个终端设备上都能获取到历史信息，使用户在多个设备切换使用的情况下也能保持一致的会话场景。
+- 即时通讯 IM 提供消息漫游功能，即将用户的所有会话的历史消息保存在消息服务器，用户在任何一个终端设备上都能获取到历史信息，使用户在多个设备切换使用的情况下也能保持一致的会话场景。
 
 - SDK 内部使用 SQLite 保存本地消息，你可以获取本地消息。
 
 ## 技术原理
 
-环信即时通讯 IM React Native SDK 通过 `ChatManager` 和 `ChatConversation` 类实现对会话和消息的管理。
+即时通讯 IM React Native SDK 通过 `ChatManager` 和 `ChatConversation` 类实现对会话和消息的管理。
 
 - `getMessage`：根据消息 ID 获取本地消息；
 - `getMsgsWithMsgType`：获取本地指定会话中特定类型的消息；
@@ -26,7 +26,7 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，并连接到服务器，详见 [初始化](initialization.html)及[连接](connection.html)文档。
-- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM API 的使用限制，详见 [使用限制](limitation.html)。
 
 ## 实现方法
 
@@ -108,10 +108,6 @@ ChatClient.getInstance()
 
 你可以调用 `getMsgsWithMsgType` 方法从本地存储中获取指定会话中特定类型的消息。每次最多可获取 400 条消息。若未获取到任何消息，SDK 返回空列表。
 
-:::tip
-要使用该方法，需将 SDK 升级至 1.4.0 或以上版本。
-:::
-
 ```typescript
 // convId: 会话 ID。
 // convType：会话类型：单聊、群聊和聊天室分别为 `PeerChat`、`GroupChat` 和 `RoomChat`。
@@ -143,10 +139,6 @@ ChatClient.getInstance()
 ### 获取一定时间内本地会话的消息
 
 你可以调用 `getMsgWithTimestamp` 方法从本地存储中获取指定的单个会话中一定时间内发送和接收的消息。每次最多可获取 400 条消息。
-
-:::tip
-要使用该方法，需将 SDK 升级至 V1.4.0 或以上版本。
-:::
 
 ```typescript
 // convId：会话 ID。
@@ -197,10 +189,6 @@ ChatClient.getInstance()
 ### 获取本地会话中一定数量的消息
 
 你可以调用 `getMsgs` 获取本地指定会话中一定数量的消息。
-
-:::tip
-要使用该方法，需将 SDK 升级至 V1.4.0 或以上版本。
-:::
 
 ```typescript
 // convId: 会话 ID。

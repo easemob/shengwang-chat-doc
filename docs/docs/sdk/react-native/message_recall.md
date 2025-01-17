@@ -12,7 +12,7 @@
 
 ## 技术原理
 
-环信即时通讯 IM 通过 `ChatManager` 类和 `ChatMessage` 类支持你撤回一条发送成功的消息：
+即时通讯 IM 通过 `ChatManager` 类和 `ChatMessage` 类支持你撤回一条发送成功的消息：
 
 - `recallMessage`：撤回一条发送成功的消息。
 
@@ -21,7 +21,7 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM 的使用限制，详见 [使用限制](limitation.html)。
 - 产品套餐包支持消息撤回功能。
 
 ## 实现方法
@@ -33,11 +33,11 @@
 调用该方法后，服务端的该条消息（历史消息，离线消息或漫游消息）以及消息发送方和接收方的内存和数据库中的消息均会被移除，消息的接收方会收到 `onMessagesRecalledInfo` 事件。
 
 :::tip
-1. 你可以通过 `ext` 字段传入自定义字符串，设置扩展信息。
-2. 附件类型消息，包括图片、音频和视频和文件消息，撤回消息后，消息附件也相应删除。
+附件类型消息，包括图片、音频和视频和文件消息，撤回消息后，消息附件也相应删除。
 :::
 
 ```typescript
+// 你可以通过 `ext` 字段传入自定义字符串，设置扩展信息。
 ChatClient.getInstance()
   .chatManager.recallMessage(msgId, { ext: "new added ext" })
   .then(() => {

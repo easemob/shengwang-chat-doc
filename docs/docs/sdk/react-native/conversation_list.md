@@ -4,7 +4,7 @@
 
 对于单聊、群组聊天和聊天室会话，用户发消息时 SDK 会自动创建会话并将会话添加至用户的会话列表。 
 
-环信服务器和本地均存储会话，你可以获取会话列表。
+声网服务器和本地均存储会话，你可以获取会话列表。
 
 ## 前提条件
 
@@ -12,11 +12,11 @@
 
 - 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
 - 产品套餐包支持[从服务端获取会话列表功能](conversation_list#从服务器分页获取会话列表)。
-- 了解即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM API 的使用限制，详见 [使用限制](limitation.html)。
 
 ## 技术原理
 
-环信即时通讯 IM 支持从服务器和本地获取会话列表，主要方法如下：
+即时通讯 IM 支持从服务器和本地获取会话列表，主要方法如下：
 
 - `ChatManager.fetchConversationsFromServerWithCursor`：从服务器获取会话列表。
 - `ChatManager.getAllConversationsBySort`：获取本地所有会话。
@@ -49,8 +49,6 @@ ChatClient.getInstance()
     console.log("get conversions fail.", reason);
   });
 ```
-
-若不支持 `fetchConversationsFromServerWithCursor`，你可以调用 `fetchConversationsFromServerWithPage` 接口从服务器获取会话列表。利用该接口，你总共可获取服务器存储的 100 个会话。若提升这两个上限，需联系环信商务。
 
 ### 获取本地所有会话
 

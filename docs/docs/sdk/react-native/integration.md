@@ -1,6 +1,6 @@
 # 集成 SDK
 
-本文介绍如何将环信即时通讯 IM SDK 集成到你的 React Native 项目中。
+本文介绍如何将即时通讯 IM SDK 集成到你的 React Native 项目中。
 
 ## 开发环境需求
 
@@ -9,7 +9,7 @@
 
 ## 集成到项目中
 
-打开终端，添加依赖到项目中
+打开终端，添加依赖到项目中：
 
 ```sh
 yarn add react-native-shengwang-chat
@@ -25,11 +25,9 @@ npm i --save react-native-shengwang-chat
 
 目前需要基本的网络通讯权限。
 
-对于 ios 平台：内置网络权限。
+- 对于 ios 平台：内置网络权限。
 
-对于 android 平台：
-
-更新 `AndroidManifest.xml` 文件内容，增加需要的权限。
+- 对于 android 平台：更新 `AndroidManifest.xml` 文件内容，增加需要的权限。
 
 ```xml
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">

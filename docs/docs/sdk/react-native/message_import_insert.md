@@ -2,11 +2,11 @@
 
 <Toc />
 
-本文介绍环信即时通讯 IM React Native SDK 如何在本地导入消息。
+本文介绍即时通讯 IM React Native SDK 如何在本地导入消息。
 
 ## 技术原理
 
-环信即时通讯 IM React Native SDK 支持提供 `ChatManager` 类支持在本地导入消息，其中包含如下主要方法：
+即时通讯 IM React Native SDK 支持提供 `ChatManager` 类支持在本地导入消息，其中包含如下主要方法：
 
 - `importMessages`：批量导入消息到数据库。
 
@@ -15,7 +15,7 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，并连接到服务器，详见 [初始化](initialization.html)及[连接](connection.html)文档。
-- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM API 的使用限制，详见 [使用限制](limitation.html)。
 
 ## 实现方法
 

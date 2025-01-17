@@ -2,7 +2,7 @@
 
 <Toc />
 
-某些情况下，你可能需要对会话添加标记，例如会话标星或将会话标为已读或未读。即时通讯云 IM 支持对单聊和群聊会话添加标记，最大支持 20 个标记，所以一个会话最多可添加 20 个标记。
+某些情况下，你可能需要对会话添加标记，例如会话标星或将会话标为已读或未读。即时通讯 IM 支持对单聊和群聊会话添加标记，最大支持 20 个标记，所以一个会话最多可添加 20 个标记。
 
 **如果要使用会话标记功能，你需要确保产品套餐包支持[从服务端获取会话列表的功能](conversation_list.html#从服务器分页获取会话列表)。**
 
@@ -17,7 +17,7 @@ mapping.set(ChatConversationMarkType.Type2, "unimportant");
 
 ## 技术原理
 
-环信即时通讯 IM 支持会话标记功能，主要方法如下：
+即时通讯 IM 支持会话标记功能，主要方法如下：
 
 - `ChatManager#addRemoteAndLocalConversationsMark`：标记会话。
 - `ChatManager#deleteRemoteAndLocalConversationsMark`：取消标记会话。
@@ -30,7 +30,7 @@ mapping.set(ChatConversationMarkType.Type2, "unimportant");
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
-- 了解环信即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM API 的使用限制，详见 [使用限制](limitation.html)。
 - 产品套餐包支持[从服务端获取会话列表功能](conversation_list#从服务器分页获取会话列表)。
 
 ## 实现方法

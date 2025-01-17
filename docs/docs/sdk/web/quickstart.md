@@ -57,7 +57,35 @@ quickstart<br>
 }
 ```
 
-### 3. 实现用户界面
+### 3. 注册即时通讯 IM 用户
+
+#### 创建用户
+
+在[声网控制台](https://console.shengwang.cn/overview)按照如下步骤创建用户：
+
+1. 展开控制台左上角下拉框，选择需要开通即时通讯 IM 服务的项目。
+
+2. 点击左侧导航栏的**全部产品**。
+
+3. 在下拉列表中找到**即时通讯 IM** 并点击。
+
+4. 在**即时通讯 IM** 页面，进入**运营管理**标签页。
+
+5. 在**用户** 页签下，点击**创建IM用户**。
+
+6. 在弹出的对话框中，配置用户相关参数，点击**确定**。
+
+![img](/images/android/user_create.png)
+
+#### 获取用户 token
+
+创建用户后，在用户列表点击对应的用户的**操作**一栏中的**更多**，选择**查看Token**。
+
+在弹出的对话框中，可以查看用户 Token，也可以点击**重新生成**，生成用户 token。
+
+![img](/images/android/user_token.png)
+
+### 4. 实现用户界面
 
 `index.html` 的内容如下。
 
@@ -115,7 +143,7 @@ quickstart<br>
 </html>
 ```
 
-### 4. 实现消息发送与接收
+### 5. 实现消息发送与接收
 
 `index.js` 的内容如下。本文使用 import 方法导入 SDK，并使用 webpack 对 JavaScript 文件进行打包，以避免浏览器兼容性问题。你需要分别将代码中的 `<Your appId>` 替换为你之前获取的 appId。
 
@@ -238,7 +266,7 @@ import ChatSDK, { ShengwangChat } from "shengwang-chat";
 
 :::
 
-### 5. 运行项目
+### 6. 运行项目
 
 本文使用 webpack 对项目进行打包，并使用 `webpack-dev-server` 运行项目。
 

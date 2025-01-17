@@ -82,43 +82,39 @@ options.UsingHttpsOnly = true;
 SDKClient.Instance.InitWithOptions(options);
 ```
 
-### 4.创建账号
+### 4. 注册即时通讯 IM 用户
 
-在 `SignUp_Click` 函数尾部添加以下代码，用于创建 AppServer 上的登录账户，示例代码如下：
+#### 创建用户
 
-```csharp
-SDKClient.Instance.CreateAccount(username, password, callback: new CallBack(
-     onSuccess: () =>
-     {
-        AddLogToLogText("sign up succeed");
-     },
-     onError: (code, desc) =>
-     {
-        AddLogToLogText("sign up failed");
-     }
-));
-```
+在[声网控制台](https://console.shengwang.cn/overview)按照如下步骤创建用户：
 
-:::tip
-该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用。正式环境中，需要[在声网控制台中创建用户或调用 Restful API 注册用户](login.html#用户注册)。
-:::
+1. 展开控制台左上角下拉框，选择需要开通即时通讯 IM 服务的项目。
+
+2. 点击左侧导航栏的**全部产品**。
+
+3. 在下拉列表中找到**即时通讯 IM** 并点击。
+
+4. 在**即时通讯 IM** 页面，进入**运营管理**标签页。
+
+5. 在**用户** 页签下，点击**创建IM用户**。
+
+6. 在弹出的对话框中，配置用户相关参数，点击**确定**。
+
+![img](/images/android/user_create.png)
+
+#### 获取用户 token
+
+创建用户后，在用户列表点击对应的用户的**操作**一栏中的**更多**，选择**查看Token**。
+
+在弹出的对话框中，可以查看用户 Token，也可以点击**重新生成**，生成用户 token。
+
+![img](/images/android/user_token.png)
 
 ### 5. 登录账号
 
 在 `SignIn_Click` 函数尾部添加以下代码，用于使用账号登录即时通讯系统，示例代码如下：
 
 ```csharp
-SDKClient.Instance.Login(UserIdTextBox.Text,  PasswordTextBox.Text, false, callback: new CallBack(
-     onSuccess: () =>
-     {
-       AddLogToLogText("sign in sdk succeed");
-     },
-     onError: (code, desc) =>
-     {
-       AddLogToLogText($"sign in sdk failed, code: {code}, desc: {desc}");
-     }
-));
-
 // PasswordTextBox中的内容需输入token
 SDKClient.Instance.LoginWithToken(UserIdTextBox.Text, PasswordTextBox.Text, callback: new CallBack(
     onSuccess: () =>
@@ -150,7 +146,7 @@ SDKClient.Instance.Logout(true, callback: new CallBack(
 ));
 ```
 
-### 7.发送一条文本消息
+### 7. 发送一条文本消息
 
 在 `SendBtn_Click` 函数尾部添加以下代码，可以用于创建一条文本消息，然后发送该消息：
 
@@ -175,7 +171,7 @@ Message msg = Message.CreateTextSendMessage(SingleChatIdTextBox.Text, MessageCon
 发送一条文本消息示例代码中的，在成功回调函数中，为了使用界面元素，例如：`SingleChatIdTextBox.Text；MessageContentTextBox.Text`，需要使用 `System.Windows.Threading.Dispatcher`(参见代码中的 `Dip` 变量)的 `Invoke` 进行操作。
 :::
 
-### 8.接收消息
+### 8. 接收消息
 
 接收消息需要对象继承 `IChatManagerDelegate` 并实现相关的回调函数，同时将对象加入到监听列表中。
 

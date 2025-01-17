@@ -273,7 +273,7 @@
 
 - 修复极端情况下 SDK 崩溃的问题。
 - 修复某些场景下调用 `updateMessage` 方法导致的内存与数据库中的消息不一致问题。
-- 适配 Android 12，修复依赖环信即时通讯云 SDK 的 APK 在 Android 12 版本的部分手机上第一次安装后打开时出现异常弹框的问题。
+- 适配 Android 12，修复依赖即时通讯 IM SDK 的 APK 在 Android 12 版本的部分手机上第一次安装后打开时出现异常弹框的问题。
 
 ## 版本 V1.0.10 Dev 2022-10-13
 
@@ -393,8 +393,8 @@
 
 具体集成请参考以下文档：
 
-- [开通配置环信即时通讯 IM 服务](/product/enable_and_configure_IM.html)
-- [环信即时通讯 IM React-Native 快速开始](quickstart.html)
+- [开通配置即时通讯 IM 服务](/product/enable_and_configure_IM.html)
+- [即时通讯 IM React-Native 快速开始](quickstart.html)
 - [消息管理 React Native](message_overview.html)
 - [群组](group_overview.html)
 - [聊天室](room_overview.html)

@@ -102,39 +102,39 @@ var options = Options.InitOptionsWithAppId("YourAppId"); //将该参数设置为
 SDKClient.Instance.InitWithOptions(options);
 ```
 
-### 4. 创建账号
+### 4. 注册即时通讯 IM 用户
 
-在 `SignUpAction` 方法尾部添加以下代码，创建即时通讯系统的登录账户，示例代码如下：
+#### 创建用户
 
-```csharp
-SDKClient.Instance.CreateAccount(username: Username.text, Password.text, callback: new CallBack(
-  onSuccess: () => {
-    AddLogToLogText("sign up sdk succeed");
-  },
-  onError: (code, desc) => {
-    AddLogToLogText($"sign up sdk failed, code: {code}, desc: {desc}");
-  }
-));
-```
+在[声网控制台](https://console.shengwang.cn/overview)按照如下步骤创建用户：
 
-:::tip
-该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用。正式环境中，需要[在声网控制台中创建用户或调用 Restful API 注册用户](login.html#用户注册)。
-:::
+1. 展开控制台左上角下拉框，选择需要开通即时通讯 IM 服务的项目。
+
+2. 点击左侧导航栏的**全部产品**。
+
+3. 在下拉列表中找到**即时通讯 IM** 并点击。
+
+4. 在**即时通讯 IM** 页面，进入**运营管理**标签页。
+
+5. 在**用户** 页签下，点击**创建IM用户**。
+
+6. 在弹出的对话框中，配置用户相关参数，点击**确定**。
+
+![img](/images/android/user_create.png)
+
+#### 获取用户 token
+
+创建用户后，在用户列表点击对应的用户的**操作**一栏中的**更多**，选择**查看Token**。
+
+在弹出的对话框中，可以查看用户 Token，也可以点击**重新生成**，生成用户 token。
+
+![img](/images/android/user_token.png)
 
 ### 5. 登录账号
 
 在 `SignInAction` 方法尾部添加以下代码，使用账号登录即时通讯系统，示例代码如下：
 
 ```csharp
-SDKClient.Instance.Login(username: Username.text, pwdOrToken: Password.text, callback: new CallBack(
-  onSuccess: () => {
-    AddLogToLogText("sign in sdk succeed");
-  },
-  onError:(code, desc) => {
-    AddLogToLogText($"sign in sdk failed, code: {code}, desc: {desc}");
-  }
-));
-
 // Password.text中的内容需要需输入token
 SDKClient.Instance.LoginWithToken(username: Username.text, pwdOrToken: Password.text, callback: new CallBack(
     onSuccess: () =>
