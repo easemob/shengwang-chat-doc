@@ -267,7 +267,7 @@ void _initSDK() async {
 
 在弹出的对话框中，可以查看用户 Token，也可以点击**重新生成**，生成用户 token。
 
-![img](/images/android/user_create.png)
+![img](/images/android/user_token.png)
 
 ### 添加登录
 

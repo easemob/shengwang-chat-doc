@@ -80,21 +80,33 @@
 
 若有导航，可以用 push 方式跳转到聊天页面发消息测试，也就是用登录的 user1 向 user2 发消息；若没有导航的话，可以用 present 方式跳转到聊天页面。
 
-## 5. 创建账号
+### 2. 注册即时通讯 IM 用户
 
-设置用户 ID 和密码创建账号。
+#### 创建用户
 
-```objectivec
-// 异步方法
-[[AgoraChatClient sharedClient] registerWithUsername:@"username"
-                                         password:@"your password"
-                                       completion:^(NSString *aUsername, AgoraChatError *aError) {
-                                   }];
-```
+在[声网控制台](https://console.shengwang.cn/overview)按照如下步骤创建用户：
 
-:::tip
-该注册模式为在客户端注册，主要用于测试，简单方便，但不推荐在正式环境中使用。正式环境中，需要[在声网控制台中创建用户或调用 Restful API 注册用户](login.html#用户注册)。
-:::
+1. 展开控制台左上角下拉框，选择需要开通即时通讯 IM 服务的项目。
+
+2. 点击左侧导航栏的**全部产品**。
+
+3. 在下拉列表中找到**即时通讯 IM** 并点击。
+
+4. 在**即时通讯 IM** 页面，进入**运营管理**标签页。
+
+5. 在**用户** 页签下，点击**创建IM用户**。
+
+6. 在弹出的对话框中，配置用户相关参数，点击**确定**。
+
+![img](/images/android/user_create.png)
+
+#### 获取用户 token
+
+创建用户后，在用户列表点击对应的用户的**操作**一栏中的**更多**，选择**查看Token**。
+
+在弹出的对话框中，可以查看用户 Token，也可以点击**重新生成**，生成用户 token。
+
+![img](/images/android/user_token.png)
 
 ## 6. 登录账号
 
@@ -102,7 +114,7 @@
 
 ```objectivec
 [[AgoraChatClient sharedClient] loginWithUsername:@"username"
-                                     password:@"your password"
+                                     token:@"your user token"
                                    completion:^(NSString *aUsername, AgoraChatError *aError) {
 
 }];

@@ -73,7 +73,7 @@ implementation("cn.shengwang:chat-uikit:1.3.2")
 
 **本地依赖**
 // TODO: 替换链接
-从 GitHub 获取[单群聊 UIKit](https://github.com/easemob/chatuikit-android) 源码，按照下面的方式集成：
+从 GitHub 获取[单群聊 UIKit](https://github.com/Shengwang-Community/ShengwangChat-UIKit-android) 源码，按照下面的方式集成：
 
 - 在Project的 `settings.gradle.kts` 文件中添加如下代码：
 
