@@ -141,6 +141,7 @@ const options = [
 
 
 <template>
+  <span>SDK</span>
   <el-select v-model="platform" @change="onChange" placeholder="请选择">
     <template #prefix>
      <img width="20" height="20" :src="platformIcon">
@@ -168,7 +169,15 @@ const options = [
 </template>
 
 <style lang="scss" scope>
-
+  .platform-switch{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 5px;
+    &>span{
+      font-weight: 500;
+    }
+  }
   .option-content:hover .default {
     display: none;
   }

@@ -1,29 +1,29 @@
-import { hopeTheme, ThemeOptions } from 'vuepress-theme-hope'
-import { zhNavbar } from './navbar/index.js'
-import { zhSidebar } from './sidebar/index.js'
+import { hopeTheme, ThemeOptions } from "vuepress-theme-hope";
+import { zhNavbar } from "./navbar/index.js";
+import { zhSidebar } from "./sidebar/index.js";
 
 interface CustomConfig {
-  extra_nav?: any[]
+  extra_nav?: any[];
 }
 
 export default hopeTheme(<ThemeOptions & CustomConfig>{
-  hostname: 'https://im.shengwang.cn/',
-  home: '/',
-  iconAssets: 'iconfont',
+  hostname: "https://im.shengwang.cn/",
+  home: "/",
+  iconAssets: "iconfont",
   // logo: '/logo.svg',
   // repo: 'easemob/easemob-doc',
   // docsBranch: 'doc-v2',
   // docsDir: 'docs',
-  darkmode: 'disable',
+  darkmode: "disable",
   pure: true,
   breadcrumb: false,
   contributors: false,
   // navbar
   navbar: zhNavbar,
   navbarLayout: {
-    start: ['Brand'],
-    center: ['Links'],
-    end: ['Language', 'Repo', 'Outlook']
+    start: ["Brand"],
+    center: [],
+    end: ["Language", "Repo", "Outlook"],
   },
   // sidebar
   sidebar: zhSidebar,
@@ -51,7 +51,7 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
     mdEnhance: {
       container: true,
       imgSize: true,
-      tabs: true
-    }
-  }
-})
+      tabs: true,
+    },
+  },
+});

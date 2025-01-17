@@ -129,6 +129,7 @@ const onChange = (platform) => {
 </script>
 
 <template>
+  <span>UIKit</span>
   <el-select v-model="platform" @change="onChange" placeholder="请选择">
     <template #prefix>
       <img width="20" height="20" :src="platformIcon" />
