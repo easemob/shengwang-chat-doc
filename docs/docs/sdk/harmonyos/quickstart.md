@@ -148,9 +148,11 @@ ChatClient.getInstance().init(context, options);
 使用如下代码实现用户登录：
 
 ```typescript
-ChatClient.getInstance().login(userId, pwd).then(() => {
-    // success logic        
-})
+ChatClient.getInstance().loginWithToken(userId, token).then(() => {
+    // 登录成功回调
+}).catch((e: ChatError) => {
+    // 登录失败回调，包含错误信息
+});
 ```
 
 :::tip
