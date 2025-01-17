@@ -112,7 +112,7 @@ cd ios && pod install && cd ..
 建议使用 `visual studio code` 打开文件夹 `simple_demo`，打开文件 `App.js`，删除全部内容，并添加如下内容:
 
 ```javascript
-// Import depend packages.
+// 导入依赖包。
 import React, { useEffect } from "react";
 import {
   SafeAreaView,
@@ -132,7 +132,7 @@ import {
 // 定义 App 对象。
 const App = () => {
   // 定义变量。
-  const title = "ShengwangIMQuickstart";
+  const title = "ShengwangChatQuickstart";
   // 将 <your appId> 替换为你的 app ID。
   const appId = "<your appId>";
   // 将 <your userId> 替换为你的用户 ID。

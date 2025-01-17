@@ -13,7 +13,7 @@
 ## 前提条件
 
 - 有效的声网即时通讯 IM 开发者账号；
-- [创建声网即时通讯 IM 项目并获取 appId](/product/enable_and_configure_IM.html)；
+- [创建声网即时通讯 IM 项目并获取 App ID](enable_im.html)；
 - [npm](https://www.npmjs.com/get-npm)；
 - SDK 支持 IE 11+、Firefox 10+、Chrome 54+ 和 Safari 6+。
 
@@ -29,6 +29,7 @@
 
 - `index.html`：设置 Web 应用的用户界面；
 - `index.js`：包含消息发送和接收逻辑的实现代码。
+  
   此时你的目录中包含以下文件：
 
 quickstart<br>
@@ -109,23 +110,22 @@ quickstart<br>
             style="margin-bottom: 0px; margin-top: 10px;"
           >
             <div class="input-field">
-              <label>Username</label>
-              <input type="text" placeholder="Username" id="userID" />
+              <label>UserID</label>
+              <input type="text" placeholder="UserID" id="userID" />
             </div>
             <div class="input-field">
-              <label>Password</label>
-              <input type="password" placeholder="Password" id="password" />
+              <label>Token</label>
+              <input type="text" placeholder="Token" id="token" />
             </div>
             <div class="row">
               <div>
-                <button type="button" id="register">register</button>
                 <button type="button" id="login">login</button>
                 <button type="button" id="logout">logout</button>
               </div>
             </div>
             <div class="input-field">
-              <label>Peer username</label>
-              <input type="text" placeholder="Peer username" id="peerId" />
+              <label>Peer UserID</label>
+              <input type="text" placeholder="Peer UserID" id="peerId" />
             </div>
             <div class="input-field">
               <label>Peer Message</label>
@@ -145,13 +145,13 @@ quickstart<br>
 
 ### 5. 实现消息发送与接收
 
-`index.js` 的内容如下。本文使用 import 方法导入 SDK，并使用 webpack 对 JavaScript 文件进行打包，以避免浏览器兼容性问题。你需要分别将代码中的 `<Your appId>` 替换为你之前获取的 appId。
+`index.js` 的内容如下。本文使用 import 方法导入 SDK，并使用 webpack 对 JavaScript 文件进行打包，以避免浏览器兼容性问题。你需要分别将代码中的 `<Your appId>` 替换为你之前获取的 App ID。
 
 ```javascript
 import ChatSDK from "shengwang-chat";
 const appId = "<Your appId>";
 
-let username, password;
+let userId, token;
 
 // 初始化客户端。相关的参数配置，详见 API 参考中的 `Connection` 类。
 const chatClient = new ChatSDK.connection({
@@ -186,31 +186,12 @@ chatClient.addEventHandler("connection&message", {
 
 // 按钮行为定义。
 window.onload = function () {
-  // 注册。
-  document.getElementById("register").onclick = function () {
-    username = document.getElementById("userID").value.toString();
-    password = document.getElementById("password").value.toString();
-    chatClient
-      .registerUser({ username, password })
-      .then((res) => {
-        document
-          .getElementById("log")
-          .appendChild(document.createElement("div"))
-          .append(`register user ${username} success`);
-      })
-      .catch((e) => {
-        document
-          .getElementById("log")
-          .appendChild(document.createElement("div"))
-          .append(`${username} already exists`);
-      });
-  };
   // 登录。
   document.getElementById("login").onclick = function () {
-    username = document.getElementById("userID").value.toString();
-    password = document.getElementById("password").value.toString();
+    userId = document.getElementById("userID").value.toString();
+    token = document.getElementById("token").value.toString();
     chatClient
-      .open({ user: username, pwd: password })
+      .open({ user: userId, accessToken: token })
       .then((res) => {
         document
           .getElementById("log")
@@ -270,7 +251,7 @@ import ChatSDK, { ShengwangChat } from "shengwang-chat";
 
 本文使用 webpack 对项目进行打包，并使用 `webpack-dev-server` 运行项目。
 
-1.在 `package.json` 的 `dependencies` 字段中添加 `webpack`、`webpack-cli` 和 `webpack-dev-server`，并且在 `scripts` 字段中添加 `build` 和 `start:dev` 命令。
+1. 在 `package.json` 的 `dependencies` 字段中添加 `webpack`、`webpack-cli` 和 `webpack-dev-server`，并且在 `scripts` 字段中添加 `build` 和 `start:dev` 命令。
 
 ```json
 {
@@ -293,7 +274,7 @@ import ChatSDK, { ShengwangChat } from "shengwang-chat";
 }
 ```
 
-2.在项目根目录中添加 `webpack.config.js` 文件，用于配置 webpack。文件内容如下：
+2. 在项目根目录中添加 `webpack.config.js` 文件，用于配置 webpack。文件内容如下：
 
 ```javascript
 const path = require("path");
@@ -321,13 +302,13 @@ quickstart<br>
 ├─ package.json<br>
 └─webpack.config.js
 
-3.在项目根目录运行以下命令，安装依赖项。
+3. 在项目根目录运行以下命令，安装依赖项。
 
 ```bash
 $ npm install
 ```
 
-4.运行以下命令使用 `webpack` 构建并运行项目。
+4. 运行以下命令使用 `webpack` 构建并运行项目。
 
 ```bash
 # 使用 webpack 打包。
