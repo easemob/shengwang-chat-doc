@@ -139,7 +139,7 @@ SDKClient.Instance.GetLoggedInDevicesFromServerWithToken(username, token,
 ```csharp
 // 设置设备名称并进行初始化
 Options options = Options.InitOptionsWithAppId("YourAppId");
-ooptions.CustomDeviceName = "MyDeviceName";
+options.CustomDeviceName = "MyDeviceName";
 SDKClient.Instance.InitWithOptions(options);
 
 // 定义监听器
