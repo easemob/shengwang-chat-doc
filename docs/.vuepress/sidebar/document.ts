@@ -337,7 +337,7 @@ const documentSidebar = [
        { text: '离线推送概述', link: 'push/push_overview.html' }, 
        { text: '设置通知方式和免打扰', link: 'push/push_notification_mode_dnd.html' },
        { text: '设置推送模板', link: 'push/push_template.html' },
-       { text: '设置推送翻译', link: 'push/push_translation.html' },
+       // { text: '设置推送翻译', link: 'push/push_translation.html' },
        { text: '设置推送扩展功能', link: 'push/push_extension.html' },
        { text: 'uni-app 离线推送', link: 'push/uniapp_push.html' }
        ]
