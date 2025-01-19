@@ -2,7 +2,7 @@
 
 <Toc />
 
-环信单群聊 UIKit 提供 `UIKitChatActivity` 和 `UIKitChatFragment` 两种方式方便用户快速集成聊天页面和自定义聊天页面。该页面提供如下功能：
+单群聊 UIKit 提供 `UIKitChatActivity` 和 `UIKitChatFragment` 两种方式方便用户快速集成聊天页面和自定义聊天页面。该页面提供如下功能：
 
 - 发送和接收消息, 包括文本、表情、图片、语音、视频、文件和名片消息。
 - 对消息进行复制、引用、撤回、删除、编辑、重新发送和审核。

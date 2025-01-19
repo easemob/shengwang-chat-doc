@@ -18,6 +18,7 @@
 
 ### 第一步 下载示例代码
 
+// TODO：替换链接
 前往 [GitHub 源码](https://github.com/AgoraIO-Usecase/ShengwangChat-ios)下载示例代码到本机。
 
 ### 第二步 执行 pod 命令
@@ -40,7 +41,7 @@ pod install --repo-update
 
 ![img](/images/uikit/chatuikit/ios/buildError.png) 
 
-1. 在[声网控制台](https://console.shengwang.cn/overview)创建有效的即时通讯 IM 开发者账号和 [App Key](/product/enable_and_configure_IM.html#创建应用)。然后，将 App ID 填入 `appId` 字段，运行项目。
+1. 在[声网控制台](https://console.shengwang.cn/overview)[创建有效的即时通讯 IM 开发者账号](https://im.shengwang.cn/docs/sdk/android/enable_im.html#_1-登录声网控制台)和 [获取App ID](https://im.shengwang.cn/docs/sdk/android/enable_im.html#_3-获取-app-id)。然后，将 App ID 填入 `appId` 字段，运行项目。
 
 在键盘上按 `cmd+B` 重新编译程序即可跑通项目。
 

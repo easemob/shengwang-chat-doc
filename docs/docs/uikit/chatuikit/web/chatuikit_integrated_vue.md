@@ -7,7 +7,7 @@
 开始前，确保你的开发环境满足如下条件：
 
 - 已安装 [Node.js](https://nodejs.org/)。
-- [即时通讯 IM 应用和 appId](/product/enable_and_configure_IM.html#创建应用)。
+- [已创建项目并获取 App ID](https://im.shengwang.cn/docs/sdk/web/enable_im.html)。
 
 ## 操作步骤
 
@@ -52,7 +52,7 @@ npm run dev
 
 ### 第二步 安装和配置 Veaury
 
-[Veaury ](https://github.com/gloriasoft/veaury#readme)是基于 React 和 Vue 的工具库，主要用于 React 和 Vue 在一个项目中公共使用的场景。Veaury 适用于 Vue 3 和 Vue 2。
+[Veaury](https://github.com/gloriasoft/veaury#readme)是基于 React 和 Vue 的工具库，主要用于 React 和 Vue 在一个项目中公共使用的场景。Veaury 适用于 Vue 3 和 Vue 2。
 
 1. 可以使用以下命令从 npm 安装 Veaury 库：
 
@@ -248,6 +248,8 @@ const switchTheme = () => {
 </ImageGallery>
 
 ## 相关参考
+
+// TODO：替换链接
 
 - [示例项目源码](https://github.com/shengwang/webim-vue-demo/tree/chat-uikit-vue-demo)
 - [组件库源码](https://github.com/shengwang/shengwang-UIKit-web)

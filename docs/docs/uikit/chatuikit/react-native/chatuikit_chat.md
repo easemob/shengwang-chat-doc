@@ -163,10 +163,10 @@ export function ConversationDetailScreen(props: Props) {
 
 核心属性如下：
 
-| 属性                          | 类型                       | 是否必选 | 描述                                                                        |
-| ----------------------------- | -------------------------- | -------- | --------------------------------------------------------------------------- |
-| convId                        | string                     | 是       | 会话 ID。                                                                   |
-| convType                      | ChatConversationType       | 是       | 会话类型。                                                                  |
+| 属性                          | 类型                       | 是否必选 | 描述        |
+| ----------------------------- | -------------------------- | -------- | --------------- |
+| convId                        | string                     | 是       | 会话 ID。     |
+| convType                      | ChatConversationType       | 是       | 会话类型。      |
 | selectType                    | ConversationSelectModeType | 否       | 选择模式。包括普通模式和多选模式。                                          |
 | containerStyle                | object                     | 否       | 修改组件样式。                                                              |
 | thread                        | ChatMessageThread          | 否       | 话题模式参数。话题对象。                                                    |

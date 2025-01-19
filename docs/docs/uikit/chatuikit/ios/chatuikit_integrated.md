@@ -14,7 +14,7 @@
 
 ## 安装
 
-你可以使用 CocoaPods 安装 ShengwangChatUIKit 作为 Xcode 项目的依赖项。
+你可以使用 CocoaPods 安装 `ShengwangChatUIKit` 作为 Xcode 项目的依赖项。
 
 ## CocoaPods
 
