@@ -1,19 +1,19 @@
-# 声网即时通讯 IM Web 快速开始
+# 即时通讯 IM Web 快速开始
 
 <Toc />
 
-本页面介绍如何快速集成声网即时通讯 IM Web SDK 实现单聊。
+本页面介绍如何快速集成即时通讯 IM Web SDK 实现单聊。
 
 ## 实现原理
 
 下图展示在客户端发送和接收一对一文本消息的工作流程。
 
-![](/images/web/sendandreceivemsg.png)
+![](/images/android/sendandreceivemsg.png)
 
 ## 前提条件
 
-- 有效的声网即时通讯 IM 开发者账号；
-- [创建声网即时通讯 IM 项目并获取 App ID](enable_im.html)；
+- 有效的即时通讯 IM 开发者账号；
+- [创建即时通讯 IM 项目并获取 App ID](enable_im.html)；
 - [npm](https://www.npmjs.com/get-npm)；
 - SDK 支持 IE 11+、Firefox 10+、Chrome 54+ 和 Safari 6+。
 
@@ -21,7 +21,7 @@
 
 ### 1. 准备开发环境
 
-本节介绍如何创建项目，将声网即时通讯 IM Web SDK 集成到你的项目中。
+本节介绍如何创建项目，将即时通讯 IM Web SDK 集成到你的项目中。
 
 #### 新建 Web 项目
 

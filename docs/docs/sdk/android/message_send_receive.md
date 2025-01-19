@@ -295,7 +295,7 @@ Uri fileLocalUri = fileMessageBody.getLocalUri();
 ## 发送和接收位置消息
 
 1. 创建和发送位置消息。
-  
+
 发送位置时，需要集成第三方的地图服务，获取到位置点的经纬度信息。 
 
 ```java
@@ -310,6 +310,7 @@ ChatClient.getInstance().chatManager().sendMessage(message);
 
 2. 接收位置消息与文本消息一致，详见[接收文本消息](#发送和接收文本消息)。
    
+
  接收方接收到位置消息时，需要将该位置的经纬度，借由第三方的地图服务，将位置在地图上显示出来。
 
 ## 发送和接收透传消息

@@ -2,13 +2,14 @@
 
 <Toc />
 
-声网小程序 SDK 为各端小程序开发提供一套完整的技术解决方案，在各端小程序的开发环境下，集成 IM 相关的功能更加便捷、高效。让您的小程序快速获得安全稳定的 IM 能力，集成简单，使用方便，帮助您快速拓展业务，赢得先机。
+即时通讯 IM 小程序 SDK 为各端小程序开发提供一套完整的技术解决方案，在各端小程序的开发环境下，集成即时通讯 IM 相关的功能更加便捷、高效。让你的小程序快速获得安全稳定的 IM 能力，集成简单，使用方便，帮助你快速拓展业务，赢得先机。
 
 :::tip
 
+// TODO：这里的版本号对吗？
 - uniapp SDK 目前支持微信、支付宝、QQ、百度小程序、抖音（请使用低于 1.70.0 以下的版本基础库）、uni-app 编译的 原生 Android 以及 iOS。
 - uniapp SDK 4.11.0 及以上版本支持鸿蒙系统。
-  :::
+:::
 
 ## 功能说明
 
@@ -22,22 +23,26 @@
 
 ### 集成前准备
 
-[注册并创建应用](/product/enable_and_configure_IM.html#创建应用)
+[注册账号并创建项目](enable_im.html)。
 
 ### 搭建开发环境
 
-1. 下载 HBuilderx 编辑器 [https://www.dcloud.io/hbuilderx.html](https://www.dcloud.io/hbuilderx.html)。
-2. DCloud 开发者中心注册 [https://dev.dcloud.net.cn/](https://dev.dcloud.net.cn/)。
+1. [下载 HBuilderx 编辑器](https://www.dcloud.io/hbuilderx.html)。
+2. [DCloud 开发者中心注册](https://dev.dcloud.net.cn/)。
 
-之后登录 HBuilderx 编辑器。这样，小程序的开发环境准备完毕。
+之后登录 HBuilderx 编辑器，小程序的开发环境准备完毕。
 
-即将开发的平台配置服务
+即将开发的平台配置服务          // TODO：这句话还需要吗？
 
 ### 配置服务器域名（以微信为例）
+
+// TODO：目前声网 IM 只有一个数据中心，这两段是否要删掉？
 
 为满足不同客户的业务需求，声网在多地部署了数据中心。不同数据中心的 REST API 请求域名、WebSocket 访问域名不同。请根据您所在数据中心进行配置。
 
 声网不同数据中心的 REST API 请求域名、WebSocket 访问域名：
+
+// TODO：替换表格中的地址
 
 | 数据中心    | REST API 请求地址                        | WebSocket 访问域名                                             |
 | ----------- | ---------------------------------------- | -------------------------------------------------------------- |
@@ -50,12 +55,11 @@
 | 美东 1 区   | a41.easemob.com 或 a41.easecdn.com       | im-api-wechat-41.easemob.com 或 im-api-wechat-41.easecdn.com   |
 | 德国 2 区   | a71.easemob.com 或 a71.easecdn.com       | im-api-wechat-71.easemob.com 或 im-api-wechat-71.easecdn.com   |
 
-应用所在数据中心可以在声网用户管理后台>应用信息中查看：Console 中查看请求域名
-
-![img](/images/applet/service_overview.png)
+关于如何查看应用所在数据中心，详见[数据中心文档](data.center.html#查看数据中心)。
 
 登录 [微信公众平台](https://mp.weixin.qq.com/)，进入 **开发 > 开发设置** 页面，配置以下服务器地址（其他平台小程序配置与微信一致）：
 
+// TODO：替换域名
 :::tip
 request 合法域名，uploadFile 合法域名，downloadFile 合法域名
 
@@ -83,7 +87,7 @@ socket 合法域名:
    :::
 
 ### 各端小程序 WebSocket 连接数量
-
+// TODO：版本号和描述对吗？
 - QQ、微信小程序： `**1.7.0**` 及以上版本，最多可以同时存在 **5** 个 WebSocket 连接
 - 字节小程序： `**1.0.0**` 及以上版本 （在当前小程序页面已经有一个 WebSocket 连接的情况下，如果再创建一个 WebSocket 连接，会重新创建一个 WebSocket 连接，但是之前创建的 WebSocket 连接并不会自动关闭。）
 - 百度小程序：`**1.9.4**` 及以上版本，支持存在多个 WebSokcet 连接，每次成功调用会返回一个新的 SocketTask
@@ -108,7 +112,7 @@ socket 合法域名:
 
 #### 调用示例
 
-若项目之前未使用 npm 管理依赖（项目根目录下无 package.json 文件），先在项目根目录执行命令初始化 npm 工程：
+若项目之前未使用 npm 管理依赖（项目根目录下无 `package.json` 文件），先在项目根目录执行命令初始化 npm 工程：
 
 ```bash
 npm init -y
@@ -120,7 +124,7 @@ npm init -y
 npm i shengwang-chat
 ```
 
-引入 uniApp SDK
+引入 uniApp SDK：
 
 ```javascript
 import ChatSDK from "shengwang-chat/uniApp/Shengwang-chat";

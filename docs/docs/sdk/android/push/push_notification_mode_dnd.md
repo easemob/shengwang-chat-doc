@@ -53,7 +53,6 @@
 </tbody>
 </table>
 <p>&nbsp;</p>
-
 ### 从服务器获取所有会话的推送通知方式设置
 
 你可以调用 `PushManager#syncSilentModeConversationsFromServer` 方法从服务器同步所有会话的推送通知方式设置。同步后成功后的结果会存储到本地数据库，然后你可以通过`Conversation#pushRemindType` 查询当前会话的推送通知方式。

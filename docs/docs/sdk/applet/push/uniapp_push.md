@@ -6,9 +6,9 @@
 
 ## 前提条件
 
-1. 已开启声网即时通讯服务，详见 [开启和配置即时通讯服务](/docs/sdk/applet/enable_im.html)。
-2. 了解声网即时通讯 IM 的使用限制，详见 [使用限制](/docs/sdk/applet/limitation.html)。
-3. 你已在 [声网即时通讯控制台](https://console.easemob.com/user/login)的**即时通讯 > 功能配置 > 功能配置总览**页面激活推送高级功能。高级功能激活后，你可以设置推送通知方式、免打扰模式和自定义推送模板。**高级功能开启后，如需关闭必须联系商务，因为该操作会删除所有相关配置。**
+1. 已开启声网即时通讯服务，详见 [开启和配置即时通讯服务](enable_im.html)。
+2. 了解即时通讯 IM 的使用限制，详见 [使用限制](limitation.html)。
+3. 你已在 [声网控制台](https://console.shengwang.cn/overview)的**即时通讯 IM** > **功能配置** > **推送模板** 页签下开启高级功能。高级功能激活后，你可以设置推送通知方式、免打扰模式和自定义推送模板。**高级功能开启后，如需关闭必须联系商务，因为该操作会删除所有相关配置。** 
 4. 各推送使用的条件：
    - 小米推送：在小米设备上可用；
    - 华为推送：在华为设备上可用；
@@ -22,10 +22,10 @@
 
 ## 实现流程
 
-### 步骤一 上传推送证书至声网即时通讯控制台
+### 步骤一 上传推送证书至声网控制台
 
 1. 在第三方推送服务后台注册应用，获取应用信息，开启推送服务。
-2. 在[声网即时通讯云控制台](https://console.easemob.com/user/login)配置获取到的应用信息，上传推送证书，实现第三方推送服务与声网即时通讯 IM 的通信。
+2. 在[声网控制台](https://console.shengwang.cn/overview)配置获取到的应用信息，上传推送证书，实现第三方推送服务与即时通讯 IM 的通信。
 
 :::tip
 更多详情，参见 [Android 离线推送](/docs/sdk/android/push/push_fcm.html)和 [APNs 离线推送](/docs/sdk/ios/push/push_apns.html)。
@@ -33,7 +33,7 @@
 
 ### 步骤二 配置 uni-app 应用支持推送插件
 
-TODO
+// TODO：替换链接
 
 1. 新建 uni-app 工程，并引入[声网 uni-app 推送插件](https://downloadsdk.easemob.com/downloads/WEB_SDK/EMPushUniPlugin_V1.0.0.zip)。
 
@@ -71,7 +71,8 @@ TODO
 
 - 配置原生插件，必须打包自定义基座进行测试。
 - 打包自定义基座时，需要提供安卓/苹果平台签名证书。安卓平台签名证书是开发者后续更新升级已发布 APK 的凭证。开发者需要自行生成证书文件并保管，具体请参考[Android 平台签名证书(.keystore)生成指南](https://ask.dcloud.net.cn/article/35777)和[iOS 证书(.p12)和描述文件(.mobileprovision)申请](https://ask.dcloud.net.cn/article/152)。
-  :::
+
+:::
 
 - 制作自定义调试基座：
 
@@ -87,10 +88,6 @@ TODO
 
 ### 步骤三 集成 EMPushUniPlugin 插件
 
-:::tip
-SDK 4.9.1 及以上版本支持 uni-app 推送。
-:::
-
 1. 安装并引入声网 uni-app SDK。
 
 ```bash
@@ -102,10 +99,10 @@ npm install shengwang-chat
 import ChatSDK from "shengwang-chat/uniApp/Shengwang-chat";
 ```
 
-2. 初始化 IM SDK 并集成推送插件。
+2. 初始化即时通讯 IM SDK 并集成推送插件。
 
 ```javascript
-// 初始化 IM SDK
+// 初始化即时通讯 IM SDK
 const chatClient = ChatSDK.connection({
   appId: "your appId",
 });
@@ -130,7 +127,7 @@ const pushOption = {
   },
 };
 
-// 调用 IM SDK 方法，注册推送插件
+// 调用即时通讯 IM SDK 方法，注册推送插件
 chatClient.usePlugin(
   pushOption,
   "push" // 为固定值
@@ -163,7 +160,7 @@ onLaunch(() => {
 
 2. 即时通讯 IM 是否支持多设备离线推送？
 
-你可在[声网即时通讯控制台](https://console.easemob.com/user/login)的**证书管理**页面配置多设备推送策略。该策略配置对所有推送通道生效：
+你可在[声网控制台](https://console.shengwang.cn/overview)的**推送证书**页面配置多设备推送策略。该策略配置对所有推送通道生效：
 
 - 所有设备离线时，才发送推送消息；
 - 任一设备离线时，都发送推送消息。

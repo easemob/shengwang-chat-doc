@@ -38,7 +38,7 @@
 
 1. **用户 ID + token** 是更加安全的登录方式。
 
-通过用户 ID 和 token 进行登录。使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
+​      使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
 
 ```java
 ChatClient.getInstance().loginWithToken(mAccount, mToken, new CallBack() {
@@ -56,7 +56,7 @@ ChatClient.getInstance().loginWithToken(mAccount, mToken, new CallBack() {
 });
 ```
 
-1. **用户 ID + 密码**登录是传统的登录方式。用户名和密码均由你的终端用户自行决定，密码需要符合[密码规则要求](/docs/sdk/server-side/account_system.html#开放注册单个用户)。
+1. **用户 ID + 密码**登录是传统的登录方式。用户 ID 和密码均由你的终端用户自行决定，密码需要符合[密码规则要求](/docs/sdk/server-side/account_system.html#注册单个用户)。
 
 ```java
 ChatClient.getInstance().login(mAccount, mPassword, new CallBack() {
