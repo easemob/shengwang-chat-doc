@@ -1,14 +1,14 @@
 # 管理群组公告和共享文件
 
-声网即时通讯 IM 提供了 RESTful API 管理群组公告和共享文件，包括修改和获取群组公告、上传、下载、获取和删除群组共享文件。
+即时通讯 IM 提供了 RESTful API 管理群组公告和共享文件，包括修改和获取群组公告、上传、下载、获取和删除群组共享文件。
 
 ## 前提条件
 
 要调用声网即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置声网即时通讯 IM 服务](enable_im.html)。
+- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置即时通讯 IM 服务](enable_im.html)。
 - 已从服务端获取 app token，详见 [使用 Token 鉴权](token_authentication.html)。
-- 了解声网即时通讯 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+- 了解即时通讯 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 公共参数
 
@@ -37,7 +37,7 @@
 
 ## 认证方式
 
-声网即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
+即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
 `Authorization: Bearer YourAppToken`
 
@@ -332,7 +332,7 @@ POST https://{host}/app-id/{app_id}/chatgroups/{group_id}/share_files
 
 | 字段             | 类型   | 描述                                                       |
 | :--------------- | :----- | :--------------------------------------------------------- |
-| `data.file_url`  | String | 群组共享文件的 URL，在声网即时通讯 IM 服务器上保存的地址。 |
+| `data.file_url`  | String | 群组共享文件的 URL，在即时通讯 IM 服务器上保存的地址。 |
 | `data.group_id`  | String | 群组 ID。                                                  |
 | `data.file_name` | String | 群组共享文件名称。                                         |
 | `data.created`   | Long   | 上传群组共享文件的时间。                                   |

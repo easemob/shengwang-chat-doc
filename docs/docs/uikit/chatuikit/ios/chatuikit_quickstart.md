@@ -27,7 +27,7 @@
 
 ### 第二步 初始化
 
-你可以在应用加载时或使用 ShengwangChatUIKit 之前对其进行初始化。
+你可以在应用加载时或使用 `ShengwangChatUIKit` 之前对其进行初始化。
 
 初始化时，需传入 App ID。你可以在[声网控制台](https://console.shengwang.cn/overview)展开控制台左上角下拉框，选择需要开通即时通讯 IM 服务的项目，然后点击 **总览**，在**项目信息**区域查看 App ID。
 
@@ -48,10 +48,10 @@ class AppDelegate：UIResponder，UIApplicationDelegate {
 
 ### 第三步 登录
 
-使用用户 ID 和用户 token 登录 ShengwangChatUIKit。
+使用用户 ID 和用户 token 登录 `ShengwangChatUIKit`。
 
 :::tip
-若你已集成了 IM SDK，SDK 的所有用户 ID 均可用于登录 ShengwangChatUIKit。
+若你已集成了 IM SDK，SDK 的所有用户 ID 均可用于登录 `ShengwangChatUIKit`。
 :::
 
 在[声网控制台](https://console.shengwang.cn/overview)按照如下步骤创建用户：

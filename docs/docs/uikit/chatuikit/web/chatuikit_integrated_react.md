@@ -10,7 +10,7 @@
 
 - React 16.8.0 或以上版本；
 - React DOM 16.8.0 或以上版本；
-- [即时通讯 IM 应用和 appId](/product/enable_and_configure_IM.html#创建应用)。
+- [已创建项目并获取 App ID](https://im.shengwang.cn/docs/sdk/web/enable_im.html)。
 
 ## 操作步骤
 
@@ -45,7 +45,22 @@ import "shengwang-chat-uikit/style.css";
 
 若要实现自动登录，初始化时需传入 `userId`、`password` 或 `token`。
 
-你需要在声网控制台[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，获取用户 ID 和密码。如果使用 token，你需要从你的 App Server 获取用户 token，详见[使用声网用户 token 鉴权](/product/shengwang_user_token.html) 。
+在[声网控制台](https://console.shengwang.cn/overview)按照如下步骤创建用户：
+
+1. 展开控制台左上角下拉框，选择需要开通即时通讯 IM 服务的项目。
+
+2. 点击左侧导航栏的**全部产品**。
+
+3. 在下拉列表中找到**即时通讯 IM** 并点击。
+
+4. 在**即时通讯 IM** 页面，进入**运营管理**标签页。
+
+5. 在**用户** 页签下，点击**创建IM用户**。
+
+6. 在弹出的对话框中，配置用户相关参数，点击**确定**。
+
+在正式环境中，你需要从你的 App Server 获取用户 token，详见[使用 Token 鉴权](/docs/sdk/server-side/token_authentication.html)。
+
 
 ```jsx
 import React from 'react';
@@ -55,7 +70,7 @@ ReactDOM.createRoot(document.getElementById('root') as Element).render(
   <div>
     <UIKitProvider
       initConfig={{
-        appId: 'your appId', // 你的 appId
+        appId: 'your appId', // 你的 app Id
         userId: 'user ID', // 用户 ID
         password: 'password', // 如果使用密码登录，传入密码。
       }}
@@ -101,5 +116,6 @@ const App = () => {
 
 ## 相关参考
 
+// TODO：替换链接
 - [组件库源码](https://github.com/shengwang/shengwang-UIKit-web)
 - [其他示例 demo](https://github.com/shengwang/shengwang-UIKit-web/tree/main/demo)

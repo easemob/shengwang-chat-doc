@@ -2,13 +2,13 @@
 
 <Toc />
 
-声网单群聊 UIKit 是基于声网即时通讯云 IM SDK 开发的一款即时通讯 React UI 组件库。该组件库提供了聊天相关的组件，包括会话列表、聊天界面、联系人列表和群组设置等组件，组件内部集成了 IM SDK，可以帮助开发者不关心内部实现和数据管理就能根据实际业务需求快速搭建包含 UI 界面的即时通讯应用。
+单群聊 UIKit 是基于即时通讯 IM SDK 开发的一款即时通讯 React UI 组件库。该组件库提供了聊天相关的组件，包括会话列表、聊天界面、联系人列表和群组设置等组件，组件内部集成了 IM SDK，可以帮助开发者不关心内部实现和数据管理就能根据实际业务需求快速搭建包含 UI 界面的即时通讯应用。
 
-若要访问源码，请点击[这里](https://github.com/easemob/Easemob-UIKit-web/tree/main)。
+若要访问源码，请点击[这里](https://github.com/Shengwang-Community/ShengwangChat-UIKit-web)。
 
 ## 技术原理
 
-声网单群聊 UIKit 组件内部集成 IM SDK 和声网服务器连接，实现收发消息等功能。组件使用 React Context API 管理内部状态，用户可以使用 UIKit 提供的自定义 hooks 从全局数据获取需要的数据，也可以用自定义 hooks 获取操作这些数据的方法。
+单群聊 UIKit 组件内部集成 IM SDK 和声网服务器连接，实现收发消息等功能。组件使用 React Context API 管理内部状态，用户可以使用 UIKit 提供的自定义 hooks 从全局数据获取需要的数据，也可以用自定义 hooks 获取操作这些数据的方法。
 
 ![img](/images/uikit/chatuikit/web/uikit.png =600x730)
 

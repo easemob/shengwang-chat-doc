@@ -1,5 +1,7 @@
 # 设置联系人详情页面
 
+// TODO：替换链接
+
 你可以配置联系人详情页面的导航栏、点击右侧图片显示的联系人操作和联系人详情自定义列表项等。详见 [ContactInfoViewController](https://github.com/AgoraIO-Usecase/ShengwangChat-ios/tree/main/Documentation/ShengwangChatUIKit.doccarchive/documentation/easechatuikit/contactinfoviewcontroller)。
 
 <ImageGallery>
@@ -12,7 +14,7 @@
 
 ### 设置点击右侧图片显示的联系人操作
 
-联系人详情页面中右上角按钮 `...` 点击后弹出 `ActionSheet` 菜单中的数据源可配项`Appearance.contact.moreActions`。你可以增加或删除菜单项，示例代码如下：
+联系人详情页面中右上角按钮 `...` 点击后弹出 `ActionSheet` 菜单中的数据源可配项 `Appearance.contact.moreActions`。你可以增加或删除菜单项，示例代码如下：
 
 ```swift
      //增加菜单项

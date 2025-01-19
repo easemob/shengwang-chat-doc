@@ -2,7 +2,7 @@
 
 <Toc />
 
-利用声网单群聊 UIKit，你可以轻松实现单群和群聊。本文介绍如何快速实现在单聊会话中发送消息。
+利用单群聊 UIKit，你可以轻松实现单群和群聊。本文介绍如何快速实现在单聊会话中发送消息。
 
 ## 前提条件
 
@@ -10,7 +10,7 @@
 
 - React 16.8.0 或以上版本；
 - React DOM 16.8.0 或以上版本；
-- 已在[声网即时通讯云控制台](https://console.shengwnag.com/user/login)创建了有效的声网即时通讯 IM 开发者账号，并[获取了 appId](/product/enable_and_configure_IM.html#获取声网即时通讯-im-的信息)。
+- 已在[声网控制台](https://console.shengwnag.com/user/login)[创建了有效的即时通讯 IM 开发者账号](/docs/sdk/web/enable_im.html#_1-登录声网控制台)，并[获取了 App ID](/docs/sdk/web/enable_im.html#_3-获取-app-id)。
 
 ## 支持的浏览器
 
@@ -70,11 +70,27 @@ yarn add shengwnag-chat-uikit
 
 #### 使用 shengwnag-chat-uikit 组件构建应用
 
-为了方便快速体验，你可以在[声网即时通讯云控制台](https://console.shengwnag.com/user/login)的**应用概览** > **用户认证**页面创建用户并查看用户 token。**用户认证**页面中的用户仅用于快速体验或调试目的。
+在[声网控制台](https://console.shengwang.cn/overview)按照如下步骤创建用户：
 
-在开发环境中，你需要在声网控制台[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，从你的 App Server 获取用户 token，详见[使用声网用户 token 鉴权](/product/shengwnag_user_token.html) 。
+1. 展开控制台左上角下拉框，选择需要开通即时通讯 IM 服务的项目。
 
-将 shengwnag-chat-uikit 库导入你的代码中：
+2. 点击左侧导航栏的**全部产品**。
+
+3. 在下拉列表中找到**即时通讯 IM** 并点击。
+
+4. 在**即时通讯 IM** 页面，进入**运营管理**标签页。
+
+5. 在**用户** 页签下，点击**创建IM用户**。
+
+6. 在弹出的对话框中，配置用户相关参数，点击**确定**。
+
+创建用户后，在用户列表点击对应的用户的**操作**一栏中的**更多**，选择**查看Token**。
+
+在弹出的对话框中，可以查看用户 Token，也可以点击**重新生成**，生成用户 token。
+
+在开发环境中，你需要从你的 App Server 获取用户 token，详见[使用 Token 鉴权](/docs/sdk/server-side/token_authentication.html)。
+
+将 `shengwnag-chat-uikit` 库导入你的代码中：
 
 ```javascript
 // App.js
@@ -150,7 +166,7 @@ npm run start
 2. 输入你的第一条消息并发送。
 
 :::tip
-使用新创建的 appId 时，由于没有联系人，需先添加好友。
+使用新创建的 App ID 时，由于没有联系人，需先添加好友。
 :::
 
 <ImageGallery>

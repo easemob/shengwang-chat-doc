@@ -1,10 +1,10 @@
 # 用户收藏
 
-声网即时通讯 IM 支持你收藏聊天过程中发送成功的各类消息或你的其他自定义内容。这些收藏的内容永久保存，你可以随时查看。例如，你若收藏指定的消息附件，可[将消息附件设置为永久存储](message_attachment_storage.html)，然后再收藏，即可随时查看这些附件内容。
+即时通讯 IM 支持你收藏聊天过程中发送成功的各类消息或你的其他自定义内容。这些收藏的内容永久保存，你可以随时查看。例如，你若收藏指定的消息附件，可[将消息附件设置为永久存储](message_attachment_storage.html)，然后再收藏，即可随时查看这些附件内容。
 
 ## 公共参数
 
-以下表格列举了声网即时通讯 IM 的 RESTful 接口的公共请求参数：
+以下表格列举了即时通讯 IM 的 RESTful 接口的公共请求参数：
 
 | 参数       | 类型   | 是否必需 | 描述   |
 | :--------- | :----- | :------- | :------------------ |
@@ -13,15 +13,15 @@
 
 ## 前提条件
 
-要调用声网即时通讯 IM 的 RESTful API，请确保满足以下要求：
+要调用即时通讯 IM 的 RESTful API，请确保满足以下要求：
 
-- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置声网即时通讯 IM 服务](enable_im.html)。
+- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置即时通讯 IM 服务](enable_im.html)。
 - 已从服务端获取 app token，详见 [使用 Token 鉴权](token_authentication.html)。
-- 了解声网即时通讯 IM 的 RESTful API 调用频率限制，详见 [接口频率限制](limitationapi.html)。
+- 了解即时通讯 IM 的 RESTful API 调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 认证方式
 
-声网即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
+即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
 `Authorization: Bearer YourAppToken`
 

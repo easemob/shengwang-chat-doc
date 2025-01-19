@@ -14,9 +14,9 @@ IMKit 是环信即时通讯 IM SDK 的一个开源 UI 组件，提供应用内�
 
 CallKit 提供应用内聊天中音视频通话的页面和 UI 组件，帮助开发者快速构建音视频通话功能。 
 
-### 环信通讯云控制台（Easemob Console）
+### 声网控制台（Easemob Console）
 
-[环信通讯云控制台](https://console.easemob.com/user/login)是环信提供给开发者管理环信各项服务的工具。
+[声网控制台](https://console.shengwang.cn/overview)是环信提供给开发者管理环信各项服务的工具。
 
 ## Demo
 

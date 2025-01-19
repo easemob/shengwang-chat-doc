@@ -34,7 +34,7 @@
 | 方法名    |   用途    | 是否可重载 |
 | -------- | -------- | -------- |
 | `createNavigation`    | 创建导航栏方法     | 是     |
-| `createLoading`    | 创建Loading页面方法     | 是     |
+| `createLoading`    | 创建加载页面的方法     | 是     |
 | `navigationClick`    | 导航栏所有点击方法     | 是     |
 | `viewDetail`   | 查看联系人或群组详情页面     | 是     |
 | `rightItemsAction`    | 导航右侧按钮点击方法     | 是     |

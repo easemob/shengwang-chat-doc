@@ -2,7 +2,7 @@
 
 <Toc />
 
-利用环信单群聊 UIKit，你可以轻松实现单群和群聊。本文介绍如何快速实现在单聊和群聊会话中发送消息。
+利用单群聊 UIKit，你可以轻松实现单群和群聊。本文介绍如何快速实现在单聊和群聊会话中发送消息。
 
 ## 前提条件
 
@@ -29,7 +29,7 @@
 
   - Gradle 7.0 之前 
 
-    在 Project的`build.gradle.kts` 文件中添加 `mavenCentral()` 仓库。
+    在 Project 的 `build.gradle.kts` 文件中添加 `mavenCentral()` 仓库。
 
     ```kotlin
     buildscript {
@@ -40,7 +40,7 @@
     ```
   - Gradle 7.0 即之后
 
-    在Project的 `settings.gradle` 文件中添加 `mavenCentral()` 仓库。
+    在 Project 的 `settings.gradle` 文件中添加 `mavenCentral()` 仓库。
 
     ```gradle
     pluginManagement {
@@ -75,7 +75,7 @@ implementation("cn.shengwang:chat-uikit:1.3.2")
 // TODO: 替换链接
 从 GitHub 获取[单群聊 UIKit](https://github.com/Shengwang-Community/ShengwangChat-UIKit-android) 源码，按照下面的方式集成：
 
-- 在Project的 `settings.gradle.kts` 文件中添加如下代码：
+- 在 Project 的 `settings.gradle.kts` 文件中添加如下代码：
 
 ```kotlin
 include(":chat-uikit")
@@ -179,7 +179,7 @@ implementation(project(mapOf("path" to ":chat-uikit")))
 
 ### 第二步 实现代码逻辑
 
-1. 初始化UIKit。
+1. 初始化 UIKit。
 
 2. 实现登录和退出页面。
 
@@ -187,11 +187,27 @@ implementation(project(mapOf("path" to ":chat-uikit")))
 若你已集成了即时通讯 IM SDK，SDK 的所有用户 ID 均可用于登录单群聊 UIKit。
 :::
 
-你需要在环信控制台[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，登录时传入用户 ID 和密码。
+在[声网控制台](https://console.shengwang.cn/overview)按照如下步骤创建用户：
+
+1. 展开控制台左上角下拉框，选择需要开通即时通讯 IM 服务的项目。
+
+2. 点击左侧导航栏的**全部产品**。
+
+3. 在下拉列表中找到**即时通讯 IM** 并点击。
+
+4. 在**即时通讯 IM** 页面，进入**运营管理**标签页。
+
+5. 在**用户** 页签下，点击**创建IM用户**。
+
+6. 在弹出的对话框中，配置用户相关参数，点击**确定**。
+
+在用户列表中，在新创建的用户的**操作**一栏中，点击**更多**，选择**查看Token**，查看该用户的 token。在开发环境中，你需要从你的 App Server 获取用户 token，详见[使用 Token 鉴权](/docs/sdk/server-side/token_authentication.html)。
 
 完整实现示例代码：
 
 打开 `MainActivity` 文件，并替换为如下代码。
+
+// TODO：下面的示例代码中还有 easemob，可以吗？
 
 ```kotlin
 package com.easemob.quickstart
@@ -239,7 +255,7 @@ class MainActivity : AppCompatActivity() {
             return
         }
         ChatOptions().apply {
-            // 设置你自己的 app id
+            // 设置你自己的 App ID
             this.appId = appId
             // 设置为手动登录
             this.autoLogin = false

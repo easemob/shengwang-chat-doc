@@ -2,7 +2,7 @@
 
 <Toc />
 
-本文展示如何调用声网即时通讯 IM RESTful API 在服务端实现单聊场景中全类型消息的发送与接收，包括文本消息、图片消息、语音消息、视频消息、透传消息和自定义消息。
+本文展示如何调用即时通讯 IM RESTful API 在服务端实现单聊场景中全类型消息的发送与接收，包括文本消息、图片消息、语音消息、视频消息、透传消息和自定义消息。
 
 下表为各类型消息的发送说明：
 
@@ -28,7 +28,7 @@
 </td>
 <td rowspan="2" width="279">
 <p>1.发送消息时，可选的 `from` 字段用于指定发送方。</p>
-<p>2. 消息支持扩展属性 `ext`，可添加自定义信息。同时，推送通知也支持自定义扩展字段，详见 <a href="https://doc.easemob.com/docs/sdk/ios/push/push_display.html#使用消息扩展字段设置推送通知显示内容">APNs 自定义显示</a>和 <a href="https://doc.easemob.com/docs/sdk/android/push/push_display.html#使用消息扩展字段设置推送通知显示内容">Android 推送字段说明</a>。</p>
+<p>2. 消息支持扩展属性 `ext`，可添加自定义信息。同时，推送通知也支持自定义扩展字段，详见 <a href="https://im.shengwang.cn/docs/sdk/ios/push/push_display.html#%E4%BD%BF%E7%94%A8%E6%B6%88%E6%81%AF%E6%89%A9%E5%B1%95%E5%AD%97%E6%AE%B5%E8%AE%BE%E7%BD%AE%E6%8E%A8%E9%80%81%E9%80%9A%E7%9F%A5%E6%98%BE%E7%A4%BA%E5%86%85%E5%AE%B9">APNs 自定义显示</a>和 <a href="https://im.shengwang.cn/docs/sdk/android/push/push_display.html#%E4%BD%BF%E7%94%A8%E6%B6%88%E6%81%AF%E6%89%A9%E5%B1%95%E5%AD%97%E6%AE%B5%E8%AE%BE%E7%BD%AE%E6%8E%A8%E9%80%81%E9%80%9A%E7%9F%A5%E6%98%BE%E7%A4%BA%E5%86%85%E5%AE%B9">Android 推送字段说明</a>。</p>
 </td>
 </tr>
 <tr>
@@ -36,7 +36,7 @@
 <p>图片/语音/视频/文件消息</p>
 </td>
 <td width="189">
-<p>1. 调用<a href="https://doc.easemob.com/docs/sdk/server-side/message_download.html#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0">文件上传</a>方法上传图片、语音、视频或其他类型文件，并从响应 body 中获取文件 UUID。</p>
+<p>1. 调用<a href="https://im.shengwang.cn/docs/sdk/server-side/message_download.html#%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6">文件上传</a>方法上传图片、语音、视频或其他类型文件，并从响应 body 中获取文件 UUID。</p>
 <p>2. 调用发送消息方法，在请求 body 中传入该 UUID。</p>
 </td>
 </tr>
@@ -48,7 +48,7 @@
 
 :::tip
 1. 接口调用过程中，请求体和扩展字段的总长度不能超过 5 KB。
-2. 通过 RESTful 接口发送的消息默认不写入会话列表，若需要此类消息写入会话列表，需在[声网控制台开通](/product/enable_and_configure_IM.html#设置通过-restful-api-发送的消息写入会话列表)。
+2. 通过 RESTful 接口发送的消息默认不写入会话列表，若需要此类消息写入会话列表，需要联系声网商务开通。
 :::
 
 **发送频率**：对于单个 app，该 REST API 存在以下三个限制：
@@ -58,11 +58,11 @@
 
 ## 前提条件
 
-要调用声网即时通讯 RESTful API，请确保满足以下要求：
+要调用即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置声网即时通讯 IM 服务](enable_im.html)。
+- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置即时通讯 IM 服务](enable_im.html)。
 - 已从服务端获取 app token，详见 [使用 Token 鉴权](token_authentication.html)。
-- 了解声网即时通讯 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+- 了解即时通讯 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 公共参数 
 
@@ -86,7 +86,7 @@
 
 ## 认证方式
 
-声网即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
+即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
 `Authorization: Bearer YourAppToken`
 
@@ -126,7 +126,7 @@ POST https://{host}/app-id/{app_id}/messages/users
 | `roam_ignore_users`   | List   | 否 | 设置哪些用户拉漫游消息时拉不到该消息。|
 | `routetype`     | String | 否       | 若传入该参数，其值为 `ROUTE_ONLINE`，表示接收方只有在线时才能收到消息，若接收方离线则无法收到消息。若不传入该参数，无论接收方在线还是离线都能收到消息。 |
 | `ext`   | JSON   | 否       | 消息支持扩展字段，可添加自定义信息。不能对该参数传入 `null`。同时，推送通知也支持自定义扩展字段，详见 [APNs 自定义显示](/docs/sdk/ios/push/push_display.html#使用消息扩展字段设置推送通知显示内容) 和 [Android 推送字段说明](/docs/sdk/android/push/push_display.html#使用消息扩展字段设置推送通知显示内容)。 |
-| `ext.em_ignore_notification` | Bool   | 否 | 是否发送静默消息：<br/> - `true`：是；<br/> - （默认）`false`：否。<br/> 发送静默消息指用户离线时，声网即时通讯 IM 服务不会通过第三方厂商的消息推送服务向该用户的设备推送消息通知。因此，用户不会收到消息推送通知。当用户再次上线时，会收到离线期间的所有消息。发送静默消息和免打扰模式下均为不推送消息，区别在于发送静默消息为发送方设置不推送消息，而免打扰模式为接收方设置在指定时间段内不接收推送通知。| 
+| `ext.em_ignore_notification` | Bool   | 否 | 是否发送静默消息：<br/> - `true`：是；<br/> - （默认）`false`：否。<br/> 发送静默消息指用户离线时，即时通讯 IM 服务不会通过第三方厂商的消息推送服务向该用户的设备推送消息通知。因此，用户不会收到消息推送通知。当用户再次上线时，会收到离线期间的所有消息。发送静默消息和免打扰模式下均为不推送消息，区别在于发送静默消息为发送方设置不推送消息，而免打扰模式为接收方设置在指定时间段内不接收推送通知。| 
 
 请求体中的 `body` 字段说明详见下表。
 

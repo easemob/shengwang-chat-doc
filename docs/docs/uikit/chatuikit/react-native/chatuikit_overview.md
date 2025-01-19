@@ -2,15 +2,15 @@
 
 <Toc />
 
-环信聊天 UIKit 是基于环信即时通讯云 IM SDK 开发的一款即时通讯 UI 组件库，提供各种组件实现会话列表、聊天界面、联系人列表等功能，帮助开发者根据实际业务需求快速搭建包含 UI 界面的即时通讯应用。
+单群聊 UIKit 是基于即时通讯 IM SDK 开发的一款即时通讯 UI 组件库，提供各种组件实现会话列表、聊天界面、联系人列表等功能，帮助开发者根据实际业务需求快速搭建包含 UI 界面的即时通讯应用。
 
-若要访问源码，请点击[这里](https://github.com/easemob/react-native-chat-library)。
+若要访问源码，请点击[这里](https://github.com/Shengwang-Community/ShengwangChat-UIKit-rn)。
 
 ## UIKit 基本项目结构
 
-环信即时通讯 `Chat UIKit SDK` 是基于 `Chat SDK`，增加相关的 UI 页面和组件，提供主题、国际化等常用工具的产品。
+单群聊 UIKit SDK 是基于即时通讯 IM SDK，增加相关的 UI 页面和组件，提供主题、国际化等常用工具的产品。
 
-以下是 `Chat UIKit SDK` 项目的结构概览。
+以下是单群聊 UIKit 项目的结构概览。
 
 ```bash
 ├── CHANGELOG.md // 更新日志
@@ -28,7 +28,7 @@
 ├── src // 源码
 │   ├── assets // 静态资源
 │   ├── biz // 业务代码
-│   ├── chat // Chat SDK 封装，提供基础服务
+│   ├── chat // 单群聊 UIKit SDK 封装，提供基础服务
 │   ├── config // 配置组件
 │   ├── config.local.ts // 本地配置
 │   ├── const.tsx // 常量
@@ -42,14 +42,14 @@
 │   ├── types.tsx // 类型定义
 │   ├── ui // 基础 UI 组件，为业务组件提供基础服务
 │   ├── utils // 工具函数
-│   └── version.ts // Chat UIKit SDK 版本信息
+│   └── version.ts // 单群聊 UIKit SDK 版本信息
 ├── tsconfig.build.json // 编译配置
 └── tsconfig.json // 编译配置
 ```
 
 ## 功能介绍
 
-环信即时通讯 `Chat UIKit SDK` 提供的主要功能包括：主题、国际化、多媒体处理、联系人页面、会话列表、会话详情、错误处理等。
+单群聊 UIKit SDK 提供的主要功能包括：主题、国际化、多媒体处理、联系人页面、会话列表、会话详情、错误处理等。
 
 ### 核心组件
 
@@ -58,11 +58,11 @@
 | Container    | 入口组件，在应用程序入口使用，设置全局配置和初始化 UI 组件库。         |
 | Theme        | 主题组件，由 `Palette` 和 `Theme` 组成，可以配置 UI 组件的颜色和样式。      |
 | i18n         | 国际化组件，默认提供中英文 UI 组件的国际化内容，支持更改内容和自定义目标语言。     |
-| biz          | 页面级业务组件集合。包括`ConversationList`,`ContactList`,`GroupList`, `GroupParticipantList`和`ConversationDetail`等 |
+| biz          | 页面级业务组件集合。包括 `ConversationList`、`ContactList`、`GroupList`、`GroupParticipantList` 和 `ConversationDetail` 等。 |
 | chat         | 消息服务组件。所有关于消息的非页面处理都在这里。     |
 | config       | 配置服务组件。全局配置设置都在这里。     |
 | dispatch     | 事件分发组件。可以进行组件之间通信。     |
-| error        | 对错对象。`uikit`里面的错误错误对象都在这里定义。         |
+| error        | 对错对象。`uikit` 中的错误错误对象都在这里定义。         |
 | hook         | 自定义的钩子组件。为其它组件服务。         |
 
 | 页面级组件名称       | 描述   |

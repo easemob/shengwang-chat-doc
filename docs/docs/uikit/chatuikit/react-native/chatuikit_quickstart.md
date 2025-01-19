@@ -2,7 +2,7 @@
 
 <Toc />
 
-利用环信单群聊 UIKit，你可以轻松实现单群和群聊。本文介绍如何快速实现在单聊会话中发送消息。
+利用单群聊 UIKit，你可以轻松实现单群和群聊。本文介绍如何快速实现在单聊会话中发送消息。
 
 ## 前提条件
 
@@ -30,7 +30,7 @@ npx react-native --version 0.73.2 init ProjectName
 
 ### 第二步 添加依赖项
 
-`Chat UIKit SDK` 需要额外的依赖。在 `package.json` 文件中添加依赖。
+单群聊 UIKit SDK 需要额外的依赖。在 `package.json` 文件中添加依赖。
 
 ```bash
 yarn add @react-native-async-storage/async-storage \
@@ -222,4 +222,4 @@ export default App;
 
 ## 示例项目地址
 
-[仓库地址](https://github.com/easemob/easemob-uikit-reactnative)
+[仓库地址](https://github.com/Shengwang-Community/ShengwangChat-UIKit-rn)

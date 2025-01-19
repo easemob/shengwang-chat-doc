@@ -2,7 +2,7 @@
 
 <Toc />
 
-环信单群聊 UIKit 提供 `UIKitChatActivity` 和 `UIKitChatFragment` 两种方式方便用户快速集成聊天页面和自定义聊天页面。该页面提供如下功能：
+单群聊 UIKit 提供 `UIKitChatActivity` 和 `UIKitChatFragment` 两种方式方便用户快速集成聊天页面和自定义聊天页面。该页面提供如下功能：
 
 - 发送和接收消息, 包括文本、表情、图片、语音、视频、文件和名片消息。
 - 对消息进行复制、引用、撤回、删除、编辑、重新发送和审核。
@@ -682,7 +682,7 @@ builder.setCustomAdapter(CustomMessageAdapter())
 #### 设置消息翻译
 
 - `ChatUIKitClient.getConfig()?.chatConfig?.enableTranslationMessage`：是否开启文本消息长按翻译功能，默认为 `false`，即该功能默认关闭。如需开启该特性，需设置为 `true`。
-- `ChatUIKitClient.getConfig()?.chatConfig?.targetTranslationLanguage = "zh"`：翻译目标语言，默认为中文。文本消息长按后出现**翻译**菜单，点击**翻译**后，设置翻译的目标语言。使用前，你需在[环信即时通讯云控制台](https://console.easemob.com/user/login)申请试用翻译功能，然后将 `ChatUIKitClient.getConfig()?.chatConfig?.enableTranslationMessage` 设置为 `true`，才会出现文本消息长按的翻译功能。若后台申请翻译未通过，前端无法成功调用 API 进行翻译。
+- `ChatUIKitClient.getConfig()?.chatConfig?.targetTranslationLanguage = "zh"`：翻译目标语言，默认为中文。文本消息长按后出现**翻译**菜单，点击**翻译**后，设置翻译的目标语言。使用前，你需在[环信即时通讯云控制台](https://console.shengwang.cn/overview)申请试用翻译功能，然后将 `ChatUIKitClient.getConfig()?.chatConfig?.enableTranslationMessage` 设置为 `true`，才会出现文本消息长按的翻译功能。若后台申请翻译未通过，前端无法成功调用 API 进行翻译。
 - `<style name="ease_chat_message_received_translation_content_style">`：消息接收方翻译文本 style 样式 可以自行修改文本任意属性。
 - `<style name="ease_chat_message_sent_translation_content_style">`：消息发送方翻译文本 style 样式 可以自行修改文本任意属性。
 

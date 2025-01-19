@@ -2,7 +2,7 @@
 
 <Toc />
 
-环信提供一个开源的聊天示例项目，演示了如何使用该 UIKit 快速搭建聊天页面，实现完整业务。
+声网提供一个开源的聊天示例项目，演示了如何使用该 UIKit 快速搭建聊天页面，实现完整业务。
 
 本文展示如何编译并运行 React Native 平台的聊天 UIKit 示例项目。
 
@@ -16,9 +16,9 @@
 - 对于 `iOS` 平台，需要 `Xcode` 工具，版本建议 14 或以上；
 - 对于 `Android` 平台，需要 `Android studio` 工具，版本建议 2022 或以上。
 
-## AppServer
+## App Server
 
-该实例项目运行需要配置 AppServer。在服务端部署 AppServer 服务，在客户端实现 RESTful API 接口。
+该实例项目运行需要配置 App Server。在服务端部署 App Server 服务，在客户端实现 RESTful API 接口。
 
 本示例项目中，配置服务器地址 `RestApi.setServer`, 提供获取手机号验证码、手机号登录、上传头像、获取 rtcToken、获取 rtcMap、获取群主头像接口。
 
@@ -28,7 +28,7 @@
 
 ### 下载项目
 
-可以通过 [GitHub 地址](https://github.com/shengwang/react-native-chat-library)下载项目。
+可以通过 [GitHub 地址](https://github.com/Shengwang-Community/ShengwangChat-UIKit-rn)下载项目。
 
 ### 初始化项目
 
@@ -44,13 +44,13 @@ yarn && yarn uikit-prepack
 cd example/ios && pod install
 ```
 
-- 对于 Android 平台，建议使用 Android studio sync 示例项目。
+- 对于 Android 平台，建议使用 Android Studio sync 示例项目。
 
 使用 `Android studio` 应用打开 `example/android` 目录，同步项目。
 
 ### 本地配置
 
-登录[环信即时通讯控制台](https://console.shengwang.com/user/login)，获取 App ID。将 App ID、用户 ID 和用户 token 填入 `example` 的配置文件 `example/src/env.ts` 中。
+登录[声网控制台](https://console.shengwang.com/user/login)，获取 App ID。将 App ID、用户 ID 和用户 token 填入 `example` 的配置文件 `example/src/env.ts` 中。
 
 例如：
 
@@ -63,6 +63,8 @@ export const agoraAppId = "xxx";
 export const fcmSenderId = "xxx";
 export const account = [{ id: "xxx", token: "xxx" }];
 ```
+
+// TODO：替换路径
 
 手动设置区域，目前支持国内和海外。配置文件在 `packages/react-native-shengwang-chat-uikit/src/config.local.ts`
 

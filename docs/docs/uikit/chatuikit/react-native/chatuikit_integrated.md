@@ -2,7 +2,7 @@
 
 <Toc />
 
-本文介绍如何将 `Chat UIKit SDK` 集成到现有的项目中。
+本文介绍如何将单群聊 UIKit SDK 集成到现有的项目中。
 
 与快速开始不同，集成单群聊 UIKit 需要应用中使用路由功能实现页面间的切换和跳转。`react-native` 本身没有路由功能，需要使用三方库，推荐 `react-navigation`，该库比 `react-native-navigation` 更流行。
 
@@ -22,7 +22,7 @@
 
 ## 集成单群聊 UIKit SDK npm 包
 
-`Chat UIKit SDK` npm 包 `react-native-shengwang-chat-uikit` 需要依赖包，可通过以下代码安装。
+单群聊 UIKit SDK npm 包 `react-native-shengwang-chat-uikit` 需要依赖包，可通过以下代码安装。
 
 你可以通过 `npm ls` 或者 `yarn list` 命令查看依赖关系。
 
@@ -91,7 +91,7 @@ twemoji
 
 ## 集成 UI 组件
 
-`Chat UIKit SDK` 组件库提供主题、国际化、联系人列表、会话列表和会话详情等页面。这些页面均支持默认设置和自定义设置。
+单圈聊 UIKit 组件库提供主题、国际化、联系人列表、会话列表和会话详情等页面。这些页面均支持默认设置和自定义设置。
 
 ### 初始化
 
