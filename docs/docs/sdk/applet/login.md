@@ -38,8 +38,6 @@
 
 1. **用户 ID + token** 是更加安全的登录方式。
 
-测试环境下，你在[声网控制台](https://console.shengwang.cn/overview)创建用户后，声网服务器会自动为这些用户分配用户 Token，详见[测试环境下创建用户的介绍](/product/enable_and_configure_IM.html#测试环境)。
-
 使用 token 登录时需要处理 token 过期的问题，比如在每次登录时更新 token 等机制。
 
 ```javascript
@@ -56,7 +54,7 @@ chatClient
   });
 ```
 
-2. **用户 ID + 密码** 登录是传统的登录方式。用户名和密码均由你的终端用户自行决定，密码需要符合[密码规则要求](/docs/sdk/server-side/account_system.html#开放注册单个用户)。
+1. **用户 ID + 密码** 登录是传统的登录方式。用户名和密码均由你的终端用户自行决定，密码需要符合[密码规则要求](/docs/sdk/server-side/account_system.html#注册单个用户)。
 
 ```javascript
 chatClient
