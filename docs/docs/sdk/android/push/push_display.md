@@ -191,8 +191,6 @@ ChatClient.getInstance().chatManager().sendMessage(message);
 
 例如，推送模板的设置如下图所示：
 
-// TODO：重新截图
-
 ![img](/images/android/push/push_template_custom.png)
 
 使用下面的示例代码后，通知栏中弹出的推送通知为：

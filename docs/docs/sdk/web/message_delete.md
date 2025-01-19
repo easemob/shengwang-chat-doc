@@ -6,7 +6,7 @@
 
 ## 技术原理
 
-利用声网即时通讯 IM SDK 可从服务器单向删除历史消息，主要方法如下：
+利用即时通讯 IM SDK 可从服务器单向删除历史消息，主要方法如下：
 
 - `removeHistoryMessages`：单向删除服务端的历史消息。
 - `deleteAllMessagesAndConversations`：单向清空服务端的聊天记录，本地若有会话和消息，也会被清除。

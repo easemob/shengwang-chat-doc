@@ -11,11 +11,11 @@
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，并连接到服务器，详见 [快速开始](quickstart.html)。
-- 了解声网即时通讯 IM API 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM 的使用限制，详见 [使用限制](limitation.html)。
 
 ## 技术原理
 
-声网即时通讯 IM 支持从服务器获取会话列表，主要方法如下：
+即时通讯 IM 支持从服务器获取会话列表，主要方法如下：
 
 `getServerConversations`：从服务器分页获取会话列表。
 

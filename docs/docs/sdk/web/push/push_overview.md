@@ -33,7 +33,7 @@
 
 ## 多设备离线推送策略
 
-多设备登录时，可在[声网即时通讯控制台](https://console.easemob.com/user/login)的**证书管理**页面配置推送策略，该策略配置对所有推送通道生效：
+多设备登录时，可在[声网控制台](https://console.shengwang.cn/overview)的**推送证书**页面配置推送策略，该策略配置对所有推送通道生效：
 
 - 所有设备离线时，才发送推送消息；
 - 任一设备离线时，都发送推送消息。
@@ -44,7 +44,7 @@
 
 ## 上传推送证书
 
-除了满足用户离线条件外，要使用第三方离线推送，用户还需在[声网即时通讯控制台](https://console.easemob.com/user/login)配置推送证书信息，详见 [Android 推送](/docs/sdk/android/push/push_fcm.html)和 [APNs 推送](/docs/sdk/ios/push/push_apns.html)文档中各厂商证书配置描述。
+除了满足用户离线条件外，要使用第三方离线推送，用户还需在[声网控制台](https://console.shengwang.cn/overview)配置推送证书信息，详见 [Android 推送](/docs/sdk/android/push/push_fcm.html)和 [APNs 推送](/docs/sdk/ios/push/push_apns.html)文档中各厂商证书配置描述。
 
 例如，对于华为推送，需配置**证书名称**和**推送密钥**，并调用客户端 Web SDK 提供的 `uploadPushToken` 方法向声网服务器上传 device token（Android 或 iOS 平台使用 Web SDK）。
 

@@ -4,7 +4,7 @@
 
 ### 注册声网账号
 
-开发者需要在声网管理后台 [注册并创建应用](/product/enable_and_configure_IM.html#创建应用)，来获取唯一 appId，SDK 初始化时需要配置 appId。
+开发者需要在[声网控制台](https://console.shengwang.cn/overview)[注册账号](enable_im.html#_1-登录声网控制台)、[创建项目](enable_im.html#_2-开通即时通讯-im-服务)、[获取唯一 App ID](enable_im.html#_3-获取-app-id)，SDK 初始化时需要配置 App ID。
 
 ### 搭建抖音小程序开发环境
 
@@ -14,7 +14,7 @@
 
 小程序在发布前，需要配置合法域名。
 
-登录抖音小程序 [开发者平台](https://microapp.bytedance.com/)，选择当前小程序（如果没有需要创建一个小程序），进入 “开发管理>开发设置” 页面配置以下服务器地址。
+登录抖音小程序 [开发者平台](https://microapp.bytedance.com/)，选择当前小程序（如果没有需要创建一个小程序），进入 **开发管理** > **开发设置** 页面配置以下服务器地址。
 
 :::tip
 request 合法域名：
@@ -51,9 +51,7 @@ wss://im-api-wechat.easemob.com
 | 美东 1 区   | a41.easemob.com 或 a41.easecdn.com       | im-api-wechat-41.easemob.com 或 im-api-wechat-41.easecdn.com   |
 | 德国 2 区   | a71.easemob.com 或 a71.easecdn.com       | im-api-wechat-71.easemob.com 或 im-api-wechat-71.easecdn.com   |
 
-应用所在数据中心可以在声网用户管理后台 > **即时通讯** > **服务概览**中查看：
-
-![img](/images/applet/service_overview.png)
+关于如何查看应用所在数据中心，详见[数据中心文档](data.center.html#查看数据中心)。
 
 ### 集成 SDK
 
@@ -61,15 +59,15 @@ wss://im-api-wechat.easemob.com
 
 可以通过以下两种方式获取 SDK：
 
-- 通过官网 [下载 SDK](https://www.easemob.com/download/im)
-- 从声网的 [github 仓库](https://github.com/easemob/webim-weixin-xcx/tree/master/src/sdk) 中获取 SDK 中的文件
+- 通过官网 [下载 SDK](https://www.easemob.com/download/im)。
+- 从声网的 [github 仓库](https://github.com/easemob/webim-weixin-xcx/tree/master/src/sdk) 中获取 SDK 中的文件。
 
 #### 引入 SDK
 
-- 开始一个全新的项目
+- 开始一个全新的项目。
   1. 将下载的 SDK（src/sdk/）导入到自己的项目中。
   2. 引入 SDK：`import ChatSDK from "../sdk/Shengwang-chat-miniProgram";`
-- 基于 Demo 二次开发
+- 基于 Demo 二次开发。
 
 将下载的代码导入开发者工具即可运行起来。
 

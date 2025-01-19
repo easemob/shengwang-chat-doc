@@ -2,20 +2,20 @@
 
 <Toc />
 
-声网即时通讯 IM 的小程序 SDK 可以实现文本、图片、音频、视频和文件等类型的消息的发送和接收。
+即时通讯 IM 的小程序 SDK 可以实现文本、图片、音频、视频和文件等类型的消息的发送和接收。
 
-- 对于单聊，声网即时通信 IM 默认支持陌生人之间发送消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要[开启好友关系检查](/product/enable_and_configure_IM.html#好友关系检查)。
+- 对于单聊，即时通讯 IM 默认支持陌生人之间发送消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要联系声网商务开通。
 
 - 对于群组和聊天室，用户每次只能向所属的单个群组和聊天室发送消息。
 
-单聊、群组聊天和聊天室的消息发送控制，详见[消息发送控制](/product/product_message_overview.html#消息发送控制)文档。
+单聊、群组聊天和聊天室的消息发送控制，详见[消息发送控制](product_message_overview.html#消息发送控制)文档。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
 - 完成 SDK 初始化，详见 [初始化文档](initialization.html)。
-- 了解声网即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
+- 了解即时通讯 IM 的使用限制，详见 [使用限制](limitation.html)。
 
 ## 发送和接收文本消息
 
@@ -74,6 +74,8 @@ chatClient.addEventHandler("handlerId", {
 2. 接收附件消息。
 
    接收方可以自行下载语音、图片、图片缩略图、视频和文件。
+
+// TODO：替换链接
 
 对于消息附件，你也可以将附件上传到自己的服务器，而不是声网服务器，然后发送消息。这种情况下，需要在 SDK 初始化时将 [`Connection` 类中的 `useOwnUploadFun` 参数](https://doc.easemob.com/jsdoc/classes/Connection.Connection-1.html)设置为 `true`。例如，对于图片消息，上传附件后，调用 `sendPrivateUrlImg` 方法传入图片的 URL 发送图片消息。
 
@@ -550,23 +552,23 @@ chatClient.addEventHandler("handlerId", {
 
 创建合并消息时，需要设置以下参数：
 
-| 属性                   | 类型                                            | 描述                                                                                                                                                                                       |
-| :--------------------- | :---------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `chatType`             | ChatType                                        | 会话类型。                                                                                                                                                                                 |
-| `type`                 | 'combine'                                       | 消息类型。                                                                                                                                                                                 |
-| `to`                   | String                                          | 消息接收方。该字段的设置取决于会话类型：<br/> - 单聊：对方用户 ID；<br/> - 群聊：群组 ID；<br/> - 子区会话：子区 ID；<br/> - 聊天室聊天：聊天室 ID。                                       |
-| `title`                | String                                          | 合并消息的标题。                                                                                                                                                                           |
-| `summary`              | String                                          | 合并消息的概要。                                                                                                                                                                           |
+| 属性        | 类型        | 描述           |
+| :------- | :-------------- | :--------------------------- |
+| `chatType`             | ChatType                                        | 会话类型。              |
+| `type`                 | 'combine'                                       | 消息类型。                |
+| `to`                   | String                                          | 消息接收方。该字段的设置取决于会话类型：<br/> - 单聊：对方用户 ID；<br/> - 群聊：群组 ID；<br/> - 子区会话：子区 ID；<br/> - 聊天室聊天：聊天室 ID。     |
+| `title`                | String                                          | 合并消息的标题。             |
+| `summary`              | String                                          | 合并消息的概要。        |
 | `compatibleText`       | String                                          | 合并消息的兼容文本。<br/>兼容文本起向下兼容不支持消息合并转发的版本的作用。当支持合并消息的 SDK 向不支持合并消息的低版本 SDK 发送消息时，低版本的 SDK 会将该属性解析为文本消息的消息内容。 |
-| `messageList`          | MessagesType[]                                  | 合并消息的消息列表。该列表最多包含 300 个消息。                                                                                                                                            |
-| `onFileUploadComplete` | (data: { url: string; secret: string;}) => void | 合并消息文件上传完成的回调。                                                                                                                                                               |
-| `onFileUploadError`    | (error: any) => void                            | 合并消息文件上传失败的回调。                                                                                                                                                               |
+| `messageList`          | MessagesType[]                                  | 合并消息的消息列表。该列表最多包含 300 个消息。       |
+| `onFileUploadComplete` | (data: { url: string; secret: string;}) => void | 合并消息文件上传完成的回调。   |
+| `onFileUploadError`    | (error: any) => void                            | 合并消息文件上传失败的回调。      |
 
 :::tip
 
 1. 合并转发支持嵌套，最多支持 10 层嵌套，每层最多 300 条消息。
 2. 只有成功发送或接收的消息才能合并转发。
-   :::
+:::
 
 示例代码如下：
 
@@ -726,13 +728,3 @@ function sendTextMessage() {
     });
 }
 ```
-
-### 发送消息前的内容审核
-
-- 内容审核关注消息 body
-
-[内容审核服务会关注消息 body 中指定字段的内容，不同类型的消息审核不同的字段](/product/moderation/moderation_mechanism.html)，若创建消息时在这些字段中传入了很多业务信息，可能会影响审核效果。因此，创建消息时需要注意内容审核的字段不涉及业务信息，建议业务信息放在扩展字段中。
-
-- 设置发送方收到内容审核替换后的内容
-
-若初始化时打开了 `EMOptions#useReplacedMessageContents` 开关，发送文本消息时如果被内容审核（Moderation）进行了内容替换，发送方会收到替换后的内容。若该开关为关闭状态，则发送方不会收到替换后的内容。

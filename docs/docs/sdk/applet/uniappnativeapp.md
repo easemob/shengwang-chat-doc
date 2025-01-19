@@ -2,7 +2,7 @@
 
 <Toc />
 
-使用声网小程序 SDK 在 **`HBuilderX`** 中编译 Android、iOS 应用，可实现一套代码多端同时打包。IM 相关的集成方式同 Web、小程序一样便捷、高效。
+使用即时通讯 IM 小程序 SDK 在 **`HBuilderX`** 中编译 Android、iOS 应用，可实现一套代码多端同时打包。即时通讯 IM 相关的集成方式同 Web、小程序一样便捷、高效。
 
 ## 功能说明
 
@@ -13,19 +13,19 @@
 
 ## 开发者集成
 
-[注册并创建应用](/product/enable_and_configure_IM.html#创建应用)
+[注册账号并创建项目](enable_im.html)。
 
 ### 搭建 app 开发环境
 
-1. 下载 HBuilderx 编辑器 https://www.dcloud.io/hbuilderx.html
+1. [下载 HBuilderx 编辑器](https://www.dcloud.io/hbuilderx.html)。
 
 :::tip
-项目中 HBuilderx 目前使用的最新版本，如果此前下载过 HBuilderx，为保证开发环境统一请更新到最新版本
+项目中 HBuilderx 目前使用的最新版本，如果此前下载过 HBuilderx，为保证开发环境统一请更新到最新版本。
 :::
 
-2. DCloud 开发者中心注册 [https://dev.dcloud.net.cn/](https://dev.dcloud.net.cn/)
+2. [DCloud 开发者中心注册](https://dev.dcloud.net.cn/)。
 
-之后登陆 HBuilderx 编辑器。 至此 app 的开发环境差不多完成。
+登陆 HBuilderx 编辑器，完成搭建 app 的开发环境。
 
 ### 将 SDK 添加到自己的小程序
 
@@ -33,12 +33,12 @@
 
 可以通过以下两种方式获取 SDK：
 
-- 通过官网 [下载 SDK](https://www.easemob.com/download/im)
-- Uni-app Demo 源码中获取 [https://github.com/easemob/webim-uniapp-demo](https://github.com/easemob/webim-uniapp-demo)
+- 通过官网 [下载 SDK](https://www.easemob.com/download/im)。
+- [Uni-app Demo 源码中获取](https://github.com/easemob/webim-uniapp-demo)。
 
 #### 引入 SDK
 
-- 开始一个全新的项目
+- 开始一个全新的项目：
   1. 将 SDK 目录下（src/sdk/）的文件全部导入到自己的项目中。
   2. 直接使用 import/require 方式获取引用, 如果使用 mpvue 请保持引用文件方式的统一。
 
@@ -73,7 +73,7 @@ IM 基本功能，请参考 [消息管理](message_overview.html)。
 
 ## APP 开发者常见问题（重要）
 
-TODO
+// TODO：链接是否需要替换
 
 - App/uni-app 离线本地存储方案：[https://ask.dcloud.net.cn/article/166](https://ask.dcloud.net.cn/article/166)
 - uni-app 实现全局变量：[https://ask.dcloud.net.cn/article/35021](https://ask.dcloud.net.cn/article/35021)

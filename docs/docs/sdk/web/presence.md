@@ -8,7 +8,7 @@
 
 ## 技术原理
 
-声网 IM SDK 提供在线状态接口，用于管理在线状态订阅，包含如下核心方法：
+即时通讯 IM SDK 提供在线状态接口，用于管理在线状态订阅，包含如下核心方法：
 
 - `subscribePresence`：订阅用户的在线状态；
 - `publishPresence`：发布自定义在线状态；
@@ -18,7 +18,7 @@
 
 订阅用户在线状态的基本工作流程如下：
 
-![Presence_web](/images/ios/presence.png)
+![Presence_web](/images/android/presence.png)
 
 如上图所示，订阅用户在线状态的基本步骤如下：
 
@@ -35,12 +35,12 @@
 使用在线状态功能前，请确保满足以下条件：
 
 1. 完成 SDK 初始化，详见 [快速开始](quickstart.html)。
-2. 了解声网即时通讯 IM API 的 [使用限制](/product/limitation.html)。
+2. 了解即时通讯 IM 的 [使用限制](limitation.html)。
 3. 产品套餐包支持在线状态订阅功能。
 
 ## 实现方法
 
-本节介绍如何使用声网 IM SDK 提供的 API 实现上述功能。
+本节介绍如何使用即时通讯 IM SDK 提供的 API 实现上述功能。
 
 ### 订阅指定用户的在线状态
 

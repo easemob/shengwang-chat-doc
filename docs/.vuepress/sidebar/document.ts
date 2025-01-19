@@ -76,7 +76,7 @@ const documentSidebar = [
       // { text: 'React Demo（WebIM）体验', link: 'demo_react.html', only: ['web'] },
       // { text: 'Vue Demo（WebIM）体验', link: 'demo_vue.html', only: ['web'] },
       // { text: 'Demo（EaseIM App）体验', link: 'demo.html', except: ['web', 'windows', 'react-native', 'flutter', 'unity', 'server-side'] },
-      { text: "开通服务", link: "enable_im.html" },
+      { text: "开通服务", link: "enable_im.html", except: ['applet'] },
       { text: '实现收发消息', link: 'quickstart.html', except: ['server-side'] },
       // { text: '私有云 SDK 集成配置', link: 'privatecloud.html', except: ['windows', 'server-side', 'react-native', 'flutter', 'unity'] },
       /*{ text: 'API reference', link: 'apireference.html', only: ['android', 'ios', 'web', 'windows', 'react-native', 'flutter', 'unity']},*/
@@ -241,6 +241,7 @@ const documentSidebar = [
    text: '用户指南',
    collapsible: true,
   children: [
+     { text: "开通服务", link: "enable_im.html" },
      {
        text: '集成介绍',
        collapsible: true,
@@ -249,6 +250,7 @@ const documentSidebar = [
          { text: 'QQ 小程序', link: 'qq.html' },
          { text: '百度小程序', link: 'baidu.html' },
          { text: '抖音小程序', link: 'bytedance.html' },
+         { text: '支付宝小程序', link: 'alipay.html' },
          { text: 'Uniapp 全平台', link: 'uniapp.html' },
        ],
      },
@@ -335,7 +337,7 @@ const documentSidebar = [
        { text: '离线推送概述', link: 'push/push_overview.html' }, 
        { text: '设置通知方式和免打扰', link: 'push/push_notification_mode_dnd.html' },
        { text: '设置推送模板', link: 'push/push_template.html' },
-       { text: '设置推送翻译', link: 'push/push_translation.html' },
+       // { text: '设置推送翻译', link: 'push/push_translation.html' },
        { text: '设置推送扩展功能', link: 'push/push_extension.html' },
        { text: 'uni-app 离线推送', link: 'push/uniapp_push.html' }
        ]
@@ -355,6 +357,7 @@ const documentSidebar = [
   },
   {
    text: '常见问题',
+   collapsible: true,
    children: [
      { text: 'Uniapp 生成原生 Android、iOS 应用', link: 'uniappnativeapp.html' },
      { text: '小程序模板使用指南', link: 'uniappuikit.html' },
