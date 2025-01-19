@@ -454,6 +454,7 @@ return builder.buildUserToken(appid, appcert, chatUserId, expirePeriod);
 
 6. 实现 App 逻辑。
 
+// TODO：APP Key 替换为 appID?
    复制以下代码到 `index.js` 文件中，将 `<Your App Key>` 替换为你的 App Key 。
 
    在下列示例代码中可以看到，就客户端而言，用户权限 Token 和以下代码逻辑有关：

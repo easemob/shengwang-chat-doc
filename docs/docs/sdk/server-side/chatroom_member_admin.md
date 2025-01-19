@@ -8,15 +8,15 @@
 
 要调用即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置即时通讯 IM 服务](enable_im.html)。
+- 已在[声网控制台](https://console.shengwang.cn/overview)[开通配置即时通讯 IM 服务](enable_im.html)。
 - 已从服务端获取 app token，详见 [使用 Token 鉴权](token_authentication.html)。
 - 了解即时通讯 IM 的 API 调用频率限制，详见 [接口频率限制](limitationapi.html)。
-- 了解聊天室成员相关限制，详见[使用限制](/product/limitation.html#聊天室成员)。
+- 了解聊天室成员相关限制，详见[使用限制](limitation.html#聊天室成员)。
 
 ## 聊天室成员角色
 
-| 成员角色     | 描述                                               | 管理权限       |
-| :----------- | :------------------------------------------------- | :--------------------------------- |
+| 成员角色     | 描述           | 管理权限       |
+| :----------- | :----------------- | :--------------------------------- |
 | 普通成员     | 不具备管理权限的聊天室成员。                       | 普通成员可以修改自己的聊天室信息。   |
 | 聊天室管理员 | 由聊天室创建者授权，协助聊天室管理，具有管理权限。 | 管理员可以管理聊天室内的普通成员。 最多支持添加 99 个管理员。  |
 | 聊天室所有者 | 聊天室的创建者，具有聊天室最高权限。               | 聊天室所有者可以指定聊天室管理员、解散聊天室、更改聊天室信息、管理聊天室成员。 |
@@ -52,7 +52,7 @@
 
 `Authorization: Bearer YourAppToken`
 
-为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的 鉴权方式，详见 [使用 Token 鉴权](token_authentication.html)。
+为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 IM RESTful API 推荐使用 app token 的 鉴权方式，详见 [使用 Token 鉴权](token_authentication.html)。
 
 ## 获取聊天室管理员列表
 

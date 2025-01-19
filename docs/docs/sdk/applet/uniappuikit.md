@@ -106,7 +106,7 @@ import longPressModal from "@/components/longPressModal/index";
 
 长按组件参数
 
-- `winSize` – **必传参数** Objet，示例：winSize：{witdh: windowWidth, height: windowHeight}。
+- `winSize` – **必传参数** Objet，示例：winSize：{width: windowWidth, height: windowHeight}。
 - `popButton` – **必传参数** Array，示例:['删除该聊天','置顶','自定义']。
 - `change` – Function ，当前选中的具体参数。
 - `showPop` – **必传参数** Bool，遮罩默认 `false`。
@@ -123,7 +123,7 @@ onLoad(){
  uni.getSystemInfo({
         success: (res) => {
           this.winSize = {
-            witdh: res.windowWidth,
+            width: res.windowWidth,
             height: res.windowHeight,
           };
         },
@@ -142,8 +142,8 @@ longpress: function (e) {
       } else {
         style = `top:${touches.clientY}px;`;
       }
-      if (touches.clientX > this.winSize.witdh / 2) {
-        style += `right:${this.winSize.witdh - touches.clientX}px`;
+      if (touches.clientX > this.winSize.width / 2) {
+        style += `right:${this.winSize.width - touches.clientX}px`;
       } else {
         style += `left:${touches.clientX}px`;
       }

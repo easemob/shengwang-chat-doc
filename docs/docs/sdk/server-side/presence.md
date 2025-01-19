@@ -4,7 +4,7 @@
 
 在线状态（Presence）表示用户的当前状态信息。除了即时通讯 IM 内置的在线和离线状态，你还可以添加自定义在线状态，例如忙碌、马上回来、离开、接听电话、外出就餐等。**若你当前套餐不支持该功能，需升级产品套餐。**
 
-本文展示如何调用声网即时通讯 RESTful API 实现用户在线状态（Presence）订阅，包括设置用户在线状态信息、批量订阅和获取在线状态、取消订阅以及查询订阅列表。
+本文展示如何调用即时通讯 RESTful API 实现用户在线状态（Presence）订阅，包括设置用户在线状态信息、批量订阅和获取在线状态、取消订阅以及查询订阅列表。
 
 关于用户的在线、离线和自定义状态的定义，详见[用户在线状态管理](product_user_presence.html)。
 
@@ -22,7 +22,7 @@
 
 ## 前提条件
 
-要调用声网即时通讯 RESTful API，请确保满足以下要求：
+要调用即时通讯 RESTful API，请确保满足以下要求：
 
 - 产品套餐包支持 Presence 功能。
 - 已从服务端获取 app token，详见 [使用 Token 鉴权](token_authentication.html)。
@@ -34,7 +34,7 @@
 
 `Authorization: Bearer YourAppToken`
 
-为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的 鉴权方式，详见 [使用 Token 鉴权](token_authentication.html)。
+为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 IM RESTful API 推荐使用 app token 的 鉴权方式，详见 [使用 Token 鉴权](token_authentication.html)。
 
 ## 设置用户在线状态信息
 

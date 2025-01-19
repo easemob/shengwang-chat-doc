@@ -2,7 +2,7 @@
 
 <Toc />
 
-本文展示如何调声网即时通讯 RESTful API 实现离线推送，包括设置离线推送通知显示的昵称、推送通知方式及免打扰模式。调用以下方法前，请先参考 [接口频率限制](limitationapi.html) 了解即时通讯 RESTful API 的调用频率限制。
+本文展示如何调即时通讯 RESTful API 实现离线推送，包括设置离线推送通知显示的昵称、推送通知方式及免打扰模式。调用以下方法前，请先参考 [接口频率限制](limitationapi.html) 了解即时通讯 RESTful API 的调用频率限制。
 
 :::tip
 若要使用离线推送的高级功能，即设置推送通知模式、免打扰模式和自定义推送模板，你需要在[声网控制台](https://console.shengwang.cn/overview)中点击你的应用后选择 **即时通讯** > **功能配置** > **总览** 开通离线推送高级功能。
@@ -29,9 +29,9 @@
 | `duration`        | Int    | 从发送 HTTP 请求到响应的时长，单位为毫秒。                                     |
 ## 前提条件
 
-要调用声网即时通讯 RESTful API，请确保满足以下要求：
+要调用即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置即时通讯 IM 服务](enable_im.html)。
+- 已在[声网控制台](https://console.shengwang.cn/overview)[开通配置即时通讯 IM 服务](enable_im.html)。
 - 已从服务端获取 app token，详见 [使用 Token 鉴权](token_authentication.html)。
 - 了解即时通讯 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
@@ -41,7 +41,7 @@
 
 `Authorization: Bearer YourAppToken`
 
-为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的 鉴权方式，详见 [使用 Token 鉴权](token_authentication.html)。
+为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 IM RESTful API 推荐使用 app token 的 鉴权方式，详见 [使用 Token 鉴权](token_authentication.html)。
 
 ## 绑定和解绑推送信息 
 
@@ -794,9 +794,15 @@ curl -L -X GET 'https://XXXX/app-id/XXXX/users/XXXX/notification/language' \
 
 ## 使用推送模板
 
-你可以使用推送模板设置推送标题和内容。你可以调用以下 RESTful API 配置默认推送模板 `default` 和自定义推送模板。除此之外，你也可以在[声网控制台](https://console.shengwang.cn/overview)设置推送模板，详见[控制台文档](enable_and_configure_IM.html#配置推送模板)。
+你可以使用推送模板设置推送标题和内容。你可以调用以下 RESTful API 配置默认推送模板 `default` 和自定义推送模板。
 
-对于群组消息，你可以使用定向模板将离线通知只发送给特定用户，或向某些用户推送与其他用户不同的离线通知。
+除此之外，你也可以在[声网控制台](https://console.shengwang.cn/overview)设置推送模板：
+
+1. [调用 RESTful API 配置](/docs/sdk/server-side/push.html#使用推送模板)。
+
+2. 在[声网控制台](https://console.shengwang.cn/overview)设置推送模板。
+
+  展开控制台左上角下拉框，选择需要开通即时通讯 IM 服务的项目。点击左侧导航栏的**全部产品**。在下拉列表中找到**即时通讯 IM** 并点击。 在**即时通讯 IM** 页面，进入**功能配置**标签页。在**推送模板**页签下，点击**添加推送模板**，配置相关参数，添加推送模板。
 
 使用推送模板有以下优势：
 
@@ -1086,6 +1092,8 @@ curl -X PUT 'https://XXXX/app-id/XXXX/users/XXXX/notification/template' \
 
 若使用默认模板 **default**，消息推送时自动使用默认模板，创建消息时无需传入模板名称。
 
+对于群组消息，你可以使用定向模板将离线通知只发送给特定用户，或向某些用户推送与其他用户不同的离线通知。
+
 该扩展参数的 JSON 结构如下：
 
 ```json
@@ -1147,7 +1155,7 @@ curl -L -X POST 'https://XXXX/app-id/XXXX/messages/users' \
 
 单聊会话中发送其他类型的消息的接口，请参见[发送单聊消息](message_single.html)接口描述。
 
-1. 下面以发送群聊文本消息时使用群组昵称为例进行介绍：
+2. 下面以发送群聊文本消息时使用群组昵称为例进行介绍：
 
 #### 请求示例
 
@@ -1193,7 +1201,7 @@ curl -X POST -i 'https://XXXX/app-id/XXXX/messages/chatgroups'
 }
 ```
 
-接口详情，请参见[发送文本消息](https://doc.easemob.com/docs/sdk/server-side/message_group.html#发送文本消息)。
+接口详情，请参见[发送文本消息](/docs/sdk/server-side/message_group.html#发送文本消息)。
 
 群聊会话中发送其他类型的消息的接口，请参见[发送群聊消息](message_group.html)接口描述。
 
