@@ -111,7 +111,7 @@ export default defineConfig({
    npm i shengwang-chat-uikit --save;
    ```
 
-2. 创建 `react_app/chat.jsx` 文件，导入 UIKit，使用声网即时通讯 IM 的 appId 和用户信息初始化 UIKit。
+2. 创建 `react_app/chat.jsx` 文件，导入 UIKit，使用即时通讯 IM 的 appId 和用户信息初始化 UIKit。
 
 <img src="/images/uikit/chatuikit/web/vue_initialization.png" width="500" >
 

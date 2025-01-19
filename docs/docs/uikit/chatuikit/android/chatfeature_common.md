@@ -73,7 +73,7 @@
 已发送回执用于告知消息发送者，其发送的消息已经成功发送到服务器、接收方以及发送失败。
 
 <ImageGallery>
-  <ImageItem src="/images/uikit/chatuikit/feature/common/android/message_delivery_receipt.png" title="已发送回执	" />
+  <ImageItem src="/images/uikit/chatuikit/feature/common/android/message_delivery_receipt.png" title="已发送回执" />
 </ImageGallery>
 
 ## 已读回执

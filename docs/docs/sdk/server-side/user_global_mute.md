@@ -12,7 +12,7 @@
 
 ## 公共参数
 
-以下表格列举了声网即时通讯 IM 的 RESTful 接口的公共请求参数和响应参数：
+以下表格列举了即时通讯 IM 的 RESTful 接口的公共请求参数和响应参数：
 
 ### 请求参数
 
@@ -38,11 +38,11 @@
 
 - 已联系声网商务开通该功能。
 - 已从服务端获取 app token，详见 [使用 Token 鉴权](token_authentication.html)。
-- 了解声网即时通讯 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+- 了解即时通讯 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 认证方式
 
-声网即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
+即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
 `Authorization: Bearer YourAppToken`
 

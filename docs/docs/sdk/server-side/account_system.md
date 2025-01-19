@@ -6,7 +6,7 @@
 
 ## 公共参数
 
-以下表格列举了声网即时通讯 IM 的 RESTful 接口的公共请求参数和响应参数：
+以下表格列举了即时通讯 IM 的 RESTful 接口的公共请求参数和响应参数：
 
 ### 请求参数
 
@@ -38,7 +38,7 @@
 
 要调用声网即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置声网即时通讯 IM 服务](enable_im.html)。
+- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置即时通讯 IM 服务](enable_im.html)。
 - 已从服务端获取 app token，详见 [使用 App Token 鉴权](token_authentication.html)。
 - 了解声网 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
@@ -811,7 +811,7 @@ curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H
 
 ### 账号封禁
 
-声网即时通讯 IM 提供了对用户的禁用以及解禁接口操作，用户若被禁用将立即下线并无法登录进入声网即时通讯 IM，直到被解禁后才能恢复登录。常用在对异常用户的即时处理场景使用。
+即时通讯 IM 提供了对用户的禁用以及解禁接口操作，用户若被禁用将立即下线并无法登录进入即时通讯 IM，直到被解禁后才能恢复登录。常用在对异常用户的即时处理场景使用。
 
 #### HTTP 请求
 
@@ -888,7 +888,7 @@ curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppTok
 
 ### 账号解禁
 
-声网即时通讯 IM 提供了对用户的禁用以及解禁接口操作。对用户禁用后，用户将立即下线并无法登录进入声网即时通讯 IM，直到被解禁后才能恢复登录。该功能常于对异常用户的即时处理场景。
+即时通讯 IM 提供了对用户的禁用以及解禁接口操作。对用户禁用后，用户将立即下线并无法登录进入即时通讯 IM，直到被解禁后才能恢复登录。该功能常于对异常用户的即时处理场景。
 
 #### HTTP 请求
 

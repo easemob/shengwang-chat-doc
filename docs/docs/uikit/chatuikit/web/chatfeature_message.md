@@ -126,7 +126,7 @@ features.chat.message.translate = false;
 
 #### 如何使用
 
-使用该特性前，请确保在[声网即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
+使用该特性前，请确保在[声网即时通信控制台](https://console.shengwang.cn/overview)上已开通该功能。
 
 表情回复特性默认开启，若要在全局配置中关闭，可以进行如下设置：
 
@@ -148,7 +148,7 @@ features.chat.message.reaction = false;
 
 #### 如何使用
 
-1. 使用该特性前，请确保在[声网即时通信控制台](https://console.easemob.com/user/login)上已开通该功能。
+1. 使用该特性前，请确保在[声网即时通信控制台](https://console.shengwang.cn/overview)上已开通该功能。
 
 消息话题特性默认开启，若要在全局配置中关闭，可以进行如下设置：
 

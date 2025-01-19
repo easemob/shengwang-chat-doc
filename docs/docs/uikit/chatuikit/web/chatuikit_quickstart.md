@@ -10,7 +10,7 @@
 
 - React 16.8.0 或以上版本；
 - React DOM 16.8.0 或以上版本；
-- 已在[声网即时通讯云控制台](https://console.shengwnag.com/user/login)创建了有效的声网即时通讯 IM 开发者账号，并[获取了 appId](/product/enable_and_configure_IM.html#获取声网即时通讯-im-的信息)。
+- 已在[声网控制台](https://console.shengwnag.com/user/login)创建了有效的即时通讯 IM 开发者账号，并[获取了 appId](/product/enable_and_configure_IM.html#获取声网即时通讯-im-的信息)。
 
 ## 支持的浏览器
 
@@ -70,7 +70,7 @@ yarn add shengwnag-chat-uikit
 
 #### 使用 shengwnag-chat-uikit 组件构建应用
 
-为了方便快速体验，你可以在[声网即时通讯云控制台](https://console.shengwnag.com/user/login)的**应用概览** > **用户认证**页面创建用户并查看用户 token。**用户认证**页面中的用户仅用于快速体验或调试目的。
+为了方便快速体验，你可以在[声网控制台](https://console.shengwnag.com/user/login)的**应用概览** > **用户认证**页面创建用户并查看用户 token。**用户认证**页面中的用户仅用于快速体验或调试目的。
 
 在开发环境中，你需要在声网控制台[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，从你的 App Server 获取用户 token，详见[使用声网用户 token 鉴权](/product/shengwnag_user_token.html) 。
 

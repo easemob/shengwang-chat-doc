@@ -8,9 +8,9 @@
 
 要调用声网即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置声网即时通讯 IM 服务](enable_im.html)。
+- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置即时通讯 IM 服务](enable_im.html)。
 - 已从服务端获取 app token，详见 [使用 Token 鉴权](token_authentication.html)。
-- 了解声网即时通讯 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+- 了解即时通讯 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 - 了解聊天室属性相关限制，详见[使用限制](limitation.html#聊天室基本属性)。
 
 ## 公共参数
@@ -35,7 +35,7 @@
 | `host`               | String | 即时通讯 IM 分配的用于访问 RESTful API 的域名，与请求参数 `host` 相同。    |
 | `uri`                | String | 请求 URL。   |
 | `path`               | String | 请求路径，属于请求 URL 的一部分，开发者无需关注。   |
-| `id`                 | String | 聊天室 ID，聊天室唯一标识，由声网即时通讯 IM 服务器生成。    |
+| `id`                 | String | 聊天室 ID，聊天室唯一标识，由即时通讯 IM 服务器生成。    |
 | `entities`           | JSON   | 响应实体。  |
 | `data`               | JSON   | 数据详情。 |
 | `created`            | String | 用户、群组或聊天室的创建时间，Unix 时间戳，单位为毫秒。    |
@@ -49,7 +49,7 @@
 
 ## 认证方式
 
-声网即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
+即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
 `Authorization: Bearer YourAppToken`
 

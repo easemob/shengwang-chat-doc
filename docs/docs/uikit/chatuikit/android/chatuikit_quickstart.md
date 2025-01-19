@@ -187,7 +187,7 @@ implementation(project(mapOf("path" to ":chat-uikit")))
 若你已集成了即时通讯 IM SDK，SDK 的所有用户 ID 均可用于登录单群聊 UIKit。
 :::
 
-你需要在环信控制台[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，登录时传入用户 ID 和密码。
+你需要在声网控制台[创建 IM 用户](/product/enable_and_configure_IM.html#创建-im-用户)，登录时传入用户 ID 和密码。
 
 完整实现示例代码：
 

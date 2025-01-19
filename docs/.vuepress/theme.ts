@@ -34,7 +34,7 @@ export default hopeTheme(<ThemeOptions & CustomConfig>{
     // { text: '提交工单', link: 'https://console.easemob.com/ticket', type: 'info' },
     // {
     //   text: '登录',
-    //   link: 'https://console.easemob.com/user/login',
+    //   link: 'https://console.shengwang.cn/overview',
     //   type: 'success'
     // },
     // {

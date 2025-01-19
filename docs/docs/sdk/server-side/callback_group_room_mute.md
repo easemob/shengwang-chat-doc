@@ -4,7 +4,7 @@
 
 :::tip
 1. 你所使用的环信即时通讯 IM 的版本可能需要单独开通回调服务，详见[增值服务说明](/product/pricing.html#增值服务费用)。
-2. 如果需要将群组或聊天室成员添加或移出禁言列表的事件，你需要在[环信控制台](https://console.easemob.com/user/login)设置发送后回调规则，详见[配置回调规则](/product/enable_and_configure_IM.html#配置回调规则)。
+2. 如果需要将群组或聊天室成员添加或移出禁言列表的事件，你需要在[声网控制台](https://console.shengwang.cn/overview)设置发送后回调规则，详见[配置回调规则](/product/enable_and_configure_IM.html#配置回调规则)。
 3. 发送后回调的相关介绍，详见[回调说明](/docs/sdk/server-side/callback_postsending.html)。
 :::
 
@@ -14,7 +14,7 @@
 
 1. 客户端将群组或聊天室成员添加禁言列表。
 2. 调用 RESTful API 将群组或聊天室成员添加禁言列表。
-3. 在[环信控制台](https://console.easemob.com/user/login)将群组或聊天室成员添加禁言列表。
+3. 在[声网控制台](https://console.shengwang.cn/overview)将群组或聊天室成员添加禁言列表。
 
 ### 回调请求
 
@@ -46,7 +46,7 @@
 | 字段名称         | 类型   | 描述                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。 |
-| `security`     | String | 签名，格式如下: `MD5(callId+secret+timestamp)`。详见[配置环信控制台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。|
+| `security`     | String | 签名，格式如下: `MD5(callId+secret+timestamp)`。详见[配置声网控制台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。|
 | `payload`       | Object | 事件内容。                                                     |
 | `payload.member` | JSON   | 被加入禁言列表的成员的用户 ID。 |
 | `payload.expire_timestamp` | LONG   | 禁言过期时间。将群组或聊天室成员禁言后，系统会自动分配一个禁言过期时间戳。 |
@@ -65,7 +65,7 @@
 
 1. 客户端将群组/聊天室成员移出禁言列表。
 2. 调用 RESTful API 将群组/聊天室成员移出禁言列表。
-3. 在[环信控制台](https://console.easemob.com/user/login)将群组/聊天室成员移出禁言列表。
+3. 在[声网控制台](https://console.shengwang.cn/overview)将群组/聊天室成员移出禁言列表。
 
 ### 回调请求
 
@@ -96,7 +96,7 @@
 | 字段名称         | 类型   | 描述                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。 |
-| `security`     | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。详见[配置环信控制台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。|
+| `security`     | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。详见[配置声网控制台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。|
 | `payload`       | Object | 事件内容。                                                     |
 | `payload.member` | JSON   | 被移出禁言列表的成员的用户 ID。 | 
 | `payload.type` | String | 将成员移出禁言列表的事件，值为 `REMOVE`。 |
@@ -132,7 +132,7 @@
 | 字段名称         | 类型   | 描述                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。 |
-| `security`     | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。详见[配置环信控制台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。|
+| `security`     | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。详见[配置声网控制台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。|
 | `paylod`       | Object | 事件内容。                                                     |
 | `payload.mute` | JSON   | 将成员添加或移出禁言列表的事件：<br/> - `true`：添加 <br/> - `false` ：移出 |
 | `payload.type` | String | 成员添加或移出禁言列表的操作，值为 `MUTE`。 |

@@ -6,10 +6,10 @@
 
 例如，在招聘场景下，利用用户属性功能，可以存储性别、邮箱、用户类型（面试者）、职位类型（web 研发）等。当查看用户信息时，可以直接查询服务器存储的用户属性信息。
 
-声网即时通讯 IM 提供 RESTful API 接口方便开发者管理服务端的用户属性信息。
+即时通讯 IM 提供 RESTful API 接口方便开发者管理服务端的用户属性信息。
 
 :::tip
-为保证用户信息安全，声网即时通讯 IM 仅支持用户本人或 app 管理员设置用户属性。
+为保证用户信息安全，即时通讯 IM 仅支持用户本人或 app 管理员设置用户属性。
 :::
 
 可以调用以下 RESTful API 实现用户属性功能：
@@ -24,10 +24,10 @@
 
 ## 前提条件
 
-要调用声网即时通讯 IM 的 RESTful API，请确保满足以下条件：
+要调用即时通讯 IM 的 RESTful API，请确保满足以下条件：
 
-- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置声网即时通讯 IM 服务](enable_im.html)。
-- 了解声网即时通讯 IM 的 RESTful API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置即时通讯 IM 服务](enable_im.html)。
+- 了解即时通讯 IM 的 RESTful API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 公共参数
 
@@ -53,7 +53,7 @@
 
 ## 认证方式
 
-声网即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
+即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
 `Authorization: Bearer YourAppToken`
 

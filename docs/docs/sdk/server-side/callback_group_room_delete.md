@@ -4,7 +4,7 @@
 
 :::tip
 1. 你所使用的环信即时通讯 IM 的版本可能需要单独开通回调服务，详见[增值服务说明](/product/pricing.html#增值服务费用)。
-2. 如果需要群组/聊天室解散的回调事件，你需要在[环信控制台](https://console.easemob.com/user/login)设置发送后回调规则，详见[配置回调规则](/product/enable_and_configure_IM.html#配置回调规则)。
+2. 如果需要群组/聊天室解散的回调事件，你需要在[声网控制台](https://console.shengwang.cn/overview)设置发送后回调规则，详见[配置回调规则](/product/enable_and_configure_IM.html#配置回调规则)。
 3. 发送后回调的相关介绍，详见[回调说明](/docs/sdk/server-side/callback_postsending.html)。
 :::
  
@@ -12,7 +12,7 @@
 
 1. 用户通过客户端解散了群组/聊天室。
 2. 用户调用 RESTful API 解散了群组/聊天室。
-3. 用户在[环信控制台](https://console.easemob.com/user/login)删除了群组/聊天室。
+3. 用户在[声网控制台](https://console.shengwang.cn/overview)删除了群组/聊天室。
 
 ## 回调请求
 
@@ -37,7 +37,7 @@
 | 字段名称         | 类型   | 描述                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
 | `callId`       | String | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。 | 
-| `security`     | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。详见[配置环信控制台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。|
+| `security`     | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。详见[配置声网控制台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。|
 | `appkey`       | String | 你在环信管理后台注册的应用唯一标识。  |
 | `id`           | String | 群组/聊天室 ID。                                                 |
 | `type`         | String | 区分群组或聊天室事件：<br/> - `GROUP`：群组 <br/> - `CHATROOM` ：聊天室   |

@@ -1,6 +1,6 @@
 # 发送聊天室消息
 
-本文展示如何调用声网即时通讯 IM RESTful API 在服务端实现聊天室场景中全类型消息的发送与接收，包括文本消息、图片消息、语音消息、视频消息、透传消息和自定义消息。
+本文展示如何调用即时通讯 IM RESTful API 在服务端实现聊天室场景中全类型消息的发送与接收，包括文本消息、图片消息、语音消息、视频消息、透传消息和自定义消息。
 
 聊天室场景下，发送各类型的消息调用需调用同一 RESTful API，不同类型的消息只是请求体中的 body 字段内容存在差异，发送方式与单聊类似，详见[发送单聊消息](message_single.html)。
 
@@ -21,9 +21,9 @@
 
 要调用声网即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置声网即时通讯 IM 服务](enable_im.html)。
+- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置即时通讯 IM 服务](enable_im.html)。
 - 已从服务端获取 app token，详见 [使用 Token 鉴权](token_authentication.html)。
-- 了解声网即时通讯 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
+- 了解即时通讯 IM API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 公共参数 
 
@@ -46,7 +46,7 @@
 
 ## 认证方式
 
-声网即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
+即时通讯 IM RESTful API 要求 Bearer HTTP 认证。每次发送 HTTP 请求时，都必须在请求头部填入如下 `Authorization` 字段：
 
 `Authorization: Bearer YourAppToken`
 
