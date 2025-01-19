@@ -24,6 +24,7 @@ npm install shengwang-chat
 SDK 提供了灵活的模块化设计，允许开发者根据需求引入功能模块，并将其注册到 miniCore 中使用。
 
 // TODO：替换链接
+
 miniCore 是一个基座，支持登录登出和发送消息等[基础功能](https://doc.easemob.com/jsdoc/classes/Connection.Connection-1.html)，而且包含消息对象。因此，若只使用收发消息功能，则只需引入 miniCore。若使用其他功能，miniCore 支持使用插件的方式引入其他功能模块。按需引入模块的方式实现了不同模块的灵活组合，从而避免不必要的代码加载，减小了应用程序的体积。
 
 :::tip
