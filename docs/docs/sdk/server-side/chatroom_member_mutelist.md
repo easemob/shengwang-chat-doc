@@ -8,10 +8,10 @@
 
 要调用即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置即时通讯 IM 服务](enable_im.html)。
+- 已在[声网控制台](https://console.shengwang.cn/overview)[开通配置即时通讯 IM 服务](enable_im.html)。
 - 已从服务端获取 app token，详见 [使用 Token 鉴权](token_authentication.html)。
 - 了解即时通讯 IM 的 API 调用频率限制，详见 [接口频率限制](limitationapi.html)。
-- 了解聊天室成员相关限制，详见[使用限制](/product/limitation.html#聊天室成员)。
+- 了解聊天室成员相关限制，详见[使用限制](limitation.html#聊天室成员)。
 
 ## 公共参数
 
@@ -45,7 +45,7 @@
 
 `Authorization: Bearer YourAppToken`
 
-为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的 鉴权方式，详见[使用 Token 鉴权](token_authentication.html)。
+为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 IM RESTful API 推荐使用 app token 的 鉴权方式，详见[使用 Token 鉴权](token_authentication.html)。
 
 ##  获取禁言列表
 

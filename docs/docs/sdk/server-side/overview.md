@@ -8,7 +8,7 @@
 
 要调用即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置即时通讯 IM 服务](enable_im.html)。
+- 已在[声网控制台](https://console.shengwang.cn/overview)[开通配置即时通讯 IM 服务](enable_im.html)。
 - 已从服务端获取 app token，详见 [使用 Token 鉴权](token_authentication.html)。
 
 ## 请求结构
@@ -19,7 +19,7 @@
 
 `Authorization: Bearer YourAppToken`
 
-为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的 鉴权方式，详见 [使用 Token 鉴权](token_authentication.html)。
+为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 IM RESTful API 推荐使用 app token 的 鉴权方式，详见 [使用 Token 鉴权](token_authentication.html)。
 
 ## 请求域名
 
@@ -31,13 +31,11 @@
 
 你可以在 **基础信息**页面的**访问域名**区域看到 RESTful API 的请求域名，如下图所示：
 
-// TODO：替换下图
-
-![img](/images/applet/service_overview.png)
+![img](/images/server-side/domain.png)
 
 ### 通信协议
 
-声网即时通讯 RESTful API 支持 HTTP 和 HTTPS 协议。
+即时通讯 RESTful API 支持 HTTP 和 HTTPS 协议。
 
 ### 数据格式
 

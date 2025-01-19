@@ -6,9 +6,9 @@
 
 ## 前提条件
 
-要调用声网即时通讯 RESTful API，请确保满足以下要求：
+要调用即时通讯 RESTful API，请确保满足以下要求：
 
-- 已在[声网控制台](https://console.shengwang.cn/overview) [开通配置即时通讯 IM 服务](enable_im.html)。
+- 已在[声网控制台](https://console.shengwang.cn/overview)[开通配置即时通讯 IM 服务](enable_im.html)。
 - 了解即时通讯 IM 的 RESTful API 的调用频率限制，详见 [接口频率限制](limitationapi.html)。
 
 ## 认证方式
@@ -17,7 +17,7 @@
 
 `Authorization: Bearer YourAppToken`
 
-为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 推荐使用 app token 的 鉴权方式，详见 [使用 Token 鉴权](token_authentication.html)。
+为提高项目的安全性，声网使用 Token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 IM RESTful API 推荐使用 app token 的 鉴权方式，详见 [使用 Token 鉴权](token_authentication.html)。
 
 ## 公共参数
 
@@ -47,9 +47,9 @@
 
 ## 添加好友
 
-添加好友，好友必须是和当前用户在一个 App Key 下的用户。
+添加好友，好友必须是和当前用户在一个 App ID 下的用户。
 
-对于免费版即时通讯服务，单个 App Key 下的每个用户的好友数量上限为 100，不同服务版本的 App Key 的该数量上限不同，具体可参考[版本功能介绍](https://www.easemob.com/pricing/im)。
+对于免费版即时通讯服务，单个 App ID 下的每个用户的好友数量上限为 100，不同服务版本的 App ID 的该数量上限不同，具体可参考[版本功能介绍](https://www.easemob.com/pricing/im)。
 
 ### HTTP 请求
 
@@ -68,8 +68,8 @@ POST https://{host}/app-id/{app_id}/users/{owner_username}/contacts/users/{frien
 
 #### 请求 header
 
-| 参数            | 类型   | 是否必需<div style="width: 80px;"></div> | 描述                   |
-| :-------------- | :----- | :----------- | :------------------------------------------------------ |
+| 参数            | 类型   | 是否必需<div style="width: 80px;"></div> | 描述      |
+| :-------------- | :----- | :----------- | :------------------- |
 | `Content-Type`  | String | 是         | 内容类型。请填 `application/json`。               |
 | `Accept`        | String | 是                                       | 内容类型。请填 `application/json`。           |
 | `Authorization` | String | 是                                       | App 管理员的鉴权 token，格式为 `Bearer YourAppToken`，其中 `Bearer` 为固定字符，后面为英文空格和获取到的 app token。 |
@@ -80,8 +80,8 @@ POST https://{host}/app-id/{app_id}/users/{owner_username}/contacts/users/{frien
 
 如果返回的 HTTP 状态码为 `200`，表示请求成功，响应包体中包含以下字段：
 
-| 字段                 | 类型       | 描述                                                                    |
-| :------------------- | :--------- | :---------------------------------------------------------------------- |
+| 字段                 | 类型       | 描述          |
+| :------------------- | :--------- | :----------------------- |
 | `entities`           | JSON Array | 添加的好友的详情。                                                      |
 |  - `uuid`      | String     | 系统内为好友生成的系统内唯一标识，开发者无需关心。                      |
 |  - `type`      | String     | 对象类型，值为 `user` 或 `group`。                                      |
@@ -135,7 +135,7 @@ curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
 | :----------- | :--- | :------------- | :----------- | :----------- |
 | 401     | unauthorized | Unable to authenticate (OAuth) | token 不合法，可能过期或 token 错误。 | 使用新的 token 访问。 |
-| 403     | exceed_limit | user contact number exceed limit | 好友数量达到上限。对于免费版来说，单个用户的好友数上限为 100， 对于专业版和旗舰版 IM 来说，该上限为 3000。 | 检查添加的和被添的用户好友数量是否达到上限。 |
+| 403     | exceed_limit | user contact number exceed limit | 好友数量达到上限。 | 检查添加的和被添的用户好友数量是否达到上限。 |
 | 404     | service_resource_not_found | Service resource not found | 要添加的好友或被添加好友的用户 ID 不存在。 | 检查添加和被添加的用户 ID 是否存在。 |
 
 关于其他错误，你可以参考 [响应状态码](error.html) 了解可能的原因。
@@ -233,9 +233,9 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 
 ## 设置好友备注
 
-你可以调用该接口设置你在当前 app 下的好友的备注，即你和要设置备注的好友需在同一个 App Key 下。
+你可以调用该接口设置你在当前 app 下的好友的备注，即你和要设置备注的好友需在同一个 App ID 下。
 
-对于免费版即时通讯服务，单个 App Key 下的每个用户的好友数量上限为 100，不同服务套餐包的 App Key 的该数量上限不同，详见[套餐包功能详情](/product/pricing.html#套餐包功能详情)。
+对于免费版即时通讯服务，单个 App ID 下的每个用户的好友数量上限为 100，不同服务套餐包的 App ID 的该数量上限不同，详见[套餐包功能详情](/product/pricing.html#套餐包功能详情)。
 
 ### HTTP 请求
 
@@ -835,7 +835,7 @@ DELETE https://{host}/app-id/{app_id}/users/{owner_username}/blocks/users/{block
 | `entities.created`   | Long       | 用户创建时间，Unix 时间戳，单位为毫秒。                                                 |
 | `entities.modified`  | Long       | 用户信息如密码或昵称等的最新修改时间，Unix 时间戳，单位为毫秒。                         |
 | `entities.username`  | String     | 被移出黑名单的用户 ID。                                                                 |
-| `entities.activated` | Bool       | 用户是否为正常状态：<br/> • `true` 该用户为正常状态。<br/> • `false` 该用户为封禁状态。 |
+| `entities.activated` | Bool       | 用户是否为正常状态：<br/> - `true` 该用户为正常状态。<br/> - `false` 该用户为封禁状态。 |
 | `entities.nickname`  | String     | 被移出黑名单的用户的昵称。                                                              |
 
 其他字段及描述详见[公共参数](#公共参数)。

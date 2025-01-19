@@ -61,7 +61,7 @@
 
 ## 前提条件
 
-- 已开启声网即时通讯服务，详见 [开通即时通讯服务](/docs/sdk/harmonyos/enable_im.html)。
+- 已开启即时通讯服务，详见 [开通即时通讯服务](/docs/sdk/harmonyos/enable_im.html)。
 - 了解即时通讯 IM 的使用限制，详见 [使用限制](/docs/sdk/harmonyos/limitation.html)。
 - 确保已经在 [AppGallery Connect](https://developer.huawei.com/consumer/cn/service/josp/agc/index.html) 网站开通开通推送服务。
 - 检查并提醒用户允许接收通知消息，并将设备的推送证书上传到[声网控制台](https://console.shengwang.cn/overview)
