@@ -4,10 +4,10 @@
 
 为了保证即时通讯连接的安全性，声网提供以下两种场景的 Token 用于用户鉴权。
 
-| 应用场景   | Token 权限 | Token 构成           | Token 最长有效期       |
-| :------------ | :----- | :----------------------------------------- | :------- |
-| RESTful API 调用 | App 权限   | <br/> - 你的即时通讯 IM 项目的 App ID。<br/> - 你的即时通讯 IM 项目的 App 证书。<br/> - 你设置的即时通讯 Token 的有效期。| 24 小时（以 UTC 时区为准） |
-| SDK API 调用     | 用户权限   | <br/> - 你的即时通讯 IM 项目的 App ID。<br/> - 你的即时通讯 IM 项目的 App 证书。<br/> - 你的即时通讯 IM 项目的 Token 有效期。<br/> - 待鉴权用户的 ID。|  24 小时（以 UTC 时区为准）                          |
+| 应用场景         | Token 权限 | Token 构成                                                                                                                                             | Token 最长有效期           |
+| :--------------- | :--------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------- |
+| RESTful API 调用 | App 权限   | <br/> - 你的即时通讯 IM 项目的 App ID。<br/> - 你的即时通讯 IM 项目的 App 证书。<br/> - 你设置的即时通讯 Token 的有效期。                              | 24 小时（以 UTC 时区为准） |
+| SDK API 调用     | 用户权限   | <br/> - 你的即时通讯 IM 项目的 App ID。<br/> - 你的即时通讯 IM 项目的 App 证书。<br/> - 你的即时通讯 IM 项目的 Token 有效期。<br/> - 待鉴权用户的 ID。 | 24 小时（以 UTC 时区为准） |
 
 ## 体验 Token 生成
 
@@ -89,9 +89,9 @@
        <java.version>11</java.version>
        <spring-boot.version>2.4.3</spring-boot.version>
    </properties>
-   
+
    <packaging>jar</packaging>
-   
+
    <dependencyManagement>
        <dependencies>
            <dependency>
@@ -103,7 +103,7 @@
            </dependency>
        </dependencies>
    </dependencyManagement>
-   
+
    <dependencies>
        <dependency>
            <groupId>org.springframework.boot</groupId>
@@ -122,7 +122,7 @@
            <artifactId>commons-codec</artifactId>
            <version>1.14</version>
        </dependency>
-   
+
        <!-- agoraTools -->
        <dependency>
            <groupId>io.agora</groupId>
@@ -130,7 +130,7 @@
            <version>2.0.0</version>
        </dependency>
    </dependencies>
-   
+
    <build>
        <plugins>
            <plugin>
@@ -148,7 +148,7 @@
        </plugins>
    </build>
    ```
-   
+
 3. 在 `<Project name>/src/main/resource` 路径下创建 `application.properties` 配置文件存储用于生成 Token 的信息。你需要将该文件中的相关值替换你的声网项目的值并设置你的即时通讯 Token 的有效期，例如将 `expire.second` 设为 `6000`，即 Token 的有效期为 6000 秒。
 
    ```txt
@@ -270,10 +270,10 @@ public class AgoraChatTokenController {
 
    ```java
    package com.agora.chat.token;
-   
+
    import org.springframework.boot.SpringApplication;
    import org.springframework.boot.autoconfigure.SpringBootApplication;
-   
+
    @SpringBootApplication(scanBasePackages = "com.agora")
    public class AgoraChatTokenStarter {
        public static void main(String[] args) {
@@ -284,7 +284,7 @@ public class AgoraChatTokenController {
 
 6. 启动 App Server。点击图中绿色三角标识，选择 `Debug "AgoraChatTokenStarter..." `。
 
-  ![](https://web-cdn.agora.io/docs-files/1670990071861)
+![](https://web-cdn.agora.io/docs-files/1670990071861)
 
 ### 使用 Token 调用即时通讯 RESTful API
 
@@ -374,7 +374,7 @@ return builder.buildUserToken(appid, appcert, chatUserId, expirePeriod);
 
 参考以下步骤实现一个 Web 客户端：
 
-1. 创建 `Agora Chat Web app` 文件夹。一个 Web 客户端项目至少需包含以下文件：
+1. 创建 `Shengwang Chat Web app` 文件夹。一个 Web 客户端项目至少需包含以下文件：
 
    - `index.html`: 用于设计 Web 应用的用户界面。
    - `index.js`: 实现具体应用逻辑的代码。
@@ -383,21 +383,21 @@ return builder.buildUserToken(appid, appcert, chatUserId, expirePeriod);
 2. 将以下代码复制到 `webpack.config.js` 文件中配置 webpack：
 
    ```javascript
-    const path = require('path');
-   
-    module.exports = {
-        entry: './index.js',
-        mode: 'production',
-        output: {
-            filename: 'bundle.js',
-            path: path.resolve(__dirname, './dist'),
-        },
-        devServer: {
-            compress: true,
-            port: 9000,
-            https: true
-        }
-    };
+   const path = require("path");
+
+   module.exports = {
+     entry: "./index.js",
+     mode: "production",
+     output: {
+       filename: "bundle.js",
+       path: path.resolve(__dirname, "./dist"),
+     },
+     devServer: {
+       compress: true,
+       port: 9000,
+       https: true,
+     },
+   };
    ```
 
 3. 为你的 Web app 安装 npm 包。打开终端，进入到你的项目的根目录，运行 `npm init` 命令创建 `package.json` 文件。
@@ -406,25 +406,25 @@ return builder.buildUserToken(appid, appcert, chatUserId, expirePeriod);
 
    ```json
    {
-      "name": "web",
-      "version": "1.0.0",
-      "description": "",
-      "main": "index.js",
-      "scripts": {
-        "build": "webpack --config webpack.config.js",
-        "start:dev": "webpack serve --open --config webpack.config.js"
-      },
-      "keywords": [],
-      "author": "",
-      "license": "ISC",
-      "dependencies": {
-        "agora-chat": "latest"
-      },
-      "devDependencies": {
-        "webpack": "^5.50.0",
-        "webpack-cli": "^4.8.0",
-        "webpack-dev-server": "^3.11.2"
-      }
+     "name": "web",
+     "version": "1.0.0",
+     "description": "",
+     "main": "index.js",
+     "scripts": {
+       "build": "webpack --config webpack.config.js",
+       "start:dev": "webpack serve --open --config webpack.config.js"
+     },
+     "keywords": [],
+     "author": "",
+     "license": "ISC",
+     "dependencies": {
+       "shengwang-chat": "latest"
+     },
+     "devDependencies": {
+       "webpack": "^5.50.0",
+       "webpack-cli": "^4.8.0",
+       "webpack-dev-server": "^3.11.2"
+     }
    }
    ```
 
@@ -434,9 +434,9 @@ return builder.buildUserToken(appid, appcert, chatUserId, expirePeriod);
    <!DOCTYPE html>
    <html lang="en">
      <head>
-       <title>Agora Chat Token demo</title>
+       <title>Shengwang Chat Token demo</title>
      </head>
-   
+
      <body>
        <h1>Token demo</h1>
        <div class="input-field">
@@ -455,80 +455,79 @@ return builder.buildUserToken(appid, appcert, chatUserId, expirePeriod);
 6. 实现 App 逻辑。
 
 // TODO：APP Key 替换为 appID?
-   复制以下代码到 `index.js` 文件中，将 `<Your App Key>` 替换为你的 App Key 。
+复制以下代码到 `index.js` 文件中，将 `<Your appId>` 替换为你的 appId 。
 
-   在下列示例代码中可以看到，就客户端而言，用户权限 Token 和以下代码逻辑有关：
+在下列示例代码中可以看到，就客户端而言，用户权限 Token 和以下代码逻辑有关：
 
-   - 调用 `open`，使用 Token 和用户名登录即时通讯 IM 系统。
-   - 当 Token 即将过期或已经过期时，从 App Server 重新获取新的 Token 并调用 `renewToken` 更新 Token。即时通讯 IM 建议你定期（例如每小时）生成一个 Token 并调用 `renewToken` 更新 Token，确保 Token 的有效性。
+- 调用 `open`，使用 Token 和用户名登录即时通讯 IM 系统。
+- 当 Token 即将过期或已经过期时，从 App Server 重新获取新的 Token 并调用 `renewToken` 更新 Token。即时通讯 IM 建议你定期（例如每小时）生成一个 Token 并调用 `renewToken` 更新 Token，确保 Token 的有效性。
 
-   ```js
-   import WebIM from "agora-chat-sdk";
-   WebIM.conn = new WebIM.connection({
-    appKey: "<Your App Key>",
-   });
-   // 登录即时通讯 IM
-   let username;
-   document.getElementById("login").onclick = function () {
-    username = document.getElementById("username").value.toString();
-    // 用用户名信息获取即时通讯 IM 用户权限 Token
-    fetch(`http://localhost:8090/chat/user/${username}/token`)
-      .then((res) => res.text())
-      .then((token) => {
-        // 通过用户名和 Token 登录即时通讯
-        WebIM.conn.open({
-          user: username,
-          agoraToken: token,
-        });
+```js
+import ChatSDK from "shengwang-chat";
+const chatClient = new ChatSDK.connection({
+  appId: "<Your appId>",
+});
+// 登录即时通讯 IM
+let username;
+document.getElementById("login").onclick = function () {
+  username = document.getElementById("username").value.toString();
+  // 用用户名信息获取即时通讯 IM 用户权限 Token
+  fetch(`http://localhost:8090/chat/user/${username}/token`)
+    .then((res) => res.text())
+    .then((token) => {
+      // 通过用户名和 Token 登录即时通讯
+      chatClient.open({
+        user: username,
+        accessToken: token,
       });
-   };
-   // 添加回调函数
-   WebIM.conn.addEventHandler("AUTHHANDLER", {
-   // 连接成功回调
-    onConnected: () => {
-      document
-        .getElementById("log")
-        .appendChild(document.createElement("div"))
-        .append("Connect success !");
-    },
-   // 收到文本消息
-    onTextMessage: (message) => {
-      console.log(message);
-      document
-        .getElementById("log")
-        .appendChild(document.createElement("div"))
-        .append("Message from: " + message.from + " Message: " + message.data);
-    },
-    // Token 即将过期
-    onTokenWillExpire: (params) => {
-      document
-        .getElementById("log")
-        .appendChild(document.createElement("div"))
-        .append("Token is about to expire");
-      refreshToken(username);
-    },
-    // Token 已过期
-    onTokenExpired: (params) => {
-      document
-        .getElementById("log")
-        .appendChild(document.createElement("div"))
-        .append("The token has expired");
-      refreshToken(username);
-    },
-    onError: (error) => {
-      console.log("on error", error);
-    },
-   });
-   // 更新 Token
-   function refreshToken(username) {
-    fetch(`http://localhost:8090/chat/user/${username}/token`)
-      .then((res) => res.text())
-      .then((token) => {
-        WebIM.conn.renewToken(token);
-      }
-    );
-   }
-   ```
+    });
+};
+// 添加回调函数
+chatClient.addEventHandler("AUTHHANDLER", {
+  // 连接成功回调
+  onConnected: () => {
+    document
+      .getElementById("log")
+      .appendChild(document.createElement("div"))
+      .append("Connect success !");
+  },
+  // 收到文本消息
+  onTextMessage: (message) => {
+    console.log(message);
+    document
+      .getElementById("log")
+      .appendChild(document.createElement("div"))
+      .append("Message from: " + message.from + " Message: " + message.data);
+  },
+  // Token 即将过期
+  onTokenWillExpire: (params) => {
+    document
+      .getElementById("log")
+      .appendChild(document.createElement("div"))
+      .append("Token is about to expire");
+    refreshToken(username);
+  },
+  // Token 已过期
+  onTokenExpired: (params) => {
+    document
+      .getElementById("log")
+      .appendChild(document.createElement("div"))
+      .append("The token has expired");
+    refreshToken(username);
+  },
+  onError: (error) => {
+    console.log("on error", error);
+  },
+});
+// 更新 Token
+function refreshToken(username) {
+  fetch(`http://localhost:8090/chat/user/${username}/token`)
+    .then((res) => res.text())
+    .then((token) => {
+      chatClient.renewToken(token);
+    });
+}
+```
 
 7. 编译并运行你的项目。
 
@@ -539,7 +538,7 @@ return builder.buildUserToken(appid, appcert, chatUserId, expirePeriod);
       ```shell
       # 用 webpack 打包项目
       npm run build
-      
+
       # 用 webpack-dev-server 测试运行项目
       npm run start:dev
       ```
@@ -579,7 +578,7 @@ Java AgoraTools 依赖:
 Token 即将过期或已经过期后，即时通讯 IM SDK 会分别触发 `onTokenWillExpire` 或 `onTokenExpired` 回调。你需要在 app 逻辑中添加如下操作：
 
 1. App 识别即将过期或已经过期的是哪类权限的 Token。
-2. App 从 App Server 获取新的 Token。 
+2. App 从 App Server 获取新的 Token。
 3. SDK 调用 `renewToken` 更新 Token。
 
 ### 实现 Token 过期后自动重连
