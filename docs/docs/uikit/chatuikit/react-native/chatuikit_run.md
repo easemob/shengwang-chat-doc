@@ -64,9 +64,7 @@ export const fcmSenderId = "xxx";
 export const account = [{ id: "xxx", token: "xxx" }];
 ```
 
-// TODO：替换路径
-
-手动设置区域，目前支持国内和海外。配置文件在 `packages/react-native-shengwang-chat-uikit/src/config.local.ts`
+手动设置区域，目前支持国内和海外。配置文件在 `config.local.ts`
 
 ```javascript
 export const language = "zh-Hans"; // 'en' or 'zh-Hans'
