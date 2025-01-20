@@ -114,7 +114,7 @@
 | `msg_id`          | 消息的 ID。         |
 | `payload`         | 消息内容，与通过 RESTful API 发送过来的一致，查看 [消息格式文档](message_historical.html#历史消息记录的内容)。 |
 | `securityVersion` | 安全校验版本，目前为 1.0.0。请忽略此参数。      | 
-| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。关于 Secret，详见[规则配置说明](/product/enable_and_configure_IM.html#配置回调规则)。   | 
+| `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。关于 Secret，详见[配置发送后回调规则](callback_postsending.html#发送后回调规则)。   | 
 
 ### 回调响应
 
@@ -137,7 +137,7 @@
 
 `Authorization：Bearer YourAppToken`
 
-为提高项目的安全性，使用 token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 支持使用 App Token 的鉴权方式，详见 [使用 App Token 鉴权](easemob_app_token.html)。
+为提高项目的安全性，使用 token（动态密钥）对即将登录即时通讯系统的用户进行鉴权。即时通讯 RESTful API 支持使用 App Token 的鉴权方式，详见 [使用 Token 鉴权](token_authentication.html)。
 
 ### HTTP 请求
 
@@ -251,9 +251,7 @@ POST https://{host}/app-id/{app_id}/callbacks/storage/retry
 | :------------- | :----- | :----------------------------------------------------------------------------- |
 | `path`         | String | 请求路径。                                                                     |
 | `uri`          | String | 请求路径的 URI。                                                               |
-| `timestamp`    | long   | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。                         |
-| `organization` | String | 环信即时通讯 IM 为每个公司（组织）分配的唯一标识，与请求参数 `org_name` 相同。 |
-| `application`  | String | 你在环信 IM 管理后台注册的 app 唯一标识。                                      |
+| `timestamp`    | long   | 即时通讯 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。                         |
 | `action`       | String | 请求方法。                                                                     |
 | `data`         | Bool   | - `success`：成功；<br/> - `failure`：失败。                                   |
 | `duration`     | long   | 请求耗时，单位为毫秒。                                                         |

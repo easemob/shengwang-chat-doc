@@ -23,7 +23,7 @@
 
 ## 查询用户在线状态
 
-即时通讯 IM 支持调用 [REST API](/docs/sdk/server-side/presence.html#批量获取在线状态信息) 或[客户端接口](/docs/sdk/android/presence.html#查询被订阅用户列表)批量查询用户的在线状态。
+即时通讯 IM 支持调用 [RESTful API](/docs/sdk/server-side/presence.html#批量获取在线状态信息) 或[客户端接口](/docs/sdk/android/presence.html#查询被订阅用户列表)批量查询用户的在线状态。
 
 ## 用户状态变更
 

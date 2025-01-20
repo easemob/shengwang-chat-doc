@@ -1,9 +1,9 @@
 # 创建群组/聊天室事件 
-成功创建群组或聊天室后，环信服务器会按照[发送后回调规则](/product/enable_and_configure_IM.html#配置回调规则)向你的 App Server 发送回调请求，App Server 可通过该回调查看创建的群组/聊天室的信息，进行数据同步。
+成功创建群组或聊天室后，声网服务器会按照[发送后回调规则](callback_postsending.html#发送后回调规则)向你的 App Server 发送回调请求，App Server 可通过该回调查看创建的群组/聊天室的信息，进行数据同步。
 
 :::tip
-1. 你所使用的环信即时通讯 IM 的版本可能需要单独开通回调服务，详见[增值服务说明](/product/pricing.html#增值服务费用)。
-2. 如果需要创建群组/聊天室的回调事件，你需要在[声网控制台](https://console.shengwang.cn/overview)设置发送后回调规则，详见[配置回调规则](/product/enable_and_configure_IM.html#配置回调规则)。
+1. 若你当前套餐不支持回调功能，需升级产品套餐。
+2. 如果需要创建群组/聊天室的回调事件，你需要在[声网控制台](https://console.shengwang.cn/overview)设置发送后回调规则，详见[配置发送后回调规则](callback_postsending.html#发送后回调规则)。
 3. 发送后回调的相关介绍，详见[回调说明](/docs/sdk/server-side/callback_postsending.html)。
 :::
  
@@ -61,13 +61,12 @@
 
 | 字段名称         | 类型   | 描述                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
-| `callId`       | String   | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。 | 
-| `security`     | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。详见[配置声网控制台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。|
+| `callId`       | String   | `callId` 为每个回调请求的唯一标识。 | 
+| `security`     | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。详见[配置声网控制台回调规则](callback_postsending.html#发送后回调规则)。|
 | `payload`       | Object | 事件内容。                                                     |
 | `payload.role` | JSON | 群组角色。若设置了管理员，显示管理员角色，若未设置，则只显示群组角色：<br/> - 用户 ID：`owner`<br/> - 用户 ID：`admin` | 
 | `payload.member`| Array | 创建群组时拉入群的用户。    | 
 | `payload.info`   | JSON | 新群组的相关信息。除了以下参数，其他群组参数详见[创建群组 RESTful API](/docs/sdk/server-side/group_manage.html#创建群组)。<br/> - `title`：String 类型，群组名称。 <br/> - `disabled` ：Boolean 类型，取值为 `false`，表示群组为非禁用状态，可正常使用。 <br/> - `last_modified`：Long 类型，群组信息的最新修改时间。   |
-| `appkey`       | String | 你在环信管理后台注册的应用唯一标识。                                |
 | `id`           | String | 群组/聊天室 ID。                                                 |
 | `type`         | String | 区分群组或聊天室事件：<br/> - `GROUP`：群组 <br/> - `CHATROOM` ：聊天室     |
 | `event`        | String | 对于群组和聊天室，该参数的值固定为 `group_op_event`。接收方可按此字段区分是否是群组/聊天室操作事件。 |

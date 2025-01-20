@@ -259,7 +259,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 | `secret`       | String | 视频文件的访问密钥。如果 [文件上传](message_download.html#上传文件) 时设置了文件访问限制，则该字段存在。     |
 | `length`       | Int    | 视频时长。单位为秒。                          |
 | `size`         | JSON   | 视频缩略图尺寸。单位为像素。<br/> - `width`：视频缩略图的宽度；<br/> - `height`：视频缩略图的高度。    |
-| `thumb`        | String | 视频缩略图的 URL 地址，格式为 https://{host}/app-id/{app_id}/chatfiles/{file_uuid}。其中，`file_uuid` 为视频缩略图上传后，声网服务器返回的缩略图的 UUID。 |
+| `thumb`        | String | 视频缩略图的 URL 地址，格式为 https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}。其中，`file_uuid` 为视频缩略图上传后，声网服务器返回的缩略图的 UUID。 |
 | `thumb_secret` | String | 缩略图文件访问密钥。如果文件上传时设置了文件访问限制，则该字段存在。          |
 | `type`         | String | 消息类型。视频消息为 `video`。                                        |
 | `url`          | String | 视频文件的 URL 地址。              |

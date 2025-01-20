@@ -1,10 +1,10 @@
 # 群组/聊天室加人事件 
 
-在群组或聊天室创建时拉人进入、邀请用户加入、或用户申请加入时，环信服务器会按照[发送后回调规则](/product/enable_and_configure_IM.html#配置回调规则)向你的 App Server 发送回调请求，App Server 可通过该回调进行数据同步。
+在群组或聊天室创建时拉人进入、邀请用户加入、或用户申请加入时，声网服务器会按照[发送后回调规则](callback_postsending.html#发送后回调规则)向你的 App Server 发送回调请求，App Server 可通过该回调进行数据同步。
 
 :::tip
-1. 你所使用的环信即时通讯 IM 的版本可能需要单独开通回调服务，详见[增值服务说明](/product/pricing.html#增值服务费用)。
-2. 如果需要群组/聊天室加人的回调事件，你需要在[声网控制台](https://console.shengwang.cn/overview)设置发送后回调规则，详见[配置回调规则](/product/enable_and_configure_IM.html#配置回调规则)。
+1. 若你当前套餐不支持回调功能，需升级产品套餐。
+2. 如果需要群组/聊天室加人的回调事件，你需要在[声网控制台](https://console.shengwang.cn/overview)设置发送后回调规则，详见[配置发送后回调规则](callback_postsending.html#发送后回调规则)。
 3. 发送后回调的相关介绍，详见[回调说明](/docs/sdk/server-side/callback_postsending.html)。
 :::
 
@@ -47,12 +47,11 @@
 
 | 字段名称         | 类型   | 描述                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
-| `callId`       | String   | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。 | 
-| `security`     | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。详见[配置声网控制台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。|
+| `callId`       | String   | `callId` 为每个回调请求的唯一标识。 | 
+| `security`     | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。详见[配置声网控制台回调规则](callback_postsending.html#发送后回调规则)。|
 | `payload`       | Object | 事件内容。                                                     |
 | `payload.member` | JSON | 被拉入进群/聊天室的用户 ID。        | 
 | `payload.type` | Array  | 入群方式：`DIRECT` 表示创建群组或聊天室时拉人进入。     |
-| `appkey`       | String | 你在环信管理后台注册的应用唯一标识。  |
 | `id`           | String | 群组/聊天室 ID。                                                 |
 | `type`         | String | 区分群组或聊天室事件：<br/> - `GROUP`：群组 <br/> - `CHATROOM` ：聊天室   |
 | `event`        | String | 对于群组和聊天室，该参数的值固定为 `group_op_event`。接收方可按此字段区分是否是群组/聊天室操作事件。 | 
@@ -96,12 +95,11 @@
 
 | 字段名称         | 类型   | 描述                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
-| `callId`       | String   | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。 | 
-| `security`     | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。详见[配置声网控制台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。|
+| `callId`       | String   | `callId` 为每个回调请求的唯一标识。 | 
+| `security`     | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。详见[配置声网控制台回调规则](callback_postsending.html#发送后回调规则)。|
 | `payload`       | Object | 事件内容。                                                     |
 | `payload.member`| JSON  | 被邀请的用户 ID。        | 
 | `payload.type` | Array  | 入群方式：`INVITE` 表示邀请用户入群。     |
-| `appkey`       | String | 你在环信管理后台注册的应用唯一标识。  |
 | `id`           | String | 群组/聊天室 ID。                                                 |
 | `type`         | String | 区分群组或聊天室事件：<br/> - `GROUP`：群组 <br/> - `CHATROOM` ：聊天室  <br/> 由于聊天室无此事件，因此该参数只能为 `GROUP`。 |
 | `event`        | String | 对于群组和聊天室，该参数的值固定为 `group_op_event`。接收方可按此字段区分是否是群组/聊天室操作事件。 | 
@@ -145,12 +143,11 @@
 
 | 字段名称         | 类型   | 描述                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
-| `callId`       | String   | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。 | 
-| `security`     | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。详见[配置声网控制台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。|
+| `callId`       | String   | `callId` 为每个回调请求的唯一标识。 | 
+| `security`     | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。详见[配置声网控制台回调规则](callback_postsending.html#发送后回调规则)。|
 | `paylod`       | Object | 事件内容。                                                     |
 | `payload.member` | JSON | 申请入群的用户 ID。        | 
 | `payload.type`| Array | 入群方式：`APPLY` 表示申请入群。     |
-| `appkey`       | String | 你在环信管理后台注册的应用唯一标识。  |
 | `id`       | String | 群组/聊天室 ID。                                                 |
 | `type`         | String | 区分群组或聊天室事件：<br/> - `GROUP`：群组 <br/> - `CHATROOM` ：聊天室   |
 | `event`        | String | 对于群组和聊天室，该参数的值固定为 `group_op_event`。接收方可按此字段区分是否是群组/聊天室操作事件。 | 

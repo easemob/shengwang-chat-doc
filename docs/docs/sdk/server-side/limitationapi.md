@@ -8,7 +8,6 @@
 - 下表中标注 * 的 RESTful API 没有对应的客户端接口，因此它们的调用频率仅由相应的 RESTful API 的调用频率决定。若这些接口的调用频率达到上限，你可以联系声网商务提升。
 - 其他接口，其调用频率则为 RESTful API 和对应客户端接口调用频率的总和。若这些接口的调用频率达到上限，你可以查看是否是客户端 API 调用过于频繁。如果需要提升调用频率上限，可联系声网商务。
 
-
 ## 消息管理
 
 | RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） |
@@ -212,7 +211,7 @@
 | 批量订阅在线状态    |  POST      | /app-id/{app_id}/users/{uid}/presence/{expiry}         | 50 次/秒/App ID   |
 | 批量获取在线状态信息    |  POST   | /app-id/{app_id}/users/{uid}/presence                  | 50 次/秒/App ID |
 | 查询单个群组的在线成员数量    |  GET   | /app-id/{app_id}/presence/online/{group_id}/type/{query_type}  | 100 次/秒/App ID |
-|  取消订阅多个用户的在线状态     |  DELETE           | /app-id/{app_id}/users/{uid}/presence                  | 50 次/秒/App ID    |
+| 取消订阅多个用户的在线状态     |  DELETE           | /app-id/{app_id}/users/{uid}/presence                  | 50 次/秒/App ID    |
 | 查询订阅列表    |   GET       | /app-id/{app_id}/users/{uid}/presence/sublist?pageNum={pagenumber}&pageSize={pagesize} | 50 次/秒/App ID  |
 
 ### 全局禁言
