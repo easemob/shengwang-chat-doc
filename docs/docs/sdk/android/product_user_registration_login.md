@@ -37,7 +37,7 @@
 ![img](/images/product/login_userid_token.png)
 
 :::tip
-1. 关于获取 token，详见[获取 App Token](/docs/sdk/server-side/easemob_app_token.html)和[获取 User Token](/docs/sdk/server-side/easemob_user_token.html)。
+1. 关于获取 token，详见[获取 Token](/docs/sdk/server-side/token_authentication.html)。
 2. 获取 token 时，token 有效期 `ttl` 以传入的值为准。若不传该参数，以[声网控制台](https://console.shengwang.cn/overview)的**用户认证**页面的 token 有效期的设置为准，默认为 60 天。若设置为 `0`，则 token 永久有效。
 :::
 
