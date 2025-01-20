@@ -4,12 +4,33 @@
 
 ## 用户注册模式
 
-用户注册模式分为以下两种：
+即时通讯 IM 提供以下两种方式创建用户：
 
-- 开放注册：一般在体验 Demo 和测试环境时使用，正式环境中不推荐使用该方式注册声网账号。要使用开放注册，需要在[声网控制台](https://console.shengwang.cn/overview)的**即时通讯** > **服务概览**的**设置**区域，将**用户注册模式**设置为**开放注册**。只有打开该开关，才能使用客户端或 [REST API](/docs/sdk/server-side/account_system.html#开放注册单个用户)开放注册用户。
-- 授权注册：通过声网提供的 REST API 注册声网用户账号，注册后保存到你的服务器或返给客户端。要使用授权注册，你需要在[声网控制台](https://console.shengwang.cn/overview)的**即时通讯** > **服务概览**的**设置**区域，将**用户注册模式**设置为**授权注册**。相关的 REST API 介绍，详见[授权注册单个用户](/docs/sdk/server-side/account_system.html#授权注册单个用户)和[批量授权注册用户](/docs/sdk/server-side/account_system.html#批量授权注册用户)的接口介绍。
+- 调用 [RESTful API](/docs/sdk/server-side/account_system.html#注册用户) 注册用户账号，注册后保存到你的服务器或返给客户端。
 
-除此以外，可以在[声网控制台](https://console.shengwang.cn/overview)创建用户，详见[创建用户相关介绍](/product/enable_and_configure_IM.html#创建-im-用户)。
+- 在[声网控制台](https://console.shengwang.cn/overview)按照如下步骤创建用户：
+
+1. 展开控制台左上角下拉框，选择需要开通即时通讯 IM 服务的项目。
+
+2. 点击左侧导航栏的**全部产品**。
+
+3. 在下拉列表中找到**即时通讯 IM** 并点击。
+
+4. 在**即时通讯 IM** 页面，进入**运营管理**标签页。
+
+5. 在**用户** 页签下，点击**创建IM用户**。
+
+6. 在弹出的对话框中，配置用户相关参数，点击**确定**。
+
+![img](/images/android/user_create.png)
+
+### 获取用户 token
+
+创建用户后，在用户列表点击对应的用户的**操作**一栏中的**更多**，选择**查看Token**。
+
+在弹出的对话框中，可以查看用户 Token，也可以点击**重新生成**，生成用户 token。
+
+![img](/images/android/user_token.png)
 
 ## 用户登录
 
@@ -23,7 +44,7 @@
 | 参数       | 类型   | 是否必需 | 描述          |
 | :--------- | :----- | :------- | :-------------------------------------------- |
 | `username` | String | 是  | 用户 ID，长度不可超过 64 个字节。不可设置为空。支持以下字符集：<br/>- 26 个小写英文字母 a-z；<br/>- 26 个大写英文字母 A-Z；<br/>- 10 个数字 0-9；<br/>- “_”, “-”, “.”。 <br/><Container type="notice" title="注意"><br/>- 该参数不区分大小写，因此 `Aa` 和 `aa` 为相同的用户 ID。<br/>- 请确保同一个 app 下，用户 ID 唯一；<br/>- 用户 ID 为公开信息，请勿使用 UUID、邮箱地址、手机号等敏感信息。</Container> |
-| `token` | String | 是 | token 可以通过调用 REST API 获取，即传入用户 ID （或用户 ID + 密码）和 token 有效期参数获取，详见 [使用 token 验证](/docs/sdk/server-side/token_authentication.html)。<br/><Container type="notice" title="注意"><br/>- 你可以在调用 REST API 获取 token 时，传入 `ttl` 参数，设置 token 的有效期。此外，你也可以通过[声网控制台](https://console.shengwang.cn/overview/)的**用户认证**页面设置 token 的有效期。该参数值以最新设置为准。<br/>- 声网服务器完全信赖用户 token，为避免业务受影响，你需要确保 token 的安全。</Container> |
+| `token` | String | 是 | token 可以通过调用 REST API 获取，即传入用户 ID （或用户 ID + 密码）和 token 有效期参数获取，详见 [使用 token 验证](/docs/sdk/server-side/token_authentication.html)。<br/> |
 | `password` | String | 是 | 用户的登录密码，长度不可超过 64 个字符。|
 
 ## 登录流程
@@ -37,7 +58,6 @@
 ![img](/images/product/login_userid_token.png)
 
 :::tip
-1. 关于获取 token，详见[获取 Token](/docs/sdk/server-side/token_authentication.html)。
-2. 获取 token 时，token 有效期 `ttl` 以传入的值为准。若不传该参数，以[声网控制台](https://console.shengwang.cn/overview)的**用户认证**页面的 token 有效期的设置为准，默认为 60 天。若设置为 `0`，则 token 永久有效。
+关 token 鉴权，详见 [Token](/docs/sdk/server-side/token_authentication.html)。
 :::
 

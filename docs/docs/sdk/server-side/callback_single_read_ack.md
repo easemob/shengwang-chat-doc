@@ -5,15 +5,14 @@
 | 字段        | 数据类型 | 含义                                                         |
 | :---------- | :------- | :----------------------------------------------------------- |
 | `chat_type` | String   | `read_ack` 已读回执。                                        |
-| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_回执消息的消息 ID”。 | 
-| `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。 Secret 见 [Console 后台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识。 | 
+| `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。详见[配置声网控制台回调规则](callback_postsending.html#发送后回调规则)。 |
 | `payload`   | object   | 包括：<br/> - `ext`：消息扩展字段<br/> - `ack_message_id`：消息 ID<br/> - `bodies`：消息体内容。 |
 | `host`      | String   | 服务器名称。                                                 |
-| `appkey`    | String   | 你在环信管理后台注册的应用唯一标识。                         |
 | `from`      | String   | 发送已读回执用户 ID。                                        |
 | `to`        | String   | 接收已读回执用户 ID。                                        |
 | `eventType` | String   | `chat`：单聊。                                               |
-| `timestamp` | long     | 环信 IM 服务器收到消息已读回执的 Unix 时间戳，单位为 ms。                  |
+| `timestamp` | long     | 即时通讯 IM 服务器收到消息已读回执的 Unix 时间戳，单位为 ms。                  |
 | `msg_id`    | String   | 该回执消息的消息 ID。                                        |
 
 回调请求示例：

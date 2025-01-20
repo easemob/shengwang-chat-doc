@@ -8,19 +8,18 @@
 
 | 字段              | 数据类型 | 描述                                                         |
 | :---------------- | :------- | :----------------------------------------------------------- |
-| `callId`          | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_该撤回事件消息的 ID”。 |
+| `callId`          | String   | `callId` 为每个回调请求的唯一标识。 |
 | `eventType`       | String   | “chat” 上行消息、“chat_offline” 离线消息。                   |
-| `timestamp`       | long     | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为 ms。        |
+| `timestamp`       | long     | 即时通讯 IM 服务器接收到此消息的 Unix 时间戳，单位为 ms。        |
 | `chat_type`       | String   | `recall`，表示消息撤回。 |
 | `group_id`        | String   | 该参数对于群组聊天或聊天室有效，表示回调消息所在的群组或聊天室。 |
 | `from`            | String   | 消息的发送方。                                               |
 | `to`              | String   | 消息的接收方。                                               |
 | `recall_id`       | String   | 要撤回的消息 ID。                                            |
 | `msg_id`          | String   | 该撤回事件消息的 ID，与发送消息时的 `msg_id` 一致。                                       |
-| `payload`         | object   | 事件内容，与通过 REST API 发送过来的一致，查看 [历史消息内容](message_historical.html#历史消息记录的内容)。 |
+| `payload`         | object   | 事件内容，与通过 RESTful API 发送过来的一致，查看 [历史消息内容](message_historical.html#历史消息记录的内容)。 |
 | `securityVersion` | String   | 安全校验版本，目前为 1.0.0。忽略此参数，以后会改成 Console 后台做设置。 |
-| `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [Console 后台回调规则](/product/enable_and_configure_IM.html#配置回调规则)。 |
-| `appkey`          | String   | 你在环信管理后台注册的应用唯一标识。                         |
+| `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见[配置声网控制台回调规则](callback_postsending.html#发送后回调规则)。 |
 | `host`            | String   | 服务器名称。                                                 |
 
 payload 中字段含义：

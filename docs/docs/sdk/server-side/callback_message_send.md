@@ -4,24 +4,23 @@
 
 | 参数 | 类型   | 描述 |
 | :---------------- | :----- |:------------------------------------------------------------------|
-| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 “App Key_发送的消息的 ID”。 | 
+| `callId`    | String   | `callId` 为每个回调请求的唯一标识。 | 
 | `eventType`       | String | “chat” 上行消息、“chat_offline” 离线消息。                      |
-| `timestamp`       | long   | 环信 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。                           |
-| `chat_type`       | String | 会话类型（默认全选）：<br/> - "chat"：单聊回调；<br/> - "groupchat"：群聊回调包含了群组和聊天室的消息回调；<br/> - "notify"：通知回调包含了 Thread 和 Reaction 的回调，需要结合 payload 中的 type 字段确定具体类型。 |
+| `timestamp`       | long   | 即时通讯 IM 服务器接收到此消息的 Unix 时间戳，单位为毫秒。                           |
+| `chat_type`       | String | 会话类型（默认全选）：<br/> - "chat"：单聊回调；<br/> - "groupchat"：群聊回调包含了群组和聊天室的消息回调；<br/> - "notify"：通知回调包含了子区（Thread）和 Reaction 的回调，需要结合 payload 中的 type 字段确定具体类型。 |
 | `group_id`        | String | 当 `chat_type` 为 `groupchat` 有此参数，表示回调消息所在的群组或聊天室。                |
 | `from`            | String | 消息的发送方。     |
 | `to`              | String | 消息的接收方。   |
 | `msg_id`    | String   | 发送的消息 ID。 | 
-| `payload`         | object | 事件内容，与通过 REST API 发送过来的一致，查看 [历史消息内容](message_historical.html#历史消息记录的内容)。      |
+| `payload`         | object | 事件内容，与通过 RESTful API 发送过来的一致，查看 [历史消息内容](message_historical.html#历史消息记录的内容)。      |
 | `securityVersion` | String | 安全校验版本，目前为 1.0.0。忽略此参数，以后会改成 Console 后台做设置。                   |
-| `security`        | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。 Secret 见 Console 后台回调规则。     |
-| `appkey`          | String | 你在环信管理后台注册的应用唯一标识。        |
+| `security`        | String | 签名，格式如下: `MD5（callId+secret+timestamp）`。 Secret 见[配置声网控制台回调规则](callback_postsending.html#发送后回调规则)。     |
 | `host`            | String | 服务器名称。              |
 | `content_type`            | String | 消息类型：<br/> - `chat:user:*`：单聊消息  <br/> - `chat:group:*`：群组消息   <br/> - `chat:room:*`：聊天室消息  <br/>  文本、图片、音视频等消息对应的参数值，详见[发送单聊消息](#发送单聊消息)、[发送群组消息](#发送群组消息)和[发送聊天室消息](#发送聊天室消息)章节。   |
 
 ## 发送单聊消息
 
-本节展示发送各类消息后，环信服务器向你的 App Server 发送的回调请求的包体示例。
+本节展示发送各类消息后，声网服务器向你的 App Server 发送的回调请求的包体示例。
 
 | content_type         | payload 中类型                | 触发事件           |
 | :----------- | :---------------------------- | :----------------- |
@@ -176,7 +175,7 @@
 
 | 参数          | 类型 | 描述                                                         |
 | :------------ | :------- | :----------------------------------------------------------- |
-| `customEvent` | String   | 用户自定义的事件类型，必须是 String，值必须满足正则表达式。 [a-zA-Z0-9-_/.]{1,32}，最短 1 个字符 最长 32 个字符。 |
+| `customEvent` | String   | 用户自定义的事件类型，必须是 String，值必须满足正则表达式。[a-zA-Z0-9-_/.]{1,32}，最短 1 个字符 最长 32 个字符。 |
 | `customExts`/`v2:customExts`  | Array/JSON     | 用户自定义的事件属性。该参数为可选，不需要可以不传。<br/> - `customExts` 为旧版参数，数组类型，最多可包含 16 个元素。<br/> - `v2:customExts` 为新版参数，Map<String,String> 类型，最多可以包含 16 个元素。推荐使用该新版参数。 |
 | `from`        | String   | 表示消息发送者;无此字段 Server 会默认设置为 “from”:“admin”，有 from 字段但值为空串 (“”) 时请求失败。 |
 | `ext`         | JSON     | 扩展属性，支持 app 自定义内容。可以没有这个字段；但是如果有，值不能是 “ext:null” 这种形式，否则会发生错误。 |
@@ -244,7 +243,7 @@
 
 ## 发送群组消息
 
-本节介绍在群组中发送各类消息后，环信服务器向你的 App Server 发送的回调请求的包体示例。
+本节介绍在群组中发送各类消息后，声网服务器向你的 App Server 发送的回调请求的包体示例。
 
 | content_type             | payload 中类型                | 触发事件           |
 | :---------------- | :---------------------------- | :----------------- |
@@ -273,7 +272,7 @@
 
 ```json
 {
-    "callId":"{appkey}_8924312242322", 
+    "callId":"XXXX#XXXX_8924312242322", 
     "eventType":"chat_offline",
     "timestamp":1600060847294,
     "chat_type":"groupchat", 
@@ -291,7 +290,7 @@
 
 ### 发送聊天室消息
 
-本节介绍在聊天室中发送各类消息后，环信服务器向你的 App Server 发送的回调请求的包体示例。
+本节介绍在聊天室中发送各类消息后，声网服务器向你的 App Server 发送的回调请求的包体示例。
 
 | content_type             | payload 中类型                | 触发事件             |
 | :--------------- | :---------------------------- | :------------------- |
@@ -318,7 +317,7 @@
 
 ```json
 {
-    "callId":"{appkey}_8924312242322",
+    "callId":"XXXX#XXXX_8924312242322",
     "eventType":"chat_offline",
     "timestamp":1600060847294,
     "chat_type":"groupchat", 

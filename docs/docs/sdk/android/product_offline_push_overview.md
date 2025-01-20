@@ -23,7 +23,7 @@
 
 ## 推送 token
 
-推送 token（device token） 是第三方推送厂商提供的推送 token。例如，对于 FCM 推送，初次启动你的应用时，FCM SDK 为客户端应用实例生成的注册令牌 (registration token)。该 token 用于标识每台设备上的每个应用，FCM 通过该 token 明确消息是发送给哪个设备的，然后将消息转发给设备，设备再通知应用程序。你可以调用 `FirebaseMessaging.getInstance().getToken()` 方法获得 token。
+推送 token（device token）是第三方推送厂商提供的推送 token。例如，对于 FCM 推送，初次启动你的应用时，FCM SDK 为客户端应用实例生成的注册令牌 (registration token)。该 token 用于标识每台设备上的每个应用，FCM 通过该 token 明确消息是发送给哪个设备的，然后将消息转发给设备，设备再通知应用程序。你可以调用 `FirebaseMessaging.getInstance().getToken()` 方法获得 token。
 
 打开应用，初始化即时通讯 IM SDK 成功且成功登录后，获取推送 token，将 token 上传至声网服务器，与 IM 的登录账号绑定。
 
@@ -37,7 +37,7 @@
 
 ## 多设备离线推送策略
 
-多设备登录时，可在声网控制台的证书管理页面配置推送策略，该策略配置对所有推送通道生效：
+多设备登录时，可在声网控制台推送证书页面配置推送策略，该策略配置对所有推送通道生效：
 
 - 所有设备离线时，才发送推送消息；
 - 任一设备离线时，都发送推送消息。
@@ -46,7 +46,19 @@
 
 ## 推送高级功能
 
-要使用离线推送的高级功能，包括推送通知方式、免打扰模式和使用推送模板，你可以在声网控制台的**即时通讯 > 功能配置 > 功能配置总览**页面激活推送高级功能。**高级功能开启后，如需关闭必须联系商务，因为该操作会删除所有相关配置。**
+如果需要离线推送的高级功能，需在[声网控制台](https://console.shengwang.cn/overview)开启。高级功能包括[推送通知方式](push_notification_mode_dnd.html#推送通知方式)、[免打扰模式](push_notification_mode_dnd.html#免打扰模式)和[推送模板](push_display.html#使用推送模板)。**高级功能开启后，如需关闭必须联系商务，因为该操作会删除所有相关配置。**
+
+1. 展开控制台左上角下拉框，选择需要开通即时通讯 IM 服务的项目。
+
+2. 点击左侧导航栏的**全部产品**。
+
+3. 在下拉列表中找到**即时通讯 IM** 并点击。
+
+4. 在**即时通讯 IM** 页面，进入**功能配置**标签页。
+
+5. 在**推送模板** 页签下，点击**启用**。
+
+6. 在弹出的对话框中，配置用户相关参数，点击**确定**。
 
 ### 推送通知方式
 
@@ -73,12 +85,12 @@
 
 ### 使用推送模板
 
-设置推送模板为推送的高级功能，使用前需要在[声网控制台](https://console.shengwang.cn/overview)的**即时通讯 > 功能配置 > 功能配置总览**页面激活推送高级功能。
+设置推送模板为推送的高级功能，使用前需要在[声网控制台](https://console.shengwang.cn/overview)[开通推送高级功能](#推送高级功能)。
 
 推送模板主要用于服务器提供的默认配置不满足你的需求时，可使你设置全局范围的推送标题和推送内容。例如，服务器提供的默认设置为中文和英文的推送标题和内容，你若需要使用韩语或日语的推送标题和内容，则可以设置对应语言的推送模板。推送模板包括默认推送模板 `default` 和自定义推送模板，你可以通过以下两种方式设置：
 
-- [调用 REST API 配置](/docs/sdk/server-side/push.html#使用推送模板)。
-- 在[声网控制台](https://console.shengwang.cn/overview)设置推送模板，详见[控制台文档](/product/enable_and_configure_IM.html#配置推送模板)。
+- [调用 RESTful API 配置](/docs/sdk/server-side/push.html#使用推送模板)。
+- 在[声网控制台](https://console.shengwang.cn/overview)[设置推送模板](/docs/sdk/android/push_display.html#配置推送模板)。
 
 使用推送模板有以下优势：
 
@@ -99,14 +111,6 @@
 对于推送通知的标题和内容，你可以通过多种方式设置，包括调用 API、使用推送模板以及发送消息时使用消息扩展字段。
 
 关于这些设置方式的使用和设置优先级，详见具体文档，例如，对于 Android，可参见[设置通知的显示内容](/docs/sdk/android/push/push_display.html)。
-
-## 推送翻译
-
-推送通知与[翻译功能](/docs/sdk/android/message_translation.html)协同工作。如果用户启用自动翻译功能并发送消息，SDK 会同时发送原始消息和翻译后的消息。
-
-作为接收方，你可以设置你在离线时希望接收的推送通知的首选语言。如果翻译消息的语言符合你的设置，则翻译消息显示在推送通知中；否则，将显示原始消息。翻译功能由 Microsoft Azure Translation API 提供，你可以点击[这里](https://learn.microsoft.com/zh-cn/azure/ai-services/translator/language-support)了解支持的翻译语言。
-
-关于如何设置和获取推送通知的首选语言，详见相应文档，例如，对于 Android，可参见[设置推送翻译文档](/docs/sdk/android/push/push_translation.html)。
 
 ## 推送扩展
 

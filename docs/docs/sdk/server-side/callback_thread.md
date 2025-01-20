@@ -1,6 +1,6 @@
 ## Thread 回调事件
 
-若对 Thread 中的一条消息进行相关操作，包括发送、撤回或修改，环信服务器会向你的 app server 发送回调请求。
+若对 Thread 中的一条消息进行相关操作，包括发送、撤回或修改，声网服务器会向你的 app server 发送回调请求。
 
 ## 回调请求的字段描述
 
@@ -10,7 +10,6 @@ Thread 回调请求中的字段含义如下表所示：
 | :------------------- | :------- | :-------------------------------- |
 | `chat_type` | String | 固定值为 `notify`。通知回调包含了 Thread 和 Reaction 的回调，需要结合 payload 中的 `type` 字段确定具体类型。 |
 | `host`            | String | 服务器名称。              |
-| `appkey`          | String | 即时通讯服务分配给每个应用的唯一标识，由 `orgname` 和 `appname` 参数的值组成，生成后无法修改。 |
 | `from`            | String | 固定为 `admin`。  |
 | `to`              | String | 消息所属的 Thread 的群组 ID。 |
 | `eventType`       | String | 事件类型，固定为 `chat`。     |
