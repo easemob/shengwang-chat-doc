@@ -8,7 +8,7 @@
 
 1. 已开启即时通讯服务，详见 [开启和配置即时通讯服务](enable_im.html)。
 2. 了解即时通讯 IM 的使用限制，详见 [使用限制](limitation.html)。
-3. 你已在 [声网控制台](https://console.shengwang.cn/overview)的**即时通讯 IM** > **功能配置** > **推送模板** 页签下开启高级功能。高级功能激活后，你可以设置推送通知方式、免打扰模式和自定义推送模板。**高级功能开启后，如需关闭必须联系商务，因为该操作会删除所有相关配置。** 
+3. 你已在 [声网控制台](https://console.shengwang.cn/overview)的**即时通讯 IM** > **功能配置** > **推送模板** 页签下开启高级功能。高级功能激活后，你可以设置推送通知方式、免打扰模式和自定义推送模板。**高级功能开启后，如需关闭必须联系商务，因为该操作会删除所有相关配置。**
 4. 各推送使用的条件：
    - 小米推送：在小米设备上可用；
    - 华为推送：在华为设备上可用；
@@ -33,9 +33,7 @@
 
 ### 步骤二 配置 uni-app 应用支持推送插件
 
-// TODO：替换链接
-
-1. 新建 uni-app 工程，并引入[声网 uni-app 推送插件](https://downloadsdk.easemob.com/downloads/WEB_SDK/EMPushUniPlugin_V1.0.0.zip)。
+1. 新建 uni-app 工程，并引入[声网 uni-app 推送插件](https://download.shengwang.cn/sdk/release/EMPushUniPlugin_v1.0.0.zip)。
 
 在你的 uni-app 应用根目录下新建 `nativeplugins` 文件夹，然后将下载的插件放置于 `nativeplugins` 文件夹下。如下图所示：
 

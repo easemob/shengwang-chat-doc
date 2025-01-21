@@ -6,6 +6,7 @@
 
 **如果要使用会话标记功能，你需要确保产品套餐包支持[从服务端获取会话列表的功能](conversation_list.html#从服务器分页获取会话列表)。**
 
+//TODO
 你需要自行维护会话标记与具体业务含义之间的映射，例如 [`MarkType.mark_0`](https://doc.easemob.com/jsdoc/enums/Types.ContactType.MarkType.html)表示待处理会话。
 
 ```javascript

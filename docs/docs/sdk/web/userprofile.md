@@ -68,16 +68,16 @@ chatClient.updateUserInfo("nickname", "Your nickname").then((res) => {
 
 关于用户属性，客户端针对用户的昵称、头像 URL、联系方式、邮箱、性别、签名、生日和扩展字段默认使用以下键名。[调用 RESTful 的接口设置](/docs/sdk/server-side/userprofile.html#设置用户属性)或[删除用户属性](/docs/sdk/server-side/userprofile.html#删除用户属性)，若要确保在客户端能够获取设置，请求中必须传以下键名与客户端保持一致，键值可根据实际使用场景确定。
 
-| 字段        | 类型   | 备注                    |
-| :---------- | :----- | :------------------- |
-| `nickname`  | String | 用户昵称。长度在 64 字符内。            |
-| `avatarurl` | String | 用户头像 URL 地址。长度在 256 字符内。         |
-| `phone`     | String | 用户联系方式。长度在 32 字符内。     |
-| `mail`      | String | 用户邮箱。长度在 64 字符内。       |
+| 字段        | 类型   | 备注                                                                                               |
+| :---------- | :----- | :------------------------------------------------------------------------------------------------- |
+| `nickname`  | String | 用户昵称。长度在 64 字符内。                                                                       |
+| `avatarurl` | String | 用户头像 URL 地址。长度在 256 字符内。                                                             |
+| `phone`     | String | 用户联系方式。长度在 32 字符内。                                                                   |
+| `mail`      | String | 用户邮箱。长度在 64 字符内。                                                                       |
 | `gender`    | Number | 用户性别。 <br/> - `1`：男；<br/> - `2`：女；<br/> - （默认）`0`：未知；<br/> - 设置为其他值无效。 |
-| `sign`      | String | 用户签名。长度在 256 字符内。        |
-| `birth`     | String | 用户生日。长度在 64 字符内。         |
-| `ext`       | String | 扩展字段。       |
+| `sign`      | String | 用户签名。长度在 256 字符内。                                                                      |
+| `birth`     | String | 用户生日。长度在 64 字符内。                                                                       |
+| `ext`       | String | 扩展字段。                                                                                         |
 
 ### 获取用户属性
 
@@ -174,5 +174,3 @@ chatClient
 ```
 
 如果需要在名片中展示更丰富的信息，可以在 `ext` 中添加更多字段。
-// TODO：替换路径
-可参考 [示例项目](https://github.com/easemob/webim/tree/dev_3.0/demo) 中 src/components/contact/ 下 UserInfoModal 组件。

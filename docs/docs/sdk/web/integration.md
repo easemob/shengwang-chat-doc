@@ -101,8 +101,7 @@ miniCore.contact.getContacts();
 // 登录
 miniCore.open({
   username: "username",
-  password: "password",
-  // accessToken: 'token'
+  accessToken: "token",
 });
 
 // 登出
@@ -164,6 +163,7 @@ import ChatSDK, { ShengwangChat } from "shengwang-chat";
 ### 从官网获取并导入 SDK
 
 // TODO：替换链接
+
 1. 下载 [ShengwangChat Chat SDK for Web](https://www.easemob.com/download/im)。将 Web SDK 中的 `Shengwang-chat.js` 文件保存到你的项目下。
 
 2. 在 `index.html` 文件中，对 `index.js` 文件进行引用。
@@ -182,9 +182,8 @@ import ChatSDK, { ShengwangChat } from "shengwang-chat";
 export default {
   mounted: () => {
     import("shengwang-chat").then((res) => {
-      const EC = res.default;
-      console.log(EC, "easemob websdk");
-      const conn = new EC.connection({
+      const ChatSDK = res.default;
+      const chatClient = new ChatSDK.connection({
         appId: "your appId",
       });
     });
@@ -202,9 +201,8 @@ import { useEffect } from "react";
 export default function Home() {
   useEffect(() => {
     import("shengwang-chat").then((res) => {
-      const EC = res.default;
-      console.log(EC, "easemob websdk");
-      const conn = new EC.connection({
+      const ChatSDK = res.default;
+      const conn = new ChatSDK.connection({
         appId: "your appId",
       });
     });

@@ -110,7 +110,7 @@ chatClient.recallMessage(option).then((res) => {
 })
 
 // 监听要撤回的消息：
-chatClient.addEventHandler('MESSAGES',{
+chatClient.addEventHandler('handlerId',{
    onRecallMessage: => (msg) {
        // 接收到子区消息被撤回，添加处理逻辑。
        console.log('撤回成功'，msg)

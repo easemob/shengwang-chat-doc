@@ -63,7 +63,7 @@ chatClient
 你可以设置消息撤回监听，通过 `onRecallMessage` 监听消息撤回状态。
 
 ```javascript
-  chatClient.addEventHandler('MESSAGES',{
+  chatClient.addEventHandler('handlerId',{
    onRecallMessage: (msg) => {
       // 这里需要在本地删除对应的消息，也可以插入一条消息：“XXX撤回一条消息”。
       console.log('Recalling the message success'，msg)

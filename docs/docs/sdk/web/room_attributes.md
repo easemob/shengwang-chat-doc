@@ -111,16 +111,16 @@ chatClient.setChatRoomAttribute(option).then((res) => console.log(res));
 
 ```javascript
 const option = {
-    chatRoomId: "chatRoomId",  // 聊天室 ID
-    attributes: {  // 聊天室属性，为 key-value 格式，即 {"key":"value"}
-        "attributeKey1": "attributeValue1",
-     	"attributeKey2": "attributeValue2",
-      	"..."
-    },
-    autoDelete: true, // 成员退出聊天室时是否删除其设置的聊天室自定义属性（可选，默认为 `true`）
-	isForced: false  // 强制设置聊天室自定义属性，即是否支持覆盖其他成员设置的属性（可选，默认为 `false`）
-}
-chatClient.setChatRoomAttributes(option).then(res => console.log(res))
+  chatRoomId: "chatRoomId", // 聊天室 ID
+  attributes: {
+    // 聊天室属性，为 key-value 格式，即 {"key":"value"}
+    attributeKey1: "attributeValue1",
+    attributeKey2: "attributeValue2",
+  },
+  autoDelete: true, // 成员退出聊天室时是否删除其设置的聊天室自定义属性（可选，默认为 `true`）
+  isForced: false, // 强制设置聊天室自定义属性，即是否支持覆盖其他成员设置的属性（可选，默认为 `false`）
+};
+chatClient.setChatRoomAttributes(option).then((res) => console.log(res));
 ```
 
 #### 删除单个聊天室属性
