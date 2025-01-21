@@ -49,7 +49,7 @@
 
 添加好友，好友必须是和当前用户在一个 App ID 下的用户。
 
-对于免费版即时通讯服务，单个 App ID 下的每个用户的好友数量上限为 100，不同服务版本的 App ID 的该数量上限不同，具体可参考[版本功能介绍](https://www.easemob.com/pricing/im)。
+对于免费版即时通讯服务，单个 App ID 下的每个用户的好友数量上限为 100，不同服务版本的 App ID 的该数量上限不同，具体可参考[版本功能介绍](billing_strategy.html)。
 
 ### HTTP 请求
 
@@ -235,7 +235,7 @@ curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppT
 
 你可以调用该接口设置你在当前 app 下的好友的备注，即你和要设置备注的好友需在同一个 App ID 下。
 
-对于免费版即时通讯服务，单个 App ID 下的每个用户的好友数量上限为 100，不同服务套餐包的 App ID 的该数量上限不同，详见[套餐包功能详情](/product/pricing.html#套餐包功能详情)。
+对于免费版即时通讯服务，单个 App ID 下的每个用户的好友数量上限为 100，不同服务套餐包的 App ID 的该数量上限不同，详见[套餐包功能详情](billing_strategy.html#套餐包功能详情)。
 
 ### HTTP 请求
 
@@ -560,7 +560,7 @@ POST https://{host}/app-id/{app_id}/users/{username}/contacts/import
 | 异常类型 |  HTTP 状态码  | 错误信息     | 错误描述    |
 | :-------- | :----- | :------ |:----- |
 | `illegal_argument` | 400  | `request user over flow limit:10.`  | 请求 body 中传入的用户 ID 数量超过了 10。  |
-| `exceed_limit`  | 403   | `Inviter's contact max count.`  | 调用该接口的用户的好友数量已达上限。单个用户的好友数上限与你购买的套餐包相关，详见[套餐包功能详情](/product/pricing.html#套餐包功能详情)。 |
+| `exceed_limit`  | 403   | `Inviter's contact max count.`  | 调用该接口的用户的好友数量已达上限。单个用户的好友数上限与你购买的套餐包相关，详见[套餐包功能详情](billing_strategy.html#套餐包功能详情)。 |
 
 关于其他异常，你可以参考 [错误码](#错误码) 了解可能的原因。
 

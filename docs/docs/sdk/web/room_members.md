@@ -21,7 +21,7 @@
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)；
 - 了解即时通讯 IM 的使用限制，详见 [使用限制](limitation.html)；
-- 了解即时通讯 IM 聊天室不同套餐相关限制，详见 [即时通讯 IM 价格](https://www.easemob.com/pricing/im)。
+- 了解即时通讯 IM 聊天室不同套餐相关限制，详见 [即时通讯 IM 价格](billing_strategy.html)。
 
 ## 实现方法
 

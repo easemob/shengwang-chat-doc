@@ -33,6 +33,8 @@
 
 可以通过以下两种方式获取 SDK：
 
+// TODO：替换链接
+
 - 通过官网 [下载 SDK](https://www.easemob.com/download/im)。
 - [Uni-app Demo 源码中获取](https://github.com/easemob/webim-uniapp-demo)。
 

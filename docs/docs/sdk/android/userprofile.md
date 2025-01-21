@@ -141,6 +141,7 @@ ChatClient.getInstance().chatManager().sendMessage(message);
 
 如果需要在名片中展示更丰富的信息，可以在 `ext` 中增加更多字段。
 
+// TODO：替换链接
 可参考 [示例项目](https://www.easemob.com/download/im) 中的以下类：
 
 - `ChatUserCardAdapterDelegate`
