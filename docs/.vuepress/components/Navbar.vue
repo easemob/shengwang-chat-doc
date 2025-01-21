@@ -25,7 +25,12 @@ const goHome = () => {
         <span>文档中心</span>
       </a>
       <span class="color-#505E72">|</span>
-      <view class="text-14px color-black font-500"> 即时通讯IM </view>
+      <a
+        href="https://im.shengwang.cn/"
+        class="color-black text-18px font-500 cursor-pointer"
+      >
+        <view class="text-14px color-black font-500"> 即时通讯IM </view>
+      </a>
     </template>
     <template #endBefore>
       <Docsearch />
