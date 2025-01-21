@@ -55,12 +55,11 @@ import "shengwang-chat-uikit/style.css";
 
 4. 在**即时通讯 IM** 页面，进入**运营管理**标签页。
 
-5. 在**用户** 页签下，点击**创建IM用户**。
+5. 在**用户** 页签下，点击**创建 IM 用户**。
 
 6. 在弹出的对话框中，配置用户相关参数，点击**确定**。
 
 在正式环境中，你需要从你的 App Server 获取用户 token，详见[使用 Token 鉴权](/docs/sdk/server-side/token_authentication.html)。
-
 
 ```jsx
 import React from 'react';
@@ -72,7 +71,8 @@ ReactDOM.createRoot(document.getElementById('root') as Element).render(
       initConfig={{
         appId: 'your appId', // 你的 app Id
         userId: 'user ID', // 用户 ID
-        password: 'password', // 如果使用密码登录，传入密码。
+        token: 'token', // 如果使用 token 登录，传入 token。
+        // password: 'password', // 如果使用密码登录，传入密码。
       }}
     />
   </div>
@@ -116,6 +116,5 @@ const App = () => {
 
 ## 相关参考
 
-// TODO：替换链接
-- [组件库源码](https://github.com/shengwang/shengwang-UIKit-web)
-- [其他示例 demo](https://github.com/shengwang/shengwang-UIKit-web/tree/main/demo)
+- [组件库源码](https://github.com/Shengwang-Community/ShengwangChat-UIKit-web)
+- [其他示例 demo](https://github.com/Shengwang-Community/ShengwangChat-UIKit-web/tree/main/demo)
