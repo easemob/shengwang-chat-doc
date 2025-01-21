@@ -6,6 +6,10 @@
 
 本文介绍如何在即时通讯应用中发布、订阅和查询用户的在线状态。关于用户的在线、离线和自定义状态的定义、变更以及用户的实时感知，详见[用户在线状态管理](product_user_presence.html)。
 
+效果如下图：
+
+![img](/images/ios/status.png)
+
 ## 技术原理
 
 即时通讯 IM SDK 提供 `ChatPresence`、`ChatPresenceManager` 和 `ChatPresenceEventHandler` 类，用于管理在线状态订阅，包含如下核心方法：
@@ -26,10 +30,6 @@
 1. 用户 A 订阅用户 B 的在线状态；
 2. 用户 B 的在线状态发生变更；
 3. 用户 A 收到 B 的状态变更通知。
-
-效果如下图：
-
-![img](/images/ios/status.png)
 
 ## 前提条件
 
