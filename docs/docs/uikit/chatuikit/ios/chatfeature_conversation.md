@@ -1,6 +1,6 @@
 # 会话特性
 
-在会话列表页面，你 可以左滑或右滑单个会话进行会话操作，左滑菜单项包括会话免打扰、置顶会话和删除会话，右滑菜单包括会话已读和唤起更多菜单。
+在会话列表页面，你可以左滑或右滑单个会话进行会话操作，左滑菜单项包括会话免打扰、置顶会话和删除会话，右滑菜单包括会话已读和唤起更多菜单。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/ios/configurationitem/conversation/Appearance_conversation_swipeLeftActions.png" title="会话左滑和右滑" />
