@@ -482,7 +482,7 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 
 当 SDK 提供的消息类型不满足需求时，你可以通过消息扩展字段传递自定义的内容，从而生成自己需要的消息类型。
 
-当目前消息类型不满足用户需求时，可以在扩展部分保存更多信息，例如消息中需要携带被回复的消息内容或者是图文消息等场景。
+当目前消息类型不满足用户需求时，可以在扩展部分保存更多信息，例如，消息中需要携带被回复的消息内容或者是图文消息等场景。
 
 ```typescript
 let message = ChatMessage.createTxtSendMessage(toChatUsername, content);
@@ -496,6 +496,17 @@ ChatClient.getInstance().chatManager()?.sendMessage(message);
 let exts = message.ext();
 let attr1 = exts.get("attribute1") as string;
 let attr2 = exts.get("attribute2") as boolean;
+```
+
+`ChatMessage.setJsonAttribute` 方法用于设置 JSON 结构的扩展信息。
+
+```typescript
+let jsonStr = JSON.stringify({
+  'key1':999,
+  'key2':"1",
+  'key3':true
+});
+message?.setJsonAttribute('json', jsonStr);
 ```
 
 ## 更多

@@ -107,7 +107,11 @@
 | `event`        | String | 对于群组和聊天室，该参数的值固定为 `group_op_event`。接收方可按此字段区分是否是群组/聊天室操作事件。 |
 | `operation`    | String | 操作。移除群组/聊天室管理员的操作为 `ADMIN`。 |
 | `operator`     | String | 操作人。若 app 管理员移除了管理员，该参数的值固定为 `@ppAdmin`。         |
-| `timestamp`    | Long   | 操作完成的时间戳。      | 
+| `timestamp`    | Long   | 操作完成的时间戳。      |
+
+## 其他说明
+
+**群组操作的事件以及子事件后续会有更多新增。若业务强依赖这些事件或者子事件，业务中需添加对`operation` 和 `payload.type` 的强判断。**
 
 
 
