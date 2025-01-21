@@ -1,108 +1,31 @@
-# iOS 单群聊 UIKit 更新日志
+# 版本 V2.0.0 2025-1-24
 
-## 版本 4.11.0
+该版本为单群聊 UIKit 第一个正式发布的版本，支持实现如下页面：
 
-### 问题修复
+1. [聊天页面](chatuikit_custom_chat.html)
 
-修复了部分 `UIKit内ChatNavigationBar` 继承后需要调用内部指定初始化器，与系统的初始化方法同名导致递归的问题。
+- 支持发送各种类型的消息、文件共享、消息回执、消息审核、消息搜索和群组 @ 提及等消息功能。
+- 支持自定义聊天页面样式：
+  - 配置聊天页面的导航栏、消息列表项等，包括设置头像样式、昵称、聊天列表区域的背景、文本字体大小和颜色以及发送/接收消息气泡区域的背景等。
+  - 消息长按后的菜单项：支持消息长按后弹出类似微信样式的弹窗和仿系统样式。
+  - 发送附件消息弹窗样式：支持类似微信样式的弹窗和仿系统样式。
 
-## 版本 4.11.0
+2. [会话列表页面](chatuikit_custom_conversation_list.html)
 
-### 问题修复
+- 支持通过左滑或右滑单个会话进行会话操作，实现会话已读、置顶、免打扰和删除功能。支持开启或关闭会话免打扰和置顶功能。
+- 支持自定义会话列表页面：支持自定义会话列表页面导航栏、和会话列表项，包括会话条目的背景、头像、标题和内容的文字颜色和大小等。
 
-- 修复微信风格样式的发送附件消息菜单与表情键盘点击互相影响的问题。
-- 修复了微信风格长按菜单多个扩展显示的问题。
-- 修复了完全自定义消息文档缺失的问题，以及原来只能自定义一种自定义消息样式的问题。详见[实现新类型的自定义消息 Cell](chatuikit_custom_cell.html)。
+1. [通讯录页面](chatuikit_contactlist.html)
 
-## 版本 4.10.1
+- 用于展示通讯录列表，包括联系人搜索，添加联系人，好友申请列表入口，群组列表入口，联系人列表。
+- 支持设置联系人页面导航栏、联系人列表 Header 和联系人列表条目，例如设置成可选择的联系人列表和设置联系人头像样式。
 
-修复了 Xcode16 以下版本 build 时关键字 @retroactive 报错问题。
+4. [联系人详情页面](chatuikit_custom_contact_details.html)
+   
+- 展示联系人的详情，包括联系人备注、电话等信息以及是否对会话开启消息免打扰、拉黑联系人等。
+- 支持配置联系人详情页面的导航栏和中间的按钮等。
 
-## 版本 4.10.0
+5. [群组详情页面](chatuikit_custom_group_details.html)
 
-### 新增特性
-
-- [消息长按菜单样式新增微信风格样式](chatuikit_custom_chat.html#设置消息长按后显示的操作)；
-- [发送附件消息菜单新增微信风格样式](chatuikit_custom_chat.html#设置附件消息)。
-
-### 交互优化
-
-优化了部分发送消息以及消息选中等交互体验。
-
-### 问题修复
-
-- 修复了不需要消息表情回应时 UI 错乱问题。
-- 修复了一些文案问题。
-- 修复了群详情页面中解散群组请求中强引用的问题。
-
-### 重大变更
-
-由于业务原因对一些类进行了重命名，若要升级需针对如下改动处理编译错误。
-
-`EaseChatUIKit` 中携带的 `Ease` 前缀的类的名称均去掉了 `Ease` 前缀，具体变更如下表所示：
-
-| UIKit 变更项      | 类名变更 | 
-| :--------- | :----- | 
-| 版本号变量名  | `EaseChatUIKit_VERSION` -> `ChatUIKit_VERSION`  | 
-| option 类名 | `EaseChatUIKitOptions` -> `ChatUIKitOptions`       | 
-| 初始化类名 | `EaseChatUIKitClient` -> `ChatUIKitClient `       | 
-| 缓存类名   | `EaseChatUIKitContext` -> `ChatUIKitContext`       | 
-| 用户个人信息协议名 | `EaseProfileProtocol` -> `ChatUserProfileProtocol` | 
-| 用户信息提供协议名 | 1. `EaseProfileProvider` -> `ChatUserProfileProvider` <br/> 2. `EaseProfileProviderOC` -> `ChatUserProfileProviderOC`      | 
-| 群组信息提供协议名   | 1. `EaseGroupProfileProvider` -> `ChatGroupProfileProvider` <br/> 2. `EaseGroupProfileProviderOC` -> `ChatGroupProfileProviderOC`      | 
-| 公共导航组件类名 | 1. `EaseChatNavigationBar`-> `ChatNavigationBar` <br/> 2. 对应枚举类名变动：`EaseChatNavigationBarClickEvent` -> `ChatNavigationBarClickEvent` | 
-
-## 版本 4.8.0
-
-本版本新增如下功能：
-
-- 消息页面：
-  - 消息置顶
-  - 文本消息 URL 预览
-  - 消息输入中状态
-- 联系人黑名单
-
-## 版本 4.6.0
-
-从 V4.6.0 版本开始会启用 Swift 语言编写的新的 `EaseChatUIKit` 与 `EaseChatDemo`，老版本 Demo 和 UIKit 逐渐不再维护，请参考：
-- [UIKit 文档](https://doc.easemob.com/docs/uikit/chatuikit/ios/chatuikit_overview.html)
-- [Demo 源码](https://github.com/easemob/chat-ios/tree/SwiftDemo)
-
-本版本新增了如下功能、组件和工具类：
-
-1. 会话列表界面：
-- 会话置顶
-- 会话删除
-- 会话免打扰
-- 会话已读
-- 更多扩展操作菜单
-
-2. 联系人列表界面：
-- 联系人列表
-- 好友请求
-- 群组列表及其后续
-
-3. 聊天界面：
-- 消息内容的显示可配置
-- 消息扩展功能复制、删除、多选合并转发、单条转发、撤回、创建话题（群内消息）、表情回应、消息回复、消息翻译、消息举报、消息编辑
-- 发送文本、音频、视频、文件、联系人名片、表情、图片
-- 各种消息的预览
-- 消息气泡两种样式切换
-- 后续消息搜索等
-
-4. 公共 UI 组件：
-- 导航栏
-- 弹窗
-- 底部弹层
-- Loading 页面
-- Toast 工具
-- 图片加载存储组件
-- 换肤协议工具
-- 字体工具类
-- 主题颜色工具类
-
-5. 工具类：
-- 国际化工具
-- 音频 AMR 格式转换工具
-- 各种扩展工具
-
+- 展示群组详情，包括群成员、群名称、群描述、当前用户在本群中的昵称以及是否对群组开启消息免打扰等功能。
+- 支持配置群组详情页面的导航栏和中间的按钮等。
