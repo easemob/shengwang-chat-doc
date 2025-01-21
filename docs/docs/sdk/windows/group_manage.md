@@ -25,7 +25,7 @@
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)；
 - 了解即时通讯 IM 的使用限制，详见 [使用限制](limitation.html)；
-- 了解群组和群成员的数量限制，详见 [套餐包详情](https://www.easemob.com/pricing/im)。
+- 了解群组和群成员的数量限制，详见 [套餐包详情](billing_strategy.html)。
 
 ## 实现方法
 
@@ -223,7 +223,7 @@ SDKClient.Instance.GroupManager.FetchPublicGroupsFromServer(pageSize, cursor, ca
 
 ### 查询当前用户已加入的群组数量
 
-你可以调用 `FetchMyGroupsCount` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见[产品价格](/product/pricing.html#套餐包功能详情)。
+你可以调用 `FetchMyGroupsCount` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见[产品价格](billing_strategy.html#套餐包功能详情)。
 
 ```csharp
 SDKClient.Instance.GroupManager.FetchMyGroupsCount(new ValueCallBack<int>(

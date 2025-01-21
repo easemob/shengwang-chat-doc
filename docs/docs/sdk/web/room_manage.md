@@ -27,7 +27,7 @@
 
 - 完成 SDK 初始化，详见 [快速开始](quickstart.html)；
 - 了解即时通讯 IM 的 使用限制，详见 [使用限制](limitation.html)；
-- 了解即时通讯 IM 聊天室不同版本的数量限制，详见 [即时通讯 IM 价格](https://www.easemob.com/pricing/im)；
+- 了解即时通讯 IM 聊天室不同版本的数量限制，详见 [即时通讯 IM 价格](billing_strategy.html)；
 - 仅 [超级管理员](/docs/sdk/server-side/chatroom_superadmin.html) 可以创建聊天室；
 - 聊天室创建者和管理员的数量之和不能超过 100 ，即管理员最多可添加 99 个。
 

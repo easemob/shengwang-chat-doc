@@ -20,7 +20,7 @@
 
 4. 查看推送证书是否存和证书推送测试。
 
-在[声网控制台](https://console.easemob.com) 的 **即时通讯** > **功能配置** > **消息推送** > **证书管理**页面选择要测试的推送证书（用户绑定的推送证书），选择 **更多** > **测试**。
+在[声网控制台](https://console.shengwang.cn/overview) 的 **即时通讯 IM** > **功能配置** > **推送证书** > **添加推送证书**页面选择要测试的推送证书（用户绑定的推送证书），选择 **更多** > **测试**。
 
 ![image](/images/android/push/push_notification_test.png)
 
@@ -28,7 +28,7 @@
 
 ![image](/images/android/push/huawei_push_notification_test.png)
 
-5. 查看是否超过了厂商通道限制。
+1. 查看是否超过了厂商通道限制。
 
 详见[推送消息分类](push_message_classification.html)。
 

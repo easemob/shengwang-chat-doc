@@ -258,7 +258,7 @@
 | leaveChatroom                                                                                       | 退出聊天室。                                                            |
 | getChatroomsFromServer                          | 从服务器获取聊天室数据，支持分页。                          |
 | getChatroomSpecificationFromServer                                                                   | 从服务器获取聊天室的详细信息。                                  |
-| String, ValueCallBack) asyncChangeChatRoomSubject                                      | 修改聊天室名称。   | // TODO：
+| asyncChangeChatRoomSubject                                      | 修改聊天室名称。   | 
 | updateSubject                              | 修改聊天室描述。                                           |
 | getChatroomMemberListFromServer                                   | 获取聊天室成员列表。                                               |
 | muteMembers                                      | 在聊天室中禁言成员。                                                 |

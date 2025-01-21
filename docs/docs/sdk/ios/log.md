@@ -32,7 +32,7 @@ SDK 会写入日志文件到本地。日志文件路径如下：沙箱 Library/A
 以真机为例，获取本地日志过程如下：
 
 - 打开 Xcode，连接设备，选择 **Xcode** > **Window** > **Devices and Simulators**。
-- 进入 **Devices** 选项卡，在左侧选择目标设备，例如 Easemob IM，点击设置图标，然后选择 **Download Container**。// TODO：改成 Agora ID？
+- 进入 **Devices** 选项卡，在左侧选择目标设备，例如 Easemob IM，点击设置图标，然后选择 **Download Container**。// TODO：改成 Agora IM？
 
 ![img](/images/ios/overview_fetchlogfile.png)
 

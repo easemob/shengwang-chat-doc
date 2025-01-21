@@ -58,7 +58,7 @@ export const zhSidebar = sidebar({
         { text: "产品动态", link: "product_dynamics.html" },
         { text: "IM 产品使用限制", link: "limitation.html" },
         { text: "接口频率限制", link: "limitationapi.html" },
-        { text: "产品价格", link: "pricing.html" },
+        { text: "产品价格", link: "billing_strategy.html" },
         { text: "术语表", link: "glossary.html" },
       ],
     },
