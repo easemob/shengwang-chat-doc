@@ -9,7 +9,7 @@
 
 消息相关功能，详见[功能介绍文档](chatfeature_message.html)。
 
-你可以配置聊天页面的导航栏、消息列表项、输入框和跳转事件等。详见 [MessageListController.swift](https://github.com/AgoraIO-Usecase/ShengwangChat-ios/blob/main/Sources/EaseChatUIKit/Classes/UI/Components/Chat/Controllers/MessageListController.swift)。
+你可以配置聊天页面的导航栏、消息列表项、输入框和跳转事件等。详见 [MessageListController.swift](https://github.com/Shengwang-Community/ShengwangChat-UIKit-ios/blob/main/Sources/EaseChatUIKit/Classes/UI/Components/Chat/Controllers/MessageListController.swift)。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/ios/custom_chat.png" title="聊天页面" />

@@ -18,8 +18,7 @@
 
 ### 第一步 下载示例代码
 
-// TODO：替换链接
-前往 [GitHub 源码](https://github.com/AgoraIO-Usecase/ShengwangChat-ios)下载示例代码到本机。
+前往 [GitHub 源码](https://github.com/Shengwang-Community/ShengwangChat-UIKit-ios)下载示例代码到本机。
 
 ### 第二步 执行 pod 命令
 

@@ -1,8 +1,6 @@
 # 设置群详情页面
 
-// TODO：替换链接
-
-你可以配置群详情页面的导航栏、点击右侧图片显示的群组操作和群详情自定义列表项等。详见 [GroupInfoViewController](https://github.com/AgoraIO-Usecase/ShengwangChat-ios/tree/main/Documentation/ShengwangChatUIKit.doccarchive/documentation/easechatuikit/groupinfoviewcontroller)。
+你可以配置群详情页面的导航栏、点击右侧图片显示的群组操作和群详情自定义列表项等。详见 [GroupInfoViewController](https://github.com/Shengwang-Community/ShengwangChat-UIKit-ios/blob/main/Sources/EaseChatUIKit/Classes/UI/Components/Contact/Controllers/ContactInfoViewController.swift)。
 
 <ImageGallery>
   <ImageItem src="/images/uikit/chatuikit/ios/custom_group_details.png" title="群详情页面" />
