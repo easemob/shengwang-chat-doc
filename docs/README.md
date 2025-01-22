@@ -5,7 +5,7 @@ heroText: false
 tagline: false
 starter:
   - title: "客户端 SDK"
-    desc: "从下面的列表中选择合适你的 SDK 构建即时通讯应用，点击“快速开始”按钮将引导你在 30 分钟内实现即时通讯消息收发。"
+    desc: "从下面的列表中选择适合你的 SDK 构建即时通讯应用，点击“快速开始”按钮将引导你在 30 分钟内实现即时通讯消息收发。"
     platform:
       - icon: /sdk/android.svg
         link: /docs/sdk/android/quickstart.html
@@ -30,15 +30,15 @@ starter:
       - icon: /sdk/flutter.svg
         link: /docs/sdk/flutter/quickstart.html
         text: Flutter
-        desc: "学习使用 Flutter SDK 构建即时通讯的 跨平台 应用程序。"
+        desc: "学习使用 Flutter SDK 构建即时通讯的跨平台应用程序。"
       - icon: /sdk/react.svg
         link: /docs/sdk/react-native/quickstart.html
         text: React Native
-        desc: "学习使用 React-Native SDK 构建即时通讯的 跨平台 应用程序。"
+        desc: "学习使用 React-Native SDK 构建即时通讯的跨平台应用程序。"
       - icon: /sdk/unity.svg
         link: /docs/sdk/unity/quickstart.html
         text: Unity
-        desc: "学习使用 Unity SDK 构建即时通讯的 跨平台 应用程序。"
+        desc: "学习使用 Unity SDK 构建即时通讯的跨平台应用程序。"
       - icon: /sdk/windows.svg
         link: /docs/sdk/windows/quickstart.html
         text: Windows  
@@ -61,18 +61,18 @@ starter:
       - icon: /sdk/flutter.svg
         link: /docs/uikit/chatuikit/flutter/chatuikit_overview.html
         text: Flutter
-        desc: "学习使用 Flutter UIKit 构建即时通讯的 跨平台 应用程序。"
+        desc: "学习使用 Flutter UIKit 构建即时通讯的跨平台应用程序。"
       - icon: /sdk/react.svg
         link: /docs/uikit/chatuikit/react-native/chatuikit_overview.html
         text: React Native
-        desc: "学习使用 React-Native UIKit 构建即时通讯的 跨平台 应用程序。"
+        desc: "学习使用 React-Native UIKit 构建即时通讯的跨平台应用程序。"
   - title: "服务端 API"
     desc: "从下面的列表中选择合适你的 SDK 构建即时通讯应用，点击“快速开始”按钮将引导你在 30 分钟内实现即时通讯消息收发。"
     platform:
       - icon: /sdk/rest.svg
         link: /docs/sdk/server-side/overview.html
         text: REST
-        desc: "学习使用 Restful API 构建即时通讯的应用服务。"
+        desc: "学习使用 RESTful API 构建即时通讯的应用服务。"
       - icon: ""
         link: ""
         text: ""
