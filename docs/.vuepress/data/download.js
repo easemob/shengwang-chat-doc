@@ -72,7 +72,7 @@ export const clientSDKDownloadInfo = [
     package: "agora-im",
     md5: "9aa4b2a542f3197ac9f905e20c5b7889",
     updateTime: "2025-01-26",
-    releaseNote: "document/flutter/releasenote.html",
+    releaseNote: "docs/sdk/flutter/releasenote.html",
     downloadLink:
       "https://pub.dev/packages/shengwang_chat_sdk"
   },
@@ -83,7 +83,7 @@ export const clientSDKDownloadInfo = [
     package: "agora-im",
     md5: "9aa4b2a542f3197ac9f905e20c5b7889",
     updateTime: "2025-01-26",
-    releaseNote: "document/react-native/releasenote.html",
+    releaseNote: "docs/sdk/react-native/releasenote.html",
     downloadLink:
       "https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/WEB_SDK/4.9.1/websdk.zip"
   },
@@ -94,7 +94,7 @@ export const clientSDKDownloadInfo = [
     package: "agora-im",
     md5: "9aa4b2a542f3197ac9f905e20c5b7889",
     updateTime: "2025-01-26",
-    releaseNote: "document/unity/releasenote.html",
+    releaseNote: "docs/sdk/unity/releasenote.html",
     downloadLink:
       "https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/WEB_SDK/4.9.1/websdk.zip"
   }
