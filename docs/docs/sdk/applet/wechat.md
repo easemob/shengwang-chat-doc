@@ -16,66 +16,28 @@
 
 登录[微信公众平台](https://mp.weixin.qq.com/), 在开发设置页面配置以下服务器域名。
 
-// TODO 更换域名
-
 :::tip
 request 合法域名：
 
-1. https://a1.easemob.com
-2. https://a2.easemob.com
-3. https://a3.easemob.com
-4. https://a4.easemob.com
-5. https://a5.easemob.com
-6. https://a1-chatfile.easemob.com
-7. https://rs.chat.agora.io
-8. https://rs.easemob.com
+1. https://c1.chat.rtnsvc.com
+2. https://c1.chat.realtimemesh.com
+3. https://rs.chat.rtnsvc.com
+4. https://rs.chat.realtimemesh.com
    :::
 
 :::tip
 socket 合法域名：
-wss://im-api-wechat.easemob.com（3.0 IM SDK）
+wss://im-api-wechat-c1.chat.rtnsvc.com
+wss://im-api-wechat-c1.chat.realtimemesh.com
 :::
 
 :::tip
-uploadFile 合法域名：
-https://a1.easemob.com
-:::
+uploadFile, downloadFile 合法域名：
 
-:::tip
-downloadFile 合法域名：
-
-1. https://a1-v2.easemob.com
-2. https://a4.easemob.com
-3. https://a1.easemob.com
-4. https://a4-v2.easemob.com
-5. https://a3-v2.easemob.com
-6. https://a5-v2.easemob.com
-7. https://a2-v2.easemob.com
-8. https://a1-chatfile.easemob.com
+1. https://c1.chat.rtnsvc.com
+2. https://c1.chat.realtimemesh.com
+3. https://c1-chatfile.chat.rtnsvc.com
    :::
-
-:::tip
-为满足不同客户的业务需求，声网在多地部署了数据中心。不同数据中心的 REST API 请求域名、WebSocket 访问域名不同。请根据您所在数据中心进行配置。
-:::
-
-// TODO：目前声网 IM 只有一个数据中心，下面的提示是否要删掉？
-
-声网不同数据中心的 REST API 请求域名、WebSocket 访问域名：
-
-// TODO：替换表格中的地址
-
-| 数据中心    | REST API 请求地址                        | WebSocket 访问域名                                             |
-| ----------- | ---------------------------------------- | -------------------------------------------------------------- |
-| 国内 1 区   | a1.easemob.com                           | im-api-wechat.easemob.com 或 im-api-wechat.easecdn.com         |
-| 国内 2 区   | a31.easemob.com                          | im-api-wechat-31.easemob.com 或 im-api-wechat-31.easecdn.com   |
-| 国内 VIP 区 | 请咨询商务经理                           | 请咨询商务经理                                                 |
-| 客服专用    | 请咨询商务经理                           | 请咨询商务经理                                                 |
-| 新加坡 1 区 | a1-sgp.easemob.com 或 a1-sgp.easecdn.com | im-api-wechat-sgp.easemob.com 或 im-api-wechat-sgp.easecdn.com |
-| 新加坡 2 区 | a61.easemob.com 或 a61.easecdn.com       | im-api-wechat-61.easemob.com 或 im-api-wechat-61.easecdn.com   |
-| 美东 1 区   | a41.easemob.com 或 a41.easecdn.com       | im-api-wechat-41.easemob.com 或 im-api-wechat-41.easecdn.com   |
-| 德国 2 区   | a71.easemob.com 或 a71.easecdn.com       | im-api-wechat-71.easemob.com 或 im-api-wechat-71.easecdn.com   |
-
-关于如何查看应用所在数据中心，详见[数据中心文档](data.center.html#查看数据中心)。
 
 ### 集成 SDK
 
@@ -83,17 +45,16 @@ downloadFile 合法域名：
 
 可以通过以下两种方式获取 SDK：
 
-// TODO：替换链接
+- 通过 CDN[下载 SDK](https://download.shengwang.cn/sdk/release/shengwang-chat-web-1.3.2.zip)。
+- 通过 npm 下载 'shengwang-chat'。
 
-- 通过官网 [下载 SDK](https://www.easemob.com/download/im)。
-- 从声网的 [github 仓库](https://github.com/easemob/webim-weixin-xcx/tree/master/src/sdk) 中获取 SDK 中的文件。
+sdk 文件为 miniProgram 文件夹下的 Shengwang-chat.js
 
 #### 引入 SDK
 
 - 开始一个全新的项目。
-  1. 将下载的 SDK（src/sdk/）导入到自己的项目中。// TODO：括号中的描述对吗？
-  2. 引入 SDK：`import ChatSDK from "../sdk/Shengwang-chat-miniProgram";`
-- 基于 Demo 二次开发。  // TODO：需要提 Demo 吗？
+  1. 将下载的 SDK 导入到自己的项目中。
+  2. 引入 SDK：`import ChatSDK from "./Shengwang-chat";`
 
 将下载的代码导入开发者工具即可运行起来。
 
@@ -101,7 +62,7 @@ downloadFile 合法域名：
 
 ```javascript
 //使用示例
-import ChatSDK from "../sdk/Shengwang-chat-miniProgram";
+import ChatSDK from "./Shengwang-chat";
 ```
 
 #### 实例调用方式

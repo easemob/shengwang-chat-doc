@@ -35,17 +35,17 @@
 
 创建群组时，需设置以下参数：
 
-| 参数                | 类型   | 描述    |
-| :-------- | :----- | :------------- |
-| `groupname`         | String | 群组名称。   |
-| `desc`              | String | 群组描述。      |
-| `members`           | Array  | 群成员的用户 ID 组成的数组，不包含群主的用户 ID。                         |
-| `public`            | Bool   | 是否为公开群：<br/> - `true`：是；<br/> - `false`：否。该群组为私有群。       |
-| `approval`          | Bool   | 入群申请是否需群主或管理员审批：<br/> - `true`：需要；<br/> - `false`：不需要。<br/>由于私有群不支持用户申请入群，只能通过邀请方式进群，因此该参数仅对公开群有效，即 `public` 设置为 `true` 时，对私有群无效。         |
+| 参数                | 类型   | 描述                                                                                                                                                                                                                                                                   |
+| :------------------ | :----- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `groupname`         | String | 群组名称。                                                                                                                                                                                                                                                             |
+| `desc`              | String | 群组描述。                                                                                                                                                                                                                                                             |
+| `members`           | Array  | 群成员的用户 ID 组成的数组，不包含群主的用户 ID。                                                                                                                                                                                                                      |
+| `public`            | Bool   | 是否为公开群：<br/> - `true`：是；<br/> - `false`：否。该群组为私有群。                                                                                                                                                                                                |
+| `approval`          | Bool   | 入群申请是否需群主或管理员审批：<br/> - `true`：需要；<br/> - `false`：不需要。<br/>由于私有群不支持用户申请入群，只能通过邀请方式进群，因此该参数仅对公开群有效，即 `public` 设置为 `true` 时，对私有群无效。                                                         |
 | `allowinvites`      | Bool   | 是否允许普通群成员邀请人入群：<br/> - `true`：允许；<br/> - `false`：不允许。只有群主和管理员才可以向群组添加用户。<br/>该参数仅对私有群有效，即 `public` 设置为 `false` 时， 因为公开群（public：`true`）仅支持群主和群管理员邀请人入群，不支持普通群成员邀请人入群。 |
-| `inviteNeedConfirm` | Bool   | 邀请加群时是否需要受邀用户确认：<br/> - `true`：受邀用户需同意才会加入群组；<br/> - `false`：受邀用户直接加入群组，无需确认。      |
-| `maxusers`          | Int    | 群组最大成员数，默认为 `200`。不同套餐支持的人数上限不同，详见 [产品价格](billing_strategy.html#套餐包功能详情)。          |
-| `ext`               | String | 群组扩展信息，例如可以给群组添加业务相关的标记，不要超过 8 KB。      |
+| `inviteNeedConfirm` | Bool   | 邀请加群时是否需要受邀用户确认：<br/> - `true`：受邀用户需同意才会加入群组；<br/> - `false`：受邀用户直接加入群组，无需确认。                                                                                                                                          |
+| `maxusers`          | Int    | 群组最大成员数，默认为 `200`。不同套餐支持的人数上限不同，详见 [产品价格](billing_strategy.html#套餐包功能详情)。                                                                                                                                                      |
+| `ext`               | String | 群组扩展信息，例如可以给群组添加业务相关的标记，不要超过 8 KB。                                                                                                                                                                                                        |
 
 创建群组的示例代码如下：
 
@@ -83,22 +83,22 @@ chatClient.inviteUsersToGroup({
 
 (2). 受邀用户会收到 `inviteToJoin` 事件，自动进群或确认是否加入群组。
 
-   入群邀请是否需受邀用户确认取决于群组选项 `inviteNeedConfirm` 的设置：
+入群邀请是否需受邀用户确认取决于群组选项 `inviteNeedConfirm` 的设置：
 
-   - `inviteNeedConfirm` 设置为 `false` 时，受邀用户直接进群，无需确认，群组所有成员会收到 `memberPresence` 事件。
-   - `inviteNeedConfirm` 设置为 `true` 时，受邀用户需确认是否加入群组。
+- `inviteNeedConfirm` 设置为 `false` 时，受邀用户直接进群，无需确认，群组所有成员会收到 `memberPresence` 事件。
+- `inviteNeedConfirm` 设置为 `true` 时，受邀用户需确认是否加入群组。
 
-     - 受邀用户同意加入群组，需要调用 `acceptGroupJoinRequest` 方法。用户加入成功后，邀请人会收到 `acceptInvite` 事件，群组所有成员会收到 `memberPresence` 事件。
+  - 受邀用户同意加入群组，需要调用 `acceptGroupJoinRequest` 方法。用户加入成功后，邀请人会收到 `acceptInvite` 事件，群组所有成员会收到 `memberPresence` 事件。
 
-     ```javascript
-     chatClient.acceptGroupInvite({ invitee: "myUserId", groupId: "groupId" });
-     ```
+  ```javascript
+  chatClient.acceptGroupInvite({ invitee: "myUserId", groupId: "groupId" });
+  ```
 
-     - 受邀用户拒绝入群，需要调用 `rejectGroupJoinRequest` 方法。邀请人会收到 `rejectInvite` 事件。
+  - 受邀用户拒绝入群，需要调用 `rejectGroupJoinRequest` 方法。邀请人会收到 `rejectInvite` 事件。
 
-     ```javascript
-     chatClient.rejectGroupInvite({ invitee: "myUserId", groupId: "groupId" });
-     ```
+  ```javascript
+  chatClient.rejectGroupInvite({ invitee: "myUserId", groupId: "groupId" });
+  ```
 
 3、用户加入群组后，可以收发群消息。
 
@@ -182,7 +182,7 @@ SDK 提供 `addEventHandler` 方法用于注册监听事件。开发者可以通
 ```javascript
 // 创建一个群组事件监听器
 // 在该方法的举例中，用户 A 表示当前用户。
-chatClient.addEventHandler("eventName", {
+chatClient.addEventHandler("handlerId", {
   onGroupEvent: function (msg) {
     switch (msg.operation) {
       // 有新群组创建。群主的其他设备会收到该回调。

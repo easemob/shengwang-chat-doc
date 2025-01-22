@@ -249,9 +249,6 @@ const switchTheme = () => {
 
 ## 相关参考
 
-// TODO：替换链接
-
-- [示例项目源码](https://github.com/shengwang/webim-vue-demo/tree/chat-uikit-vue-demo)
-- [组件库源码](https://github.com/shengwang/shengwang-UIKit-web)
-- [其他示例 demo](https://github.com/shengwang/shengwang-uikit-react/tree/main/demo)
+- [组件库源码](https://github.com/Shengwang-Community/ShengwangChat-UIKit-web)
+- [其他示例 demo](https://github.com/Shengwang-Community/ShengwangChat-UIKit-web/tree/main/demo)
 - [`UIKitProvider` 文档](https://doc.shengwang.com/docs/uikit/chatuikit/web/chatuikit_provider.html)

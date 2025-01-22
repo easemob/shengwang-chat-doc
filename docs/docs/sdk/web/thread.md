@@ -64,7 +64,7 @@ chatClient.addEventHandler("handlerId", {
 // 解散子区
 chatClient.destroyChatThread({ chatThreadId: "chatThreadId" });
 // 监听子区解散回调
-chatClient.addEventHandler("THREAD", {
+chatClient.addEventHandler("handlerId", {
   onChatThreadChange: (threadMsg) => {
     console.log(threadMsg);
   },

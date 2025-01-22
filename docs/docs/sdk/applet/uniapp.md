@@ -6,10 +6,8 @@
 
 :::tip
 
-// TODO：这里的版本号对吗？
 - uniapp SDK 目前支持微信、支付宝、QQ、百度小程序、抖音（请使用低于 1.70.0 以下的版本基础库）、uni-app 编译的 原生 Android 以及 iOS。
-- uniapp SDK 4.11.0 及以上版本支持鸿蒙系统。
-:::
+  :::
 
 ## 功能说明
 
@@ -32,62 +30,37 @@
 
 之后登录 HBuilderx 编辑器，小程序的开发环境准备完毕。
 
-即将开发的平台配置服务          // TODO：这句话还需要吗？
+即将开发的平台配置服务
 
 ### 配置服务器域名（以微信为例）
 
-// TODO：目前声网 IM 只有一个数据中心，这两段是否要删掉？
-
-为满足不同客户的业务需求，声网在多地部署了数据中心。不同数据中心的 REST API 请求域名、WebSocket 访问域名不同。请根据您所在数据中心进行配置。
-
-声网不同数据中心的 REST API 请求域名、WebSocket 访问域名：
-
-// TODO：替换表格中的地址
-
-| 数据中心    | REST API 请求地址                        | WebSocket 访问域名                                             |
-| ----------- | ---------------------------------------- | -------------------------------------------------------------- |
-| 国内 1 区   | a1.easemob.com                           | im-api-wechat.easemob.com 或 im-api-wechat.easecdn.com         |
-| 国内 2 区   | a31.easemob.com                          | im-api-wechat-31.easemob.com 或 im-api-wechat-31.easecdn.com   |
-| 国内 VIP 区 | 请咨询商务经理                           | 请咨询商务经理                                                 |
-| 客服专用    | 请咨询商务经理                           | 请咨询商务经理                                                 |
-| 新加坡 1 区 | a1-sgp.easemob.com 或 a1-sgp.easecdn.com | im-api-wechat-sgp.easemob.com 或 im-api-wechat-sgp.easecdn.com |
-| 新加坡 2 区 | a61.easemob.com 或 a61.easecdn.com       | im-api-wechat-61.easemob.com 或 im-api-wechat-61.easecdn.com   |
-| 美东 1 区   | a41.easemob.com 或 a41.easecdn.com       | im-api-wechat-41.easemob.com 或 im-api-wechat-41.easecdn.com   |
-| 德国 2 区   | a71.easemob.com 或 a71.easecdn.com       | im-api-wechat-71.easemob.com 或 im-api-wechat-71.easecdn.com   |
-
-关于如何查看应用所在数据中心，详见[数据中心文档](data.center.html#查看数据中心)。
-
 登录 [微信公众平台](https://mp.weixin.qq.com/)，进入 **开发 > 开发设置** 页面，配置以下服务器地址（其他平台小程序配置与微信一致）：
 
-// TODO：替换域名
 :::tip
-request 合法域名，uploadFile 合法域名，downloadFile 合法域名
+request 合法域名：
 
-1. https://a1.easemob.com
-2. https://a2.easemob.com
-3. https://a3.easemob.com
-4. https://a4.easemob.com
-5. https://a5.easemob.com
-6. https://a31.easemob.com
-7. https://a1-sgp.easemob.com
-8. https://a41.easemob.com
-9. https://a51.easemob.com
-10. https://a1-chatfile.easemob.com
-11. https://rs.chat.agora.io
-12. https://rs.easemob.com
-    :::
+1. https://c1.chat.rtnsvc.com
+2. https://c1.chat.realtimemesh.com
+3. https://rs.chat.rtnsvc.com
+4. https://rs.chat.realtimemesh.com
+   :::
 
 :::tip
-socket 合法域名:
+socket 合法域名：
+wss://im-api-wechat-c1.chat.rtnsvc.com
+wss://im-api-wechat-c1.chat.realtimemesh.com
+:::
 
-1. wss://im-api-wechat.easemob.com（3.0 IM SDK）
-2. wss://im-api-wechat-31.easemob.com
-3. wss://im-api-alipay.easemob.com/websocket（支付宝小程序专用）
-4. wss://im-api-alipay-31.easemob.com/websocket（支付宝小程序专用）
+:::tip
+uploadFile, downloadFile 合法域名：
+
+1. https://c1.chat.rtnsvc.com
+2. https://c1.chat.realtimemesh.com
+3. https://c1-chatfile.chat.rtnsvc.com
    :::
 
 ### 各端小程序 WebSocket 连接数量
-// TODO：版本号和描述对吗？
+
 - QQ、微信小程序： `**1.7.0**` 及以上版本，最多可以同时存在 **5** 个 WebSocket 连接
 - 字节小程序： `**1.0.0**` 及以上版本 （在当前小程序页面已经有一个 WebSocket 连接的情况下，如果再创建一个 WebSocket 连接，会重新创建一个 WebSocket 连接，但是之前创建的 WebSocket 连接并不会自动关闭。）
 - 百度小程序：`**1.9.4**` 及以上版本，支持存在多个 WebSokcet 连接，每次成功调用会返回一个新的 SocketTask
@@ -106,7 +79,6 @@ socket 合法域名:
 - 开始一个全新的项目：
   1. 安装 `shengwang-chat` npm 包。
   2. 直接使用 `import/require` 方式获取引用，如果使用 mpvue 保持引文件方式的统一。
-- 基于 Demo 二次开发。
 
 拉取代码，HBuilder 运行。
 

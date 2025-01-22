@@ -52,7 +52,7 @@ chatClient.send(msg);
 :::
 
 ```javascript
-chatClient.addEventHandler("customEvent", {
+chatClient.addEventHandler("handlerId", {
   onChannelMessage: (message) => {},
 });
 ```

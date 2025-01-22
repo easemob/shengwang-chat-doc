@@ -3,9 +3,10 @@
 对于单聊或群组聊天会话中已经发送成功的文本消息，SDK 支持对这些消息的内容进行修改。
 
 :::tip
+
 1. 若使用该功能，需联系声网商务开通。
 2. 聊天室会话不支持消息修改功能。
-:::
+   :::
 
 ## 技术原理
 
@@ -44,7 +45,7 @@
 
 ```javascript
 // 注册修改消息事件
-chatClient.addEventHandler("modifiedMessage", {
+chatClient.addEventHandler("handlerId", {
   onModifiedMessage: (message) => {
     console.log("onModifiedMessage", message);
   },

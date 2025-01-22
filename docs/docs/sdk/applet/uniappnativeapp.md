@@ -44,10 +44,6 @@
   1. 将 SDK 目录下（src/sdk/）的文件全部导入到自己的项目中。
   2. 直接使用 import/require 方式获取引用, 如果使用 mpvue 请保持引用文件方式的统一。
 
-#### 基于 Demo 二次开发
-
-拉取代码，连接手机，打开手机开发者模式，连接手机授权传输文件，即可运行起来。
-
 #### 调用示例
 
 ```javascript
@@ -74,8 +70,6 @@ IM 基本功能，请参考 [消息管理](message_overview.html)。
 2. 原生 App-离线打包：HBuilder 编辑器 → 发行 → 生成本地打包 App 资源 （详细打包方案请看 **`iOS、Android 本地打包指南`**。）
 
 ## APP 开发者常见问题（重要）
-
-// TODO：链接是否需要替换
 
 - App/uni-app 离线本地存储方案：[https://ask.dcloud.net.cn/article/166](https://ask.dcloud.net.cn/article/166)
 - uni-app 实现全局变量：[https://ask.dcloud.net.cn/article/35021](https://ask.dcloud.net.cn/article/35021)

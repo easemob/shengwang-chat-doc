@@ -102,7 +102,7 @@ chatClient.getServerPinnedMessages(options).then((res) => {
 你可以设置消息置顶监听，通过 `onMessagePinEvent` 事件监听消息的置顶。
 
 ```javascript
-chatClient.addEventHandler("eventName", {
+chatClient.addEventHandler("handlerId", {
   onMessagePinEvent: (event) => {
     console.log(event, "收到消息置顶操作事件");
     switch (event.operation) {
