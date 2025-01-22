@@ -23,13 +23,13 @@
 
 ## 自定义导航栏
 
-会话列表页面、聊天页面、联系人列表页面、群详情页面和联系人详情页面的导航栏均使用 `EaseChatNavigationBar`。如果会话列表页面的导航栏不满足需求，建议自定义导航栏，重载方法传入自定义的导航类。
+会话列表页面、聊天页面、联系人列表页面、群详情页面和联系人详情页面的导航栏均使用 `ChatNavigationBar`。如果会话列表页面的导航栏不满足需求，建议自定义导航栏，重载方法传入自定义的导航类。
 
-1. 在 Demo 中继承 `ShengwangChatUIKit` 中的 `EaseChatNavigationBar` 类创建自己的会话列表页面导航栏，例如 `CustomConversationNavigationBar`。
+1. 在 Demo 中继承 `ShengwangChatUIKit` 中的 `ChatNavigationBar` 类创建自己的会话列表页面导航栏，例如 `CustomConversationNavigationBar`。
 2. 重载 `createNavigation()` 方法并返回你使用 `CustomConversationNavigationBar` 创建的对象。示例代码如下：
 
 ```swift
-    override func createNavigationBar() -> EaseChatNavigationBar {
+    override func createNavigationBar() -> ChatNavigationBar {
         CustomConversationNavigationBar(showLeftItem: false,rightImages: [UIImage(named: "add", in: .chatBundle, with: nil,hiddenAvatar: false)])
     }
 ```
@@ -81,7 +81,7 @@
 对于导航点击事件的监听，你需要重载会话列表页面中的 `navigationClick` 方法，然后根据对应的点击区域做对应的处理，示例代码如下：
 
 ```swift
-    override func navigationClick(type: EaseChatNavigationBarClickEvent, indexPath: IndexPath?) {
+    override func navigationClick(type: ChatNavigationBarClickEvent, indexPath: IndexPath?) {
         switch type {
         case .back: self.backAction()
         case .avatar: self.avatarAction()
