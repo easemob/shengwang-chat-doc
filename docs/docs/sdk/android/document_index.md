@@ -2,9 +2,9 @@
 title: 文档指引
 ---
 
-## RTM 是什么？
+## 即时通讯 IM 是什么？
 
-**实时消息**（Real-Time Messaging，RTM）为开发者提供一整套低延时、高并发、可扩展、高可靠的实时消息及状态同步解决方案。RTM 负责管理应用程序实时通信层所需的基础设施。为方便用户开发与创新，RTM 在保障 99.95% 的 SLA 正常运行时间的同时，提供丰富的 Demo App 及开放的第三方 API 扩展。
+**即时通讯 IM** 为开发者提供高可靠、低时延、高并发、安全、全球化的即时聊天云服务，支持单聊、群聊、聊天室，提供多平台 SDK 支持，包括 Android、iOS、Web、Windows、Unity、Flutter、React Native 和小程序，同时提供服务端 RESTful API 以及单群聊 UIKit，帮助开发者快速构建端到端的即时通讯场景。
 
 <Card padding="32px" borderSize="large">
   <el-row :gutter="32">
@@ -13,7 +13,7 @@ title: 文档指引
     </el-col>
     <el-col :span="24" :md="12" :lg="12" :xl="12">
       <p>
-        RTM 沉淀了声网多年的技术经验、应用了分布全球的网络部署，并由具备丰富经验的产品和研发专家团队维护。在使用 RTM 的过程中，用户可以借助声网团队的专业知识和运营技能，快速接入可靠的消息/信令传输与实时状态同步数据流网络，避免自行开发、运维带来的高成本和高风险。
+		即时通讯 IM 沉淀了 10 年的技术经验、部署了分布全球的数据中心，应用了分布全球的网络部署，并由丰富经验的产品和研发专家团队维护。在使用即时通讯 IM 的过程中，用户可以借助声网团队的专业知识和运营技能，快速接入可靠的即时通讯 IM 功能，避免自行开发、运维带来的高成本和高风险。
       </p>
     </el-col>
   </el-row>
@@ -21,24 +21,24 @@ title: 文档指引
 
 <div style="margin-top: 30px;"></div>
 
-## RTM 应用场景
+## 即时通讯 IM 应用场景
 
-RTM 已被 3000+ 客户广泛应用在以下领域，如果你对某个场景感兴趣，可以联系声网 RTM 团队（rtm-support@agora.io）获得更多信息。
+即时通讯 IM 广泛应用在以下领域，如果你对某个场景感兴趣，可以联系声网即时通讯 IM 团队获得更多信息。
 
 <IndexImageGallery
   :aspect-ratio="2.22"
   :list="[
-    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '元宇宙' },
+    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '陌生人社交' },
+    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '秀场直播' },
+    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '语聊房' },
+    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '1v1 社交' },
     { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '互动游戏' },
-    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '在线教育' },
-    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '元宇宙' },
-    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '互动游戏' },
-    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '在线教育' },
-    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '元宇宙' },
-    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '互动游戏' },
-    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '在线教育' },
-    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '元宇宙' },
-    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '互动游戏' },
+    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '社交电商' },
+    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '医疗问诊' },
+    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '线上招聘' },
+    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '企业协作' },
+    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '客服沟通' },
+    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: 'AI 陪伴' },
     { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '在线教育' },
   ]"
 />
@@ -47,52 +47,55 @@ RTM 已被 3000+ 客户广泛应用在以下领域，如果你对某个场景感
 
 ## 如何快速开始？
 
-根据你对 RTM 的了解程度，在下方选择一条路径开启学习：
+根据你对即时通讯 IM 的了解程度，在下方选择一条路径开启学习：
 
 <el-row :gutter="32" style="row-gap: 32px;">
-  <el-col :xs="24" :md="12" :xl="12">
+<el-col :xs="24" :md="12" :xl="12">
     <LinkList 
     icon="/landing-page/quickStart.jpeg" 
-    title="首次集成 RTM" 
-    :href="[{title:'开通服务', href:'./get-started/enable-service'}, {title:'实现收发消息', href:'./get-started/quick-start'}]"
+    title="首次集成即时通讯 IM" 
+    :href="[{title:'开通服务', href:'./docs/sdk/android/enable_im.html'}, {title:'实现收发消息', href:'./docs/sdk/android/quickstart.html'}]"
     >
-    如果你首次集成 RTM，请查看以下文档了解如何开通服务并实现收发消息。
+    如果你首次集成即时通讯 IM，请查看以下文档了解如何开通服务并实现收发消息。
     </LinkList>
   </el-col>
 
-  <el-col :xs="24" :md="12" :xl="12">
+<el-col :xs="24" :md="12" :xl="12">
     <LinkList
       icon="/landing-page/quickStart.jpeg"
-      title="从旧版本升级至 v2"
-      :href="[{title:'迁移指南', href:'./overview/migration-guide'}]"
+      title="即时通讯 IM 的主要特性"
+      :href="[{title:'特性介绍', href:'./docs/sdk/android/product_message_overview.html'}]"
     >
-      如果你是 RTM 旧版本的用户，想要升级至 v2 体验新特性，请参考迁移指南。
+    你可以了解即时通讯 IM 的消息、群组、聊天室、用户关系与属性以及离线推送等特性。
     </LinkList>
-  </el-col>
+  </el-col> 
 </el-row>
 
 <br/>
 
-成功实现收发消息基础功能后，你还可以查看如下文档，加深对 RTM 的理解：
+成功实现收发消息基础功能后，你还可以查看如下文档，加深对即时通讯 IM 的理解：
 
-<LinkBlock icon="/landing-page/guide.svg" :href="`/doc/rtm2/user-guide/setup/account-and-billing`" title="使用指南" desc="系统地了解 RTM 产品的功能特性，并在此过程中掌握使用方法。" />
+<LinkBlock icon="/landing-page/guide.svg" :href="`/docs/sdk/android/integration.html`" title="使用指南" desc="系统地了解即时通讯 IM 产品的功能特性，并在此过程中掌握使用方法。" />
 
-<LinkBlock icon="/landing-page/api.svg" :href="`/api-ref/rtm2/toc-configuration/configuration`" title="API 参考" desc="了解 RTM SDK 各 API 的详细说明。" />
+<LinkBlock icon="/landing-page/api.svg" :href="`/docs/sdk/android/api_reference_overview.html`" title="API 参考" desc="了解即时通讯 IM SDK 各 API 的详细说明。" />
 
 <div style={{marginTop:30}}></div>
 
-## RTM 如何计费？
+## 即时通讯 IM 如何计费？
 
-RTM 为不同业务阶段的用户提供了 **体验版**、**自助版**、**企业版** 三种套餐服务，用户可以根据自己业务用量情况进行合理选择，优化成本支出。
+IM 为不同业务阶段的用户提供了以下套餐，用户可以根据自己业务用量情况进行合理选择，优化成本支出。
 
+- 体验套餐：**免费版**
+- 自服务套餐：**基础版**、**尊享版**、**旗舰版**
+- 企业套餐：**企业版** 
 
 <el-row :gutter="16" :style="{rowGap:'16px'}">
   <el-col :span="24" :md="12"  :lg="8">
     <ListPanel title="体验套餐" desc="免费体验产品所有特性" :height="248">
-      <ListItem type="support">3,000,000 条消息/月</ListItem>
-      <ListItem type="support">100 峰值链接数/月</ListItem>
-      <ListItem type="support">1 GB 免费存储容量/月</ListItem>
-      <ListItem type="support">1 GB 免费存储容量/月</ListItem>
+      <ListItem type="support">100 峰值日活</ListItem>
+      <ListItem type="support">100 峰值群组和聊天室数</ListItem>
+      <ListItem type="support">10 GB 免费附件流量/月</ListItem>
+      <ListItem type="support">10 GB 免费附件存储/月</ListItem>
     </ListPanel>
   </el-col>
   <el-col :span="24" :md="12" :lg="8">
@@ -103,7 +106,7 @@ RTM 为不同业务阶段的用户提供了 **体验版**、**自助版**、**�
     </ListPanel>
   </el-col>
   <el-col :span="24" :md="12"  :lg="8">
-    <ListPanel theme="blue" title="企业套餐" desc="随用随付，专属服务" :height="248">
+    <ListPanel theme="blue" title="企业套餐" desc="专属支撑，专属服务" :height="248">
       <ListItem type="support">专属 SA 24 × 7 小时支持</ListItem>
       <ListItem type="support">专属技术专家架构指导</ListItem>
       <ListItem type="support">基于用量保证的折扣</ListItem>
@@ -115,12 +118,4 @@ RTM 为不同业务阶段的用户提供了 **体验版**、**自助版**、**�
 
 <div style="margin-top: 30px;"></div>
 
-<LinkCardV2 icon="/landing-page/bill.svg" :href="`/doc/rtm2/overview/billing/billing-strategy`" title="计费说明" desc="了解关于价格、套餐及服务的更多信息。" />
-
-## 常见问题解答
-
-声网非常重视用户体验，深知在使用新工具或新服务进行开发时可能会遇到各种问题和困惑。因此，声网致力于为用户提供优质的技术服务，包括梳理数千家客户在使用 RTM 产品过程中产生的常见问题，整理成常见问题文档，以便开发者快速、准确、方便地查询和解决问题。
-
-通过访问以下页面，你可以查看声网整理的常见问题文档，并找到你感兴趣的内容。如果你在使用 RTM 产品的过程中遇到了任何问题或疑问，也可以随时联系声网 RTM 团队（rtm-support@agora.io），他们将会尽快为你提供帮助。
-
-<LinkCardV2 icon="/landing-page/question.svg" :href="`/doc/rtm2/overview/billing/billing-strategy`" title="常见问题" />
+<LinkCardV2 icon="/landing-page/bill.svg" :href="`/docs/sdk/android/billing_strategy.html`" title="计费说明" desc="了解关于价格、套餐及服务的更多信息。" />
