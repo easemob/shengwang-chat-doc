@@ -80,11 +80,11 @@ yarn add shengwnag-chat-uikit
 
 4. 在**即时通讯 IM** 页面，进入**运营管理**标签页。
 
-5. 在**用户** 页签下，点击**创建IM用户**。
+5. 在**用户** 页签下，点击**创建 IM 用户**。
 
 6. 在弹出的对话框中，配置用户相关参数，点击**确定**。
 
-创建用户后，在用户列表点击对应的用户的**操作**一栏中的**更多**，选择**查看Token**。
+创建用户后，在用户列表点击对应的用户的**操作**一栏中的**更多**，选择**查看 Token**。
 
 在弹出的对话框中，可以查看用户 Token，也可以点击**重新生成**，生成用户 token。
 
@@ -125,11 +125,11 @@ const ChatApp = () => {
   }, [client]);
 
   return (
-    <div>
-      <div>
+    <div style={{ display: "flex", height: "100vh" }}>
+      <div style={{ width: "350px" }}>
         <ConversationList />
       </div>
-      <div>
+      <div style={{ flex: "1" }}>
         <Chat />
       </div>
     </div>
