@@ -488,6 +488,7 @@ const documentSidebar = [
           { text: '发送单聊消息已读回执', link: 'callback_single_read_ack.html' },
           { text: '发送会话已读回执', link: 'callback_single_conversation_ack.html' },
           { text: '撤回消息', link: 'callback_message_recall.html' },
+          { text: '修改消息', link: 'callback_message_modify.html' },
           { text: '用户状态变更', link: 'callback_login_logout.html' },
           { text: '群组/聊天室操作', 
             collapsible: true,
