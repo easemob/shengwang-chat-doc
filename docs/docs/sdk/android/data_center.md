@@ -36,13 +36,13 @@
 
 | 数据中心名称 | Socket 地址          |
 | :--------- | :----- | 
-| 中国      | im-api-c1.chat.rtnsvc.com 或 im-api-c1.chat.realtimemesh.com       |
+| 中国      |  wss://im-api-c1.chat.rtnsvc.com 或  wss://im-api-c1.chat.realtimemesh.com       |
 
 3. RESTful 接口请求地址如下：
 
 | 数据中心名称 | RESTful API 请求地址                   |
 | :--------- | :----- |
-| 中国      | c1.chat.rtnsvc.com 或 c1.chat.realtimemesh.com   |
+| 中国      | https://c1.chat.rtnsvc.com 或 https://c1.chat.realtimemesh.com   |
 
 4. 微信小程序、支付宝小程序的具体地址如下：
 

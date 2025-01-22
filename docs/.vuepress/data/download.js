@@ -25,8 +25,8 @@ export const clientSDKDownloadInfo = [
     language: "JavaScript",
     platform: "Web",
     version: "1.3.2",
-    package: "agora-im",
-    md5: "9aa4b2a542f3197ac9f905e20c5b7889",
+    package: "shengwang-chat",
+    md5: "23929bfdfdd4f5121b9c7055bff492a2",
     updateTime: "2025-01-26",
     releaseNote: "docs/sdk/web/releasenote.html",
     downloadLink:
