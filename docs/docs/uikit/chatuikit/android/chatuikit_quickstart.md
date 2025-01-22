@@ -77,6 +77,7 @@ implementation("cn.shengwang:chat-uikit:1.3.2")
 
 - 在 Project 的 `settings.gradle.kts` 文件中添加如下代码：
 
+// TODO：替换下面括号中的相对链接
 ```kotlin
 include(":chat-uikit")
 project(":chat-uikit").projectDir = File("../AgoraChat-UIKit-android/ease-im-kit")
@@ -84,6 +85,7 @@ project(":chat-uikit").projectDir = File("../AgoraChat-UIKit-android/ease-im-kit
 
 - 在 app 的 `build.gradle.kts` 文件中添加如下代码：
 
+// TODO：查看是否要替换代码中括号中的 chat-uikit
 ```kotlin
 //chatuikit-android
 implementation(project(mapOf("path" to ":chat-uikit")))

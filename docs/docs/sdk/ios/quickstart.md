@@ -66,21 +66,7 @@
 }
 ```
 
-## 4. 初始化聊天页面
-
-向工程中导入 Chat 文件。
-
-```objectivec
-// ConversationId 接收消息方的声网ID:@"user2"
-// type 聊天类型:AgoraChatConversationTypeChat    单聊类型
-// createIfNotExist 如果会话不存在是否创建会话：YES
- AgoraChatViewController *chatViewController = [[AgoraChatViewController alloc] initWithConversationId:@"user2" conversationType:AgoraChatConversationTypeChat];
-    [self.navigationController pushViewController:chatViewController animated:YES];
-```
-
-若有导航，可以用 push 方式跳转到聊天页面发消息测试，也就是用登录的 user1 向 user2 发消息；若没有导航的话，可以用 present 方式跳转到聊天页面。
-
-### 2. 注册即时通讯 IM 用户
+## 4. 注册即时通讯 IM 用户
 
 #### 创建用户
 
@@ -108,7 +94,7 @@
 
 ![img](/images/android/user_token.png)
 
-## 6. 登录账号
+## 5. 登录账号
 
 利用创建的用户 ID 和密码登录即时通讯 IM。
 
@@ -120,7 +106,7 @@
 }];
 ```
 
-## 7. 发送消息
+## 6. 发送消息
 
 利用创建的用户 ID 和密码登录即时通讯 IM，向对端用户发送消息。在下面示例中，向 user 2 发送文本消息。
 
