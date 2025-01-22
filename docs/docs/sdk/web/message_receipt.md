@@ -17,9 +17,8 @@
 实现消息送达回执和已读回执的逻辑如下：
 
 - 单聊消息送达回执：
-  // TODO: 替换链接
 
-  1. SDK 初始化时，用户将 [`ConnectionParameters` 类型中的 `delivery` 参数](https://doc.easemob.com/jsdoc/interfaces/Connection.ConnectionParameters.html#delivery)设置为 `true`。
+  1. SDK 初始化时，用户将 [`ConnectionParameters` 类型中的 `delivery` 参数](https://im.shengwang.cn/sdkdocs/chat1.x/web/classes/Connection.Connection-1.html#delivery)设置为 `true`。
 
   2. 接收方收到消息后，SDK 会自动向发送方发送送达回执。
 
