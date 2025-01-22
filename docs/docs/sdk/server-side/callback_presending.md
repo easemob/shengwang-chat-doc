@@ -71,7 +71,7 @@
 | `to`              | 消息的接收方。单聊为消息接收方，群组聊天和聊天室为群组 ID 和聊天室 ID。  |
 | `msg_id`          | 消息的 ID。   |
 | `payload`         | 消息内容，与通过 RESTful API 发送过来的一致，查看 [消息格式文档](message_historical.html#历史消息记录的内容)。      |
-| `securityVersion` | 安全校验版本，目前为 1.0.0。请忽略此参数。   |
+| `securityVersion` | 安全校验版本，目前为 1.0.0。开发者可忽略该参数。   |
 | `security`        | 签名，格式如下: MD5（callId+Secret+timestamp）。Secret 见[声网控制台](https://console.shengwang.cn/overview)[回调规则](#回调规则)。 |
 
 #### 响应 body
