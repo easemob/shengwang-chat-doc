@@ -54,7 +54,7 @@ QQ、微信小程序： 1.7.0 及以上版本，最多可以同时存在 5 个 W
 可以通过以下两种方式获取 SDK：
 
 - 通过 CDN[下载 SDK](https://download.shengwang.cn/sdk/release/shengwang-chat-web-1.3.2.zip)。
-- 通过 npm 下载 'shengwang-chat'。
+- 通过 npm 下载 `shengwang-chat`。
 
 sdk 文件为 miniProgram 文件夹下的 Shengwang-chat.js
 
