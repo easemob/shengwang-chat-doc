@@ -54,7 +54,7 @@ title: 文档指引
     <LinkList 
     icon="/landing-page/quickStart.jpeg" 
     title="首次集成即时通讯 IM" 
-    :href="[{title:'开通服务', href:'./docs/sdk/applet/enable_im.html'}, {title:'集成介绍', href:'./docs/sdk/applet/wechat.html'}]"
+    :href="[{title:'开通服务', href:'./enable_im.html'}, {title:'集成介绍', href:'./wechat.html'}]"
     >
     如果你首次集成即时通讯 IM，请查看以下文档了解如何开通服务并实现收发消息。
     </LinkList>
@@ -64,7 +64,7 @@ title: 文档指引
     <LinkList
       icon="/landing-page/quickStart.jpeg"
       title="即时通讯 IM 的主要特性"
-      :href="[{title:'特性介绍', href:'./docs/sdk/applet/product_message_overview.html'}]"
+      :href="[{title:'特性介绍', href:'./product_message_overview.html'}]"
     >
     你可以了解即时通讯 IM 的消息、群组、聊天室、用户关系与属性以及离线推送等特性。
     </LinkList>
@@ -77,7 +77,7 @@ title: 文档指引
 
 <LinkBlock icon="/landing-page/guide.svg" :href="`/docs/sdk/applet/initialization.html`" title="使用指南" desc="系统地了解即时通讯 IM 产品的功能特性，并在此过程中掌握使用方法。" />
 
-<LinkBlock icon="/landing-page/api.svg" :href="`/sdk/applet/api_reference_overview.html`" title="API 参考" desc="了解即时通讯 IM SDK 各 API 的详细说明。" />
+<LinkBlock icon="/landing-page/api.svg" :href="`/docs/sdk/applet/api_reference_overview.html`" title="API 参考" desc="了解即时通讯 IM SDK 各 API 的详细说明。" />
 
 <div style={{marginTop:30}}></div>
 

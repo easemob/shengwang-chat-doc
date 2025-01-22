@@ -54,7 +54,7 @@ title: 文档指引
     <LinkList 
     icon="/landing-page/quickStart.jpeg" 
     title="首次集成即时通讯 IM" 
-    :href="[{title:'开通服务', href:'./docs/sdk/harmonyos/enable_im.html'}, {title:'实现收发消息', href:'./docs/sdk/harmonyos/quickstart.html'}]"
+    :href="[{title:'开通服务', href:'./enable_im.html'}, {title:'实现收发消息', href:'./quickstart.html'}]"
     >
     如果你首次集成即时通讯 IM，请查看以下文档了解如何开通服务并实现收发消息。
     </LinkList>

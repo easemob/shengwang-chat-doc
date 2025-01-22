@@ -20,7 +20,6 @@ title: 文档指引
 </Card>
 
 <div style="margin-top: 30px;"></div>
-
 ## 即时通讯 IM 应用场景
 
 即时通讯 IM 广泛应用在以下领域，如果你对某个场景感兴趣，可以联系声网即时通讯 IM 团队获得更多信息。
@@ -44,7 +43,6 @@ title: 文档指引
 />
 
 <div style="margin-top: 30px;"></div>
-
 ## 如何快速开始？
 
 根据你对即时通讯 IM 的了解程度，在下方选择一条路径开启学习：
@@ -54,7 +52,7 @@ title: 文档指引
     <LinkList 
     icon="/landing-page/quickStart.jpeg" 
     title="首次集成即时通讯 IM" 
-    :href="[{title:'开通服务', href:'./docs/sdk/android/enable_im.html'}, {title:'实现收发消息', href:'./docs/sdk/android/quickstart.html'}]"
+    :href="[{title:'开通服务', href:'./enable_im.html'}, {title:'实现收发消息', href:'./quickstart.html'}]"
     >
     如果你首次集成即时通讯 IM，请查看以下文档了解如何开通服务并实现收发消息。
     </LinkList>
@@ -64,7 +62,7 @@ title: 文档指引
     <LinkList
       icon="/landing-page/quickStart.jpeg"
       title="即时通讯 IM 的主要特性"
-      :href="[{title:'特性介绍', href:'./docs/sdk/android/product_message_overview.html'}]"
+      :href="[{title:'特性介绍', href:'./product_message_overview.html'}]"
     >
     你可以了解即时通讯 IM 的消息、群组、聊天室、用户关系与属性以及离线推送等特性。
     </LinkList>
@@ -80,7 +78,6 @@ title: 文档指引
 <LinkBlock icon="/landing-page/api.svg" :href="`/docs/sdk/android/api_reference_overview.html`" title="API 参考" desc="了解即时通讯 IM SDK 各 API 的详细说明。" />
 
 <div style={{marginTop:30}}></div>
-
 ## 即时通讯 IM 如何计费？
 
 IM 为不同业务阶段的用户提供了以下套餐，用户可以根据自己业务用量情况进行合理选择，优化成本支出。
@@ -117,5 +114,4 @@ IM 为不同业务阶段的用户提供了以下套餐，用户可以根据自�
 </el-row>
 
 <div style="margin-top: 30px;"></div>
-
 <LinkCardV2 icon="/landing-page/bill.svg" :href="`/docs/sdk/android/billing_strategy.html`" title="计费说明" desc="了解关于价格、套餐及服务的更多信息。" />

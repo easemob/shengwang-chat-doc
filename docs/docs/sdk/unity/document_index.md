@@ -54,7 +54,7 @@ title: 文档指引
     <LinkList 
     icon="/landing-page/quickStart.jpeg" 
     title="首次集成即时通讯 IM" 
-    :href="[{title:'开通服务', href:'./docs/sdk/unity/enable_im.html'}, {title:'实现收发消息', href:'./docs/sdk/unity/quickstart.html'}]"
+    :href="[{title:'开通服务', href:'./enable_im.html'}, {title:'实现收发消息', href:'./quickstart.html'}]"
     >
     如果你首次集成即时通讯 IM，请查看以下文档了解如何开通服务并实现收发消息。
     </LinkList>
@@ -64,7 +64,7 @@ title: 文档指引
     <LinkList
       icon="/landing-page/quickStart.jpeg"
       title="即时通讯 IM 的主要特性"
-      :href="[{title:'特性介绍', href:'./docs/sdk/unity/product_message_overview.html'}]"
+      :href="[{title:'特性介绍', href:'./product_message_overview.html'}]"
     >
     你可以了解即时通讯 IM 的消息、群组、聊天室、用户关系与属性以及离线推送等特性。
     </LinkList>
@@ -118,4 +118,4 @@ IM 为不同业务阶段的用户提供了以下套餐，用户可以根据自�
 
 <div style="margin-top: 30px;"></div>
 
-<LinkCardV2 icon="/landing-page/bill.svg" :href="`/doc/rtm2/overview/billing/billing-strategy`" title="计费说明" desc="了解关于价格、套餐及服务的更多信息。" />
+<LinkCardV2 icon="/landing-page/bill.svg" :href="`/docs/sdk/unity/billing_strategy.html`" title="计费说明" desc="了解关于价格、套餐及服务的更多信息。" />
