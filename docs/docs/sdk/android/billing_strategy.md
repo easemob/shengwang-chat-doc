@@ -1,11 +1,13 @@
 ---
 title: 计费策略
 ---
+
 本文将向你介绍即时通讯 IM 的计费策略，包括套餐计划、套餐配额与价格、套餐服务支持等信息。
 
 ## 套餐计划
 
 即时通讯 IM 为不同业务阶段的用户提供了 3 种套餐类型，用户可以根据自己业务用量情况进行合理选择，优化成本支出。
+
 - 体验套餐： **免费版**
 - 自服务套餐：**基础版**、**尊享版**、**旗舰版**，
 - 企业套餐：**企业版**
@@ -15,54 +17,55 @@ title: 计费策略
   <Card height="260px" >
   <Text color="rgb(0, 136, 71)">
 
-  **体验套餐**
+**体验套餐**
 
   </Text>
 
-  免费体验产品所有特性
-  - 100 峰值日活<br/>
-  - 100 峰值群组和聊天室数<br/>
-  - 10 GB 免费附件流量/月<br/>
-  - 10 GB 免费附件存储/月<br/>
-    </Card>
-    </el-col>
+免费体验产品所有特性
+
+- 100 峰值日活
+- 100 峰值群组和聊天室数
+- 10 GB 免费附件流量/月
+</Card>
+</el-col>
 
   <el-col :xs="24" :md="12" :lg="8">
-  <Card height="260px" >
-  <Text color="rgb(52, 109, 219)">
+    <Card height="260px" >
+    <Text color="rgb(52, 109, 219)">
 
-  **自服务套餐**
-
-  </Text>
-
-  灵活选择，助力业务加速
-  - 套餐灵活选择<br/>
-  - 12 × 7 小时服务支持<br/>
-  - 99.95% SLA 保障
-    </Card>
-    </el-col>
-
-
-  <el-col :xs="24" :md="12" :lg="8">
-  <Card height="260px" >
-  <Text color="rgb(185, 94, 4)">
-
-  **企业套餐版**
+**自服务套餐**
 
   </Text>
 
-  随用随付，专属服务
-  - 专属 SA 24 × 7 小时支持<br/>
-  - 专属技术专家架构指导<br/>
-  - 基于用量保证的折扣<br/>
-  - 定制化需求服务<br/>
-  - GDPR & HIPAA 合规保证
-    </Card>
-    </el-col>
+灵活选择，助力业务加速
 
-<el-col :xs="24" :md="12" :lg="8">
-  <Card height="260px" >
-  <Text color="rgb(185, 94, 4)">
+- 套餐灵活选择<br/>
+- 12 × 7 小时服务支持<br/>
+- 99.95% SLA 保障<br/>
+
+</Card>
+  </el-col>
+
+<el-col>
+  <Card>
+  <Text>
+
+**企业套餐版**
+
+  </Text>
+
+随用随付，专属服务
+
+- 专属 SA 24 × 7 小时支持<br/>
+- 专属技术专家架构指导<br/>
+- 基于用量保证的折扣<br/>
+- 定制化需求服务<br/>
+- GDPR & HIPAA 合规保证 <br/>
+
+</Card>
+  </el-col>
+
+</el-row>
 
 你可以在声网后台随时查阅用量情况并导出数据，也可以升级或降级套餐计划，升级套餐立即生效，降级套餐次月生效。
 
@@ -75,74 +78,75 @@ title: 计费策略
   <Card height="240px" >
   <Text >
 
-  **优质服务支持**
+**优质服务支持**
 
   </Text>
 
-  - 99.95% 正常运行时间 SLA 保证
-  - 24 × 7 × 365 服务支持
-  - < 1 工作小时响应
-  - 电话和企业微信在线
-    </Card>
-    </el-col>
+- 99.95% 正常运行时间 SLA 保证
+- 24 × 7 × 365 服务支持
+- < 1 工作小时响应
+- 电话和企业微信在线
+</Card>
+</el-col>
 
   <el-col :xs="24" :md="12">
   <Card height="240px" >
   <Text >
 
-  **技术专家架构指导**
+**技术专家架构指导**
 
   </Text>
 
-  - 优质实践方案指导建议
-  - 技术专家协助审查方案
-  - 专属 SA 跟踪服务
-  - 集成，测试，上线，运营全周期支持
-    </Card>
-    </el-col>
+- 优质实践方案指导建议
+- 技术专家协助审查方案
+- 专属 SA 跟踪服务
+- 集成，测试，上线，运营全周期支持
+</Card>
+</el-col>
 
   <el-col :xs="24" :md="12">
   <Card height="240px" >
   <Text >
 
-  **定制化需求服务**
+**定制化需求服务**
 
   </Text>
 
-  - Geo-fencing 支持
-  - GDPR & HIPAA 合规保证
-  - 数据区域路由限定
-  - 定制化需求配置
-  - 私有化部署支持
-    </Card>
-    </el-col>
+- Geo-fencing 支持
+- GDPR & HIPAA 合规保证
+- 数据区域路由限定
+- 定制化需求配置
+- 私有化部署支持
+</Card>
+</el-col>
 
   <el-col :xs="24" :md="12">
   <Card height="240px" >
   <Text >
 
-  **基于用量保证的折扣**
+**基于用量保证的折扣**
 
   </Text>
 
-  - 专享折扣
-  - 与声网其他产品的优惠组合
-    </Card>
-    </el-col>
+- 专享折扣
+- 与声网其他产品的优惠组合
+
+</Card>
+  </el-col>
 </el-row>
 
 ## 套餐配额与价格
 
-| 配额/套餐类型    | 免费版套餐   |  基础版套餐  |  尊享版套餐   | 旗舰版套餐    | 企业版套餐 |
-| :-------: | :--------: | :-------: | :---------: | :----------: | :--------------: |
-| 免费峰值日活数      | 100      | 5000        | 10000       | 10000 | 按需定制 |
-| 注册用户数     | 100      | 无限制        | 无限制       | 无限制 | 无限制 |
-| 好友人数      | 100      | 1000        | 3000       | 6000 | 按需定制 |
-| 群成员数      | 100      | 200        | 2000       | 8000 | 按需定制 |
-| 聊天室成员数      | 100      | 10000        | 10000       | 10000 | 按需定制 |
-| 附件流量 | 10 GB | 50 GB | 100 GB | 150 GB | 按需定制 |
-| 附件存储 | 10 GB | 0.5 TB | 1 TB | 1 TB | 按需定制 |
-| 套餐价格（/月） | 0 | 999 RMB  | 1499 RMB | 3499 RMB | 联系商务 |
+|  配额/套餐类型  | 免费版套餐 | 基础版套餐 | 尊享版套餐 | 旗舰版套餐 | 企业版套餐 |
+| :-------------: | :--------: | :--------: | :--------: | :--------: | :--------: |
+| 免费峰值日活数  |    100     |    5000    |   10000    |   10000    |  按需定制  |
+|   注册用户数    |    100     |   无限制   |   无限制   |   无限制   |   无限制   |
+|    好友人数     |    100     |    1000    |    3000    |    6000    |  按需定制  |
+|    群成员数     |    100     |    200     |    2000    |    8000    |  按需定制  |
+|  聊天室成员数   |    100     |   10000    |   10000    |   10000    |  按需定制  |
+|    附件流量     |   10 GB    |   50 GB    |   100 GB   |   150 GB   |  按需定制  |
+|    附件存储     |   10 GB    |   0.5 TB   |    1 TB    |    1 TB    |  按需定制  |
+| 套餐价格（/月） |     0      |  999 RMB   |  1499 RMB  |  3499 RMB  |  联系商务  |
 
 ## 套餐配额
 
@@ -307,20 +311,19 @@ title: 计费策略
 </tbody>
 </table>
 
-### 体验套餐: 
+### 体验套餐:
 
 提供给用户自由验证即时通讯 IM 的特性能力，但是在注册用户数、好友人数、群组和聊天室成员数有限制，给予一定的体验用量配额。用量超过配额后你会收到错误码和邮件提醒，并无法继续使用对应功能。
 
-### 自服务套餐: 
+### 自服务套餐:
 
 分为 **基础版套餐** 、 **尊享版套餐** 和 **旗舰版套餐**，对应不同的功能限制和用量配额。功能限制属于硬限制，需要升级套餐，如：好友人数、群成员数、聊天室人数。用量配额属于软限制，超出配额后你会收到邮件提醒，但可以继续使用即时通讯 IM 功能。超额部分会按照超额用量收费。
 
-
-### 企业套餐: 
+### 企业套餐:
 
 根据用户实际用量计费。用户在正常使用期间，只要不达到使用硬限制，对资源的访问将不会受到其他限制。联系声网销售（sales@shengwang.cn）获取报价及基于用量保证的折扣。
 
-**账单费用** = **套餐费用** + **超额用量费用** 
+**账单费用** = **套餐费用** + **超额用量费用**
 
 :::tip 计量规则
 超额用量计量规则参考[计量规则](billing_rules.html)。
@@ -328,46 +331,46 @@ title: 计费策略
 
 ## 套餐服务对比
 
-| 特性/套餐 | 免费版 | 基础版 | 尊享版 | 旗舰版 | 企业版 |
-| :----------------: | :----------------: | :----------------: | :----------------: | :----------------: | :----------------: |
-| 好友人数    | 100   | 1000       |   3000    |  6000   |  默认 6000（可调整）  |
-| 注册用户数    | 100   | 无上限       |   无上限    |  无上限   |  无上限  |
-| 用户属性（提供用户头像、昵称、邮箱等数据存储服务）    | <font color="green">✔</font>   | <font color="green">✔</font>     |   <font color="green">✔</font>    |  <font color="green">✔</font>   |  <font color="green">✔</font>  |
-| 消息云存储（提供消息的存储服务，支持历史消息、漫游消息）    | 3 天   | 3 天       |  7 天    |  90 天   |  默认 180 天 （可调整）  |
-| 全消息类型（包括：文本、表情、语音、视频、图片、位置、透传、自定义等消息）    | <font color="green">✔</font>   | <font color="green">✔</font>       |  <font color="green">✔</font>    |  <font color="green">✔</font>   |  <font color="green">✔</font>  |
-| 自定义消息（根据业务需求灵活定制消息内容和功能）   | <font color="green">✔</font>   | <font color="green">✔</font>       |  <font color="green">✔</font>    |  <font color="green">✔</font>   |  <font color="green">✔</font>  |
-| 透传消息（作为控制指令）   | <font color="green">✔</font>   | <font color="green">✔</font>       |  <font color="green">✔</font>    |  <font color="green">✔</font>   |  <font color="green">✔</font>  |
-| 离线消息（支持单聊/群聊离线消息，上线后可拉取离线消息）   | 3 天   | 3 天       |  7 天    |  7 天   |  默认 7 天（可调整）  |
-| 附件消息   | 3 天   | 3 天       |  7 天    |  7 天   |  默认 7 天（可调整）  |
-| 群组总数   | 100   | 无上限       |  无上限    |  无上限   | 无上限  |
-| 群成员数   | 100   | 200       |  2000    |  6000   | 默认6000（可调整）  |
-| 单人可加入群组数   | 100   | 600       |  3000    |  10000   | 默认10000（可调整）  |
-| 群公告   | <font color="green">✔</font>   | <font color="green">✔</font>       |  <font color="green">✔</font>    |  <font color="green">✔</font>   |  <font color="green">✔</font>  |
-| 群共享文件   | <font color="green">✔</font>   | <font color="green">✔</font>       |  <font color="green">✔</font>    |  <font color="green">✔</font>   |  <font color="green">✔</font>  |
-| 聊天室总数   | 100   | 无上限       |  无上限    |  无上限   | 无上限  |
-| 聊天室成员数   | 100   | 10000       |  10000    |  10000   | 默认10000（可调整）  |
-| 聊天室公告   | <font color="green">✔</font>   | <font color="green">✔</font>       |  <font color="green">✔</font>    |  <font color="green">✔</font>   |  <font color="green">✔</font>  |
-| 聊天室全局禁言   | <font color="green">✔</font>   | <font color="green">✔</font>       |  <font color="green">✔</font>    |  <font color="green">✔</font>   |  <font color="green">✔</font>  |
-| 成员白名单（只允许选定用户发送消息）   | <font color="green">✔</font>   | <font color="green">✔</font>       |  <font color="green">✔</font>    |  <font color="green">✔</font>   |  <font color="green">✔</font>  |
-| 聊天室获取漫游消息   | <font color="green">✔</font>   | <font color="red">✘</font>       |  <font color="red">✘</font>    |  <font color="red">✘</font>   |  <font color="green">✔</font>  |
-| 聊天室广播消息   | <font color="green">✔</font>   | <font color="red">✘</font>       |  <font color="red">✘</font>    |  <font color="green">✔</font>   |  <font color="green">✔</font>  |
-| 消息&事件回调（提供全量消息路由转发，支持消息和多种事件类型）  | <font color="red">✘</font>    | <font color="red">✘</font>       |  <font color="red">✘</font>    |  <font color="green">✔</font>   |  <font color="green">✔</font>  |
-| 用户状态回调（通过回调方式同步用户离在线状态）  | <font color="red">✘</font>    | <font color="red">✘</font>       |  <font color="red">✘</font>    |  <font color="green">✔</font>   |  <font color="green">✔</font>  |
-| 发送前回调（用于服务端对接第三方服务扩展）  | <font color="red">✘</font>    | <font color="red">✘</font>       |  <font color="red">✘</font>    |  <font color="green">✔</font>   |  <font color="green">✔</font>  |
-| 回调消息&事件存储（回调接收服务不可用时，存储所有回调内容用于恢复）  | <font color="red">✘</font>    | <font color="red">✘</font>       |  <font color="red">✘</font>    |  <font color="red">✘</font>    |  <font color="green">✔</font>  |
-| 多设备登录（相同账号多设备登录且保持信息同步）  | <font color="green">✔</font>    | <font color="red">✘</font>       |  <font color="green">✔</font>    |  <font color="green">✔</font>    |  <font color="green">✔</font>  |
-| 消息已读回执（接收方消息已读后发送方消息已读状态及时变更）  | <font color="green">✔</font>    | <font color="red">✘</font>       |  <font color="green">✔</font>    |  <font color="green">✔</font>    |  <font color="green">✔</font>  |
-| 消息撤回（支持客户端/服务端调用）  | <font color="green">✔</font>    | <font color="red">✘</font>       |  <font color="green">✔</font>    |  <font color="green">✔</font>    |  <font color="green">✔</font>  |
-| 消息免打扰（在设定时间内不会收到厂商离线推送通知）  | <font color="green">✔</font>    | <font color="green">✔</font>       |  <font color="green">✔</font>    |  <font color="green">✔</font>    |  <font color="green">✔</font>  |
-| 服务端会话列表  | <font color="green">✔</font>    | <font color="red">✘</font>       |  <font color="green">✔</font>    |  <font color="green">✔</font>    |  <font color="green">✔</font>  |
-| 离线推送通知（支持苹果（APNs）、谷歌（FCM）、华为、小米、OPPO、VIVO、魅族，自定义铃声和扩展） -》 离线推送通知（支持苹果（APNs）、谷歌（FCM）、华为、荣耀、小米、OPPO、VIVO、魅族，自定义铃声和扩展） | <font color="green">✔</font>    | <font color="green">✔</font>       |  <font color="green">✔</font>    |  <font color="green">✔</font>    |  <font color="green">✔</font>  |
-| Reaction 消息表情回复 | <font color="green">✔</font>    | <font color="red">✘</font>       |  <font color="green">✔</font>    |  <font color="green">✔</font>    |  <font color="green">✔</font>  |
-| Thread 消息子区 | <font color="green">✔</font>    | <font color="red">✘</font>       |  <font color="green">✔</font>    |  <font color="green">✔</font>    |  <font color="green">✔</font>  |
-| Presence 用户在线状态订阅 | <font color="green">✔</font>    | <font color="red">✘</font>       |  <font color="green">✔</font>    |  <font color="green">✔</font>    |  <font color="green">✔</font>  |
-| TLS/SSL 传输加密  | <font color="green">✔</font>    | <font color="green">✔</font>       |  <font color="green">✔</font>    |  <font color="green">✔</font>    |  <font color="green">✔</font>  |
-| AES256 存储加密 | <font color="green">✔</font>    | <font color="green">✔</font>       |  <font color="green">✔</font>    |  <font color="green">✔</font>    |  <font color="green">✔</font>  |
-| 用户信息删除 API | <font color="green">✔</font>    | <font color="green">✔</font>       |  <font color="green">✔</font>    |  <font color="green">✔</font>    |  <font color="green">✔</font>  |
-| 全球网络加速  | <font color="green">✔</font>    | <font color="green">✔</font>       |  <font color="green">✔</font>    |  <font color="green">✔</font>    |  <font color="green">✔</font>  |
+|                                                                                               特性/套餐                                                                                               |            免费版            |            基础版            |            尊享版            |            旗舰版            |            企业版            |
+| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------: | :--------------------------: | :--------------------------: | :--------------------------: | :--------------------------: |
+|                                                                                               好友人数                                                                                                |             100              |             1000             |             3000             |             6000             |     默认 6000（可调整）      |
+|                                                                                              注册用户数                                                                                               |             100              |            无上限            |            无上限            |            无上限            |            无上限            |
+|                                                                          用户属性（提供用户头像、昵称、邮箱等数据存储服务）                                                                           | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> |
+|                                                                       消息云存储（提供消息的存储服务，支持历史消息、漫游消息）                                                                        |             3 天             |             3 天             |             7 天             |            90 天             |    默认 180 天 （可调整）    |
+|                                                              全消息类型（包括：文本、表情、语音、视频、图片、位置、透传、自定义等消息）                                                               | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> |
+|                                                                           自定义消息（根据业务需求灵活定制消息内容和功能）                                                                            | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> |
+|                                                                                       透传消息（作为控制指令）                                                                                        | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> |
+|                                                                        离线消息（支持单聊/群聊离线消息，上线后可拉取离线消息）                                                                        |             3 天             |             3 天             |             7 天             |             7 天             |     默认 7 天（可调整）      |
+|                                                                                               附件消息                                                                                                |             3 天             |             3 天             |             7 天             |             7 天             |     默认 7 天（可调整）      |
+|                                                                                               群组总数                                                                                                |             100              |            无上限            |            无上限            |            无上限            |            无上限            |
+|                                                                                               群成员数                                                                                                |             100              |             200              |             2000             |             6000             |     默认 6000（可调整）      |
+|                                                                                           单人可加入群组数                                                                                            |             100              |             600              |             3000             |            10000             |     默认 10000（可调整）     |
+|                                                                                                群公告                                                                                                 | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> |
+|                                                                                              群共享文件                                                                                               | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> |
+|                                                                                              聊天室总数                                                                                               |             100              |            无上限            |            无上限            |            无上限            |            无上限            |
+|                                                                                             聊天室成员数                                                                                              |             100              |            10000             |            10000             |            10000             |     默认 10000（可调整）     |
+|                                                                                              聊天室公告                                                                                               | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> |
+|                                                                                            聊天室全局禁言                                                                                             | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> |
+|                                                                                 成员白名单（只允许选定用户发送消息）                                                                                  | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> |
+|                                                                                          聊天室获取漫游消息                                                                                           | <font color="green">✔</font> |  <font color="red">✘</font>  |  <font color="red">✘</font>  |  <font color="red">✘</font>  | <font color="green">✔</font> |
+|                                                                                            聊天室广播消息                                                                                             | <font color="green">✔</font> |  <font color="red">✘</font>  |  <font color="red">✘</font>  | <font color="green">✔</font> | <font color="green">✔</font> |
+|                                                                     消息&事件回调（提供全量消息路由转发，支持消息和多种事件类型）                                                                     |  <font color="red">✘</font>  |  <font color="red">✘</font>  |  <font color="red">✘</font>  | <font color="green">✔</font> | <font color="green">✔</font> |
+|                                                                            用户状态回调（通过回调方式同步用户离在线状态）                                                                             |  <font color="red">✘</font>  |  <font color="red">✘</font>  |  <font color="red">✘</font>  | <font color="green">✔</font> | <font color="green">✔</font> |
+|                                                                              发送前回调（用于服务端对接第三方服务扩展）                                                                               |  <font color="red">✘</font>  |  <font color="red">✘</font>  |  <font color="red">✘</font>  | <font color="green">✔</font> | <font color="green">✔</font> |
+|                                                                  回调消息&事件存储（回调接收服务不可用时，存储所有回调内容用于恢复）                                                                  |  <font color="red">✘</font>  |  <font color="red">✘</font>  |  <font color="red">✘</font>  |  <font color="red">✘</font>  | <font color="green">✔</font> |
+|                                                                            多设备登录（相同账号多设备登录且保持信息同步）                                                                             | <font color="green">✔</font> |  <font color="red">✘</font>  | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> |
+|                                                                      消息已读回执（接收方消息已读后发送方消息已读状态及时变更）                                                                       | <font color="green">✔</font> |  <font color="red">✘</font>  | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> |
+|                                                                                   消息撤回（支持客户端/服务端调用）                                                                                   | <font color="green">✔</font> |  <font color="red">✘</font>  | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> |
+|                                                                          消息免打扰（在设定时间内不会收到厂商离线推送通知）                                                                           | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> |
+|                                                                                            服务端会话列表                                                                                             | <font color="green">✔</font> |  <font color="red">✘</font>  | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> |
+| 离线推送通知（支持苹果（APNs）、谷歌（FCM）、华为、小米、OPPO、VIVO、魅族，自定义铃声和扩展） -》 离线推送通知（支持苹果（APNs）、谷歌（FCM）、华为、荣耀、小米、OPPO、VIVO、魅族，自定义铃声和扩展） | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> |
+|                                                                                         Reaction 消息表情回复                                                                                         | <font color="green">✔</font> |  <font color="red">✘</font>  | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> |
+|                                                                                            Thread 消息子区                                                                                            | <font color="green">✔</font> |  <font color="red">✘</font>  | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> |
+|                                                                                       Presence 用户在线状态订阅                                                                                       | <font color="green">✔</font> |  <font color="red">✘</font>  | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> |
+|                                                                                           TLS/SSL 传输加密                                                                                            | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> |
+|                                                                                            AES256 存储加密                                                                                            | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> |
+|                                                                                           用户信息删除 API                                                                                            | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> |
+|                                                                                             全球网络加速                                                                                              | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> | <font color="green">✔</font> |
 
 ## 超额价格
 

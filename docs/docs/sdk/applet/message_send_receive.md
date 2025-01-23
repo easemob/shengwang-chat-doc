@@ -75,9 +75,7 @@ chatClient.addEventHandler("handlerId", {
 
    接收方可以自行下载语音、图片、图片缩略图、视频和文件。
 
-// TODO：替换链接
-
-对于消息附件，你也可以将附件上传到自己的服务器，而不是声网服务器，然后发送消息。这种情况下，需要在 SDK 初始化时将 [`Connection` 类中的 `useOwnUploadFun` 参数](https://doc.easemob.com/jsdoc/classes/Connection.Connection-1.html)设置为 `true`。例如，对于图片消息，上传附件后，调用 `sendPrivateUrlImg` 方法传入图片的 URL 发送图片消息。
+对于消息附件，你也可以将附件上传到自己的服务器，而不是声网服务器，然后发送消息。这种情况下，需要在 SDK 初始化时将 [`Connection` 类中的 `useOwnUploadFun` 参数](https://im.shengwang.cn/sdkdocs/chat1.x/web/classes/Connection.Connection-1.html#useOwnUploadFun)设置为 `true`。例如，对于图片消息，上传附件后，调用 `sendPrivateUrlImg` 方法传入图片的 URL 发送图片消息。
 
 ```javascript
 function sendUrlImg() {
@@ -552,23 +550,23 @@ chatClient.addEventHandler("handlerId", {
 
 创建合并消息时，需要设置以下参数：
 
-| 属性        | 类型        | 描述           |
-| :------- | :-------------- | :--------------------------- |
-| `chatType`             | ChatType                                        | 会话类型。              |
-| `type`                 | 'combine'                                       | 消息类型。                |
-| `to`                   | String                                          | 消息接收方。该字段的设置取决于会话类型：<br/> - 单聊：对方用户 ID；<br/> - 群聊：群组 ID；<br/> - 子区会话：子区 ID；<br/> - 聊天室聊天：聊天室 ID。     |
-| `title`                | String                                          | 合并消息的标题。             |
-| `summary`              | String                                          | 合并消息的概要。        |
+| 属性                   | 类型                                            | 描述                                                                                                                                                                                       |
+| :--------------------- | :---------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chatType`             | ChatType                                        | 会话类型。                                                                                                                                                                                 |
+| `type`                 | 'combine'                                       | 消息类型。                                                                                                                                                                                 |
+| `to`                   | String                                          | 消息接收方。该字段的设置取决于会话类型：<br/> - 单聊：对方用户 ID；<br/> - 群聊：群组 ID；<br/> - 子区会话：子区 ID；<br/> - 聊天室聊天：聊天室 ID。                                       |
+| `title`                | String                                          | 合并消息的标题。                                                                                                                                                                           |
+| `summary`              | String                                          | 合并消息的概要。                                                                                                                                                                           |
 | `compatibleText`       | String                                          | 合并消息的兼容文本。<br/>兼容文本起向下兼容不支持消息合并转发的版本的作用。当支持合并消息的 SDK 向不支持合并消息的低版本 SDK 发送消息时，低版本的 SDK 会将该属性解析为文本消息的消息内容。 |
-| `messageList`          | MessagesType[]                                  | 合并消息的消息列表。该列表最多包含 300 个消息。       |
-| `onFileUploadComplete` | (data: { url: string; secret: string;}) => void | 合并消息文件上传完成的回调。   |
-| `onFileUploadError`    | (error: any) => void                            | 合并消息文件上传失败的回调。      |
+| `messageList`          | MessagesType[]                                  | 合并消息的消息列表。该列表最多包含 300 个消息。                                                                                                                                            |
+| `onFileUploadComplete` | (data: { url: string; secret: string;}) => void | 合并消息文件上传完成的回调。                                                                                                                                                               |
+| `onFileUploadError`    | (error: any) => void                            | 合并消息文件上传失败的回调。                                                                                                                                                               |
 
 :::tip
 
 1. 合并转发支持嵌套，最多支持 10 层嵌套，每层最多 300 条消息。
 2. 只有成功发送或接收的消息才能合并转发。
-:::
+   :::
 
 示例代码如下：
 
@@ -632,7 +630,7 @@ chatClient
 1. 定向消息不写入服务端会话列表，不计入服务端会话的未读消息数。
 2. 群组定向消息的漫游功能默认关闭，使用前需联系商务开通。
 3. 聊天室定向消息的漫游功能默认关闭，使用前需联系商务开通聊天室消息漫游和定向消息漫游功能。
-:::
+   :::
 
 发送定向消息的流程与发送普通消息相似，唯一区别是需要设置定向消息的接收方。
 

@@ -41,7 +41,7 @@
 # platform :ios, '10.0'
 
  target 'AgoraChatQuickstart' do
-     pod 'AgoraChat'
+     pod 'ShengwangChat_iOS'
  end
 ```
 

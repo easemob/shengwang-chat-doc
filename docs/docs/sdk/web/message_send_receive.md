@@ -75,9 +75,7 @@ chatClient.addEventHandler("handlerId", {
 
 接收方可以自行下载语音、图片、图片缩略图、视频和文件。
 
-// TODO：替换链接
-
-对于消息附件，你也可以将附件上传到自己的服务器，而不是声网服务器，然后发送消息。这种情况下，需要在 SDK 初始化时将 [`Connection` 类中的 `useOwnUploadFun` 参数](https://doc.easemob.com/jsdoc/classes/Connection.Connection-1.html)设置为 `true`。例如，对于图片消息，上传附件后，调用 `sendPrivateUrlImg` 方法传入图片的 URL 发送图片消息。
+对于消息附件，你也可以将附件上传到自己的服务器，而不是声网服务器，然后发送消息。这种情况下，需要在 SDK 初始化时将 [`Connection` 类中的 `useOwnUploadFun` 参数](https://im.shengwang.cn/sdkdocs/chat1.x/web/classes/Connection.Connection-1.html#useOwnUploadFun)设置为 `true`。例如，对于图片消息，上传附件后，调用 `sendPrivateUrlImg` 方法传入图片的 URL 发送图片消息。
 
 ```javascript
 function sendUrlImg() {
@@ -554,8 +552,8 @@ chatClient.addEventHandler("handlerId", {
 
 创建合并消息时，需要设置以下参数：
 
-| 属性         | 类型              | 描述                             |
-| :---------- | :--------------------------- | :-------------------------------- |
+| 属性                   | 类型                                            | 描述                                                                                                                                                                                       |
+| :--------------------- | :---------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `chatType`             | ChatType                                        | 会话类型。                                                                                                                                                                                 |
 | `type`                 | 'combine'                                       | 消息类型。                                                                                                                                                                                 |
 | `to`                   | String                                          | 消息接收方。该字段的设置取决于会话类型：<br/> - 单聊：对方用户 ID；<br/> - 群聊：群组 ID；<br/> - 子区会话：子区 ID；<br/> - 聊天室聊天：聊天室 ID。                                       |

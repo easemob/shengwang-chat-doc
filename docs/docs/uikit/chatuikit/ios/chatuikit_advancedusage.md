@@ -87,7 +87,7 @@ Provider 仅用于会话列表以及联系人列表。若只通过快速开始�
 
 2. 实现会话列表 Provider。
 
-对于 Objective-C，实现 `EaseProfileProviderOC` 即可。 
+对于 Objective-C，实现 `ChatUserProfileProviderOC` 即可。 
 
 下面示例代码为实现带协程功能的 Swift 特有的 provider。
 
@@ -95,7 +95,7 @@ Provider 仅用于会话列表以及联系人列表。若只通过快速开始�
 //MARK: - ChatUserProfileProvider&ChatGroupProfileProvider for conversations&contacts usage.
 //For example using conversations controller,as follows.
 extension MainViewController: ChatUserProfileProvider,ChatGroupProfileProvider {
-    //MARK: - EaseProfileProvider
+    //MARK: - ChatUserProfileProvider
     func fetchProfiles(profileIds: [String]) async -> [any ShengwangChatUIKit.ChatUserProfileProtocol] {
         return await withTaskGroup(of: [ShengwangChatUIKit.ChatUserProfileProtocol].self, returning: [ShengwangChatUIKit.ChatUserProfileProtocol].self) { group in
             var resultProfiles: [ShengwangChatUIKit.ChatUserProfileProtocol] = []
@@ -114,7 +114,7 @@ extension MainViewController: ChatUserProfileProvider,ChatGroupProfileProvider {
             return resultProfiles
         }
     }
-    //MARK: - EaseGroupProfileProvider
+    //MARK: - ChatGroupProfileProvider
     func fetchGroupProfiles(profileIds: [String]) async -> [any ShengwangChatUIKit.ChatUserProfileProtocol] {
         
         return await withTaskGroup(of: [ShengwangChatUIKit.ChatUserProfileProtocol].self, returning: [ShengwangChatUIKit.ChatUserProfileProtocol].self) { group in
@@ -155,7 +155,7 @@ extension MainViewController: ChatUserProfileProvider,ChatGroupProfileProvider {
         let result = await ChatClient.shared().userInfoManager?.fetchUserInfo(byId: unknownIds)
         if result?.1 == nil,let infoMap = result?.0 {
             for (userId,info) in infoMap {
-                let profile = EaseChatProfile()
+                let profile = ChatUserProfile()
                 let nickname = info.nickname ?? ""
                 profile.id = userId
                 profile.nickname = nickname
@@ -181,7 +181,7 @@ extension MainViewController: ChatUserProfileProvider,ChatGroupProfileProvider {
         let groups = ChatClient.shared().groupManager?.getJoinedGroups() ?? []
         for groupId in groupIds {
             if let group = groups.first(where: { $0.groupId == groupId }) {
-                let profile = EaseChatProfile()
+                let profile = ChatUserProfile()
                 profile.id = groupId
                 profile.nickname = group.groupName
                 profile.avatarURL = group.settings.ext

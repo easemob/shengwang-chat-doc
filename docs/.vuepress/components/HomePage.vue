@@ -119,13 +119,13 @@
                   >
                     客户端
                   </div>
-                  <div
+                  <!-- <div
                     class="tab-btn"
                     :class="{ active: activeTab === 1 }"
                     @click="activeTab = 1"
                   >
                     服务端
-                  </div>
+                  </div> -->
                 </div>
 
                 <div class="tab-content">
