@@ -36,8 +36,8 @@ export const clientSDKDownloadInfo = [
     language: "TypeScript",
     platform: "HarmonyOS",
     version: "1.3.2",
-    package: "agora-im",
-    md5: "9aa4b2a542f3197ac9f905e20c5b7889",
+    package: "@shengwang/chatsdk",
+    md5: "8625014328cbb1c07f92688ac824518a",
     updateTime: "2025-01-26",
     releaseNote: "docs/sdk/harmonyos/releasenote.html",
     downloadLink:
