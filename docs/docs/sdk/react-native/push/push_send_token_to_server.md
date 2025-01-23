@@ -28,7 +28,7 @@ import { getPlatform, getDeviceType } from "react-native-push-collection";
 import { ChatClient, ChatOptions, ChatPushConfig } from "react-native-shengwang-chat";
 
 // 从声网控制台获取推送 ID、pushId
-const pushId = "<your push id from easemob console>";
+const pushId = "<your push id from shengwang console>";
 
 // 设置推送类型
 const pushType = React.useMemo(() => {
