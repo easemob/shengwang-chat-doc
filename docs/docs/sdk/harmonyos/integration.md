@@ -10,7 +10,7 @@
 
 ## 集成 SDK
 
-打开 [SDK 下载](https://www.easemob.com/download/im)页面，获取最新版的即时通讯 IM HarmonyOS SDK，得到 `har` 形式的 SDK 文件。
+打开 [SDK 下载](https://im.shengwang.cn/)页面，获取最新版的即时通讯 IM HarmonyOS SDK，得到 `har` 形式的 SDK 文件。
 
 将 SDK 文件，拷贝到 `entry` 模块或者其他需要的模块下的 `libs` 目录。
 

@@ -40,7 +40,7 @@
 // 设置所有用户属性。
 let userInfo: UserInfo = {
   nickname: "Nick",
-  avatarUrl: "https://www.easemob.com",
+  avatarUrl: "https://www.shengwang.cn/",
   birth: "2000/10/10",
   signature: "Hello world",
   phone: "16666666666",
