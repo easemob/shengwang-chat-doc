@@ -39,4 +39,4 @@
 
 打开 SDK 下载页面，获取最新版的即时通讯 IM SDK，然后解压。
 
-将 SDK 包内的 `AgoraChat.xcframework` 拖入到你的工程中。
+将 SDK 包内的 `AgoraChat.xcframework`和`aosl.xcframework` 拖入到你的工程中。
