@@ -17,7 +17,7 @@
 
 在方法调用过程中，SDK 可能会返回错误码。详见 `ChatError` 错误码。
 
-如欲了解各类中的方法和参数详情，请参见 [API 参考链接](https://im.shengwang.cn/sdkdocs/chat1.x/harmonyOS/)。
+如欲了解各类中的方法和参数详情，请点击[这里](https://im.shengwang.cn/sdkdocs/chat1.x/harmonyOS/)。
 
 ## 聊天客户端
 

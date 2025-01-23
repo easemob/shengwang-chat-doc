@@ -16,6 +16,8 @@
 
 在方法调用过程中，SDK 可能会返回错误码。详见 `Error` 错误码。
 
+如欲了解各类中的方法和参数详情，请点击[这里](https://im.shengwang.cn/sdkdocs/chat1.x/android/)。
+
 ## 聊天客户端
 
 `ChatClient` 类提供各种方法实现即时通讯应用程序的登录和退出登录以及管理 SDK 和 IM 服务器之间的连接。
