@@ -14,28 +14,17 @@
 
 集成前请确认 app 的开发和运行环境满足以下要求：
 
-对于 iOS 平台：
+- MacOS 12 或更高版本
+- React-Native 0.66 或更高版本
+- NodeJs 16.18 或更高版本
 
-- MacOS 10.15.7 或以上版本
-- Xcode 12.4 或以上版本，包括命令行工具
-- React Native 0.63.4 或以上版本
-- NodeJs 16 或以上版本，包含 npm 包管理工具
-- CocoaPods 包管理工具
-- Yarn 编译运行工具
-- Watchman 调试工具
-- 运行环境真机或模拟器 iOS 10.0 或以上版本
+对于 iOS 应用：
 
-对于 Android 平台：
+- Xcode 13 或更高版本及其相关的依赖工具。
 
-- MacOS 10.15.7 或以上版本，Windows 10 或以上版本
-- Android Studio 4.0 或以上版本，包括 JDK 1.8 或以上版本
-- React Native 0.63.4 或以上版本
-- 如果用 Macos 系统开发，需要 CocoaPods 包管理工具
-- 如果用 Windows 开发，需要 Powershell 5.1 或以上版本
-- NodeJs 16 或以上版本，包含 npm 包管理工具
-- Yarn 编译运行工具
-- Watchman 调试工具
-- 运行环境真机或模拟器 Android 6.0 或以上版本
+对于 Android 应用：
+
+- Android Studio 2021 或更高版本及其相关的依赖工具。
 
 配置开发或者运行环境如果遇到问题，请参考 [RN 官网](https://reactnative.dev/)。
 
@@ -48,11 +37,10 @@
 创建一个 React Native 项目并将集成进去
 
 1. 根据开发系统和目标平台准备开发环境。
-   
 2. 打开终端，进入需要创建项目的目录，输入命令创建 React Native 项目：
 
 ```sh
-npx react-native init simple_demo
+npx @react-native-community/cli init --skip-install simple_demo
 cd simple_demo
 yarn
 ```
@@ -69,9 +57,7 @@ yarn add react-native-shengwang-chat
 
 Android：
 
-```sh
-cd node_modules/react-native-shengwang-chat/native_src/cpp && sh generate.sh --type rn && cd ../../../..
-```
+无。
 
 iOS：
 
@@ -93,7 +79,7 @@ cd ios && pod install && cd ..
 
 4. 在**即时通讯 IM** 页面，进入**运营管理**标签页。
 
-5. 在**用户** 页签下，点击**创建IM用户**。
+5. 在**用户** 页签下，点击**创建 IM 用户**。
 
 6. 在弹出的对话框中，配置用户相关参数，点击**确定**。
 
@@ -101,7 +87,7 @@ cd ios && pod install && cd ..
 
 #### 获取用户 token
 
-创建用户后，在用户列表点击对应的用户的**操作**一栏中的**更多**，选择**查看Token**。
+创建用户后，在用户列表点击对应的用户的**操作**一栏中的**更多**，选择**查看 Token**。
 
 在弹出的对话框中，可以查看用户 Token，也可以点击**重新生成**，生成用户 token。
 
@@ -137,8 +123,8 @@ const App = () => {
   const appId = "<your appId>";
   // 将 <your userId> 替换为你的用户 ID。
   const [username, setUsername] = React.useState("<your userId>");
-  // 将 <your agoraToken> 替换为你的声网 token。
-  const [chatToken, setChatToken] = React.useState("<your agoraToken>");
+  // 将 <your token> 替换为你的声网 token。
+  const [chatToken, setChatToken] = React.useState("<your token>");
   const [targetId, setTargetId] = React.useState("");
   const [content, setContent] = React.useState("");
   const [logText, setWarnText] = React.useState("Show log area");
@@ -306,139 +292,56 @@ const App = () => {
   // UI 渲染。
   return (
     <SafeAreaView>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>{title}</Text>
+      <View>
+        <Text>{title}</Text>
       </View>
       <ScrollView>
-        <View style={styles.inputCon}>
+        <View>
           <TextInput
             multiline
-            style={styles.inputBox}
             placeholder="Enter username"
             onChangeText={(text) => setUsername(text)}
             value={username}
           />
         </View>
-        <View style={styles.inputCon}>
+        <View>
           <TextInput
             multiline
-            style={styles.inputBox}
             placeholder="Enter chatToken"
             onChangeText={(text) => setChatToken(text)}
             value={chatToken}
           />
         </View>
-        <View style={styles.buttonCon}>
-          <Text style={styles.eachBtn} onPress={login}>
-            SIGN IN
-          </Text>
-          <Text style={styles.eachBtn} onPress={logout}>
-            SIGN OUT
-          </Text>
+        <View>
+          <Text onPress={login}>SIGN IN</Text>
+          <Text onPress={logout}>SIGN OUT</Text>
         </View>
-        <View style={styles.inputCon}>
+        <View>
           <TextInput
             multiline
-            style={styles.inputBox}
             placeholder="Enter the username you want to send"
             onChangeText={(text) => setTargetId(text)}
             value={targetId}
           />
         </View>
-        <View style={styles.inputCon}>
+        <View>
           <TextInput
             multiline
-            style={styles.inputBox}
             placeholder="Enter content"
             onChangeText={(text) => setContent(text)}
             value={content}
           />
         </View>
-        <View style={styles.buttonCon}>
-          <Text style={styles.btn2} onPress={sendmsg}>
-            SEND TEXT
-          </Text>
+        <View>
+          <Text onPress={sendmsg}>SEND TEXT</Text>
         </View>
         <View>
-          <Text style={styles.logText} multiline={true}>
-            {logText}
-          </Text>
-        </View>
-        <View>
-          <Text style={styles.logText}>{}</Text>
-        </View>
-        <View>
-          <Text style={styles.logText}>{}</Text>
+          <Text multiline={true}>{logText}</Text>
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
-
-// 设置 UI 样式。
-const styles = StyleSheet.create({
-  titleContainer: {
-    height: 60,
-    backgroundColor: "#6200ED",
-  },
-  title: {
-    lineHeight: 60,
-    paddingLeft: 15,
-    color: "#fff",
-    fontSize: 20,
-    fontWeight: "700",
-  },
-  inputCon: {
-    marginLeft: "5%",
-    width: "90%",
-    height: 60,
-    paddingBottom: 6,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
-  },
-  inputBox: {
-    marginTop: 15,
-    width: "100%",
-    fontSize: 14,
-    fontWeight: "bold",
-  },
-  buttonCon: {
-    marginLeft: "2%",
-    width: "96%",
-    flexDirection: "row",
-    marginTop: 20,
-    height: 26,
-    justifyContent: "space-around",
-    alignItems: "center",
-  },
-  eachBtn: {
-    height: 40,
-    width: "28%",
-    lineHeight: 40,
-    textAlign: "center",
-    color: "#fff",
-    fontSize: 16,
-    backgroundColor: "#6200ED",
-    borderRadius: 5,
-  },
-  btn2: {
-    height: 40,
-    width: "45%",
-    lineHeight: 40,
-    textAlign: "center",
-    color: "#fff",
-    fontSize: 16,
-    backgroundColor: "#6200ED",
-    borderRadius: 5,
-  },
-  logText: {
-    padding: 10,
-    marginTop: 10,
-    color: "#ccc",
-    fontSize: 14,
-    lineHeight: 20,
-  },
-});
 
 export default App;
 ```
