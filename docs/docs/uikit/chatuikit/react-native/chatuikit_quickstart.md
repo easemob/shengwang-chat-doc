@@ -41,7 +41,6 @@ pinyin-pro \
 pure-uuid \
 react \
 react-native \
-react-native-agora \
 react-native-shengwang-chat-uikit \
 react-native-shengwang-chat \
 react-native-audio-recorder-player \
