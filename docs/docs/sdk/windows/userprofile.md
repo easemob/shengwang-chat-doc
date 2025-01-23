@@ -40,8 +40,8 @@
 //设置所有用户属性。
 UserInfo userInfo;
 userInfo.UserId = currentId;
-userInfo.NickName = "easemob";
-userInfo.AvatarUrl = "https://www.easemob.com";
+userInfo.NickName = "shengwang";
+userInfo.AvatarUrl = "https://im.shengwang.cn/";
 userInfo.Birth = "2000.10.10";
 userInfo.Signature = "hello world";
 userInfo.PhoneNumber = "13333333333";

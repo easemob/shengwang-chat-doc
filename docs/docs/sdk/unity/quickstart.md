@@ -43,8 +43,8 @@
 
 参考以下步骤：
 
-1. 克隆 [chat_unity_demo](https://github.com/easemob/chat_unity_demo) 至本地。
-2. 打开 Unity Hub，选择 **Projects** 页签，点击 **Open** 右边的下拉菜单，选择 **Add project from disk**，然后选择步骤 1 中本地路径下的 `chat_unity_quickstart`。这时，**Projects** 列表中显示 **chat_unity_quickstart** 项目。
+1. 克隆 [chat_unity_demo](https://github.com/Shengwang-Lab/Shengwang-Chat-API-Examples) 至本地。
+2. 打开 Unity Hub，选择 **Projects** 页签，点击 **Open** 右边的下拉菜单，选择 **Add project from disk**，然后选择步骤 1 中本地路径下Chat-Unity的 `chat_unity_quickstart`。这时，**Projects** 列表中显示 **chat_unity_quickstart** 项目。
 3. 单击 **chat_unity_quickstart** 打开项目。
 
    如果正常打开，该流程结束。
@@ -66,7 +66,7 @@
 
 你可以参考以下步骤集成 SDK：
 
-1. [下载 Unity SDK](https://www.easemob.com/download/im)。
+1. [下载 Unity SDK](https://im.shengwang.cn/)。
 2. 在 Unity Editor 中，选择 **Assets > Import Package > Custom Package...**，然后选择刚下载的 unitypackage 导入。
 3. 在弹出的 **Import Unity Package** 页面，点击右下角的 **Import**。
 

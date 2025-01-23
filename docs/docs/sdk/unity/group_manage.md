@@ -130,7 +130,7 @@ SDKClient.Instance.GroupManager.DestroyGroup(groupId, new CallBack(
 
 ### 退出群组
 
-群成员可以调用 `LeaveGroup` 方法退出群组，其他成员收到 `IGroupManagerDelegate#OnMemberExitedFromGroup` 回调。退出群组后，该用户将不再收到群消息。群主不能调用该接口退出群组，只能调用 [DestroyGroup](https://docs-im.easemob.com/ccim/unity/group2#解散群组) 方法解散群组。
+群成员可以调用 `LeaveGroup` 方法退出群组，其他成员收到 `IGroupManagerDelegate#OnMemberExitedFromGroup` 回调。退出群组后，该用户将不再收到群消息。群主不能调用该接口退出群组，只能调用 [DestroyGroup](https://im.shengwang.cn/docs/sdk/unity/group_manage.html#解散群组) 方法解散群组。
 
 示例代码如下：
 
