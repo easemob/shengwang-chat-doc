@@ -11,7 +11,7 @@
 
 ## 集成 SDK
 
-1. 点击[这里](https://www.easemob.com/download/im) 下载 Windows SDK。下载的 NuGet 包一般存放在 `C:\Users\XXX\Downloads` (XXX 为本机用户名) 中。
+1. 点击[这里](https://im.shengwang.cn/) 下载 Windows SDK。下载的 NuGet 包一般存放在 `C:\Users\XXX\Downloads` (XXX 为本机用户名) 中。
    
 2. 将下载的 NuGet 包拷贝到自己的工作目录下，例如 `D:\workspace\WinSDK`，下面的说明以此目录举例。
    
@@ -21,6 +21,6 @@
 
 5. 在 **NuGet:windows-example** 页签，在右上角的**程序包源**处点击下拉菜单，选中刚刚配置的包源名称**Local Package source**。
 
-6. 在 **NuGet:windows-example** 页签上部，选中**浏览**，在下面搜索框的右边，勾选 **包括预发行版**，此时下面的区域会出现 **agora_chat_sdk** (如果没有出现，点击搜索框右侧的刷新按钮)，选中这一栏，右边会出现一个向下的小箭头，点击进行安装，或者点击右侧栏最右边的**安装**按钮。
+6. 在 **NuGet:windows-example** 页签上部，选中**浏览**，在下面搜索框的右边，勾选 **包括预发行版**，此时下面的区域会出现 **shengwang_chat_sdk** (如果没有出现，点击搜索框右侧的刷新按钮)，选中这一栏，右边会出现一个向下的小箭头，点击进行安装，或者点击右侧栏最右边的**安装**按钮。
    
 7. 在弹出的**预览更改**窗体中，点击**确定**按钮。Windows SDK 的 NuGet 包集成完毕。

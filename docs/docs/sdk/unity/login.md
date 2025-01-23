@@ -139,7 +139,6 @@ SDKClient.Instance.Logout(false,
 
 关于多设备登录场景中的设备数量限制、互踢策略以及信息同步，详见[多设备登录文档](multi_device.html)。
 
-
 ## 更多
 
 ### 登录被封禁账号的提示

@@ -136,7 +136,6 @@ SDKClient.Instance.ContactManager.DeleteContact(username, callback: new CallBack
 ));
 ```
 
-
 ### 从服务器获取好友列表
 
 你可以调用 `GetAllContactsFromServer` 方法从服务器获取好友列表：
