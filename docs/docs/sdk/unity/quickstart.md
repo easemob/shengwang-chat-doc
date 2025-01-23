@@ -249,7 +249,7 @@ public void OnMessagesDelivered(List<Message> messages)
 
 }
 
-public void OnMessagesRecalled(List<Message> messages)
+public void OnMessagesRecalled(List<RecallMessageInfo> recallMessagesInfo)
 {
 
 }
