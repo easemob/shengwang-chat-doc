@@ -12,11 +12,10 @@
 
 初始化示例代码：
 
-`objectivec
+```objectivec
 AgoraChatOptions *options = [AgoraChatOptions optionsWithAppId:@"xxx"];
         
 ......// 其他 AgoraChatOptions 配置。
 [AgoraChatClient.sharedClient initializeSDKWithOptions:options];
-```
 
 ```
