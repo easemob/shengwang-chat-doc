@@ -452,14 +452,6 @@ yarn run android
 yarn run start
 ```
 
-1. 程序构建完成后，自动安装和运行，并显示应用界面。
-
-![img](/images/react-native/android-1.png)
-
-demo 的界面:
-
-![img](/images/react-native/main.png)
-
 ## 测试你的 app
 
 参考以下代码测试注册账号，登录，发送和接收消息。
