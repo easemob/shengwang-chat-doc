@@ -68,12 +68,11 @@ dependencyResolutionManagement {
 dependencies {
     ...
     // x.y.z 请填写具体版本号，如：1.3.2。
-    implementation("cn.shengwang:chat-sdk:x.y.z")
+    implementation 'cn.shengwang:chat-sdk:1.3.2'
 }
 ```
 
-// TODO：修改版本号及repo地址链接
-若要查看最新版本号，请点击[这里](releasenote.html)。
+若要查看最新版本号，请点击[这里](https://central.sonatype.com/artifact/cn.shengwang/chat-sdk/versions)。
 
 除此之外，你还可以通过手动复制 SDK 文件和动态加载 `.so` 库文件的方法集成 IM SDK，详见[集成文档](integration.html)。
 

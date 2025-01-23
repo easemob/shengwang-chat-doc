@@ -9,7 +9,7 @@
 ## UIKit 基本项目结构
 
 ```
-└── easeui
+└── uikit
     ├── ChatUIKitClient                                   // UIKit SDK 入口
     ├── ChatUIKitConfig                             // UIKit SDK 配置类
     ├── feature                                  // UIKit 功能模块

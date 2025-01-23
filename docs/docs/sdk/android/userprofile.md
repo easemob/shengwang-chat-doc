@@ -40,8 +40,8 @@
 // 设置所有用户属性。
 UserInfo userInfo = new UserInfo();
 userInfo.setUserId(ChatClient.getInstance().getCurrentUser());
-userInfo.setNickname("easemob");
-userInfo.setAvatarUrl("https://www.easemob.com");
+userInfo.setNickname("shengwang");
+userInfo.setAvatarUrl("https://www.shengwang.com");
 userInfo.setBirth("2000.10.10");
 userInfo.setSignature("hello world");
 userInfo.setPhoneNumber("13333333333");
@@ -140,13 +140,6 @@ ChatClient.getInstance().chatManager().sendMessage(message);
 ```
 
 如果需要在名片中展示更丰富的信息，可以在 `ext` 中增加更多字段。
-
-// TODO：替换链接
-可参考 [示例项目](https://www.easemob.com/download/im) 中的以下类：
-
-- `ChatUserCardAdapterDelegate`
-- `ChatUserCardAdapterDelegate`
-- `ChatRowUserCard`
 
 ### 常见问题
 

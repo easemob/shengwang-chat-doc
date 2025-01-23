@@ -14,8 +14,7 @@
 
 :::tip
 
-1. 以下集成方式只需选择一种，同时使用多种集成方式可能会报错。
-2. 请点击查看[发版说明](releasenote.html)获得最新版本号。
+以下集成方式只需选择一种，同时使用多种集成方式可能会报错。
 
 :::
 
@@ -48,15 +47,15 @@ dependencyResolutionManagement {
 dependencies {
     ...
     // x.y.z 请填写具体版本号，如：1.3.2。
-    implementation("cn.shengwang:chat-sdk:x.y.z")
+    implementation 'cn.shengwang:chat-sdk:1.3.2'
 }
 ```
-// TODO：修改版本号及repo地址链接
-若要查看最新版本号，请点击[这里](releasenote.html)。
 
-### 方法二：手动复制 SDK 文件
+若要查看最新版本号，请点击[这里](https://central.sonatype.com/artifact/cn.shengwang/chat-sdk/versions)。
 
-打开 SDK 下载页面，获取最新版的即时通讯 IM Android SDK，然后解压。
+### 方法二：本地集成（将jar包和so文件拷贝到项目中）
+
+打开 SDK [下载页面]( https://im.shengwang.cn/)，获取最新版的即时通讯 IM Android SDK，然后解压。
 
 ![img](@static/images/android/sdk-files.png)
 
@@ -72,7 +71,7 @@ dependencies {
 
 如果对生成的 `apk` 大小比较敏感，我们建议使用 `jar` 方式，并且手工拷贝 `so`，而不是使用 `aar`，因为 `aar` 方式会把各个平台的 `so` 文件都包含在其中。采用 `jar` 方式，可以仅保留一个 `ARCH` 目录，建议仅保留 `armeabi-v7a`，这样虽然在对应平台执行的速度会降低，但是能有效减小 `apk` 的大小。
 
-### 方法三：动态加载 .so 库文件
+### 方法三：本地集成(动态加载 .so 库文件)
 
 为了减少应用安装包的大小，SDK 提供了 `ChatOptions#setNativeLibBasePath` 方法支持动态加载 SDK 所需的 `.so` 文件。以 SDK 1.3.2 为例，`.so` 文件包括 `libcipherdb.so` 和 `libagora-chat-sdk.so` 、 `libaosl.so` 三个文件**。
 
