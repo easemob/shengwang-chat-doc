@@ -5,7 +5,7 @@
 - `chatClient` 是聊天 SDK Connection 类的实例，提供登录和登出即时通讯 IM 的方法，并管理 SDK 与聊天服务器之间的连接，同时也提供管理联系人，群组，聊天室等的方法 。
 - `Message` 类提供创建消息的方法。
 
-如欲了解各模块中的方法和参数详情，请点击[这里](https://im.shengwang.cn/sdkdocs/chat1.x/unity/)。
+如欲了解各模块中的方法和参数详情，请点击[这里](https://im.shengwang.cn/sdkdocs/chat1.x/web/)。
 
 ## 连接与初始化
 
@@ -75,7 +75,7 @@
 | onChannelMessage           | 当收到整个会话所有消息都置为已读的确认消息时触发。 |
 | onRecallMessage            | 当收到撤回消息通知时触发。                         |
 | onModifiedMessage          | 当收到修改消息通知时触发。                         |
-| onMessagePinEvent          | 当收到置顶消息通知时触发。                        |
+| onMessagePinEvent          | 当收到置顶消息通知时触发。                         |
 | onReactionChange           | 当消息的 Reaction 发生变化时触发。                 |
 | onOfflineMessageSyncStart  | 开始从服务器拉取离线消息时触发。                   |
 | onOfflineMessageSyncFinish | 从服务器拉取离线消息结束时触发。                   |
@@ -133,44 +133,44 @@
 - `chatClient` 提供群组管理的方法，如群组创建和解散以及成员管理。
 - `EventHandler`类提供群组管理事件监听。
 
-| 方法                       | 描述                                                                                     |
-| :------------------------- | :--------------------------------------------------------------------------------------- |
-| joinGroup                  | 申请加入群组。                                                                           |
-| acceptGroupJoinRequest     | 同意用户加入群。仅群主和管理员可调用此方法。                                             |
-| rejectGroupJoinRequest     | 拒绝入群申请。仅群主和管理员可调用此方法。                                               |
-| inviteUsersToGroup         | 邀请用户加群。                                                                           |
-| acceptGroupInvite          | 接受入群邀请。                                                                           |
-| rejectGroupInvite          | 拒绝入群邀请。                                                                           |
-| leaveGroup                 | 离开群组。                                                                               |
-| getJoinedGroups            | 列出某用户加入的所有群组。                                                               |
-| getPublicGroups            | 分页获取公开群。                                                                         |
-| createGroup                | 创建群组。                                                                               |
-| destroyGroup               | 解散群组。仅群主可调用此方法。                                                           |
-| changeGroupOwner           | 转让群组。仅群主可调用此方法。                                                           |
-| modifyGroup                | 修改群信息。仅群组管理员可调用此方法。                                                   |
-| getGroupInfo               | 获取群组详情。                                                                           |
-| fetchGroupAnnouncement     | 获取群公告。                                                                             |
-| updateGroupAnnouncement    | 更新群公告。                                                                             |
-| getGroupAdmin              | 获取群组下所有管理员。                                                                   |
-| setGroupAdmin              | 设置群管理员。仅群主可调用此方法。                                                       |
-| removeGroupAdmin           | 移除群管理员。仅群主可调用此方法。                                                       |
-| blockGroupMember           | 将单个成员加入群组黑名单。仅群主和管理员可调用此方法。                                   |
-| blockGroupMembers          | 批量添加成员至群组黑名单。仅群组管理员可调用此方法。                                     |
-| unblockGroupMember         | 将单个成员从群组黑名单移除。仅群组管理员可调用此方法。                                   |
-| unblockGroupMembers        | 将成员批量移出群组黑名单。仅群主和管理员可调用此方法。                                   |
-| getGroupBlocklist          | 获取群组黑名单。                                                                         |
-| muteGroupMember            | 将一个组成员禁言。仅群主和管理员可调用此方法。                                           |
-| unmuteGroupMember          | 解除禁言。仅群主和管理员可调用此方法。                                                   |
-| getGroupMutelist           | 获取群组的禁言列表。                                                                     |
-| disableSendGroupMsg        | 设置全员禁言。仅群组管理员及以上身份可调用此方法。                                       |
-| enableSendGroupMsg         | 解除全员禁言。仅群组管理员及以上身份可调用此方法。                                       |
-| addUsersToGroupAllowlist   | 添加白名单。白名单里的成员可以在群禁言之后继续发言。仅群组管理员及以上身份可调用此方法。 |
-| removeGroupAllowlistMember | 移除白名单。仅群组管理员及以上身份可调用此方法。                                         |
-| getGroupAllowlist          | 获取群组白名单列表。仅群组管理员及以上身份可调用此方法。                                 |
-| isInGroupAllowlist         | 检查当前用户是否在群组白名单中。app 管理员可查询所有用户是否在群组白名单中；app 普通用户可查询自己是否在群组白名单中。          |
-| setGroupMemberAttributes   | 设置群成员自定义属性。                                                                   |
-| getGroupMemberAttributes   | 获取单个群成员所有自定义属性。                                                           |
-| getGroupMembersAttributes  | 根据指定的属性 key 获取多个群成员的自定义属性。                                          |
+| 方法                       | 描述                                                                                                                   |
+| :------------------------- | :--------------------------------------------------------------------------------------------------------------------- |
+| joinGroup                  | 申请加入群组。                                                                                                         |
+| acceptGroupJoinRequest     | 同意用户加入群。仅群主和管理员可调用此方法。                                                                           |
+| rejectGroupJoinRequest     | 拒绝入群申请。仅群主和管理员可调用此方法。                                                                             |
+| inviteUsersToGroup         | 邀请用户加群。                                                                                                         |
+| acceptGroupInvite          | 接受入群邀请。                                                                                                         |
+| rejectGroupInvite          | 拒绝入群邀请。                                                                                                         |
+| leaveGroup                 | 离开群组。                                                                                                             |
+| getJoinedGroups            | 列出某用户加入的所有群组。                                                                                             |
+| getPublicGroups            | 分页获取公开群。                                                                                                       |
+| createGroup                | 创建群组。                                                                                                             |
+| destroyGroup               | 解散群组。仅群主可调用此方法。                                                                                         |
+| changeGroupOwner           | 转让群组。仅群主可调用此方法。                                                                                         |
+| modifyGroup                | 修改群信息。仅群组管理员可调用此方法。                                                                                 |
+| getGroupInfo               | 获取群组详情。                                                                                                         |
+| fetchGroupAnnouncement     | 获取群公告。                                                                                                           |
+| updateGroupAnnouncement    | 更新群公告。                                                                                                           |
+| getGroupAdmin              | 获取群组下所有管理员。                                                                                                 |
+| setGroupAdmin              | 设置群管理员。仅群主可调用此方法。                                                                                     |
+| removeGroupAdmin           | 移除群管理员。仅群主可调用此方法。                                                                                     |
+| blockGroupMember           | 将单个成员加入群组黑名单。仅群主和管理员可调用此方法。                                                                 |
+| blockGroupMembers          | 批量添加成员至群组黑名单。仅群组管理员可调用此方法。                                                                   |
+| unblockGroupMember         | 将单个成员从群组黑名单移除。仅群组管理员可调用此方法。                                                                 |
+| unblockGroupMembers        | 将成员批量移出群组黑名单。仅群主和管理员可调用此方法。                                                                 |
+| getGroupBlocklist          | 获取群组黑名单。                                                                                                       |
+| muteGroupMember            | 将一个组成员禁言。仅群主和管理员可调用此方法。                                                                         |
+| unmuteGroupMember          | 解除禁言。仅群主和管理员可调用此方法。                                                                                 |
+| getGroupMutelist           | 获取群组的禁言列表。                                                                                                   |
+| disableSendGroupMsg        | 设置全员禁言。仅群组管理员及以上身份可调用此方法。                                                                     |
+| enableSendGroupMsg         | 解除全员禁言。仅群组管理员及以上身份可调用此方法。                                                                     |
+| addUsersToGroupAllowlist   | 添加白名单。白名单里的成员可以在群禁言之后继续发言。仅群组管理员及以上身份可调用此方法。                               |
+| removeGroupAllowlistMember | 移除白名单。仅群组管理员及以上身份可调用此方法。                                                                       |
+| getGroupAllowlist          | 获取群组白名单列表。仅群组管理员及以上身份可调用此方法。                                                               |
+| isInGroupAllowlist         | 检查当前用户是否在群组白名单中。app 管理员可查询所有用户是否在群组白名单中；app 普通用户可查询自己是否在群组白名单中。 |
+| setGroupMemberAttributes   | 设置群成员自定义属性。                                                                                                 |
+| getGroupMemberAttributes   | 获取单个群成员所有自定义属性。                                                                                         |
+| getGroupMembersAttributes  | 根据指定的属性 key 获取多个群成员的自定义属性。                                                                        |
 
 | 事件         | 描述                     |
 | :----------- | :----------------------- |
@@ -181,38 +181,38 @@
 - `chatClient` 提供聊天室管理的方法，如加入和离开聊天室、获取聊天室列表，以及管理成员权限。
 - `EventHandler` 类提供聊天室事件监听。
 
-| 方法 | 描述 |
-| :-------------------------------- | :----------------- |
-| joinChatRoom | 加入聊天室。 |
-| leaveChatRoom | 离开聊天室。 |
-| getChatRooms | 分页获取聊天室列表。 |
-| listChatRoomMembers | 分页列出聊天室的所有成员。 |
-| modifyChatRoom | 修改聊天室详情。 |
-| fetchChatRoomAnnouncement | 获取聊天室公告。 |
-| updateChatRoomAnnouncement | 更新聊天室公告。 |
-| setChatRoomAdmin | 设置聊天室管理员。该方法只有聊天室所有者才有权限调用。 |
-| removeChatRoomAdmin | 移除聊天室管理员。该方法只有聊天室所有者才有权限调用。 |
-| getChatRoomAdmin | 获取聊天室的所有管理员。 |
-| blockChatRoomMember | 添加单个成员至聊天室黑名单。仅聊天室所有者和管理员有权限调用该方法。 |
-| unblockChatRoomMember | 将单个用户从聊天室黑名单移除。仅聊天室所有者和管理员有权限调用该方法。 |
-| blockChatRoomMembers | 批量添加成员至聊天室黑名单。仅聊天室所有者和管理员有权限调用该方法。 |
-| unblockChatRoomMembers | 批量将成员从聊天室黑名单移除。仅聊天室所有者和管理员有权限调用该方法。 |
-| getChatRoomBlocklist | 获取聊天室黑名单。 |
-| muteChatRoomMember | 禁止聊天室用户发言。该方法只有聊天室所有者才有权限调用。 |
-| unmuteChatRoomMember | 解除对聊天室用户的禁言。仅聊天室所有者和管理员有权限调用该方法。 |
-| disableSendChatRoomMsg | 聊天室全员禁言。仅聊天室创建者和管理员可调用此方法。 |
-| enableSendChatRoomMsg | 聊天室解除全员禁言。仅聊天室创建者和管理员可调用此方法。 |
-| getChatRoomMutelist | 获取聊天室所有被禁言成员。 |
-| addUsersToChatRoomAllowlist | 批量增加聊天室白名单成员。仅聊天室所有者和管理员有权限调用该方法。 |
-| removeChatRoomAllowlistMember | 批量移除聊天室白名单成员。仅聊天室所有者和管理员有权限调用该方法。 |
-| isInChatRoomAllowlist | 查询聊天室成员是否是在白名单中。普通成员可查询自己是否在聊天室白名单中；聊天室所有者和管理员可查询其他成员是否在白名单中。 |
-| getChatRoomAllowlist | 获取聊天室白名单列表。仅聊天室所有者和管理员有权调用该方法。 |
-| setChatRoomAttribute | 设置单个聊天室自定义属性。 |
-| setChatRoomAttributes | 批量设置聊天室属性。 |
-| removeChatRoomAttribute | 移除单个聊天室自定义属性。 |
-| removeChatRoomAttributes | 批量移除聊天室属性。 |
-| getChatRoomAttributes | 获取聊天室全部的自定义属性。 |
-| getJoinedChatRooms | 获取用户加入的聊天室列表 |
+| 方法                          | 描述                                                                                                                       |
+| :---------------------------- | :------------------------------------------------------------------------------------------------------------------------- |
+| joinChatRoom                  | 加入聊天室。                                                                                                               |
+| leaveChatRoom                 | 离开聊天室。                                                                                                               |
+| getChatRooms                  | 分页获取聊天室列表。                                                                                                       |
+| listChatRoomMembers           | 分页列出聊天室的所有成员。                                                                                                 |
+| modifyChatRoom                | 修改聊天室详情。                                                                                                           |
+| fetchChatRoomAnnouncement     | 获取聊天室公告。                                                                                                           |
+| updateChatRoomAnnouncement    | 更新聊天室公告。                                                                                                           |
+| setChatRoomAdmin              | 设置聊天室管理员。该方法只有聊天室所有者才有权限调用。                                                                     |
+| removeChatRoomAdmin           | 移除聊天室管理员。该方法只有聊天室所有者才有权限调用。                                                                     |
+| getChatRoomAdmin              | 获取聊天室的所有管理员。                                                                                                   |
+| blockChatRoomMember           | 添加单个成员至聊天室黑名单。仅聊天室所有者和管理员有权限调用该方法。                                                       |
+| unblockChatRoomMember         | 将单个用户从聊天室黑名单移除。仅聊天室所有者和管理员有权限调用该方法。                                                     |
+| blockChatRoomMembers          | 批量添加成员至聊天室黑名单。仅聊天室所有者和管理员有权限调用该方法。                                                       |
+| unblockChatRoomMembers        | 批量将成员从聊天室黑名单移除。仅聊天室所有者和管理员有权限调用该方法。                                                     |
+| getChatRoomBlocklist          | 获取聊天室黑名单。                                                                                                         |
+| muteChatRoomMember            | 禁止聊天室用户发言。该方法只有聊天室所有者才有权限调用。                                                                   |
+| unmuteChatRoomMember          | 解除对聊天室用户的禁言。仅聊天室所有者和管理员有权限调用该方法。                                                           |
+| disableSendChatRoomMsg        | 聊天室全员禁言。仅聊天室创建者和管理员可调用此方法。                                                                       |
+| enableSendChatRoomMsg         | 聊天室解除全员禁言。仅聊天室创建者和管理员可调用此方法。                                                                   |
+| getChatRoomMutelist           | 获取聊天室所有被禁言成员。                                                                                                 |
+| addUsersToChatRoomAllowlist   | 批量增加聊天室白名单成员。仅聊天室所有者和管理员有权限调用该方法。                                                         |
+| removeChatRoomAllowlistMember | 批量移除聊天室白名单成员。仅聊天室所有者和管理员有权限调用该方法。                                                         |
+| isInChatRoomAllowlist         | 查询聊天室成员是否是在白名单中。普通成员可查询自己是否在聊天室白名单中；聊天室所有者和管理员可查询其他成员是否在白名单中。 |
+| getChatRoomAllowlist          | 获取聊天室白名单列表。仅聊天室所有者和管理员有权调用该方法。                                                               |
+| setChatRoomAttribute          | 设置单个聊天室自定义属性。                                                                                                 |
+| setChatRoomAttributes         | 批量设置聊天室属性。                                                                                                       |
+| removeChatRoomAttribute       | 移除单个聊天室自定义属性。                                                                                                 |
+| removeChatRoomAttributes      | 批量移除聊天室属性。                                                                                                       |
+| getChatRoomAttributes         | 获取聊天室全部的自定义属性。                                                                                               |
+| getJoinedChatRooms            | 获取用户加入的聊天室列表                                                                                                   |
 
 | 事件            | 描述                   |
 | :-------------- | :--------------------- |
