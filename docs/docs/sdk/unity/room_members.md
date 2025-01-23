@@ -256,7 +256,7 @@ SDKClient.Instance.RoomManager.MuteRoomMembers(roomId, members, new CallBack(
 ```csharp
 SDKClient.Instance.RoomManager.UnMuteRoomMembers(roomId, members, new CallBack(
     onSuccess: () => {
-    }, 
+    },
     onError: (code, desc) => {
     }
 ));

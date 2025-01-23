@@ -360,7 +360,7 @@ const documentSidebar = [
    collapsible: true,
    children: [
      { text: 'Uniapp 生成原生 Android、iOS 应用', link: 'uniappnativeapp.html' },
-     { text: '小程序模板使用指南', link: 'uniappuikit.html' },
+     // { text: '小程序模板使用指南', link: 'uniappuikit.html' },
      { text: '如何配置服务器域名', link: 'serverconfig.html' },
    ],
    only: ['applet']

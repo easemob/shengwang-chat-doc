@@ -25,67 +25,20 @@
   
   创建项目成功后，请确保项目同步完成。
 
-2. 检查工程是否引入 **mavenCentral** 仓库。
-
-  - Gradle 7.0 之前 
-
-    在 Project 的 `build.gradle.kts` 文件中添加 `mavenCentral()` 仓库。
-
-    ```kotlin
-    buildscript {
-       repositories {
-           mavenCentral()
-       }
-    }
-    ```
-  - Gradle 7.0 即之后
-
-    在 Project 的 `settings.gradle` 文件中添加 `mavenCentral()` 仓库。
-
-    ```gradle
-    pluginManagement {
-        repositories {
-            ……
-            mavenCentral()
-            ……
-        }
-    }
-    dependencyResolutionManagement {
-        repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-        repositories {
-            ……
-            mavenCentral()
-        }
-    }
-    ```
-3. 在项目中引入单群聊 UIKit。
-
-**Module 远程依赖**
-
-在 app 项目 build.gradle.kts 中添加以下依赖：
-
-// TODO: 替换为最新版本号和仓库地址
-```kotlin
-implementation("cn.shengwang:chat-uikit:1.3.2")
-```
-// TODO: 替换链接
-若要查看 UIKit 的最新版本号，请点击[这里](https://central.sonatype.com/artifact/io.hyphenate/ease-chat-kit/versions)。
+2. 在项目中引入单群聊 UIKit。
 
 **本地依赖**
-// TODO: 替换链接
 从 GitHub 获取[单群聊 UIKit](https://github.com/Shengwang-Community/ShengwangChat-UIKit-android) 源码，按照下面的方式集成：
 
 - 在 Project 的 `settings.gradle.kts` 文件中添加如下代码：
 
-// TODO：替换下面括号中的相对链接
 ```kotlin
 include(":chat-uikit")
-project(":chat-uikit").projectDir = File("../AgoraChat-UIKit-android/ease-im-kit")
+project(":chat-uikit").projectDir = File("../ShengwangChat-UIKit-android/ease-im-kit")
 ```
 
 - 在 app 的 `build.gradle.kts` 文件中添加如下代码：
 
-// TODO：查看是否要替换代码中括号中的 chat-uikit
 ```kotlin
 //chatuikit-android
 implementation(project(mapOf("path" to ":chat-uikit")))
@@ -139,11 +92,11 @@ implementation(project(mapOf("path" to ":chat-uikit")))
         android:hint="UserId"/>
 
     <EditText
-        android:id="@+id/et_password"
+        android:id="@+id/et_token"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="20dp"
-        android:hint="Password"/>
+        android:hint="Chat Token"/>
 
     <Button
         android:id="@+id/btn_login"
@@ -209,15 +162,13 @@ implementation(project(mapOf("path" to ":chat-uikit")))
 
 打开 `MainActivity` 文件，并替换为如下代码。
 
-// TODO：下面的示例代码中还有 easemob，可以吗？
-
 ```kotlin
-package com.easemob.quickstart
+package io.agora.quickstart
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import com.easemob.quickstart.databinding.ActivityMainBinding
+import io.agora.quickstart.databinding.ActivityMainBinding
 import io.agora.chat.uikit.ChatUIKitClient
 import io.agora.chat.uikit.common.ChatLog
 import io.agora.chat.uikit.common.ChatOptions
@@ -225,6 +176,7 @@ import io.agora.chat.uikit.common.extensions.showToast
 import io.agora.chat.uikit.feature.chat.enums.ChatUIKitType
 import io.agora.chat.uikit.feature.chat.activities.UIKitChatActivity
 import io.agora.chat.uikit.interfaces.ChatUIKitConnectionListener
+import io.agora.chat.uikit.model.ChatUIKitProfile
 
 class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -237,7 +189,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onLogout(errorCode: Int, info: String?) {
                 super.onLogout(errorCode, info)
-                showToast("You have been logged out, please log in again!")
+                runOnUiThread { showToast("You have been logged out, please log in again!") }
                 ChatLog.e(TAG, "")
             }
         }
@@ -252,16 +204,16 @@ class MainActivity : AppCompatActivity() {
     private fun initSDK() {
         val appId = getString(R.string.app_id)
         if (appId.isEmpty()) {
-            applicationContext.showToast("You should set your appId first!")
-            ChatLog.e(TAG, "You should set your appId first!")
+            applicationContext.showToast("You should set your AppId first!")
+            ChatLog.e(TAG, "You should set your AppId first!")
             return
         }
         ChatOptions().apply {
-            // 设置你自己的 App ID
+            // Set your own appId here
             this.appId = appId
-            // 设置为手动登录
+            // Set not to log in automatically
             this.autoLogin = false
-            // 设置是否需要接收方发送已达回执。默认为 `false`，即不需要。
+            // Set whether confirmation of delivery is required by the recipient. Default: false
             this.requireDeliveryAck = true
         }.let {
             ChatUIKitClient.init(applicationContext, it)
@@ -274,10 +226,10 @@ class MainActivity : AppCompatActivity() {
 
     fun login(view: View) {
         val username = binding.etUserId.text.toString().trim()
-        val password = binding.etPassword.text.toString().trim()
-        if (username.isEmpty() || password.isEmpty()) {
-            showToast("Username or password cannot be empty!")
-            ChatLog.e(TAG, "Username or password cannot be empty!")
+        val chatToken = binding.etToken.text.toString().trim()
+        if (username.isEmpty() || chatToken.isEmpty()) {
+            showToast("Username or ChatToken cannot be empty!")
+            ChatLog.e(TAG, "Username or ChatToken cannot be empty!")
             return
         }
         if (!ChatUIKitClient.isInited()) {
@@ -285,12 +237,13 @@ class MainActivity : AppCompatActivity() {
             ChatLog.e(TAG, "Please init first!")
             return
         }
-        ChatUIKitClient.login(username, password
+        ChatUIKitClient.login(
+            ChatUIKitProfile(username), chatToken
             , onSuccess = {
-                showToast("Login successfully!")
+                runOnUiThread { showToast("Login successfully!") }
                 ChatLog.e(TAG, "Login successfully!")
             }, onError = { code, message ->
-                showToast("Login failed: $message")
+                runOnUiThread { showToast("Login failed: $message") }
                 ChatLog.e(TAG, "Login failed: $message")
             }
         )
@@ -304,12 +257,12 @@ class MainActivity : AppCompatActivity() {
         }
         ChatUIKitClient.logout(false
             , onSuccess = {
-                showToast("Logout successfully!")
+                runOnUiThread { showToast("Logout successfully!") }
                 ChatLog.e(TAG, "Logout successfully!")
             }
         )
     }
-    // 跳转到聊天页面
+
     fun startChat(view: View) {
         val username = binding.etPeerId.text.toString().trim()
         if (username.isEmpty()) {
@@ -322,7 +275,6 @@ class MainActivity : AppCompatActivity() {
             ChatLog.e(TAG, "Please login first!")
             return
         }
-        // 对于群聊，`username` 替换为群组 ID，`ChatUIKitType.SINGLE_CHAT` 替换为 `ChatUIKitType.GROUP_CHAT`。
         UIKitChatActivity.actionStart(this, username, ChatUIKitType.SINGLE_CHAT)
     }
 
@@ -334,12 +286,6 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "MainActivity"
-    }
-}
-
-fun Context.showToast(msg: String) {
-    CoroutineScope(Dispatchers.Main).launch {
-        Toast.makeText(this@showToast, msg, Toast.LENGTH_SHORT).show()
     }
 }
 ```

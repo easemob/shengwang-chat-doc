@@ -5,6 +5,8 @@
 - `chatClient` 是聊天 SDK Connection 类的实例，提供登录和登出即时通讯 IM 的方法，并管理 SDK 与聊天服务器之间的连接，同时也提供管理联系人，群组，聊天室等的方法 。
 - `Message` 类提供创建消息的方法。
 
+如欲了解各模块中的方法和参数详情，请点击[这里](https://im.shengwang.cn/sdkdocs/chat1.x/unity/)。
+
 ## 连接与初始化
 
 `chatClient` 提供登录和登出即时通讯 IM 的方法和事件，并管理 SDK 与聊天服务器之间的连接。

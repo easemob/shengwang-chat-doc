@@ -13,7 +13,7 @@
 - `ChatPushManager` 类提供了允许你管理离线推送服务的方法。
 - `ChatUserInfoManager` 类提供用户属性管理方法，包括获取和更新用户属性。
 
-如欲了解各类中方法的详情，请点击[这里]()。
+如欲了解各类中的方法和参数详情，请点击[这里](https://im.shengwang.cn/sdkdocs/chat1.x/ios/)。
 
 ## 连接与初始化
 
