@@ -29,17 +29,13 @@ title: 文档指引
   :aspect-ratio="2.22"
   :list="[
     { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '陌生人社交' },
-    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '秀场直播' },
+    { img: 'https://doc.shengwang.cn/assets/images/collaborative-work-e0e161d8c5efe33446e8e22e94bff720.png', text: '互动直播' },
     { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '语聊房' },
-    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '1v1 社交' },
-    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '互动游戏' },
-    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '社交电商' },
-    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '医疗问诊' },
+    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '1v1社交' },
+    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: 'AI陪伴' },
     { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '线上招聘' },
-    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '企业协作' },
+    { img: 'https://doc.shengwang.cn/assets/images/iot-0bbd27d2bfbf330e652ff8a0376499ab.png', text: '企业协作' },
     { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '客服沟通' },
-    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: 'AI 陪伴' },
-    { img: 'https://doc.shengwang.cn/assets/images/metaverse-e305ea383525fea1596024f13b8e6627.png', text: '在线教育' },
   ]"
 />
 
@@ -83,11 +79,11 @@ title: 文档指引
 
 ## 即时通讯 IM 如何计费？
 
-IM 为不同业务阶段的用户提供了以下套餐，用户可以根据自己业务用量情况进行合理选择，优化成本支出。
+即时通讯 IM 为不同业务阶段的用户提供了 2 种套餐类型，用户可以根据自己业务用量情况进行合理选择，优化成本支出。
 
-- 体验套餐：**免费版**
-- 自服务套餐：**基础版**、**尊享版**、**旗舰版**
-- 企业套餐：**企业版** 
+- 体验套餐： **免费版**
+- 企业套餐：**企业版**
+
 
 <el-row :gutter="16" :style="{rowGap:'16px'}">
   <el-col :span="24" :md="12"  :lg="8">
@@ -96,13 +92,6 @@ IM 为不同业务阶段的用户提供了以下套餐，用户可以根据自�
       <ListItem type="support">100 峰值群组和聊天室数</ListItem>
       <ListItem type="support">10 GB 免费附件流量/月</ListItem>
       <ListItem type="support">10 GB 免费附件存储/月</ListItem>
-    </ListPanel>
-  </el-col>
-  <el-col :span="24" :md="12" :lg="8">
-    <ListPanel theme="yellow" title="自助套餐" desc="灵活选择，助力业务加速" :height="248">
-      <ListItem type="support">套餐灵活选择</ListItem>
-      <ListItem type="support">12 × 7 小时服务支持</ListItem>
-      <ListItem type="support">99.95% SLA 保障</ListItem>
     </ListPanel>
   </el-col>
   <el-col :span="24" :md="12"  :lg="8">
