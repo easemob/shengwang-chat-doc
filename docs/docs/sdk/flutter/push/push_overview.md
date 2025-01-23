@@ -80,8 +80,8 @@
 
 ## 前提条件 
 
-1. 已开启即时通讯 IM ，详见[开启和配置即时通讯服务](/docs/sdk/flutter/enable_im.html)。
-2. 了解即时通讯 IM 的使用限制，详见[使用限制](/docs/sdk/flutter/limitation.html)。
+1. 已开启即时通讯 IM ，详见[开启和配置即时通讯服务](enable_im.html)。
+2. 了解即时通讯 IM 的使用限制，详见[使用限制](limitation.html)。
 3. 各推送使用的条件：
   - APNs：在苹果设备上可用；
   - Google FCM：设备启用了 Google Play 服务且可连接至 Google 服务器；

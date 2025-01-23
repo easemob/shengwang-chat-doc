@@ -37,6 +37,6 @@
 
 ### 方法二：手动复制 SDK 文件
 
-打开 SDK 下载页面，获取最新版的即时通讯 IM SDK，然后解压。
+[下载 SDK](https://im.shengwang.cn/)，获取最新版的即时通讯 IM SDK，然后解压。
 
-将 SDK 包内的 `AgoraChat.xcframework` 拖入到你的工程中。
+将 SDK 包内的 `AgoraChat.xcframework` 以及 `aosl.xcframework` 拖入到你的工程中。编译并运行。

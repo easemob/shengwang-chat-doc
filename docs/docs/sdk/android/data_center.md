@@ -30,24 +30,24 @@
 
 ## 集成说明
 
-移动端 SDK 连接国内数据中心**中国**。
+1. 移动端 SDK 连接国内数据中心**中国**。
 
-Web 端和小程序端 SDK 集成需要根据数据中心，填写配置对应的 webSocket 地址。
+2. Web 端和小程序端 SDK 集成需要根据数据中心，填写配置对应的 webSocket 地址。
 
-| 数据中心名称 | socket 3.0 地址          | socket 2.0(老版本)地址   |
-| :--------- | :----- | :----- |
-| 中国      | im-api-c1.chat.rtnsvc.com     | https://im-api.easemob.com 或 https://im-api.easecdn.com       |
+| 数据中心名称 | Socket 地址          |
+| :--------- | :----- | 
+| 中国      |  wss://im-api-c1.chat.rtnsvc.com 或  wss://im-api-c1.chat.realtimemesh.com       |
 
-RESTful 接口请求地址如下：
+3. RESTful 接口请求地址如下：
 
 | 数据中心名称 | RESTful API 请求地址                   |
 | :--------- | :----- |
-| 中国      | c1.chat.rtnsvc.com    |
+| 中国      | https://c1.chat.rtnsvc.com 或 https://c1.chat.realtimemesh.com   |
 
-微信小程序、支付宝小程序的具体地址如下：
+4. 微信小程序、支付宝小程序的具体地址如下：
 
 | 数据中心名称 | 微信小程序      | 支付宝小程序           |
 | :--------- | :----- | :----- |
-| 中国     | im-api-wechat-c1.chat.rtnsvc.com | im-api-alipay-c1.chat.rtnsvc.com   |
+| 中国     | im-api-wechat-c1.chat.rtnsvc.com 或 im-api-wechat-c1.chat.realtimemesh.com | im-api-alipay-c1.chat.rtnsvc.com 或 im-api-alipay-c1.chat.realtimemesh.com   |
 
 

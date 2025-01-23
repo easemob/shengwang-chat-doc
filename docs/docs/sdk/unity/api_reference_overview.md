@@ -13,6 +13,8 @@
 - `ChatThreadManager` 类提供了管理子区的方法，包括创建、解散子区以及成员管理。
 - `UserInfoManager` 类提供了管理用户属性的方法，包括获取和更新用户属性。
 
+如欲了解各类中的方法和参数详情，请点击[这里](https://im.shengwang.cn/sdkdocs/chat1.x/unity/)。
+
 ## 连接与初始化
 
 `SDKClient` 类提供登录和登出即时通讯 IM 的方法和事件，并管理 SDK 与聊天服务器之间的连接。
