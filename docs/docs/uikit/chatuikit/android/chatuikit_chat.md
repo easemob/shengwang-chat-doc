@@ -52,8 +52,8 @@ class ChatActivity: AppCompactActivity() {
 
 ```kotlin
 // conversationID: 单聊为对端用户的用户 ID，群聊为群组 ID。
-// easeChatType: 单聊和群聊分别为 SINGLE_CHAT 和 GROUP_CHAT。
-UIKitChatFragment.Builder(conversationID, easeChatType)
+// chatType: 单聊和群聊分别为 SINGLE_CHAT 和 GROUP_CHAT。
+UIKitChatFragment.Builder(conversationID, chatType)
         .useTitleBar(true)
         .setTitleBarTitle("title")
         .setTitleBarSubTitle("subtitle")
@@ -115,14 +115,14 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 | setChatInputMenuHint()                 | 设置菜单区域输入文本框的提示文字。    |
 | sendMessageByOriginalImage()           | 设置图片消息是否发送原图：<br/> - `true`：是。 <br/> - (默认) `false`: 否。   |
 | setEmptyLayout()                       | 设置聊天列表的空白页面。      |
-| setCustomAdapter()                     | 设置自定义的适配器，默认为 `EaseMessageAdapter`。   |
+| setCustomAdapter()                     | 设置自定义的适配器，默认为 `ChatUIKitMessagesAdapter`。   |
 | setCustomFragment()                    | 设置自定义聊天 Fragment，需要继承自 `UIKitChatFragment`。  |
 
 ### 添加自定义消息布局
 
-开发者可以继承 `EaseMessageAdapter`、`ChatUIKitRowViewHolder` 和 `ChatUIKitRow`，实现自己的 `CustomMessageAdapter`、`CustomChatTypeViewViewHolder` 和 `CustomTypeChatRow`，然后将 `CustomMessageAdapter` 设置到 `UIKitChatFragment#Builder#setCustomAdapter` 中。
+开发者可以继承 `ChatUIKitMessagesAdapter`、`ChatUIKitRowViewHolder` 和 `ChatUIKitRow`，实现自己的 `CustomMessageAdapter`、`CustomChatTypeViewViewHolder` 和 `CustomTypeChatRow`，然后将 `CustomMessageAdapter` 设置到 `UIKitChatFragment#Builder#setCustomAdapter` 中。
 
-1. 创建自定义适配器 `CustomMessageAdapter` 继承自 `EaseMessageAdapter`，重写 `getViewHolder` 和 `getItemNotEmptyViewType` 方法。
+1. 创建自定义适配器 `CustomMessageAdapter` 继承自 `ChatUIKitMessagesAdapter`，重写 `getViewHolder` 和 `getItemNotEmptyViewType` 方法。
 
 ```kotlin
 class CustomMessageAdapter: ChatUIKitMessagesAdapter() {
@@ -133,7 +133,7 @@ class CustomMessageAdapter: ChatUIKitMessagesAdapter() {
         return CUSTOM_YOUR_MESSAGE_TYPE
     }
 
-    override fun getViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<EaseMessage> {
+    override fun getViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<ChatMessage> {
         // 根据返回的 viewType 返回对应的 ViewHolder。
         // 返回自定义的 ViewHolder 或者使用默认的 super.getViewHolder(parent, viewType)。
         return CUSTOM_VIEW_HOLDER()
@@ -172,7 +172,7 @@ class CustomChatTypeViewViewHolder(
     itemView: View
 ): ChatUIKitRowViewHolder(itemView) {
 
-    override fun onBubbleClick(message: EaseMessage?) {
+    override fun onBubbleClick(message: ChatMessage?) {
         super.onBubbleClick(message)
         // 添加点击事件
     }
@@ -201,7 +201,7 @@ class CustomMessageAdapter: ChatUIKitMessagesAdapter() {
         return super.getItemNotEmptyViewType(position)
     }
 
-    override fun getViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<EaseMessage> {
+    override fun getViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<ChatMessage> {
         // 根据返回的 viewType 返回对应的 ViewHolder。
         if (viewType == VIEW_TYPE_MESSAGE_CUSTOM_VIEW_ME || viewType == VIEW_TYPE_MESSAGE_CUSTOM_VIEW_OTHER) {
             CustomChatTypeViewViewHolder(
@@ -503,7 +503,7 @@ chatMessageListLayout?.let{
 }
 
 // UIKitChatFragment#Builder 中也提供了部分消息列表相关配置项
-UIKitChatFragment.Builder(conversationID, easeChatType)
+UIKitChatFragment.Builder(conversationID, chatType)
     .showNickname()                     //是否显示昵称：true：是；(默认) false: 否。 
     .setMsgTimeTextColor()              //设置时间线文本的颜色。
     .setMsgTimeTextSize()               //设置时间线文本的字体大小。
@@ -520,9 +520,9 @@ UIKitChatFragment.Builder(conversationID, easeChatType)
 
 自定义消息表中列表项的内容，即各种消息类型的自定义消息布局。
 
-开发者可以继承 `EaseMessageAdapter`、`ChatUIKitRowViewHolder` 和 `ChatUIKitRow` 实现自己的 `CustomMessageAdapter`、`CustomChatTypeViewViewHolder` 和 `CustomTypeChatRow`，然后将 `CustomMessageAdapter` 设置到 `UIKitChatFragment#Builder#setCustomAdapter` 中。
+开发者可以继承 `ChatUIKitMessagesAdapter`、`ChatUIKitRowViewHolder` 和 `ChatUIKitRow` 实现自己的 `CustomMessageAdapter`、`CustomChatTypeViewViewHolder` 和 `CustomTypeChatRow`，然后将 `CustomMessageAdapter` 设置到 `UIKitChatFragment#Builder#setCustomAdapter` 中。
 
-1. 创建自定义适配器 `CustomMessageAdapter` 继承自 `EaseMessageAdapter`，重写 `getViewHolder` 和 `getItemNotEmptyViewType` 方法。
+1. 创建自定义适配器 `CustomMessageAdapter` 继承自 `ChatUIKitMessagesAdapter`，重写 `getViewHolder` 和 `getItemNotEmptyViewType` 方法。
 
 ```kotlin
 class CustomMessageAdapter: ChatUIKitMessagesAdapter() {
@@ -533,7 +533,7 @@ class CustomMessageAdapter: ChatUIKitMessagesAdapter() {
         return CUSTOM_YOUR_MESSAGE_TYPE
     }
 
-    override fun getViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<EaseMessage> {
+    override fun getViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<ChatMessage> {
         // 根据返回的 viewType 返回对应的 ViewHolder。
         // 返回自定义的 ViewHolder 或者使用默认的 super.getViewHolder(parent, viewType)。
         return CUSTOM_VIEW_HOLDER()
@@ -572,7 +572,7 @@ class CustomChatTypeViewViewHolder(
     itemView: View
 ): ChatUIKitRowViewHolder(itemView) {
 
-    override fun onBubbleClick(message: EaseMessage?) {
+    override fun onBubbleClick(message: ChatMessage?) {
         super.onBubbleClick(message)
         // Add click event
     }
@@ -601,7 +601,7 @@ class CustomMessageAdapter: ChatUIKitMessagesAdapter() {
         return super.getItemNotEmptyViewType(position)
     }
 
-    override fun getViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<EaseMessage> {
+    override fun getViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<ChatMessage> {
         // 根据返回的 viewType 返回对应的 ViewHolder。
         if (viewType == VIEW_TYPE_MESSAGE_CUSTOM_VIEW_ME || viewType == VIEW_TYPE_MESSAGE_CUSTOM_VIEW_OTHER) {
             CustomChatTypeViewViewHolder(

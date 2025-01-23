@@ -14,26 +14,14 @@
 
 ## 集成单群聊 UIKit
 
-### Module 远程依赖
-
-在 app 项目 `build.gradle.kts` 中添加以下依赖：
-
-```kotlin
-// TODO: 替换为最新版本号和仓库地址
-implementation("cn.shengwang:chat-uikit:1.3.2")
-```
-// TODO: 替换链接
-若要查看最新版本号，请点击[这里](https://central.sonatype.com/artifact/io.hyphenate/ease-chat-kit/versions)。
-
 ### 本地依赖
-// TODO: 替换链接
 从 GitHub 获取[单群聊 UIKit](https://github.com/Shengwang-Community/ShengwangChat-UIKit-android) 源码，按照下面的方式集成：
 
 1. 在根目录 `settings.gradle.kts` 文件中添加如下代码：
 
 ```kotlin
 include(":chat-uikit")
-project(":chat-uikit").projectDir = File("../AgoraChat-UIKit-android/ease-im-kit")
+project(":chat-uikit").projectDir = File("../ShengwangChat-UIKit-android/ease-im-kit")
 ```
 
 2. 在 app 的 `build.gradle.kts` 文件中添加如下代码：
