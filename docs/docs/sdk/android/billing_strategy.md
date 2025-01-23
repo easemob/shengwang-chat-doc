@@ -129,100 +129,101 @@ title: 计费策略
 | 套餐价格（/月） | 0 | 联系商务 |
 
 ## 套餐配额
-<table width="1106">
+
+<table>
 <tbody>
 <tr>
-<td colspan="2" rowspan="2" width="302">
+<td colspan="2" rowspan="2">
 <p>计费项</p>
 </td>
-<td rowspan="2" width="89">
+<td rowspan="2">
 <p>计费方式</p>
 </td>
-<td colspan="5" width="714">
+<td colspan="5">
 <p>套餐包类型</p>
 </td>
 </tr>
 <tr>
-<td width="147">
+<td>
 <p><strong>免费版</strong></p>
 </td>
-<td width="142">
+<td>
 <p><strong>企业版</strong></p>
 </td>
 </tr>
 <tr>
-<td colspan="2" width="302">
+<td colspan="2">
 <p>套餐包费用</p>
 </td>
-<td rowspan="7" width="89">
+<td rowspan="7">
 <p>预付费</p>
 </td>
-<td width="147">
+<td>
 <p>免费</p>
 </td>
-<td rowspan="7" width="142">
+<td rowspan="7">
 <p>联系声网商务</p>
 </td>
 </tr>
 <tr>
-<td rowspan="6" width="113">
+<td rowspan="6">
 <p>套餐内包含用量</p>
 </td>
-<td width="189">
+<td>
 <p>日活用户（DAU）</p>
 </td>
-<td width="147">
+<td>
 <p>100</p>
 </td>
 </tr>
 <tr>
-<td width="189">
+<td>
 <p>峰值群组+聊天室数</p>
 </td>
-<td width="147">
+<td>
 <p>100</p>
 </td>
 </tr>
 <tr>
-<td width="189">
+<td>
 <p>附件流量</p>
 </td>
-<td width="147">
+<td>
 <p>10 GB</p>
 </td>
 </tr>
 <tr>
-<td width="189">
+<td>
 <p>附件存储</p>
 </td>
-<td width="147">
+<td>
 <p>10 GB</p>
 </td>
 </tr>
 <tr>
-<td width="189">
+<td>
 <p>RESTful API QPS</p>
 </td>
-<td width="147">
+<td>
 <p>10 QPS</p>
 </td>
 </tr>
 <tr>
-<td width="189">
+<td>
 <p>分发消息量</p>
 </td>
-<td width="147">
+<td>
 <p>/</p>
 </td>
 </tr>
 </tbody>
 </table>
 
-### 体验套餐: 
+### 体验套餐 
 
 提供给用户自由验证即时通讯 IM 的特性能力，但是在注册用户数、好友人数、群组和聊天室成员数有限制，给予一定的体验用量配额。用量超过配额后你会收到错误码和邮件提醒，并无法继续使用对应功能。
 
-### 企业套餐: 
+### 企业套餐
 
 根据用户实际用量计费。用户在正常使用期间，只要不达到使用硬限制，对资源的访问将不会受到其他限制。联系声网销售（sales@shengwang.cn）获取报价及基于用量保证的折扣。
 
@@ -236,81 +237,81 @@ title: 计费策略
 
 对于超出套餐额度的用量，声网按照本节介绍的计费策略收费。
 
-<table width="1068">
+<table>
 <tbody>
 <tr>
-<td colspan="2" rowspan="2" width="302">
+<td colspan="2" rowspan="2">
 <p>计费项</p>
 </td>
-<td rowspan="2" width="89">
+<td rowspan="2">
 <p>计费方式</p>
 </td>
-<td colspan="5" width="676">
+<td colspan="5">
 <p>套餐包类型</p>
 </td>
 </tr>
 <tr>
-<td width="147">
+<td>
 <p><strong>免费版</strong></p>
 </td>
-<td width="132">
+<td>
 <p><strong>企业版</strong></p>
 </td>
 </tr>
 <tr>
-<td rowspan="6" width="113">
+<td rowspan="6">
 <p>超量单价</p>
 </td>
-<td width="189">
+<td>
 <p>日活用户（DAU）</p>
 </td>
-<td rowspan="6" width="89">
+<td rowspan="6">
 <p>后付费</p>
 </td>
-<td width="147">
+<td>
 <p>超量需升级至付费版</p>
 </td>
-<td rowspan="6" width="132">
+<td rowspan="6">
 <p>联系声网商务</p>
 </td>
 </tr>
 <tr>
-<td width="189">
+<td>
 <p>峰值群组+聊天室数</p>
 </td>
-<td width="147">
+<td>
 <p>超量需升级至付费版</p>
 </td>
 </tr>
 <tr>
-<td width="189">
+<td>
 <p>附件流量</p>
 </td>
-<td width="147">
+<td>
 <p>超量需升级至付费版</p>
 </td>
 </tr>
 <tr>
-<td width="189">
+<td>
 <p>附件存储</p>
 </td>
-<td width="147">
+<td>
 <p>超量需升级至付费版</p>
 </td>
 </tr>
 <tr>
-<td width="189">
+<td>
 <p>RESTful API QPS</p>
 </td>
-<td width="147">
+<td>
 <p>超量需升级至付费版</p>
 </td>
 </tr>
 <tr>
-<td width="189">
+<td>
 <p>分发消息量</p>
 </td>
-<td width="147">
+<td>
 <p>/</p>
 </td>
 </tr>
@@ -319,413 +320,412 @@ title: 计费策略
 
 ## 套餐服务对比
 
-<table width="1885">
+<table>
 <tbody>
 <tr>
-<td width="153">
+<td>
 <p>特性</p>
 </td>
-<td width="662">
+<td>
 <p>功能描述</p>
 </td>
-<td width="220">
+<td>
 <p>免费版</p>
 </td>
-<td width="153">
+<td>
 <p>企业版</p>
 </td>
 </tr>
 <tr>
-<td rowspan="4" width="153">
+<td rowspan="4">
 <p>用户</p>
 </td>
-<td width="662">
+<td>
 <p>好友人数</p>
 </td>
-<td width="220">
+<td>
 <p>100</p>
 </td>
-<td width="153">
+<td>
 <p>10000</p>
 </td>
 </tr>
 <tr>
-<td width="662">
+<td>
 <p>注册用户数</p>
 </td>
-<td width="220">
+<td>
 <p>100</p>
 </td>
-<td width="153">
+<td>
 <p>无上限</p>
 </td>
 </tr>
 <tr>
-<td width="662">
+<td>
 <p>用户属性（提供用户头像、昵称、邮箱等数据存储服务）</p>
 </td>
-<td width="220">
+<td>
 <p>✓</p>
 </td>
-<td width="153">
+<td>
 <p>✓</p>
 </td>
 </tr>
 <tr>
-<td width="662">
+<td>
 <p>用户在线状态订阅</p>
 </td>
-<td width="220">
+<td>
 <p>✓</p>
 </td>
-<td width="153">
+<td>
 <p>✓</p>
 </td>
 </tr>
 <tr>
-<td rowspan="9" width="153">
+<td rowspan="9">
 <p>消息</p>
 </td>
-<td width="662">
+<td>
 <p>消息云存储（提供消息的存储服务，支持历史消息、漫游消息、离线消息）【拆开了离线消息】</p>
 </td>
-<td width="220">
+<td>
 <p>3 天</p>
 </td>
-<td width="153">
+<td>
 <p>按需定制</p>
 </td>
 </tr>
 <tr>
-<td width="662">
+<td>
 <p>全消息类型（包括：文本、表情、语音、视频、图片、位置、透传、自定义等消息）</p>
 </td>
-<td width="220">
+<td>
 <p>✓</p>
 </td>
-<td width="153">
+<td>
 <p>✓</p>
 </td>
 </tr>
 <tr>
-<td width="662">
+<td>
 <p>自定义消息（根据业务需求灵活定制消息内容和功能）</p>
 </td>
-<td width="220">
+<td>
 <p>✓</p>
 </td>
-<td width="153">
+<td>
 <p>✓</p>
 </td>
 </tr>
 <tr>
-<td width="662">
+<td>
 <p>透传消息（作为控制指令）</p>
 </td>
-<td width="220">
+<td>
 <p>✓</p>
 </td>
-<td width="153">
+<td>
 <p>✓</p>
 </td>
 </tr>
 <tr>
-<td width="662">
+<td>
 <p>离线消息（支持单聊/群聊离线消息，上线后可拉取离线消息）</p>
 </td>
-<td width="220">
+<td>
 <p>✓【3 天】</p>
 </td>
-<td width="153">
+<td>
 <p>✓</p>
 </td>
 </tr>
 <tr>
-<td width="662">
+<td>
 <p>附件消息</p>
 </td>
-<td width="220">
+<td>
 <p>✓【3 天】</p>
 </td>
-<td width="153">
+<td>
 <p>✓</p>
 </td>
 </tr>
 <tr>
-<td width="662">
+<td>
 <p>消息已读回执（接收方消息已读后发送方消息已读状态及时变更）</p>
 </td>
-<td width="220">
+<td>
 <p>✓</p>
 </td>
-<td width="153">
+<td>
 <p>✓</p>
 </td>
 </tr>
 <tr>
-<td width="662">
+<td>
 <p>消息撤回（支持客户端/服务端调用）</p>
 </td>
-<td width="220">
+<td>
 <p>✓</p>
 </td>
-<td width="153">
+<td>
 <p>✓</p>
 </td>
 </tr>
 <tr>
-<td width="662">
+<td>
 <p>消息表情回复</p>
 </td>
-<td width="220">
+<td>
 <p>✓</p>
 </td>
-<td width="153">
+<td>
 <p>✓</p>
 </td>
 </tr>
 <tr>
-<td rowspan="5" width="153">
+<td rowspan="5">
 <p>群组</p>
 </td>
-<td width="662">
+<td>
 <p>群组总数</p>
 </td>
-<td width="220">
+<td>
 <p>100</p>
 </td>
-<td width="153">
+<td>
 <p>无上限</p>
 </td>
 </tr>
 <tr>
-<td width="662">
+<td>
 <p>群成员数</p>
 </td>
-<td width="220">
+<td>
 <p>100</p>
 </td>
-<td width="153">
+<td>
 <p>默认 3000（可调整）</p>
 </td>
 </tr>
 <tr>
-<td width="662">
+<td>
 <p>单个用户可加入群组数</p>
 </td>
-<td width="220">
+<td>
 <p>100</p>
 </td>
-<td width="153">
+<td>
 <p>默认 10000（可调整）</p>
 </td>
 </tr>
 <tr>
-<td width="662">
+<td>
 <p>群公告</p>
 </td>
-<td width="220">
+<td>
 <p>✓</p>
 </td>
-<td width="153">
+<td>
 <p>✓</p>
 </td>
 </tr>
 <tr>
-<td width="662">
+<td>
 <p>群共享文件</p>
 </td>
-<td width="220">
+<td>
 <p>✓</p>
 </td>
-<td width="153">
+<td>
 <p>✓</p>
 </td>
 </tr>
 <tr>
-<td rowspan="6" width="153">
+<td rowspan="6">
 <p>聊天室</p>
 </td>
-<td width="662">
+<td>
 <p>聊天室总数</p>
 </td>
-<td width="220">
+<td>
 <p>100</p>
 </td>
-<td width="153">
+<td>
 <p>按需定制</p>
 </td>
 </tr>
 <tr>
-<td width="662">
+<td>
 <p>聊天室成员数</p>
 </td>
-<td width="220">
+<td>
 <p>100</p>
 </td>
-<td width="153">
+<td>
 <p>默认 10000（可调整）</p>
 </td>
 </tr>
 <tr>
-<td width="662">
+<td>
 <p>聊天室公告</p>
 </td>
-<td width="220">
+<td>
 <p>✓</p>
 </td>
-<td width="153">
+<td>
 <p>✓</p>
 </td>
 </tr>
 <tr>
-<td width="662">
+<td>
 <p>聊天室全局禁言</p>
 </td>
-<td width="220">
+<td>
 <p>✓</p>
 </td>
-<td width="153">
+<td>
 <p>✓</p>
 </td>
 </tr>
 <tr>
-<td width="662">
+<td>
 <p>成员白名单（只允许选定用户发送消息）</p>
 </td>
-<td width="220">
+<td>
 <p>✓</p>
 </td>
-<td width="153">
+<td>
 <p>✓</p>
 </td>
 </tr>
 <tr>
-<td width="662">
+<td>
 <p>聊天室历史消息</p>
 </td>
-<td width="220">
+<td>
 <p>3 天</p>
 </td>
-<td width="153">
+<td>
 <p>可调整</p>
 </td>
 </tr>
 <tr>
-<td rowspan="2" width="153">
+<td rowspan="2">
 <p>离线推送</p>
 </td>
-<td width="662">
+<td>
 <p>离线推送通知（支持苹果 （APNs）、谷歌（FCM）、华为、荣耀、小米、OPPO、VIVO、魅族等推送服务）</p>
 </td>
-<td width="220">
+<td>
 <p>✓</p>
 </td>
-<td width="153">
+<td>
 <p>✓</p>
 </td>
 </tr>
 <tr>
-<td width="662">
+<td>
 <p>消息免打扰（在设定时间内不会收到厂商离线推送通知）</p>
 </td>
-<td width="220">
+<td>
 <p>✓</p>
 </td>
-<td width="153">
+<td>
 <p>✓</p>
 </td>
 </tr>
 <tr>
-<td width="153">
+<td>
 <p>子区</p>
 </td>
-<td width="662">
+<td>
 <p>消息子区</p>
 </td>
-<td width="220">
+<td>
 <p>✓</p>
 </td>
-<td width="153">
+<td>
 <p>✓</p>
 </td>
 </tr>
 <tr>
-<td rowspan="3" width="153">
+<td rowspan="3">
 <p>回调</p>
 </td>
-<td width="662">
+<td>
 <p>消息&amp;事件回调（提供全量消息路由转发，支持消息和多种事件类型）</p>
 </td>
-<td width="220">
+<td>
 <p>✓</p>
 </td>
-<td width="153">
+<td>
 <p>✓</p>
 </td>
 </tr>
 <tr>
-<td width="662">
+<td>
 <p>用户状态回调（通过回调方式同步用户离在线状态）</p>
 </td>
-<td width="220">
+<td>
 <p>X</p>
 </td>
-<td width="153">
+<td>
 <p>✓</p>
 </td>
 </tr>
 <tr>
-<td width="662">
+<td>
 <p>发送前回调（用于服务端对接第三方服务扩展）</p>
 </td>
-<td width="220">
+<td>
 <p>X</p>
 </td>
-<td width="153">
+<td>
 <p>✓</p>
 </td>
 </tr>
 <tr>
-<td width="153">
+<td>
 <p>服务端会话列表</p>
 </td>
-<td width="662">
+<td>
 <p>从服务端获取会话列表</p>
 </td>
-<td width="220">
+<td>
 <p>✓</p>
 </td>
-<td width="153">
+<td>
 <p>✓</p>
 </td>
 </tr>
 <tr>
-<td width="153">
+<td>
 <p>多设备登录</p>
 </td>
-<td width="662">
+<td>
 <p>相同账号多设备登录且保持信息同步</p>
 </td>
-<td width="220">
+<td>
 <p>✓</p>
 </td>
-<td width="153">
+<td>
 <p>✓</p>
 </td>
 </tr>
-
 <tr>
-<td width="153">
+<td rowspan="2">
 <p>安全</p>
 </td>
-<td width="662">
+<td>
 <p>TLS/SSL 传输加密</p>
 </td>
-<td width="220">
+<td>
 <p>✓</p>
 </td>
-<td width="153">
+<td>
 <p>✓</p>
 </td>
 </tr>
@@ -733,10 +733,10 @@ title: 计费策略
 <td>
 <p>AES256 存储加密</p>
 </td>
-<td width="220">
+<td>
 <p>✓</p>
 </td>
-<td width="153">
+<td>
 <p>✓</p>
 </td>
 </tr>
