@@ -61,7 +61,6 @@
 
 :::tip
 1. 开发者通过[声网控制台](https://console.shengwang.cn/overview)配置 App 的推送证书，需填写证书名称（或者 App Id）。该步骤须在登录即时通讯 IM SDK 成功后进行。证书名称是声网服务器用于判断目标设备使用哪种推送通道的唯一条件，因此必须确保与 Android 终端设备上传的证书名称一致。
-2. 关于推送 token，详见[绑定推送信息页面相关描述](push_easemob_console.html#绑定推送信息)。
 :::
 
 ### iOS 平台离线推送
