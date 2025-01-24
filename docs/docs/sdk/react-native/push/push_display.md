@@ -183,8 +183,6 @@ ChatClient.getInstance().chatManager.sendMessage(message, {
 }
 ```
 
-内置参数的介绍，详见[声网控制台文档](/product/enable_and_configure_IM.html#使用默认推送模板)。
-
 这种方式的示例代码与“使用固定内容的推送模板”的相同。
 
 3. 使用自定义推送模板，而且推送标题和推送内容为自定义参数：

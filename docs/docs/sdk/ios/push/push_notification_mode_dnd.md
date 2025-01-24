@@ -4,7 +4,7 @@
 
 推送通知方式和免打扰模式为推送的高级功能，默认为开启状态。高级功能开启后，如需关闭必须联系商务，因为该操作会删除所有相关配置。
 
-![image](/images/ios/push/push_ios_27_enable_push.png)
+![image](/images/android/push/push_android_enable_push.png)
 
 ## 推送通知方式
 
