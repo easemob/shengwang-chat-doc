@@ -57,8 +57,8 @@ const typeConfig = computed(() => {
 
 <style scoped>
 .text-ellipsis {
-  overflow: hidden;
+ /* overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: nowrap; */
 }
 </style>

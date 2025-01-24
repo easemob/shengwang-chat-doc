@@ -515,7 +515,7 @@ GET https://{host}/app-id/{app_id}/users/{uid}/presence/sublist?pageNum={pagenum
 #### 请求示例
 
 ```shell
-curl -X GET 'a1-test.easemob.com:8089/5101220107132865/test/users/wzy/presence/sublist?pageNum=1&pageSize=100' \
+curl -X GET 'a1-test.shengwang.com:8089/5101220107132865/test/users/wzy/presence/sublist?pageNum=1&pageSize=100' \
 -H 'Authorization: Bearer YWMtnjEbUopPEeybKGMmN0wpeZsaLSh8UEgpirS4wNAM_qx8oS2wik8R7LE4Rclv5hu9AwMAAAF-4tr__wBPGgDWGAeO86wl2lHGeTnU030fpWuEDR015Vk6ULWGYGKccA' \
 -H 'Content-Type: application/json'
 -H 'Accept: application/json'

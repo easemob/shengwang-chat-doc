@@ -160,7 +160,7 @@ curl -X GET -H 'Accept: application/json' -H 'Authorization: Bearer <YourAppToke
 示例
 
 ```json
-"bodies": [{"msg":"welcome to easemob!", "type":"txt"}]
+"bodies": [{"msg":"welcome to shengwang!", "type":"txt"}]
 ```
 
 ### 图片消息

@@ -81,7 +81,7 @@ POST https://{host}/app-id/{app_id}/chatrooms/{chatroomid}/users/{username}
 | :------------ | :----- | :---------------------------------------------------------- |
 | `data.result` | Bool   | 是否添加成功：<br/> - `true`：是；<br/> - `false`：否。     |
 | `data.action` | String | 执行的操作，`add_member` 表示向聊天室添加成员。             |
-| `data.id`     | String | 聊天室 ID，聊天室唯一标识符，由环信即时通讯 IM 服务器生成。 |
+| `data.id`     | String | 聊天室 ID，聊天室唯一标识符，由即时通讯 IM 服务器生成。 |
 | `data.user`   | String | 添加到聊天室的用户。                                        |
 
 其他字段及描述详见 [公共参数](#公共参数)。

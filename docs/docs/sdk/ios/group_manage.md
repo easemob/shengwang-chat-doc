@@ -216,7 +216,7 @@ do {
 
 ### 查询当前用户已加入的群组数量
 
-你可以调用 `AgoraChatGroupManager#getJoinedGroupsCountFromServerWithCompletion` 方法用于从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于你订阅的即时通讯的套餐包，详见[产品价格](billing_strategy.html#套餐包功能详情)。
+你可以调用 `AgoraChatGroupManager#getJoinedGroupsCountFromServerWithCompletion` 方法用于从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于你订阅的即时通讯的套餐包，详见[产品价格](billing_strategy.html#套餐服务对比)。
 
 ```objectivec
 [AgoraChatClient.sharedClient.groupManager getJoinedGroupsCountFromServerWithCompletion:^(NSInteger groupCount, AgoraChatError * _Nullable aError) {

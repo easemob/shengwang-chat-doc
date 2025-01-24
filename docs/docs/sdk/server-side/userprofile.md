@@ -125,7 +125,7 @@ PUT https://{host}/app-id/{app_id}/metadata/user/{username}
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
 
-curl -X PUT -H 'Content-Type: application/x-www-form-urlencoded' -H 'Authorization: Bearer <YourAppToken>' -d 'avatarurl=https://www.easemob.com/avatar.png&ext=ext&nickname=nickname' 'https://XXXX/app-id/XXXX/metadata/user/user1'
+curl -X PUT -H 'Content-Type: application/x-www-form-urlencoded' -H 'Authorization: Bearer <YourAppToken>' -d 'avatarurl=https://www.shengwang.com/avatar.png&ext=ext&nickname=nickname' 'https://XXXX/app-id/XXXX/metadata/user/user1'
 ```
 
 #### 响应示例

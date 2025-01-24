@@ -113,7 +113,7 @@ curl -X POST 'https://XXXX/app-id/XXXX/chatfiles'  \
 -H 'restrict-access: true'   \
 -H 'thumbnail-height: 180' \
 -H 'thumbnail-width: 180' \
--F 'file="@/Users/test/9.2/easemob/image/IMG_2953.JPG"'
+-F 'file="@/Users/test/9.2/shengwang/image/IMG_2953.JPG"'
 ```
 
 #### 响应示例

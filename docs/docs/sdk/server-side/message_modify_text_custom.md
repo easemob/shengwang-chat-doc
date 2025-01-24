@@ -149,7 +149,7 @@ curl -X PUT -i 'http://XXXX/app-id/XXXX/messages/rewrite/1235807318835202004' \
 | 404      | message_rewrite_error  | The message is unavailable or has expired.   | 请求参数 `msg_id` 不存在。 | 输入正确的请求参数 `msg_id`。     |
 | 401      | message_rewrite_error   | You are not authorized to edit this message.   | 请求参数 `msg_id` 不正确。 |  输入正确的请求参数 `msg_id`。 |
 | 403      | message_rewrite_error   | The message has reached its edit limit and cannot be modified further.   | 消息 `msg_id` 的修改次数到达上线。 | 消息修改次数限制在 10 次以内。   |
-| 403      | message_rewrite_error   | The rewrite message feature is not open.   | 消息修改功能未开通。  |  联系环信商务开通消息修改功能。  |
+| 403      | message_rewrite_error   | The rewrite message feature is not open.   | 消息修改功能未开通。  |  联系声网商务开通消息修改功能。  |
 | 404 | MessageUnavailableException  | The message is unavailable or has expired.   | 修改的消息不存在或者已经过期。 | 只能修改服务端存储的消息，若消息不存在或已过期，则不能修改。|
 | 409         | concurrent_operation_error         | The message has been edited by another.    | 并发调用了修改消息接口修改同一消息。 | 避免同时请求修改同一消息。  |
 | 500 | RewriteMessageInternalErrorException | An unknown error occurred while processing the request.   | 内部服务异常，修改消息失败。 |    |
