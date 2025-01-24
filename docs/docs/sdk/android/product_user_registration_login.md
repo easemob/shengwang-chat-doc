@@ -8,7 +8,11 @@
 
 - 调用 [RESTful API](/docs/sdk/server-side/account_system.html#注册用户) 注册用户账号，注册后保存到你的服务器或返给客户端。
 
-- 在[声网控制台](https://console.shengwang.cn/overview)按照如下步骤创建用户：
+- 在[声网控制台](https://console.shengwang.cn/overview)上创建用户。
+
+### 创建用户
+
+在[声网控制台](https://console.shengwang.cn/overview)按照如下步骤创建用户：
 
 1. 展开控制台左上角下拉框，选择需要开通即时通讯 IM 服务的项目。
 
@@ -58,6 +62,6 @@
 ![img](/images/product/login_userid_token.png)
 
 :::tip
-关 token 鉴权，详见 [Token](/docs/sdk/server-side/token_authentication.html)。
+关 token 鉴权，详见 [使用 Token 鉴权](/docs/sdk/server-side/token_authentication.html)。
 :::
 

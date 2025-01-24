@@ -34,19 +34,19 @@
 
 2. Web 端和小程序端 SDK 集成需要根据数据中心，填写配置对应的 webSocket 地址。
 
-| 数据中心名称 | Socket 地址          |
+| 数据中心 | Socket 地址          |
 | :--------- | :----- | 
 | 中国      |  wss://im-api-c1.chat.rtnsvc.com 或  wss://im-api-c1.chat.realtimemesh.com       |
 
 3. RESTful 接口请求地址如下：
 
-| 数据中心名称 | RESTful API 请求地址                   |
+| 数据中心 | RESTful API 请求地址                   |
 | :--------- | :----- |
 | 中国      | https://c1.chat.rtnsvc.com 或 https://c1.chat.realtimemesh.com   |
 
 4. 微信小程序、支付宝小程序的具体地址如下：
 
-| 数据中心名称 | 微信小程序      | 支付宝小程序           |
+| 数据中心 | 微信小程序      | 支付宝小程序           |
 | :--------- | :----- | :----- |
 | 中国     | im-api-wechat-c1.chat.rtnsvc.com 或 im-api-wechat-c1.chat.realtimemesh.com | im-api-alipay-c1.chat.rtnsvc.com 或 im-api-alipay-c1.chat.realtimemesh.com   |
 
