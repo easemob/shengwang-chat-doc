@@ -16,7 +16,7 @@
 
 - MacOS 12 或更高版本
 - React-Native 0.66 或更高版本
-- NodeJs 16.18 或更高版本
+- NodeJs 18 或更高版本
 
 对于 iOS 应用：
 
@@ -40,12 +40,13 @@
 2. 打开终端，进入需要创建项目的目录，输入命令创建 React Native 项目：
 
 ```sh
-npx @react-native-community/cli init --skip-install simple_demo
-cd simple_demo
+npx @react-native-community/cli init --skip-install --version 0.76 quick_start_demo
+cd quick_start_demo
+yarn set version 1.22.19
 yarn
 ```
 
-创建的项目名称为 `simple_demo`。
+创建的项目名称为 `quick_start_demo`。
 
 3. 在终端命令行，输入以下命令添加依赖：
 
@@ -95,7 +96,7 @@ cd ios && pod install && cd ..
 
 ## 实现发送和接收单聊消息
 
-建议使用 `visual studio code` 打开文件夹 `simple_demo`，打开文件 `App.js`，删除全部内容，并添加如下内容:
+建议使用 `visual studio code` 打开文件夹 `quick_start_demo`，打开文件 `App.js`，删除全部内容，并添加如下内容:
 
 ```javascript
 // 导入依赖包。
@@ -292,56 +293,139 @@ const App = () => {
   // UI 渲染。
   return (
     <SafeAreaView>
-      <View>
-        <Text>{title}</Text>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>{title}</Text>
       </View>
       <ScrollView>
-        <View>
+        <View style={styles.inputCon}>
           <TextInput
             multiline
+            style={styles.inputBox}
             placeholder="Enter username"
             onChangeText={(text) => setUsername(text)}
             value={username}
           />
         </View>
-        <View>
+        <View style={styles.inputCon}>
           <TextInput
             multiline
+            style={styles.inputBox}
             placeholder="Enter chatToken"
             onChangeText={(text) => setChatToken(text)}
             value={chatToken}
           />
         </View>
-        <View>
-          <Text onPress={login}>SIGN IN</Text>
-          <Text onPress={logout}>SIGN OUT</Text>
+        <View style={styles.buttonCon}>
+          <Text style={styles.eachBtn} onPress={login}>
+            SIGN IN
+          </Text>
+          <Text style={styles.eachBtn} onPress={logout}>
+            SIGN OUT
+          </Text>
         </View>
-        <View>
+        <View style={styles.inputCon}>
           <TextInput
             multiline
+            style={styles.inputBox}
             placeholder="Enter the username you want to send"
             onChangeText={(text) => setTargetId(text)}
             value={targetId}
           />
         </View>
-        <View>
+        <View style={styles.inputCon}>
           <TextInput
             multiline
+            style={styles.inputBox}
             placeholder="Enter content"
             onChangeText={(text) => setContent(text)}
             value={content}
           />
         </View>
-        <View>
-          <Text onPress={sendmsg}>SEND TEXT</Text>
+        <View style={styles.buttonCon}>
+          <Text style={styles.btn2} onPress={sendmsg}>
+            SEND TEXT
+          </Text>
         </View>
         <View>
-          <Text multiline={true}>{logText}</Text>
+          <Text style={styles.logText} multiline={true}>
+            {logText}
+          </Text>
+        </View>
+        <View>
+          <Text style={styles.logText}>{}</Text>
+        </View>
+        <View>
+          <Text style={styles.logText}>{}</Text>
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
+
+// 设置样式
+const styles = StyleSheet.create({
+  titleContainer: {
+    height: 60,
+    backgroundColor: "#6200ED",
+  },
+  title: {
+    lineHeight: 60,
+    paddingLeft: 15,
+    color: "#fff",
+    fontSize: 20,
+    fontWeight: "700",
+  },
+  inputCon: {
+    marginLeft: "5%",
+    width: "90%",
+    height: 60,
+    paddingBottom: 6,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ccc",
+  },
+  inputBox: {
+    marginTop: 15,
+    width: "100%",
+    fontSize: 14,
+    fontWeight: "bold",
+  },
+  buttonCon: {
+    marginLeft: "2%",
+    width: "96%",
+    flexDirection: "row",
+    marginTop: 20,
+    height: 26,
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+  eachBtn: {
+    height: 40,
+    width: "28%",
+    lineHeight: 40,
+    textAlign: "center",
+    color: "#fff",
+    fontSize: 16,
+    backgroundColor: "#6200ED",
+    borderRadius: 5,
+  },
+  btn2: {
+    height: 40,
+    width: "45%",
+    lineHeight: 40,
+    textAlign: "center",
+    color: "#fff",
+    fontSize: 16,
+    backgroundColor: "#6200ED",
+    borderRadius: 5,
+  },
+  logText: {
+    padding: 10,
+    marginTop: 10,
+    color: "#ccc",
+    fontSize: 14,
+    lineHeight: 20,
+  },
+});
 
 export default App;
 ```
@@ -350,41 +434,23 @@ export default App;
 
 现在你可以开始在目标平台创建和运行项目。
 
-编译并在 iOS 真机运行：
-
-1. 连接苹果手机，设置为开发者模式；
-2. 打开 `simple_demo/ios`，使用 `xcode` 打开 `simple_demo.xcworkspace`；
-3. 依次点击 **Targets** > **simple_demo** > **Signing & Capabilities** 在签名选项下设置应用签名；
-4. 点击 `Build` 构建并运行项目。程序构建完成后，自动安装和运行，并显示应用界面。
-
-![img](/images/react-native/ios-1.png)
-
-编译并在 iOS 模拟器中运行：
-
-1. 打开 `simple_demo/ios`，使用 `xcode` 打开 `simple_demo.xcworkspace`；
-2. 在 `xcode` 中，选择模拟器 `iphone13`；
-3. 点击 `Build` 构建并运行项目。程序构建完成后，自动安装和运行，并显示应用界面。
-
-![img](/images/react-native/ios-2.png)
-
-编译并在 Android 真机运行：
-
-1. 在 Android Studio 中打开 `simple_demo/android`；
-2. 连接 Android 系统手机，设置为开发者模式，并且设置 USB 可调式；
-3. 设置数据转发：在终端命令行输入 `adb reverse tcp:8081 tcp:8081`；
-4. 启动服务：执行 `package.json` 里面的命令：`"start": "react-native start"`，在终端中运行命令 `yarn start`：
+编译运行 ios 设备：
 
 ```sh
-yarn start
+yarn run ios
 ```
 
-5. 程序构建完成后，自动安装和运行，并显示应用界面。
+编译运行 android 设备：
 
-![img](/images/react-native/android-1.png)
+```sh
+yarn run android
+```
 
-demo 的界面:
+运行本地服务
 
-![img](/images/react-native/main.png)
+```sh
+yarn run start
+```
 
 ## 测试你的 app
 

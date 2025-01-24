@@ -411,7 +411,9 @@ void _addChatListener() {
               break;
             case MessageType.COMBINE:
               {
+                _addLogToConsole(
                   "receive combine message, from: ${msg.from}",
+                );
               }
               break;
             case MessageType.CMD:
@@ -437,7 +439,7 @@ void dispose() {
   // 移除消息状态监听
   ChatClient.getInstance.chatManager.removeMessageEvent("UNIQUE_HANDLER_ID");
   // 移除收消息监听
-  ChatClient.getInstance.chatManager.removeEventHandle("UNIQUE_HANDLER_ID");
+  ChatClient.getInstance.chatManager.removeEventHandler("UNIQUE_HANDLER_ID");
   super.dispose();
 }
 ```

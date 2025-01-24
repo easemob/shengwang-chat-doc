@@ -94,7 +94,7 @@ ReactDOM.createRoot(document.getElementById('root') as Element).render(
 
 UIKit 直接使用不做任何设置时，默认展示用户的用户 ID, 头像默认为用户 ID 的前两个字母。UIKit 提供两种方式设置用户的头像和昵称：
 
-- 如果用户的头像和昵称存放在声网服务器，UIKit 内部默认使用用户属性功能获取头像昵称。用户首次登录可以调用 SDK 的 API 设置自己的头像和昵称。
+- 如果用户的头像和昵称存放在声网的服务器，UIKit 内部默认使用用户属性功能获取头像昵称。用户首次登录可以调用 SDK 的 API 设置自己的头像和昵称。
 
 示例代码：
 
