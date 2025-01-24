@@ -248,5 +248,5 @@
 
 ## 调用频率限制
 
-关于 RESTful API 的调用频率限制，详见 [RESTful API 调用频率限制](limitationapi.html)。
+关于 RESTful API 的调用频率限制，详见 [RESTful API 调用频率限制](/docs/sdk/server-side/limitationapi.html)。
 
