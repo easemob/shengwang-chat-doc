@@ -24,7 +24,7 @@
                         />
                       </div>
                       <p>{{ p.desc }}</p>
-                      <a :href="p.link" class="btn">快速开始 ></a>
+                      <a :href="p.link" class="btn">{{p.buttonText}} ></a>
                     </div>
                     <div
                       v-else

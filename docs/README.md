@@ -11,38 +11,47 @@ starter:
         link: /docs/sdk/android/quickstart.html
         text: Android
         desc: "学习使用 Android SDK 构建即时通讯的 Android 应用程序。"
+        buttonText: "快速开始"
       - icon: /sdk/iOS.svg
         link: /docs/sdk/ios/quickstart.html
-        text: iOS 
+        text: iOS
         desc: "学习使用 iOS SDK 构建即时通讯的 iOS 应用程序。"
+        buttonText: "快速开始"
       - icon: /sdk/web.svg
         link: /docs/sdk/web/quickstart.html
         text: Web
         desc: "学习使用 Web SDK 构建即时通讯的 Web 应用程序。"
+        buttonText: "快速开始"
       - icon: /sdk/applet.svg
         link: /docs/sdk/applet/wechat.html
         text: 小程序
         desc: "学习使用小程序 SDK 构建即时通讯的小程序。"
+        buttonText: "快速开始"
       - icon: /sdk/harmonyos.svg
         link: /docs/sdk/harmonyos/quickstart.html
-        text: HarmonyOS 
+        text: HarmonyOS
         desc: "学习使用 HarmonyOS SDK 构建即时通讯的 HarmonyOS 应用程序。"
+        buttonText: "快速开始"
       - icon: /sdk/flutter.svg
         link: /docs/sdk/flutter/quickstart.html
         text: Flutter
         desc: "学习使用 Flutter SDK 构建即时通讯的跨平台应用程序。"
+        buttonText: "快速开始"
       - icon: /sdk/react.svg
         link: /docs/sdk/react-native/quickstart.html
         text: React Native
         desc: "学习使用 React-Native SDK 构建即时通讯的跨平台应用程序。"
+        buttonText: "快速开始"
       - icon: /sdk/unity.svg
         link: /docs/sdk/unity/quickstart.html
         text: Unity
         desc: "学习使用 Unity SDK 构建即时通讯的跨平台应用程序。"
+        buttonText: "快速开始"
       - icon: /sdk/windows.svg
         link: /docs/sdk/windows/quickstart.html
-        text: Windows  
+        text: Windows
         desc: "学习使用 Windows SDK 构建即时通讯的 Windows 应用程序。"
+        buttonText: "快速开始"
   - title: "客户端 UIKit"
     desc: "从下面的列表中选择合适你的 UIKIT 构建即时通讯应用，点击“快速开始”按钮将引导你在 30 分钟内实现即时通讯应用。"
     platform:
@@ -50,22 +59,27 @@ starter:
         link: /docs/uikit/chatuikit/android/chatuikit_overview.html
         text: Android
         desc: "学习使用 Android UIKit 构建即时通讯的 Android 应用程序。"
+        buttonText: "快速开始"
       - icon: /sdk/iOS.svg
         link: /docs/uikit/chatuikit/ios/chatuikit_overview.html
-        text: iOS 
+        text: iOS
         desc: "学习使用 iOS UIKit 构建即时通讯的 iOS 应用程序。"
+        buttonText: "快速开始"
       - icon: /sdk/web.svg
         link: /docs/uikit/chatuikit/web/chatuikit_overview.html
         text: Web
         desc: "学习使用 Web UIKit 构建即时通讯的 Web 应用程序。"
+        buttonText: "快速开始"
       - icon: /sdk/flutter.svg
         link: /docs/uikit/chatuikit/flutter/chatuikit_overview.html
         text: Flutter
         desc: "学习使用 Flutter UIKit 构建即时通讯的跨平台应用程序。"
+        buttonText: "快速开始"
       - icon: /sdk/react.svg
         link: /docs/uikit/chatuikit/react-native/chatuikit_overview.html
         text: React Native
         desc: "学习使用 React-Native UIKit 构建即时通讯的跨平台应用程序。"
+        buttonText: "快速开始"
   - title: "服务端 API"
     desc: "从下面的列表中选择合适你的 SDK 构建即时通讯应用，点击“快速开始”按钮将引导你在 30 分钟内实现即时通讯消息收发。"
     platform:
@@ -73,6 +87,7 @@ starter:
         link: /docs/sdk/server-side/overview.html
         text: REST
         desc: "学习使用 RESTful API 构建即时通讯的应用服务。"
+        buttonText: "快速开始"
       - icon: ""
         link: ""
         text: ""

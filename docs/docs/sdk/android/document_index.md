@@ -84,9 +84,8 @@ title: 文档指引
 - 体验套餐： **免费版**
 - 企业套餐：**企业版**
 
-
 <el-row :gutter="16" :style="{rowGap:'16px'}">
-  <el-col :span="24" :md="12"  :lg="8">
+  <el-col :span="24" :md="12"  >
     <ListPanel title="体验套餐" desc="免费体验产品所有特性" :height="248">
       <ListItem type="support">100 峰值日活</ListItem>
       <ListItem type="support">100 峰值群组和聊天室数</ListItem>
@@ -94,7 +93,7 @@ title: 文档指引
       <ListItem type="support">10 GB 免费附件存储/月</ListItem>
     </ListPanel>
   </el-col>
-  <el-col :span="24" :md="12"  :lg="8">
+  <el-col :span="24" :md="12" >
     <ListPanel theme="blue" title="企业套餐" desc="专属支撑，专属服务" :height="248">
       <ListItem type="support">专属 SA 24 × 7 小时支持</ListItem>
       <ListItem type="support">专属技术专家架构指导</ListItem>
