@@ -60,7 +60,7 @@ title: 文档指引
     <LinkList
       icon="/landing-page/quickStart.jpeg"
       title="即时通讯 IM 的主要特性"
-      :href="[{title:'特性介绍', href:'./docs/sdk/harmonyos/product_message_overview.html'}]"
+      :href="[{title:'特性介绍', href:'./product_message_overview.html'}]"
     >
     你可以了解即时通讯 IM 的消息、群组、聊天室、用户关系与属性以及离线推送等特性。
     </LinkList>

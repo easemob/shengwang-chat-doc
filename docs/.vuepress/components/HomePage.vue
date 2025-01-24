@@ -98,7 +98,7 @@
                         <span class="font-600">基本信息：</span>
                       </div>
                       <div class="color-#303A48 font-400 mb-12px">
-                        【SDK 名称】即时通讯 SDK；【开发者】上海兆言网络科技有限公司；
+                        【SDK 名称】即时通讯 SDK；【开发者】上海声网科技有限公司；
                       </div>
                       <div class="color-#303A48 font-400">
                         【使用说明】
