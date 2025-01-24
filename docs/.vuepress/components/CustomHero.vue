@@ -6,7 +6,7 @@
       class="max-w-1200px text-align-center p-t-55px p-b-35px p-x-20px box-border w-100% flex justify-between"
     >
       <div class="max-w-100%">
-        <div class="color-black text-left text-60px font-500 line-height-normal">即时通讯IM</div>
+        <div class="color-black text-left text-60px font-500 line-height-normal">即时通讯 IM</div>
         <div class="color-black text-justify text-16px font-400 mt-30px line-height-24px">
           基于即时通讯 (Instant Messaging, IM)
           的高可靠性、低延时、强扩展性及高并发特性，可轻松切入即时通讯领域，为产品带来卓越沟通体验，快速增强用户粘性和市场竞争力。即时通讯

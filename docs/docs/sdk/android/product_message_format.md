@@ -108,7 +108,7 @@
 
 | 参数          | 类型   | 描述                                                                              |
 | :------------ | :----- | :------------------------------------------ |
-| `url`         | String | 语音文件的 URL 地址：https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}。其中 `file_uuid` 为文件 ID，成功上传语音文件后，从[文件上传](/docs/sdk/server-side/message_download.html#上传文件)的响应 body 中获取。 |
+| `url`         | String | 语音文件的 URL 地址：`https://{host}/{org_name}/{app_name}/chatfiles/{file_uuid}`。其中 `file_uuid` 为文件 ID，成功上传语音文件后，从[文件上传](/docs/sdk/server-side/message_download.html#上传文件)的响应 body 中获取。 |
 | `filename`    | String | 语音文件名称，包含文件后缀名。    |
 | `length`      | Int    | 语音时长。单位为秒。    |
 | `secret`      | String | 语音文件的访问密钥，即成功上传语音文件后，从[文件上传](/docs/sdk/server-side/message_download.html#上传文件)的响应 body 中获取的 `share-secret`。如果语音文件上传时设置了文件访问限制（`restrict-access`），则发送消息时该字段为必填。 |

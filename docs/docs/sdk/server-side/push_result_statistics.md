@@ -12,7 +12,7 @@
 
 ![img](/images/server-side/message_delivery_query.png)
 
-- 推送结果回调：[创建发送后回调规则](/product/enable_and_configure_IM.html#配置回调规则)，对于**回调类型**参数选择**离线推送事件**，然后选择**推送成功**、**推送失败**或**推送异常**，即可接收到推送结果消息回调内容。关于离线推送事件，详见[发送后回调事件](/docs/sdk/server-side/callback_login_logout.html)。
+- 推送结果回调：[创建发送后回调规则](/docs/sdk/server-side/callback_postsending.html#发送后回调规则)，对于**回调类型**参数选择**离线推送事件**，然后选择**推送成功**、**推送失败**或**推送异常**，即可接收到推送结果消息回调内容。关于离线推送事件，详见[发送后回调事件](/docs/sdk/server-side/callback_message_send.html)。
 
 ![img](/images/server-side/post_callback_push.png)
 
