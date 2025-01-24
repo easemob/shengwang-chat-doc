@@ -85,7 +85,6 @@
 | `security`     | String | 签名，格式如下: `MD5(callId+secret+timestamp)`。详见[配置声网控制台回调规则](callback_postsending.html#发送后回调规则)。|
 | `paylod`       | Object | 事件内容。                                                     |
 | `payload.type` | String | 解除屏蔽群组事件，值为 `REMOVE`。 |
-| `appkey`       | String | 你在环信管理后台注册的应用唯一标识。                                |
 | `id`           | String | 群组/聊天室 ID。                                                |
 | `type`         | String | 区分群组或聊天室事件：<br/> - `GROUP`：群组 <br/> - `CHATROOM` ：聊天室     |
 | `event`        | String | 对于群组和聊天室，该参数的值固定为 `group_op_event`。接收方可按此字段区分是否是群组/聊天室操作事件。 |

@@ -215,7 +215,7 @@ String cursor = result.getCursor();
 
 ### 查询当前用户已加入的群组数量
 
-你可以调用 `GroupManager#asyncGetJoinedGroupsCountFromServer` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见[产品价格](billing_strategy.html#套餐包功能详情)。
+你可以调用 `GroupManager#asyncGetJoinedGroupsCountFromServer` 方法从服务器获取当前用户已加入的群组数量。单个用户可加入群组数量的上限取决于订阅的即时通讯的套餐包，详见[产品价格](billing_strategy.html#套餐服务对比)。
 
 ```java
 ChatClient.getInstance().groupManager().asyncGetJoinedGroupsCountFromServer(new ValueCallBack<Integer>() {

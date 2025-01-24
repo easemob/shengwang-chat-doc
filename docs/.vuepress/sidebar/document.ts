@@ -190,7 +190,7 @@ const documentSidebar = [
           { text: '上传推送证书', link: 'push/push_easemob_console.html', only: ['react-native'] },
           { text: '上传推送证书及绑定推送信息', link: 'push/push_easemob_console.html', only: ['flutter'] },
           { text: '获取或更新推送 token', link: 'push/push_get_device_token.html', only: ['react-native'] },
-          { text: '发送推送 token 到环信服务器', link: 'push/push_send_token_to_server.html', only: ['react-native'] },
+          { text: '发送推送 token 到声网服务器', link: 'push/push_send_token_to_server.html', only: ['react-native'] },
           { text: '解析推送消息', link: 'push/push_parsing.html', only: ['android', 'ios'] },
           { text: '设置通知的显示内容', link: 'push/push_display.html', only: ['android', 'ios', 'harmonyos', 'react-native', 'flutter'] },
           { text: '设置通知方式和免打扰', link: 'push/push_notification_mode_dnd.html', only: ['android', 'ios', 'web', 'harmonyos', 'react-native', 'flutter']},

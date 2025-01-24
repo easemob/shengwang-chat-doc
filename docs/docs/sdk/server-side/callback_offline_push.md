@@ -37,7 +37,7 @@
             "payload":"{\"t\":\"wzy_apns\",\"aps\":{\"badge\":1,\"alert\":{\"body\":\"请点击查看\",\"title\":\"您有一条新消息\"},\"sound\":\"ring.caf\"},\"e\":{\"em_push_sound\":\"ring.caf\"},\"f\":\"wzy_vivo\",\"m\":\"626473521765161477\"}",
             "priority":"IMMEDIATE",
             "token":"XXXX",
-            "topic":"com.easemob.XXXX.easeim"
+            "topic":"com.shengwang.XXXX.easeim"
         }
     },
     "device_id":"bcf1eb81-XXXX-XXXX-bb9f-284e9943a045",

@@ -227,7 +227,7 @@
                 "summary": "wzy1: 你在哪里？\nwzy1: 你在哪里？\nwzy1: 你在哪里？",
                 "title": "聊天记录",
                 "type": "txt",
-                "url": "https://a1-hsb.easemob.com/easemob-demo/testy/chatfiles/09ec7550-ac74-11ef-83ce-4719989e3c82"
+                "url": "https://a1-hsb.shengwang.com/shengwang-demo/testy/chatfiles/09ec7550-ac74-11ef-83ce-4719989e3c82"
             }
         ],
         "ext": {
