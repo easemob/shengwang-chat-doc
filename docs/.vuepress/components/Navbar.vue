@@ -99,7 +99,7 @@ const toggleAccountMenu = () => {
 };
 
 const openConsole = () => {
-  window.location.href = "https://console.easemob.com/index";
+  window.location.href = "https://console.shengwang.cn/overview";
 };
 
 const handleLogout = () => {
@@ -108,11 +108,11 @@ const handleLogout = () => {
 };
 
 const handleLogin = () => {
-  window.location.href = "https://console.easemob.com/user/login";
+  window.location.href = "https://sso.shengwang.cn/login";
 };
 
 const handleRegister = () => {
-  window.location.href = "https://console.easemob.com/user/register";
+  window.location.href = "https://sso.shengwang.cn/login";
 };
 
 const goToShengwangHome = () => {
