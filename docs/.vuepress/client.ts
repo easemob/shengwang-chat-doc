@@ -16,7 +16,6 @@ import DemoCard from "./components/DemoCard.vue";
 import Step from "./components/Step.vue";
 import FeedBack from "./components/Feedback.vue";
 import HideSection from "./components/HideSection.vue";
-import { embedChatbot } from "./embed";
 
 export default defineClientConfig({
   enhance({ app, router, siteData }) {
@@ -34,7 +33,6 @@ export default defineClientConfig({
     app.component("HideSection", HideSection);
     
     if (typeof window !== "undefined") {
-      embedChatbot();
 
       // 发布后旧 hash chunk 被删，路由懒加载失败时整页跳到目标路径；同一路径只跳一次，避免死循环
       const chunkReloadKey = "vuepress:chunk-reload";

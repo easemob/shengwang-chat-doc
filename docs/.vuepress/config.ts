@@ -127,7 +127,7 @@ export default defineUserConfig({
   base: '/',
   lang: 'zh-CN',
   title: 'IM 文档',
-  head: [['link', { rel: 'icon', href: '/logo.png' }]],
+  head: [['link', { rel: 'icon', href: '/logo.ico' }]],
   description: '即时通讯 IM 文档',
   shouldPrefetch: false,
   bundler: viteBundler({
@@ -171,13 +171,15 @@ export default defineUserConfig({
       })
     })
   },
-  extendsPage: (page) => {
-    const docsRoutePath = getDocsRoutePath(page.filePathRelative || (page as any).filePath)
+   // Set path in extendsPageOptions so htmlFilePath includes /docs.
+  // extendsPage alone only updates the SPA route; HTML still lands without /docs.
+  extendsPageOptions: (options) => {
+    const docsRoutePath = getDocsRoutePath(options.filePath)
     if (docsRoutePath) {
-      page.path = docsRoutePath
-      page.data.path = docsRoutePath
+      options.path = docsRoutePath
     }
-
+  },
+  extendsPage: (page) => {
     page.frontmatter = rewriteFrontmatterLinks(page.frontmatter) as typeof page.frontmatter
     page.data.frontmatter = page.frontmatter
 
