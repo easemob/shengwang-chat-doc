@@ -22,7 +22,6 @@ import DownloadTable from "./DownloadTable.vue";
 const latestSDKDownloadInfo = [
   ["Android", "Java", "v5.0.0", "com.hyphenate.chat", "a97c03af8b2040dea043b3c401fb361a", "2026-08-12", "/docs/document/android/releasenote.html#v5-0-0-dev-2026-8-12", "https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/easemob-sdk-5.0.0.zip", "-"],
   ["iOS", "Objective-C/swift", "v5.0.0", "-", "738f559047c0fea40a7cbe82598bcf36", "2026-08-12", "/docs/document/ios/releasenote.html#v5-0-0-dev-2026-8-12", "https://downloadsdk.easesdk.com/downloads/iOS_IM_SDK_V5.0.0.zip", "-"],
-  ["Web/小程序/uni-app", "TypeScript", "v5.0.0", "-", "6ea53b149250f44693f061d6731f87fe", "2025-08-12", "/docs/document/web/releasenote.html#v5-0-0-dev-2026-8-12", "https://downloads.easemob.com/downloads/WEB_SDK/5.0.0/websdk.zip", "-"],
   ["HarmonyOS", "TypeScript", "v1.13.0", "@easemob/chatsdk", "2ec37112f5a080d437821e35943285e2", "2026-06-25", "/docs/document/harmonyos/releasenote.html#v1-13-0-dev-2026-6-24-%E5%BC%80%E5%8F%91%E7%89%88", "https://downloadsdk.easesdk.com/downloads/HarmonySDK/chatsdk-1.13.0.har", "-"],
   ["Flutter", "Dart", "v4.19.3", "-", "-", "2026-06-12", "/docs/document/flutter/releasenote.html#_4-19-3-2026-6-12", "https://pub.dev/packages/im_flutter_sdk", "等同于\n稳定版"],
   ["React Native", "TypeScript", "v1.15.2", "-", "-", "2026-06-02", "/docs/document/react-native/releasenote.html#v1-15-2-2026-06-02", "https://www.npmjs.com/package/react-native-chat-sdk", "等同于\n稳定版"],
@@ -32,7 +31,6 @@ const latestSDKDownloadInfo = [
 const stableSDKDownloadInfo = [
   ["Android", "Java", "v4.16.1", "com.hyphenate.chat", "ac4acfa2647322352dba480373620ce7", "2025-11-12", "/docs/document/android/releasenote.html#v4-16-1-2025-11-12", "https://downloadsdk.easesdk.com/downloads/easemob-sdk-4.16.1.zip"],
   ["iOS", "Objective-C", "v4.16.2", "-", "f1d938dc7400237503c1e3cafaae6230", "2025-11-12", "/docs/document/ios/releasenote.html#v4-16-2-2025-11-12", "https://downloadsdk.easesdk.com/downloads/iOS_IM_SDK_V4.16.2.zip"],
-  ["Web", "JavaScript", "v4.17.1", "-", "d049cb596fc4bf26b18023598276bcc8", "2025-12-12", "/docs/v4/web/releasenote.html#_4-17-1-2025-12-12", "https://downloads.easemob.com/downloads/WEB_SDK/4.17.1/websdk.zip"],
   ["HarmonyOS", "TypeScript", "v1.9.1", "@easemob/chatsdk", "7040be1d93257cd42979e38e20b0441c", "2026-07-08", "/docs/document/harmonyos/releasenote.html#v1-9-1", "https://downloadsdk.easesdk.com/downloads/HarmonySDK/chatsdk-1.9.1.har"],
   ["小程序", "TypeScript", "v4.17.1", "-", "5bcecdb40e3b2b2c8aab8c9983bf21a3", "2025-12-12", "/docs/v4/applet/releasenote.html#_4-17-1-2025-12-12", "https://downloads.easemob.com/downloads/WEB_SDK/4.１７．１/miniProgram.zip"],
   ["uni-app", "TypeScript", "v4.15.1", "-", "01bdccf3f9c2197c4822206f8f9b027c", "2025-06-09", "/docs/v4/applet/releasenote.html#_4-17-1-2025-12-12", "https://downloads.easemob.com/downloads/WEB_SDK/4.17.1/uniApp.zip"],
