@@ -13,7 +13,7 @@ const PLATFORM_ICON_MAP = {
   },
   web: {
     icon: "/icon-web.svg",
-    activeIcon: "/icon-web-hover.png",
+    activeIcon: "/icon-web-hover.svg",
   },
   windows: {
     icon: "/icon-windows.svg",
@@ -30,10 +30,6 @@ const PLATFORM_ICON_MAP = {
   unity: {
     icon: "/icon-unity.svg",
     activeIcon: "/icon-unity-hover.svg",
-  },
-  uniapp: {
-    icon: "/icon-uni-app.svg",
-    activeIcon: "/icon-uni-app.svg",
   },
   applet: {
     icon: "/icon-mini-program.svg",
@@ -81,17 +77,18 @@ const options = [
 const platform = ref("android");
 const kitType = ref("chatuikit");
 const platformIcon = computed(
-  () => PLATFORM_ICON_MAP[platform.value]?.activeIcon
+  () => PLATFORM_ICON_MAP[platform.value]?.icon
 );
 const route = useRoute();
 const router = useRouter();
 watch(
   () => route.path,
   () => {
-    if (route.path.indexOf("/docs/uikit") == 0) {
+    if (route.path.indexOf("/uikit") == 0 || route.path.indexOf("/docs/uikit") == 0) {
       const splitRoute = route.path.split("/");
-      kitType.value = splitRoute[3];
-      platform.value = splitRoute[4];
+      if (splitRoute[1] === "docs") splitRoute.splice(1, 1);
+      kitType.value = splitRoute[2];
+      platform.value = splitRoute[3];
     }
   },
   { immediate: true }
@@ -108,7 +105,8 @@ const onChange = (platform) => {
     .map((item) => item.path);
 
   let newPath = route.path.split("/");
-  newPath[3] = platform;
+  if (newPath[1] !== "docs") newPath.splice(1, 0, "docs");
+  newPath[4] = platform;
   const nextPathPath = newPath.join("/");
 
   if (nextPlatformDocRouters.indexOf(nextPathPath) > -1) {
@@ -129,8 +127,7 @@ const onChange = (platform) => {
 </script>
 
 <template>
-  <span>UIKit</span>
-  <el-select v-model="platform" @change="onChange" placeholder="请选择">
+  <el-select v-model="platform" @change="onChange" placeholder="请选择" placement="bottom-end" popper-class="platform-select-dropdown">
     <template #prefix>
       <img width="20" height="20" :src="platformIcon" />
     </template>
@@ -167,7 +164,8 @@ const onChange = (platform) => {
 </template>
 
 <style lang="scss" scope>
-.option-content:hover .default {
+.option-content:hover .default,
+.option-content.is-selected .default {
   display: none;
 }
 
@@ -175,12 +173,100 @@ const onChange = (platform) => {
   display: none;
 }
 
-.option-content:hover .active {
+.option-content:hover .active,
+.option-content.is-selected .active {
   display: inline-block;
 }
 
 .label-icon {
   vertical-align: sub;
   padding-right: 5px;
+}
+
+.el-select {
+  .el-select__wrapper {
+    min-height: 2.125rem;
+    .el-select__icon {
+      width: 0.88rem;
+      height: 0.88rem;
+      background: url(/icon-arrow-down.svg) no-repeat center center;
+      svg {
+        display: none;
+      }
+    }
+
+    &.is-focused {
+      .el-select__icon {
+        background-image: url(/icon-arrow-down-hover.svg);
+      }
+    }
+  }
+}
+
+.platform-select-dropdown {
+  width: 16rem;
+
+  .el-select-group__wrap {
+    position: relative;
+    padding-bottom: .5rem;
+    margin-bottom: .5rem;
+
+    .el-select-group__title {
+      display: flex;
+      align-items: center;
+      height: 2rem;
+      padding-left: 1.25rem;
+      align-self: stretch;
+      color: var(--text-color-light);
+      font-size: 0.75rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.25rem;
+    }
+
+    .el-select-group {
+      .el-select-dropdown__item {
+        height: 2rem;
+        padding-left: .75rem;
+        color: var(--text-color);
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 400;
+
+        .label-icon {
+            padding-right: .62rem;
+        }
+
+        &:hover,
+        &.is-selected,
+        &.is-hovering {
+          color: var(--theme-color);
+          background-color: transparent;
+        }
+        &:hover {
+          background-color: var(--switch-hover-bg-color);
+        }
+      }
+    }
+
+    &::after {
+      content: '';        
+      position: absolute; 
+      bottom: 0;          
+      left: 1.5rem;
+      width: calc(100% - 3rem);        
+      height: 1px;       
+      background-color: var(--border-color); 
+    }
+
+    &:last-child {
+      padding-bottom: 0;
+      margin-bottom: 0;
+
+      &::after {
+        display: none;
+      }
+    }
+  }
 }
 </style>

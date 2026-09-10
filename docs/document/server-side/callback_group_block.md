@@ -1,0 +1,95 @@
+# 群组屏蔽状态变更回调事件 
+
+## 功能说明
+
+成功屏蔽/解除屏蔽群组后，IM 服务器会按照 [发送后回调规则](callback_postsending.html#回调规则) 向你的 App Server 发送回调请求，App Server 可通过该回调查看群组屏蔽/解除屏蔽的信息，进行数据同步。
+
+## 前提条件
+
+已在 [声网控制台](https://console.shengwang.cn/overview) 设置发送后回调规则。详见 [配置回调规则](callback_postsending.html#回调规则)。
+
+## 屏蔽群组
+
+### 回调时机
+
+[客户端屏蔽了群组](/document/android/group_manage.html#屏蔽群消息)。
+
+### 回调请求
+
+#### 请求示例
+
+```json
+{
+    "callId": "XXXX#XXXX_a64cbdc6-XXXX-XXXX-81b0-b64285c5f711",
+    "security": "eed92d60XXXXa3f30c39b111fc0dfffa",
+    "payload": {
+        "type": "ADD"
+    },
+    "id": "test_123",
+    "type": "GROUP",
+    "event": "group_op_event",
+    "operation": "SHIELD",
+    "operator": "wzy",
+    "timestamp": 1732518372734
+}
+```
+
+#### 请求字段说明
+
+| 字段名称         | 类型   | 描述                                                         |
+| :------------- | :----- | :----------------------------------------------------------- |
+| `callId`       | String | 回调请求的唯一标识。 |
+| `security`     | String | 签名，格式如下: `MD5(callId+secret+timestamp)`。[配置回调规则](callback_postsending.html#回调规则) 后，IM 服务器会自动为该规则生成 secret，向你的 App Server 发送数据时会基于该 secret 生成该签名，作为你的服务器识别 IM 服务器的依据。若要使用自定义密钥，可联系声网商务。|
+| `payload`       | Object | 事件内容。                                                     |
+| `payload.type` | String | 屏蔽群组事件，值为 `ADD`。 |
+| `id`           | String | 群组/聊天室 ID。                                                |
+| `type`         | String | 区分群组或聊天室事件：<br/> - `GROUP`：群组 <br/> - `CHATROOM` ：聊天室     |
+| `event`        | String | 对于群组和聊天室，该参数的值固定为 `group_op_event`。接收方可按此字段区分是否是群组/聊天室操作事件。 |
+| `operation`    | String | 操作。屏蔽群组的操作为 `SHIELD`。 |
+| `operator`     | String | 操作人。若 app 管理员屏蔽群组，该参数的值固定为 `@ppAdmin`。                                      |
+| `timestamp`    | Long   | 操作完成的时间戳。                             |
+
+## 解除屏蔽群组
+
+### 回调时机
+
+[客户端解除屏蔽了群组](/document/android/group_manage.html#解除屏蔽群消息)。
+
+### 回调请求
+
+#### 请求示例
+
+```json
+{
+    "callId": "XXXX#XXXX_124b1da0-XXXX-XXXX-8b2f-d5d376c3ad16",
+    "security": "895b3f0dfXXXX0a8efb6104d67232961",
+    "payload": {
+        "type": "REMOVE"
+    },
+    "id": "test_123",
+    "type": "GROUP",
+    "event": "group_op_event",
+    "operation": "SHIELD",
+    "operator": "wzy",
+    "timestamp": 1732518426833
+}
+```
+
+#### 请求字段说明
+
+| 字段名称         | 类型   | 描述                                                         |
+| :------------- | :----- | :----------------------------------------------------------- |
+| `callId`       | String | 回调请求的唯一标识。 |
+| `security`     | String | 签名，格式如下: `MD5(callId+secret+timestamp)`。[配置回调规则](callback_postsending.html#回调规则) 后，IM 服务器会自动为该规则生成 secret，向你的 App Server 发送数据时会基于该 secret 生成该签名，作为你的服务器识别 IM 服务器的依据。若要使用自定义密钥，可联系声网商务。|
+| `paylod`       | Object | 事件内容。                                                     |
+| `payload.type` | String | 解除屏蔽群组事件，值为 `REMOVE`。 |
+| `id`           | String | 群组/聊天室 ID。                                                |
+| `type`         | String | 区分群组或聊天室事件：<br/> - `GROUP`：群组 <br/> - `CHATROOM` ：聊天室     |
+| `event`        | String | 对于群组和聊天室，该参数的值固定为 `group_op_event`。接收方可按此字段区分是否是群组/聊天室操作事件。 |
+| `operation`    | String | 操作。解除屏蔽群组的操作为 `SHIELD`。 |
+| `operator`     | String | 操作人。若 app 管理员解除屏蔽群组，该参数的值固定为 `@ppAdmin`。             |
+| `timestamp`    | Long   | 操作完成的时间戳。                             |
+
+## 其他说明
+
+**群组操作的事件以及子事件后续会有更多新增。若业务强依赖这些事件或者子事件，业务中需添加对`operation` 和 `payload.type` 的强判断。**

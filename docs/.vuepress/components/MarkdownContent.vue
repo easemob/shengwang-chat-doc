@@ -1,19 +1,20 @@
 <script setup lang="ts">
 import { Content } from '@vuepress/client'
 import { usePageData } from '@vuepress/client'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import pages from '@temp/pages'
 
-const redirectPageKey = ref('')
+// If pageUri points to another generated page, render that page's content
+// instead of passing an empty key to <Content>, which produces a blank body.
 const dialogVisible = ref(false)
 const pageData = usePageData()
+const redirectPageKey = ref(pageData.value.key)
 const router = useRouter()
 const frontmatter = pageData.value.frontmatter
-const redirectUri = frontmatter.pageUri
 
 const nameMap = {
-  android: 'Andorid 集成文档',
+  android: 'Android 集成文档',
   ios: 'iOS 集成文档',
   web: 'Web 集成文档',
   applet: '小程序集成文档',
@@ -26,7 +27,8 @@ const nameMap = {
   product: '产品介绍',
   push: '即时推送',
   moderation: '内容审核',
-  aigc: 'AI 集成'
+  aigc: '使用 MCP 集成',
+  solution_common: '常见方案',
 }
 
 const getCategoryFromPath = () => {
@@ -47,14 +49,38 @@ const getCategoryFromPath = () => {
   return result
 }
 const metaCategory = frontmatter.category || getCategoryFromPath()
+const docsPathPrefixes = ['document', 'callkit', 'product', 'sdk', 'uikit', 'v4']
 
-if (redirectUri) {
-  const redirectPage = pages.find((item) => item.path === redirectUri)
-  if (redirectPage) {
-    pageData.value.headers = redirectPage.headers
-    redirectPageKey.value = redirectPage.key
+const getRedirectCandidates = (uri: string): string[] => {
+  const candidates = [uri]
+  const matched = uri.match(/^\/([^/]+)\//)
+  if (matched && docsPathPrefixes.includes(matched[1])) {
+    candidates.push(`/docs${uri}`)
   }
+  return candidates
 }
+
+watch(
+  pageData,
+  (currentPage) => {
+    // Always reset to the newly navigated page first. This is essential for
+    // client-side navigation from the legacy sidebar, where this component is
+    // reused instead of remounted.
+    redirectPageKey.value = currentPage.key
+    const redirectUri = currentPage.frontmatter.pageUri
+    if (!redirectUri) return
+
+    const redirectCandidates = getRedirectCandidates(redirectUri)
+    const redirectPage = pages.find(
+      (item) => redirectCandidates.includes(item.path)
+    )
+    if (redirectPage) {
+      currentPage.headers = redirectPage.headers
+      redirectPageKey.value = redirectPage.key
+    }
+  },
+  { immediate: true }
+)
 </script>
 
 <template>

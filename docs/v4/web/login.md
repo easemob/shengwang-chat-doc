@@ -1,0 +1,123 @@
+# 登录
+
+初始化 IM SDK 后，你需要首先调用接口登录。登录成功后，才能使用 IM 的功能。
+
+## 用户注册
+
+### 创建用户
+
+即时通讯 IM 提供以下两种方式创建用户：
+
+- 调用 [RESTful API](/docs/sdk/server-side/account_register_authorized_single.html) 注册用户账号，注册后保存到你的服务器或返给客户端。
+
+- 在[声网控制台](https://console.shengwang.cn/overview)按照如下步骤创建用户：
+
+1. 展开控制台左上角下拉框，选择需要开通即时通讯 IM 服务的项目。
+
+2. 点击左侧导航栏的**全部产品**。
+
+3. 在下拉列表中找到**即时通讯 IM** 并点击。
+
+4. 在**即时通讯 IM** 页面，进入**运营管理**标签页。
+
+5. 在**用户** 页签下，点击**创建IM用户**。
+
+6. 在弹出的对话框中，配置用户相关参数，点击**确定**。
+
+![img](/images/android/user_create.png)
+
+### 获取用户 token
+
+创建用户后，在用户列表点击对应的用户的**操作**一栏中的**更多**，选择**查看Token**。
+
+在弹出的对话框中，可以查看用户 Token，也可以点击**重新生成**，生成用户 token。
+
+![img](/images/android/user_token.png)
+
+在生产环境中，为了安全考虑，你需要部署 App Server 生成 Token，详见 [Token 鉴权文档](/docs/sdk/server-side/token_authentication.html#搭建-app-server-生成-token)。
+
+## 登录方式
+
+1. **用户 ID + token** 是更加安全的登录方式。
+
+测试环境下，你在 [声网控制台](https://console.shengwang.cn/overview) 创建用户后，IM 服务器会自动为这些用户分配用户 Token，详见 [创建用户的介绍](/product/product_user_registration_login.html#创建用户)。
+
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [Token 鉴权](/document/server-side/token_authentication.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。SDK 会在 Token 过期时或者其有效期达到 80%（4.15.0 之前为 50%）时分别回调 `onTokenExpired` 和 `onTokenWillExpire` 通知用户更新 Token。你可以采取各种机制更新 Token，例如，每次登录时更新 token。
+
+- 整体引入 SDK：
+
+```javascript
+conn
+  .open({
+    user: "username",
+    accessToken: "token",
+  })
+  .then(() => {
+    console.log("login success");
+  })
+  .catch((reason) => {
+    console.log("login fail", reason);
+  });
+```
+
+- 按需引入 SDK（使用 miniCore）
+
+```javascript
+conn
+  .open({
+    username: "username",
+    accessToken: "token",
+  })
+  .then(() => {
+    console.log("login success");
+  })
+  .catch((reason) => {
+    console.log("login fail", reason);
+  });
+```
+
+2. **用户 ID + 密码**登录是传统的登录方式。用户 ID 和密码均由你的终端用户自行决定，密码需要符合[密码规则要求](/document/server-side/account_register_authorized_single.html)。
+
+- 整体引入 SDK：
+
+```javascript
+conn
+  .open({
+    user: "username",
+    pwd: "password",
+  })
+  .then(() => {
+    console.log("login success");
+  })
+  .catch((reason) => {
+    console.log("login fail", reason);
+  });
+```
+
+- 按需引入 SDK（使用 miniCore）
+
+```javascript
+conn.open({
+  username: "username",
+  password: "password",
+})
+.then(() => {
+    console.log("login success");
+  })
+  .catch((reason) => {
+    console.log("login fail", reason);
+  });
+```
+
+## 退出登录
+
+```javascript
+conn.close();
+```
+
+## 多设备登录
+
+除了单端单设备登录，即时通讯 IM 支持同一账号在多端的多个设备上登录。多设备登录时，若同端设备数量超过限制，新登录的设备会将之前登录的设备踢下线。
+
+关于多设备登录场景中的设备数量限制、互踢策略以及信息同步，详见[多设备登录文档](multi_device.html)。
+

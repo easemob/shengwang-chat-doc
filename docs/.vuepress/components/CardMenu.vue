@@ -19,7 +19,7 @@
             width="24px"
             :alt="sdk.text"
           />
-          <el-link :href="sdk.link" class="link-label">{{ sdk.text }}</el-link>
+          <a :href="sdk.link" class="link-label">{{ sdk.text }}</a>
         </div>
       </section>
     </div>
@@ -47,7 +47,7 @@ defineProps<{
 <style scoped>
 .card-content {
   display: flex;
-  gap: 10px;
+  gap: 16px;
   margin: 12px 8px;
 }
 @media (max-width: 991px) {
@@ -61,18 +61,17 @@ defineProps<{
   flex-direction: column;
   padding: 0 20px 0 0;
   font-size: 14px;
-  border-right: 1px solid #f0f0f0;
+  border-right: 1px solid var(--border-color);
 }
 .message-header {
   font-weight: 500;
   color: #000;
-  font-family: 'PingFang SC', sans-serif;
 }
 .message-description {
-  color: #666;
-  font-family: 'PingFang SC', sans-serif;
+  color: #505E72;
   font-weight: 400;
   margin-top: 8px;
+  line-height: normal;
 }
 @media (max-width: 991px) {
   .message-section {
@@ -82,14 +81,12 @@ defineProps<{
 
 .links-section {
   width: 40%;
-  margin-left: 16px;
   display: flex;
   flex-direction: column;
   font-size: 14px;
 }
 .links-header {
-  color: #000;
-  font-family: 'PingFang SC';
+  color: var(--text-color);
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -101,15 +98,30 @@ defineProps<{
   margin-top: 16px;
   gap: 4px;
   white-space: nowrap;
+
+  img {
+    display: block;
+  }
 }
 .link-icon {
   width: 24px;
-  object-fit: auto;
+  height: 24px;
+  object-fit: contain;
   object-position: center;
 }
 .link-label {
-  font-family: 'SF Pro', sans-serif;
+  color: #000;
+  font-family: "SF Pro";
+  font-style: normal;
+  font-weight: 400;
+  text-underline-offset: 4px;
+  line-height: normal;
   margin: auto 0;
+  text-decoration: underline;
+
+  &:hover {
+    color: #00A0FA;
+  }
 }
 @media (max-width: 991px) {
   .links-section {

@@ -2,13 +2,12 @@ import path from "node:path";
 import fs from "node:fs";
 
 const getSubDirectories = (dir) =>
-  fs
-    .readdirSync(dir)
+  (fs.existsSync(dir) ? fs.readdirSync(dir) : [])
     .filter((item) => fs.statSync(path.join(dir, item)).isDirectory());
-const CHAT_DOC_PATH = path.resolve(__dirname, "../../docs/uikit/chatuikit");
-// const CHATROOM_DOC_PATH = path.resolve(__dirname, "../../docs/uikit/chatroomuikit");
+const CHAT_DOC_PATH = path.resolve(__dirname, "../../uikit/chatuikit");
+const CHATROOM_DOC_PATH = path.resolve(__dirname, "../../uikit/chatroomuikit");
 const chatPlatformList = getSubDirectories(CHAT_DOC_PATH);
-// const chatroomPlatformList = getSubDirectories(CHATROOM_DOC_PATH);
+const chatroomPlatformList = getSubDirectories(CHATROOM_DOC_PATH);
 
 const chatUikitSidebar = [
   {
@@ -298,18 +297,19 @@ const chatroomUikitSidebar = [
 function buildChatUikitSidebar() {
   const result = {};
   chatPlatformList.forEach((platform) => {
-    const key = `/docs/uikit/chatuikit/${platform}/`;
-    result[key] = chatUikitSidebar
+    const sidebarItems = chatUikitSidebar
       .map((sidebar) =>
         handleSidebarItem(platform, sidebar, CHAT_DOC_PATH, "chatuikit")
       )
       .filter((s) => s);
+    result[`/docs/uikit/chatuikit/${platform}/`] = sidebarItems;
+    result[`/uikit/chatuikit/${platform}/`] = sidebarItems;
   });
   return result;
 }
 
 function buildChatroomUikitSidebar() {
-  // const result = {};
+  const result = {};
   // chatroomPlatformList.forEach((platform) => {
   //   const key = `/docs/uikit/chatroomuikit/${platform}/`;
   //   result[key] = chatroomUikitSidebar
@@ -318,17 +318,27 @@ function buildChatroomUikitSidebar() {
   //     )
   //     .filter((s) => s);
   // });
-  // return result;
+  return result;
+}
+
+function getDocumentPath(platform: string, link: string, docPath: string) {
+  return path.join(docPath, platform, link.replace(/\.html$/, ".md"));
 }
 
 function linkExists(platform: string, link: string, docPath: string): boolean {
   try {
-    const filePath = `${docPath}/${platform}/${link.replace(/.html$/, ".md")}`;
-    return fs.existsSync(filePath);
+    return fs.existsSync(getDocumentPath(platform, link, docPath));
   } catch (e) {
     console.error(`Error checking file existence: ${e}`);
     return false;
   }
+}
+
+function getDocumentLink(platform: string, link: string, docPath: string, kitType: string) {
+  const content = fs.readFileSync(getDocumentPath(platform, link, docPath), "utf8");
+  const permalink = content.match(/^permalink:\s*["']?([^\s"']+)["']?\s*$/m)?.[1];
+
+  return permalink || `/docs/uikit/${kitType}/${platform}/${link}`;
 }
 
 function handleSidebarItem(platform, sidebar, docPath, kitType) {
@@ -350,6 +360,10 @@ function handleSidebarItem(platform, sidebar, docPath, kitType) {
     return null;
   }
 
+  if (sidebar.type === "separator") {
+    return { ...sidebar, type: "separator" };
+  }
+
   if (hasChildren) {
     let newchildren = sidebar.children
       .map((s) => handleSidebarItem(platform, s, docPath, kitType))
@@ -358,8 +372,13 @@ function handleSidebarItem(platform, sidebar, docPath, kitType) {
       return { ...sidebar, children: newchildren };
     }
   } else {
-    if (linkExists(platform, sidebar.link, docPath)) {
-      const newLink = `/docs/uikit/${kitType}/${platform}/${sidebar.link}`;
+    if (sidebar.link && linkExists(platform, sidebar.link, docPath)) {
+      const newLink = getDocumentLink(
+        platform,
+        sidebar.link,
+        docPath,
+        kitType
+      );
       return { ...sidebar, link: newLink };
     }
   }

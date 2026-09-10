@@ -1,57 +1,45 @@
-import { hopeTheme, ThemeOptions } from "vuepress-theme-hope";
-import { zhNavbar } from "./navbar/index.js";
-import { zhSidebar } from "./sidebar/index.js";
+import { hopeTheme, ThemeOptions } from 'vuepress-theme-hope'
+import { zhNavbar } from './navbar/index.js'
+import { zhSidebar } from './sidebar/index.js'
 
 interface CustomConfig {
-  extra_nav?: any[];
+  extra_nav?: any[]
 }
 
 export default hopeTheme(<ThemeOptions & CustomConfig>{
-  hostname: "https://im.shengwang.cn/",
-  home: "/",
-  iconAssets: "iconfont",
-  // logo: '/logo.svg',
-  // repo: 'easemob/easemob-doc',
-  // docsBranch: 'doc-v2',
-  // docsDir: 'docs',
-  darkmode: "disable",
+  hostname: 'https://im.shengwang.cn/',
+  home: '/',
+  iconAssets: 'iconfont',
+  repo: 'easemob/shengwang-chat-doc',
+  docsBranch: 'doc-v5',
+  docsDir: 'docs',
+  darkmode: 'disable',
   pure: true,
-  breadcrumb: false,
   contributors: false,
   // navbar
   navbar: zhNavbar,
   navbarLayout: {
-    start: ["Brand"],
+    start: ['Links'],
     center: [],
-    end: ["Language", "Repo", "Outlook"],
+    end: ['Language', 'Repo', 'Outlook']
   },
   // sidebar
   sidebar: zhSidebar,
-  // footer: '环信 IM 文档 Version: 1.0.0 ©️环信',
-  displayFooter: false,
+  footer: `<div class="footer-left">声网 IM 文档</div><div class="footer-right">&copy; 声网 ${new Date().getFullYear()}</div>`,
+  displayFooter: true,
   headerDepth: 2,
-  extra_nav: [
-    // { text: '提交工单', link: 'https://console.easemob.com/ticket', type: 'info' },
-    // {
-    //   text: '登录',
-    //   link: 'https://console.shengwang.cn/overview',
-    //   type: 'success'
-    // },
-    // {
-    //   text: '注册',
-    //   link: 'https://console.easemob.com/user/register',
-    //   type: 'primary'
-    // }
-  ],
-  // page meta
-  // metaLocales: {
-  //   editLink: '在 GitHub 上编辑此页'
-  // },
+  editLink: false,
+  prevLink: false,
+  nextLink: false,
   plugins: {
     mdEnhance: {
       container: true,
       imgSize: true,
-      tabs: true,
+      tabs: true
     },
-  },
-});
+    prismjs: {
+      light: "coldark-dark",
+      dark: "coldark-dark",
+    },
+  }
+})

@@ -3,235 +3,105 @@
     <template #center>
       <div class="main-container">
         <HeroSection />
-        <main class="main-content">
-          <div class="home-container">
-            <section>
-              <h2 class="section-title">用户指南</h2>
-              <template v-for="s in starter" :key="s.title">
-                <h3 class="section-sub-title">{{ s.title }}</h3>
-                <p class="section-sub-title-desc">
-                  {{ s.desc }}
-                </p>
-                <div class="card-container">
-                  <template v-for="p in s.platform" :key="p.text">
-                    <div v-if="p.text" class="card">
-                      <div class="card-header">
-                        <h3>{{ p.text }}</h3>
-                        <img
-                          :src="p.icon"
-                          alt="JavaScript Logo"
-                          style="background-color: #e6f7ff"
-                        />
-                      </div>
-                      <p>{{ p.desc }}</p>
-                      <a :href="p.link" class="btn">{{p.buttonText}} ></a>
-                    </div>
-                    <div
-                      v-else
-                      class="card"
-                      style="
-                        visibility: hidden;
-                        height: 0;
-                        padding: 0;
-                        border: none;
-                      "
-                    ></div>
-                  </template>
-                </div>
-              </template>
-            </section>
-
-            <!-- <section v-for="p in projects" :key="p.title">
-              <h2 class="section-title">{{ p.title }}</h2>
-              <p class="section-sub-title-desc">
-                {{ p.desc }}
-              </p>
-              <div class="card-container-solution">
-                <template v-for="p in p.contexts" :key="p.title">
-                  <div v-if="p.title" class="card">
-                    <div class="placeholder"></div>
-                    <h3>{{ p.title }}</h3>
-                    <p>{{ p.desc }}</p>
-                  </div>
+        <main :ref="containerRef" class="main-content">
+          <div class="content">
+            <div class="content-title">用户指南</div>
+            <section class="product-section">
+              <div v-for="s in starter" :key="s.title" :id="s.title">
+                <h2 class="sdk-start-title">{{ s.title }}</h2>
+                <div class="sdk-start-desc">{{ s.desc }}</div>
+                <div class="sdk-start-list">
                   <div
-                    v-else
-                    class="card"
-                    style="visibility: hidden; height: 0"
-                  ></div>
-                </template>
+                    class="sdk-start-item"
+                    v-for="item in s.platform"
+                    :key="item.text"
+                    @click="goTo(item.link)"
+                  >
+                    <div class="sdk-start-icon">
+                      <img
+                        :src="item.icon"
+                        alt="Platform Icon"
+                        class="platform-icon"
+                      />
+                      <span class="platform-name">{{ item.text }}</span>
+                    </div>
+                    <img
+                      src="/arrow_right.svg"
+                      alt="Arrow icon"
+                      class="arrow-icon normal"
+                    />
+                    <img
+                      src="/arrow_right_h.svg"
+                      alt="Arrow icon"
+                      class="arrow-icon high"
+                    />
+                  </div>
+                </div>
               </div>
-            </section> -->
-
-            <section>
-              <h2 class="section-title">资源下载</h2>
-              <p class="section-sub-title-desc">
-                从下面选项中选择合适 SDK 下载并集成到你的应用中，
-                以快速接入即时通讯服务体验实时互动特性。
-              </p>
-              <div class="download-tip-container">
-                <div class="download-tip">
-                  <div class="tip-icon">
-                    <svg
-                      viewBox="64 64 896 896"
-                      focusable="false"
-                      data-icon="info-circle"
-                      width="1em"
-                      height="1em"
-                      fill="currentColor"
-                      aria-hidden="true"
+              <div class="content-title fun">功能</div>
+              <div
+                :id="project.title"
+                v-for="project in projects"
+                :key="project.title"
+              >
+                <h2 class="sdk-features-title">{{ project.title }}</h2>
+                <div
+                  class="sdk-feature-item"
+                  v-for="feature in project.features"
+                  :key="feature.title"
+                  :id="feature.title || null"
+                >
+                  <div v-if="feature.title" class="sdk-feature-header">
+                    <img
+                      v-if="feature.icon"
+                      :src="feature.icon"
+                      class="feature-icon"
+                    />
+                    <h3 v-if="feature.title" class="feature-title">
+                      {{ feature.title }}
+                    </h3>
+                  </div>
+                  <div class="sdk-feature-links">
+                    <template
+                      v-for="context in feature.contexts"
+                      :key="context.text"
                     >
-                      <path
-                        d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm32 664c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V456c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v272zm-32-344a48.01 48.01 0 010-96 48.01 48.01 0 010 96z"
-                      ></path>
-                    </svg>
-                  </div>
-                  <div class="tip-content">
-                    <div class="tip-title mb-12px">SDK 合规信息公示</div>
-                    <div class="tip-desc">
-                      <div class="color-#303A48 mb-12px">
-                        <span class="font-600">功能介绍：</span>
-                        <span class="font-400">
-                          为开发者提供低延时、高并发、可扩展、高可靠的实时消息及状态同步网络服务。
-                        </span>
-                      </div>
-                      <div class="color-#303A48 mb-12px">
-                        <span class="font-600">基本信息：</span>
-                      </div>
-                      <div class="color-#303A48 font-400 mb-12px">
-                        【SDK 名称】即时通讯 SDK；【开发者】上海声网科技有限公司；
-                      </div>
-                      <div class="color-#303A48 font-400">
-                        【使用说明】
-                        <a href="https://im.shengwang.cn/docs/sdk/android/security.html">《即时通讯 SDK 合规使用说明》</a
-                        >；【个人信息处理规则】
-                        <a href="https://www.shengwang.cn/SDK-privacy-policy/?_gl=1*198vm6x*_gcl_aw*R0NMLjE3MzI3NTY1OTUuQ2owS0NRaUFvNXU2QmhESkFSSXNBQVZvRFd0VVBCRGYyaUZmOGNtYzVlOExvdFVjWjY5OHBPTURMM0NEWUkwNGNZb3hLYUpsbExSd2d2c2FBcVRsRUFMd193Y0I.*_gcl_au*MTYxNTIzMjA3MS4xNzMyNzU2NTMy*_ga*MTUxMjI3NTA3NS4xNzE5OTcxODAy*_ga_BFVGG7E02W*MTczNzUzMDcyOS4xODAuMC4xNzM3NTMwNzM4LjAuMC4w">《SDK个人信息处理规则》 </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="tabs">
-                <div class="tab-header">
-                  <div
-                    class="tab-btn"
-                    :class="{ active: activeTab === 0 }"
-                    @click="activeTab = 0"
-                  >
-                    客户端
-                  </div>
-                  <!-- <div
-                    class="tab-btn"
-                    :class="{ active: activeTab === 1 }"
-                    @click="activeTab = 1"
-                  >
-                    服务端
-                  </div> -->
-                </div>
-
-                <div class="tab-content">
-                  <!-- 客户端 SDK 表格 -->
-                  <table class="table" v-if="activeTab === 0">
-                    <thead>
-                      <tr>
-                        <th
-                          v-for="column in downloadTableColumns"
-                          :key="column.title"
-                          :style="{ minWidth: column.width + 'px' }"
-                        >
-                          {{ column.title }}
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr v-for="item in clientSDKDownloadInfo" :key="item.id">
-                        <td>{{ item.language }}</td>
-                        <td>{{ item.platform }}</td>
-                        <td>{{ item.version }}</td>
-                        <td>{{ item.package }}</td>
-                        <td>{{ item.md5 }}</td>
-                        <td>{{ item.updateTime }}</td>
-                        <td>
-                          <a class="color-#2D85E9" :href="item.releaseNote"
-                            >点击查看</a
-                          >
-                        </td>
-                        <td>
-                          <a :href="item.downloadLink">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
+                      <a
+                        v-if="context.link"
+                        class="feature-link"
+                        type="primary"
+                        target="_blank"
+                        :href="context.link"
+                      >
+                        {{ context.text }}
+                      </a>
+                      <ClientOnly v-else>
+                        <el-popover placement="bottom-start" :width="436">
+                          <template #reference>
+                            <a
+                              class="feature-link"
+                              type="primary"
+                              :href="context.sdks[0].link"
+                              target="_blank"
                             >
-                              <path
-                                fill="currentColor"
-                                d="m12 16l-5-5l1.4-1.45l2.6 2.6V4h2v8.15l2.6-2.6L17 11zm-6 4q-.825 0-1.412-.587T4 18v-3h2v3h12v-3h2v3q0 .825-.587 1.413T18 20z"
-                              />
-                            </svg>
-                          </a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <!-- 服务端 API 表格 -->
-                  <table class="table" v-if="activeTab === 1">
-                    <thead>
-                      <tr>
-                        <th
-                          v-for="column in downloadTableColumns"
-                          :key="column.title"
-                          :style="{ minWidth: column.width + 'px' }"
-                        >
-                          {{ column.title }}
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr v-for="item in serverSDKDownloadInfo" :key="item.id">
-                        <td>{{ item.language }}</td>
-                        <td>{{ item.platform }}</td>
-                        <td>{{ item.version }}</td>
-                        <td>{{ item.package }}</td>
-                        <td>{{ item.md5 }}</td>
-                        <td>{{ item.updateTime }}</td>
-                        <td>
-                          <a
-                            :class="[
-                              'color-#2D85E9',
-                              { 'opacity-0': !item.releaseNote },
-                              { 'pointer-events-none': !item.releaseNote }
-                            ]"
-                            :href="item.releaseNote"
-                            >点击查看</a
-                          >
-                        </td>
-                        <td>
-                          <a
-                            :href="item.downloadLink"
-                            :class="[
-                              { 'opacity-0': !item.downloadLink },
-                              { 'pointer-events-none': !item.downloadLink }
-                            ]"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                fill="currentColor"
-                                d="m12 16l-5-5l1.4-1.45l2.6 2.6V4h2v8.15l2.6-2.6L17 11zm-6 4q-.825 0-1.412-.587T4 18v-3h2v3h12v-3h2v3q0 .825-.587 1.413T18 20z"
-                              />
-                            </svg>
-                          </a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                              {{ context.text }}
+                            </a>
+                          </template>
+                          <template #default>
+                            <CardMenu
+                              :title="context.text"
+                              :sdks="context.sdks"
+                              :desc="context.desc"
+                            />
+                          </template>
+                        </el-popover>
+                      </ClientOnly>
+                    </template>
+                  </div>
                 </div>
               </div>
             </section>
+            <DownloadSection />
           </div>
         </main>
       </div>
@@ -240,304 +110,448 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
 import HopeHomePage from "vuepress-theme-hope/components/HomePage.js";
 import HeroSection from "./CustomHero.vue";
+import CardMenu from "./CardMenu.vue";
+import DownloadSection from "./DownloadSection.vue";
 import { usePageFrontmatter } from "@vuepress/client";
-import {
-  clientSDKDownloadInfo,
-  serverSDKDownloadInfo
-} from "../data/download.js";
 const frontmatter = usePageFrontmatter();
 const router = useRouter();
-const starter = frontmatter.value.starter || [];
-const projects = frontmatter.value.projects || [];
+const starter = computed(() =>
+  (frontmatter.value.starter || []).filter((item) => !item.hidden)
+);
+const projects = computed(() =>
+  (frontmatter.value.projects || [])
+    .map((project) => ({
+      ...project,
+      features: (project.features || []).filter((feature) => !feature.hidden),
+    }))
+    .filter((project) => project.features.length > 0)
+);
+const containerRef = ref<HTMLElement | null>(null);
 
-const downloadTableColumns = [
-  {
-    title: "语言",
-    width: 100
-  },
-  {
-    title: "适用平台",
-    width: 100
-  },
-  {
-    title: "最新版本",
-    width: 80
-  },
-  {
-    title: "包名",
-    width: 110
-  },
-  {
-    title: "MD5 值",
-    width: 200
-  },
-  {
-    title: "更新日期",
-    width: 120
-  },
-  {
-    title: "更新日志",
-    width: 80
-  },
-  {
-    title: "下载",
-    width: 40
+const goTo = (path: string) => {
+  if (path.indexOf("http") == 0) {
+    window.open(path);
+  } else {
+    router.push(path);
   }
-];
+};
 
-const activeTab = ref(0);
+interface AnchorLink {
+  text: string;
+  children?: AnchorLink[];
+}
+
+const buildAnchorLink = () => {
+  const values: AnchorLink[] = [];
+  starter.value.forEach((s) => {
+    values.push({ text: s.title });
+  });
+  projects.value.forEach((project) => {
+    const children = [];
+    project.features.forEach((feature) => {
+      if (feature.title) {
+        children.push({ text: feature.title });
+      }
+    });
+    values.push({ text: project.title, children });
+  });
+  return values;
+};
 </script>
 
 <style scoped>
 .main-container {
   border-radius: 4px;
-  background-color: #fff;
+  background-color: #FAFDFF;
   display: flex;
   flex-direction: column;
 }
 
 .main-content {
   align-self: center;
-  width: 100%;
+  margin-top: 20px;
+  width: 95%;
   max-width: 1200px;
   position: relative;
 }
 
-.home-container {
+.content {
   width: 100%;
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 0 20px;
-  box-sizing: border-box;
 }
 
-.section-title {
-  font-size: 36px;
-  color: #000;
-  margin-bottom: 20px;
-  text-align: left;
-  border: none;
-}
-
-.section-sub-title-desc {
+.content-title {
+  margin-bottom: 24px;
   color: #000;
   text-align: justify;
-  font-family: "PingFang SC";
-  font-size: 16px;
+  font-size: 36px;
   font-style: normal;
-  font-weight: 400;
-  line-height: 24px; /* 150% */
-}
-
-.section-sub-title {
-  font-size: 24px;
-  color: #484644;
-  margin-bottom: 20px;
   font-weight: 600;
-  line-height: 28px;
-}
+  line-height: 40px;
 
-.card-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
-
-.card-container-solution {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 20px;
-}
-
-.card {
-  background: #f8f8f8;
-  border: 1px solid #f8f8f8;
-  border-radius: 20px;
-  padding: 20px;
-  text-align: center;
-  transition: all 0.2s;
-}
-
-.card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  border: 1px solid #00b3ff;
-  .btn {
-    background: #0076e7;
-    color: #fff;
+  &.fun {
+    margin: 8px 0 0 0;
   }
 }
 
-.card img {
-  width: 48px;
-  height: 48px;
-  border-radius: 10px;
-}
-
-.card h3 {
-  font-size: 18px;
-  color: #333;
-}
-
-.card p {
-  font-size: 14px;
-  color: #2d2d2d;
-  text-align: left;
-}
-
-.card .btn {
-  display: inline-block;
-  margin-top: 15px;
-  width: 100%;
-  padding: 10px 0;
-  background: #d9d9d9;
-  color: #0076e7;
-  text-decoration: none;
-  border-radius: 20px;
-}
-
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 30px;
-  background: #fff;
-  border-radius: 8px;
-  overflow-x: auto;
-  display: block;
-}
-
-.table th {
-  padding: 13.75px 0 !important;
-}
-
-.table th,
-.table td {
-  border: 1px solid #e0e0e0;
-  text-align: center;
-  font-size: 14px;
-  white-space: nowrap;
-  min-width: 80px;
-  padding: 11.5px 0;
-}
-
-.table th:nth-child(5),
-.table td:nth-child(5) {
-  width: 100%;
-}
-
-.table td:nth-child(8) svg {
-  color: #2d85e9;
-  transition: color 0.3s;
-}
-
-.table th {
-  background: #e6f7ff;
-  color: #283544;
-  border: none;
-  font-size: 16px;
-}
-
-.table td {
-  color: #313c4b;
-  border: none;
-}
-
-.table .btn {
-  padding: 5px 10px;
-  background: #1890ff;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 4px;
-  font-size: 12px;
-}
-
-.table .btn:hover {
-  background: #167abc;
-}
-
-.placeholder {
-  height: 150px;
-  background-color: #e6f7ff;
-  border-radius: 8px;
-  margin-bottom: 10px;
-}
-
-.download-tip {
+.columns {
+  gap: 20px;
   display: flex;
-  align-items: flex-start;
-  padding: 16px 16px;
-  background: #e6f7ff;
-  border: 1px solid #e6f7ff;
-  border-radius: 12px;
-  margin-bottom: 24px;
+  justify-content: center;
 }
 
-.tip-icon {
-  color: #1890ff;
-  font-size: 18px;
-  margin-right: 12px;
-  margin-top: 2px;
+.sdk-features {
+  justify-content: flex-end;
+  border-radius: 4px;
+  background-color: #fff;
+  display: flex;
+  gap: 20px;
+  white-space: nowrap;
+  padding: 10px;
 }
 
-.tip-content {
-  flex: 1;
+@media (max-width: 991px) {
+  .sdk-features {
+    white-space: initial;
+  }
 }
 
-.tip-title {
-  color: #0076e7;
+.feature-title {
+  flex-grow: 1;
   font-size: 16px;
+  flex-basis: auto;
+}
+
+.sdk-list {
+  display: flex;
+  padding-left: 12px;
+  flex-direction: column;
+  font-size: 14px;
+  color: #808080;
+  white-space: nowrap;
+}
+
+@media (max-width: 991px) {
+  .sdk-list {
+    white-space: initial;
+  }
+}
+
+.sdk-item {
+  align-items: start;
+  border-left: 2px solid rgba(204, 204, 204, 1);
+  background-color: #fff;
+  justify-content: center;
+  padding: 10px 12px;
+}
+
+@media (max-width: 991px) {
+  .sdk-item {
+    padding-right: 20px;
+    white-space: initial;
+  }
+}
+
+.sdk-item.active {
+  border-left-color: rgba(9, 109, 217, 1);
+  color: #096dd9;
+  padding: 9px 12px;
+}
+
+.column:last-child {
+  display: flex;
+  flex-direction: column;
+  line-height: normal;
+  width: 81%;
+  margin-left: 20px;
+}
+
+@media (max-width: 991px) {
+  .column:last-child {
+    width: 100%;
+  }
+}
+
+.product-section {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+}
+
+@media (max-width: 991px) {
+  .product-section {
+    max-width: 100%;
+    margin-top: 40px;
+  }
+}
+
+.sdk-start-title {
+  margin: 0;
+  color: #242f3d;
+  white-space: nowrap;
+  justify-content: center;
+  padding: 0;
+  font-size: 24px;
+  font-style: normal;
   font-weight: 600;
   line-height: normal;
+  border-bottom: 0;
 }
 
-.tip-desc {
-  font-size: 14px;
-  color: #595959;
-  line-height: 1.5;
+@media (max-width: 991px) {
+  .sdk-start-title {
+    max-width: 100%;
+    white-space: initial;
+  }
 }
 
-.tip-desc ul {
-  margin: 8px 0 0 20px;
-  padding: 0;
+.sdk-start-desc {
+  margin-top: 8px;
+  color: #505e72;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
 }
 
-.tip-desc li {
-  margin-bottom: 4px;
-}
-
-.tab-header {
-  width: 170px;
+.sdk-start-list {
   display: flex;
-  justify-content: space-between;
-  color: #abadad;
+  flex-wrap: wrap;
+  margin: 1.5rem 0 3rem 0;
+  gap: 1.5rem;
+  color: #000;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+@media (max-width: 991px) {
+  .sdk-start-list {
+    flex-wrap: wrap;
+    white-space: initial;
+  }
+}
+
+.sdk-start-item {
+  display: flex;
+  align-items: center;
+  border-radius: 0.75rem;
+  border: 1px solid #ebf0f9;
+  background-color: #fff;
+  padding: 0.8125rem 1.5rem;
+  width: 14.4rem;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.sdk-start-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 157, 255, 0.02) 0%, rgba(0, 160, 250, 0.02) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sdk-start-item:hover {
+  cursor: pointer;
+  border-color: #009dff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 157, 255, 0.15);
+}
+
+.sdk-start-item:hover::before {
+  opacity: 1;
+}
+
+.sdk-start-item:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 157, 255, 0.1);
+}
+
+@media (max-width: 991px) {
+  .sdk-start-item {
+    white-space: initial;
+  }
+}
+
+.sdk-start-icon {
+  display: flex;
+  align-items: center;
+  width: calc(100% - 20px);
+}
+
+@media (max-width: 991px) {
+  .sdk-start-icon {
+    white-space: initial;
+  }
+}
+
+.platform-icon {
+  aspect-ratio: 1;
+  object-fit: contain;
+  width: 24px;
+  height: 24px;
+}
+
+
+.platform-name {
+  color: #303233;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin: 0 8px;
+  width: calc(100% - 40px);
+  transition: color 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.sdk-start-item:hover .platform-name {
+  color: #009dff;
+}
+
+.arrow-icon {
+  aspect-ratio: 1;
+  object-fit: contain;
+  width: 20px;
+  margin: auto 0;
+  color: #dce2e6;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.arrow-icon.high {
+  display: none;
+}
+
+.sdk-start-item:hover .arrow-icon.normal {
+  display: none;
+}
+
+.sdk-start-item:hover .arrow-icon.high {
+  display: block;
+  transform: translateX(2px);
+}
+
+.sdk-features-title {
+  width: 100%;
+  padding: 0.75rem 0;
+  margin: 2.25rem 0;
+  color: #242f3d;
+  white-space: nowrap;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  border-bottom: 1px solid rgba(230, 230, 230, 1);
+}
+
+@media (max-width: 991px) {
+  .sdk-features-title {
+    max-width: 100%;
+    white-space: initial;
+  }
+}
+
+.sdk-feature-item {
+  display: flex;
+  margin-top: 28px;
+  font-size: 14px;
+  color: #096dd9;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+@media (max-width: 991px) {
+  .sdk-feature-item {
+    max-width: 100%;
+    white-space: initial;
+  }
+}
+
+.sdk-feature-header {
+  display: flex;
+  align-self: start;
+  flex-shrink: 0;
+  min-width: 142px;
+  margin-right: 60px;
+  gap: 2px;
+  font-size: 16px;
+  color: #303233;
+  font-weight: 600;
+}
+
+@media (max-width: 991px) {
+  .sdk-feature-header {
+    white-space: initial;
+  }
+}
+
+.feature-icon {
+  display: none;
+  aspect-ratio: 1;
+  object-fit: contain;
+  width: 20px;
+}
+
+.feature-title {
+  padding: 8px 0;
+  font-weight: 600;
+  font-size: 16px;
+  font-style: normal;
+  line-height: normal;
+  margin: 0;
+}
+
+.sdk-feature-links {
+  align-content: flex-start;
+  flex-wrap: wrap;
+  display: flex;
+  gap: 8px 100px;
+}
+
+@media (max-width: 991px) {
+  .sdk-feature-links {
+    max-width: 100%;
+    white-space: initial;
+  }
+}
+
+.feature-link {
+  padding: 8px 8px 8px 0;
+  color: #505e72;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  min-width: 120px;
   cursor: pointer;
 }
 
-.table tr:nth-child(odd) {
-  background-color: #fff; /* 浅色 */
+.feature-link-group {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
 }
 
-.table tr:nth-child(even) {
-  background-color: #f4f4f4; /* 深色 */
+@media (max-width: 991px) {
+  .feature-link-group {
+    white-space: initial;
+  }
 }
 
-.tab-btn {
-  font-size: 20px;
-  padding-bottom: 12px;
-  font-weight: 600;
-}
-
-.active {
-  color: #2d85e9;
-  border-bottom: 2px solid #2d85e9;
-}
 </style>
