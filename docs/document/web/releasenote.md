@@ -4,11 +4,11 @@ show_search_search: false
 show_callback_route: false
 ---
 
-## v5.1.0 Dev 2026-8-21
+## v5.1.1 Dev 2026-9-10
 
-该版本于 2026 年 8 月 15 日发布。
+该版本于 2026 年 9 月 10 日发布。
 
-本文重点说明功能和行为变化，具体的接口删除、重命名及替代方式请参见 [IM Web/小程序 SDK 4.x 到 5.0.0 迁移指南](migration_guide.html)。
+本文重点说明功能和行为变化，具体的接口删除、重命名及替代方式请参见 [IM Web/小程序 SDK 4.x 到 5.1.1 迁移指南](migration_guide.html)。
 
 #### 新增功能
 
