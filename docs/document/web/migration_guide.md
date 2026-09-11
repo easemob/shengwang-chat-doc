@@ -1,6 +1,6 @@
-﻿# 即时通讯 IM Web SDK 4.x 到 5.0.0 迁移指南
+﻿# 即时通讯 IM Web SDK 4.x 到 5.1.1 迁移指南
 
-本文档介绍如何从旧版 `easemob-websdk` 迁移到新版 Web SDK。新版 SDK 以 `ChatClient` 为统一入口，并按功能拆分为多个 Manager。迁移时，建议先完成初始化、登录、消息、事件和返回值处理等核心改造，再按业务使用范围迁移用户关系、群组、聊天室、会话、推送等模块。
+本文档介绍如何从 v4.x `easemob-websdk` 迁移到 v5.x Web SDK。v5.x SDK 以 `ChatClient` 为统一入口，并按功能拆分为多个 Manager。迁移时，建议先完成初始化、登录、消息、事件和返回值处理等核心改造，再按业务使用范围迁移用户关系、群组、聊天室、会话、推送等模块。
 
 ## 迁移说明
 
@@ -55,7 +55,7 @@
 
 新版 SDK 使用 `ChatClient.init` 创建客户端实例。需要使用的业务模块可在初始化时通过 `managers` 注册，也可以在初始化后通过 `.use()` 注册。未注册的 Manager 不会挂载到 `client` 上。
 
-### 旧版 SDK 用法
+### v4.x SDK 用法
 
 ```typescript
 import SDK from 'easemob-websdk';
@@ -70,7 +70,7 @@ const conn = new SDK.connection({
 conn.addEventHandler('handler', { onConnected: () => {} });
 ```
 
-### 新版 SDK 用法
+### v5.x SDK 用法
 
 ```typescript
 import {
@@ -127,7 +127,7 @@ const client = ChatClient.init({ appId: 'org#app' })
 
 新版 SDK 使用 `client.login` 登录，使用 `client.logout` 登出。登录参数名称发生变化，密码登录参数不再作为客户端推荐方式使用。
 
-### 旧版 SDK 用法
+### v4.x SDK 用法
 
 ```typescript
 await conn.open({
@@ -138,7 +138,7 @@ await conn.open({
 conn.close();
 ```
 
-### 新版 SDK 用法
+### v5.x SDK 用法
 
 ```typescript
 await client.login({
@@ -267,7 +267,7 @@ client.chatManager.addEventHandler('message-handler', {
 
 ### 群组事件迁移
 
-旧版 SDK 使用 `onGroupEvent` 加 `operation` 字段区分群组事件。新版 SDK 将群组事件拆分为独立事件名。
+v4.x SDK 使用 `onGroupEvent` 加 `operation` 字段区分群组事件。v5.x SDK 将群组事件拆分为独立事件名。
 
 ```typescript
 // 旧 SDK
@@ -321,7 +321,7 @@ client.groupManager.addEventHandler('group-handler', {
 
 ### 聊天室事件迁移
 
-旧 SDK 使用 `onChatroomEvent` 加 `operation` 字段区分聊天室事件。新版 SDK 通过 `client.chatRoomManager.addEventHandler` 注册聊天室事件监听器，并使用独立事件名，例如，聊天室销毁、成员加入或退出、成员被移除、聊天室信息变更、管理员变更、禁言状态变更、白名单变更、公告变更和自定义属性变更等。
+旧 SDK 使用 `onChatroomEvent` 加 `operation` 字段区分聊天室事件。v5.x SDK 通过 `client.chatRoomManager.addEventHandler` 注册聊天室事件监听器，并使用独立事件名，例如，聊天室销毁、成员加入或退出、成员被移除、聊天室信息变更、管理员变更、禁言状态变更、白名单变更、公告变更和自定义属性变更等。
 
 ### 好友事件对照
 
@@ -398,7 +398,7 @@ try {
 
 旧 SDK 通过 `WebIM.message.create` 结合 `type` 字段创建不同类型的消息。新版 SDK 将消息创建拆分为多个类型化方法，例如 `createTextMessage`、`createImageMessage`、`createCustomMessage` 等。发送消息统一调用 `client.chatManager.sendMessage`。
 
-### 旧版 SDK 用法
+### v4.x SDK 用法
 
 ```typescript
 const msg = WebIM.message.create({
