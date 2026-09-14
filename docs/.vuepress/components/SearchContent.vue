@@ -207,7 +207,7 @@ export default {
         "0477ac0d60376b558f7713b50d9b1ae6"
       ),
       initialUiState: {
-        ["im-beta-easemob"]: {
+        ["chat-rtnsvc"]: {
           query: queryParam,
           refinementList: {
             type: ["content"],
