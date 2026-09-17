@@ -282,7 +282,7 @@ EMClient.getInstance().userInfoManager()
 
 ## 常见问题
 
-### 设置了用户昵称，为什么获取不到？
+#### 设置了用户昵称，为什么获取不到？
 
 如果你已通过客户端或 RESTful API 设置用户昵称，但后续未能正确获取，通常需要检查以下两点：
 
@@ -291,7 +291,7 @@ EMClient.getInstance().userInfoManager()
 
 例如，Android 侧可调用 [updatePushNickname](/document/android/push/push_display_attribute.html#设置推送通知的显示属性) 更新推送昵称；RESTful API 可参考 [离线推送通知的显示属性配置](/document/server-side/push_nickname_set_single.html)。
 
-### 为什么会返回错误码 4？
+#### 为什么会返回错误码 4？
 
 设置和获取用户属性的相关接口在超过调用频率限制时，会返回错误码 `4` `EXCEED_SERVICE_LIMIT`。
 
