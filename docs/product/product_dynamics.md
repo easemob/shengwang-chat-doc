@@ -24,6 +24,12 @@ show_server_callback_route: false
 
 <HideSection :show="$frontmatter.show_server_search">
 
+#### 环信 HarmonyOS v1.14.0/Flutter v4.22.0/React Native v1.18.0 SDK 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| HarmonyOS v1.14.0/Flutter v4.22.0/React Native v1.18.0 SDK 发版  |- 图片消息分层资源管理，[发送方发消息时可选择上传原图或大图](/document/android/message_send.html#发送图片消息)，[接收方可下载原图、大图和缩略图](/document/android/message_send.html#发送图片消息)。<br/> - [群成员名片](/document/harmonyos/group_namecard.html)。<br/> - [支持登录成功后自动同步好友列表及好友信息](/document/android/user_relationship.html#开启自动同步) <br/> - 支持 [订阅非好友用户的属性变更功能](/document/android/userprofile.html#订阅非好友用户的属性变更)。 <br/> - Flutter 和 React Native 端 [支持用户信息自动管理](/document/harmonyos/userinfo_provider.html)。 |  2026-8-28     |  - [HarmonyOS SDK 1.14.0 更新日志](/document/harmonyos/releasenote.html#v1-14-0-dev-2026-8-26) <br/> - [Flutter 4.22.0 更新日志](/document/flutter/releasenote.html#v4-22-0-2026-8-28) <br/> - [React Native 1.18.0 更新日志](/document/react-native/releasenote.html#v1-18-0-2026-8-6)          |
+
 ## 2026-07
 
 :::tip
