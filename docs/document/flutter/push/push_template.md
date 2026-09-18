@@ -113,7 +113,7 @@
 这种情况下，创建消息时无需传入 `titleArgs` 和 `contentArgs` 参数。 
 
 ```dart
-    final msg = EMMessage.createTxtSendMessage(
+    final msg = ChatMessage.createTxtSendMessage(
       targetId: 'userId',
       content: '消息内容',
     );
@@ -123,7 +123,7 @@
       'em_push_template': {'name': 'test7'},
     };
 
-    await EMClient.getInstance.chatManager.sendMessage(msg);
+    await ChatClient.getInstance.chatManager.sendMessage(msg);
 ```
 
 ### 使用包含内置参数的推送模板
@@ -163,7 +163,7 @@
 ![img](/images/android/push/push_template_custom_example.png)
 
 ```dart
-    final msg = EMMessage.createTxtSendMessage(
+    final msg = ChatMessage.createTxtSendMessage(
       targetId: 'userId',
       content: '消息内容',
     );
@@ -177,7 +177,7 @@
       },
     };
 
-    await EMClient.getInstance.chatManager.sendMessage(msg);
+    await ChatClient.getInstance.chatManager.sendMessage(msg);
 ```
 
 ## 消息接收方使用推送模板
@@ -190,7 +190,7 @@
 
 ```dart
 try {
-  await EMClient.getInstance.pushManager.setPushTemplate('Template Name');
-} on EMError catch (e) {}
+  await ChatClient.getInstance.pushManager.setPushTemplate('Template Name');
+} on ChatError catch (e) {}
 ```
 
