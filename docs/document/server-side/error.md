@@ -70,8 +70,8 @@
 
 调用 REST API 接口时，若传入的 HTTP 路径中的用户 ID 参数不存入时，会提示 `Service resource not found` 错误。例如，调用 [获取单个用户的详情](account_detail_obtain_single.html)、[添加好友](user_friend_add.html)和[删除好友](user_friend_remove.html)等 REST API。
 
-| HTTP 状态码 | 错误类型    | 错误提示      | 可能原因      | 
-| :---------- | :---------- | :--------- | :----------- |
+| HTTP 状态码 | 错误类型    | 错误提示      | 可能原因      | 处理建议 |
+| :---------- | :---------- | :--------- | :----------- | :----------- |
 | 404         | service_resource_not_found  | Service resource not found  | 用户不存在。  | 
 
 ## 服务未开通相关错误码

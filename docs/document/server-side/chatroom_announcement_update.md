@@ -71,6 +71,8 @@ curl -X POST 'https://XXXX/app-id/{app_id}/chatrooms/12XXXX11/announcement'    \
 
 响应体中的其他参数说明如下表所示：
 
+| 参数              | 类型   | 描述     |
+| :---------------- | :----- | :--------------- |
 | `action`          | String | 请求方法。                                                                     |
 | `uri`             | String | 请求 URL。                                                                     |
 | `entities`        | JSON Array   | 响应实体。                                                                     |

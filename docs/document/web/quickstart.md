@@ -29,7 +29,7 @@ Easemob_quickstart<br>
 - 有效的 [即时通讯 IM 开发者账号](https://doc.shengwang.cn/doc/console/general/quickstart#注册账号)；
 - 在声网控制台 [创建项目并开通 IM](/product/enable_im.html#_2-开通即时通讯-im-服务)，[获取项目的 App ID](/product/enable_im.html#_3-获取-app-id)；
 - 已安装 [npm](https://www.npmjs.com/get-npm)；
-- SDK 支持 IE 9+、Firefox 10+、Chrome 54+ 和 Safari 6+。
+- 使用现代浏览器，如 Chrome、Firefox、Safari，或使用这些浏览器引擎的其他浏览器（例如 Microsoft Edge），不支持 Internet Explorer (IE)。
 
 ## 实现流程
 
