@@ -117,7 +117,7 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- |
 | 分页获取 app 中的消息话题  | GET  | /app-id/{app_id}/thread | 100 次/秒/App ID   |     | 
 | 分页获取单个用户加入的所有消息话题  | GET     | /app-id/{app_id}/threads/user/{username}    | 100 次/秒/App ID   |     | 
-| 分页获取单个用户在指定群组中加入的所有消息话题  | GET  | /app-id/{app_id}/threads/chatgroups/{group_id}/user/{username}    | 100 次/秒/App ID   |
+| 分页获取单个用户在指定群组中加入的所有消息话题  | GET  | /app-id/{app_id}/threads/chatgroups/{group_id}/user/{username}    | 100 次/秒/App ID   |     |
 | 创建消息话题  | POST     | /app-id/{app_id}/thread    | 100 次/秒/App ID  |     | 
 | 修改消息话题  | PUT     | /app-id/{app_id}/thread/{thread_id}    | 100 次/秒/App ID   |     | 
 | 删除消息话题  | DELETE     | /app-id/{app_id}/thread/{thread_id}    | 100 次/秒/App ID   |     | 
@@ -196,7 +196,7 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 | 获取单个用户  |  GET | /app-id/{app_id}/users/{username}   |
 | * 批量获取用户 |  GET  | /app-id/{app_id}/users      | 
 | * 删除单个用户 |  DELETE  | /app-id/{app_id}/users/{username}         | 
-| * 批量删除用户 |  DELETE   | /app-id/{app_id}/users  | 30 次/秒/App ID   | 
+| * 批量删除用户 |  DELETE   | /app-id/{app_id}/users  |
 | * 修改用户密码  |  POST | /app-id/{app_id}/users/{username}/password   | 
 | * 获取用户在线状态  |  GET | /app-id/{app_id}/users/{username}/status   | 
 | * 批量获取用户在线状态  |  POST    | /app-id/{app_id}/users/batch/status  | 
