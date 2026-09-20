@@ -578,7 +578,7 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 #### 重大变更
 
 从 V4.6.0 版本开始会启用 Swift 语言编写的新的 `EaseChatUIKit` 与 `EaseChatDemo`，老版本 Demo 和 UIKit 逐渐不再维护，请参考：
-- [UIKit 文档](/uikit/chatuikit/ios/chatuikit_overview.html)
+- [UIKit 文档](/uikit/chatuikit/v2/ios/chatuikit_overview.html)
 - [GitHub](https://github.com/easemob/chat-ios/tree/SwiftDemo) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-ios/tree/SwiftDemo) 上的 Demo 源码
 
 ## v4.5.0 Dev 2024-04-03

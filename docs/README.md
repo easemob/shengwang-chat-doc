@@ -29,7 +29,7 @@ starter:
         link: /docs/document/android/beginner_guide.html
         text: SDK
       - icon: /guide/uikit.svg
-        link: /docs/uikit/chatuikit/android/chatuikit_overview.html
+        link: /docs/uikit/chatuikit/v2/android/chatuikit_overview.html
         text: UIKit
       - icon: /guide/callkit.svg
         link: /docs/callkit/android/beginner_guide.html
@@ -41,7 +41,7 @@ starter:
         link: /docs/document/android/easemob_mcp_server.html
         text: SDK
       - icon: /guide/uikit.svg
-        link: /docs/uikit/chatuikit/android/chatuikit_overview.html
+        link: /docs/uikit/chatuikit/v2/android/chatuikit_overview.html
         text: UIKit
       - icon: /guide/callkit.svg
         link: /docs/callkit/android/easemob_mcp_server.html
@@ -84,19 +84,19 @@ starter:
     desc: 选择合适的 UIKit 构建即时通讯应用，点击各客户端按钮了解单群聊 UIKit 主要功能介绍。
     platform:
       - icon: /sdk/android.svg
-        link: /docs/uikit/chatuikit/android/chatuikit_overview.html
+        link: /docs/uikit/chatuikit/v2/android/chatuikit_overview.html
         text: Android
       - icon: /sdk/iOS.svg
-        link: /docs/uikit/chatuikit/ios/chatuikit_overview.html
+        link: /docs/uikit/chatuikit/v2/ios/chatuikit_overview.html
         text: iOS
       - icon: /sdk/web.svg
-        link: /docs/uikit/chatuikit/web/chatuikit_overview.html
+        link: /docs/uikit/chatuikit/v2/web/chatuikit_overview.html
         text: Web
       - icon: /sdk/flutter.svg
-        link: /docs/uikit/chatuikit/flutter/chatuikit_overview.html
+        link: /docs/uikit/chatuikit/v2/flutter/chatuikit_overview.html
         text: Flutter
       - icon: /sdk/react.svg
-        link: /docs/uikit/chatuikit/react-native/chatuikit_overview.html
+        link: /docs/uikit/chatuikit/v2/react-native/chatuikit_overview.html
         text: React Native
   - title: 聊天室 UIKit
     desc: 选择合适你的 UIKit 构建即时通讯应用，点击各客户端按钮了解聊天室 UIKit 主要功能介绍。
@@ -1078,85 +1078,85 @@ projects:
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /docs/uikit/chatuikit/android/chatuikit_conversation.html
+                link: /docs/uikit/chatuikit/v2/android/chatuikit_conversation.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /docs/uikit/chatuikit/ios/chatuikit_custom_conversation_list.html
+                link: /docs/uikit/chatuikit/v2/ios/chatuikit_custom_conversation_list.html
               - icon: /sdk/web.svg
                 text: Web
-                link: /docs/uikit/chatuikit/web/chatuikit_conversation.html
+                link: /docs/uikit/chatuikit/v2/web/chatuikit_conversation.html
               - icon: /sdk/flutter.svg
                 text: Flutter
-                link: /docs/uikit/chatuikit/flutter/chatuikit_conversation.html
+                link: /docs/uikit/chatuikit/v2/flutter/chatuikit_conversation.html
               - icon: /sdk/react.svg
                 text: React Native
-                link: /docs/uikit/chatuikit/react-native/chatuikit_conversation.html
+                link: /docs/uikit/chatuikit/v2/react-native/chatuikit_conversation.html
           - text: 消息
             desc: 聊天页面展示发送和接收的所有消息，支持消息操作，以及消息列表和消息输入区的自定义等。
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /docs/uikit/chatuikit/android/chatuikit_chat.html
+                link: /docs/uikit/chatuikit/v2/android/chatuikit_chat.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /docs/uikit/chatuikit/ios/chatuikit_custom_chat.html
+                link: /docs/uikit/chatuikit/v2/ios/chatuikit_custom_chat.html
               - icon: /sdk/web.svg
                 text: Web
-                link: /docs/uikit/chatuikit/web/chatuikit_chat.html
+                link: /docs/uikit/chatuikit/v2/web/chatuikit_chat.html
               - icon: /sdk/flutter.svg
                 text: Flutter
-                link: /docs/uikit/chatuikit/flutter/chatuikit_chat.html
+                link: /docs/uikit/chatuikit/v2/flutter/chatuikit_chat.html
               - icon: /sdk/react.svg
                 text: React Native
-                link: /docs/uikit/chatuikit/react-native/chatuikit_chat.html
+                link: /docs/uikit/chatuikit/v2/react-native/chatuikit_chat.html
           - text: 通讯录
             desc: 通讯录页面展示通讯录列表，包括添加好友，好友申请列表入口，好友列表等。支持自定义好友列表和好友事件监听。
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /docs/uikit/chatuikit/android/chatuikit_contactlist.html
+                link: /docs/uikit/chatuikit/v2/android/chatuikit_contactlist.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /docs/uikit/chatuikit/ios/chatuikit_custom_contact_list.html
+                link: /docs/uikit/chatuikit/v2/ios/chatuikit_custom_contact_list.html
               - icon: /sdk/web.svg
                 text: Web
-                link: /docs/uikit/chatuikit/web/chatuikit_contactlist.html
+                link: /docs/uikit/chatuikit/v2/web/chatuikit_contactlist.html
               - icon: /sdk/flutter.svg
                 text: Flutter
-                link: /docs/uikit/chatuikit/flutter/chatuikit_contactlist.html
+                link: /docs/uikit/chatuikit/v2/flutter/chatuikit_contactlist.html
               - icon: /sdk/react.svg
                 text: React Native
-                link: /docs/uikit/chatuikit/react-native/chatuikit_contactlist.html
+                link: /docs/uikit/chatuikit/v2/react-native/chatuikit_contactlist.html
           - text: 好友详情
             desc: 好友详情页面展示好友的详细信息，支持自定义导航栏、好友条目以及发消息、音频通话、视频通话等按钮。
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /docs/uikit/chatuikit/android/chatuikit_custom_contact_details.html
+                link: /docs/uikit/chatuikit/v2/android/chatuikit_custom_contact_details.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /docs/uikit/chatuikit/ios/chatuikit_custom_contact_details.html
+                link: /docs/uikit/chatuikit/v2/ios/chatuikit_custom_contact_details.html
               - icon: /sdk/flutter.svg
                 text: Flutter
-                link: /docs/uikit/chatuikit/flutter/chatuikit_custom_contact_details.html
+                link: /docs/uikit/chatuikit/v2/flutter/chatuikit_custom_contact_details.html
               - icon: /sdk/react.svg
                 text: React Native
-                link: /docs/uikit/chatuikit/react-native/chatuikit_custom_contact_details.html
+                link: /docs/uikit/chatuikit/v2/react-native/chatuikit_custom_contact_details.html
           - text: 群组详情
             desc: 群组详情页面展示群组的详细信息，支持自定义标题栏、按钮和群详情条目。
             sdks:
               - icon: /sdk/android.svg
                 text: Android
-                link: /docs/uikit/chatuikit/android/chatuikit_custom_group_details.html
+                link: /docs/uikit/chatuikit/v2/android/chatuikit_custom_group_details.html
               - icon: /sdk/iOS.svg
                 text: iOS
-                link: /docs/uikit/chatuikit/ios/chatuikit_custom_group_details.html
+                link: /docs/uikit/chatuikit/v2/ios/chatuikit_custom_group_details.html
               - icon: /sdk/flutter.svg
                 text: Flutter
-                link: /docs/uikit/chatuikit/flutter/chatuikit_custom_group_details.html
+                link: /docs/uikit/chatuikit/v2/flutter/chatuikit_custom_group_details.html
               - icon: /sdk/react.svg
                 text: React Native
-                link: /docs/uikit/chatuikit/react-native/chatuikit_custom_group_details.html
+                link: /docs/uikit/chatuikit/v2/react-native/chatuikit_custom_group_details.html
       - title: 聊天室
         icon: /feature/uikit-chatroom.svg
         contexts:

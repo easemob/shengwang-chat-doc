@@ -4,7 +4,7 @@ import fs from "node:fs";
 const getSubDirectories = (dir) =>
   (fs.existsSync(dir) ? fs.readdirSync(dir) : [])
     .filter((item) => fs.statSync(path.join(dir, item)).isDirectory());
-const CHAT_DOC_PATH = path.resolve(__dirname, "../../uikit/chatuikit");
+const CHAT_DOC_PATH = path.resolve(__dirname, "../../uikit/chatuikit/v2");
 const CHATROOM_DOC_PATH = path.resolve(__dirname, "../../uikit/chatroomuikit");
 const chatPlatformList = getSubDirectories(CHAT_DOC_PATH);
 const chatroomPlatformList = getSubDirectories(CHATROOM_DOC_PATH);
@@ -302,8 +302,8 @@ function buildChatUikitSidebar() {
         handleSidebarItem(platform, sidebar, CHAT_DOC_PATH, "chatuikit")
       )
       .filter((s) => s);
-    result[`/docs/uikit/chatuikit/${platform}/`] = sidebarItems;
-    result[`/uikit/chatuikit/${platform}/`] = sidebarItems;
+    result[`/docs/uikit/chatuikit/v2/${platform}/`] = sidebarItems;
+    result[`/uikit/chatuikit/v2/${platform}/`] = sidebarItems;
   });
   return result;
 }
@@ -338,7 +338,8 @@ function getDocumentLink(platform: string, link: string, docPath: string, kitTyp
   const content = fs.readFileSync(getDocumentPath(platform, link, docPath), "utf8");
   const permalink = content.match(/^permalink:\s*["']?([^\s"']+)["']?\s*$/m)?.[1];
 
-  return permalink || `/docs/uikit/${kitType}/${platform}/${link}`;
+  const versionPath = kitType === "chatuikit" ? "/v2" : "";
+  return permalink || `/docs/uikit/${kitType}${versionPath}/${platform}/${link}`;
 }
 
 function handleSidebarItem(platform, sidebar, docPath, kitType) {

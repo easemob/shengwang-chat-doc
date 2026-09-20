@@ -5,7 +5,7 @@
 - 支持单聊、群聊、聊天室服务；
 - 提供服务端 RESTful API 和 [回调服务](/document/server-side/callback_overview.html)；
 - 提供多平台 SDK，包括 Android、iOS、Web、HarmonyOS、Unity、Flutter、React Native、小程序、uni-app；
-- 提供 [UIKit](/docs/uikit/chatuikit/android/chatuikit_overview.html)。
+- 提供 [UIKit](/docs/uikit/chatuikit/v2/android/chatuikit_overview.html)。
 
 ## 产品架构
 

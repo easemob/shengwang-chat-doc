@@ -26,7 +26,7 @@
                 <a href="/docs/sdk/android/document_index.html">SDK v1.x 文档</a>。
               </li>
               <li>
-                <a href="/docs/uikit/chatuikit/android/chatuikit_overview.html">UIKit v2.x 文档</a>。
+                <a href="/docs/uikit/chatuikit/v2/android/chatuikit_overview.html">UIKit v2.x 文档</a>。
               </li>
               <li>
                 <a href="/docs/sdk/server-side/document_index.html">服务端 API 文档</a>。

@@ -88,7 +88,7 @@ watch(
       const splitRoute = route.path.split("/");
       if (splitRoute[1] === "docs") splitRoute.splice(1, 1);
       kitType.value = splitRoute[2];
-      platform.value = splitRoute[3];
+      platform.value = splitRoute[3] === "v2" ? splitRoute[4] : splitRoute[3];
     }
   },
   { immediate: true }
@@ -100,13 +100,18 @@ const onChange = (platform) => {
     .filter(
       (item) =>
         item.hasOwnProperty("name") &&
-        item?.path.indexOf(`/docs/uikit/${kitType.value}/${platform}`) == 0
+        item?.path.indexOf(`/docs/uikit/${kitType.value}/v2/${platform}`) == 0
     )
     .map((item) => item.path);
 
   let newPath = route.path.split("/");
   if (newPath[1] !== "docs") newPath.splice(1, 0, "docs");
-  newPath[4] = platform;
+  if (kitType.value === "chatuikit") {
+    newPath[4] = "v2";
+    newPath[5] = platform;
+  } else {
+    newPath[4] = platform;
+  }
   const nextPathPath = newPath.join("/");
 
   if (nextPlatformDocRouters.indexOf(nextPathPath) > -1) {
@@ -114,7 +119,7 @@ const onChange = (platform) => {
   } else {
     if (kitType.value == "chatuikit") {
       router.push(
-        `/docs/uikit/${kitType.value}/${platform}/chatuikit_overview.html`
+        `/docs/uikit/${kitType.value}/v2/${platform}/chatuikit_overview.html`
       );
     }
     if (kitType.value == "chatroomuikit") {

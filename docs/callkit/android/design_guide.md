@@ -2,7 +2,7 @@
 
 <img src="/images/callkit/design/Cover.png" width="100%" >
 
-声网通话套件人机交互界面工具包基于声网移动端单/群聊人机交互界面工具包进行设计，设计原则、全局样式、小控件样式均复用自声网单/群聊人机交互界面工具包，详见 [单/群聊人机交互界面工具包](/uikit/chatuikit/android/chatuikit_design_guide.html)。
+声网通话套件人机交互界面工具包基于声网移动端单/群聊人机交互界面工具包进行设计，设计原则、全局样式、小控件样式均复用自声网单/群聊人机交互界面工具包，详见 [单/群聊人机交互界面工具包](/uikit/chatuikit/v2/android/chatuikit_design_guide.html)。
 
 ## 总设计原则
 
@@ -513,7 +513,7 @@ Message Bubble(Large Radius)
 
 <img src="/images/callkit/design/call_msg.png" width="500">
 
-关于通话相关消息样式（Call Msg），详见 [单/群聊人机交互界面工具包](/uikit/chatuikit/android/chatuikit_design_guide.html)。
+关于通话相关消息样式（Call Msg），详见 [单/群聊人机交互界面工具包](/uikit/chatuikit/v2/android/chatuikit_design_guide.html)。
 
 
 ## 设计资源
