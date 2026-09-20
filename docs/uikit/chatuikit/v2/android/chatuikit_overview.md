@@ -1,6 +1,6 @@
 ---
 title: 概述
-permalink: /docs/uikit/chatuikit/android/chatuikit_overview.html
+permalink: /docs/uikit/chatuikit/v2/android/chatuikit_overview.html
 ---
 
 # 概述

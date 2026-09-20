@@ -251,4 +251,4 @@ const switchTheme = () => {
 
 - [组件库源码](https://github.com/Shengwang-Community/ShengwangChat-UIKit-web)
 - [其他示例 demo](https://github.com/Shengwang-Community/ShengwangChat-UIKit-web/tree/main/demo)
-- [`UIKitProvider` 文档](https://doc.shengwang.com/docs/uikit/chatuikit/web/chatuikit_provider.html)
+- [`UIKitProvider` 文档](https://doc.shengwang.com/docs/uikit/chatuikit/v2/web/chatuikit_provider.html)

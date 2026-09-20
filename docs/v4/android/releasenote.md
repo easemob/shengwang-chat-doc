@@ -427,7 +427,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 - [IM SDK] 修复发送图片消息时指定缩略图尺寸未生效的问题。
 - [IM SDK] 修复未拉取好友时收到好友事件，导致好友列表不能更新的问题。
 
-#### [单群聊 UIKit](/uikit/chatuikit/android/chatuikit_overview.html)
+#### [单群聊 UIKit](/uikit/chatuikit/v2/android/chatuikit_overview.html)
 
 - 修复发送方发送的部分表情与接收方收到的不匹配的问题。
 
@@ -462,7 +462,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 [IM SDK] 部分场景下，多设备离线消息未读数不同步的问题。
 
-#### [单群聊 UIKit](/uikit/chatuikit/android/chatfeature_message.html#消息置顶)
+#### [单群聊 UIKit](/uikit/chatuikit/v2/android/chatfeature_message.html#消息置顶)
 
 - **新增**：消息置顶功能支持单聊会话。
 - **修复**：
@@ -579,7 +579,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 #### 重大变更
 
 从 V4.6.0 版本开始会启用 Kotlin 语言编写的新的 EaseIM App 项目与 EaseIMKIt 项目，老版本的项目将逐渐不再维护，请参考：
-- [EaseIMKIt 文档](/uikit/chatuikit/android/chatuikit_overview.html) 
+- [EaseIMKIt 文档](/uikit/chatuikit/v2/android/chatuikit_overview.html)
 - EaseIM App 项目：[GitHub](https://github.com/easemob/easemob-demo-android) 或 [Gitee](https://gitee.com/easemob-code/easemob-demo-android)。
 
 ## v4.5.0 Dev 2024-04-03

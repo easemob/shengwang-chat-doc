@@ -188,7 +188,7 @@ show_server_callback_route: false
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Web UIKit 2.4.0 发版   | `ConversationList` 组件增加 `includeEmptyConversations` 参数控制是否拉取 [空会话](/docs/v4/web/conversation_overview.html#空会话)。 | 2026-1-9      | [Web 单群聊 UIKit 2.4.0 更新日志](/uikit/chatuikit/web/releasenote.html#v2-4-0)          |
+| Web UIKit 2.4.0 发版   | `ConversationList` 组件增加 `includeEmptyConversations` 参数控制是否拉取 [空会话](/docs/v4/web/conversation_overview.html#空会话)。 | 2026-1-9      | [Web 单群聊 UIKit 2.4.0 更新日志](/uikit/chatuikit/v2/web/releasenote.html#v2-4-0)          |
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
@@ -221,9 +221,9 @@ show_server_callback_route: false
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Web 单群聊 UIKit 2.3.1 发版   | - 支持监听用户获取会话列表事件 `getConversationlist`。<br/> - 优化图片放大查看效果。<br/> -  使用 `customRenderers` 代替原来的 `renderMessage` 来自定义消息的界面展示。<br/> - 优化移动设备上消息操作菜单的显示。 | 2025-12-4      | [Web 单群聊 UIKit 2.2.0 更新日志](/uikit/chatuikit/web/releasenote.html#v2-3-1)          |
-| Flutter 单群聊 UIKit 2.3.0-dev.1 发版   | 合并聊天室 UIKit 并完整本地化。 | 2025-12-20      | [Flutter 单群聊 UIKit 2.3.0-dev.1 更新日志](/uikit/chatuikit/flutter/releasenote.html#v2-3-0-dev-1) |
-| Flutter UIKit 2.2.0 发版   | - 升级第三方库。<br/> - 修改撤回消息回调。<br/> - 修改群默认头像设置。 | 2025-12-20      | [Flutter 单群聊 UIKit 2.3.0-dev.1 更新日志](/uikit/chatuikit/flutter/releasenote.html#v2-3-0-dev-1) |
+| Web 单群聊 UIKit 2.3.1 发版   | - 支持监听用户获取会话列表事件 `getConversationlist`。<br/> - 优化图片放大查看效果。<br/> -  使用 `customRenderers` 代替原来的 `renderMessage` 来自定义消息的界面展示。<br/> - 优化移动设备上消息操作菜单的显示。 | 2025-12-4      | [Web 单群聊 UIKit 2.2.0 更新日志](/uikit/chatuikit/v2/web/releasenote.html#v2-3-1)          |
+| Flutter 单群聊 UIKit 2.3.0-dev.1 发版   | 合并聊天室 UIKit 并完整本地化。 | 2025-12-20      | [Flutter 单群聊 UIKit 2.3.0-dev.1 更新日志](/uikit/chatuikit/v2/flutter/releasenote.html#v2-3-0-dev-1) |
+| Flutter UIKit 2.2.0 发版   | - 升级第三方库。<br/> - 修改撤回消息回调。<br/> - 修改群默认头像设置。 | 2025-12-20      | [Flutter 单群聊 UIKit 2.3.0-dev.1 更新日志](/uikit/chatuikit/v2/flutter/releasenote.html#v2-3-0-dev-1) |
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
@@ -250,8 +250,8 @@ show_server_callback_route: false
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Web 单群聊 UIKit 2.2.1 发版   | `Chat`、`ConversationList` 和 `CallKit` 等组件适配移动端，会话列表和消息等鼠标悬停事件改为长按事件。 | 2025-11-10      | [Web 单群聊 UIKit 2.2.0 更新日志](/uikit/chatuikit/web/releasenote.html#v2-2-1)          |
-| React Native 单群聊 UIKit 2.5.0 发版   | - 支持 [自定义数据层](/uikit/chatuikit/web/chatuikit_advancedusage.html#自定义-sdk-数据模型)，实现灵活业务处理。例如，App 内根据手机号搜索好友功能已使用该接口。<br/> - 新增 [自定义图片预览组件](/uikit/chatuikit/web/chatuikit_advancedusage.html#自定义图片消息预览组件)，支持自定义 App 内图片消息预览效果。<br/> - 新增 [自定义视频预览组件](/uikit/chatuikit/web/chatuikit_advancedusage.html#自定义视频消息预览组件)，支持自定义 App 内视频消息预览效果。<br/> - 新增语音图像动画组件，提升动画展示效果。 | 2025-11-17   | [React Native 单群聊 UIKit 2.5.0 更新日志](/uikit/chatuikit/react-native/releasenote.html#v2-5-0)           |
+| Web 单群聊 UIKit 2.2.1 发版   | `Chat`、`ConversationList` 和 `CallKit` 等组件适配移动端，会话列表和消息等鼠标悬停事件改为长按事件。 | 2025-11-10      | [Web 单群聊 UIKit 2.2.0 更新日志](/uikit/chatuikit/v2/web/releasenote.html#v2-2-1)          |
+| React Native 单群聊 UIKit 2.5.0 发版   | - 支持 [自定义数据层](/uikit/chatuikit/web/chatuikit_advancedusage.html#自定义-sdk-数据模型)，实现灵活业务处理。例如，App 内根据手机号搜索好友功能已使用该接口。<br/> - 新增 [自定义图片预览组件](/uikit/chatuikit/web/chatuikit_advancedusage.html#自定义图片消息预览组件)，支持自定义 App 内图片消息预览效果。<br/> - 新增 [自定义视频预览组件](/uikit/chatuikit/web/chatuikit_advancedusage.html#自定义视频消息预览组件)，支持自定义 App 内视频消息预览效果。<br/> - 新增语音图像动画组件，提升动画展示效果。 | 2025-11-17   | [React Native 单群聊 UIKit 2.5.0 更新日志](/uikit/chatuikit/v2/react-native/releasenote.html#v2-5-0)           |
 
 ## 2025-10
 
@@ -266,7 +266,7 @@ show_server_callback_route: false
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Web 单群聊 UIKit 2.1.0 发版   | CallKit 增加清屏功能。 | 2025-10-27       | [Web 单群聊 UIKit 2.1.0 更新日志](/uikit/chatuikit/web/releasenote.html#v2-1-0)          |
+| Web 单群聊 UIKit 2.1.0 发版   | CallKit 增加清屏功能。 | 2025-10-27       | [Web 单群聊 UIKit 2.1.0 更新日志](/uikit/chatuikit/v2/web/releasenote.html#v2-1-0)          |
 | Uniapp 单群聊 UIKit 1.0.1 发版   | 运行到 app 端，发送语音消息时，增加麦克风权限校验。 | 2025-10-17       | [Uniapp 单群聊 UIKit 1.0.1 更新日志](/uikit/chatuikit/uniapp/releasenote.html#v1-0-1)          |
 
 #### CallKit 发版
@@ -289,7 +289,7 @@ show_server_callback_route: false
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Web UIKit 2.0.0 发版   | 增加 `CallKit` 组件，`Chat` 组件内使用 `CallKit` 取代原来的音视频通话功能。 | 2025-9-3       | [Web 单群聊 UIKit 2.0.0 更新日志](/uikit/chatuikit/web/releasenote.html#v2-0-0)          |
+| Web UIKit 2.0.0 发版   | 增加 `CallKit` 组件，`Chat` 组件内使用 `CallKit` 取代原来的音视频通话功能。 | 2025-9-3       | [Web 单群聊 UIKit 2.0.0 更新日志](/uikit/chatuikit/v2/web/releasenote.html#v2-0-0)          |
 
 ## 2025-08
 
@@ -325,7 +325,7 @@ show_server_callback_route: false
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| React Native 单群聊 UIKit 2.4.8 发版   | 新增漫游消息拉取特性。 | 2025-07-28   | [React Native 单群聊 UIKit 2.4.8 更新日志](/uikit/chatuikit/react-native/releasenote.html#v2-4-8)           |
+| React Native 单群聊 UIKit 2.4.8 发版   | 新增漫游消息拉取特性。 | 2025-07-28   | [React Native 单群聊 UIKit 2.4.8 更新日志](/uikit/chatuikit/v2/react-native/releasenote.html#v2-4-8)           |
 
 ## 2025-06
 
@@ -342,8 +342,8 @@ show_server_callback_route: false
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| iOS 单群聊 UIKit 4.14.0 发版   | 支持 GIF 图片消息。 | 2025-6-23       | [iOS 单群聊 UIKit 4.14.0 更新日志](/uikit/chatuikit/ios/releasenote.html#v-4-14-0)          |
-| Web 单群聊 UIKit 1.7.0 发版   | 增加点击消息的回调事件。 | 2025-6-9       | [Web 单群聊 UIKit 4.14.0 更新日志](/uikit/chatuikit/web/releasenote.html#v1-7-0)          |
+| iOS 单群聊 UIKit 4.14.0 发版   | 支持 GIF 图片消息。 | 2025-6-23       | [iOS 单群聊 UIKit 4.14.0 更新日志](/uikit/chatuikit/v2/ios/releasenote.html#v-4-14-0)          |
+| Web 单群聊 UIKit 1.7.0 发版   | 增加点击消息的回调事件。 | 2025-6-9       | [Web 单群聊 UIKit 4.14.0 更新日志](/uikit/chatuikit/v2/web/releasenote.html#v1-7-0)          |
 
 ## 2025-05
 
@@ -406,7 +406,7 @@ show_server_callback_route: false
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| React Native 单群聊 UIKit 2.4.2 发版 | 增加置顶消息。| 2025-1-17 | [React Native 单群聊 UIKit 2.4.2 更新日志](/uikit/chatuikit/react-native/releasenote.html#v2-4-2) |
+| React Native 单群聊 UIKit 2.4.2 发版 | 增加置顶消息。| 2025-1-17 | [React Native 单群聊 UIKit 2.4.2 更新日志](/uikit/chatuikit/v2/react-native/releasenote.html#v2-4-2) |
 
 ## 2024-12
 
@@ -453,7 +453,7 @@ show_server_callback_route: false
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| SDK 4.6.0 开发版发布  | **新增特性**：<br/> - 客户端[消息撤回时支持携带自定义信息](/docs/v4/android/message_recall.html#实现方法)。<br/> - 客户端支持离线期间撤回的消息通知给接收方。<br/> - 移动端支持[自定义筛选获取本地会话列表](/docs/v4/android/conversation_list.html#获取本地所有或筛选的会话)。<br/> - 移动端支持[清除内存中的会话](/docs/v4/android/conversation_list.html#清除内存中的会话)，并举例说明如何[降低会话占用内存](/docs/v4/android/conversation_list.html#降低会话占用内存的实例)。<br/> - Android 端添加绑定推送 token 成功与否的回调。<br/> - Web/小程序端增加接口支持[获取当前用户加入和创建的聊天室](/docs/v4/web/room_manage.html#获取当前用户加入的聊天室列表)。<br/> - Web/小程序 端支持 [logger 日志不显示在控制台](/docs/v4/web/log.html#输出信息到日志文件)。 <br/>**重大变更** <br/> 1. **Android**：<br/> 从 V4.6.0 版本开始会启用 Kotlin 语言编写的新的 EaseIM App 项目与 EaseIMKIt 项目，老版本的项目将逐渐不再维护，请参考：<br/> - [EaseIMKIt 文档](/uikit/chatuikit/android/chatuikit_overview.html) <br/> - EaseIM App 项目：[Github](https://github.com/easemob/easemob-demo-android) 或 [Gitee 地址](https://gitee.com/easemob-code/easemob-demo-android)。<br/> 2. **iOS**：<br/>从 V4.6.0 版本开始会启用 Swift 语言编写的新的 `EaseChatUIKit` 与 `EaseChatDemo`，老版本 Demo 和 UIKit 逐渐不再维护，请参考：<br/> - [UIKit 文档](/uikit/chatuikit/ios/chatuikit_overview.html) <br/> - Demo 源码：[GitHub](https://github.com/easemob/chat-ios/tree/SwiftDemo) 或 [Gitee 地址](https://gitee.com/easemob-code/easemob-demo-ios/tree/SwiftDemo) | 2024-04-30   | <br/> - [Android 4.6.0 更新日志](/docs/v4/android/releasenote.html#v4-6-0-dev-2024-04-30-开发版)<br/> - [iOS 4.6.0 更新日志](/docs/v4/ios/releasenote.html#v4-6-0-dev-2024-04-30-开发版)<br/> - [Web 4.7.0 更新日志](/docs/v4/web/releasenote.html#v4-7-0-dev-2024-04-30-开发版)<br/> - [小程序 4.7.0 更新日志](/docs/v4/applet/releasenote.html#v4-7-0-dev-2024-04-30-开发版)。  |
+| SDK 4.6.0 开发版发布  | **新增特性**：<br/> - 客户端[消息撤回时支持携带自定义信息](/docs/v4/android/message_recall.html#实现方法)。<br/> - 客户端支持离线期间撤回的消息通知给接收方。<br/> - 移动端支持[自定义筛选获取本地会话列表](/docs/v4/android/conversation_list.html#获取本地所有或筛选的会话)。<br/> - 移动端支持[清除内存中的会话](/docs/v4/android/conversation_list.html#清除内存中的会话)，并举例说明如何[降低会话占用内存](/docs/v4/android/conversation_list.html#降低会话占用内存的实例)。<br/> - Android 端添加绑定推送 token 成功与否的回调。<br/> - Web/小程序端增加接口支持[获取当前用户加入和创建的聊天室](/docs/v4/web/room_manage.html#获取当前用户加入的聊天室列表)。<br/> - Web/小程序 端支持 [logger 日志不显示在控制台](/docs/v4/web/log.html#输出信息到日志文件)。 <br/>**重大变更** <br/> 1. **Android**：<br/> 从 V4.6.0 版本开始会启用 Kotlin 语言编写的新的 EaseIM App 项目与 EaseIMKIt 项目，老版本的项目将逐渐不再维护，请参考：<br/> - [EaseIMKIt 文档](/uikit/chatuikit/v2/android/chatuikit_overview.html) <br/> - EaseIM App 项目：[Github](https://github.com/easemob/easemob-demo-android) 或 [Gitee 地址](https://gitee.com/easemob-code/easemob-demo-android)。<br/> 2. **iOS**：<br/>从 V4.6.0 版本开始会启用 Swift 语言编写的新的 `EaseChatUIKit` 与 `EaseChatDemo`，老版本 Demo 和 UIKit 逐渐不再维护，请参考：<br/> - [UIKit 文档](/uikit/chatuikit/v2/ios/chatuikit_overview.html) <br/> - Demo 源码：[GitHub](https://github.com/easemob/chat-ios/tree/SwiftDemo) 或 [Gitee 地址](https://gitee.com/easemob-code/easemob-demo-ios/tree/SwiftDemo) | 2024-04-30   | <br/> - [Android 4.6.0 更新日志](/docs/v4/android/releasenote.html#v4-6-0-dev-2024-04-30-开发版)<br/> - [iOS 4.6.0 更新日志](/docs/v4/ios/releasenote.html#v4-6-0-dev-2024-04-30-开发版)<br/> - [Web 4.7.0 更新日志](/docs/v4/web/releasenote.html#v4-7-0-dev-2024-04-30-开发版)<br/> - [小程序 4.7.0 更新日志](/docs/v4/applet/releasenote.html#v4-7-0-dev-2024-04-30-开发版)。  |
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
