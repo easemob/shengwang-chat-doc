@@ -5,7 +5,11 @@ import { CALL_KIT_SIDEBAR } from "./callkit";
 import { PUSH_SIDEBAR } from "./push";
 import { TRANSLATION_SIDEBAR } from "./translation";
 import { LEGACY_SDK_SIDEBAR } from "./legacy-sdk";
-import { CHAT_UIKIT_SIDEBAR, CHATROOM_UIKIT_SIDEBAR } from "./uikit";
+import {
+  CHAT_UIKIT_SIDEBAR,
+  CHAT_UIKIT_V4_SIDEBAR,
+  CHATROOM_UIKIT_SIDEBAR,
+} from "./uikit";
 
 export const zhSidebar = sidebar({
   "/docs/product/": [
@@ -141,5 +145,6 @@ export const zhSidebar = sidebar({
   "/value-added/translation":TRANSLATION_SIDEBAR,
   ...LEGACY_SDK_SIDEBAR,
   ...CHAT_UIKIT_SIDEBAR,
+  ...CHAT_UIKIT_V4_SIDEBAR,
   ...CHATROOM_UIKIT_SIDEBAR,
 });

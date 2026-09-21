@@ -28,7 +28,6 @@
         ],
         "type": "ADD"
     },
-    "appkey": "XXXX#XXXX",
     "id": "",
     "type": "CHATROOM",
     "event": "group_op_event",
@@ -42,7 +41,7 @@
 
 | 字段名称         | 类型   | 描述                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
-| `callId`       | String | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。 | 
+| `callId`       | String | 回调请求的唯一标识。 | 
 | `security`     | String | 签名，格式如下: `MD5(callId+secret+timestamp)`。详见[配置声网控制台回调规则](callback_postsending.html#发送后回调规则)。|
 | `payload`       | Object | 事件内容。                                                     |
 | `payload.admin`| JSON   | 添加的聊天室超级管理员的用户 ID。 | 
@@ -75,7 +74,6 @@
         ],
         "type": "REMOVE"
     },
-    "appkey": "shengwang-demo#testy",
     "id": "",
     "type": "CHATROOM",
     "event": "group_op_event",
@@ -89,7 +87,7 @@
 
 | 字段名称         | 类型   | 描述                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
-| `callId`       | String | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。 | 
+| `callId`       | String | 回调请求的唯一标识。 | 
 | `security`     | String | 签名，格式如下: `MD5(callId+secret+timestamp)`。详见[配置声网控制台回调规则](callback_postsending.html#发送后回调规则)。|
 | `payload`       | Object | 事件内容。                                                     |
 | `payload.admin`| JSON   | 移除的聊天室超级管理员的用户 ID。 | 

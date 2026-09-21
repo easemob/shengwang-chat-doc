@@ -79,7 +79,7 @@
 | 400      | service open exception  | this appKey not open message roaming   | 消息漫游服务未开通。  | 联系商务开通。  |
 | 400         | service open exception | the app not open presence   | 没有开通 presence 服务。  | 联系商务开通 presence 服务。 |
 | 403      | message_rewrite_error   | The rewrite message feature is not open.   | 消息修改功能未开通。  |  联系商务开通消息修改功能。  |
-| 403     | FORBIDDEN       | {appkey} user metadata service not allow   | 用户属性功能未开通。  | 联系商务开通用户属性功能。    |
+| 403     | FORBIDDEN       | {xxxx#xxxx} user metadata service not allow   | 用户属性功能未开通。  | 联系商务开通用户属性功能。    |
 
     
 

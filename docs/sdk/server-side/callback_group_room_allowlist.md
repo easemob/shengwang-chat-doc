@@ -29,7 +29,6 @@
 		],
 		"type": "ADD"
 	},
-	"appkey": "XXXX#XXXX",
 	"id": "255445981790209",
 	"type": "GROUP",
 	"event": "group_op_event",
@@ -77,7 +76,6 @@
 		],
 		"type": "REMOVE"
 	},
-	"appkey": "XXXX#XXXX",
 	"id": "255445981790209",
 	"type": "GROUP",
 	"event": "group_op_event",
@@ -91,7 +89,7 @@
 
 | 字段名称         | 类型   | 描述                                                         |
 | :------------- | :----- | :----------------------------------------------------------- |
-| `callId`       | String | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。      |
+| `callId`       | String | 回调请求的唯一标识。     |
 | `security`     | String | 签名，格式如下: `MD5(callId+secret+timestamp)`。详见[配置声网控制台回调规则](callback_postsending.html#发送后回调规则)。|
 | `paylod`       | Object | 事件内容。                                                     |
 | `payload.member` | JSON   | 被移出白名单的成员的用户 ID。 | 

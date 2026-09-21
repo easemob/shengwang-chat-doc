@@ -52,7 +52,7 @@
 
 ```objectivec
     //SDK 初始化 `AgoraChatOptions` 时可以传入 `loginExtensionInfo` 属性投递给被踢下线的设备。该属性需要开启多设备登录的情况下才能生效。
-    AgoraChatOptions *options = [AgoraChatOptions optionsWithAppkey:<#AppKey#>];
+    AgoraChatOptions *options = [AgoraChatOptions optionsWithAppId:<#AppId#>];
     options.loginExtensionInfo = @"you was kicked out by other device";
     [AgoraChatClient.sharedClient initializeSDKWithOptions:options];
 // 异步方法

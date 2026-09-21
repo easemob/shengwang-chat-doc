@@ -29,7 +29,6 @@
 		],
 		"type": "ADD"
 	},
-	"appkey": "XXXX#XXX",
 	"id": "test_123",
 	"type": "GROUP",
 	"event": "group_op_event",
@@ -76,7 +75,6 @@
 		],
 		"type": "REMOVE"
 	},
-	"appkey": "XXXX#XXXX",
 	"id": "test_123",
 	"type": "GROUP",
 	"event": "group_op_event",

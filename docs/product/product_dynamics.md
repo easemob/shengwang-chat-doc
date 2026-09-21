@@ -10,13 +10,13 @@ show_server_callback_route: false
 
 ## 2026-08
 
-#### IM Android/iOS SDK v5.0.0 发版
+#### Android/iOS SDK v5.0.0 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
 | Android/iOS SDK 5.0.0 开发版发布   | - 提供统一的数据同步配置和状态回调。应用可 [配置登录后自动同步会话](/document/android/initialization.html#设置登录后自动同步数据)、[好友](/document/android/user_relationship.html#登录后自动同步好友列表)和 [已加入群组](/document/android/group_manage.html#获取当前用户加入的群组列表) 数据，并在本地数据库打开后提前读取本地数据。<br/> - [群组配置](/document/android/group_manage.html#创建群组) 拆分为多个独立属性，并支持创建群组后按需更新指定配置。<br/> - 原有的单条消息回执、会话回执和全局回执开关已调整为批量消息回执和未读数清理接口，覆盖单聊和群聊场景。 <br/> - 支持 [批量删除会话](/document/android/conversation_delete.html#批量删除本地会话) 和 [会话展示信息](/document/android/conversation_list.html#获取会话名称和头像) 等常用管理能力。<br/> - 移除密码登录，不再支持自动登录。 <br/> - 移除客户端注册、公开群列表、聊天室创建和销毁、消息统计等低频 API。 <br/> - | 2026-8-15     | - [Android SDK 5.0.0 更新日志](/document/android/releasenote.html#v5-0-0-dev-2026-8-12) <br/> - [iOS SDK 5.0.0 更新日志](/document/ios/releasenote.html#v5-0-0-dev-2026-8-12)  |
 
-#### IM Web SDK v5.1.1 发版
+#### Web SDK v5.1.1 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
@@ -24,7 +24,7 @@ show_server_callback_route: false
 
 <HideSection :show="$frontmatter.show_server_search">
 
-#### 环信 HarmonyOS v1.14.0/Flutter v4.22.0/React Native v1.18.0 SDK 发版
+#### HarmonyOS v1.14.0/Flutter v4.22.0/React Native v1.18.0 SDK 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
@@ -43,7 +43,7 @@ show_server_callback_route: false
 | Android/iOS SDK 4.24.0 开发版发布   | - Android 和 iOS SDK [支持服务端消息搜索](/value-added/search/message_search_android.html)。<br/> - Android 可通过异步方法 [更新群扩展字段](/docs/v4/android/group_attributes.html#更新群扩展字段)。<br/> - Android 可通过异步方法 [获取服务器端推送配置](/docs/v4/android/push/push_display_attribute.html#获取推送通知的显示属性)。   | 2026-7-10     | - [Android SDK 4.24.0 更新日志](/docs/v4/android/releasenote.html#v4-24-0-dev-2026-7-10-开发版) <br/> - [iOS SDK 4.24.0 更新日志](/docs/v4/ios/releasenote.html#v4-24-0-dev-2026-7-10-开发版)  |
 
 
-#### IM Web/小程序 SDK v4.24.1 发版
+#### Web/小程序 SDK v4.24.1 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
@@ -69,13 +69,13 @@ show_server_callback_route: false
 目前，[发消息时设置回调路由功能](/document/android/message_send.html#发消息时设置回调路由) 仅面向中国区开放。
 :::
 
-#### IM HarmonyOS SDK v1.13.0 发版
+#### HarmonyOS SDK v1.13.0 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
 | HarmonyOS SDK 1.13.0 开发版发布   | - [支持用户信息自动管理](/document/harmonyos/userinfo_provider.html)。<br/> - [群成员名片](/document/harmonyos/group_namecard.html)。<br/> - [支持语言转文字](/value-added/stt/voice_to_text_harmonyos.html)。   | 2026-6-24     | [HarmonyOS SDK 1.13.0 更新日志](/document/harmonyos/releasenote.html#v1-13-0-dev-2026-6-24-开发版)   |
 
-#### IM Android/iOS/Web/小程序 SDK v4.23.0 发版
+#### Android/iOS/Web/小程序 SDK v4.23.0 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
@@ -84,7 +84,7 @@ show_server_callback_route: false
 
 </HideSection>
 
-#### IM 客户端 SDK v4.22.0 发版
+#### 客户端 SDK v4.22.0 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
@@ -103,7 +103,7 @@ show_server_callback_route: false
 
 ## 2026-04
 
-#### IM 客户端 SDK v4.21.0 发版
+#### 客户端 SDK v4.21.0 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
@@ -135,7 +135,7 @@ show_server_callback_route: false
 
 环信 MCP Server 支持的工具、安装与配置说明，详见环信 MCP Server 使用指南。例如，以下为 Android 平台文档链接：
 - [SDK](/document/android/easemob_mcp_server.html)
-- [单群聊 UIKit](/uikit/chatuikit/android/easemob_mcp_server.html)
+- [单群聊 UIKit](/uikit/chatuikit/v4/android/easemob_mcp_server.html)
 - [CallKit](/callkit/android/easemob_mcp_server.html)
 - [聊天室 UIKit](/uikit/chatroomuikit/android/easemob_mcp_server.html)
 
@@ -188,7 +188,7 @@ show_server_callback_route: false
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Web UIKit 2.4.0 发版   | `ConversationList` 组件增加 `includeEmptyConversations` 参数控制是否拉取 [空会话](/docs/v4/web/conversation_overview.html#空会话)。 | 2026-1-9      | [Web 单群聊 UIKit 2.4.0 更新日志](/uikit/chatuikit/v2/web/releasenote.html#v2-4-0)          |
+| Web UIKit 2.4.0 发版   | `ConversationList` 组件增加 `includeEmptyConversations` 参数控制是否拉取 [空会话](/docs/v4/web/conversation_overview.html#空会话)。 | 2026-1-9      | [Web 单群聊 UIKit 2.4.0 更新日志](/uikit/chatuikit/v2/web/releasenote.html)          |
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
@@ -221,9 +221,9 @@ show_server_callback_route: false
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Web 单群聊 UIKit 2.3.1 发版   | - 支持监听用户获取会话列表事件 `getConversationlist`。<br/> - 优化图片放大查看效果。<br/> -  使用 `customRenderers` 代替原来的 `renderMessage` 来自定义消息的界面展示。<br/> - 优化移动设备上消息操作菜单的显示。 | 2025-12-4      | [Web 单群聊 UIKit 2.2.0 更新日志](/uikit/chatuikit/v2/web/releasenote.html#v2-3-1)          |
-| Flutter 单群聊 UIKit 2.3.0-dev.1 发版   | 合并聊天室 UIKit 并完整本地化。 | 2025-12-20      | [Flutter 单群聊 UIKit 2.3.0-dev.1 更新日志](/uikit/chatuikit/v2/flutter/releasenote.html#v2-3-0-dev-1) |
-| Flutter UIKit 2.2.0 发版   | - 升级第三方库。<br/> - 修改撤回消息回调。<br/> - 修改群默认头像设置。 | 2025-12-20      | [Flutter 单群聊 UIKit 2.3.0-dev.1 更新日志](/uikit/chatuikit/v2/flutter/releasenote.html#v2-3-0-dev-1) |
+| Web 单群聊 UIKit 2.3.1 发版   | - 支持监听用户获取会话列表事件 `getConversationlist`。<br/> - 优化图片放大查看效果。<br/> -  使用 `customRenderers` 代替原来的 `renderMessage` 来自定义消息的界面展示。<br/> - 优化移动设备上消息操作菜单的显示。 | 2025-12-4      | [Web 单群聊 UIKit 2.2.0 更新日志](/uikit/chatuikit/v2/web/releasenote.html#v2-0-0)          |
+| Flutter 单群聊 UIKit 2.3.0-dev.1 发版   | 合并聊天室 UIKit 并完整本地化。 | 2025-12-20      | [Flutter 单群聊 UIKit 2.3.0-dev.1 更新日志](/uikit/chatuikit/v2/flutter/releasenote.html) |
+| Flutter UIKit 2.2.0 发版   | - 升级第三方库。<br/> - 修改撤回消息回调。<br/> - 修改群默认头像设置。 | 2025-12-20      | [Flutter 单群聊 UIKit 2.3.0-dev.1 更新日志](/uikit/chatuikit/v2/flutter/releasenote.html) |
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
@@ -251,7 +251,7 @@ show_server_callback_route: false
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
 | Web 单群聊 UIKit 2.2.1 发版   | `Chat`、`ConversationList` 和 `CallKit` 等组件适配移动端，会话列表和消息等鼠标悬停事件改为长按事件。 | 2025-11-10      | [Web 单群聊 UIKit 2.2.0 更新日志](/uikit/chatuikit/v2/web/releasenote.html#v2-2-1)          |
-| React Native 单群聊 UIKit 2.5.0 发版   | - 支持 [自定义数据层](/uikit/chatuikit/web/chatuikit_advancedusage.html#自定义-sdk-数据模型)，实现灵活业务处理。例如，App 内根据手机号搜索好友功能已使用该接口。<br/> - 新增 [自定义图片预览组件](/uikit/chatuikit/web/chatuikit_advancedusage.html#自定义图片消息预览组件)，支持自定义 App 内图片消息预览效果。<br/> - 新增 [自定义视频预览组件](/uikit/chatuikit/web/chatuikit_advancedusage.html#自定义视频消息预览组件)，支持自定义 App 内视频消息预览效果。<br/> - 新增语音图像动画组件，提升动画展示效果。 | 2025-11-17   | [React Native 单群聊 UIKit 2.5.0 更新日志](/uikit/chatuikit/v2/react-native/releasenote.html#v2-5-0)           |
+| React Native 单群聊 UIKit 2.5.0 发版   | - 支持自定义数据层，实现灵活业务处理。例如，App 内根据手机号搜索好友功能已使用该接口。<br/> - 新增自定义图片预览组件，支持自定义 App 内图片消息预览效果。<br/> - 新增自定义视频预览组件，支持自定义 App 内视频消息预览效果。<br/> - 新增语音图像动画组件，提升动画展示效果。 | 2025-11-17   | [React Native 单群聊 UIKit 2.5.0 更新日志](/uikit/chatuikit/v2/react-native/releasenote.html)           |
 
 ## 2025-10
 
@@ -266,8 +266,7 @@ show_server_callback_route: false
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Web 单群聊 UIKit 2.1.0 发版   | CallKit 增加清屏功能。 | 2025-10-27       | [Web 单群聊 UIKit 2.1.0 更新日志](/uikit/chatuikit/v2/web/releasenote.html#v2-1-0)          |
-| Uniapp 单群聊 UIKit 1.0.1 发版   | 运行到 app 端，发送语音消息时，增加麦克风权限校验。 | 2025-10-17       | [Uniapp 单群聊 UIKit 1.0.1 更新日志](/uikit/chatuikit/uniapp/releasenote.html#v1-0-1)          |
+| Web 单群聊 UIKit 2.1.0 发版   | CallKit 增加清屏功能。 | 2025-10-27       | [Web 单群聊 UIKit 2.1.0 更新日志](/uikit/chatuikit/v2/web/releasenote.html)          |
 
 #### CallKit 发版
 
@@ -289,7 +288,7 @@ show_server_callback_route: false
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Web UIKit 2.0.0 发版   | 增加 `CallKit` 组件，`Chat` 组件内使用 `CallKit` 取代原来的音视频通话功能。 | 2025-9-3       | [Web 单群聊 UIKit 2.0.0 更新日志](/uikit/chatuikit/v2/web/releasenote.html#v2-0-0)          |
+| Web UIKit 2.0.0 发版   | 增加 `CallKit` 组件，`Chat` 组件内使用 `CallKit` 取代原来的音视频通话功能。 | 2025-9-3       | [Web 单群聊 UIKit 2.0.0 更新日志](/uikit/chatuikit/v2/web/releasenote.html)          |
 
 ## 2025-08
 
@@ -325,7 +324,7 @@ show_server_callback_route: false
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| React Native 单群聊 UIKit 2.4.8 发版   | 新增漫游消息拉取特性。 | 2025-07-28   | [React Native 单群聊 UIKit 2.4.8 更新日志](/uikit/chatuikit/v2/react-native/releasenote.html#v2-4-8)           |
+| React Native 单群聊 UIKit 2.4.8 发版   | 新增漫游消息拉取特性。 | 2025-07-28   | [React Native 单群聊 UIKit 2.4.8 更新日志](/uikit/chatuikit/v2/react-native/releasenote.html)           |
 
 ## 2025-06
 
@@ -342,8 +341,8 @@ show_server_callback_route: false
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| iOS 单群聊 UIKit 4.14.0 发版   | 支持 GIF 图片消息。 | 2025-6-23       | [iOS 单群聊 UIKit 4.14.0 更新日志](/uikit/chatuikit/v2/ios/releasenote.html#v-4-14-0)          |
-| Web 单群聊 UIKit 1.7.0 发版   | 增加点击消息的回调事件。 | 2025-6-9       | [Web 单群聊 UIKit 4.14.0 更新日志](/uikit/chatuikit/v2/web/releasenote.html#v1-7-0)          |
+| iOS 单群聊 UIKit 4.14.0 发版   | 支持 GIF 图片消息。 | 2025-6-23       | [iOS 单群聊 UIKit 4.14.0 更新日志](/uikit/chatuikit/v2/ios/releasenote.html)          |
+| Web 单群聊 UIKit 1.7.0 发版   | 增加点击消息的回调事件。 | 2025-6-9       | [Web 单群聊 UIKit 4.14.0 更新日志](/uikit/chatuikit/v2/web/releasenote.html)          |
 
 ## 2025-05
 
@@ -358,7 +357,7 @@ show_server_callback_route: false
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| HarmonyOS UIKit 1.0.1 发版   | - 新增新请求页面，方便同意好友请求。<br/> - 新增发起新会话页面。 | 2025-5-21       | [HarmonyOS 单群聊 UIKit 1.0.1 更新日志](/uikit/chatuikit/harmonyos/releasenote.html#v1-0-1)          |
+| HarmonyOS UIKit 1.0.1 发版   | - 新增新请求页面，方便同意好友请求。<br/> - 新增发起新会话页面。 | 2025-5-21       | HarmonyOS 单群聊 UIKit 1.0.1 更新日志          |
 
 ## 2025-04
 
@@ -406,7 +405,7 @@ show_server_callback_route: false
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| React Native 单群聊 UIKit 2.4.2 发版 | 增加置顶消息。| 2025-1-17 | [React Native 单群聊 UIKit 2.4.2 更新日志](/uikit/chatuikit/v2/react-native/releasenote.html#v2-4-2) |
+| React Native 单群聊 UIKit 2.4.2 发版 | 增加置顶消息。| 2025-1-17 | [React Native 单群聊 UIKit 2.4.2 更新日志](/uikit/chatuikit/v2/react-native/releasenote.html) |
 
 ## 2024-12
 

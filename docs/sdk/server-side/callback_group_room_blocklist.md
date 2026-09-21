@@ -33,7 +33,6 @@
 		"expire_timestamp": 4638873600000, 
 		"type": "ADD"
 	},
-	"appkey": "XXXX#XXXX",
 	"id": "255445981790209",
 	"type": "GROUP",
 	"event": "group_op_event",
@@ -83,7 +82,6 @@
 		],
 		"type": "REMOVE"
 	},
-	"appkey": "XXXX#XXXX",
 	"id": "255445981790209",
 	"type": "GROUP",
 	"event": "group_op_event",

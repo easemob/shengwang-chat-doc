@@ -43,7 +43,6 @@ payload 中字段含义：
         "bodies":[]
     },
     "host":"******",
-    "appkey":"orgname#appname",
     "from":"tst",
     "recall_id":"966475220900644860",
     "to":"170908972023810",

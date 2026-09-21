@@ -26,7 +26,6 @@
 ```json
 {
     "callId": "XXXX#XXXX_1029XXXX29922197880",
-    "appkey":"XXXX#XXXX",
     "channel":"APNS",
     "chat_type":"chat",
     "data":{
@@ -81,7 +80,6 @@
     "chat_type": "chat",
     "callId": "XXXX#XXXX_1029172947949980024",
     "security": "79e87c892ec0159ac9175f295d587a51",
-    "appkey": "XXXX#XXXX",
     "step": "push",
     "detail": "no push binding",
     "msg_id": "1029172947949980024",
@@ -98,7 +96,6 @@
     "chat_type": "chat",
     "callId": "XXXX#XXXX_1029XXXX29922197880",
     "security": "c2d1352efc3f0b9bbf7e447c54ccb11d",
-    "appkey": "XXXX#XXXX",
     "step": "push",
     "detail": "no user exist",
     "msg_id": "1029174929922197880",
@@ -115,7 +112,6 @@
     "chat_type": "chat",
     "callId": "XXXX#XXXX_1029188050686577016",
     "security": "baf6ff663587e705efd39d91e995c306",
-    "appkey": "XXXX#XXXX",
     "step": "push",
     "detail": "no notifier exist",
     "notifier_name": "102920687",
@@ -141,7 +137,6 @@
     "chat_type": "chat",
     "security": "afa9bd9d372XXXX5bedde37e275e",
     "device_token": "160403XXXX055106740XXXX",
-    "appkey": "XXXX#XXXX",
     "step": "push",
     "detail": "get push token fail",
     "notifier_name": "104510674#XXXX30bc2c54a6d078bc69a8b6d7807d",

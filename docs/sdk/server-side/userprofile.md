@@ -148,7 +148,7 @@ curl -X PUT -H 'Content-Type: application/x-www-form-urlencoded' -H 'Authorizati
 
 | HTTP 状态码        | 错误类型 | 错误提示          | 可能原因 | 处理建议 |
 | :----------- | :--- | :------------- | :----------- | :----------- |
-| 403     | FORBIDDEN       | {appkey} user metadata service not allow   | 用户属性功能未开通。  | 联系商务开通用户属性功能。    |
+| 403     | FORBIDDEN       | {xxxx#xxxx} user metadata service not allow   | 用户属性功能未开通。  | 联系商务开通用户属性功能。    |
 | 403     | FORBIDDEN         | size of metadata for this single user exceeds the user defined limit, {}Bytes        | 单个用户的用户属性用量超过限制。默认单个用户的属性总长度不得超过 2 KB。 | 调整用量或联系商务提升用量上限。 |
 | 403     | FORBIDDEN         | size of metadata for this single user exceeds the current mysql column size, {}Bytes        | 单个用户的用户属性超过字段长度限制。关于用户属性字段（例如，用户昵称）的长度限制，详见[设置用户属性](/docs/sdk/server-side/userprofile.html#设置用户属性)。  | 减少用户属性字段的长度。    |
 | 403     | FORBIDDEN          | total size of user metadata for this app exceeds the user defined limit, {}Bytes        | 整个应用的用户属性用量超过限制。默认单个 app 下所有用户的属性总长度不得超过 10 GB。   | 调整用量或联系商务提升用量上限。    |

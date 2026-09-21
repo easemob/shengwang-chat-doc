@@ -152,7 +152,6 @@ import EaseCallUIKit
 import AgoraRtcKit
 
 // MARK: - 配置常量
-let AppKey = "YOUR_IM_APP_KEY"
 let userId = "YOUR_USER_ID"
 let token = "YOUR_IM_TOKEN"
 let agoraAppId = "YOUR_AGORA_APP_ID"
@@ -172,7 +171,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         // 1. 初始化 IM SDK
-        let option = ChatSDKOptions(appkey: AppKey)
+        let option = ChatSDKOptions(appId: app id)
         option.enableConsoleLog = true
         option.isAutoLogin = false
         ChatClient.shared().initializeSDK(with: option)
@@ -371,7 +370,7 @@ class MyViewController: UIViewController {
 
 | 问题 | 解决方法 |
 | :-------------- | :----- |
-| 收到 `App ID is not set` 或 `RTC App ID from CallTokenProvider is empty` 错误 | 使用自定义 `CallTokenProvider` 时，RTC App ID 由应用通过 `getAppId()` 提供，IM SDK 不负责提供或兜底。请检查 `getAppId()` 是否返回非空、有效的声网 RTC App ID（不是环信 AppKey）。已有声网 RTC 项目的用户应填写原项目的 App ID；如果使用环信提供的 RTC 服务，请先在环信控制台为当前应用开通音视频服务。RTC App ID 只在 RTC 引擎创建时读取一次，之后不能改变。 |
+| 收到 `App ID is not set` 或 `RTC App ID from CallTokenProvider is empty` 错误 | 使用自定义 `CallTokenProvider` 时，RTC App ID 由应用通过 `getAppId()` 提供，IM SDK 不负责提供或兜底。请检查 `getAppId()` 是否返回非空、有效的声网 RTC App ID（不是环信 App ID）。已有声网 RTC 项目的用户应填写原项目的 App ID；如果使用 RTC 服务，请先在声网控制台为当前应用开通 RTC 服务。RTC App ID 只在 RTC 引擎创建时读取一次，之后不能改变。 |
 | 收到 `RTC credential source returned an invalid credential` 或其他 Token 相关错误 | 该错误表示 CallKit 未取得有效的 `CallRTCTokenInfo`。使用自定义 `CallTokenProvider` 时，RTC Token 由应用通过 `getRTCToken(withChannel:)` 提供，IM SDK 不负责获取 Token。请确认返回结果满足以下条件：`uid > 0`、`token` 为非空字符串（除非启用了 `disableRTCTokenValidation`）、`expiration >= 0` 且大于当前时间戳。当前 `channelName` 参数固定为 `nil`，请签发**应用级 Token**（对所有频道有效），不要按单个频道签发。如果 Provider 方法抛出异常或返回无效数据，CallKit 会报凭证错误。 |
 | 能发送通话邀请，但无法进入 RTC 频道 | 确认以下条件一致：(1) 生成 Token 时使用的 RTC App ID 与初始化时的一致；(2) **生成 Token 时必须按应用级签发**（`channelName` 为 `nil`，有效对所有频道）；(3) 加入频道时使用的 UID 与生成 Token 时的 UID 一致；(4) Token 未过期（`expiration` 大于当前时间戳）。若混用不同 Agora 项目、不同频道的 Token，或使用已过期的 Token，会导致加入频道失败。 |
 | 已有声网 RTC 项目的用户如何接入 CallKit | `CallTokenProvider` 用于让已有声网 RTC 项目的用户直接使用 CallKit。配置 Provider 后，通过 `getAppId()` 提供原声网项目的 RTC App ID，通过 `getRTCToken(withChannel:)` 提供由业务服务端签发的 RTC Token，并通过 `getRelations(rtc:)` 提供 RTC UID 与 IM 用户 ID 的映射。RTC App ID 和 Token 均由应用提供，IM SDK 不负责获取；IM SDK 仍用于 IM 登录和通话信令。 |

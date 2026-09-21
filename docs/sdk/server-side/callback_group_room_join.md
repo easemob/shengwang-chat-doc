@@ -31,7 +31,6 @@
 		],
 		"type": "DIRECT"
 	},
-	"appkey": "XXXX#XXXX",
 	"id": "262246968131585",
 	"type": "GROUP",
 	"event": "group_op_event",
@@ -81,7 +80,6 @@
 		],
 		"type": "INVITE"
 	},
-	"appkey": "XXXX#XXXX",
 	"id": "262424566497281",
 	"type": "GROUP",
 	"event": "group_op_event",
@@ -127,7 +125,6 @@
 		],
 		"type": "APPLY"
 	},
-	"appkey": "XXXX#XXXX",
 	"id": "261958837272578",
 	"type": "GROUP",
 	"event": "group_op_event",

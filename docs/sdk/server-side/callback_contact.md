@@ -38,7 +38,6 @@ payload 示例：
         "operation":"add"
         },
     "host":"XXXX",
-    "appkey":"XXXX#XXXX",
     "from":"XXXX#XXXX",
     "to":"tst01",
     "eventType":"chat",
@@ -75,7 +74,6 @@ payload 示例：
         "operation":"remove"
         },
     "host":"XXXX",
-    "appkey":"XXXX#XXXX",
     "from":"XXXX#XXXX",
     "to":"tst01",
     "eventType":"chat",
@@ -114,7 +112,6 @@ payload 之外的字段如下表所示：
         "operation":"accept"
         },
     "host":"XXXX",
-    "appkey":"XXXX#XXXX",
     "from":"XXXX#XXXX",
     "to":"tst01",
     "eventType":"chat",
@@ -153,7 +150,6 @@ payload 之外的字段如下表所示：
         "operation":"remote_decline"
         },
     "host":"XXXX",
-    "appkey":"XXXX#XXXX",
     "from":"XXXX#XXXX",
     "to":"tst",
     "eventType":"chat",
@@ -193,7 +189,6 @@ payload 示例：
             }
         },
     "host":"XXXX",
-    "appkey":"XXXX#XXXX",
     "from":"XXXX#XXXX",
     "to":"tst",
     "eventType":"chat",
@@ -234,7 +229,6 @@ payload 之外的字段如下表所示：
             }
         },
     "host":"XXXX",
-    "appkey":"XXXX#XXXX",
     "from":"XXXX#XXXX",
     "to":"tst",
     "eventType":"chat",

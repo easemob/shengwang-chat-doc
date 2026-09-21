@@ -86,7 +86,6 @@ Reaction 回调请求中的字段含义如下表所示：
         "type": "reaction"
     },
     "host": "XXXX",
-    "appkey": "XXXX#XXXX",
     "from": "user1",
     "to": "user2",
     "eventType": "chat",

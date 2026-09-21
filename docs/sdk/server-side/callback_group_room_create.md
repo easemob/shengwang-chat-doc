@@ -44,7 +44,6 @@
 			"last_modified": "1729496598199"
 		}
 	},
-	"appkey": "XXXX#XXXX",
 	"id": "262246968131585",
 	"type": "GROUP",
 	"event": "group_op_event",

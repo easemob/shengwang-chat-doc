@@ -331,7 +331,7 @@
 | `payload.status`    | object   | 包含 `error_code`。  |
 | `payload.status.error_code`    | String   | 操作失败对应的错误码。 |
 | `host`            | String   | 服务器名称。          |
-| `from`       | String | 发起方，格式为 `App Key_发起方用户 ID@easemob.com`。                                |
+| `from`       | String | 发起方，格式为 `xxxx#xxxx_发起方用户 ID@easemob.com`。                                |
 | `to`       | String | 接收方用户 ID。                                |
 | `eventType`       | String   | <br/> - `chat`：上行消息<br/> - `chat_offline`：离线消息。       |
 | `msg_id`    | String   | 拉黑用户事件的消息 ID。 | 
@@ -380,7 +380,7 @@
 | `payload.status`    | object   | 包含 `error_code`。  |
 | `payload.status.error_code`    | String   | 操作失败对应的错误码。 |
 | `host`            | String   | 服务器名称。          |
-| `from`       | String | 发起方，格式为 `App Key_发起方用户 ID@easemob.com`。                                |
+| `from`       | String | 发起方，格式为 `xxxx#xxxx_发起方用户 ID@easemob.com`。                                |
 | `to`       | String | 接收方用户 ID。                                |
 | `eventType`       | String   | <br/> - `chat`：上行消息<br/> - `chat_offline`：离线消息。       |
 | `msg_id`    | String   | 解除拉黑用户事件的消息 ID。 | 

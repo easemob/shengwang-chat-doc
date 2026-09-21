@@ -32,7 +32,6 @@
 "type": "channel_ack" 
 },
 "host": "XXXX@hsb-XXXX-msync0",
-"appkey": "XXXX-XXXX#testy",
 "from": "wzy",   
 "to": "wzy1",   
 "msg_id": "1252106597610555348",  

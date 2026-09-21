@@ -31,7 +31,6 @@
 		],
 		"type": "QUIT"
 	},
-	"appkey": "XXXX#XXXX",
 	"id": "261958837272578",
 	"type": "GROUP",
 	"event": "group_op_event",
@@ -79,7 +78,6 @@
 		],
 		"type": "KICK"
 	},
-	"appkey": "XXXX#XXXX",
 	"id": "254636824002561",
 	"type": "GROUP",
 	"event": "group_op_event",
@@ -128,7 +126,6 @@
 		],
 		"type": "BLOCK"
 	},
-	"appkey": "XXXX#XXX",
 	"id": "255445981790209",
 	"type": "GROUP",
 	"event": "group_op_event",
@@ -181,7 +178,6 @@
         ],
         "type": "DELETE"
     },
-    "appkey": "XXXX#XXX_7dc24fac-3451-421e-a8aa-70ba0587e69d",
 	"event": "group_op_event",
     "timestamp": 1734597600148,
     "type": "GROUP"

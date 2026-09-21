@@ -21,7 +21,6 @@
 {
     "callId":"XXXX#XXXX_8924312242322", 
     "timestamp": 1737454241444,
-    "appkey": "XXXX#XXXX",
     "from": "user1",
     "to": "user2",
     "msg_id": "1373914689292994516",
