@@ -18,7 +18,7 @@
 
 ### 第一步 创建项目
 
-[在 Xcode 中创建一个 iOS 平台下的 App](https://developer.apple.com/cn/documentation/xcode/creating_an_xcode_project_for_an_app/)。在 **Choose options for your new project** 对话框中进行以下设置：
+[在 Xcode 中创建一个 iOS 平台下的 App](https://developer.apple.com/documentation/xcode/creating-an-xcode-project-for-an-app)。在 **Choose options for your new project** 对话框中进行以下设置：
 
 - **Product Name**：填入 **EaseChatUIKitQuickStart**。
 - **Organization Identifier**：设置为你的标识符。
@@ -56,7 +56,7 @@ let error = EaseChatUIKitClient.shared.setup(appId: "Appid")
 若你已集成了 IM SDK，SDK 的所有用户 ID 均可用于登录 EaseChatUIKit。
 :::
 
-在 [声网控制台](https://console.shengwang.cn/overview) [创建用户](/document/ios/login.html#注册用户)，获取用户 ID 和用户 token。
+在 [声网控制台](https://console.shengwang.cn/overview) [创建用户](/document/ios/login.html#用户注册)，获取用户 ID 和用户 token。
 
 在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [Token 鉴权](/document/server-side/token_authentication.html) 实现获取 Token 的业务逻辑，你的应用可以调用自身服务端，从IM 服务器获取 Token。
 

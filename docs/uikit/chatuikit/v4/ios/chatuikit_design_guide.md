@@ -1,6 +1,6 @@
 ---
 {
-    pageUri: "/uikit/chatuikit/android/chatuikit_design_guide.html",
+    pageUri: "/uikit/chatuikit/v4/android/chatuikit_design_guide.html",
     title: "设计指南"
 }
 ---

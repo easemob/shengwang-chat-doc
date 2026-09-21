@@ -45,7 +45,7 @@ pod install --repo-update
 
 在键盘上按 `cmd+B` 重新编译程序即可跑通项目。
 
-4. [创建有效的 IM 用户](/document/android/login.html#注册用户)，将用户的 ID 和 token 分别填入下图的两个输入框，点击 **Login**。
+4. [创建有效的 IM 用户](/document/ios/login.html#用户注册)，将用户的 ID 和 token 分别填入下图的两个输入框，点击 **Login**。
 
 <img src="/images/uikit/chatuikit/ios/login.png" width="600" >
 

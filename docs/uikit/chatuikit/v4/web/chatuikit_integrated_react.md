@@ -106,4 +106,4 @@ const App = () => {
 ## 相关参考
 
 - 组件库源码：可访问 [GitHub](https://github.com/easemob/easemob-uikit-react) 或 [Gitee 地址](https://gitee.com/easemob-code/easemob-uikit-react)
-- 其他示例 demo：可访问 [GitHub](https://github.com/easemob-uikit-react/tree/main/demo) 或 [Gitee 地址](https://gitee.com/easemob-code/easemob-uikit-react/tree/main/demo)
+- 其他示例 demo：可访问 [GitHub](https://github.com/easemob/easemob-uikit-react/tree/main/demo) 或 [Gitee 地址](https://gitee.com/easemob-code/easemob-uikit-react/tree/main/demo)

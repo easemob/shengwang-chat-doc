@@ -54,7 +54,7 @@
 
 - 修复微信风格样式的发送附件消息菜单与表情键盘点击互相影响的问题。
 - 修复了微信风格长按菜单多个扩展显示的问题。
-- 修复了完全自定义消息文档缺失的问题，以及原来只能自定义一种自定义消息样式的问题。详见[实现新类型的自定义消息 Cell](chatuikit_custom_cell.html)。
+- 修复了完全自定义消息文档缺失的问题，以及原来只能自定义一种自定义消息样式的问题。详见[实现新类型的自定义消息 Cell](chatuikit_custom_chat_advanced.html#完全自定义消息条目)。
 
 ## 版本 4.10.1
 
@@ -107,7 +107,7 @@
 ## 版本 4.6.0
 
 从 V4.6.0 版本开始会启用 Swift 语言编写的新的 `EaseChatUIKit` 与 `EaseChatDemo`，老版本 Demo 和 UIKit 逐渐不再维护，请参考：
-- [UIKit 文档](https://doc.easemob.com/uikit/chatuikit/ios/chatuikit_overview.html)
+- [UIKit 文档](/uikit/chatuikit/v4/ios/chatuikit_overview.html)
 - Demo 源码：你可以访问 [GitHub](https://github.com/easemob/easemob-demo-ios/tree/SwiftDemo) 或 [Gitee 地址](https://gitee.com/easemob-code/easemob-demo-ios/tree/SwiftDemo)。
 
 本版本新增了如下功能、组件和工具类：

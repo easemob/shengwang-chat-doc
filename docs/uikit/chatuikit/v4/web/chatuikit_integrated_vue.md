@@ -288,4 +288,4 @@ const switchTheme = () => {
 - 示例项目源码：可访问 [GitHub](https://github.com/easemob/webim-vue-demo/tree/chat-uikit-vue-demo) 或 [Gitee](https://gitee.com/easemob-code/webim-vue-demo/tree/chat-uikit-vue-demo) 地址。
 - 组件库源码：可访问 [GitHub](https://github.com/easemob/easemob-uikit-react) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-react) 地址。
 - 其他示例 demo：可访问 [GitHub](https://github.com/easemob/easemob-uikit-react/tree/main/demo) 或 [Gitee](https://gitee.com/easemob-code/easemob-uikit-react/tree/main/demo) 地址。
-- [`UIKitProvider` 文档](https://doc.easemob.com/uikit/chatuikit/web/chatuikit_provider.html)
+- [`UIKitProvider` 文档](/uikit/chatuikit/v4/web/chatuikit_provider.html)
