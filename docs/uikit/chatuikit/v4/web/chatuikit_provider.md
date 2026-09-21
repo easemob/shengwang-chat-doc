@@ -12,7 +12,7 @@
 
 ### 基础使用
 
-通过 `Provider` 设置 App Key、用户 ID 和用户 Token（或用户密码）：
+通过 `Provider` 设置 App ID、用户 ID 和用户 Token（或用户密码）：
 
 ```jsx
 import React from 'react';
@@ -23,7 +23,7 @@ import ChatApp from './ChatApp';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider
     initConfig={{
-      appKey: 'your app key',
+      appId: 'your app ID',
       userId: 'user123',
       token: 'user_token', // 或使用 password: 'password'
     }}
@@ -45,7 +45,7 @@ import 'easemob-chat-uikit/style.css';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider
     initConfig={{
-      appKey: 'your app key',
+      appId: 'your app ID',
       userId: 'user123',
       token: 'user_token',
       translationTargetLanguage: 'zh', // 翻译目标语言
@@ -156,7 +156,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 ```jsx
 <Provider
   initConfig={{
-    appKey: 'your app key',
+    appId: 'your app ID',
     userId: 'user123',
     token: 'user_token', // 使用 token 登录（推荐）
     // 或使用 password: 'password' // 使用密码登录
@@ -166,7 +166,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 </Provider>
 ```
 
-若希望自行控制登录与登出的时机，可以仅传入 `appKey`，然后通过 `useClient` hook 获取客户端实例，进行登录。
+若希望自行控制登录与登出的时机，可以仅传入 `appId`，然后通过 `useClient` hook 获取客户端实例，进行登录。
 
 ```jsx
 import { Provider, useClient } from 'easemob-chat-uikit';
@@ -184,7 +184,7 @@ const ChatApp = () => {
   return <button onClick={login}>登录</button>;
 };
 
-<Provider initConfig={{ appKey: 'your app key' }}>
+<Provider initConfig={{ appId: 'your app ID' }}>
   <ChatApp />
 </Provider>;
 ```
@@ -197,7 +197,7 @@ const ChatApp = () => {
 
 | 参数 | 类型 | 默认值 | 描述 |
 | :-- | :-- | :-- | :-- |
-| `appKey` | String | - | **必需**，应用的 App Key |
+| `Id` | String | - | **必需**，项目的 App ID |
 | `userId` | String | - | 用户 ID，若提供则自动登录 |
 | `token` | String | - | 用户 Token，与 `userId` 配合进行自动登录（推荐） |
 | `password` | String | - | 用户密码，与 `userId` 配合进行自动登录 |

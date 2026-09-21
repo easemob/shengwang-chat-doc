@@ -22,7 +22,6 @@
 {
 	"callId": "XXXX#XXXX_2e962475-XXXX-XXXX-a90c-d7e2949440f2",
 	"security": "4e5d778c77dXXXXab41ed2528594e449",
-	"appkey": "XXXX#XXXX",
 	"id": "255445981790209",
 	"type": "GROUP",
 	"event": "group_op_event",

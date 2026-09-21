@@ -94,7 +94,6 @@ Thread 回调请求中的字段含义如下表所示：
         "type": "thread"
     },
     "host": "XXXX",
-    "appkey": "XXXX#XXXX",
     "from": "admin",
     "to": "user2",
     "eventType": "chat",

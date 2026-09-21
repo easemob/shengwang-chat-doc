@@ -27,7 +27,7 @@ app 用户状态分为在线和离线两种，即用户已连接到即时通讯 
 
 | 字段        | 数据类型 | 含义                                                         |
 | :---------- | :------- | :----------------------------------------------------------- |
-| `callId`    | String   | `callId` 为每个回调请求的唯一标识，格式为 `App Key_UUID`。 |
+| `callId`    | String   | 回调请求的唯一标识。 |
 | `reason`    | object   | `login`，用户登录。                                          |
 | `security`  | String   | 签名，格式如下: MD5（callId+secret+timestamp）。Secret 见 [声网控制台回调规则](callback_postsending.html#发送后回调规则)。 |
 | `os`        | String   | 设备类型。                                                   |
@@ -48,7 +48,6 @@ app 用户状态分为在线和离线两种，即用户已连接到即时通讯 
     "os":"ios",
     "ip":"XXXX",
     "host":"XXXX",
-    "appkey":"XXXX#XXXX",
     "user":"XXXX#XXXX_XXXX@easemob.com/ios_6d580737-db3a-d2b5-da18-b6045ffd195b",
     "version":"3.8.9.1",
     "timestamp":1642585154644,
@@ -62,13 +61,13 @@ app 用户状态分为在线和离线两种，即用户已连接到即时通讯 
 
 | 字段        | 数据类型 | 含义                                                         |
 | :---------- | :------- | :----------------------------------------------------------- |
-| `callId`    | String   | `callId` 为每个回调请求的唯一标识。 | 
+| `callId`    | String   | 回调请求的唯一标识。 | 
 | `reason`    | object   | 值为 `logout`，表示用户登出。                                    |
 | `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。Secret 见[声网控制台回调规则](callback_postsending.html#发送后回调规则)。 |
 | `os`        | String   | 设备类型。                                                   |
 | `ip`        | String   | 用户登录 IP。                                                |
 | `host`      | String   | 服务器名称。                                                 |
-| `user`      | String   | 登录用户识别号，格式为 `{app key_username@easemob.com/device operating system_device ID}`，其中 `@easemob.com` 为固定字符串，`device ID` 由 SDK 随机生成。             |
+| `user`      | String   | 登录用户识别号，格式为 `{ xxxx#xxxx_username@easemob.com/device operating system_device ID}`，其中 `@easemob.com` 为固定字符串，`device ID` 由 SDK 随机生成。             |
 | `version`   | String   | SDK 版本号。                                                 |
 | `timestamp` | long     | 请求到即时通讯 IM 服务器的 Unix 时间戳，单位为 ms。              |
 | `status`    | String   | `offline`，离线。                                            |
@@ -83,7 +82,6 @@ app 用户状态分为在线和离线两种，即用户已连接到即时通讯 
     "os":"ios",
     "ip":"XXXX",
     "host":"XXXX",
-    "appkey":"XXXX#XXXX",
     "user":"XXXX#XXXX_XXXX@easemob.com/ios_6d580737-db3a-d2b5-da18-b6045ffd195b",
     "version":"3.8.9.1",
     "timestamp":1642648914742,
@@ -118,7 +116,6 @@ app 用户状态分为在线和离线两种，即用户已连接到即时通讯 
     "os":"ios",
     "ip":"223.71.97.198:52709",
     "host":"msync@ebs-ali-beijing-msync40",
-    "appkey":"XXXX#XXXX",
     "user":"XXXX#XXXX_XXXX@easemob.com/ios_a5fa01fd-b5a4-84d5-ebeb-bf10e8950442",
     "version":"3.8.9.1",
     "timestamp":1642648955563,

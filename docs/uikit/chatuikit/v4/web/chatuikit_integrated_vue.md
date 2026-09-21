@@ -6,7 +6,7 @@
 
 开始前，确保你的开发环境满足如下条件：
 - 已安装 [Node.js](https://nodejs.org/)。
-- [即时通讯 IM 应用和 App Key](/product/console/app_create.html)。
+- [即时通讯 IM 应用和 App ID](/product/enable_im.html#_3-获取-app-id)。
 
 ## 操作步骤
 
@@ -150,7 +150,7 @@ import { UIKitProvider, Chat, ConversationList } from "easemob-chat-uikit";
 // 引入 UIKit 样式
 import 'easemob-chat-uikit/style.css'
 
-const appKey = "your appkey";
+const appId = "your appid";
 const userId = "userId";
 const password = "password";
 // 若通过 token 登录，使用下面的代码：
@@ -162,7 +162,7 @@ const EaseChat = (props) => {
   return (
     <UIKitProvider
       initConfig={{
-        appKey,
+        appId,
         userId,
         password
       }}

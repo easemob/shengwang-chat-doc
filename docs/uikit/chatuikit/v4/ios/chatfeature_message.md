@@ -100,7 +100,7 @@ Appearance.chat.contentStyle: [MessageContentDisplayStyle] = [.withReply,.withAv
 
 #### 如何使用
 
-使用该特性前，请确保在 [声网控制台](https://console.shengwang.cn/overview) 上已申请试用该功能。
+使用该特性前，请确保在 [声网控制台](https://console.shengwang.cn/overview) 上已开通该功能。
 
 1. 开启消息翻译特性。
 

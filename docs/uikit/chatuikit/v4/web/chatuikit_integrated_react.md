@@ -10,7 +10,7 @@
 
 - React 16.8.0 或以上版本；
 - React DOM 16.8.0 或以上版本；
-- [即时通讯 IM 应用和 App Key](/product/console/app_create.html)。
+- [即时通讯 IM 应用和 App ID](/product/enable_im.html#_3-获取-app-id)。
 
 ## 操作步骤
 
@@ -57,7 +57,7 @@ ReactDOM.createRoot(document.getElementById('root') as Element).render(
   <div>
     <UIKitProvider
       initConfig={{
-        appKey: 'your app key', // 你的 app key
+        appId: 'your app ID', // 你的 app ID
         userId: 'user ID', // 用户 ID
         password: 'password', // 如果使用密码登录，传入密码。
         // 若通过 token 登录，使用下面的代码：

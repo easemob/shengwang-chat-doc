@@ -28,7 +28,6 @@
 		"new_owner": "tst01",
 		"type": "OWNER"
 	},
-	"appkey": "XXXX#XXXX",
 	"id": "262246968131585",
 	"type": "GROUP",
 	"event": "group_op_event",

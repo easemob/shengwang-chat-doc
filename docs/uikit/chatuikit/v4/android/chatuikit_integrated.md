@@ -59,7 +59,7 @@ class DemoApplication: Application() {
     
     override fun onCreate() {
         val options = ChatOptions()
-        options.appKey = "你的appkey"
+        options.appId = "你的appid"
         ChatUIKitClient.init(this, options)
     }
 }

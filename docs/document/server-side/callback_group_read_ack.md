@@ -49,7 +49,7 @@
 | 字段        | 数据类型 | 含义                                                         |
 | :---------- | :------- | :----------------------------------------------------------- |
 | `callId`    | String   | 回调请求的唯一标识。 |
-| `channel_channel` | String   | 群聊消息的已读回执，格式为 `App Key_群组 ID@conference.easemob.com`，例如，示例中的 `easemob-demo#wang_277721224642561@conference.easemob.com`。|
+| `channel_channel` | String   | 群聊消息的已读回执，格式为 `xxxx#xxxx_群组 ID@conference.easemob.com`，例如，示例中的 `easemob-demo#wang_277721224642561@conference.easemob.com`。|
 | `eventType`       | String | `chat`：表示上行消息。                      |
 | `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。[配置回调规则](callback_postsending.html#回调规则) 后，IM 服务器会自动为该规则生成 secret，向你的 App Server 发送数据时会基于该 secret 生成该签名，作为你的服务器识别 IM 服务器的依据。若要使用自定义密钥，可联系声网商务。 |  
 | `payload`   | object   | 包括：<br/> - `ext`：消息扩展字段<br/> - `ack_message_id`：消息 ID<br/> - `msg_config.allow_group_ack`：是否需要群消息已读回执 <br/> - `type`：`read_ack` 表示消息已读回执。|

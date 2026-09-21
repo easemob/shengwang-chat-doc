@@ -28,7 +28,6 @@
         "bodies": []
     },
     "host": "msync@ebs-ali-beijing-msync45",
-    "appkey": "XXXX#XXXX",
     "from": "1111",
     "to": "2222",
     "eventType": "chat",

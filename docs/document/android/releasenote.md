@@ -155,7 +155,7 @@ SDK 补充会话展示信息、批量删除会话和群成员读取等能力：
   - `352`：`EMError#CONNECTION_IO_ERROR`：连接服务器时发生 IO 错误。
   - `353`：`EMError#CONNECTION_STREAM_CLOSED`：连接服务器时流被关闭。
   - `354`：`EMError#CONNECTION_PROVISION_TIMEOUT`：连接服务器时认证超时。
-- 优化 `EMClient#changeAppkey` 和 `EMClient#changeAppId` 的参数校验逻辑，新增空值校验。
+- 优化 `EMClient#changeAppId` 的参数校验逻辑，新增空值校验。
 
 #### 修复
 

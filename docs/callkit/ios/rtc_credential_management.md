@@ -152,7 +152,6 @@ import EaseCallUIKit
 import AgoraRtcKit
 
 // MARK: - 配置常量
-let AppKey = "YOUR_IM_APP_KEY"
 let userId = "YOUR_USER_ID"
 let token = "YOUR_IM_TOKEN"
 let agoraAppId = "YOUR_AGORA_APP_ID"
@@ -172,7 +171,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         // 1. 初始化 IM SDK
-        let option = ChatSDKOptions(appkey: AppKey)
+        let option = ChatSDKOptions(appId: app id)
         option.enableConsoleLog = true
         option.isAutoLogin = false
         ChatClient.shared().initializeSDK(with: option)

@@ -226,5 +226,5 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 
 | RESTful API 接口 |方法  | 接口 URL| 接口最高调用频率（默认值） | 是否可调 | API 类型 | 超额费用  |
 | :-------- | :----- | :---------------- | :--------------------- | :--------------------- | :--------------------- | :--------------------- |
-|  查询回调储存详情   | GET   | /app-id/callbacks/storage/info   | 100 次/秒/App Key   | 是  |  API 类型 2    | 50 QPS，200 元/月    |
-|  补发回调存储信息 | POST   | /app-id/callbacks/storage/retry  | 100 次/秒/App Key   | 是  |  API 类型 2    | 50 QPS，200 元/月    |
+|  查询回调储存详情   | GET   | /app-id/callbacks/storage/info   | 100 次/秒/App ID   | 是  |  API 类型 2    | 50 QPS，200 元/月    |
+|  补发回调存储信息 | POST   | /app-id/callbacks/storage/retry  | 100 次/秒/App ID | 是  |  API 类型 2    | 50 QPS，200 元/月    |

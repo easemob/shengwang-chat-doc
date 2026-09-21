@@ -88,10 +88,10 @@ import {
 } from "easemob-chat-uikit";
 import "easemob-chat-uikit/style.css";
 
-// 注意：在使用 UIKit 前，请先设置好userId， accessToken 和 appKey。
+// 注意：在使用 UIKit 前，请先设置好userId， accessToken 和 appId。
 const userId = "userId";
 const accessToken = "accessToken";
-const appKey = "your app key";
+const appId = "your app ID";
 
 const ChatApp = () => {
   const client = useClient();
@@ -132,7 +132,7 @@ class App extends Component {
     return (
       <UIKitProvider
         initConfig={{
-          appKey: appKey,
+          appId: appId,
         }}
       >
         <ChatApp />
@@ -157,7 +157,7 @@ npm run start
 2. 输入你的第一条消息并发送。
 
 :::tip
-使用自定义 App Key 时，由于没有好友，需先添加好友。
+使用自定义 App ID 时，由于没有好友，需先添加好友。
 :::
 
 <ImageGallery>

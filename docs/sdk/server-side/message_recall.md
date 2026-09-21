@@ -51,7 +51,7 @@
 
 发送方可以撤回一条发送成功的消息。
 
-调用频率上限：100 次/秒/App Key
+调用频率上限：100 次/秒/App ID
 
 #### HTTP 请求
 
@@ -173,7 +173,7 @@ curl -i -X POST -H 'Content-Type: application/json' -H 'Accept: application/json
 
 你一次可撤回多条消息，每次可同时撤回单聊、聊天室或群组聊天的多条消息。
 
-**调用频率上限**：100 次/秒/App Key
+**调用频率上限**：100 次/秒/App ID
 
 #### HTTP 请求
 

@@ -11,7 +11,7 @@ const App = () => {
   return (
     <UIKitProvider
       initConfig={{
-        appKey: "",
+        appId: "",
         userId: "",
         token: "",
       }}

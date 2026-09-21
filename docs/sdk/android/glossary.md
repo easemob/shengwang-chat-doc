@@ -94,11 +94,11 @@
 
 ### 用户 ID
 
-用户 ID 即用户名，是 App Key 内用户的唯一标识，代码中出现的“username”、“userId”、“user”参数指定了用户 ID。用户 ID 不同于即时通讯系统服务器为用户创建的 UUID。
+用户 ID 即用户名，是 App 内用户的唯一标识，代码中出现的“username”、“userId”、“user”参数指定了用户 ID。用户 ID 不同于即时通讯系统服务器为用户创建的 UUID。
 
 ### UUID
 
-即时通讯服务器为 App Key 内用户创建的唯一 ID，不同于用户 ID。
+即时通讯服务器为 App 内用户创建的唯一 ID，不同于用户 ID。
 
 ### 用户属性
 

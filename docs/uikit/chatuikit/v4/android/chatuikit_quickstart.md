@@ -127,12 +127,12 @@ android.enableJetifier=true
 <resources>
     <string name="app_name">Quickstart</string>
 
-    <string name="app_key">[您申请的 app key]</string>
+    <string name="app_id">[您的 app id]</string>
 </resources>
 
 ```
 :::tip
-你需要将 **app_key** 替换为你申请的 App Key。
+你需要将 **app_id** 替换为声网控制台为你的项目生成的 App ID。
 :::
 
 2. 打开 `app/src/main/res/layout/activity_main.xml` 文件，并替换为如下内容：
@@ -256,15 +256,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initSDK() {
-        val appkey = getString(R.string.app_key)
-        if (appkey.isEmpty()) {
-            applicationContext.showToast("You should set your AppKey first!")
-            ChatLog.e(TAG, "You should set your AppKey first!")
+        val appid = getString(R.string.app_id)
+        if (appid.isEmpty()) {
+            applicationContext.showToast("You should set your AppId first!")
+            ChatLog.e(TAG, "You should set your AppId first!")
             return
         }
         ChatOptions().apply {
-            // 设置你自己的 app key
-            this.appKey = appkey
+            // 设置你自己的 app ID
+            this.appId = appid
             // 设置为手动登录
             this.autoLogin = false
             // 设置是否需要接收方发送已达回执。默认为 `false`，即不需要。

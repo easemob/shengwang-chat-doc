@@ -198,7 +198,7 @@ export default function App() {
   return (
     <Provider
       initConfig={{
-        appKey: 'your-org#your-app',
+        appId: 'yourAppId',
         userId: currentUserId,
         token: 'your-im-token',
       }}
@@ -227,7 +227,7 @@ await callKitRef.current?.startSingleCall({
 
 ## 完整示例代码
 
-下面的 `App.tsx` 将服务端 RTC 接口、`CallKitRTCProvider`、UIKit `Provider` 和一对一通话按钮组合在一起。将接口地址、App Key、IM Token 和用户 ID 替换为实际值即可使用；IM Token 与 RTC Token 仍由各自的服务端流程签发。
+下面的 `App.tsx` 将服务端 RTC 接口、`CallKitRTCProvider`、UIKit `Provider` 和一对一通话按钮组合在一起。将接口地址、App ID、IM Token 和用户 ID 替换为实际值即可使用；IM Token 与 RTC Token 仍由各自的服务端流程签发。
 
 ```tsx
 import React from 'react';
@@ -244,7 +244,7 @@ import type {
 } from 'easemob-chat-uikit';
 import 'easemob-chat-uikit/style.css';
 
-const appKey = 'your-org#your-app';
+const appId = 'your-app-id';
 const currentUserId = 'alice';
 const imToken = 'your-im-token';
 
@@ -387,7 +387,7 @@ export default function App() {
   return (
     <Provider
       initConfig={{
-        appKey,
+        appId,
         userId: currentUserId,
         token: imToken,
       }}
@@ -412,7 +412,7 @@ POST /api/rtc/user-ids
 
 如果只需要自定义 Token 获取而继续使用 IM SDK 的 UID 映射，可以从 provider 中删除 `getUserIdsWithRTCUids`；如果声网项目允许不校验 Token，请将示例中的 `useRTCToken` 常量改为 `false`（该常量同时传给 `useCallKitRTCProvider` 和 `CallKit`），此时仍需返回正确的 `appId` 和 `rtcUid`，`rtcToken` 可以为空。
 
-运行页面后，请先等待 `Provider` 使用 `initConfig` 完成 IM 登录，再点击通话按钮。示例中的 App Key、IM Token 和服务端接口地址均为占位值，生产环境不要将真实凭证硬编码在前端代码中。
+运行页面后，请先等待 `Provider` 使用 `initConfig` 完成 IM 登录，再点击通话按钮。示例中的 App ID、IM Token 和服务端接口地址均为占位值，生产环境不要将真实凭证硬编码在前端代码中。
 
 ## 常见问题
 
