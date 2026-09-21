@@ -3,7 +3,7 @@
 HarmonyOS IM SDK 提供用户关系管理功能，包括好友管理和黑名单管理。
 
 - 好友管理：添加好友、处理好友申请、删除好友、设置好友备注、获取好友列表，以及在登录成功后自动同步好友列表和好友信息。
-- 黑名单管理：获取黑名单列表，以及添加和移除黑名单用户。使用该功能前，需要在 [环信控制台](https://console.easemob.com/user/login) 开通该服务，详见 [环信控制台文档](/product/console/basic_user.html#用户黑名单)。
+- 黑名单管理：获取黑名单列表，以及添加和移除黑名单用户。
 
 ## 前提条件
 
@@ -11,7 +11,7 @@ HarmonyOS IM SDK 提供用户关系管理功能，包括好友管理和黑名单
 
 - 已完成 SDK 初始化、登录 IM 并连接到服务器，详见 [初始化](initialization.html) 和 [登录](login.html)。
 - 了解即时通讯 IM 的使用限制，详见 [使用限制](/product/limitation.html)。
-- 使用黑名单功能前，已在 [环信控制台](https://console.easemob.com/user/login) 开通该功能，详见 [环信控制台文档](/product/console/basic_user.html#用户黑名单)。
+
 
 ## 好友管理
 

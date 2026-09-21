@@ -10,13 +10,13 @@ show_server_callback_route: false
 
 ## 2026-08
 
-#### IM Android/iOS SDK v5.0.0 发版
+#### Android/iOS SDK v5.0.0 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
 | Android/iOS SDK 5.0.0 开发版发布   | - 提供统一的数据同步配置和状态回调。应用可 [配置登录后自动同步会话](/document/android/initialization.html#设置登录后自动同步数据)、[好友](/document/android/user_relationship.html#登录后自动同步好友列表)和 [已加入群组](/document/android/group_manage.html#获取当前用户加入的群组列表) 数据，并在本地数据库打开后提前读取本地数据。<br/> - [群组配置](/document/android/group_manage.html#创建群组) 拆分为多个独立属性，并支持创建群组后按需更新指定配置。<br/> - 原有的单条消息回执、会话回执和全局回执开关已调整为批量消息回执和未读数清理接口，覆盖单聊和群聊场景。 <br/> - 支持 [批量删除会话](/document/android/conversation_delete.html#批量删除本地会话) 和 [会话展示信息](/document/android/conversation_list.html#获取会话名称和头像) 等常用管理能力。<br/> - 移除密码登录，不再支持自动登录。 <br/> - 移除客户端注册、公开群列表、聊天室创建和销毁、消息统计等低频 API。 <br/> - | 2026-8-15     | - [Android SDK 5.0.0 更新日志](/document/android/releasenote.html#v5-0-0-dev-2026-8-12) <br/> - [iOS SDK 5.0.0 更新日志](/document/ios/releasenote.html#v5-0-0-dev-2026-8-12)  |
 
-#### IM Web SDK v5.1.1 发版
+#### Web SDK v5.1.1 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
@@ -24,7 +24,7 @@ show_server_callback_route: false
 
 <HideSection :show="$frontmatter.show_server_search">
 
-#### 环信 HarmonyOS v1.14.0/Flutter v4.22.0/React Native v1.18.0 SDK 发版
+#### HarmonyOS v1.14.0/Flutter v4.22.0/React Native v1.18.0 SDK 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
@@ -43,7 +43,7 @@ show_server_callback_route: false
 | Android/iOS SDK 4.24.0 开发版发布   | - Android 和 iOS SDK [支持服务端消息搜索](/value-added/search/message_search_android.html)。<br/> - Android 可通过异步方法 [更新群扩展字段](/docs/v4/android/group_attributes.html#更新群扩展字段)。<br/> - Android 可通过异步方法 [获取服务器端推送配置](/docs/v4/android/push/push_display_attribute.html#获取推送通知的显示属性)。   | 2026-7-10     | - [Android SDK 4.24.0 更新日志](/docs/v4/android/releasenote.html#v4-24-0-dev-2026-7-10-开发版) <br/> - [iOS SDK 4.24.0 更新日志](/docs/v4/ios/releasenote.html#v4-24-0-dev-2026-7-10-开发版)  |
 
 
-#### IM Web/小程序 SDK v4.24.1 发版
+#### Web/小程序 SDK v4.24.1 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
@@ -69,13 +69,13 @@ show_server_callback_route: false
 目前，[发消息时设置回调路由功能](/document/android/message_send.html#发消息时设置回调路由) 仅面向中国区开放。
 :::
 
-#### IM HarmonyOS SDK v1.13.0 发版
+#### HarmonyOS SDK v1.13.0 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
 | HarmonyOS SDK 1.13.0 开发版发布   | - [支持用户信息自动管理](/document/harmonyos/userinfo_provider.html)。<br/> - [群成员名片](/document/harmonyos/group_namecard.html)。<br/> - [支持语言转文字](/value-added/stt/voice_to_text_harmonyos.html)。   | 2026-6-24     | [HarmonyOS SDK 1.13.0 更新日志](/document/harmonyos/releasenote.html#v1-13-0-dev-2026-6-24-开发版)   |
 
-#### IM Android/iOS/Web/小程序 SDK v4.23.0 发版
+#### Android/iOS/Web/小程序 SDK v4.23.0 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
@@ -84,7 +84,7 @@ show_server_callback_route: false
 
 </HideSection>
 
-#### IM 客户端 SDK v4.22.0 发版
+#### 客户端 SDK v4.22.0 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
@@ -103,7 +103,7 @@ show_server_callback_route: false
 
 ## 2026-04
 
-#### IM 客户端 SDK v4.21.0 发版
+#### 客户端 SDK v4.21.0 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |

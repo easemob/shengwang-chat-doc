@@ -134,15 +134,15 @@ app.mount("#app");
    npm i easemob-chat-uikit --save
    ```
 
-2. 创建 `react_app/chat.jsx` 文件，导入 UIKit，使用环信即时通讯 IM 的 App Key 和用户信息初始化 UIKit。
+2. 创建 `react_app/chat.jsx` 文件，导入 UIKit，使用即时通讯 IM 的 App ID 和用户信息初始化 UIKit。
 
 <img src="/images/uikit/chatuikit/web/vue_initialization.png" width="500" >
 
-代码如下，请将示例中的 `appKey`、`userId` 和 `password` 替换为你的实际值。
+代码如下，请将示例中的 `appId`、`userId` 和 `password` 替换为你的实际值。
 
 若要实现自动登录，初始化时需传入 `userId`、`password` 或 `token`。 
 
-你需要在环信控制台[创建 IM 用户](/product/console/operation_user.html#创建用户)，获取用户 ID 和密码。如果使用 token，你需要从你的 App Server 获取用户 token，详见[使用环信用户 token 鉴权](/document/server-side/easemob_user_token.html) 。
+你需要在声网控制台 [创建用户](/document/android/login.html#用户注册)，登录时传入用户 ID 和密码。如果使用 token，你需要从你的 App Server 获取用户 token，详见 [Token 鉴权](/document/server-side/token_authentication.html)。
 
 ```jsx
 // 导入 UIKit 到 react_app/chat.jsx 文件

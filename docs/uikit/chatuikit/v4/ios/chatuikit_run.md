@@ -2,7 +2,7 @@
 
 <Toc />
 
-环信提供一个开源的聊天示例项目，演示了如何使用该 UIKit 快速搭建聊天页面，实现完整业务。
+即时通讯 IM 提供一个开源的聊天示例项目，演示了如何使用该 UIKit 快速搭建聊天页面，实现完整业务。
 
 本文展示如何编译并运行 iOS 平台的聊天 UIKit 示例项目。
 
@@ -41,11 +41,11 @@ pod install --repo-update
 
 ![img](/images/uikit/chatuikit/ios/buildError.png) 
 
-1. 在[环信控制台](https://console.easemob.com/user/login)创建有效的环信即时通讯 IM 开发者账号和 [App Key](/product/console/app_create.html)。然后，将 App Key 填入 `appKey` 字段，运行项目。
+3. 在 [声网控制台](https://console.shengwang.cn/overview) 创建有效的即时通讯 IM 开发者账号和 [App ID](/product/enable_im.html#_3-获取-app-id)。然后，将 App ID 填入 `appId` 字段，运行项目。
 
 在键盘上按 `cmd+B` 重新编译程序即可跑通项目。
 
-4. [创建有效的环信 IM 用户](/product/console/operation_user.html#创建用户)，将用户的 ID 和 token 分别填入下图的两个输入框，点击 **Login**。
+4. [创建有效的 IM 用户](/document/android/login.html#注册用户)，将用户的 ID 和 token 分别填入下图的两个输入框，点击 **Login**。
 
 <img src="/images/uikit/chatuikit/ios/login.png" width="600" >
 

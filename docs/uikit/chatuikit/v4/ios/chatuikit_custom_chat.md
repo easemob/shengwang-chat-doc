@@ -1,6 +1,6 @@
 # 聊天消息
 
-环信单群聊 UIKit 的聊天页面提供如下功能：
+单群聊 UIKit 的聊天页面提供如下功能：
 
 - 发送和接收消息, 包括文本、表情、图片、语音、视频、文件和名片消息。
 - 对消息进行复制、引用、撤回、删除、编辑、重新发送和审核。
@@ -71,7 +71,7 @@
 
 你可以通过 `Appearance.chat.contentStyle = [.withReply,.withAvatar,.withNickName,.withDateAndTime]` 设置聊天页面消息中显示内容的可配项数组，默认展示回复消息气泡，消息发送方头像，消息发送方昵称，消息的日期时间。
 
-你可以将不需要的功能移除，也还可添加表情回应（`MessageReaction`）和话题（`MessageThread`）。**注意，添加表情回应和话题功能前，需在[环信控制台](https://console.easemob.com/user/login)开通。** 
+你可以将不需要的功能移除，也还可添加表情回应（`MessageReaction`）和话题（`MessageThread`）。**注意，添加表情回应和话题功能前，需在 [声网控制台](https://console.shengwang.cn/overview) 开通。** 
 
 ```swift
         //是否显示消息话题。
@@ -172,7 +172,7 @@
 ### 设置消息翻译
 
 - `Appearance.chat.enableTranslation = value`：是否开启文本消息长按翻译功能，默认为 `false`，即该功能默认关闭。如需开启该特性，需设置为 `true`。
-- `Appearance.chat.targetLanguage= .Chinese` 翻译目标语言，默认为中文。文本消息长按后出现**翻译**菜单，点击**翻译**后，设置翻译的目标语言。使用前，你需在[环信控制台](https://console.easemob.com/user/login)申请试用翻译功能，然后将 `Appearance.chat.enableTranslation` 设置为 `true`，才会出现文本消息长按的翻译功能。若后台申请翻译未通过，前端无法成功调用 API 进行翻译。
+- `Appearance.chat.targetLanguage= .Chinese` 翻译目标语言，默认为中文。文本消息长按后出现**翻译**菜单，点击**翻译**后，设置翻译的目标语言。使用前，你需在[声网控制台](https://console.shengwang.cn/overview) 开通翻译功能，然后将 `Appearance.chat.enableTranslation` 设置为 `true`，才会出现文本消息长按的翻译功能。若后台申请翻译未通过，前端无法成功调用 API 进行翻译。
 - `Appearance.chat.receiveTranslationColor = value`：消息接收方翻译文本颜色。
 - `Appearance.chat.sendTranslationColor = value`：消息发送方翻译文本颜色。
 

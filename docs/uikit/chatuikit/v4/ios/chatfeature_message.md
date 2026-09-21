@@ -100,7 +100,7 @@ Appearance.chat.contentStyle: [MessageContentDisplayStyle] = [.withReply,.withAv
 
 #### 如何使用
 
-使用该特性前，请确保在[环信控制台](https://console.easemob.com/user/login)上已申请试用该功能。
+使用该特性前，请确保在 [声网控制台](https://console.shengwang.cn/overview) 上已申请试用该功能。
 
 1. 开启消息翻译特性。
 
@@ -133,7 +133,7 @@ Appearance.chat.targetLanguage = .English
 
 #### 如何使用
 
-使用该特性前，请确保在[环信控制台](https://console.easemob.com/user/login)上已开通该功能。
+使用该特性前，请确保在 [声网控制台](https://console.shengwang.cn/overview) 上已开通该功能。
 
 消息表情回复特性在 `Appearance.swift` 中默认关闭，即 `Appearance.chat.contentStyle` 数组中默认不包含 `.withMessageReaction`。
 
@@ -158,7 +158,7 @@ Appearance.chat.contentStyle.append(.withMessageReaction)
 
 #### 如何使用
 
-使用该特性前，请确保在[环信控制台](https://console.easemob.com/user/login)上已开通该功能。
+使用该特性前，请确保在 [声网控制台](https://console.shengwang.cn/overview) 上已开通该功能。
 
 Thread 特性在 `Appearance.swift` 中默认关闭，即` Appearance.chat.contentStyle` 数组中默认不包含 `.withMessageThread`。
 
@@ -185,7 +185,7 @@ Appearance.chat.contentStyle.append(.withMessageThread)
 
 ## 消息置顶	
 
-消息置顶指用户将重要信息做标记方便查看，有助于用户快速找到关键信息，避免遗漏重要内容。该特性尤其适用于处理紧急事务或持续跟进的项目，帮助高效管理重要通告。注意：这里需要先去环信开发者控制台开启此功能。
+消息置顶指用户将重要信息做标记方便查看，有助于用户快速找到关键信息，避免遗漏重要内容。该特性尤其适用于处理紧急事务或持续跟进的项目，帮助高效管理重要通告。注意：这里需要先联系商务经理开启此功能。
 
 目前，单群聊 UIKit 支持消息置顶。消息置顶 UI 和逻辑结构如下：
 - `Appearance.chat.enablePinMessage`：控制消息置顶功能显示与隐藏。

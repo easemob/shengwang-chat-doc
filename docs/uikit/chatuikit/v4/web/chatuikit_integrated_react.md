@@ -45,7 +45,9 @@ import "easemob-chat-uikit/style.css";
 
 若要实现自动登录，初始化时需传入 `userId`、`password` 或 `token`。 
 
-你需要在环信控制台[创建 IM 用户](/product/console/operation_user.html#创建用户)，获取用户 ID 和密码。如果使用 token，你需要从你的 App Server 获取用户 token，详见[使用环信用户 token 鉴权](/document/server-side/easemob_user_token.html) 。
+你需要在声网控制台 [创建用户](/document/android/login.html#用户注册)，登录时传入用户 ID 和密码。
+
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [Token 鉴权](/document/server-side/token_authentication.html) 实现获取 Token 的业务逻辑，你的应用可以调用自身服务端，从IM 服务器获取 Token。
 
 ```tsx
 import React from 'react';

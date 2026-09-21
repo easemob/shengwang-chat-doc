@@ -3,6 +3,26 @@ import { navbar } from 'vuepress-theme-hope'
 export const zhNavbar = navbar([
   { text: '产品介绍', link: '/docs/product/introduction.html' },
   {
+    text: 'UIKit',
+    children: [
+      {
+        text: 'Android',
+        icon: '/icon-Android.svg',
+        link: '/docs/uikit/chatuikit/v4/android/beginner_guide.html'
+      },
+      {
+        text: 'iOS',
+        icon: '/icon-iOS.svg',
+        link: '/docs/uikit/chatuikit/v4/ios/beginner_guide.html'
+      },
+      {
+        text: 'Web',
+        icon: '/icon-web.svg',
+        link: '/docs/uikit/chatuikit/v4/web/beginner_guide.html'
+      },
+    ]
+  },
+  {
     text: 'CallKit',
     children: [
       {

@@ -449,7 +449,7 @@ extension MessageListViewModel {
         ComponentsRegister.shared.MessageRenderEntity = MineMessageEntity.self
         ComponentsRegister.shared.Conversation = MineConversationInfo.self
         ComponentsRegister.shared.MessageViewController = CustomMessageListController.self
-        //redPackageIdentifier 为消息条目的唯一标识，也是环信自定义消息的时间类型
+        //redPackageIdentifier 为消息条目的唯一标识，也是自定义消息的时间类型
         ComponentsRegister.shared.registerCustomCellClasses(cellType: RedPackageCell.self,identifier: redPackageIdentifier)
 ```
 

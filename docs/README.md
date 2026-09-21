@@ -84,13 +84,13 @@ starter:
     desc: 选择合适的 UIKit 构建即时通讯应用，点击各客户端按钮了解单群聊 UIKit 主要功能介绍。
     platform:
       - icon: /sdk/android.svg
-        link: /docs/uikit/chatuikit/v2/android/chatuikit_overview.html
+        link: /docs/uikit/chatuikit/v4/android/beginner_guide.html
         text: Android
       - icon: /sdk/iOS.svg
-        link: /docs/uikit/chatuikit/v2/ios/chatuikit_overview.html
+        link: /docs/uikit/chatuikit/v4/ios/beginner_guide.html
         text: iOS
       - icon: /sdk/web.svg
-        link: /docs/uikit/chatuikit/v2/web/chatuikit_overview.html
+        link: /docs/uikit/chatuikit/v4/web/beginner_guide.html
         text: Web
       - icon: /sdk/flutter.svg
         link: /docs/uikit/chatuikit/v2/flutter/chatuikit_overview.html

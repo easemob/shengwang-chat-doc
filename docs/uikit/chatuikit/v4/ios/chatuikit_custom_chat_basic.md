@@ -79,7 +79,7 @@ Appearance.chat.sendTextColor = UIColor.white
 Appearance.chat.receiveTextColor = UIColor.black
 ```
 
-2. 支持添加表情回复（`MessageReaction`）和话题（`MessageThread`）。**添加前，需在 [环信控制台](https://console.easemob.com/user/login) 开通。** 
+1. 支持添加表情回复（`MessageReaction`）和话题（`MessageThread`）。**添加前，需在 [声网控制台](https://console.shengwang.cn/overview) 开通。** 
 
 ```swift
         //是否显示消息话题。

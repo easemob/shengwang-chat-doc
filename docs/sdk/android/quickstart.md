@@ -15,7 +15,7 @@
 - Android Studio 3.6 或以上版本；
 - Android SDK API 等级 21 或以上；
 - Android 5.0 或以上版本的设备；
-- 有效的即时通讯 IM 开发者账号和 App ID，见 [声网控制台](https://console.shengwang.cn/overview)。
+- 有效的 [即时通讯 IM 开发者账号](https://doc.shengwang.cn/doc/console/general/quickstart#注册账号) 和 [App ID](/product/enable_im.html#_3-获取-app-id)。
 
 ## 准备开发环境
 

@@ -76,6 +76,7 @@ const options = [
 
 const platform = ref("android");
 const kitType = ref("chatuikit");
+const kitVersion = ref("v2");
 const platformIcon = computed(
   () => PLATFORM_ICON_MAP[platform.value]?.icon
 );
@@ -88,7 +89,13 @@ watch(
       const splitRoute = route.path.split("/");
       if (splitRoute[1] === "docs") splitRoute.splice(1, 1);
       kitType.value = splitRoute[2];
-      platform.value = splitRoute[3] === "v2" ? splitRoute[4] : splitRoute[3];
+      if (kitType.value === "chatuikit" && ["v2", "v4"].includes(splitRoute[3])) {
+        kitVersion.value = splitRoute[3];
+        platform.value = splitRoute[4];
+      } else {
+        kitVersion.value = "";
+        platform.value = splitRoute[3];
+      }
     }
   },
   { immediate: true }
@@ -100,14 +107,16 @@ const onChange = (platform) => {
     .filter(
       (item) =>
         item.hasOwnProperty("name") &&
-        item?.path.indexOf(`/docs/uikit/${kitType.value}/v2/${platform}`) == 0
+        item?.path.indexOf(
+          `/docs/uikit/${kitType.value}${kitVersion.value ? `/${kitVersion.value}` : ""}/${platform}`
+        ) == 0
     )
     .map((item) => item.path);
 
   let newPath = route.path.split("/");
   if (newPath[1] !== "docs") newPath.splice(1, 0, "docs");
   if (kitType.value === "chatuikit") {
-    newPath[4] = "v2";
+    newPath[4] = kitVersion.value || "v2";
     newPath[5] = platform;
   } else {
     newPath[4] = platform;
@@ -119,7 +128,7 @@ const onChange = (platform) => {
   } else {
     if (kitType.value == "chatuikit") {
       router.push(
-        `/docs/uikit/${kitType.value}/v2/${platform}/chatuikit_overview.html`
+        `/docs/uikit/${kitType.value}/${kitVersion.value || "v2"}/${platform}/chatuikit_overview.html`
       );
     }
     if (kitType.value == "chatroomuikit") {

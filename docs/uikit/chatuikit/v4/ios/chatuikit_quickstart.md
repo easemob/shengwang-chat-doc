@@ -2,7 +2,7 @@
 
 <Toc />
 
-利用环信单群聊 UIKit，你可以轻松实现单群和群聊。本文介绍如何快速实现在单聊会话中发送第一条消息。
+利用单群聊 UIKit，你可以轻松实现单群和群聊。本文介绍如何快速实现在单聊会话中发送第一条消息。
 
 ## 前提条件
 
@@ -11,8 +11,8 @@
 - Xcode：推荐最新版本。
 - 安装 iOS 14.0 或以上版本的 iOS 模拟器或 Apple 设备。
 - CocoaPods 1.14.3 及以上版本已经安装并且已跑通了集成。
-- 已在[环信控制台](https://console.easemob.com/user/login)创建了有效的环信即时通讯 IM 开发者账号，并[获取了 App Key](/product/console/app_manage.html#管理应用)。
-- 如果你的网络环境部署了防火墙，请联系环信技术支持设置白名单。
+- 有效的 [即时通讯 IM 开发者账号](https://doc.shengwang.cn/doc/console/general/quickstart#注册账号) 和 [App ID](/product/enable_im.html#_3-获取-app-id)。。
+- 如果你的网络环境部署了防火墙，请联系技术支持设置白名单。
 
 ## 实现发送第一条单聊消息
 
@@ -33,19 +33,19 @@
 
 你可以在应用加载时或使用 EaseChatUIKit 之前对其进行初始化。
 
-初始化时，需传入 App Key。你可以在 [环信控制台](https://console.easemob.com/user/login) 的 **应用概览** 页面查看 App Key。
+初始化时，需传入 App ID。你可以在 [声网控制台](https://console.shengwang.cn/overview) 获取 [App ID](/product/enable_im.html#_3-获取-app-id)。
 
 ```
 import EaseChatUIKit
     
 // 在导入 EaseChatUIKit 库后在 appdelegate.swift 中 'func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool' 方法中添加如下代码：
 // UIKit 4.10.0 及以上版本      
- let option = ChatOptions(appkey: "ExampleRequiredConfig.appKey")
+ let option = ChatOptions(appId: "ExampleRequiredConfig.appId")
  option.enableConsoleLog = true
  option.isAutoLogin = false
  _ = ChatUIKitClient.shared.setup(option: option)
 // UIKit 4.10.0 以下版本
-let error = EaseChatUIKitClient.shared.setup(appKey: "Appkey")
+let error = EaseChatUIKitClient.shared.setup(appId: "Appid")
 ```
 
 ### 第四步 登录
@@ -56,9 +56,9 @@ let error = EaseChatUIKitClient.shared.setup(appKey: "Appkey")
 若你已集成了 IM SDK，SDK 的所有用户 ID 均可用于登录 EaseChatUIKit。
 :::
 
-在 [环信控制台](https://console.easemob.com/user/login) 创建用户，获取用户 ID 和用户 token。详见 [创建用户文档](/product/console/operation_user.html#创建用户)。
+在 [声网控制台](https://console.shengwang.cn/overview) [创建用户](/document/ios/login.html#注册用户)，获取用户 ID 和用户 token。
 
-在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [获取 App Token API](/document/server-side/easemob_app_token.html) 和 [获取用户 Token API](/document/server-side/easemob_user_token.html) 实现获取 Token 的业务逻辑，使你的用户从你的应用服务器获取 Token。
+在生产环境中，为了安全考虑，你需要在你的应用服务器集成 [Token 鉴权](/document/server-side/token_authentication.html) 实现获取 Token 的业务逻辑，你的应用可以调用自身服务端，从IM 服务器获取 Token。
 
 - 4.10.0 及以上版本：
 
@@ -124,10 +124,7 @@ public final class YourAppUser: NSObject, EaseProfileProtocol {
 
 ### 第五步 创建聊天页面
 
-登录成功后，你可以按以下步骤创建聊天页面：
-
-1. 在控制台[关闭好友关系检查功能](/product/console/basic_user.html#好友关系检查)，即无需添加好友即可聊天。
-2. 调用 `init` 方法将在控制台上创建的用户的用户 ID 传入 `conversationId` 参数，向该用户发送消息。
+登录成功后，调用 `init` 方法将在控制台上创建的用户的用户 ID 传入 `conversationId` 参数，向该用户发送消息。
 
 ```swift
  let vc = ComponentsRegister.shared.MessageViewController.init(conversationId: <#创建用户的id#>, chatType: .chat)
