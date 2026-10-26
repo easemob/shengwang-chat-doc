@@ -909,33 +909,7 @@ const documentSidebar = [
     only: ['server-side']
   },
   { type: "separator", only: ['server-side']} as any,
-  {
-    text: 'Server SDK',
-    collapsible: true,
-    children: [
-      { text: 'Java Server SDK 2.0', link: 'java_server_sdk_2.0.html' },
-      { text: 'PHP Server SDK', link: 'php_server_sdk.html' }
-    ],
-    only: ['server-side']
-  },
-  {
-    text: 'API 参考',
-    collapsible: true,
-    children: [
-      { text: 'Java Server SDK 2.0', link: 'apireference_java_2.0.html' },
-      { text: 'Java Server SDK 1.0', link: 'apireference_java_1.0.html' },
-      { text: 'PHP Server SDK', link: 'php_server_sdk.html' }
-    ],
-    only: ['server-side']
-  },
   { text: '特性限制', link: 'limitation.html', only: ['server-side']},
-  {
-    text: '已废弃内容',
-    collapsible: true,
-    children: [
-    ],
-    only: ['server-side']
-  },
 ]
 
 function buildDocSidebar() {
