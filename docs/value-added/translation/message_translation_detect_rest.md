@@ -25,7 +25,7 @@ POST https://{host}//app-id/{app_id}/translate/detect
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -i -X POST "https://XXXX//app-id/{app_id}/translate/detect"   \
+curl -i -X POST "https://XXXX/app-id/{app_id}/translate/detect"   \
 -H 'Content-Type: application/json'  \
 -H "Authorization: Bearer <YourAppToken>"   \
 -d '{
