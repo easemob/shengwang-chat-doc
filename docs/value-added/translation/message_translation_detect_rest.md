@@ -16,7 +16,7 @@
 ## 请求 URL
 
 ```http
-POST https://{host}//app-id/{app_id}/translate/detect
+POST https://{host}/app-id/{app_id}/translate/detect
 ```
 
 关于请求 URL 中的其他参数说明，详见 [请求 URL 参数介绍](/document/server-side/overview.html#请求-url)。
