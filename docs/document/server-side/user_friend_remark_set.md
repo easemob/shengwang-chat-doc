@@ -53,7 +53,7 @@ curl -X PUT 'https://XXXX/app-id/{app_id}/user/{owner_username}/contacts/users/{
   "duration": 22,
   "status": "ok",
   "timestamp": 1700633088329,
-  "uri": "https://{host}/{host}/{org_name}/{app_name}/user/{owner_username}/contacts/users/{friend_username}"
+  "uri": "https://{host}/{org_name}/{app_name}/user/{owner_username}/contacts/users/{friend_username}"
 }
 ```
 
