@@ -8,16 +8,16 @@
 
 | RESTful API 接口        | 方法 | 接口 URL           |
 | :----------- | :--- | :------------- |
-| 绑定和解绑推送信息           | PUT  | /{org_name}/{app_name}/users/{userId}/push/binding |
-| 查询推送绑定信息    | GET  | /{org_name}/{app_name}/users/{userId}/push/binding |
-| 设置离线推送时显示的昵称 | PUT  | /{org_name}/{app_name}/users/{userId} |
-| 设置离线推送通知的展示方式 | PUT  | /{org_name}/{app_name}/users/{userId} |
-| 设置离线推送         | PUT  | /{org_name}/{app_name}/users/{userId}/notification/{chattype}/{key} |
-| 查询离线推送设置     | GET  | /{org_name}/{app_name}/users/{userId}/notification/{chattype}/{key} |
-| 设置推送通知的首选语言     | PUT  | /{org_name}/{app_name}/users/{userId}/notification/language |
-| 获取推送通知的首选语言 | GET  | /{org_name}/{app_name}/users/{userId}/notification/language |
-| 设置接收方配置模板名称 | PUT  | /{org_name}/{app_name}/users/{userId}/notification/template |
-| 获取接收方配置模板名称 | GET | /{org_name}/{app_name}/users/{userId}/notification/template |
+| 绑定和解绑推送信息           | PUT  | /{host}/app-id/{app_id}/users/{userId}/push/binding |
+| 查询推送绑定信息    | GET  | /{host}/app-id/{app_id}/users/{userId}/push/binding |
+| 设置离线推送时显示的昵称 | PUT  | /{host}/app-id/{app_id}/users/{userId} |
+| 设置离线推送通知的展示方式 | PUT  | /{host}/app-id/{app_id}/users/{userId} |
+| 设置离线推送         | PUT  | /{host}/app-id/{app_id}/users/{userId}/notification/{chattype}/{key} |
+| 查询离线推送设置     | GET  | /{host}/app-id/{app_id}/users/{userId}/notification/{chattype}/{key} |
+| 设置推送通知的首选语言     | PUT  | /{host}/app-id/{app_id}/users/{userId}/notification/language |
+| 获取推送通知的首选语言 | GET  | /{host}/app-id/{app_id}/users/{userId}/notification/language |
+| 设置接收方配置模板名称 | PUT  | /{host}/app-id/{app_id}/users/{userId}/notification/template |
+| 获取接收方配置模板名称 | GET | /{host}/app-id/{app_id}/users/{userId}/notification/template |
 
 以上 API 的常见错误码如下所示：
 
@@ -34,10 +34,10 @@
 
 | RESTful API 接口        | 方法 | 接口 URL           |
 | :----------- | :--- | :------------- |
-| 创建离线推送模板          | POST  | /{org_name}/{app_name}/notification/template |
-| 修改离线推送模板      | PUT  | /{org_name}/{app_name}/notification/template/{name} |
-| 查询离线推送模板 | GET | /{org_name}/{app_name}/notification/template/{name} |
-| 删除离线推送模板          | DELETE  | /{org_name}/{app_name}/notification/template/{name} |
+| 创建离线推送模板          | POST  | /{host}/app-id/{app_id}/notification/template |
+| 修改离线推送模板      | PUT  | /{host}/app-id/{app_id}/notification/template/{name} |
+| 查询离线推送模板 | GET | /{host}/app-id/{app_id}/notification/template/{name} |
+| 删除离线推送模板          | DELETE  | /{host}/app-id/{app_id}/notification/template/{name} |
 
 这些 REST API 的常见错误码如下所示：
 

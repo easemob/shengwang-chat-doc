@@ -22,7 +22,7 @@
 ## 请求 URL
 
 ```http
-POST https://{host}/{org_name}/{app_name}/translate
+POST https://{host}/app-id/{app_id}/translate
 ```
 
 关于请求 URL 中的其他参数说明，详见 [请求 URL 参数介绍](/document/server-side/overview.html#请求-url)。
@@ -30,7 +30,7 @@ POST https://{host}/{org_name}/{app_name}/translate
 ## 请求示例
 
 ```shell
-curl -X POST "https://XXXX/XXXX/XXXX/translate"  \
+curl -X POST "https://XXXX/app-id/{app_id}/translate"  \
 -H 'Content-Type: application/json'   \
 -H "Authorization: Bearer <YourAppToken>"   \
 -d '{

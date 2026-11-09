@@ -28,7 +28,7 @@ PUT https://{host}/app-id/{app_id}/users/{username}/chatfiles/lifetime
 
 ```shell
 # 将 <YourUserToken> 替换为你的用户 Token
-curl -X PUT "https://localhost/{org_name}/{app_name}/users/{username}/chatfiles/lifetime" \
+curl -X PUT "https://XXXX/app-id/{app_id}/users/{username}/chatfiles/lifetime" \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer <YourUserToken>" \
 -d '{

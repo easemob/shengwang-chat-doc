@@ -25,10 +25,10 @@
 例如，注册用户的请求 URL 如下所示：
 
 ```http
-POST https://{host}/{org_name}/{app_name}/users
+POST https://{host}/app-id/{app_id}/users
 ```
 
-每个请求 URL 均包括 `host`、`org_name` 和 `app_name` 参数。
+每个请求 URL 均包括 `host` 和 `app_id` 参数。
 
 | 参数       | 类型   | 是否必需 | 描述         |
 | :--------- | :----- | :------- | :------------------------- |

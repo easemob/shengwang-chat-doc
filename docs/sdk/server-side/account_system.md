@@ -1318,7 +1318,7 @@ GET https://{host}/app-id/{app_id}/users/{username}/resources
 
 ```shell
 # 将 <YourAppToken> 替换为你在服务端生成的 App Token
-curl -L -X GET 'http://XXXX//app-id/XXXX/users/XXXX/resources' \
+curl -L -X GET 'http://XXXX/app-id/XXXX/users/XXXX/resources' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer <YourAppToken>'
 ```
