@@ -12,6 +12,18 @@ import {
 } from "./uikit";
 
 export const zhSidebar = sidebar({
+  "/docs/breadcrumb/menu.html": [{ text: "菜单", link: "/docs/breadcrumb/menu.html" }],
+  // These real platform sidebars ensure the theme mounts a sidebar on landing pages.
+  // The breadcrumb sidebar parameter then restores the originating platform.
+  "/docs/sdk/": DOC_V5_SIDEBAR["/docs/document/android/"],
+  "/docs/sdk/v5.html": DOC_V5_SIDEBAR["/docs/document/android/"],
+  "/docs/sdk/v4.html": DOC_SIDEBAR["/docs/v4/android/"],
+  "/docs/uikit/": CHAT_UIKIT_V4_SIDEBAR["/docs/uikit/chatuikit/v4/android/"],
+  "/docs/uikit/chatuikit/": CHAT_UIKIT_V4_SIDEBAR["/docs/uikit/chatuikit/v4/android/"],
+  "/docs/uikit/chatuikit/v4/": CHAT_UIKIT_V4_SIDEBAR["/docs/uikit/chatuikit/v4/android/"],
+  "/docs/uikit/chatuikit/v2/": CHAT_UIKIT_SIDEBAR["/docs/uikit/chatuikit/v2/android/"],
+  "/docs/callkit/": CALL_KIT_SIDEBAR["/docs/callkit/android/"],
+  "/docs/value-added/": TRANSLATION_SIDEBAR,
   "/docs/product/": [
     { text: "产品动态", link: "product_dynamics.html" },
     { text: "产品简介", link: "introduction.html" },

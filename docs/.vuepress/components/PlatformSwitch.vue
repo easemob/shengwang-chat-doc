@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { ref, watch, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { getLandingSidebarRoot } from './breadcrumbSidebarContext'
+import { MENU_PAGE } from './sidebarBreadcrumb'
 
 type PlatformKey =
   | 'android'
@@ -118,13 +120,17 @@ const VERSION_CONFIG: VersionConfig = {
 const platform = ref<PlatformKey>('android')
 const version = ref<DocVersion>(VERSION_CONFIG.defaultVersion)
 const platformIcon = computed(() => PLATFORM_ICON_MAP[platform.value].icon)
-const isLegacyPath = (path: string): boolean => path.startsWith('/sdk/') || path.startsWith('/docs/sdk/')
-const canSwitchVersion = computed(() => !isLegacyPath(route.path) && isSwitchablePlatform(platform.value))
+const isLegacyPath = (path: string): boolean => /^\/(?:docs\/)?sdk\/[^/]+\//.test(path)
+const canSwitchVersion = computed(() => !isLegacyPath(getCurrentPath()) && isSwitchablePlatform(platform.value))
 const versionLabel = computed(() =>
   canSwitchVersion.value ? version.value : VERSION_CONFIG.fixedVersionLabel
 )
 const route = useRoute()
 const router = useRouter()
+const getCurrentPath = (): string =>
+  getLandingSidebarRoot(route.path, route.query.sidebar) ??
+  (route.path === MENU_PAGE && typeof route.query.sidebar === 'string'
+    ? route.query.sidebar : route.path)
 
 const normalizeHomePath = (home: string): string => home.replace(/\/$/, '')
 
@@ -157,8 +163,9 @@ const getHomePath = (versionValue: DocVersion, platformName: PlatformKey): strin
 }
 
 const resolveVersion = (path: string, platformName: PlatformKey): DocVersion => {
-  // /v4 开头优先判定为 4.x；默认 /document 为 5.x
-  if (path.startsWith('/docs/v4/') || path.startsWith('/v4/')) {
+  // HarmonyOS、Flutter、React Native、Unity 的 V4 文档仍位于 /document/。
+  if (path.startsWith('/docs/v4/') || path.startsWith('/v4/') ||
+    /^\/(?:docs\/)?document\/(?:harmonyos|flutter|react-native|unity|windows)\//.test(path)) {
     return '4.x'
   }
 
@@ -201,13 +208,13 @@ const navigateToPlatformDoc = (
   platformName: PlatformKey,
   targetVersion: DocVersion = '5.x'
 ): void => {
-  const legacySdk = route.path.startsWith('/sdk/') || route.path.startsWith('/docs/sdk/')
+  const legacySdk = isLegacyPath(getCurrentPath())
   const documentRoot = legacySdk ? '/docs/sdk' : (targetVersion === '4.x' ? '/docs/v4' : '/docs/document')
   const nextPlatformDocRouters = getRoutePaths(router.options.routes)
     .filter((path) => path.indexOf(`${documentRoot}/${platformName}/`) === 0)
     .map(normalizeRoutePath)
 
-  let newPath = route.path.split('/')
+  let newPath = getCurrentPath().split('/')
   if (newPath[1] !== 'docs') newPath.splice(1, 0, 'docs')
   const documentRootSegments = documentRoot.split('/').filter(Boolean)
   newPath[1] = documentRootSegments[0]
@@ -228,13 +235,13 @@ const navigateToPlatformDoc = (
 }
 
 watch(
-  () => route.path,
+  () => route.fullPath,
   () => {
-    const nextPlatform = parsePlatform(route.path)
+    const nextPlatform = parsePlatform(getCurrentPath())
     if (!nextPlatform) return
 
     platform.value = nextPlatform
-    version.value = resolveVersion(route.path, nextPlatform)
+    version.value = resolveVersion(getCurrentPath(), nextPlatform)
   },
   { immediate: true }
 )
@@ -243,16 +250,14 @@ watch(
 const onChange = (nextPlatform: PlatformKey): void => {
   // 小程序仅在 V4 中独立存在。
   if (nextPlatform === 'applet') {
-    if (isLegacyPath(route.path)) navigateToPlatformDoc(nextPlatform)
+    if (isLegacyPath(getCurrentPath())) navigateToPlatformDoc(nextPlatform)
     else router.push(getHomePath('4.x', nextPlatform))
     return
   }
 
   if (isSwitchablePlatform(nextPlatform)) {
     // V4 的 Web 与小程序是两个独立平台，互相切换时保持在 V4。
-    const targetVersion = route.path.startsWith('/docs/v4/') || route.path.startsWith('/v4/')
-      ? '4.x'
-      : version.value
+    const targetVersion = version.value
     navigateToPlatformDoc(nextPlatform, targetVersion)
     return
   }
@@ -268,7 +273,7 @@ const onVersionChange = (nextVersion: DocVersion | string): void => {
 }
 
 const options = computed<PlatformOptionGroup[]>(() => {
-  const isLegacy = isLegacyPath(route.path)
+  const isLegacy = isLegacyPath(getCurrentPath())
   const isV5 = !isLegacy && version.value === '5.x'
   return [
     {
@@ -357,7 +362,7 @@ const options = computed<PlatformOptionGroup[]>(() => {
         </el-dropdown-menu>
       </template>
     </el-dropdown>
-    <span v-else-if="!isLegacyPath(route.path)" class="version-fixed">{{ versionLabel }}</span>
+    <span v-else-if="!isLegacyPath(getCurrentPath())" class="version-fixed">{{ versionLabel }}</span>
   </div>
 </template>
 

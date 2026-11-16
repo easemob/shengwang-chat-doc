@@ -835,3 +835,12 @@ button {
     color: #000;
   }
 }
+/* Match the breadcrumb separator and landing-page layout used by Easemob IM. */
+.theme-container .breadcrumb li + li::before {
+  content: " > ";
+}
+.no-sidebar.breadcrumb-landing .theme-hope-content:not(.custom) {
+  display: block;
+  width: auto;
+  max-width: var(--content-width);
+}

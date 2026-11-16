@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { ref, watch, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import { getLandingSidebarRoot } from './breadcrumbSidebarContext'
+import { MENU_PAGE } from './sidebarBreadcrumb'
 
 const PLATFORM_ICON_MAP = {
   android: {
@@ -41,7 +43,7 @@ const PLATFORM_ICON_MAP = {
   },
 };
 
-const options = [
+const allOptions = [
   {
     label: "平台",
     options: [
@@ -77,16 +79,24 @@ const options = [
 const platform = ref("android");
 const kitType = ref("chatuikit");
 const kitVersion = ref("v2");
+const options = computed(() => kitVersion.value === 'v4'
+  ? allOptions.filter(group => group.label === '平台')
+  : allOptions);
 const platformIcon = computed(
   () => PLATFORM_ICON_MAP[platform.value]?.icon
 );
 const route = useRoute();
 const router = useRouter();
+const getCurrentPath = (): string =>
+  getLandingSidebarRoot(route.path, route.query.sidebar) ??
+  (route.path === MENU_PAGE && typeof route.query.sidebar === 'string'
+    ? route.query.sidebar : route.path)
 watch(
-  () => route.path,
+  () => route.fullPath,
   () => {
-    if (route.path.indexOf("/uikit") == 0 || route.path.indexOf("/docs/uikit") == 0) {
-      const splitRoute = route.path.split("/");
+    const currentPath = getCurrentPath();
+    if (currentPath.indexOf("/uikit") == 0 || currentPath.indexOf("/docs/uikit") == 0) {
+      const splitRoute = currentPath.split("/");
       if (splitRoute[1] === "docs") splitRoute.splice(1, 1);
       kitType.value = splitRoute[2];
       if (kitType.value === "chatuikit" && ["v2", "v4"].includes(splitRoute[3])) {
@@ -113,7 +123,7 @@ const onChange = (platform) => {
     )
     .map((item) => item.path);
 
-  let newPath = route.path.split("/");
+  let newPath = getCurrentPath().split("/");
   if (newPath[1] !== "docs") newPath.splice(1, 0, "docs");
   if (kitType.value === "chatuikit") {
     newPath[4] = kitVersion.value || "v2";
