@@ -23,6 +23,12 @@ show_server_callback_route: false
 | :----- | :------- | :---------------- | :---------------- |
 | Android SDK 4.25.1/iOS SDK v4.25.0 开发版发布   | - 支持 [分页获取本地会话列表](/docs/v4/android/conversation_list.html#分页获取本地会话) 功能。<br/> - [本地会话列表默认不包含聊天室会话](/docs/v4/android/conversation_list.html#从本地获取会话列表)。<br/> - 移除第二通道（数据同步 WebSocket）配置属性。<br/> - Android 新增默认服务域名切换接口，用于在 IM 官方域名与私有部署域名之间切换。 | 2026-9-18     | - [Android SDK 4.25.1 更新日志](/docs/document/android/releasenote.html#v4-25-1-dev-2026-9-18-开发版) <br/> - [iOS SDK 4.25.0 更新日志](/docs/document/ios/releasenote.html#v4-25-0-dev-2026-9-16-开发版)  |
 
+#### HarmonyOS SDK v1.15.0 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| HarmonyOS SDK v1.15.0 开发版发布   | **重大变更**：<br/> - [本地会话列表默认不包含聊天室会话](/docs/document/harmonyos/conversation_list.html#从本地获取会话列表)。<br/> - 移除第二通道（数据同步 WebSocket）配置属性，数据同步 WebSocket 地址根据 REST 服务器配置自动获取。<br/> **新增特性**：<br/> - 支持 [分页获取本地会话列表](/docs/document/harmonyos/conversation_list.html#分页获取本地会话) 功能，并可控制登录成功后是否自动将全部会话加载到内存。<br/> - 支持 [文本消息翻译](/docs/value-added/translation/message_translation_harmonyos.html)。<br/> - 新增连接和翻译相关的错误码。 | 2026-9-24     | [HarmonyOS SDK 1.15.0 更新日志](/docs/document/harmonyos/releasenote.html#v1-15-0-dev-2026-9-24-开发版) |
+
 ## 2026-08
 
 #### Android/iOS SDK v5.0.0 发版

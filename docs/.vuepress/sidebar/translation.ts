@@ -4,6 +4,7 @@ export const TRANSLATION_SIDEBAR = [
 { text: 'Android', link: '/docs/value-added/translation/message_translation_android.html' },
 { text: 'iOS', link: '/docs/value-added/translation/message_translation_ios.html' },
 { text: 'Web', link: '/docs/value-added/translation/message_translation_web.html' },
+{ text: 'HarmonyOS', link: '/docs/value-added/translation/message_translation_harmonyos.html' },
 { text: '小程序', link: '/docs/value-added/translation/message_translation_applet.html' },
 { text: 'Flutter', link: '/docs/value-added/translation/message_translation_flutter.html' },
 { text: 'React Native', link: '/docs/value-added/translation/message_translation_react-native.html' },
