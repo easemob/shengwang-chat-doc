@@ -26,6 +26,7 @@
     "channel_user": "XXXX#XXXX_tst@easemob.com",
     "chat_type": "read_ack",
     "security": "bc392b82e70e24cc1ea29e08aa41765d",
+    "os": "ios",
     "content_type": "chat:ack:read",
     "payload": {
         "ext": {},
@@ -52,6 +53,7 @@
 | `channel_channel` | String   | 群聊消息的已读回执，格式为 `xxxx#xxxx_群组 ID@conference.easemob.com`，例如，示例中的 `easemob-demo#wang_277721224642561@conference.easemob.com`。|
 | `eventType`       | String | `chat`：表示上行消息。                      |
 | `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。[配置回调规则](callback_postsending.html#回调规则) 后，IM 服务器会自动为该规则生成 secret，向你的 App Server 发送数据时会基于该 secret 生成该签名，作为你的服务器识别 IM 服务器的依据。若要使用自定义密钥，可联系声网商务。 |  
+| `os` | String | 发送群组消息已读回执的客户端使用的 IM SDK 平台标识，常见取值如下：<br/> - `android`：Android 平台。适用于使用 Android IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 Android 平台上的客户端。<br/> - `ios`：iOS 平台。适用于使用 iOS IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 iOS 平台上的客户端。<br/> - `webim`：Web SDK。适用于使用 Web IM SDK 的客户端。<br/> - `harmony`：HarmonyOS 平台。<br/> - `win`：Windows 平台。<br/> - `custom`：自定义平台。IM 支持自定义设备平台，以便对登录设备进行精细化管理，详见 [设置设备平台文档](/docs/document/android/multi_device.html#设置登录设备的平台)。 |
 | `payload`   | object   | 包括：<br/> - `ext`：消息扩展字段<br/> - `ack_message_id`：消息 ID<br/> - `msg_config.allow_group_ack`：是否需要群消息已读回执 <br/> - `type`：`read_ack` 表示消息已读回执。|
 | `host`      | String   | 服务器名称。                                                 |
 | `from`      | String   | 发送已读回执的用户 ID。                                        |

@@ -22,6 +22,7 @@
     "chat_type":"recall",
     "callId":"XXXX#XXXX_966475585536657404",
     "security":"ea7a867314fb0e0833d5f4f169eb4f8d",
+    "os":"ios",
     "payload":{
         "ext":{},
         "ack_message_id":"966475220900644860",
@@ -53,4 +54,5 @@
 | `payload`         | object   | - 对于消息撤回行为，`bodies` 和 `ext` 字段为空。<br/> `ack_message_id` 表示原消息 ID。 |
 | `securityVersion` | String   | 安全校验版本，目前为 1.0.0。忽略此参数，以后会改成 Console 后台做设置。 |
 | `security`        | String   | 签名，格式如下: MD5（callId+secret+timestamp）。[配置回调规则](callback_postsending.html#回调规则) 后，IM 服务器会自动为该规则生成 secret，向你的 App Server 发送数据时会基于该 secret 生成该签名，作为你的服务器识别 IM 服务器的依据。若要使用自定义密钥，可联系声网商务。 |
+| `os` | String | 发起本次消息撤回操作的客户端使用的 IM SDK 平台标识，常见取值如下：<br/> - `android`：Android 平台。适用于使用 Android IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 Android 平台上的客户端。<br/> - `ios`：iOS 平台。适用于使用 iOS IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 iOS 平台上的客户端。<br/> - `webim`：Web SDK。适用于使用 Web IM SDK 的客户端。<br/> - `harmony`：HarmonyOS 平台。<br/> - `win`：Windows 平台。<br/> - `custom`：自定义平台。IM 支持自定义设备平台，以便对登录设备进行精细化管理，详见 [设置设备平台文档](/docs/document/android/multi_device.html#设置登录设备的平台)。 |
 | `host`            | String   | 服务器名称。                                                 |
