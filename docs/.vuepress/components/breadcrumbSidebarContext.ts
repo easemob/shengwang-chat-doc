@@ -5,9 +5,9 @@ export const withDocsPath = (path: string): string =>
 export const withoutDocsPath = (path: string): string => path.replace(/^\/docs(?=\/)/, '')
 const roots = (prefix: string, platforms: string[]): string[] =>
   platforms.map(platform => '/docs' + prefix + platform + '/')
-const sdkV5 = roots('/document/', ['android', 'ios', 'web'])
-const sdkV4 = [...roots('/v4/', ['android', 'ios', 'web', 'applet']),
-  ...roots('/document/', ['harmonyos', 'flutter', 'react-native', 'unity'])]
+const sdkV5 = roots('/document/', ['android', 'ios', 'web', 'harmonyos', 'flutter', 'react-native'])
+const sdkV4 = [...roots('/v4/', ['android', 'ios', 'web', 'harmonyos', 'applet', 'flutter', 'react-native']),
+  ...roots('/document/', ['unity'])]
 const chatV4 = roots('/uikit/chatuikit/v4/', ['android', 'ios', 'web'])
 const chatV2 = roots('/uikit/chatuikit/v2/', ['android', 'ios', 'web', 'flutter', 'react-native'])
 const callKit = roots('/callkit/', ['android', 'ios', 'web'])

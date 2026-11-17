@@ -37,9 +37,6 @@ const platformLabels: Record<string, string> = {
 }
 
 const documentV4Platforms = new Set([
-  'harmonyos',
-  'flutter',
-  'react-native',
   'unity',
 ])
 

@@ -25,7 +25,7 @@
 
 效果如下图：
 
-![img](/images/ios/status.png)
+![img](/images/android/status.png)
 
 ## 前提条件
 

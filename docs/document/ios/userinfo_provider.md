@@ -10,7 +10,11 @@
 
 ## 技术原理
 
-用户信息自动管理功能由 `EMOptions#enableUserInfo` 控制。开启后，SDK 按以下流程处理用户信息同步与内存更新：
+用户信息自动管理功能由 `EMOptions` 的 `enableUserInfo` 属性控制，默认关闭。将其设置为 `YES` 后，SDK 会在登录成功时自动同步当前登录用户的用户属性，并在发送消息时附带发送方用户属性的更新时间。对于群聊消息，还会额外附带发送方在当前群中的群成员名片更新时间。
+
+好友备注从接收方的本地好友数据中读取，不随消息发送，也不通过上述更新时间比较机制同步。详见[通过消息获取发送方信息](#通过消息获取发送方信息)。
+
+接收方收到消息后，SDK 会根据消息中携带的更新时间，按需同步用户属性和群成员名片、更新本地缓存，并通过代理回调通知业务层刷新 UI。具体处理流程如下：
 
 1. 用户登录成功后，SDK 自动从服务端获取当前登录用户的信息，并写入本地内存。
 2. 当用户更新自身信息后，后续发送的消息会携带对应信息的更新时间。
@@ -24,7 +28,7 @@
 
 内存更新流程如下：
 
-![img](/images/ios/memory_update_userinfo_mgmt.png)
+![img](/images/android/memory_update_userinfo_mgmt.png)
 
 ## 前提条件
 
@@ -172,7 +176,7 @@ if let userInfoMap = result {
 
 - 用户信息：指用于业务展示的用户相关信息，包括用户的 [昵称、头像](userprofile.html)、[备注](user_relationship.html#设置好友备注) 和 [群成员名片](group_namecard.html)。
 - 用户属性：指用户可设置和管理的资料字段，例如，用户昵称、头像、邮箱、电话号码等。你可通过相关接口对这些字段进行设置、更新和查询。详见 [管理用户属性](userprofile.html)。例如，你可以通过 `updateOwnUserInfo` 设置当前登录用户的昵称、头像等资料。若用户信息自动管理功能开通（`EMOptions#enableUserInfo` 设置为 `true`），更新后的信息会在后续发送消息时自动参与同步。
-  
+
 ### 通过消息同步的发送方信息
 
 开启用户信息自动管理后，接收到的消息中会包含发送方相关信息，包括昵称、头像、备注和群成员名片。
@@ -186,4 +190,3 @@ if let userInfoMap = result {
 | [`fetchUserInfoById:completion:`](#从本地内存读取用户属性) | `IEMUserInfoManager` | 从服务端获取用户信息 |
 | [`getUserInfoByIds:`](#从本地内存读取用户属性) | `IEMUserInfoManager` | 获取本地用户信息 |
 | [`senderInfo`](#通过消息获取发送方信息) | `EMChatMessage` | 获取消息发送方信息 |
-

@@ -4,7 +4,7 @@
 
 即时通讯 IM 支持在单聊和群组聊天中接收流式消息。流式消息是一种边生成、边发送、边接收的实时消息传输机制，适用于长文本逐段输出的场景，例如 AI 对话、实时协作写作和分段生成内容展示等。
 
-流式消息由业务服务端生成并通过 [RESTful API](/document/server-side/message_stream_send_single.html) 发送，Flutter SDK 负责接收、排序、合并和回调，不提供客户端主动发送流式消息的能力。
+流式消息由业务服务端生成并通过 [RESTful API](/docs/document/server-side/message_stream_send_single.html) 发送，Flutter SDK 负责接收、排序、合并和回调，不提供客户端主动发送流式消息的能力。
 
 ## 核心概念
 
@@ -22,18 +22,16 @@
 
 - 会话类型：仅支持单聊和群聊，不支持聊天室。
 - 消息类型：仅支持文本类型的流式消息。
-- 发送方式：仅支持通过 [服务端 RESTful API](/document/server-side/message_stream_send_single.html) 发送。
+- 发送方式：仅支持通过 [服务端 RESTful API](/docs/document/server-side/message_stream_send_single.html) 发送。
 - 客户端能力：Flutter SDK 仅支持接收，不支持发送。
 - 消息标识：`msgId` 标识整条流式消息。
-- 消息限制：消息总长度、分片发送间隔、总传输时长等限制以 [服务端 API 文档](/document/server-side/message_stream_send_single.html#支持范围与限制) 为准。
+- 消息限制：消息总长度、分片发送间隔、总传输时长等限制以 [服务端 API 文档](/docs/document/server-side/message_stream_send_single.html#支持范围与限制) 为准。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
-
-- 已升级 SDK 至 v4.19.0 或以上版本。
 - 已完成 SDK 初始化，详见 [初始化文档](initialization.html)。
-- 已了解即时通讯 IM 的 [使用限制](/product/limitation.html)。
+- 已了解即时通讯 IM 的 [使用限制](/docs/product/limitation.html)。
 
 ## 技术原理
 
@@ -77,6 +75,16 @@ void addChatListener() {
 }
 ```
 
+不再需要接收消息事件时，应使用与注册时相同的事件监听 ID 移除监听器：
+
+```dart
+void removeChatListener() {
+  ChatClient.getInstance.chatManager.removeEventHandler(
+    'UNIQUE_HANDLER_ID',
+  );
+}
+```
+
 在接收到流式消息分片后，你可以进一步获取当前分片内容、传输状态、累计合并内容、自定义类型、错误码和完成原因等信息，并根据 `msgId` 更新同一条消息的展示内容。
 
 ```dart
@@ -103,7 +111,7 @@ void handleStreamChunk(ChatMessage msg) {
   // 自定义类型，例如 text / markdown
   final String? customType = chunk.customType;
 
-  // 错误码与完成原因
+  // 错误码仅在 ERROR 状态下有效；完成原因由业务服务器设置
   final int errorCode = chunk.errorCode;
   final int finishReason = chunk.finishReason;
   // 建议业务侧按 msgId 更新同一条消息的展示内容
@@ -116,15 +124,16 @@ void handleStreamChunk(ChatMessage msg) {
 
 ### 当前分片信息
 
-通过 `msg.streamChunk` 获取 `StreamChunk` 对象。该对象表示当前收到的分片信息。
+通过 `msg.streamChunk` 获取 `ChatStreamChunk` 对象。该对象表示当前收到的分片信息。
 
-| 属性 | 类型 | 说明 |
+| 属性或判断项     | 类型    | 说明   |
 | :--- | :--- | :--- |
-| `chunk` | String | 当前分片的文本内容。 |
-| `status` | ChatStreamStatus | 当前分片对应的流式消息传输状态。 |
-| `errorCode` | Int | 错误码。默认值 `0` 表示正常。其他值详见 [错误码文档](error.html)。 |
-| `finishReason` | Int | 完成原因码（由业务服务器设置）。默认值 `0` 表示无异常。 |
-| `customType` | String? | 自定义透传类型，例如，用于标识文本格式的 `"markdown"`。 |
+| `chunk`                                     | String           | 当前分片的文本内容。                                         |
+| `status`                                    | ChatStreamStatus | 当前分片对应的流式消息传输状态。                             |
+| `errorCode`                                 | int              | 错误码。默认值 `0` 表示正常。其他值详见 [错误码文档](error.html)。 |
+| `finishReason`                              | int              | 完成原因码（由业务服务器设置）。默认值 `0` 表示无异常。      |
+| `customType`                                | String?          | 自定义透传类型，例如，用于标识文本格式的 `"markdown"`。      |
+| 流式消息是否已结束（业务计算，非 SDK 属性） | bool             | 根据 `status` 判断流式消息是否已结束。<br/> 当 `status` 为 `ChatStreamStatus.COMPLETE`、`ChatStreamStatus.START_AND_COMPLETE` 或 `ChatStreamStatus.ERROR` 中任意一种状态时，判定为已结束。其中，`ERROR` 表示异常结束，不代表成功完成。 |
 
 ```dart
 void handleStreamChunk(ChatMessage msg) {
@@ -196,7 +205,7 @@ UI 使用建议如下：
 
 | 功能 | 是否支持 | 基本说明 |
 | :--- | :--- | :--- |
-| [发送消息](/document/server-side/message_stream_send_single.html) | 支持 | 通过服务端接口发送流式消息。 |
+| [发送消息](/docs/document/server-side/message_stream_send_single.html) | 支持 | 通过服务端接口发送流式消息。 |
 | [接收消息](message_stream_receive.html) | 支持 | 客户端接收通过服务端接口发送的流式消息。 |
 | [消息漫游](message_retrieve.html#从服务器获取指定会话的消息) | 支持 | 从服务端获取历史消息。 |
 | [消息扩展](message_extension.html) | 支持 | 为消息携带自定义扩展字段。 |
@@ -211,17 +220,17 @@ UI 使用建议如下：
 | [消息搜索](message_search_local.html) | 支持 | 在本地或会话中搜索消息。 |
 | [会话未读数](conversation_unread.html) | 支持 | 将消息计入会话未读数。 |
 | 会话最后一条消息 | 支持 | 作为会话最后一条消息展示。 |
-| [离线推送](/document/flutter/push/push_overview.html) | 支持 | 用户离线时进行消息推送提醒。 |
-| [消息翻译](/value-added/translation/message_translation_flutter.html) | 支持 | 对消息内容进行翻译。 |
-| [发送前回调](/document/server-side/callback_presending.html) | 不支持 | 消息发送前触发服务端回调，可用于在消息发送前由应用服务器执行预处理逻辑。 |
-| [发送后回调](/document/server-side/callback_postsending.html) | 不支持 | 消息发送后触发服务端回调，可用于 app 后台实现必要的数据同步。 |
+| [离线推送](/docs/document/flutter/push/push_overview.html) | 支持 | 用户离线时进行消息推送提醒。 |
+| [消息翻译](/docs/value-added/translation/message_translation_flutter.html) | 支持 | 对消息内容进行翻译。 |
+| [发送前回调](/docs/document/server-side/callback_presending.html) | 不支持 | 消息发送前触发服务端回调，可用于在消息发送前由应用服务器执行预处理逻辑。 |
+| [发送后回调](/docs/document/server-side/callback_postsending.html) | 不支持 | 消息发送后触发服务端回调，可用于 app 后台实现必要的数据同步。 |
 | 消息发送成功后在发送方多客户端同步 | 不支持 | 消息发送成功后同步到发送方其他设备。 |
 
 ## 常见问题
 
 #### 1. SDK 能否主动发送流式消息？
 
-不支持。流式消息 [仅支持通过服务端 RESTful API 发送](/document/server-side/message_stream_send_single.html)，Flutter SDK 只负责接收。
+不支持。流式消息 [仅支持通过服务端 RESTful API 发送](/docs/document/server-side/message_stream_send_single.html)，Flutter SDK 只负责接收。
 
 #### 2. `chunk` 和 `content` 有何区别？
 
@@ -245,3 +254,24 @@ UI 使用建议如下：
 #### 5. 是否需自行合并分片？
 
 SDK 会自动合并内容，但业务侧仍建议按 `msgId` 更新同一条消息的 UI，避免将同一条流式消息误显示为多条消息。
+
+## 接口列表
+
+以下列表包含接收流式消息所使用的方法、回调和属性。
+
+| API 名称 | 所属模块/类 | 说明 |
+| :--- | :--- | :--- |
+| [`addEventHandler`](#示例代码) | `ChatManager` | 注册消息事件监听器。 |
+| [`removeEventHandler`](#示例代码) | `ChatManager` | 使用注册时的同一标识移除消息事件监听器。 |
+| [`onStreamMessagesReceived`](#示例代码) | `ChatEventHandler` | 接收流式消息分片回调，返回包含当前分片信息的消息列表。 |
+| [`msgId`](#接入流程) | `ChatMessage` | 获取整条流式消息的唯一 ID，用于更新同一条消息的展示内容。 |
+| [`streamChunk`](#当前分片信息) | `ChatMessage` | 获取当前分片信息，类型为 `ChatStreamChunk?`；读取前需判断是否为 `null`。 |
+| [`chunk`](#当前分片信息) | `ChatStreamChunk` | 获取当前分片的文本内容。 |
+| [`status`](#传输状态与错误处理) | `ChatStreamChunk` | 获取当前分片对应的流式消息传输状态，并据此判断消息是否已结束。 |
+| [`customType`](#当前分片信息) | `ChatStreamChunk` | 获取分片的自定义透传类型。 |
+| [`errorCode`](#传输状态与错误处理) | `ChatStreamChunk` | 获取流式消息异常结束时的错误码。 |
+| [`finishReason`](#传输状态与错误处理) | `ChatStreamChunk` | 获取业务服务器设置的完成原因码。 |
+| [`content`](#累计合并内容) | `ChatTextMessageBody` | 获取从首个分片到当前分片的累计合并文本内容。 |
+| [`attributes`](#扩展字段) | `ChatMessage` | 获取消息扩展字段，最终持久化结果以首个分片中的扩展字段为准。 |
+
+Flutter SDK 未提供 Android 的 `isCompleted()` 方法。判断流式消息是否已结束时，应检查 `status` 是否为 `ChatStreamStatus.COMPLETE`、`ChatStreamStatus.START_AND_COMPLETE` 或 `ChatStreamStatus.ERROR`，其中 `ERROR` 表示异常结束。

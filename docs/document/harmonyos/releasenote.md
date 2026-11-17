@@ -1,6 +1,6 @@
 # HarmonyOS IM SDK 更新日志
 
-## v5.0.0 Dev 2026-9-24（开发版）
+## v5.0.0 Dev 2026-10-22（开发版）
 
 本文重点说明功能和行为变化，具体的接口删除、重命名及替代方式请参见 [HarmonyOS IM SDK 1.x 到 5.0.0 迁移指南](migration_guide.html)。
 
@@ -249,7 +249,7 @@ SDK 补充会话展示信息和批量管理能力：
 
 - 私有化部署底层链路支持 TCP 和 WebSocket 之间切换。
 - `ChatMessage#setJsonAttribute` 的类型只支持 `object` 类型，推荐使用 [ChatMessage.setExt](/docs/v4/harmonyos/message_extension.html)。详见 [消息扩展升级指南](/docs/v4/harmonyos/message_extension_optimize.html)。
- 
+
 ## v1.10.0 Dev 2026-1-26（开发版）
 
 #### 新增特性
@@ -328,7 +328,7 @@ SDK 补充会话展示信息和批量管理能力：
 - 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。
   - 新增群成员进出事件 [onMembersJoined](/docs/v4/harmonyos/group_manage.html#监听群组事件) 和 [onMembersExited](/docs/v4/harmonyos/group_manage.html#监听群组事件)。已废弃原事件 `onMemberJoined` 和 `onMemberExited`，请使用新事件代替。
 - 支持 [获取群成员信息列表](/docs/v4/harmonyos/group_manage.html#获取群成员列表) 时除了用户 ID 还包括成员角色和加群时间。
-  
+
 #### 优化
 
 - 修改 Token 即将过期事件 [onTokenWillExpire](/docs/v4/harmonyos/connection.html#监听连接状态) 的触发时机。SDK 在 Token 有效期达到 80% 左右时（之前版本为 50% ）回调即将过期通知。

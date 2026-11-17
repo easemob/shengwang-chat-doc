@@ -146,6 +146,8 @@ NSArray *admins = aGroup.adminList;
 
 1. 自 4.14.0 版本开始，获取全部群成员（包括群主和群管理员）的信息，包括群成员的用户 ID、群成员角色和入群时间。自 4.20.0 版本起，该方法新增支持获取 [群成员名片](group_namecard.html)。
 
+自 SDK 4.20.0 开始，开启用户信息自动管理（`EMOptions.enableUserInfo = YES`）后，SDK 会优先使用本地缓存中的昵称和头像；本地没有对应缓存，或昵称和头像都为空时，会按需从服务端补拉用户属性。该接口不会主动刷新本地已有的昵称或头像。补拉时可能触发用户属性更新事件，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
+
 ```objectivec
 // limit：每页期望返回的群成员数量，上限取决于服务端，详见 https://im.shengwang.cn/document/server-side/group_member_list_obtain.html#请求-url。
 NSString* cursor = nil;
@@ -239,7 +241,7 @@ do {
 
 ```objectivec
 [EMClient.sharedClient.groupManager getJoinedGroupsCountFromServerWithCompletion:^(NSInteger groupCount, EMError * _Nullable aError) {
-            
+
     }];
 ```
 
@@ -311,7 +313,7 @@ do {
 // 群主或群管理员拒绝用户的进群申请。申请人、群主和管理员（除操作者）收到该回调。
 - (void)joinGroupRequestDidDecline:(NSString *)aGroupId reason:(NSString *)aReason decliner:(NSString *)aDecliner applicant:(NSString *)aApplicant
   {
-    
+
   }
 
 // 用户同意进群邀请。邀请人收到该回调。
@@ -391,7 +393,7 @@ do {
 - (void)userDidJoinGroup:(EMGroup *_Nonnull)group
                    users:(NSArray<NSString*> *_Nonnull)userIds
 {
-    
+
 } 
 
 // 有成员退群。除退群成员外，其他群成员会收到该回调。
@@ -405,13 +407,13 @@ do {
 - (void)userDidLeaveGroup:(EMGroup *_Nonnull)group
                     users:(NSArray<NSString *>* _Nonnull)userIds
 {
-    
+
 }  
 
 // 有成员被移出群组。被移出的成员收到该事件。
 - (void)didLeaveGroup:(EMGroup *_Nonnull)aGroup reason:(EMGroupLeaveReason)aReason
   {
-    
+
   }  
 
 // 群组公告更新。群组所有成员会收到该回调。
