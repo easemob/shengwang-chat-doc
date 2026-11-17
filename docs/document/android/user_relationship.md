@@ -309,7 +309,7 @@ try {
 
 #### 从本地内存获取单个用户属性
 
-如果需要直接从本地内存读取指定用户的属性，可以调用 `EMUserInfoManager#getUserInfoWithUserId(String)`。关于该接口的说明，详见 [从本地内存读取用户属性](userinfo_provider.html#从本地内存读取用户属性)。
+如果需要直接从本地内存读取指定用户的属性，可以调用 `EMUserInfoManager#getUserInfoWithUserId(String)`。关于该接口的说明，详见 [从本地内存读取用户属性](userinfo_provider.html#从本地缓存读取用户属性)。
 
 该接口返回的是单个用户的 `EMUserInfo`，不是 `EMContact`。它不会发起网络请求，可作为好友列表读取之外的补充资料读取方式。
 
@@ -357,7 +357,7 @@ EMClient.getInstance()
 
 ### 将用户从黑名单移除
 
-你可以调用 `removeUserFromBlackList` 将用户从黑名单中移除。移除后，用户发送消息等行为将恢复。
+你可以调用 `removeUserFromBlackList` 将用户从黑名单中移除。移除后，该用户发送消息或好友申请等行为将恢复。
 
 ```java
 // 异步方法。

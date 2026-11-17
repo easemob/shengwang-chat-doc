@@ -91,7 +91,7 @@ const PLATFORM_ICON_MAP: Record<PlatformKey, PlatformIcon> = {
 
 /** 版本切换配置：平台、默认版本、各版本按平台的 homePath 均可在此调整 */
 const VERSION_CONFIG: VersionConfig = {
-  switchablePlatforms: ['android', 'ios', 'web'],
+  switchablePlatforms: ['android', 'ios', 'web', 'harmonyos'],
   fixedVersionLabel: '4.x',
   defaultVersion: '5.x',
   versions: [
@@ -102,6 +102,7 @@ const VERSION_CONFIG: VersionConfig = {
         android: '/docs/v4/android/quickstart.html',
         ios: '/docs/v4/ios/quickstart.html',
         web: '/docs/v4/web/quickstart.html',
+        harmonyos: '/docs/v4/harmonyos/quickstart.html',
         applet: '/docs/v4/applet/beginner_guide.html',
       },
     },
@@ -112,6 +113,7 @@ const VERSION_CONFIG: VersionConfig = {
         android: '/docs/document/android/quickstart.html',
         ios: '/docs/document/ios/quickstart.html',
         web: '/docs/document/web/quickstart.html',
+        harmonyos: '/docs/document/harmonyos/quickstart.html',
       },
     },
   ],
@@ -163,9 +165,9 @@ const getHomePath = (versionValue: DocVersion, platformName: PlatformKey): strin
 }
 
 const resolveVersion = (path: string, platformName: PlatformKey): DocVersion => {
-  // HarmonyOS、Flutter、React Native、Unity 的 V4 文档仍位于 /document/。
+  // Flutter、React Native、Unity、Windows 的 V4 文档仍位于 /document/。
   if (path.startsWith('/docs/v4/') || path.startsWith('/v4/') ||
-    /^\/(?:docs\/)?document\/(?:harmonyos|flutter|react-native|unity|windows)\//.test(path)) {
+    /^\/(?:docs\/)?document\/(?:flutter|react-native|unity|windows)\//.test(path)) {
     return '4.x'
   }
 
