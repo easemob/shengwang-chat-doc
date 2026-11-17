@@ -23,6 +23,13 @@ show_server_callback_route: false
 | Web SDK 5.1.2 开发版发布   | - **增强日志管理能力**：支持单独关闭 SDK 控制台日志，并可通过回调接收经过脱敏处理的结构化 SDK 日志。请参见 [SDK 日志](/docs/document/web/log.html#控制台输出和日志回调) 文档。<br/> - **支持 uni-app 原生离线推送**：支持通过 uni-app 推送插件自动获取并绑定设备推送 Token，覆盖 APNs、FCM、华为、小米、魅族、vivo、OPPO 和荣耀等推送通道。登录后可自动完成 Token 绑定和更新，退出登录时自动解绑，也支持业务侧手动停止和重新启用推送。请参见 [Uni-app 离线推送插件](/docs/document/web/push/uniapp_push.html) 和 [离线打包集成 FCM](/docs/document/web/push/uniapp_push_fcm.html) 文档。<br/> -  **支持查询聊天室全员禁言状态**：获取聊天室详情可以判断聊天室是否已开启全员禁言。请参见 [获取聊天室详情](/docs/document/web/room_attributes.html#获取聊天室详情) 文档。<br/> -  **支持自定义登录超时时间**：登录默认总超时时间为 30 秒，并支持在调用登录方法时自定义超时时间。请参见 [登录](/docs/document/web/login.html#登录-1) 文档。   | 2026-9-20 | [Web SDK 5.1.2 更新日志](/docs/document/web/releasenote.html#v5-1-2-dev-2026-9-20-开发版) |
 | Web SDK 4.24.3 开发版发布   | [群组操作触发的群组事件中标识事件的目标用户](/docs/v4/web/group_manage.html#监听群组事件)，包括管理员权限撤销事件、群组转让事件、成员移出群组和群黑名单事件以及邀请用户加入群组事件。   | 2026-9-20     | [Web SDK 4.24.3 更新日志](/docs/document/web/releasenote.html#v4-24-3-dev-2026-9-20-开发版)   |
 
+#### Android SDK v4.24.2/v4.24.3 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Android SDK 4.24.3 开发版发布   | **新增特性**：<br/> - 新增后台断连开关 `EMOptions#setUsePushInBackground(boolean)`。开启该开关且推送 token 已绑定时，应用进入后台约 10 秒后断开长连接，离线消息通过厂商推送通道下发。该开关适用于所有厂商推送通道，详见[离线推送过程](/docs/v4/android/push/push_overview.html#离线推送过程)。<br/> - 4.24.3 起，FCM 场景下应用进入后台后自动断连的行为默认关闭。依赖原有行为的应用需显式开启后台断连开关，断连等待时间由 3 分钟缩短为约 10 秒。 | 2026-9-23 | [Android SDK 更新日志](/docs/document/android/releasenote.html) |
+| Android SDK 4.24.2 开发版发布   | **优化**：<br/> - 调整 TCP/WebSocket 单次连接、非附件类 HTTP 请求、整体登录、`sendMessage` 内部重连等待以及 DNS 地址列表获取的超时时间，详见 [网络超时](/docs/v4/android/connection.html)。<br/> - 优化 `EMPresenceManager#fetchSubscribedMembers` 的参数校验：当 `pageSize <= 0` 时直接返回参数错误，不再发起请求，详见[查询被订阅用户列表](/docs/v4/android/presence.html#查询被订阅用户列表)。 | 2026-9-3 | [Android SDK 更新日志](/docs/document/android/releasenote.html) |
+
 #### Android SDK v4.25.1/iOS SDK v4.25.0 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
@@ -34,6 +41,18 @@ show_server_callback_route: false
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
 | HarmonyOS SDK v1.15.0 开发版发布   | **重大变更**：<br/> - [本地会话列表默认不包含聊天室会话](/docs/document/harmonyos/conversation_list.html#从本地获取会话列表)。<br/> - 移除第二通道（数据同步 WebSocket）配置属性，数据同步 WebSocket 地址根据 REST 服务器配置自动获取。<br/> **新增特性**：<br/> - 支持 [分页获取本地会话列表](/docs/document/harmonyos/conversation_list.html#分页获取本地会话) 功能，并可控制登录成功后是否自动将全部会话加载到内存。<br/> - 支持 [文本消息翻译](/docs/value-added/translation/message_translation_harmonyos.html)。<br/> - 新增连接和翻译相关的错误码。 | 2026-9-24     | [HarmonyOS SDK 1.15.0 更新日志](/docs/document/harmonyos/releasenote.html#v1-15-0-dev-2026-9-24-开发版) |
+
+#### Flutter SDK v4.25.0 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| Flutter SDK 4.25.0 发布 | **重大变更**：<br/> - [本地会话列表默认不包含聊天室会话](/docs/document/flutter/conversation_list.html#从本地获取会话列表)。如需包含聊天室会话，需在 SDK 初始化前将 `ChatOptions.enableChatroomConversation` 设置为 `true`，也可读取该属性查询当前配置。<br/> **新增特性**：<br/> - 依赖的原生 SDK 升级：iOS SDK 升级至 4.25.0，Android SDK 升级至 4.25.1。<br/> - 支持 [分页获取本地会话列表](/docs/document/flutter/conversation_list.html#分页获取本地会话)。<br/> - 支持 [初始化时配置 iOS 的 APNs 与 PushKit 推送证书名称](/docs/document/flutter/push/push_easemob_console.html#配置-ios-推送证书名称)。<br/> - iOS 支持 [绑定](/docs/document/flutter/push/push_easemob_console.html#绑定-pushkit-token) 和 [解绑](/docs/document/flutter/push/push_easemob_console.html#解绑-pushkit-token) 苹果 PushKit token，仅 iOS 生效，其他平台调用不做任何处理。 | 2026-9-24 | [Flutter SDK 4.25.0 更新日志](/docs/document/flutter/releasenote.html#v4-25-0-2026-9-24) |
+
+#### React Native SDK v1.21.0 发版
+
+| 动态名称   | 动态描述 | 发布时间       | 相关文档          |
+| :----- | :------- | :---------------- | :---------------- |
+| React Native SDK 1.21.0 发布 | **新增特性**：<br/> - 依赖的原生 SDK 升级：iOS SDK 升级至 4.25.0，Android SDK 升级至 4.25.1。<br/> - 默认情况下，[本地会话列表不包含聊天室会话](/docs/document/react-native/conversation_list.html#从本地获取会话列表)。如需包含聊天室会话，需在 SDK 初始化前将 `ChatOptions.enableChatroomConversation` 设置为 `true`。<br/> - 支持 [分页获取本地会话列表](/docs/document/react-native/conversation_list.html#分页获取本地会话)，并可通过 `ChatOptions.autoLoadConversations` 控制登录成功后是否自动将全部本地会话加载到内存。<br/> - iOS 支持在初始化时 [配置 APNs 与 PushKit 推送证书名称](/docs/document/react-native/push/push_easemob_console.html#配置-ios-推送证书名称)。<br/> - iOS 支持 [绑定和解绑苹果 PushKit token](/docs/document/react-native/push/push_send_token_to_server.html#绑定和解绑-pushkit-token)。其他平台调用这两个方法不会执行任何操作。 | 2026-9-24 | [React Native SDK 1.21.0 更新日志](/docs/document/react-native/releasenote.html#v1-21-0-2026-09-24) |
 
 ## 2026-08
 
