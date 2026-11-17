@@ -146,7 +146,7 @@ SDK 补充会话展示信息和批量管理能力：
   - 新增 [“大图”资源类型](/docs/v4/harmonyos/message_send.html#发送图片消息)，用于区分原图与压缩后的图片资源。
   - 优化 [非原图发送场景下的图片处理逻辑](/docs/v4/harmonyos/message_send.html#发送图片消息)。
   - 优化 [图片消息的缩略图及附件路径处理逻辑](/docs/v4/harmonyos/message_receive.html#接收图片消息)。
-- 支持 [非好友用户的属性变更订阅功能](/docs/v4/harmonyos/userprofile.html#订阅非好友用户的属性变更)。
+- 支持 [非好友用户的属性变更订阅功能](/docs/v4/harmonyos/userprofile.html#订阅非好友用户的属性变更)，使用前需要联系声网商务开通。
 - 支持登录后自动同步好友列表：
   - 新增 [好友列表自动同步配置功能](/docs/v4/harmonyos/user_relationship.html#登录后自动同步好友列表)。
   - 新增 [好友列表及好友信息同步状态回调](/docs/v4/harmonyos/user_relationship.html#监听好友关系和好友信息变更)。
