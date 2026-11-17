@@ -27,8 +27,8 @@ show_server_callback_route: false
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Android SDK 4.24.3 开发版发布   | **新增特性**：<br/> - 新增后台断连开关 `EMOptions#setUsePushInBackground(boolean)`。开启该开关且推送 token 已绑定时，应用进入后台约 10 秒后断开长连接，离线消息通过厂商推送通道下发。该开关适用于所有厂商推送通道，详见[离线推送过程](/docs/v4/android/push/push_overview.html#离线推送过程)。<br/> - 4.24.3 起，FCM 场景下应用进入后台后自动断连的行为默认关闭。依赖原有行为的应用需显式开启后台断连开关，断连等待时间由 3 分钟缩短为约 10 秒。 | 2026-9-23 | [Android SDK 更新日志](/docs/document/android/releasenote.html) |
-| Android SDK 4.24.2 开发版发布   | **优化**：<br/> - 调整 TCP/WebSocket 单次连接、非附件类 HTTP 请求、整体登录、`sendMessage` 内部重连等待以及 DNS 地址列表获取的超时时间，详见 [网络超时](/docs/v4/android/connection.html)。<br/> - 优化 `EMPresenceManager#fetchSubscribedMembers` 的参数校验：当 `pageSize <= 0` 时直接返回参数错误，不再发起请求，详见[查询被订阅用户列表](/docs/v4/android/presence.html#查询被订阅用户列表)。 | 2026-9-3 | [Android SDK 更新日志](/docs/document/android/releasenote.html) |
+| Android SDK 4.24.3 开发版发布   | **新增特性**：<br/> - 新增后台断连开关 `EMOptions#setUsePushInBackground(boolean)`。开启该开关且推送 Token 已绑定时，应用进入后台约 10 秒后断开长连接，离线消息通过厂商推送通道下发。该开关适用于所有厂商推送通道，详见[离线推送过程](/docs/v4/android/push/push_overview.html#离线推送过程)。<br/> - 4.24.3 起，FCM 场景下应用进入后台后自动断连的行为默认关闭。依赖原有行为的应用需显式开启后台断连开关，断连等待时间由 3 分钟缩短为约 10 秒。 | 2026-9-23 | [Android SDK 4.24.3 更新日志](/docs/document/android/releasenote.html#v4-24-3-dev-2026-9-23-开发版) |
+| Android SDK 4.24.2 开发版发布   | **优化**：<br/> - 调整 TCP/WebSocket 单次连接、非附件类 HTTP 请求、整体登录、`sendMessage` 内部重连等待以及 DNS 地址列表获取的超时时间，详见 [网络超时](/docs/v4/android/connection.html#网络超时)。<br/> - 优化 `EMPresenceManager#fetchSubscribedMembers` 的参数校验：当 `pageSize` 为 `0` 时直接返回参数错误，不再发起请求，详见[查询被订阅用户列表](/docs/v4/android/presence.html#查询被订阅用户列表)。 | 2026-9-3 | [Android SDK 4.24.2 更新日志](/docs/document/android/releasenote.html#v4-24-2-dev-2026-9-3-开发版) |
 
 #### Android SDK v4.25.1/iOS SDK v4.25.0 发版
 
@@ -159,7 +159,7 @@ show_server_callback_route: false
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |
 | :----- | :------- | :---------------- | :---------------- |
-| Android/iOS/Web/小程序 SDK 4.21.0 开发版发布   | [支持语言转文字](/value-added/stt/voice_to_text_android.html)。  | 2026-4-28     | - [Android SDK 4.21.0 更新日志](/docs/v4/android/releasenote.html#v4-21-0-dev-2026-4-28-开发版) <br/> - [iOS SDK 4.21.0 更新日志](/docs/v4/ios/releasenote.html#v4-21-0-dev-2026-4-28-开发版) <br/> - [Web SDK 4.21.0 更新日志](/docs/v4/web/releasenote.html#v4-21-0-dev-2026-4-28-开发版)<br/> - [小程序 SDK 4.21.0 更新日志](/docs/v4/applet/releasenote.html#v4-21-0-dev-2026-4-28-开发版)      |
+| Android/iOS/Web/小程序 SDK 4.21.0 开发版发布   | [支持语言转文字](/value-added/stt/voice_to_text_android.html)。  | 2026-4-28     | - [Android SDK 4.21.0 更新日志](/docs/v4/android/releasenote.html#v4-21-0-dev-2026-4-28-开发版) <br/> - [iOS SDK 4.21.0 更新日志](/docs/v4/ios/releasenote.html#v4-21-0-dev-2026-4-28-开发版) <br/> - [Web SDK 4.21.0 更新日志](/docs/document/web/releasenote.html#v4-21-0-2026-4-28)<br/> - [小程序 SDK 4.21.0 更新日志](/docs/v4/applet/releasenote.html#v4-21-0-2026-4-28)      |
 | React Native SDK 1.15.0 开发版发布   | [支持接收服务端发送的流式消息](/v4/harmonyos/message_stream_receive.html)。  | 2026-4-22     | [React Native 1.15.0 更新日志](/document/react-native/releasenote.html#v1-15-0-2026-04-22)  |
 
 ## 2026-03
