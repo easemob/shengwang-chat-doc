@@ -12,6 +12,10 @@
 
 ![img](/images/ios/translation.png)
 
+:::tip
+消息翻译仅支持单消息体的文本消息，不支持 [复合消息](/docs/document/ios/message_send.html#发送复合消息)，也不会自动翻译复合消息中的文本消息体。
+:::
+
 ## 功能开通
 
 文本翻译为增值服务，如需使用请先在 [声网控制台](https://console.shengwang.cn/overview) 的 **套餐包 > 预付费套餐包 > 即时通讯 IM** 页面开通。

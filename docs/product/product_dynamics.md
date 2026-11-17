@@ -10,6 +10,20 @@ show_server_callback_route: false
 
 ## 2026-11
 
+### Android SDK v5.2.1 / iOS SDK v5.2.0 发版
+
+| 动态名称 | 动态描述 | 发布时间 | 相关文档 |
+| :----- | :------- | :------- | :------- |
+| Android SDK 5.2.1 / iOS SDK 5.2.0 开发版发布 | **新增特性**：<br/> - **支持复合消息**：单条消息可按顺序组合文本、图片、视频、语音、文件、位置或自定义消息体，最多支持 20 个，便于构建图文混排、多图等消息内容。详见 [Android 文档](/docs/document/android/message_send.html#发送复合消息) 和 [iOS 文档](/docs/document/ios/message_send.html#发送复合消息)。<br/> - **支持查询完整连接状态**：可区分已断开、连接中和已连接三种状态，便于应用展示连接进度、判断当前连接状态。详见 [Android 文档](/docs/document/android/connection.html#获取连接状态) 和 [iOS 文档](/docs/document/ios/connection.html#获取连接状态)。<br/> - **断线通知配置**：Android SDK 5.2.1 支持配置可恢复断线通知宽限期，默认 10 秒，详见 [Android 文档](/docs/document/android/connection.html#配置断线通知宽限期)。iOS SDK 5.2.0 新增 `disconnectNotifyThreshold` 属性，但普通断线通知不会因该属性而延迟，详见 [iOS 文档](/docs/document/ios/connection.html#配置断线通知宽限期)。<br/> - **[支持配置后台消息接收策略](/docs/document/android/push/push_overview.html#配置后台消息接收策略)（仅 Android）**：应用可选择在进入后台后断开 IM 长连接，通过有效的推送通道接收离线消息通知。开启该策略且推送通道有效时，SDK 会在应用切入后台约 10 秒后主动断开长连接。<br/> - **[支持查询推送通道是否有效](/docs/document/android/push/push_overview.html#确认推送通道有效)（仅 Android）**：应用可判断当前是否已建立有效的厂商推送通道，辅助选择后台消息接收策略。<br/> **优化**：<br/> - **调整流式消息扩展字段的更新逻辑**：此前，本地保留消息首次入库时的扩展字段，后续分片或完整消息更新不会同步更新这些字段。现改为使用最新处理的分片或完整消息更新中的扩展字段整体覆盖本地旧值，并同步保存到数据库；若新扩展字段为空，则清空本地原有扩展字段。详见 [Android 文档](/docs/document/android/message_stream_receive.html#扩展字段) 和 [iOS 文档](/docs/document/ios/message_stream_receive.html#扩展字段)。 | 2026-11-5 | - [Android SDK 5.2.1 更新日志](/docs/document/android/releasenote.html#v5-2-1-dev-2026-11-5)<br/> - [iOS SDK 5.2.0 更新日志](/docs/document/ios/releasenote.html#v5-2-0-dev-2026-11-5) |
+
+### Web SDK v5.2.0 发版
+
+| 动态名称 | 动态描述 | 发布时间 | 相关文档 |
+| :----- | :------- | :------- | :------- |
+| Web SDK 5.2.0 开发版发布 | **新增特性**：<br/> - **[支持复合消息](/docs/document/web/message_send.html#发送复合消息)**：单条消息可按顺序组合文本、图片、文件、语音、视频、位置和自定义内容，支持 2–20 段，可用于构建图文混排、多图等消息展示。支持 [接收及下载附件](/docs/document/web/message_receive.html#接收复合消息)，以及将复合消息作为子消息进行合并转发。<br/> - **[支持查询 SDK 版本号](/docs/document/web/initialization.html#获取-sdk-版本号)**：应用可获取当前集成的 SDK 版本号，便于确认集成版本和排查版本相关问题。 | 2026-11-5 | [Web SDK 5.2.0 更新日志](/docs/document/web/releasenote.html#v5-2-0-dev-2026-11-5) |
+
+## 2026-10
+
 #### Flutter SDK v5.0.0 发版
 
 | 动态名称   | 动态描述 | 发布时间       | 相关文档          |

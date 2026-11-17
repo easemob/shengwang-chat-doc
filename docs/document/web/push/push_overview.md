@@ -6,7 +6,7 @@
 
 ## 离线推送过程
 
-当客户端断开连接、应用进程关闭，或其他原因导致用户离线时，即时通讯 IM 会通过已接入的第三方推送通道向该离线用户的设备发送通知。用户重新上线后，SDK 会从服务端同步离线期间产生的消息。通知栏角标通常表示离线期间累计的通知数量，并不等同于应用内实际未读消息数。详情请参见 [Android](/docs/document/android/push/push_overview.html#推送原理) 和 [iOS 平台](/docs/document/ios/push/push_overview.html#推送原理)的离线推送文档。
+当客户端断开连接、应用进程关闭，或其他原因导致用户离线时，即时通讯 IM 会通过已接入的第三方推送通道向该离线用户的设备发送通知。用户重新上线后，SDK 会从服务端同步离线期间产生的消息。通知栏角标通常表示离线期间累计的通知数量，并不等同于应用内实际未读消息数。详情请参见 [Android](/docs/document/android/push/push_overview.html#消息推送流程) 和 [iOS 平台](/docs/document/ios/push/push_overview.html#消息推送流程)的离线推送文档。
 
 **以下两种情况，即时通讯 IM 不会发送离线推送通知：**
 

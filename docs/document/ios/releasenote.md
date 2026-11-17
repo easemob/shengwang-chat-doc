@@ -4,6 +4,26 @@ show_search_search: false
 show_callback_route: false
 ---
 
+## v5.2.0 Dev 2026-11-5
+
+### 新增特性
+
+- **[支持复合消息](message_send.html#发送复合消息)**：一条消息可按顺序包含多个文本、图片、视频、语音、文件、位置或自定义消息体，便于应用构建图文混排、多图等消息内容。新增 `-[EMChatMessage initWithConversationID:bodies:ext:]` 初始化方法，通过 `bodies` 属性设置或读取完整的有序消息体列表，通过 `appendBody:` 追加消息体，并通过 `contentType` 判断消息内容类型。每条消息最多支持 20 个消息体。
+- **[支持查询完整的连接状态](connection.html#获取连接状态)**：通过 `[EMClient sharedClient].connectionState` 获取 `EMConnectionState`，可区分已断开、连接中和已连接三种状态，便于应用展示连接进度、判断当前连接状态。`isConnected` 属性标记为废弃，现有调用仍可使用，建议改用新属性。
+- **[新增断线通知时间阈值属性](connection.html#配置断线通知宽限期)**：新增 `EMOptions.disconnectNotifyThreshold`，用于设置或查询断线通知时间阈值，单位为秒，默认为 10 秒。iOS SDK 5.2.0 的普通断线回调不会因设置该属性而延迟，也不会因短暂断线后快速重连成功而取消。
+
+### 优化
+
+- **[调整流式消息扩展字段的更新逻辑](message_stream_receive.html#扩展字段)**：此前，本地保留消息首次入库时的扩展字段，后续分片或完整消息更新不会同步更新这些字段。现改为使用最新处理的分片或完整消息更新中的扩展字段（`ext`）整体覆盖本地旧值，并同步保存到数据库；若新扩展字段为空，则清空本地原有扩展字段。
+- **[优化复合消息的附件传输](message_receive.html#附件下载接口与回调)**：支持处理消息中的多个附件，并按文件大小加权汇总，通过现有进度回调上报整条消息的上传或下载总进度。缩略图下载不上报进度，仅返回完成结果。
+
+### 修复
+
+- 修复附件下载失败且服务端错误响应为空时，解析错误信息可能导致崩溃的问题。
+- 修复网络异常时，尝试完可用服务器地址后，SDK 可能停止自动重连的问题。
+- 修复附件下载回调可能覆盖同一消息的发送回调，导致发送与下载结果相互干扰的问题。
+- 修复发送前校验失败时，消息状态可能仍停留在发送中的问题。
+
 ## v5.1.0 Dev 2026-9-24
 
 #### 重大变更
@@ -586,7 +606,7 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 #### 修复
 
 - [IM SDK] 修复多线程同时调用获取会话列表时，偶现会话未读数不正确的问题。
-- [IM SDK] 修复调用 [REST API](/document/server-side/group_member.html#转让群组) 转让群主后，SDK 上原群主离开群失败的问题。
+- [IM SDK] 修复调用 [REST API](/docs/document/server-side/group_owner_transfer.html) 转让群主后，SDK 上原群主离开群失败的问题。
 - [IM SDK] 修复开启多设备登录后，偶现的收到会话已读多设备同步事件，导致未读数不同步的问题。
 
 ## v4.8.1 2024-07-26
@@ -1042,7 +1062,7 @@ SDK 依赖的 AOSL Crash 检测库已更换为 `ShengwangInfra_iOS`。如使用�
 
 ##### 新增特性：
 
-- [IM SDK] [单向删除服务端会话 API](https://sdkdocs.easemob.com/apidoc/ios/chat3.0/protocol_i_e_m_chat_manager-p.html#a4ac87045ad781e99c59acc271f9af433)；
+- [IM SDK] [单向删除服务端会话 API](/docs/v4/ios/conversation_delete.html#单向删除服务端会话及本地会话)；
 - [IM SDK] 免打扰事件的多设备间同步；
 - [IM SDK] Push 平台推送支持扩展字段获取、后续动作、角标设置、透传消息等功能，具体见：[iOS 推送集成](https://docs-im.easemob.com/push/apppush/iossdk)；
 - [IM SDK] 发送图片支持 PNG 格式；
@@ -1686,7 +1706,7 @@ IM_DEMO 修改：
 
 新功能：
 
-- 实现不同模式的实时语音会议功能 [多人音视频会议](https://docs-im.easemob.com/im/ios/basics/multiuserconference)
+- 实现不同模式的实时语音会议功能 多人音视频会议（历史文档已下线）
 - 添加动态更换对方实时视频显示页面的功能[IEMConferenceManager updateConference:streamId:remoteVideoView:completion:]
 
 ## v3.3.9 2018-02-11
@@ -1804,8 +1824,8 @@ IM_DEMO 修改：
 
 新功能：
 
-- 新增：修改获取群公告，上传下载删除群共享文件，修改群扩展信息接口（接口详情请查看文档[群组管理](https://docs-im.easemob.com/im/ios/basics/group)）
-- 新增：修改获取聊天室公告（接口详情请查看文档[聊天室管理](https://docs-im.easemob.com/im/ios/basics/chatroom)）
+- 新增：修改获取群公告，上传下载删除群共享文件，修改群扩展信息接口（接口详情请查看文档[群组管理](/docs/v4/ios/group_manage.html)）
+- 新增：修改获取聊天室公告（接口详情请查看文档[聊天室管理](/docs/v4/ios/room_manage.html)）
 - 新增：批量设置群组免打扰接口
 
 修复:
@@ -1836,7 +1856,7 @@ IM_DEMO 修改：
 
 新功能：
 
-- 新增：群组改造,增加一系列新接口，具体查看[iOS 3.3.0 api 修改](https://docs-im.easemob.com/im/300iosclientintegration/3.3.0apichange)
+- 新增：群组改造,增加一系列新接口，具体查看iOS 3.3.0 api 修改（历史文档已下线）
 - 新增：获取 SDK 日志路径接口，将日志文件压缩成.gz 文件，返回 gz 文件路径，[EMClient getLogFilesPath:]
 - 更新：使用视频通话录制功能时，必须在开始通话之前调用[EMVideoRecorderPlugin initGlobalConfig]
 
@@ -1857,7 +1877,7 @@ IM_DEMO 修改：
 
 - 新增：实时 1v1 音视频，设置了对方不在线发送离线推送的前提下，当对方不在线时返回回调，以便于用户自定义离线消息推送
 - 更新：SDK 支持 bitcode
-- 更新：SDK 使用动态库(为了方便集成开发,sdk 支持 i386,x86_64,armv7,arm64，当使用动态库上传 appstore 时，需要删除 i386,x86_64)，[动态库集成方式](https://docs-im.easemob.com/im/ios/sdk/import)
+- 更新：SDK 使用动态库(为了方便集成开发,sdk 支持 i386,x86_64,armv7,arm64，当使用动态库上传 appstore 时，需要删除 i386,x86_64)，[动态库集成方式](/docs/v4/ios/integration.html#方法二-手动复制-sdk-文件)
 - 为了使 SDK 更简洁易用,过时的 API 会在后续 3~5 个版本进行删除
 
 红包相关:
