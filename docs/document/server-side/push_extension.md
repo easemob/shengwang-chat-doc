@@ -97,6 +97,7 @@
 | `vivo_click_activity`       | String  | vivo 点击跳转 activity，优先级高于在声网控制台的 **即时通讯 IM** > **功能配置** > **推送证书** > **添加推送证书** > **VIVO** 页面设置的 **Activity** 参数的配置。 |
 | `xiaomi_channel_id` | String  | 小米通道 ID，优先级高于在声网控制台的 **即时通讯 IM** > **功能配置** > **推送证书** > **添加推送证书** > **小米** 页面设置的 **Channel ID** 参数的配置。 |
 | `xiaomi_click_action`       | String  | 小米点击跳转 action，优先级高于在声网控制台的 **即时通讯 IM** > **功能配置** > **推送证书** > **添加推送证书** > **小米** 页面设置的 **Action** 参数的配置。 |
+| `xiaomi_template_param` | Object | 小米推送模板参数采用 JSON 格式，例如 `{"keywords1": "k1"}`。<br/>必须同时满足以下三个条件：<br/> - **必须与模板预配置的格式和参数个数完全一致；**<br/> - **参数值长度 1–128 字符，不可为纯空格；**<br/> - **不支持 emoji、\p{So} 及未分配 Unicode 字符。** |
 
 `em_harmony_push_ext` 结构如下：
 
