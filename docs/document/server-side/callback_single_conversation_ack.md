@@ -23,7 +23,6 @@
 "chat_type": "channel_ack", 
 "security": "203e3cXXXX0ebdbd776d8aa9cc057b2d",
 "payload": {
-"ack_message_id": "1252106100258375636", 
 "type": "channel_ack" 
 },
 "host": "XXXX@hsb-XXXX-msync0",
@@ -43,7 +42,6 @@
 | `chat_type` | String    |  会话已读回执。           |
 | `security`  | String   | 签名，格式如下: `MD5（callId+secret+timestamp）`。[配置回调规则](callback_postsending.html#回调规则) 后，IM 服务器会自动为该规则生成 secret，向你的 App Server 发送数据时会基于该 secret 生成该签名，作为你的服务器识别 IM 服务器的依据。若要使用自定义密钥，可联系声网商务。 |
 | `payload`   | object   | 会话已读回执详情。 |
-| `payload.ack_message_id` | String     | 会话中消息的消息 ID。                  |
 | `payload.type` | String | 会话已读回执类型。       |                |
 | `host`      | String   | 服务器名称。                                                 |
 | `from` | String          | 发送已读回执的用户。|
