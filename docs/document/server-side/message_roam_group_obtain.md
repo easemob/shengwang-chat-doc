@@ -50,7 +50,7 @@ curl -X POST 'https://{host}/api/server/v6/app-id/{app_id}/roaming/group' \
 -d '{
     "username": "alice",
     "groupId": "321582707834881",
-    "limit": "20",
+    "limit": 20,
     "order": "down"
 }'
 ```
@@ -69,11 +69,11 @@ curl -X POST 'https://{host}/api/server/v6/app-id/{app_id}/roaming/group' \
 -d '{
     "username": "alice",
     "groupId": "321582707834881",
-    "limit": "20",
+    "limit": 20,
     "order": "down",
     "cursor": "<上一页返回的游标>",
-    "startTimestamp": "1700000000000",
-    "endTimestamp": "1700003600000"
+    "startTimestamp": 1700000000000,
+    "endTimestamp": 1700003600000
 }'
 ```
 
@@ -89,11 +89,11 @@ curl -X POST 'https://{host}/api/server/v6/app-id/{app_id}/roaming/group' \
 | ---------------- | ------ | -------- | ------------------------------------------------------------ |
 | `username`       | String | 是       | 要查询其漫游消息的用户 ID。该用户用于确定消息可见范围，不表示只查询该用户发送的消息。 |
 | `groupId`        | String | 是       | 要获取历史消息的群组 ID。                                    |
-| `limit`          | String | 是       | 每页获取的消息数量，以十进制整数字符串传入，例如 `"20"`。取值范围为 1–20。 |
+| `limit`          | Number | 是       | 每页获取的消息数量。取值范围为 1–20。 |
 | `order`          | String | 否       | 查询方向，请使用小写值：<br/> - `up`：从旧到新查询，先取较早的消息。<br/> - （默认）`down`：从新到旧查询，先取较新的消息。 |
 | `cursor`         | String | 否       | 分页游标。首次请求时不传入，后续请求使用上一次响应返回的游标。具体用法详见 [分页获取](#分页获取)。 |
-| `startTimestamp` | String | 否       | 查询的起始时间，以十进制整数字符串表示 Unix 时间戳，单位为毫秒。仅返回该时间点之后的消息，不包含该时间点。不传入时，不额外设置起始时间条件。 |
-| `endTimestamp`   | String | 否       | 查询的结束时间，以十进制整数字符串表示 Unix 时间戳，单位为毫秒。仅返回该时间点之前的消息，不包含该时间点。不传入时，不额外设置结束时间条件。 |
+| `startTimestamp` | Number | 否       | 查询的起始时间，Unix 时间戳，单位为毫秒。仅返回该时间点之后的消息，不包含该时间点。不传入时，不额外设置起始时间条件。 |
+| `endTimestamp`   | Number | 否       | 查询的结束时间，Unix 时间戳，单位为毫秒。仅返回该时间点之前的消息，不包含该时间点。不传入时，不额外设置结束时间条件。 |
 
 使用参数时，请注意：
 
@@ -112,7 +112,7 @@ curl -X POST 'https://{host}/api/server/v6/app-id/{app_id}/roaming/group' \
 
 ### 未指定时间范围时的查询行为
 
-在传入必填参数的基础上，若设置 `"limit": "20"`，但不设置 `cursor`、`startTimestamp` 和 `endTimestamp`，则从第一页开始查询，且不额外限定查询时间范围。查询结果取决于 `order` 的设置：
+在传入必填参数的基础上，若设置 `"limit": 20`，但不设置 `cursor`、`startTimestamp` 和 `endTimestamp`，则从第一页开始查询，且不额外限定查询时间范围。查询结果取决于 `order` 的设置：
 
 - 若不设置 `order`，默认使用 `down`，查询当前群组中对指定用户可见的 **最多 20 条最新漫游消息**。
 - 若设置 `"order": "up"`，则查询可见范围内 **最早的最多 20 条漫游消息**。
