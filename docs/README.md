@@ -252,7 +252,7 @@ projects:
                 link: /docs/document/unity/message_retrieve.html
               - icon: /sdk/rest.svg
                 text: REST
-                link: /docs/document/server-side/message_historical.html
+                link: /docs/document/server-side/message_roam_single_obtain.html
           - text: 撤回消息
             desc: 发送方可以撤回一条发送成功的消息，包括已经发送的历史消息，离线消息或漫游消息。
             sdks:
