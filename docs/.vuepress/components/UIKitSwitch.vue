@@ -113,6 +113,12 @@ watch(
 
 // 切换平台，如果有相同路径的route就直接跳转
 const onChange = (platform) => {
+  // Web v4 contains two frameworks; entering Web starts with Vue.
+  if (kitType.value === 'chatuikit' && kitVersion.value === 'v4' && platform === 'web') {
+    router.push('/docs/uikit/chatuikit/v4/web/vue_overview.html');
+    return;
+  }
+
   const nextPlatformDocRouters = router.options.routes
     .filter(
       (item) =>

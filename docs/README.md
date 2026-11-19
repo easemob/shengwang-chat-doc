@@ -90,8 +90,11 @@ starter:
         link: /docs/uikit/chatuikit/v4/ios/beginner_guide.html
         text: iOS
       - icon: /sdk/web.svg
-        link: /docs/uikit/chatuikit/v4/web/beginner_guide.html
-        text: Web
+        link: /docs/uikit/chatuikit/v4/web/vue_overview.html
+        text: Web（Vue）
+      - icon: /sdk/web.svg
+        link: /docs/uikit/chatuikit/v4/web/chatuikit_overview.html
+        text: Web（React）
       - icon: /sdk/flutter.svg
         link: /docs/uikit/chatuikit/v2/flutter/chatuikit_overview.html
         text: Flutter
@@ -1101,7 +1104,10 @@ projects:
                 text: iOS
                 link: /docs/uikit/chatuikit/v2/ios/chatuikit_custom_conversation_list.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web（Vue）
+                link: /docs/uikit/chatuikit/v4/web/vue_overview.html#会话列表
+              - icon: /sdk/web.svg
+                text: Web（React）
                 link: /docs/uikit/chatuikit/v2/web/chatuikit_conversation.html
               - icon: /sdk/flutter.svg
                 text: Flutter
@@ -1119,7 +1125,10 @@ projects:
                 text: iOS
                 link: /docs/uikit/chatuikit/v2/ios/chatuikit_custom_chat.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web（Vue）
+                link: /docs/uikit/chatuikit/v4/web/vue_overview.html#聊天与消息
+              - icon: /sdk/web.svg
+                text: Web（React）
                 link: /docs/uikit/chatuikit/v2/web/chatuikit_chat.html
               - icon: /sdk/flutter.svg
                 text: Flutter
@@ -1137,7 +1146,10 @@ projects:
                 text: iOS
                 link: /docs/uikit/chatuikit/v2/ios/chatuikit_custom_contact_list.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web（Vue）
+                link: /docs/uikit/chatuikit/v4/web/vue_overview.html#通讯录与好友
+              - icon: /sdk/web.svg
+                text: Web（React）
                 link: /docs/uikit/chatuikit/v2/web/chatuikit_contactlist.html
               - icon: /sdk/flutter.svg
                 text: Flutter
@@ -1169,6 +1181,9 @@ projects:
               - icon: /sdk/iOS.svg
                 text: iOS
                 link: /docs/uikit/chatuikit/v2/ios/chatuikit_custom_group_details.html
+              - icon: /sdk/web.svg
+                text: Web（Vue）
+                link: /docs/uikit/chatuikit/v4/web/vue_overview.html#群组与群管理
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /docs/uikit/chatuikit/v2/flutter/chatuikit_custom_group_details.html
