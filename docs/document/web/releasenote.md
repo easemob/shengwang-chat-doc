@@ -57,7 +57,7 @@ show_callback_route: false
 
 该版本于 2026 年 9 月 10 日发布。
 
-本文重点说明功能和行为变化，具体的接口删除、重命名及替代方式请参见 [IM Web/小程序 SDK 4.x 到 5.1.1 迁移指南](/docs/document/web/migration_guide.html)。
+Web/小程序 IM SDK 5.1.1 是一次重要的架构升级。本文重点说明功能和行为变化，具体的接口删除、重命名及替代方式请参见 [IM Web/小程序 SDK 4.x 到 5.1.1 迁移指南](/docs/document/web/migration_guide.html)。
 
 #### 新增功能
 
