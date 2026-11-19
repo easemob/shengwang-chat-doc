@@ -143,7 +143,7 @@ starter:
       #   link: /docs/value-added/push/push_overview.html
       #   text: 即时推送
       - icon: /sdk/translation.svg
-        link: /docs/value-added/translation/message_translation_android.html
+        link: /docs/value-added/translation/message_translation_overview.html
         text: 消息翻译
 projects:
   - title: SDK/服务端功能

@@ -28,15 +28,18 @@ export default defineComponent({
         // Their directory route is the reliable signal for keeping groups closed.
         const isLandingPage = route.path.endsWith('/') &&
           /^\/docs\/(?:document|v4|sdk|uikit|callkit|product|value-added)\//.test(route.path)
-        // Only explicitly marked groups start open together; other menus
-        // retain the existing accordion behavior.
+        const isServicePage = route.path.startsWith('/docs/value-added/translation/')
+        // Keep translation groups open while viewing their child pages.
+        // Other menus retain their configured defaults and accordion behavior.
         defaultOpenGroups.value = new Set(props.config.flatMap((item: any, index) =>
-          item.defaultOpen ? [index] : []
+          item.defaultOpen ||
+            (isServicePage && item.defaultOpen === false && containsCurrentPage(item))
+            ? [index] : []
         ))
         openGroupIndex.value = isLandingPage
           ? -1
           : props.config.findIndex((item: any) =>
-              route.path.startsWith('/docs/uikit/chatuikit/v4/web/')
+              (route.path.startsWith('/docs/uikit/chatuikit/v4/web/') || isServicePage)
                 ? containsCurrentPage(item)
                 : isMatchedSidebarItem(route, item)
             )
@@ -48,11 +51,11 @@ export default defineComponent({
       h('li', config.type === 'group'
         ? h(SidebarGroup, {
             config,
-            open: config.defaultOpen
+            open: typeof config.defaultOpen === 'boolean'
               ? defaultOpenGroups.value.has(index)
               : index === openGroupIndex.value,
             onToggle: () => {
-              if (config.defaultOpen) {
+              if (typeof config.defaultOpen === 'boolean') {
                 const next = new Set(defaultOpenGroups.value)
                 if (next.has(index)) next.delete(index)
                 else next.add(index)
@@ -62,7 +65,12 @@ export default defineComponent({
               }
             },
           })
-        : h(SidebarChild, { config }))
+        : h(SidebarChild, {
+            // Translation navigation lists documents; headings stay in the article TOC.
+            config: route.path.startsWith('/docs/value-added/translation/')
+              ? { ...config, children: [] }
+              : config,
+          }))
     ))
   },
 })
