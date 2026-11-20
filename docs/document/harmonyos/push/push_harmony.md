@@ -1,6 +1,6 @@
 # 集成 HarmonyOS 推送
 
-即时通讯 IM SDK 中已集成 HarmonyOS 推送相关逻辑，你还需要完成以下步骤。
+即时通讯 IM SDK 已集成 HarmonyOS Push Kit 的 Push Token 获取与上传逻辑。使用离线推送前，还需完成以下配置。
 
 ## 步骤一 申请服务账号密钥
 
@@ -47,63 +47,63 @@
 | Category | - | 否      | 通知消息类别。详见 [HarmonyOS NEXT 官网相关文档](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/push-apply-right-V5#section16708911111611)。 |
 | Action        | - | 否  | 消息接收方在收到离线推送通知时单击通知栏时打开的应用指定页面的自定义标记。 |
 
-## 步骤三 在项目中配置 Client ID
+## 步骤三 在项目中配置推送 Client ID
 
-在项目模块级别下的 `src/main/module.json5`（例如 `entry/src/main/module.json5`）中，新增 `metadata` 并配置 `client_id`，如下所示：
+在应用模块的 `src/main/module.json5`（例如 `entry/src/main/module.json5`）中，将 `client_id` 添加到 `module.metadata`。其值必须与声网控制台中的推送证书名称一致。
 
-> 配置 `client_id` 的 `value` 时，不能通过 `resource` 中的值配置（例如 `$media.icon`），请直接写入 `client_id` 的值。
-
-```typescript
-"module": {
-  "name": "entry",
-  "type": "xxx",
-  "description": "xxxx",
-  "mainElement": "xxxx",
-  "deviceTypes": [],
-  "pages": "xxxx",
-  "abilities": [],
-  // 配置如下信息
-  "metadata": [ 
-    {
-      "name": "client_id",
-      // 配置为步骤 1： 中获取的 Client ID
-      "value": "xxxxxx"  
-    }
-  ]
+```json
+{
+  "module": {
+    "metadata": [
+      {
+        "name": "client_id",
+        "value": "your-client-id"
+      }
+    ]
+  }
 }
-
 ```
-:::tip
-从HarmonyOS NEXT Developer Beta2起，无需配置Client ID。可以直接看步骤四。
-:::
+
+如果 `module.metadata` 已存在，请将 `client_id` 配置项合并到现有数组中，不要覆盖其他配置项。
 
 ## 步骤四 在 SDK 初始化时配置应用的推送 Client ID
 
 ```typescript
-// ChatOptions 需要传入 appId 参数。
-let options = new ChatOptions({
-  appId: "你的 AppId"
+import { ChatClient, ChatOptions } from '@easemob/chatsdk';
+
+const options = new ChatOptions({
+  appId: 'Your AppId'
 });
-// 传入 AppGallery Connect 获取到的 ClientID。
-options.setAppIDForPush('Your ClientID');
+
+// 传入与推送证书名称及 module.json5 中 client_id 一致的 Client ID。
+options.setAppIDForPush('your-client-id');
 // 初始化即时通讯 IM SDK。
 ChatClient.getInstance().init(context, options);
 ```
 
 ## 步骤五 监听 Push Token 上传结果
 
-你可以设置 `PushListener` 监听 Push Token 的上传结果。
+SDK 初始化完成后、调用 `ChatClient#loginWithToken` 登录前，注册 `PushListener` 监听 Push Token 的获取和绑定结果。登录成功后，SDK 会自动从 HarmonyOS Push Kit 获取 Push Token，并将 Token 与初始化时配置的 Client ID 上传至IM 服务器，应用无需自行判断 Token 是否需要上传。
 
 ```typescript
-private pushListener: PushListener = {
-    onError: (error: ChatError) => {
-      // push token 绑定失败。
-    },
-    onBindTokenSuccess: (token: string) => {
-      // push token 绑定成功。
-    }
+import { ChatClient, ChatError, PushListener } from '@easemob/chatsdk';
+
+const pushListener: PushListener = {
+  onError: (error: ChatError): void => {
+    // Push Token 获取或绑定失败，根据错误码和错误信息处理。
+  },
+  onBindTokenSuccess: (token: string): void => {
+    // Push Token 绑定成功。
+  }
+};
+
+const pushManager = ChatClient.getInstance().pushManager();
+pushManager?.addListener(pushListener);
+
+// 不再需要监听时，移除同一个监听器实例。
+function releasePushListener(): void {
+  pushManager?.removeListener(pushListener);
 }
-ChatClient.getInstance().pushManager()?.addListener(this.pushListener);
 ```
 
-
+主动登录时，即使 Push Token 未发生变化，SDK 也会重新上传；上传失败时会清除本地保存的 Push Token。调用 `ChatClient#logout` 退出登录时，默认会解绑当前设备的 Push Token；若将 `unbindToken` 参数设置为 `false`，则仅退出 IM 账号而不解绑 Token，设备仍可能收到当前账号的离线推送通知。详见 [退出登录](/docs/document/harmonyos/login.html#退出登录)。

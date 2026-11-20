@@ -23,24 +23,31 @@ options.setAppId("Your appId");
 EMClient.getInstance().init(getApplicationContext(), options);
 ```
 
-下表列出初始化时常用的 `EMOptions` 方法。
+下表列出常用的 `EMOptions` 方法。除明确支持初始化后修改的配置外，请在初始化 SDK 前完成设置。
 
 | 方法名称 | 描述 |
 | :--- | :--- |
 | `setAppId("Your appId")` | 设置 App ID，应用的唯一标识。 |
 | `setPushConfig(EMPushConfig pushConfig)` | 设置离线推送配置。应在 `init` 前传入已构建的 `EMPushConfig`；未设置时，SDK 会创建默认推送配置。 |
+| `setUsePushInBackground(boolean usePushInBackground)` | 自 SDK 5.2.1 起，设置应用进入后台后是否断开长连接并使用厂商推送。该开关必须在初始化前调用。默认 `false`，SDK 不会因应用进入后台而主动断连；设置为 `true` 且切入后台时推送通道有效，SDK 会安排约 10 秒后断连。通过 `isUsePushInBackground()` 查询。完整条件和时机见 [配置后台消息接收策略](/docs/document/android/push/push_overview.html#配置后台消息接收策略)。 |
+| `setDisconnectNotifyThreshold(int seconds)` | 自 SDK 5.2.1 起，配置可恢复断线的通知宽限时间，单位为秒，默认 `10`，小于或等于 `0` 时不延迟。初始化前后均可设置，通过 `getDisconnectNotifyThreshold()` 查询。详见 [配置断开通知宽限时间](connection.html#配置断线通知宽限期)。 |
 | `setAutoAcceptGroupInvitation(boolean value)` | 设置是否自动接受群组邀请。<br/> -（默认）`true`：自动接受群组邀请。<br/> - `false`：不自动接受群组邀请。 |
 | `setAcceptInvitationAlways(boolean value)` | 设置是否自动接受好友邀请。<br/> -（默认）`true`：自动接受好友邀请。<br/> - `false`：不自动接受好友邀请。 |
 | `setDeleteMessagesAsExitChatRoom(boolean delete)` | 设置主动或被动退出聊天室时是否删除该聊天室的本地消息。<br/> -（默认）`true`：删除。<br/>- `false`：保留。 |
 | `setDeleteMessagesAsExitGroup(boolean delete)` | 设置主动或被动退出群组时是否删除该群组的本地消息。<br/> -（默认）`true`：删除。<br/> - `false`：保留。 |
 | `allowChatroomOwnerLeave(boolean allowed)` | 设置是否允许聊天室所有者离开聊天室。<br/> -（默认）`true`：允许；离开后所有者仍保留聊天室权限，但不再接收聊天室消息。<br/> - `false`：不允许。 |
-| `setDataSyncType(EnumSet<EMDataSyncType> types)` | 设置登录后自动同步的数据类型。可选 `CONVERSATIONS`、`CONTACTS`、`JOINED_GROUPS`；传入 `NONE`、`null` 或空集合表示不同步。必须在 `init` 前设置。 |
+| `setDataSyncType(EnumSet<EMDataSyncType> types)` | 设置登录后自动同步的数据类型。可选 `CONVERSATIONS`、`CONTACTS`、`JOINED_GROUPS`；传入 `NONE`、`null` 或空集合表示不同步。自 SDK v5.1.0 起，默认值为 `CONVERSATIONS`。 |
+| `setEnableChatroomConversation(boolean enable)`              | 设置获取本地会话列表时是否包含聊天室会话。该配置不控制聊天室会话的创建或存储，也不影响聊天室消息的正常收发。该功能自 SDK v5.1.0 起支持。<br/> - `true`：本地会话列表中包含聊天室会话。<br/> -（默认）`false`：本地会话列表中不包含聊天室会话。<br/> 你可以通过 `isEnableChatroomConversation()` 查询当前配置下获取本地会话列表时是否包含聊天室会话。 |
+| `setLoadEmptyConversations(boolean isLoadEmptyConversations)` | 设置从本地数据库加载会话时是否包含空会话。<br/> - `true`：包含空会话。<br/> - （默认）`false`：不包含空会话。 |
+| `setAutoLoadAllConversations(boolean autoLoadAllConversations)` | 设置登录成功后是否自动将本地数据库中的全部会话加载到内存。自 SDK v5.1.0 起支持。<br/> - （默认）`true`：自动加载全部会话。<br/> - `false`：不自动加载全部会话，可通过分页或筛选接口按需加载。 |
 
 关于私有化 SDK 的 IP 地址或域名配置，详见 [配置文档](private_ip_domain.html)。
 
 ## 初始化后设置监听
 
 初始化完成后，可以注册连接状态监听和消息监听，以感知 SDK 与 IM 服务器的连接变化及新消息。连接监听回调运行在工作线程，不要直接更新 UI，也不要执行耗时操作；弱网断开后 SDK 会自动重连，无需手动重连。
+
+自 SDK 5.2.1 起，网络异常等可恢复断开的通知受 [断线通知宽限期](connection.html#配置断线通知宽限期) 控制。未收到 `onDisconnected` 不代表长连接仍然可用；查询当前连接状态请使用 `EMClient#getConnectionState()`。
 
 ```java
 private final EMConnectionListener connectionListener = new EMConnectionListener() {
@@ -51,7 +58,7 @@ private final EMConnectionListener connectionListener = new EMConnectionListener
 
     @Override
     public void onDisconnected(int errorCode) {
-        // SDK 与 IM 服务器断开连接，可根据 errorCode 区分原因。
+        // 收到断开通知；可恢复断开的通知可能延迟，请通过 getConnectionState() 查询当前状态。
     }
 };
 
@@ -81,7 +88,7 @@ EMClient.getInstance().chatManager().removeMessageListener(messageListener);
 
 ### 同步的数据
 
-SDK 支持在初始化前通过 `EMOptions.setDataSyncType` 配置登录后自动同步的数据类型。用户登录成功后，SDK 按配置同步服务端数据并更新本地缓存或数据库。
+SDK 支持在初始化前通过 `EMOptions#setDataSyncType` 配置登录后自动同步的数据类型。用户登录成功后，SDK 按配置同步服务端数据并更新本地缓存或数据库。自 SDK v5.1.0 起，该配置默认包含 `EMDataSyncType.CONVERSATIONS`，即默认自动同步会话列表。
 
 当前支持同步会话列表、好友列表以及当前用户已加入的群组列表。各数据类型的配置项、本地读取方式如下：
 
@@ -99,7 +106,7 @@ SDK 支持在初始化前通过 `EMOptions.setDataSyncType` 配置登录后自�
 
 配置规则如下：
 
-- 未调用 `setDataSyncType` 时，默认不自动同步数据，即 `EMDataSyncType.NONE`。
+- 自 Android SDK v5.1.0 起，未调用 `setDataSyncType` 时，默认自动同步会话数据，即 `EMDataSyncType.CONVERSATIONS`。
 - 需要同步一种或多种数据时，使用 `EnumSet.of(...)` 显式传入对应枚举值。
 - 传入 `EnumSet.of(EMDataSyncType.NONE)`、`null` 或空集合表示不自动同步。
 
@@ -189,11 +196,37 @@ List<EMGroup> joinedGroups =
         EMClient.getInstance().groupManager().getAllGroups();
 ```
 
+## 开启用户信息自动管理
+
+Android SDK 支持通过 `EMOptions#setEnableUserInfo(boolean enableUserInfo)` 配置用户信息自动管理功能。该参数默认为 `false`；设置为 `true` 后，SDK 会在用户登录成功时自动同步当前登录用户的用户属性。其他用户的用户属性会在接收相关消息、主动从服务端获取用户属性等场景下更新。该配置须在初始化 SDK 前设置。
+
+用户信息自动管理与联系人自动同步相互独立。Android v5.x 通过 `EMOptions#setDataSyncType` 配置登录后自动同步的数据类型，其中 `EMOptions.EMDataSyncType.CONTACTS` 表示同步联系人数据。开启用户信息自动管理不会在登录时自动获取所有好友的昵称和头像。用户属性更新事件、本地读取与主动获取方式，详见 [用户信息自动管理](userinfo_provider.html)。
+
+如果两项功能都需要，可在同一次初始化中配置。以下示例同时保留默认的会话数据同步：
+
+```java
+import java.util.EnumSet;
+
+EMOptions options = new EMOptions();
+options.setAppId("Your AppId");
+options.setDataSyncType(EnumSet.of(
+        EMOptions.EMDataSyncType.CONVERSATIONS,
+        EMOptions.EMDataSyncType.CONTACTS
+));
+options.setEnableUserInfo(true);
+
+EMClient.getInstance().init(context.getApplicationContext(), options);
+```
+
 ## 接口列表
 
 | API 名称 | 所属模块/类 | 说明 |
 | :--- | :--- | :--- |
 | [`init`](#初始化-sdk) | `EMClient` | 初始化 Android SDK 单例。 |
+| [`setUsePushInBackground`](/docs/document/android/push/push_overview.html#配置后台消息接收策略) | `EMOptions` | 设置后台推送开关，须在初始化前调用。 |
+| [`isUsePushInBackground`](/docs/document/android/push/push_overview.html#配置后台消息接收策略) | `EMOptions` | 查询后台推送开关值。 |
+| [`setDisconnectNotifyThreshold`](connection.html#配置断线通知宽限期) | `EMOptions` | 配置可恢复断开的通知宽限时间，初始化前后均可设置。 |
+| [`getDisconnectNotifyThreshold`](connection.html#配置断线通知宽限期) | `EMOptions` | 查询断开通知宽限时间。 |
 | [`setDataSyncType`](#配置方式) | `EMOptions` | 设置登录后自动同步的数据类型。 |
 | [`getAllConversations`](#登录后读取同步结果) | `EMChatManager` | 读取本地会话列表。 |
 | [`getContactsFromLocal`](#登录后读取同步结果) | `EMContactManager` | 从本地数据库读取好友列表。 |

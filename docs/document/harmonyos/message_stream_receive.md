@@ -4,7 +4,7 @@
 
 即时通讯 IM 支持在单聊和群组聊天中接收流式消息。流式消息是一种边生成、边发送、边接收的实时消息传输机制，适用于长文本逐段输出的场景，例如 AI 对话、实时协作写作和分段生成内容展示等。
 
-流式消息由业务服务端生成并通过 [RESTful API](/document/server-side/message_stream_send_single.html) 发送，HarmonyOS SDK 负责接收、排序、合并和回调，不提供客户端主动发送流式消息的能力。
+流式消息由业务服务端生成并通过 [RESTful API](/docs/document/server-side/message_stream_send_single.html) 发送，HarmonyOS SDK 负责接收、排序、合并和回调，不提供客户端主动发送流式消息的能力。
 
 ## 核心概念
 
@@ -15,25 +15,25 @@
 - **当前分片内容**：当前回调中接收到的单个分片内容，可通过 `ChatStreamChunk#text()` 获取。
 - **累计合并内容**：从首个分片到当前分片为止已合并的完整内容，可通过 `TextMessageBody#getContent()` 获取。
 - **流式消息传输状态**：流式消息在传输过程中的阶段标识，例如开始、传输中、完成或异常结束，可通过 `ChatStreamChunk#status()` 获取。
-- **完成原因码**：流式消息结束时的业务原因标识，可通过 `ChatStreamChunk#finishReason()` 获取。
-- **消息 ID**：流式消息的唯一标识，用于标识整条流式消息。在 HarmonyOS SDK 中，可通过 `ChatMessage#getMsgId` 获取。
+- **完成原因码**：流式消息结束时由业务服务器设置的自定义原因标识，可通过 `ChatStreamChunk#finishReason()` 获取。
+- **消息 ID**：流式消息的唯一标识，用于标识整条流式消息。在 HarmonyOS SDK 中，可通过 `ChatMessage#getMsgId()` 获取。
 
 ## 支持范围与限制
 
 - 会话类型：仅支持单聊和群聊，不支持聊天室。
 - 消息类型：仅支持文本类型的流式消息。
-- 发送方式：仅支持通过 [服务端 RESTful API](/document/server-side/message_stream_send_single.html) 发送。
+- 发送方式：仅支持通过 [服务端 RESTful API](/docs/document/server-side/message_stream_send_single.html) 发送。
 - 客户端能力：HarmonyOS SDK 仅支持接收，不支持发送。
 - 消息标识：`msgId` 标识整条流式消息。
-- 消息限制：消息总长度、分片发送间隔、总传输时长等限制以 [服务端 API 文档](/document/server-side/message_stream_send_single.html#支持范围与限制) 为准。
+- 消息限制：消息总长度、分片发送间隔、总传输时长等限制以 [服务端 API 文档](/docs/document/server-side/message_stream_send_single.html#支持范围与限制) 为准。
 
 ## 前提条件
 
 开始前，请确保满足以下条件：
 
-- 已升级 SDK 至 v1.12.0 或以上版本。
+- 已升级 SDK 至 v5.0.0 或以上版本。
 - 已完成 SDK 初始化，详见 [初始化文档](initialization.html)。
-- 已了解即时通讯 IM 的 [使用限制](/product/limitation.html)。
+- 已了解即时通讯 IM 的 [使用限制](/docs/product/limitation.html)。
 
 ## 技术原理
 
@@ -59,18 +59,26 @@
 以下示例展示了如何注册消息监听器并接收流式消息分片。
 
 ```typescript
-ChatClient.getInstance().chatManager()?.addMessageListener({
-  onMessageReceived: (messages: Array<ChatMessage>) => {
+const messageListener: ChatMessageListener = {
+  onMessageReceived: (messages: Array<ChatMessage>): void => {
     // 普通消息接收回调
   },
 
-  onStreamMessageReceived: (messages: Array<ChatMessage>) => {
+  onStreamMessageReceived: (messages: Array<ChatMessage>): void => {
     // 流式消息分片接收回调
     for (const message of messages) {
       handleStreamChunk(message);
     }
   }
-} as ChatMessageListener);
+};
+
+const chatManager = ChatClient.getInstance().chatManager();
+chatManager?.addMessageListener(messageListener);
+
+// 在页面或组件销毁时调用，移除同一个监听器实例。
+function releaseMessageListener(): void {
+  chatManager?.removeMessageListener(messageListener);
+}
 ```
 
 在接收到流式消息分片后，你可以进一步获取当前分片内容、传输状态、累计合并内容、自定义类型、错误码和完成原因等信息，并根据 `msgId` 更新同一条消息的展示内容。
@@ -82,11 +90,17 @@ function handleStreamChunk(message: ChatMessage): void {
     return;
   }
 
+  // 整条流式消息的消息 ID
+  const msgId: string = message.getMsgId();
+
   // 当前分片内容
   const incrementText: string = chunk.text();
 
   // 当前传输状态
   const status: ChatStreamStatus = chunk.status();
+
+  // COMPLETE、START_AND_COMPLETE 和 ERROR 状态均表示传输结束
+  const completed: boolean = chunk.isCompleted();
 
   // 累计合并内容
   let fullText = "";
@@ -98,7 +112,7 @@ function handleStreamChunk(message: ChatMessage): void {
   // 自定义类型，例如 text / markdown
   const customType: string = chunk.customType();
 
-  // 错误码与完成原因
+  // 错误码仅在 ERROR 状态下有意义；结束原因由业务服务器设置
   const errorCode: number = chunk.errorCode();
   const finishReason: number = chunk.finishReason();
   // 建议业务侧按 msgId 更新同一条消息的展示内容
@@ -115,12 +129,12 @@ function handleStreamChunk(message: ChatMessage): void {
 
 | 方法 | 返回值类型 | 说明 |
 | :--- | :--- | :--- |
-| `text()` | String | 获取当前分片的文本内容。 |
-| `status()` | ChatStreamStatus | 获取当前分片对应的流式消息传输状态。 |
-| `isCompleted()` | Boolean | 判断流式消息是否已传输完成。<br>当 `status()` 返回 `COMPLETE`、`START_AND_COMPLETE` 或 `ERROR` 中任意一种状态时，`isCompleted()` 方法返回 `true`。 |
-| `customType()` | String | 获取自定义透传类型，例如，用于标识文本格式的 `"markdown"`。 |
-| `errorCode()` | Number | 获取错误码。默认值 `0` 表示正常。其他值详见 [错误码文档](error.html)。 |
-| `finishReason()` | Number | 获取完成原因码（由业务服务器设置）。默认值 `0` 表示无异常。 |
+| `text()` | `string` | 获取当前分片的文本内容。 |
+| `status()` | `ChatStreamStatus` | 获取当前分片对应的流式消息传输状态。 |
+| `isCompleted()` | `boolean` | 判断流式消息是否已传输完成。<br>当 `status()` 返回 `COMPLETE`、`START_AND_COMPLETE` 或 `ERROR` 中任意一种状态时，`isCompleted()` 方法返回 `true`。 |
+| `customType()` | `string` | 获取自定义透传类型，例如，用于标识文本格式的 `"markdown"`。 |
+| `errorCode()` | `number` | 获取 SDK 错误码，仅在 `ERROR` 状态下有意义。`512` 表示相邻分片间隔超时，`513` 表示整体传输超时。默认值 `0` 表示正常。其他值详见 [错误码文档](error.html)。 |
+| `finishReason()` | `number` | 获取业务服务器设置的自定义结束原因码，仅在结束分片中有意义。`0` 表示未设置结束原因或传输未被业务中断。 |
 
 ```typescript
 function handleStreamChunk(message: ChatMessage): void {
@@ -185,7 +199,7 @@ UI 使用建议如下：
 | `START_AND_COMPLETE` | 流式消息在单个分片内完成传输，此时消息仅包含一个分片。 | 直接按完整消息展示内容，并结束流式渲染流程。 |
 | `PROGRESS` | 流式消息传输中。 | 使用累计合并内容持续刷新消息展示，并保持消息处于“生成中”状态。 |
 | `COMPLETE` | 最后一个分片到达，流式消息传输完成。 | 展示最终合并内容，结束“生成中”状态，并按普通消息完成态处理。 |
-| `ERROR` | 流式消息传输异常结束。 | 保留当前已接收的内容，结束流式渲染，并结合 `errorCode` 和 `finishReason` 展示异常结束状态或错误提示。<br>- `errorCode == 0`：表示 SDK 侧无异常。<br>- `errorCode != 0`：表示本次流式消息以异常状态结束，建议记录日志并提示用户“内容生成中断”。<br>- `finishReason`：建议由服务端定义业务语义，例如，正常完成、主动停止、超时中止或模型异常等，并在客户端统一映射为对应的展示文案。 |
+| `ERROR` | 流式消息传输异常结束。 | 保留当前已接收的内容并结束流式渲染。`errorCode` 为 `512` 表示相邻分片间隔超时，为 `513` 表示整体传输超时；其他错误码参见 [错误码文档](error.html)。`finishReason` 是业务服务器设置的自定义完成原因码，客户端可按约定映射为对应的展示文案。 |
 
 建议界面渲染优先使用累计合并内容，以确保用户始终看到当前最新的完整文本。对于异常结束的流式消息，建议保留已生成的内容，并结合业务需求展示“已中断”、“生成失败”或“已停止”等状态提示。
 
@@ -193,12 +207,13 @@ UI 使用建议如下：
 
 | 功能 | 是否支持 | 基本说明 |
 | :--- | :--- | :--- |
-| [发送消息](/document/server-side/message_stream_send_single.html) | 支持 | 通过服务端接口发送流式消息。 |
+| [发送消息](/docs/document/server-side/message_stream_send_single.html) | 支持 | 通过服务端接口发送流式消息。 |
 | [接收消息](message_stream_receive.html) | 支持 | 客户端接收通过服务端接口发送的流式消息。 |
 | [消息漫游](message_retrieve.html#从服务器获取指定会话的消息) | 支持 | 从服务端获取历史消息。 |
 | [消息扩展](message_extension.html) | 支持 | 为消息携带自定义扩展字段。 |
 | [定向发送](message_target.html) | 不支持 | 仅向群组中的指定成员投递消息。 |
 | [消息已读回执](message_receipt.html) | 不支持 | 接收方回传已读状态。 |
+| 消息输入状态 | 不支持 | 通知对方“正在输入”状态。 |
 | [消息表情回复（Reaction）](reaction.html) | 支持 | 对消息添加回复表情。 |
 | [消息置顶](message_pin.html) | 支持 | 将消息置顶到会话中。 |
 | [消息撤回](message_recall.html) | 支持 | 撤回已发送消息。 |
@@ -207,18 +222,19 @@ UI 使用建议如下：
 | [消息搜索](message_search_local.html) | 支持 | 在本地或会话中搜索消息。 |
 | [会话未读数](conversation_unread.html) | 支持 | 将消息计入会话未读数。 |
 | 会话最后一条消息 | 支持 | 作为会话最后一条消息展示。 |
-| [离线推送](/document/harmonyos/push/push_overview.html) | 支持 | 用户离线时进行消息推送提醒。 |
-| [消息翻译](/value-added/translation/message_translation_android.html) | 不支持 | 对消息内容进行翻译。 |
-| [发送前回调](/document/server-side/callback_presending.html) | 不支持 | 消息发送前触发服务端回调，可用于在消息发送前由应用服务器执行预处理逻辑。 |
-| [发送后回调](/document/server-side/callback_postsending.html) | 不支持 | 消息发送后触发服务端回调，可用于 app 后台实现必要的数据同步。 |
+| [离线推送](/docs/document/harmonyos/push/push_overview.html) | 支持 | 用户离线时进行消息推送提醒。 |
+| 内容审核 | 不支持 | 对消息内容进行审核拦截。 |
+| [消息翻译](/docs/value-added/translation/message_translation_harmonyos.html) | 支持 | 对消息内容进行翻译。 |
+| [发送前回调](/docs/document/server-side/callback_presending.html) | 不支持 | 消息发送前触发服务端回调，可用于在消息发送前由应用服务器执行预处理逻辑。 |
+| [发送后回调](/docs/document/server-side/callback_postsending.html) | 不支持 | 消息发送后触发服务端回调，可用于 app 后台实现必要的数据同步。 |
 | 消息发送成功后在发送方多客户端同步 | 不支持 | 消息发送成功后同步到发送方其他设备。 |
-| [发送方和接收方的本地数据库存储](/product/limitation.html#消息存储) | 支持 | 在发送方和接收方本地数据库中存储消息。 |
+| [发送方和接收方的本地数据库存储](/docs/product/limitation.html#消息存储) | 支持 | 在发送方和接收方本地数据库中存储消息。 |
 
 ## 常见问题
 
 #### 1. SDK 能否主动发送流式消息？
 
-不支持。流式消息 [仅支持通过服务端 RESTful API 发送](/document/server-side/message_stream_send_single.html)，HarmonyOS SDK 只负责接收。
+不支持。流式消息 [仅支持通过服务端 RESTful API 发送](/docs/document/server-side/message_stream_send_single.html)，HarmonyOS SDK 只负责接收。
 
 #### 2. `text()` 和 `getContent()` 有何区别？
 

@@ -2,7 +2,7 @@
 
 ## 功能说明
 
-会话置顶用于将重要的单聊、群聊或聊天室会话固定在会话列表靠前位置，方便用户快速找到高频或重点会话。置顶状态会保存到服务端，并同步到当前用户的其他设备和本地会话数据。
+会话置顶用于将重要的单聊、群聊会话固定在会话列表靠前位置，方便用户快速找到高频或重点会话；不支持聊天室会话。置顶状态会保存到服务端，并同步到当前用户的其他设备和本地会话数据。
 
 ## 前提条件
 
@@ -39,7 +39,7 @@ EMClient.shared().chatManager?.pinConversation(
 
 | 参数 | 类型 | 说明 |
 | :--- | :--- | :--- |
-| `conversationId` | String | 会话 ID。<br/> - 单聊：对端用户 ID。<br/> - 群聊：群组 ID。<br/> - 聊天室：聊天室 ID。 |
+| `conversationId` | String | 会话 ID。<br/> - 单聊：对端用户 ID。<br/> - 群聊：群组 ID。<br/> 不支持聊天室会话。 |
 | `isPinned` | Boolean | 是否置顶。<br/> - `true`：置顶。<br/> - `false`：取消置顶。 |
 | `completionBlock` | `(EMError?) -> Void` | 异步操作结果。`error == nil` 表示成功，否则可通过 `EMError#code` 和 `EMError#errorDescription` 处理失败。 |
 
@@ -63,7 +63,7 @@ if let conversation {
 
 置顶状态会随会话数据在登录后自动同步并写入本地，应用应在同步完成后读取本地会话列表。
 
-初始化 SDK 前，将 `EMOptions#dataSyncType` 配置为包含 `.conversations`：
+如需显式配置会话同步，可以在初始化 SDK 前进行以下设置：
 
 ```swift
 let options = EMOptions(appId: "your app ID")
@@ -220,7 +220,7 @@ let sortedConversations =
 
 ## 注意事项
 
-- 会话置顶支持单聊、群聊和聊天室会话。
+- 会话置顶支持单聊和群聊会话；不支持聊天室会话。
 - `conversationId` 不能为空；调用失败时，应根据 completion 中的 `EMError#code` 和 `EMError#errorDescription` 处理。
 - 最多可以置顶 50 个会话。
 - 会话置顶状态保存在服务端，并同步到当前用户的其他设备和本地会话数据。

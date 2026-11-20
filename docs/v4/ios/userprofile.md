@@ -88,7 +88,15 @@ NSString *url = @"https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/IMD
 
 ### 从服务端获取用户的所有属性
 
-你可以调用 `fetchUserInfoById` 从服务端获取一个或多个用户的全部属性。自 v4.20.0 开始，若返回的用户属性更新时间戳大于本地存储的用户属性更新时间戳，SDK 会触发 `EMUserInfoManagerDelegate#onUserInfoUpdate` 事件。
+你可以调用 `fetchUserInfoById` 从服务端获取一个或多个用户的全部属性。
+
+以下用户属性更新事件自 SDK 4.20.0 开始支持。获取成功并不一定触发用户属性更新事件。SDK 会比较服务端返回的用户属性更新时间与本地缓存：
+
+- 其他用户的属性解析成功，且服务端更新时间晚于本地缓存时，触发 `EMUserInfoManagerDelegate#onUserInfoUpdate`。
+- 当前登录用户自己的属性满足上述更新条件时，触发 `EMUserInfoManagerDelegate#onSelfUserInfoUpdate`。
+- 服务端更新时间不晚于本地缓存，或未返回有效的用户属性更新时间时，不会因本次查询触发更新事件。
+
+上述主动查询及其更新事件不要求开启 `EMOptions.enableUserInfo = YES`。业务侧可直接使用 completion 回调中的属性刷新界面，无需等待更新事件。监听方式详见 [监听用户属性变更](#监听用户属性变更)。
 
 ```objectivec
 // 每次传入的用户 ID 数量不能超过 100。
@@ -99,7 +107,7 @@ NSString *url = @"https://download-sdk.oss-cn-beijing.aliyuncs.com/downloads/IMD
 
 ### 从服务端获取用户的指定属性
 
-你可以调用 `fetchUserInfoById` 从服务端获取获取指定用户的一个或多个属性。自 v4.20.0 开始，若返回的用户属性更新时间戳大于本地存储的用户属性更新时间戳，SDK 会触发 `EMUserInfoManagerDelegate#onUserInfoUpdate` 事件。
+你可以调用 `fetchUserInfoById` 从服务端获取指定用户的一个或多个属性。用户属性更新事件的触发条件与 [获取全部属性](#从服务端获取用户的所有属性) 相同。
 
 ```objectivec
 // 获取指定用户的指定用户属性。
@@ -135,6 +143,8 @@ if let userInfoMap = result {
 - 群成员展示等场景中，需要维护指定非好友用户的最新用户属性。
 
 :::tip
+使用非好友用户属性变更订阅功能前，你需要联系声网商务开通该功能。
+
 本功能只适用于非好友用户。关于当前用户、非好友用户和好友相关的用户属性变更通知详情，请参见 [用户属性变更事件](#监听用户属性变更)。
 :::
 
@@ -192,14 +202,16 @@ NSArray<NSString *> *userIds = @[@"user1", @"user2"];
 
 好友用户及非好友用户的属性更新，均可能通过以下方式触发 SDK 的 `EMUserInfoManagerDelegate#onUserInfoUpdate` 事件：
 
-1. **主动拉取更新**：主动调用 [从服务端获取用户属性](userprofile.html#从服务端获取用户的所有属性) 或 [从服务端获取群成员信息](group_manage.html#获取群成员列表) 接口时，若服务端返回的用户属性更新时间戳大于本地存储的时间戳，SDK 会自动更新本地数据并触发该事件。
-2. **消息携带更新**：若启用了 [用户信息自动管理功能](userinfo_provider.html#开启用户信息自动管理)，当收到消息且消息中携带的发送方用户属性更新时间晚于本地缓存时，SDK 会重新拉取该用户属性并触发该事件。此机制对好友与非好友发送方均生效。
-3. **订阅用户变更（仅限非好友）**：若已 [订阅非好友用户的属性变更事件](#订阅非好友用户的属性变更)，则当这些被订阅的非好友用户属性发生变更时，SDK 也会触发该事件。
+1. **主动获取用户属性**：自 SDK 4.20.0 开始，调用 [`IEMUserInfoManager#fetchUserInfoById`](#从服务端获取用户的所有属性) 时，若其他用户的属性解析成功，且服务端更新时间晚于本地缓存，则触发 `onUserInfoUpdate`。该主动查询不要求开启用户信息自动管理。
+2. **获取群成员信息时补拉用户属性**：自 SDK 4.20.0 开始，调用 [`IEMGroupManager#fetchGroupMemberInfoListFromServerWithGroupId`](group_manage.html#获取群成员列表) 时，只有开启用户信息自动管理，且本地没有成员属性缓存或昵称、头像都为空，SDK 才补拉用户属性。补拉结果满足上述更新条件时，触发 `onUserInfoUpdate`；已有昵称或头像时直接使用缓存，不会检查服务端属性是否有更新。
+3. **消息携带更新**：若启用了 [用户信息自动管理功能](userinfo_provider.html#开启用户信息自动管理)，当收到消息且消息中携带的发送方用户属性更新时间晚于本地缓存时，SDK 会重新拉取该用户属性并触发该事件。此机制对好友与非好友发送方均生效。
+4. **订阅用户变更（仅限非好友）**：若已 [订阅非好友用户的属性变更事件](#订阅非好友用户的属性变更)，则当这些被订阅的非好友用户属性发生变更时，SDK 也会触发该事件。
 
 **特殊说明**
 
 - **当前用户**：当前用户的属性变更，通过 `EMUserInfoManagerDelegate#onSelfUserInfoUpdate` 事件单独回调，不适用上述 `onUserInfoUpdate` 逻辑。
 - **仅限好友用户**：若启用了 [登录后自动同步好友列表功能](user_relationship.html#登录后自动同步好友列表)，SDK 会在登录完成后自动拉取并更新本地好友数据。好友属性变更时，会触发 `EMContactManagerDelegate#onFriendInfoChanged` 事件。此事件为好友关系特有，与 `EMUserInfoManagerDelegate#onUserInfoUpdate` 区分。
+- 如需接收好友的用户属性变更通知，或订阅非好友用户的属性变更通知，你需要联系声网商务开通该功能后方可使用。
 
 ## 常见问题
 

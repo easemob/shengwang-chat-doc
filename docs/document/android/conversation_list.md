@@ -2,9 +2,9 @@
 
 ## 功能说明
 
-- **本地会话列表：** 对于单聊、群组聊天和聊天室会话，用户收发消息时，SDK 会在本地创建或更新对应会话，并将其维护在本地会话列表缓存中。应用可从本地内存或数据库读取会话列表，用于展示会话名称、头像、最后一条消息、未读数、置顶状态和会话标记等信息。
+- **本地会话列表：** 对于单聊、群组聊天和聊天室会话，用户收发消息时，SDK 会在本地创建或更新对应会话，并将其维护在本地会话列表缓存中。应用可从本地内存或数据库读取会话列表，用于展示会话名称、头像、最后一条消息、未读数、置顶状态和会话标记等信息。**自 SDK v5.1.0 起，默认情况下，本地会话列表不包含聊天室会话。**
 - **服务端与本地数据：** IM 服务器和 SDK 本地均可维护会话列表数据：服务端保存当前用户的会话状态，SDK 本地缓存用于客户端快速读取和展示会话列表。完成 SDK 初始化并成功登录后，SDK 会自动维护本地会话列表；会话同步、主动刷新、收发消息、删除会话、清空未读数、设置或取消置顶、添加或移除会话标记等操作均可能更新本地列表。
-- **同步与变更通知：** 若需获取服务端维护的最新会话数据，应在初始化 SDK 前配置会话数据自动同步，并在登录后等待同步完成，再读取本地会话列表。当本地会话列表发生变化时，SDK 会通过会话列表更新事件通知应用；同一账号在其他设备上设置或取消会话置顶时，当前设备也可通过多设备事件感知该变更。
+- **同步与变更通知：** 自 SDK v5.1.0 起登录后默认自动同步服务端会话数据。因此，登录后应等待会话同步完成，再读取本地会话列表。当本地会话列表发生变化时，SDK 会通过会话列表更新事件通知应用；同一账号在其他设备上设置或取消会话置顶时，当前设备也可通过多设备事件感知该变更。
 
 ## 前提条件
 
@@ -19,7 +19,7 @@
 
 ### 登录后自动同步会话列表
 
-在调用 `EMClient#init` 初始化 SDK 前，通过 `EMOptions#setDataSyncType` 配置 `EMDataSyncType.CONVERSATIONS`。用户登录成功后，SDK 会自动同步会话列表并写入本地。
+自 SDK v5.1.0 起，`EMOptions#setDataSyncType` 默认包含 `EMDataSyncType.CONVERSATIONS`。用户登录成功后，SDK 会自动同步会话列表并写入本地。如需显式指定同步范围，可在调用 `EMClient#init` 初始化 SDK 前配置该方法。
 
 ```java
 EMOptions options = new EMOptions();
@@ -78,6 +78,62 @@ EMClient.getInstance().addConnectionListener(connectionListener);
 EMClient.getInstance().removeConnectionListener(connectionListener);
 ```
 
+### 会话相关选项
+
+初始化时，你可以在 `EMOptions` 中设置以下会话相关选项：
+
+| 选项                                                         | 描述                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| `setEnableChatroomConversation(boolean enable)`              | 设置获取本地会话列表时是否包含聊天室会话。该配置不控制聊天室会话的创建或存储，也不影响聊天室消息的正常收发。该功能自 SDK v5.1.0 起支持。<br/> - `true`：本地会话列表中包含聊天室会话。<br/> -（默认）`false`：本地会话列表中不包含聊天室会话。必须在初始化 SDK 前设置。<br/> 你可以通过 `isEnableChatroomConversation()` 查询当前配置下获取本地会话列表时是否包含聊天室会话。 |
+| `setDeleteMessagesAsExitChatRoom(boolean delete)`            | 设置主动或被动退出聊天室时是否删除该聊天室的本地消息。<br/> - （默认）`true`：删除本地消息。 <br/> - `false`：保留本地消息。 |
+| `setLoadEmptyConversations(boolean isLoadEmptyConversations)` | 设置从本地数据库加载会话时是否包含空会话。必须在初始化 SDK 前设置。<br/> - `true`：包含空会话。<br/> - （默认）`false`：不包含空会话。 |
+| `setAutoLoadAllConversations(boolean autoLoadAllConversations)` | 设置登录成功后是否自动将本地数据库中的全部会话加载到内存。必须在初始化 SDK 前设置，自 SDK v5.1.0 起支持。<br/> - （默认）`true`：自动加载全部会话。<br/> - `false`：不自动加载全部会话，可通过分页或筛选接口按需加载。 |
+
+### 分页获取本地会话
+
+自 SDK v5.1.0 起，你可以调用 `EMChatManager#asyncGetConversationsFromDB` 从本地数据库分页获取会话列表。SDK 优先返回置顶会话。对于置顶状态相同的会话，SDK 按照最新一条消息的服务器时间戳降序排列；若时间戳也相同，则按照会话 ID 降序排列，比较会话 ID 时不区分大小写。
+
+调用该方法前，需在 SDK 初始化时调用 `EMOptions#setAutoLoadAllConversations(false)`，关闭本地会话的自动全量加载。该选项默认为 `true`，即默认自动全量加载。否则，SDK 会在登录成功后将数据库中的全部会话加载到内存，无法发挥分页加载在减少初始加载量和内存占用方面的作用。
+
+```java
+// SDK 初始化前关闭自动加载全部本地会话。
+EMOptions options = new EMOptions();
+options.setAppId("your app ID");
+options.setAutoLoadAllConversations(false);
+EMClient.getInstance().init(getApplicationContext(), options);
+
+// 首次查询时，cursor 传 null 或空字符串，表示从第一页开始获取。
+String cursor = "";
+// pageSize 的取值范围为 [1,100]。
+int pageSize = 20;
+
+EMClient.getInstance()
+        .chatManager()
+        .asyncGetConversationsFromDB(
+                cursor,
+                pageSize,
+                new EMValueCallBack<EMCursorResult<EMConversation>>() {
+                    @Override
+                    public void onSuccess(EMCursorResult<EMConversation> result) {
+                        List<EMConversation> conversations = result.getData();
+                        String nextCursor = result.getCursor();
+
+                        if (nextCursor != null && !nextCursor.isEmpty()) {
+                            // 保存 nextCursor；获取下一页时将其作为 cursor 传入。
+                        } else {
+                            // nextCursor 为空字符串，表示当前页为最后一页。
+                        }
+                    }
+
+                    @Override
+                    public void onError(int errorCode, String errorMessage) {
+                        if (errorCode == EMError.INVALID_PARAM) {
+                            // cursor 无效。
+                        }
+                    }
+                });
+```
+
 ### 获取本地所有或筛选的会话
 
 你可以调用 `asyncFilterConversationsFromDB` 从本地数据库获取全部会话或按条件筛选会话：
@@ -119,12 +175,8 @@ EMClient.getInstance()
                 });
 ```
 
-下表列出了初始化时可设置的会话相关选项：
+关于设置本地会话列表是否包含聊天室会话或空会话，详见 [会话相关选项](#会话相关选项)。
 
-| 选项                                        | 描述                                                         |
-| ------------------------------------------- | ------------------------------------------------------------ |
-| `EMOptions#setDeleteMessagesAsExitChatRoom` | 设置退出聊天室时是否删除该聊天室的本地消息。 -（默认）`true`：删除本地消息。 - `false`：保留本地消息。 |
-| `EMOptions#setLoadEmptyConversations`       | 设置从本地数据库加载会话时是否包含空会话。 - `true`：包含空会话。 -（默认）`false`：不包含空会话。必须在初始化 SDK 前设置。 |
 
 ### 一次性获取本地所有会话
 
@@ -170,12 +222,66 @@ Map<String, EMConversation> conversationMap = EMClient.getInstance()
 
 - 单聊会话：分别为对端用户的昵称和头像。
 - 群聊会话：分别为群名称和群头像。
-- 相关数据尚未同步时，这两个方法可能返回空字符串。
+- 相关用户或群组数据尚未同步时，这两个方法可能返回空字符串。
 
 ```java
 String conversationName = conversation.getConversationName();
 String conversationAvatar = conversation.getConversationAvatar();
 ```
+
+## 展示最后一条消息摘要
+
+会话列表通常展示最后一条消息的简短摘要。SDK 提供消息数据，应用需根据消息类型生成展示文案，并按界面需要截断文本。下表中的文案仅为示例，不是 SDK 的固定返回值。
+
+| 消息类型 | 建议的摘要内容 |
+| :--- | :--- |
+| 文本 | 展示文本内容。 |
+| 图片（含 GIF） | 展示“[图片]”；如需区分 GIF，可由应用调整文案。 |
+| 语音 | 展示“[语音]”，可附加语音时长。 |
+| 视频 | 展示“[视频]”。 |
+| 文件 | 展示“[文件]”，可附加文件名。 |
+| 位置 | 展示“[位置]”，可附加地点名称或地址。 |
+| 自定义 | 根据自定义事件和业务参数生成摘要，无法识别时使用兜底文案。 |
+| 合并 | 使用消息体提供的标题或摘要，也可统一展示“[聊天记录]”。 |
+| 复合 | 展示“[复合消息]”，或按消息体顺序组合文本与类型标签，例如“你好 [图片]”。 |
+
+透传消息用于业务指令，不作为普通会话摘要展示。
+
+调用 `EMConversation#getLastMessage()` 获取最后一条消息，通过 `getContentType()` 或 `getType()` 判断整条消息的类型。没有最后一条消息或消息体为空时，可将摘要设为空字符串。以下示例使用固定标签展示非文本消息，并优先使用合并消息自带的摘要：
+
+```java
+EMMessage lastMessage = conversation.getLastMessage();
+String summary = "";
+if (lastMessage != null && !lastMessage.getBodies().isEmpty()) {
+    switch (lastMessage.getContentType()) {
+        case TXT:
+            summary = ((EMTextMessageBody) lastMessage.getBody()).getMessage();
+            break;
+        case IMAGE: summary = "[图片]"; break;
+        case VOICE: summary = "[语音]"; break;
+        case VIDEO: summary = "[视频]"; break;
+        case FILE: summary = "[文件]"; break;
+        case LOCATION: summary = "[位置]"; break;
+        case CUSTOM: summary = "[自定义消息]"; break;
+        case COMBINE:
+            String combinedSummary =
+                    ((EMCombineMessageBody) lastMessage.getBody()).getSummary();
+            summary = combinedSummary == null || combinedSummary.isEmpty()
+                    ? "[聊天记录]" : combinedSummary;
+            break;
+        case MULTIBODY: summary = "[复合消息]"; break;
+        case CMD: break;
+        default: summary = "[消息]"; break;
+    }
+}
+// 使用 summary 更新当前会话的摘要。
+```
+
+:::tip
+自 SDK 5.2.1 起，复合消息的 `getContentType()` 和 `getType()` 返回 `EMMessage.Type.MULTIBODY`。如需组合各消息体的摘要，应先识别该类型，再通过 `getBodies()` 按顺序读取完整消息体列表。`getBody()` 仅返回首个消息体，不能据此判断整条消息的类型或获取全部内容。各消息体的读取方式请参见 [接收复合消息](message_receive.html#接收复合消息)。
+:::
+
+会话列表更新后，应重新读取最后一条消息并生成摘要，监听方式请参见 [监听会话列表更新](#监听会话列表更新)。
 
 ## 清除内存中的会话
 
@@ -286,7 +392,7 @@ EMClient.getInstance()
 
 | 场景 | 推荐做法 |
 | :--- | :--- |
-| 获取最新会话列表 | 初始化 SDK 前配置 `EMDataSyncType.CONVERSATIONS`，在会话同步成功后读取本地数据。不要调用 V5 已移除的服务端会话列表拉取接口。 |
+| 获取最新会话列表 | 使用默认的 `EMDataSyncType.CONVERSATIONS` 配置，或在初始化 SDK 前显式配置该类型；在会话同步成功后读取本地数据。 |
 | 展示会话列表 | 优先调用 `getAllConversationsBySort`，直接使用 SDK 返回的置顶优先、按最后消息时间倒序的列表。 |
 | 响应会话变化 | 注册 `EMConversationListener`；收到 `onConversationUpdate` 后重新读取本地会话列表并刷新 UI。 |
 | 管理监听器 | 页面或组件销毁时移除 `EMConnectionListener` 和 `EMConversationListener`，避免重复回调和内存泄漏。 |
@@ -298,11 +404,14 @@ EMClient.getInstance()
 | :--- | :--- | :--- |
 | [`setAppId`](#登录后自动同步会话列表) | `EMOptions` | 设置应用的 App ID。 |
 | [`setDataSyncType`](#登录后自动同步会话列表) | `EMOptions` | 设置登录成功后自动同步的数据类型。 |
-| [`setLoadEmptyConversations`](#获取本地所有或筛选的会话) | `EMOptions` | 设置从本地数据库加载会话时是否包含空会话。 |
-| [`setDeleteMessagesAsExitChatRoom`](#获取本地所有或筛选的会话) | `EMOptions` | 设置退出聊天室时是否删除该聊天室的本地消息。 |
-| [`setAutoLoadAllConversations`](#一次性获取本地所有会话) | `EMOptions` | 设置登录成功后是否自动将全部本地会话加载到内存。 |
+| [`setEnableChatroomConversation`](#会话相关选项) | `EMOptions` | 设置获取本地会话列表时是否包含聊天室会话。 |
+| [`isEnableChatroomConversation`](#会话相关选项) | `EMOptions` | 查询当前配置下获取本地会话列表时是否包含聊天室会话。 |
+| [`setLoadEmptyConversations`](#会话相关选项) | `EMOptions` | 设置从本地数据库加载会话时是否包含空会话。 |
+| [`setDeleteMessagesAsExitChatRoom`](#会话相关选项) | `EMOptions` | 设置退出聊天室时是否删除该聊天室的本地消息。 |
+| [`setAutoLoadAllConversations`](#会话相关选项) | `EMOptions` | 设置登录成功后是否自动将全部本地会话加载到内存。 |
 | [`init`](#登录后自动同步会话列表) | `EMClient` | 使用指定配置初始化 Android SDK。 |
 | [`asyncFilterConversationsFromDB`](#获取本地所有或筛选的会话) | `EMChatManager` | 从本地数据库获取全部会话或按条件筛选会话。 |
+| [`asyncGetConversationsFromDB`](#分页获取本地会话) | `EMChatManager` | 从本地数据库分页获取会话。 |
 | [`getAllConversationsBySort`](#一次性获取本地所有会话) | `EMChatManager` | 获取置顶优先并按最后消息时间倒序排列的本地会话列表。 |
 | [`getAllConversations`](#一次性获取本地所有会话) | `EMChatManager` | 获取以会话 ID 为键的本地会话映射。 |
 | [`getConversationName`](#获取会话名称和头像) / [`getConversationAvatar`](#获取会话名称和头像) | `EMConversation` | 获取单聊或群聊会话的显示名称和头像。 |

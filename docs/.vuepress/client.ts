@@ -17,9 +17,14 @@ import Step from "./components/Step.vue";
 import FeedBack from "./components/Feedback.vue";
 import HideSection from "./components/HideSection.vue";
 
+import SidebarMenuPage from './components/SidebarMenuPage.vue';
+import SidebarOverviewPage from './components/SidebarOverviewPage.vue';
+
 export default defineClientConfig({
   enhance({ app, router, siteData }) {
     app.component("Container", Container);
+    app.component("SidebarMenuPage", SidebarMenuPage);
+    app.component("SidebarOverviewPage", SidebarOverviewPage);
     app.use(ElementPlus);
     app.component("Toc", Toc);
     app.component("ImageHotspot", ImageHotspot);

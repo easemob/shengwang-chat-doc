@@ -1,4 +1,4 @@
-﻿# 群组成员管理
+# 群组成员管理
 
 ## 功能说明
 
@@ -23,6 +23,8 @@ SDK 提供 `GroupManager` 管理器和 `Group` 单群对象用于管理群组成
 ## 获取群成员列表
 
 先调用 `getGroup` 获取单群对象，再调用 `getMembers` 分页获取群成员列表。返回结果中包含成员用户信息、成员角色和加入群组时间等信息。
+
+调用 `Group#getMembers` 时，SDK 会优先使用本地用户属性缓存（包括用户属性摘要）补充昵称和头像。仅在开启用户信息自动管理（`enableUserInfoSync: true`）后，SDK 才会按需从服务端补拉未缓存的用户属性；该接口不会主动刷新本地已有的用户属性。补拉时可能触发用户属性更新事件，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
 
 ```typescript
 const group = client.groupManager.getGroup('groupId');
@@ -138,7 +140,7 @@ await client.groupManager.getGroup('groupId').changeOwner({
 
 ### 添加群管理员
 
-仅群主可以调用 `addAdmin` 添加群管理员。添加成功后，新管理员及其他管理员会收到 `onAdminAdded` 事件。
+仅群主可以调用 `addAdmin` 添加群管理员。添加成功后，新管理员、群主及其他管理员会收到 `onAdminAdded` 事件。
 
 群管理员除不能解散群组等少数限制外，拥有群组的大部分管理权限。
 
@@ -150,7 +152,7 @@ await client.groupManager.getGroup('groupId').addAdmin({
 
 ### 移除群管理员
 
-仅群主可以调用 `removeAdmin` 移除群管理员。移除成功后，被移除的管理员及其他管理员会收到 `onAdminRemoved` 事件。
+仅群主可以调用 `removeAdmin` 移除群管理员。移除成功后，被移除的管理员、群主及其他管理员会收到 `onAdminRemoved` 事件。
 
 管理员被移出群管理员列表后，仅保留普通群成员权限。
 

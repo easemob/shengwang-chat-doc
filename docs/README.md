@@ -90,8 +90,11 @@ starter:
         link: /docs/uikit/chatuikit/v4/ios/beginner_guide.html
         text: iOS
       - icon: /sdk/web.svg
-        link: /docs/uikit/chatuikit/v4/web/beginner_guide.html
-        text: Web
+        link: /docs/uikit/chatuikit/v4/web/vue_overview.html
+        text: Web（Vue）
+      - icon: /sdk/web.svg
+        link: /docs/uikit/chatuikit/v4/web/chatuikit_overview.html
+        text: Web（React）
       - icon: /sdk/flutter.svg
         link: /docs/uikit/chatuikit/v2/flutter/chatuikit_overview.html
         text: Flutter
@@ -140,7 +143,7 @@ starter:
       #   link: /docs/value-added/push/push_overview.html
       #   text: 即时推送
       - icon: /sdk/translation.svg
-        link: /docs/value-added/translation/message_translation_android.html
+        link: /docs/value-added/translation/message_translation_overview.html
         text: 消息翻译
 projects:
   - title: SDK/服务端功能
@@ -223,6 +226,9 @@ projects:
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /docs/document/flutter/message_stream_receive.html
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /docs/document/react-native/message_stream_receive.html
           - text: 获取消息
             desc: 从消息服务器获取漫游消息，或者从本地获取消息。
             sdks:
@@ -249,7 +255,7 @@ projects:
                 link: /docs/document/unity/message_retrieve.html
               - icon: /sdk/rest.svg
                 text: REST
-                link: /docs/document/server-side/message_historical.html
+                link: /docs/document/server-side/message_roam_single_obtain.html
           - text: 撤回消息
             desc: 发送方可以撤回一条发送成功的消息，包括已经发送的历史消息，离线消息或漫游消息。
             sdks:
@@ -305,7 +311,7 @@ projects:
                 text: REST
                 link: /docs/document/server-side/message_modify.html
           - text: 消息回执
-            desc: 单聊会话支持消息送达回执、会话已读回执和消息已读回执。群聊会话只支持消息已读回执。
+            desc: 单聊会话支持消息送达回执和消息已读回执。群聊会话只支持消息已读回执。
             sdks:
               - icon: /sdk/android.svg
                 text: Android
@@ -763,6 +769,12 @@ projects:
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS
                 link: /docs/document/harmonyos/group_namecard.html
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /docs/document/flutter/group_namecard.html
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /docs/document/react-native/group_namecard.html
           - text: 群组属性管理
             desc: 支持修改群组名称及描述、获取和更新群组公告、管理群共享文件和更新群扩展字段。
             sdks:
@@ -964,6 +976,12 @@ projects:
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS
                 link: /docs/document/harmonyos/userinfo_provider.html
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /docs/document/flutter/userinfo_provider.html
+              - icon: /sdk/react.svg
+                text: React Native
+                link: /docs/document/react-native/userinfo_provider.html
           - text: 用户关系
             desc: 添加和删除好友、设置好友备注、获取好友列表以及好友黑名单管理功能。
             sdks:
@@ -1039,6 +1057,9 @@ projects:
               - icon: /sdk/harmonyos.svg
                 text: HarmonyOS
                 link: /docs/document/harmonyos/push/push_overview.html
+              - icon: /sdk/flutter.svg
+                text: Flutter
+                link: /docs/document/flutter/push/push_overview.html
               - icon: /sdk/react.svg
                 text: React Native
                 link: /docs/document/react-native/push/push_overview.html
@@ -1065,7 +1086,7 @@ projects:
           - text: 回调
             link: /docs/document/server-side/callback_presending.html
           - text: 多设备管理
-            link: /docs/document/server-side/callback_login_logout.html
+            link: /docs/document/android/multi_device.html
           - text: 用户全局禁言
             link: /docs/document/server-side/user_global_mute_overview.html
   - title: UIKit
@@ -1083,7 +1104,10 @@ projects:
                 text: iOS
                 link: /docs/uikit/chatuikit/v2/ios/chatuikit_custom_conversation_list.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web（Vue）
+                link: /docs/uikit/chatuikit/v4/web/vue_overview.html#会话列表
+              - icon: /sdk/web.svg
+                text: Web（React）
                 link: /docs/uikit/chatuikit/v2/web/chatuikit_conversation.html
               - icon: /sdk/flutter.svg
                 text: Flutter
@@ -1101,7 +1125,10 @@ projects:
                 text: iOS
                 link: /docs/uikit/chatuikit/v2/ios/chatuikit_custom_chat.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web（Vue）
+                link: /docs/uikit/chatuikit/v4/web/vue_overview.html#聊天与消息
+              - icon: /sdk/web.svg
+                text: Web（React）
                 link: /docs/uikit/chatuikit/v2/web/chatuikit_chat.html
               - icon: /sdk/flutter.svg
                 text: Flutter
@@ -1119,7 +1146,10 @@ projects:
                 text: iOS
                 link: /docs/uikit/chatuikit/v2/ios/chatuikit_custom_contact_list.html
               - icon: /sdk/web.svg
-                text: Web
+                text: Web（Vue）
+                link: /docs/uikit/chatuikit/v4/web/vue_overview.html#通讯录与好友
+              - icon: /sdk/web.svg
+                text: Web（React）
                 link: /docs/uikit/chatuikit/v2/web/chatuikit_contactlist.html
               - icon: /sdk/flutter.svg
                 text: Flutter
@@ -1151,6 +1181,9 @@ projects:
               - icon: /sdk/iOS.svg
                 text: iOS
                 link: /docs/uikit/chatuikit/v2/ios/chatuikit_custom_group_details.html
+              - icon: /sdk/web.svg
+                text: Web（Vue）
+                link: /docs/uikit/chatuikit/v4/web/vue_overview.html#群组与群管理
               - icon: /sdk/flutter.svg
                 text: Flutter
                 link: /docs/uikit/chatuikit/v2/flutter/chatuikit_custom_group_details.html

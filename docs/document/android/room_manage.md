@@ -37,12 +37,17 @@
 
 ## 加入聊天室
 
+获取聊天室 ID 后，你可以根据业务需求选择以下方式加入聊天室：
+
+- **普通加入**：仅需加入指定聊天室时，调用基础 `joinChatRoom` 方法。
+- **携带扩展信息加入**：需要在加入聊天室时传递自定义业务信息，或控制是否退出已加入的其他聊天室时，调用 `EMChatRoomManager#joinChatRoom` 重载方法。
+
 用户申请加入聊天室的步骤如下：
 
-1. 调用 `asyncFetchPublicChatRoomsFromServer` 方法从服务器获取聊天室列表，查询到想要加入的聊天室 ID。
-2. 调用 `joinChatRoom` 方法传入聊天室 ID，申请加入对应聊天室。新成员加入聊天室时，其他成员收到 `onMemberJoined` 回调。
+1. 调用 `asyncFetchPublicChatRoomsFromServer` 方法从服务器获取聊天室列表，查询要加入的聊天室 ID。
+2. 调用基础 `joinChatRoom` 方法并传入聊天室 ID，申请加入对应聊天室。新成员加入聊天室后，其他成员会收到 `onMemberJoined` 回调。
 
-示例代码如下：
+以下示例演示如何获取聊天室列表并通过基础方法加入聊天室：
 
 ```java
 // 获取应用的聊天室列表。
@@ -75,7 +80,18 @@ EMClient.getInstance().chatroomManager().joinChatRoom(chatRoomId, new EMValueCal
 });
 ```
 
-同时，你可以调用 `EMChatRoomManager#joinChatRoom(java.lang.String, boolean, java.lang.String, EMValueCallBack<EMChatRoom>)` 方法，设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。调用该方法后，聊天室内其他成员会收到 `EMChatRoomChangeListener#onMemberJoined(java.lang.String, java.lang.String, java.lang.String)` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
+### 携带扩展信息加入聊天室
+
+如果需要在加入聊天室时传递自定义业务信息，请调用 `EMChatRoomManager#joinChatRoom` 重载方法。该方法还支持控制用户加入当前聊天室时，是否退出已加入的其他聊天室。
+
+该重载方法包含以下两个重要参数：
+
+- `ext`：加入聊天室时携带的自定义扩展信息。
+- `leaveOtherRooms`：指定加入当前聊天室时是否退出已加入的其他聊天室。
+
+用户成功加入聊天室后，聊天室内的其他成员会收到 `EMChatRoomChangeListener#onMemberJoined` 回调。如果加入聊天室时传入了扩展信息，其他成员可以通过该回调的 `ext` 参数获取。
+
+以下示例演示如何携带扩展信息加入聊天室，并获取其他成员加入聊天室时携带的扩展信息：
 
 ```java
 String ext= "your ext info";
@@ -106,6 +122,17 @@ EMClient.getInstance().chatroomManager().addChatRoomChangeListener(chatRoomChang
 
 ## 退出聊天室
 
+用户退出聊天室时分为两三种情况：主动退出、被聊天室所有者或管理员移出、以及离线后自动退出。
+
+用户退出聊天室时，SDK 默认删除该聊天室所有本地消息，若要保留这些消息，可在 SDK 初始化时将 `EMOptions#setDeleteMessagesAsExitChatRoom` 设置为 `false`。
+
+示例代码如下：
+
+```java
+EMOptions options = new EMOptions();
+options.setDeleteMessagesAsExitChatRoom(false);
+```
+
 ### 主动退出
 
 聊天室所有成员均可以调用 `leaveChatRoom` 方法退出当前聊天室。成员退出聊天室时，其他成员收到 `onMemberExited` 回调。
@@ -115,15 +142,6 @@ EMClient.getInstance().chatroomManager().addChatRoomChangeListener(chatRoomChang
 ```java
 // 异步方法。
 EMClient.getInstance().chatroomManager().leaveChatRoom(chatRoomId);
-```
-
-退出聊天室时，SDK 默认删除该聊天室所有本地消息，若要保留这些消息，可在 SDK 初始化时将 `EMOptions#setDeleteMessagesAsExitChatRoom` 设置为 `false`。
-
-示例代码如下：
-
-```java
-EMOptions options = new EMOptions();
-options.setDeleteMessagesAsExitChatRoom(false);
 ```
 
 与群主无法退出群组不同，聊天室所有者可以离开聊天室，重新进入聊天室仍是该聊天室的所有者。若 `EMOptions#allowChatroomOwnerLeave` 参数在初始化时设置为 `true` 时，聊天室所有者可以离开聊天室；若该参数设置为 `false`，聊天室所有者调用 `leaveChatRoom` 方法离开聊天室时会提示错误 706 `CHATROOM_OWNER_NOT_ALLOW_LEAVE`。
@@ -317,4 +335,3 @@ EMClient.getInstance().chatroomManager().addChatRoomChangeListener(new EMChatRoo
 | [`leaveChatRoom`](#主动退出) | `EMChatRoomManager` | 主动退出聊天室。 |
 | [`asyncRemoveChatRoomMembers`](#被移出) | `EMChatRoomManager` | 将成员移出聊天室。 |
 | [`getChatRoom`](#实时更新聊天室成员人数) | `EMChatRoomManager` | 获取本地聊天室详情。 |
-

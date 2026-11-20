@@ -21,6 +21,8 @@
 
 调用 `fetchGroupMemberInfoListFromServerWithGroupId` 分页获取群成员信息。返回的成员信息为 `EMGroupMemberInfo`，包含用户 ID、入群时间、角色、群名片、昵称和头像 URL。
 
+开启用户信息自动管理（`EMOptions.enableUserInfo = YES`）后，SDK 会优先使用本地缓存中的昵称和头像；本地没有对应缓存，或昵称和头像都为空时，会按需从服务端补拉用户属性。该接口不会主动刷新本地已有的昵称或头像。补拉时可能触发用户属性更新事件，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
+
 ```swift
 EMClient.shared().groupManager?.fetchGroupMemberInfoListFromServer(
     withGroupId: "groupId",
@@ -168,9 +170,9 @@ EMClient.shared().groupManager?.updateGroupOwner(
 
 ### 添加群管理员
 
-仅群主可调用 `addAdmin` 添加管理员。成功后，新管理员和其他管理员会接收到群组事件回调会收到 `groupAdminListDidUpdate` 回调。
+仅群主可调用 `addAdmin` 添加管理员。成功后，新管理员、群主及其他管理员会收到 `groupAdminListDidUpdate` 回调。
 
-管理员除了不能解散群组等少数权限外，拥有对群组的绝大部分权限。
+管理员除了不能解散群组等少数权限外，拥有对群组的绝大部分管理权限。
 
 ```swift
 EMClient.shared().groupManager?.addAdmin(
@@ -185,7 +187,7 @@ EMClient.shared().groupManager?.addAdmin(
 
 ### 移除群管理员
 
-仅群主可调用 `removeAdmin` 移除管理员。成功后，被移除的管理员及其他管理员会收到 `groupAdminListDidUpdate` 回调。
+仅群主可调用 `removeAdmin` 移除管理员。成功后，被移除的管理员、群主及其他管理员会收到 `groupAdminListDidUpdate` 回调。
 
 群管理员被移除群管理权限后将只拥有普通群成员的权限。
 

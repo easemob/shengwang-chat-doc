@@ -17,6 +17,10 @@ iOS SDK 使用 `EMGroupConfigs` 的多个字段定义群组类型：
 | 公开群，申请需审批 | `isPublic = true`、`joinApprovalRequired = true` | 用户提交入群申请后，等待群主审批。 |
 | 公开群，可直接加入 | `isPublic = true`、`joinApprovalRequired = false` | 用户可直接加入群组。 |
 
+:::tip
+`joinApprovalRequired` 仅对公开群有效，`allowInvites` 仅对私有群有效。
+:::
+
 ### 群组成员角色
 
 群组包含以下角色：
@@ -85,7 +89,7 @@ EMClient.shared().groupManager?.createGroup(
 仅群主可以调用 `destroyGroup` 解散群组。解散成功后，群成员会收到 `didLeaveGroup` 回调，离开原因为 `.destroyed`。
 
 :::warning
-解散群组是不可恢复的操作。解散成功后，群组将不再存在，所有群成员均会被移出群组，SDK 也会移除内存中该群组对应的会话。执行该操作前，建议在应用侧进行二次确认。
+解散群组是不可恢复的操作。解散成功后，群组将不再存在，所有群成员均会被移出群组。
 :::
 
 ```swift
@@ -101,6 +105,15 @@ EMClient.shared().groupManager?.destroyGroup(
 }
 ```
 
+### 本地消息处理
+
+成员因群组解散而退出群组时，本地群组消息的处理取决于各客户端的 `EMOptions#deleteMessagesOnLeaveGroup` 配置：
+
+- （默认）`true`：删除本地群组消息。
+- `false`：保留本地群组消息。
+
+该配置用于客户端初始化，应在初始化 SDK 时设置。
+
 ## 加入群组
 
 用户可以通过邀请加入群组，也可以主动申请加入公开群。具体流程由群组的 `setting.isPublic`、`setting.joinApprovalRequired`、`setting.allowInvites` 和 `setting.isInviteNeedConfirm` 配置决定。
@@ -114,7 +127,7 @@ EMClient.shared().groupManager?.destroyGroup(
 
 邀请流程如下：
 
-![](/images/ios/goup_member_invite.png)
+![](/images/android/goup_member_invite.png)
 
 调用 `addMembers` 发起邀请：
 
@@ -133,12 +146,11 @@ EMClient.shared().groupManager?.addMembers(
 }
 ```
 
-受邀用户的处理流程由创建群组时的 `isInviteNeedConfirm` 决定：
+邀请处理流程由建群时的 `isInviteNeedConfirm` 与受邀用户客户端的 `EMOptions#autoAcceptGroupInvitation` 共同决定：
 
-- `false`：受邀用户无需确认即可加入群组，并收到 `didJoinGroup` 回调。
-- `true`：受邀用户收到 `groupInvitationDidReceive` 回调，并选择是否加入群组：
-  - 接受邀请：调用 `acceptInvitationFromGroup`。
-  - 拒绝邀请：调用 `declineGroupInvitation`。
+- `isInviteNeedConfirm = false`：受邀用户直接加入群组，并收到 `didJoinGroup` 回调；客户端是否自动接受邀请不影响结果。
+- `isInviteNeedConfirm = true` 且 `autoAcceptGroupInvitation = true`：SDK 自动接受邀请，受邀用户收到 `didJoinGroup` 回调。
+- `isInviteNeedConfirm = true` 且 `autoAcceptGroupInvitation = false`：受邀用户收到 `groupInvitationDidReceive` 回调，可调用 `acceptInvitationFromGroup` 或 `declineGroupInvitation` 接受或拒绝邀请。
 
 邀请被接受后，邀请人会收到 `groupInvitationDidAccept` 回调；邀请被拒绝后，邀请人会收到 `groupInvitationDidDecline` 回调。
 
@@ -194,7 +206,7 @@ final class GroupInvitationDelegate: NSObject, EMGroupManagerDelegate {
 
 用户申请加入公开群的流程如下：
 
-![](/images/ios/group_member_apply.png)
+![](/images/android/group_member_apply.png)
 
 具体调用方式由 `joinApprovalRequired` 决定：
 
@@ -274,7 +286,7 @@ EMClient.shared().groupManager?.leaveGroup(
 }
 ```
 
-退出群组后，本地群聊会话不会自动删除；`EMOptions#deleteMessagesOnLeaveGroup` 控制是否删除该群组的本地消息，默认值为 `true`。
+退出群组时，`EMOptions#deleteMessagesOnLeaveGroup` 控制是否删除该群组的本地消息：默认 `true` 删除，`false` 保留。该配置应在 SDK 初始化时设置。
 
 ### 移出成员
 
@@ -433,11 +445,11 @@ final class GroupEventListener: NSObject, EMGroupManagerDelegate {
         reason: String?
     ) {
     }
-    
+
     // 当前用户的公开群入群申请已获批准。
     func joinGroupRequestDidApprove(_ group: EMGroup) {
     }
-    
+
     // 当前用户的公开群入群申请被拒绝。
     // decliner 为拒绝申请的用户 ID，applicant 为申请人用户 ID。
     func joinGroupRequestDidDecline(
@@ -447,14 +459,14 @@ final class GroupEventListener: NSObject, EMGroupManagerDelegate {
         applicant: String
     ) {
     }
-    
+
     // 当前用户发出的群邀请被受邀用户接受。
     func groupInvitationDidAccept(
         _ group: EMGroup,
         invitee: String
     ) {
     }
-    
+
     // 当前用户发出的群邀请被受邀用户拒绝。
     func groupInvitationDidDecline(
         _ group: EMGroup,
@@ -462,7 +474,7 @@ final class GroupEventListener: NSObject, EMGroupManagerDelegate {
         reason: String?
     ) {
     }
-    
+
     // SDK 自动接受群邀请，当前用户已加入群组。
     func didJoinGroup(
         _ group: EMGroup,
@@ -470,7 +482,7 @@ final class GroupEventListener: NSObject, EMGroupManagerDelegate {
         message: String?
     ) {
     }
-    
+
     // 当前用户被移出群组，或群组被解散。
     // reason 用于区分被移出和群组解散。
     func didLeaveGroup(
@@ -478,11 +490,11 @@ final class GroupEventListener: NSObject, EMGroupManagerDelegate {
         reason: EMGroupLeaveReason
     ) {
     }
-    
+
     // 当前用户的本地群组列表发生变化。
     func groupListDidUpdate(_ groupList: [EMGroup]) {
     }
-    
+
     // 有成员加入群组。
     // users 为本次加入群组的成员用户 ID 数组。
     func userDidJoinGroup(
@@ -490,7 +502,7 @@ final class GroupEventListener: NSObject, EMGroupManagerDelegate {
         users userIds: [String]
     ) {
     }
-    
+
     // 有成员离开或被移出群组。
     // users 为本次离开群组的成员用户 ID 数组。
     func userDidLeaveGroup(
@@ -498,7 +510,7 @@ final class GroupEventListener: NSObject, EMGroupManagerDelegate {
         users userIds: [String]
     ) {
     }
-    
+
     // 群主发生变更。
     func groupOwnerDidUpdate(
         _ group: EMGroup,
@@ -506,21 +518,21 @@ final class GroupEventListener: NSObject, EMGroupManagerDelegate {
         oldOwner: String
     ) {
     }
-    
+
     // 有成员被设为群管理员。
     func groupAdminListDidUpdate(
         _ group: EMGroup,
         addedAdmin: String
     ) {
     }
-    
+
     // 有成员被移除群管理员身份。
     func groupAdminListDidUpdate(
         _ group: EMGroup,
         removedAdmin: String
     ) {
     }
-    
+
     // 有成员被加入群禁言列表。
     // muteExpire 为禁言到期时间；当前 SDK 的该字段不可用。
     func groupMuteListDidUpdate(
@@ -529,49 +541,49 @@ final class GroupEventListener: NSObject, EMGroupManagerDelegate {
         muteExpire: Int
     ) {
     }
-    
+
     // 有成员被移出群禁言列表。
     func groupMuteListDidUpdate(
         _ group: EMGroup,
         removedMutedMembers: [String]
     ) {
     }
-    
+
     // 全员禁言状态发生变化。
     func groupAllMemberMuteChanged(
         _ group: EMGroup,
         isAllMemberMuted: Bool
     ) {
     }
-    
+
     // 有成员被加入群白名单。
     func groupWhiteListDidUpdate(
         _ group: EMGroup,
         addedWhiteListMembers: [String]
     ) {
     }
-    
+
     // 有成员被移出群白名单。
     func groupWhiteListDidUpdate(
         _ group: EMGroup,
         removedWhiteListMembers: [String]
     ) {
     }
-    
+
     // 群公告已更新。
     func groupAnnouncementDidUpdate(
         _ group: EMGroup,
         announcement: String?
     ) {
     }
-    
+
     // 有群共享文件上传完成。
     func groupFileListDidUpdate(
         _ group: EMGroup,
         addedSharedFile: EMGroupSharedFile
     ) {
     }
-    
+
     // 有群共享文件被删除。
     // removedSharedFile 为被删除共享文件的文件 ID。
     func groupFileListDidUpdate(
@@ -579,19 +591,19 @@ final class GroupEventListener: NSObject, EMGroupManagerDelegate {
         removedSharedFile: String
     ) {
     }
-    
+
     // 群名称、描述、头像、配置或扩展字段等详情发生变化。
     // 如需完整最新群详情，应调用群详情接口重新获取。
     func groupSpecificationDidUpdate(_ group: EMGroup) {
     }
-    
+
     // 群组禁用状态发生变化。
     func groupStateChanged(
         _ group: EMGroup,
         isDisabled: Bool
     ) {
     }
-    
+
     // 群成员自定义属性发生变化。
     // operatorId 为执行该操作的用户 ID。
     func onAttributesChangedOfGroupMember(
@@ -601,7 +613,7 @@ final class GroupEventListener: NSObject, EMGroupManagerDelegate {
         operatorId: String
     ) {
     }
-    
+
     // 群成员的群名片发生变化。
     func onUserGroupNamecardChanged(
         _ groupId: String,

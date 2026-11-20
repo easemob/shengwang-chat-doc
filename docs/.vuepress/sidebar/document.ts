@@ -9,7 +9,7 @@ const platformList = getSubDirectories(DOC_PATH)
 /** V5 独立侧栏配置，可与 V4（document-v4.ts）分叉演进 */
 const documentV5Sidebar = [
   { text: "入门指引", link: "beginner_guide.html" },
-  { text: "迁移指南", link: "migration_guide.html", only: ['android', 'ios', 'web'] },
+  { text: "迁移指南", link: "migration_guide.html", only: ['android', 'ios', 'web', 'harmonyos', 'flutter', 'react-native'] },
   // { text: "使用 MCP 集成", link: "easemob_mcp_server.html", except: ['unity', 'windows', 'server-side', 'applet']},
   { text: '快速开始', link: 'quickstart.html', except: ['windows', 'react-native', 'flutter', 'unity', 'server-side', 'applet'] },
   { text: '快速开始', link: 'quickstart.html', only: ['windows', 'react-native', 'flutter', 'unity'] },
@@ -51,6 +51,7 @@ const documentV5Sidebar = [
       { text: '搜索本地消息', link: 'message_search_local.html', except: ['web'] },
       { text: '消息回执', link: 'message_receipt.html'},
       { text: '编辑消息', link: 'message_modify.html'},
+      { text: '消息翻译', link: 'message_translation.html'},
       { text: '消息表情回复', link: 'reaction.html' },
       { text: '转发消息', link: 'message_forward.html'},
       { text: '导入和插入消息', link: 'message_import_insert.html', except: ['web']},
@@ -71,7 +72,7 @@ const documentV5Sidebar = [
       { text: '会话介绍', link: 'conversation_overview.html' },
       { text: '会话列表', link: 'conversation_list.html' },
       { text: '本地会话', link: 'conversation_local.html', only: ['web'] },
-      { text: '会话已读回执', link: 'conversation_receipt.html', only: ['flutter', 'harmonyos','react-native','unity','windows'] },
+      { text: '会话已读回执', link: 'conversation_receipt.html', only: ['flutter','react-native','unity','windows'] },
       { text: '会话未读数', link: 'conversation_unread.html'},
       { text: '置顶会话', link: 'conversation_pin.html' },
       { text: '会话标记', link: 'conversation_mark.html' },
@@ -168,7 +169,7 @@ const documentV5Sidebar = [
     text: '常见问题',
     collapsible: true,
     children: [
-      { text: '实现群 @ 消息', link: 'group_@.html', only: ['android', 'ios', 'web'] },
+      { text: '实现群 @ 消息', link: 'group_@.html', only: ['android', 'ios', 'web', 'harmonyos'] },
       { text: '实现消息引用', link: 'message_quote.html', only: ['android', 'ios', 'web'] },
       { text: '实现输入指示器', link: 'typing_indication.html', only: ['android', 'ios', 'web', 'react-native', 'flutter', 'unity', 'windows'] },
       { text: '配置服务器域名', link: 'serverconfig.html', only: ['web'] },
@@ -362,8 +363,16 @@ const documentV5Sidebar = [
         { text: '下载文件缩略图', link: 'message_download_thumbnail.html' },
         ],
       },
-      { text: '获取历史消息记录', link: 'message_historical.html' },
       { text: '设置消息附件存储方式', link: 'message_attachment_storage.html' },
+      {
+        text: '获取历史消息',
+        collapsible: true,
+        children: [
+          { text: '获取单聊漫游消息', link: 'message_roam_single_obtain.html' },
+          { text: '获取群聊漫游消息', link: 'message_roam_group_obtain.html' },
+          { text: '获取历史消息记录', link: 'message_historical.html' },
+        ],
+      },
       {
         text: '消息表情回复',
         collapsible: true,
@@ -1015,4 +1024,3 @@ function handleSidebarItem(platform, sidebar) {
 }
 
 export const DOC_V5_SIDEBAR = buildDocV5Sidebar()
-

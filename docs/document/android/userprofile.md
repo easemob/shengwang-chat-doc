@@ -48,6 +48,8 @@ EMClient.getInstance().userInfoManager().updateOwnInfo(userInfo, new EMValueCall
 
 客户端默认使用以下键名存储用户属性。[调用 RESTful 接口设置](/document/server-side/user_attribute_set.html) 或 [删除用户属性](/document/server-side/user_attribute_delete.html) 时，若希望客户端可正常读取，请保持键名一致。
 
+下表列出用户属性在服务端存储时使用的键名。Android SDK 通过 `EMUserInfo` 的 getter/setter 方法读取和设置这些属性。例如，`getNickname()`/`setNickname()` 对应 `nickname`，`getAvatarUrl()`/`setAvatarUrl()` 对应 `avatarurl`。
+
 | 字段        | 类型   | 描述                                                                                              |
 | :---------- | :----- | :------------------------------------------------------------------------------------------------ |
 | `nickname`  | String | 用户昵称。长度不超过 64 字符。                                                                    |
@@ -58,6 +60,10 @@ EMClient.getInstance().userInfoManager().updateOwnInfo(userInfo, new EMValueCall
 | `sign`      | String | 用户签名。长度不超过 256 字符。                                                                   |
 | `birth`     | String | 用户生日。长度不超过 64 字符。                                                                    |
 | `ext`       | String | 扩展字段。                                                                                        |
+
+:::tip
+更新请求中未包含的属性保留原值。需要注意，调用 `EMUserInfoManager#updateOwnInfo()` 时，SDK 始终提交 `gender`；如果传入的 `EMUserInfo` 未设置性别，该值为 `0`，可能覆盖原有性别。若只需修改单个属性，可调用 `EMUserInfoManager#updateOwnInfoByAttribute()`。
+:::
 
 ### 设置当前用户的单个属性
 
@@ -82,6 +88,14 @@ EMClient.getInstance().userInfoManager().updateOwnInfoByAttribute(EMUserInfoType
 
 你可以调用 `fetchUserInfoByUserId` 从服务端获取一个或多个用户的全部属性。
 
+获取成功并不一定触发用户属性更新事件。SDK 会比较服务端返回的用户属性更新时间与本地缓存：
+
+- 其他用户的属性解析成功，且服务端更新时间晚于本地缓存时，触发 `EMUserInfoManagerListener#onUserInfoUpdate`。
+- 当前登录用户自己的属性满足上述更新条件时，触发 `EMUserInfoManagerListener#onSelfUserInfoUpdate`。
+- 服务端更新时间不晚于本地缓存，或未返回有效的用户属性更新时间时，不会因本次查询触发更新事件。
+
+上述主动查询及其更新事件不要求开启 `EMOptions#setEnableUserInfo(true)`。业务侧可直接使用成功回调中的属性刷新界面，无需等待更新事件。监听方式详见 [监听用户属性变更](#监听用户属性变更)。
+
 ```java
 // 每次传入的用户 ID 数量不超过 100 个。
 String[] userId = new String[1];
@@ -100,7 +114,7 @@ EMClient.getInstance().userInfoManager().fetchUserInfoByUserId(userId, new EMVal
 
 ### 从服务端获取用户的指定属性
 
-你可以调用 `fetchUserInfoByAttribute`从服务端获取一个或多个用户的指定属性。
+你可以调用 `fetchUserInfoByAttribute` 从服务端获取一个或多个用户的指定属性。用户属性更新事件的触发条件与 [获取全部属性](#从服务端获取用户的所有属性) 相同。
 
 ```java
 String[] userId = new String[1];
@@ -181,7 +195,9 @@ SDK 支持订阅非好友用户的属性变更。订阅后，指定非好友用�
 - 群成员展示等场景中，需要维护指定非好友用户的最新用户属性。
 
 :::tip
-本功能只适用于非好友用户。关于当前用户、非好友用户和好友相关的用户属性变更通知详情，请参见 [用户属性变更事件](#监听用户属性变更)。
+使用非好友用户属性变更订阅功能前，你需要联系声网商务开通该功能。
+
+该订阅功能只适用于非好友用户。当前用户、非好友用户和好友的属性变更通知方式不同，详见 [监听用户属性变更](#监听用户属性变更)。
 :::
 
 ### 订阅非好友用户属性变更事件
@@ -248,14 +264,16 @@ Android SDK 通过 `EMUserInfoManagerListener` 提供以下用户属性事件：
 
 其他用户的属性更新可能由以下场景触发：
 
-1. **主动拉取更新**：主动调用 [从服务端获取用户属性](userprofile.html#从服务端获取用户的所有属性) 或 [从服务端获取群成员信息](group_members.html#获取群成员列表) 接口时，若服务端返回的用户属性更新时间戳大于本地存储的时间戳，SDK 会自动更新本地数据并触发该事件。
-2. **消息携带更新**：若启用了 [用户信息自动管理功能](userinfo_provider.html#开启用户信息自动管理)，当收到消息且消息中携带的发送方用户属性更新时间晚于本地缓存时，SDK 会重新拉取该用户属性并触发该事件。此机制对好友与非好友发送方均生效。
-3. **订阅用户变更（仅限非好友）**：若已订阅非好友用户的属性变更事件，则当这些被订阅的非好友用户属性发生变更时，SDK 也会触发该事件。
+1. **主动获取用户属性**：调用 [`EMUserInfoManager#fetchUserInfoByUserId`](#从服务端获取用户的所有属性) 时，若其他用户的属性解析成功，且服务端更新时间晚于本地缓存，则触发 `onUserInfoUpdate`。该主动查询不要求开启用户信息自动管理。
+2. **获取群成员信息时补拉用户属性**：调用 [`EMGroupManager#asyncFetchGroupMembersInfo`](group_members.html#分页获取群成员信息) 时，只有开启用户信息自动管理，且本地没有成员属性缓存或昵称、头像都为空，SDK 才补拉用户属性。补拉结果满足上述更新条件时，触发 `onUserInfoUpdate`；已有昵称或头像时直接使用缓存，不会检查服务端属性是否有更新。
+3. **消息携带更新**：若启用了 [用户信息自动管理功能](userinfo_provider.html#开启用户信息自动管理)，当收到消息且消息中携带的发送方用户属性更新时间晚于本地缓存时，SDK 会重新拉取该用户属性并触发该事件。此机制对好友与非好友发送方均生效。
+4. **订阅用户变更（仅限非好友）**：若已订阅非好友用户的属性变更事件，则当这些被订阅的非好友用户属性发生变更时，SDK 也会触发该事件。
 
 **特殊说明**
 
 - **当前用户**：当前用户的属性变更，通过 `EMUserInfoManagerListener#onSelfUserInfoUpdate` 事件单独回调，不适用上述 `onUserInfoUpdate` 逻辑。
 - **好友用户**：若启用了 [登录后自动同步好友列表功能](user_relationship.html#登录后自动同步好友列表)，SDK 会在登录完成后自动拉取并更新本地好友数据。好友属性变更时，会触发 `EMContactListener#onContactInfoUpdate(EMContact contact)` 事件（此事件为好友关系特有，与 `onUserInfoUpdate` 区分）。
+- 对于好友的用户属性变更事件，以及已订阅的非好友用户属性变更，你需要联系声网商务开通该功能后方可使用。
 
 通过 `addUserInfoManagerListener` 注册监听器，不再需要监听时通过 `removeUserInfoManagerListener` 移除：
 
@@ -347,4 +365,3 @@ EMClient.getInstance().chatManager().sendMessage(message);
 | [`subscribeUsersInfo`](#订阅非好友用户属性变更事件)          | `EMUserInfoManager` | 订阅非好友用户的属性变更事件。         |
 | [`unsubscribeUsersInfo`](#取消订阅非好友用户属性变更事件)    | `EMUserInfoManager` | 取消订阅非好友用户的属性变更事件。     |
 | [`fetchSubscribedUsers`](#获取已被订阅用户属性变更事件的用户列表) | `EMUserInfoManager` | 获取已订阅用户属性变更事件的用户列表。 |
-

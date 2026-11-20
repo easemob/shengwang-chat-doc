@@ -2,16 +2,22 @@
 
 ## 升级总览
 
-Android IM SDK 5.0.0 是一次源代码不兼容的大版本升级，主要涉及以下四个方面：
+Android IM SDK 5.0.0 是一次重要的架构升级，围绕初始化与登录流程、数据同步机制、消息已读回执体系和群组配置模型进行了调整。
 
-1. **数据同步机制调整**
+本次升级涉及部分接口的移除与替换，以及默认行为的调整。从 4.x 升级至 5.0.0 时，请按照本文的迁移指引，检查并更新相关接口调用、配置和事件处理逻辑，确保业务功能正常运行。
+
+主要变化如下：
+
+1. **初始化不再自动登录，密码登录下线**
+   SDK 初始化后不再自动登录，密码登录接口下线，仅保留 Token 登录。应用需自行管理用户 ID 与 Token，并在冷启动后主动调用 `loginWithToken` 完成登录。
+2. **数据同步机制调整**
    登录后，SDK 可自动同步会话、好友和已加入的群组数据，并将数据保存到本地数据库，替代部分原先由应用主动调用的服务端拉取接口。
-2. **消息已读回执机制重构**
+3. **消息已读回执机制重构**
    已读回执由逐条发送调整为批量发送；清除本地未读数与向消息发送方发送消息已读回执相互独立；单聊和群聊使用统一的回执模型与回调。
-3. **群组配置模型重构**
+4. **群组配置模型重构**
    `EMGroupStyle` 单一枚举拆分为 `isPublic`、`joinApprovalRequired` 和 `allowInvites` 三个布尔字段，并支持创建群组后按配置类型更新群组属性。
-4. **历史 API 精简**
-   移除长期标记为废弃 `@Deprecated` 的接口及部分边缘能力。注册、举报和消息流量统计等功能需由业务服务或服务端 REST API 实现；密码登录接口下线，仅保留 Token 登录。
+5. **历史 API 精简**
+   移除长期标记为废弃 `@Deprecated` 的接口及部分边缘能力。注册、举报和消息流量统计等功能需由业务服务或服务端 REST API 实现。
 
 :::tip
 **集成要求：** Android IM SDK 5.0.0 已全面迁移至 AndroidX。宿主 App 必须启用 AndroidX `android.useAndroidX=true`
@@ -29,7 +35,7 @@ Android SDK v5 不再在 `EMClient#init` 过程中自动登录。应用冷启动
 | 删除的 API      | 替代方式  | 接口说明                      |
 | :------------------- | :----- | :------------ |
 | `EMOptions#setAutoLogin(boolean)` / `getAutoLogin()` | 无直接替代。应用启动后主动调用 `loginWithToken(...)`。       | 配置或获取 SDK 是否自动登录。 |
-| `EMClient#isLoggedInBefore()`                        | 根据业务需求使用以下方法：<br/> - `isLoggedIn()`：当前登录态<br/> - `isConnected()`：连接状态 <br/> - `isDatabaseOpened()`：本地库就绪。 | 判断之前是否存在登录记录。    |
+| `EMClient#isLoggedInBefore()`                        | 根据业务需求使用以下方法：<br/> - `isLoggedIn()`：当前登录态<br/> - `getConnectionState()`：连接状态（自 SDK 5.2.1 起推荐使用）；此前可用 `isConnected()` <br/> - `isDatabaseOpened()`：本地库就绪。 | 判断之前是否存在登录记录。    |
 
 ### 密码登录下线
 
@@ -64,7 +70,7 @@ Android SDK v5.0.0 新增登录后自动数据同步机制。应用可在初始�
 | `EMConnectionListener` | `onDataSyncStart(EMDataSyncType type)` / `onDataSyncFinish(EMDataSyncType type, int errorCode)` | 接收指定类型数据同步的开始和结束通知；`errorCode` 为 `EMError#EM_NO_ERROR` 时表示同步成功。 |
 
 :::tip
-`EMOptions#dataSyncType` 默认为 `NONE`。如果不配置，登录后不会自动同步会话、好友或已加入的群组数据。因此，`getAllConversations()`、`getAllGroups()` 和本地好友查询接口可能返回空数据。 
+Android SDK v5.0.0 中，`EMOptions#dataSyncType` 默认为 `NONE`。如果不配置，登录后不会自动同步会话、好友或已加入的群组数据。因此，`getAllConversations()`、`getAllGroups()` 和本地好友查询接口可能返回空数据。自 SDK v5.1.0 起，`EMOptions#dataSyncType` 默认包含 `CONVERSATIONS`，登录后会自动同步会话数据。
 :::
 
 典型配置如下：

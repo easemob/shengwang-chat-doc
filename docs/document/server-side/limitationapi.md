@@ -50,6 +50,8 @@ API 限流周期按照 UTC 时间计算，即当日的 00:00:00 至次日的 00:
 | 翻译消息内容 | POST  | /app-id/{app_id}/translate | 100 次/秒/App ID  | 50 次/秒    | 
 | 获取翻译语言列表 | GET  | /app-id/{app_id}/translate/support/language | 100 次/秒/App ID  | 50 次/秒    | 
 | 检测文本的源语言 | POST  | /app-id/{app_id}/translate/detect | 100 次/秒/App ID  | 50 次/秒    | 
+| 获取单聊漫游消息 | POST | /api/server/v6/app-id/{app_id}/roaming/chat | 100 次/秒/App ID | 200 次/秒 |
+| 获取群聊漫游消息 | POST | /api/server/v6/app-id/{app_id}/roaming/group | 100 次/秒/App ID | 200 次/秒 |
 | 根据消息 ID 单向删除单聊漫游消息  | DELETE    | /app-id/{app_id}/rest/message/roaming/chat/user/{userId}?userId={userId}&msgIdList={msgIdList}    | 100 次/秒/App ID   | 50 次/秒    | 
 | 根据消息 ID 单向删除群聊漫游消息  | DELETE    | /app-id/{app_id}/rest/message/roaming/group/user/{userId}?groupId={groupId}&msgIdList={msgIdList}   | 100 次/秒/App ID   |     | 
 | 单向清空指定用户的漫游消息 | POST  | /app-id/{app_id}/rest/message/roaming/user/{userId}/delete/all | 100 次/秒/App ID  | 100 次/秒    | 
