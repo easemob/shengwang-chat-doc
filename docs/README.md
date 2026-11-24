@@ -34,19 +34,6 @@ starter:
       - icon: /guide/callkit.svg
         link: /docs/callkit/android/beginner_guide.html
         text: CallKit
-  - title: 使用 MCP 集成
-    desc: MCP Server 基于 MCP（Model Context Protocol）实现，为支持 MCP 的 AI 编程工具提供即时通讯 IM 相关文档查询和源码检索能力。
-    platform:
-      - icon: /guide/sdk.svg
-        link: /docs/document/android/easemob_mcp_server.html
-        text: SDK
-      - icon: /guide/uikit.svg
-        link: /docs/uikit/chatuikit/v2/android/chatuikit_overview.html
-        text: UIKit
-      - icon: /guide/callkit.svg
-        link: /docs/callkit/android/easemob_mcp_server.html
-        text: CallKit
-    hidden: true
   - title: SDK 快速开始
     desc: 选择合适的 SDK 构建即时通讯应用，点击快速开始按钮快速实现即时通讯消息收发。
     platform:

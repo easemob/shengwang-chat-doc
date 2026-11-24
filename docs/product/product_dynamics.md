@@ -229,12 +229,6 @@ show_server_callback_route: false
 | Flutter      | ✓    | ✓     | ✗       | ✓             | ✓         |
 | React Native | ✓    | ✓     | ✗       | ✓             | ✓         |
 
-环信 MCP Server 支持的工具、安装与配置说明，详见环信 MCP Server 使用指南。例如，以下为 Android 平台文档链接：
-- [SDK](/document/android/easemob_mcp_server.html)
-- [单群聊 UIKit](/uikit/chatuikit/v4/android/easemob_mcp_server.html)
-- [CallKit](/callkit/android/easemob_mcp_server.html)
-- [聊天室 UIKit](/uikit/chatroomuikit/android/easemob_mcp_server.html)
-
 </HideSection>
 
 #### SDK 发版
