@@ -7,8 +7,6 @@
 | 资源 | 用途 |
 | :--- | :--- |
 | [更新日志](https://webim-vue-uikit-docs.easemob.com/guide/changelog.html) | 查看功能变化、问题修复、破坏性变更和升级注意事项。 |
-| [体验 Vue Demo](demo_vue.html) | 查看在线体验、本地运行和单群聊消息收发说明。 |
-| [在线 Demo](https://webim-vue3.easemob.com/) | 直接体验 Vue UIKit 界面与功能。 |
 | [UIKit 源码](https://github.com/Easemob-Community/easemob-uikit-vue) | 查阅组件库实现。 |
 | [Demo 源码](https://github.com/Easemob-Community/easemob-demo-vue3) | 参考完整应用的页面组合和业务接入。 |
 

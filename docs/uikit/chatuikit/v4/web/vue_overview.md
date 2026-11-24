@@ -10,7 +10,7 @@
 - **IM SDK**：提供连接、消息、会话、联系人和群组等基础通讯能力。
 - **业务应用**：对接自身账号、数据和业务流程，并按需扩展功能。
 
-你可以先 [体验 Vue Demo](demo_vue.html) ，了解界面效果；需要接入时，从 [开发文档导航](vue_guide.html) 查找指南、组件和 API。
+接入 Vue UIKit 时，从 [开发文档导航](vue_guide.html) 查找指南、组件和 API。
 
 ![社区 Vue UIKit 主界面](/images/uikit/chatuikit/web/vue/overview/main.png)
 

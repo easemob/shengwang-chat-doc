@@ -6,22 +6,23 @@
 
 | 准备项 | 说明 |
 | :--- | :--- |
-| 声网项目 | 创建应用并获取 App ID。账号、应用和用户 Token 的准备方法见 [入门指引](beginner_guide.html#集成步骤) 。 |
+| 声网项目 | 创建项目并获取 App ID。账号、应用和用户 Token 的准备方法见 [入门指引](beginner_guide.html#集成步骤) 。 |
 | 测试用户 | 准备同一应用下的两个 IM 用户及其用户 Token，用于验证单聊和群聊。生产环境由业务服务器获取并分发用户 Token。 |
 | Vue 项目 | 按 [快速开始](https://webim-vue-uikit-docs.easemob.com/guide/quickstart.html) 核对 Vue、Pinia、Node.js 和依赖要求。 |
 | SDK 适配器 | 根据使用的Web SDK 版本选择适配器，安装依赖和注册入口应与所选版本一致。 |
 
-外部 Vue UIKit 文档与社区 Demo 的默认示例使用 App Key。声网项目使用 App ID，不能直接套用 App Key 配置；初始化方式以实际采用的声网 Web SDK 和适配器为准。
+:::tip
+外部 Vue UIKit 文档使用 App Key。声网项目使用 App ID，不能直接套用 App Key 配置；初始化方式以实际采用的声网 Web SDK 和适配器为准。
+:::
 
 ## 推荐接入顺序
 
 首次使用时，建议按以下顺序阅读：
 
-1. **体验 Demo**：通过 [体验 Vue Demo](demo_vue.html) 了解在线效果，也可以下载源码，核对并完成声网 App ID 和登录流程适配后，再在本地使用自己的声网项目验证单聊和群聊。
-2. **完成基础接入**：按照 [快速开始](https://webim-vue-uikit-docs.easemob.com/guide/quickstart.html) 准备依赖，注册 Pinia、UIKit、所选 SDK 适配器及主题样式。
-3. **配置初始化与登录**：结合 [Provider 全局配置](https://webim-vue-uikit-docs.easemob.com/components/provider.html) 和 [useClient](https://webim-vue-uikit-docs.easemob.com/api/composables/use-client.html) ，了解初始化、登录、Token 过期处理及全局功能配置。
-4. **搭建业务界面**：组合 [会话模块](https://webim-vue-uikit-docs.easemob.com/components/conversation-container.html) 与 [聊天模块](https://webim-vue-uikit-docs.easemob.com/components/chat-container.html) ，再按需加入通讯录和群组管理。
-5. **定制与扩展**：根据业务需要查阅 [开发指南](vue_development.html) 、 [组件文档](vue_components.html) 与 [API 参考](vue_api.html) 。
+1. **完成基础接入**：按照 [快速开始](https://webim-vue-uikit-docs.easemob.com/guide/quickstart.html) 准备依赖，注册 Pinia、UIKit、所选 SDK 适配器及主题样式。
+2. **配置初始化与登录**：结合 [Provider 全局配置](https://webim-vue-uikit-docs.easemob.com/components/provider.html) 和 [useClient](https://webim-vue-uikit-docs.easemob.com/api/composables/use-client.html) ，了解初始化、登录、Token 过期处理及全局功能配置。
+3. **搭建业务界面**：组合 [会话模块](https://webim-vue-uikit-docs.easemob.com/components/conversation-container.html) 与 [聊天模块](https://webim-vue-uikit-docs.easemob.com/components/chat-container.html) ，再按需加入通讯录和群组管理。
+4. **定制与扩展**：根据业务需要查阅 [开发指南](vue_development.html) 、 [组件文档](vue_components.html) 与 [API 参考](vue_api.html) 。
 
 如果你已经接入 UIKit，可以直接按主题查找文档。安装依赖和配置示例请使用同一版本的文档，并根据所用 Web SDK 版本选择适配器。
 
