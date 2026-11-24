@@ -17,7 +17,7 @@
 | 推送通知方式 | 描述            | 
 | :---- | :------------- |
 | `ALL`          | 接收所有离线消息的推送通知。    |
-| `MENTION_ONLY`           | 仅接收提及当前用户的消息推送通知。该参数通常更适合群聊场景。若消息需要提及一个或多个用户，可在发消息时通过消息扩展字段 ext 字段传 "em_at_list":["user1", "user2" ...]；若提及所有人，对该字段传 "em_at_list":"all"。 |
+| `MENTION_ONLY`           | 仅接收提及当前用户的消息推送通知。该参数通常适合群聊场景。若消息需要提及一个或多个用户，可在发消息时通过消息扩展字段 `ext` 字段传 `"em_at_list":["user1", "user2" ...]`；若提及所有人，对该字段传 `"em_at_list":"all"`。 |
 | `NONE`        | 不接收离线消息的推送通知。    |
 
 ### 获取所有会话的推送通知方式设置
@@ -49,7 +49,7 @@ if(conversation!=null) {
 
 ### 设置指定会话的推送通知方式
 
-在本机上调用 `EMPushManager#setSilentModeForConversation` 设置会话的推送通知方式，在多设备事件 `EMMultiDeviceListener#onConversationEvent` 里会回调当前操作，此时参数 `event` 的值为 `EMMultiDeviceListener#CONVERSATION_MUTE_INFO_CHANGED`。
+在本机调用 `EMPushManager#setSilentModeForConversation` 设置会话的推送通知方式，该操作会通过多设备事件 `EMMultiDeviceListener#onConversationEvent` 回调。此时，参数 `event` 的值为 `CONVERSATION_MUTE_INFO_CHANGED`，该事件定义在 `EMMultiDeviceListener` 中。
 
 ```java
 //对会话设置推送通知方式

@@ -49,6 +49,18 @@ EMClient.getInstance().init(context, options);
 必须在调用 `EMClient.getInstance().init(context, options)` 初始化 SDK 之前调用 `EMOptions#setEnableUserInfo(true)`，否则该功能不会生效。
 :::
 
+
+调用 `EMOptions#setEnableUserInfo(true)` 开启用户信息自动管理功能后，SDK 的相关行为如下：
+
+1. 发送消息时，消息体会携带发送方用户信息/群名片的更新时间戳，SDK 同时基于本地缓存为消息填充 `EMSenderInfo`（本地缓存缺失时，`EMSenderInfo` 可能为 `null`）。
+
+2. 接收消息时，SDK 会自动同步消息发送方最新的用户属性和群成员名片。
+
+3. 新接收的消息可通过 `EMMessage#getSenderInfo()` 获取发送方信息；接收时若开关关闭，则该条消息实例的 `EMMessage#getSenderInfo()` 返回 `null`。注意：从本地数据库加载的消息不受此开关影响，SDK 会基于本地缓存构建 `EMSenderInfo`。
+
+4. `EMGroupManager#asyncFetchGroupMembersInfo(String, String, int, EMValueCallBack)` 返回的 `EMGroupMemberInfo` 中包含用户昵称（`nickname`）和头像（`avatarUrl`）；关闭时不包含。群成员名片（`namecard`）由服务端返回，不受此开关影响。
+
+5. 登录成功后，SDK 会自动从服务器同步当前用户的属性。
 ## 监听用户属性更新
 
 SDK 提供 `EMUserInfoManagerListener`，用于监听用户属性更新事件，主要包括：
@@ -59,6 +71,10 @@ SDK 提供 `EMUserInfoManagerListener`，用于监听用户属性更新事件，
   - 主动 [从服务端获取群成员信息](group_manage.html#从服务端获取群成员列表)。
 
 **建议在业务初始化阶段完成监听注册，以便在登录后的初始同步、消息触发或主动拉取等场景中及时接收事件并刷新界面。** 关于其他场景下用户属性变更通知机制，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
+
+:::tip
+如需接收好友的用户属性变更通知，或订阅非好友用户的属性变更通知，你需要先联系声网商务开通相应功能。详见 [监听用户属性变更](userprofile.html#监听用户属性变更) 和 [订阅非好友用户的属性变更](userprofile.html#订阅非好友用户的属性变更)。
+:::
 
 - 添加监听：
 

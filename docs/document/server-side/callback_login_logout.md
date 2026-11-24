@@ -136,7 +136,7 @@
 | `callId`    | String   | 回调请求的唯一标识。 |
 | `reason`    | String   | 状态变更原因，取值：`login`（登录）、`logout`（登出）、`replaced`（被踢下线）。 |
 | `security`  | String   | 签名，格式为 `MD5(callId + secret + timestamp)`。详见 [配置回调规则](callback_postsending.html#回调规则)。 |
-| `os`        | String   | 设备操作系统类型。                                           |
+| `os` | String   | 发生本次状态变更的客户端使用的 IM SDK 平台标识，常见取值如下： <br/> - `android`：Android 平台。适用于使用 Android IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 Android 平台上的客户端。 <br/> - `ios`：iOS 平台。适用于使用 iOS IM SDK 的客户端，以及使用 Flutter、React Native、Unity 等跨平台 IM SDK 并运行在 iOS 平台上的客户端。 <br/> - `webim`：Web SDK。适用于使用 Web IM SDK 的客户端。 <br/> - `harmony`：HarmonyOS 平台。 <br/> - `win`：Windows 平台。<br/> - `custom`：自定义平台。IM 支持自定义设备平台，以便对登录设备进行精细化管理，详见 [设置设备平台文档](/docs/document/android/multi_device.html#设置登录设备的平台)。 <br/>该值对应 `user` 字段中的 `{os}` 部分，可结合其中的 `{deviceId}` 确定发生本次状态变更的具体登录设备。 |
 | `ip`        | String   | 用户登录的 IP 地址。                                         |
 | `host`      | String   | 服务器名称。                                                 |
 | `user`      | String   | 状态变更用户的唯一标识。格式为 `{XXXX#XXXX}_{username}@easemob.com/{os}_{deviceId}`，其中 `@easemob.com` 为固定后缀，`deviceId` 由 SDK 随机生成。 |

@@ -7,7 +7,7 @@ show_callback_route: false
 
 ## 功能说明
 
-即时通讯 IM Android SDK 通过 `EMMessage` 创建消息，并通过 `EMChatManager` 发送消息。SDK 支持文本、图片、GIF、语音、视频、文件、位置、透传、自定义和合并消息，可用于单聊、群聊和聊天室。
+即时通讯 IM Android SDK 通过 `EMMessage` 创建消息，并通过 `EMChatManager` 发送消息。SDK 支持文本、图片、GIF、语音、视频、文件、位置、透传、自定义和合并消息，可用于单聊、群聊和聊天室。自 SDK 5.2.1 起，还支持在一条 [复合消息](#发送复合消息) 中按顺序组合多个消息体。
 
 - 对于单聊，即时通讯 IM 默认支持陌生人之间发送消息，即无需添加好友即可聊天。若仅允许好友之间发送单聊消息，你需要联系声网商务开启好友关系检查。
 - 对于群组和聊天室，用户每次只能向所属的单个群组和聊天室发送消息。
@@ -37,13 +37,13 @@ Android SDK 通过 `EMMessage` 的不同静态方法创建各类消息。不同�
 | 参数或属性       | Android 设置方式                                             | 是否必需         | 适用场景         | 说明                                                         |
 | ---------------- | ------------------------------------------------------------ | ---------------- | ---------------- | ------------------------------------------------------------ |
 | 目标会话 ID      | 各 `create*SendMessage()` 方法的接收方参数，或 `EMMessage#setTo` | 必需             | 所有消息         | 单聊时传入对端用户 ID，群聊时传入群组 ID，聊天室时传入聊天室 ID。 |
-| 消息内容         | 各消息创建方法的内容参数，或 `EMMessage#setBody`             | 必需             | 所有消息         | 参数随消息类型而不同，例如文本内容、附件 URI、位置坐标、透传命令或自定义事件。 |
+| 消息内容         | 各消息创建方法的内容参数，或 `EMMessage#setBody`、`setBodies` | 必需             | 所有消息         | 参数随消息类型而不同。`setBody()` 用单个消息体替换全部消息体；复合消息通过 `setBodies()` 设置完整列表，或通过 `addBody()`、`appendBody()` 追加。详见 [操作消息体列表](#发送复合消息)。 |
 | 会话类型         | `EMMessage#setChatType`                                      | 群聊和聊天室必需 | 所有消息         | 单聊、群聊和聊天室分别设置为 `EMMessage.ChatType.Chat`、`GroupChat` 和 `ChatRoom`。默认值为 `Chat`。 |
 | 扩展字段         | `EMMessage#setAttribute`                                     | 可选             | 所有消息         | 添加业务自定义信息。支持字符串、布尔值、数值、JSON 对象和 JSON 数组等类型；扩展字段会计入消息大小限制。 |
-| 仅在线投递       | `EMMessage#deliverOnlineOnly`                                | 可选             | 所有消息         | 设置为 `true` 时，消息仅投递给在线用户，不进行离线存储。适用于输入状态、瞬时控制信息等场景。 |
+| 仅在线投递       | `EMMessage#deliverOnlineOnly`                                | 可选             | 所有消息单聊和群聊的各类消息         | 设置为 `true` 时，消息仅投递给在线用户；接收方离线时消息会被丢弃。该功能不适用于聊天室。适用于输入状态、瞬时控制信息等场景。|
 | 回调路由环境     | `EMMessage#setWebhookEnv`                                    | 可选             | 所有消息         | 设置 Webhook 回调环境标识，服务端根据该值匹配回调路由。      |
 | 聊天室消息优先级 | `EMMessage#setPriority`                                      | 可选             | 聊天室消息       | 设置聊天室消息的优先级，可选 `PriorityHigh`、`PriorityNormal` 和 `PriorityLow`，默认值为 `PriorityNormal`。 |
-| 定向接收成员     | `EMMessage#setReceiverList`                                  | 可选             | 群聊和聊天室消息 | 设置群聊或聊天室消息的指定接收成员列表。是否可用还受相应服务端功能配置和使用限制约束。 |
+| 定向接收成员     | `EMMessage#setReceiverList`                                  | 可选             | 群聊和聊天室消息 | 设置群聊或聊天室消息的指定接收成员列表。 |
 | 是否需要已读回执 | `EMMessage#setIsNeedReadReceipt`                             | 可选             | 单聊和群聊消息   | 标记该消息是否需要已读回执。接收方发送已读回执前，消息的该属性必须为 `true`；聊天室不支持消息已读回执。 |
 
 ## 接口频率限制
@@ -123,7 +123,9 @@ EMClient.getInstance()
 
 #### 带群消息已读回执和扩展字段的示例
 
-对于带有业务属性的文本消息，可通过 `EMMessage#setAttribute` 添加扩展字段。群聊场景下，如需统计群成员的消息已读情况，可调用 `EMMessage#setIsNeedReadReceipt(true)`。
+对于带有业务属性的文本消息，可通过 `EMMessage#setAttribute` 添加扩展字段。
+
+若需要单聊或群聊消息的已读回执，必须在发送前调用 `EMMessage#setIsNeedReadReceipt(true)`。
 
 ```java
 // 创建群聊文本消息，groupId 为群组 ID。
@@ -161,12 +163,14 @@ EMClient.getInstance()
 
 默认情况下，调用 `EMChatManager#sendMessage` 后，SDK 会自动将本地附件上传至IM 服务器；接收方也可由 SDK 自动下载附件。你可以通过 `EMOptions#setAutoTransferMessageAttachments` 控制附件是否由 SDK 自动传输。消息附件大小和存储限制，详见 [消息附件限制说明](/product/limitation.html#消息存储)。
 
+由 SDK 自动传输附件时，请确保本地文件或 URI 在通过 `EMMessage.setMessageStatusCallback` 设置的 `EMCallBack` 的 `onSuccess` 或 `onError` 回调返回前持续可读，不要提前删除源文件或撤销 URI 读取权限。对于相册、系统文件选择器或临时目录返回的资源，如无法保证读取权限和文件生命周期，建议先复制到应用私有目录，再使用复制后的本地文件发送。
+
 ### 发送图片消息
 
 图片消息通常涉及以下三类图片资源：
 
 - 原图：发送方本地选择的原始图片文件，通常用于查看或保存原图。
-- 大图：SDK 客户端基于原图进行等比压缩后上传的图片。压缩规则为：若图片短边大于 720 像素，则等比压缩至短边为 720 像素；若短边小于等于 720 像素，则保留原图尺寸，不做放大处理。此类图片通常用于聊天详情页展示。SDK 从 4.22.0 版本起支持大图功能。
+- 大图：SDK 客户端基于原图进行等比压缩后上传的图片。压缩规则为：若图片短边大于 720 像素，则等比压缩至短边为 720 像素；若短边小于等于 720 像素，则保留原图尺寸，不做放大处理。此类图片通常用于聊天详情页展示。
 - 缩略图：服务端基于原图进行等比压缩后的图片。压缩规则为：默认情况下，若图片短边大于 170 像素，则等比压缩至短边为 170 像素；若短边小于等于 170 像素，则保留原图尺寸，不做放大处理。此类图片通常用于会话列表、聊天列表等轻量展示场景。
 
 #### 发送流程
@@ -182,7 +186,7 @@ EMClient.getInstance()
 
 3. 调用 `EMChatManager#sendMessage` 发送消息。
    
-   如果开启了 `EMOptions#setAutoTransferMessageAttachments(boolean)`，SDK 会自动上传图片附件。服务器自动生成缩略图。
+   如果开启了 `EMOptions#setAutoTransferMessageAttachments(boolean)`，SDK 会自动上传图片附件。服务器自动生成缩略图。关于图片的上传进度，详见 [获取发送附件消息的进度](#获取发送附件消息的进度)。
 
 创建和发送图片消息的示例代码如下所示： 
 
@@ -427,11 +431,11 @@ Android SDK 只负责封装和发送位置消息，不提供地图定位或地�
 
 透传消息可视为命令消息，通过发送这条命令给对方，通知对方要进行的操作，收到消息可以自定义处理。
 
-具体功能可以根据自身业务需求自定义，例如实现头像、昵称的更新等。另外，以 `em_` 和 `easemob::` 开头的 action 为内部保留字段，注意不要使用。
+具体功能可以根据自身业务需求自定义，例如实现头像、昵称的更新等。另外，以 `em_` 和 `easemob::` 开头的 `action` 为内部保留字段，注意不要使用。
 
 :::tip
 - 透传消息发送后，不支持撤回。
-- 透传消息不会存入本地数据库中，所以在 UI 上不会显示。
+- 透传消息不会存入本地数据库，也不会创建本地会话，因此通常不在 UI 中显示。
 :::
 
 #### 发送流程
@@ -553,7 +557,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 | :-------------- | :-------------------- | :-------------------- |
 | `title`  | String    | 合并消息的标题。    |
 | `summary` | String       | 合并消息的概要。   |
-| `compatibleText` | String       | 合并消息的兼容文本。<br/>兼容文本起向下兼容不支持消息合并转发的版本的作用。当支持合并消息的 SDK 向不支持合并消息的低版本 SDK 发送消息时，低版本的 SDK 会将该属性解析为文本消息的消息内容。  |
+| `compatibleText` | String       | 合并消息的兼容文本。<br/>兼容文本用于兼容不支持消息合并转发的低版本 SDK。当支持合并消息的 SDK 向不支持合并消息的低版本 SDK 发送消息时，低版本的 SDK 会将该属性解析为文本消息的消息内容。  |
 | `messageIdList` | List      | 合并消息的原始消息 ID 列表。该列表最多包含 300 个消息 ID。  |
 | `userId` | String     | 消息接收方。该字段的设置取决于会话类型：<br/> - 单聊：对方用户 ID；<br/> - 群聊：群组 ID；<br/> - 消息话题会话：消息话题 ID；<br/> - 聊天室聊天：聊天室 ID。|
 
@@ -563,17 +567,135 @@ EMClient.getInstance().chatManager().sendMessage(message);
 1. 合并转发支持嵌套，最多支持 10 层嵌套，每层最多 300 条消息。
 2. 不论 `EMOptions#setAutoTransferMessageAttachments` 设置为 `false` 或 `true`，SDK 都会将合并消息附件上传到IM 服务器。
 3. 对于转发合并消息，例如，用户 A 向用户 B 发送了合并消息，用户 B 将该合并消息转发给用户 C，需要调用转发单条合并消息的 API。详见 [转发单条消息](message_forward.html#转发单条消息)。
+4. 合并消息不支持搜索。
 :::
 
 #### 使用建议
 
 合并消息适用于转发聊天记录等场景。创建合并消息前，应确认原始消息 ID 列表非空且不超过 300 条；展示合并消息时，应使用 `title`、`summary` 和 `compatibleText` 提供清晰的摘要及低版本兼容提示。
 
+## 发送复合消息
+
+自 SDK 5.2.1 起，一条消息可以按顺序携带多个消息体，便于将文本、图片等内容作为一条消息发送和展示。包含多个消息体时，`getType()` 和 `getContentType()` 均返回 `EMMessage.Type.MULTIBODY`。
+
+复合消息与合并消息不同：复合消息是在一条消息中组合多个消息体；[合并消息](#发送合并消息) 则封装多条已有消息，用于聊天记录转发。
+
+### 使用限制
+
+- 一条复合消息包含 2-20 个消息体，按传入顺序保存和展示。消息体列表不能为空，也不能包含空或无效的消息体。
+- 可组合文本、图片、语音、视频、文件、位置和自定义消息体，不支持将透传、合并、流式或其他复合消息作为其中的消息体。
+- 发送期间不要增删、替换或重排消息体列表；需要上传的本地附件应在发送完成前持续可读。
+- 当前不支持编辑复合消息的消息体或扩展字段 `ext`，也不支持翻译复合消息；其中的文本消息体不触发自动翻译。
+
+### 发送流程
+
+发送复合消息时，请按以下流程执行：
+
+1. 创建各个消息体。
+   使用文本、图片、文件、语音、视频、位置或自定义消息体的构造方法准备内容。先创建全部消息体，再按阅读顺序放入列表；本地附件需具备读取权限。
+2. 创建复合消息。
+   调用 `EMMessage#createMultiBodySendMessage(String to, List<EMMessageBody> bodies)` 创建消息。`to` 为用户、群组或聊天室 ID，`bodies` 为有序消息体列表。列表为空或包含无效消息体时返回 `null`；数量上限和类型组合限制在发送时校验。
+
+   传入一个消息体时，仍按单消息体消息处理。新消息默认为单聊消息；发送至群聊或聊天室时，需设置对应的 `ChatType`。
+3. 发送复合消息。
+   先通过 `setMessageStatusCallback` 注册回调，再调用 `EMClient.getInstance().chatManager().sendMessage(message)`。需要由 SDK 上传的本地附件先完成上传，再发送整条消息；通过回调处理总进度和最终结果。
+
+以下示例按“文本、本地图片、本地文件”的顺序创建并发送复合消息：
+
+```java
+// imageUri、fileUri 为应用具有读取权限的本地图片和文件 URI。
+List<EMMessageBody> bodies = new ArrayList<>();
+bodies.add(new EMTextMessageBody("图片说明"));
+bodies.add(new EMImageMessageBody(imageUri));
+bodies.add(new EMNormalFileMessageBody(fileUri));
+
+EMMessage message = EMMessage.createMultiBodySendMessage(conversationId, bodies);
+if (message != null) {
+    // 默认单聊；群聊或聊天室分别设置为 GroupChat 或 ChatRoom。
+    message.setChatType(EMMessage.ChatType.Chat);
+    message.setMessageStatusCallback(new EMCallBack() {
+        @Override
+        public void onSuccess() {
+            // 整条消息发送成功。
+        }
+
+        @Override
+        public void onError(int code, String error) {
+            // 根据错误码处理发送失败。
+        }
+
+        @Override
+        public void onProgress(int progress, String status) {
+            // 所有附件按原始文件大小加权后的总上传进度，范围为 0–100。
+        }
+    });
+    EMClient.getInstance().chatManager().sendMessage(message);
+}
+```
+
+### 关键参数
+
+`createMultiBodySendMessage` 使用接收方和完整消息体列表创建消息。其他通用设置见 [通用消息创建参数](#通用消息创建参数)。
+
+| 参数或属性 | 类型 | 是否必需 | 说明 |
+| :--- | :--- | :--- | :--- |
+| `to` | `String` | 必需 | 单聊传对方用户 ID，群聊传群组 ID，聊天室传聊天室 ID。 |
+| `bodies` | `List<EMMessageBody>` | 必需 | 完整的有序消息体列表，复合消息包含 2–20 个消息体；传入一个消息体时仍按单消息体消息处理。 |
+| `ChatType` | `EMMessage.ChatType` | 群聊、聊天室必需 | 默认为 `Chat`，群聊和聊天室分别设置为 `GroupChat`、`ChatRoom`。 |
+| 扩展字段 | `String`、`boolean`、数值等 | 可选 | 通过 `setAttribute(...)` 设置在整条消息上，不分别设置在各个消息体中。 |
+
+**消息体创建方式**
+
+| 消息体 | 类型及创建说明 |
+| :--- | :--- |
+| 文本 | `EMTextMessageBody`，见 [发送文本消息](#发送文本消息)。 |
+| 图片 | `EMImageMessageBody`，见 [发送图片消息](#发送图片消息)。 |
+| 文件 | `EMNormalFileMessageBody`，见 [发送文件消息](#发送文件消息)。 |
+| 语音 | `EMVoiceMessageBody`，见 [发送语音消息](#发送语音消息)。 |
+| 视频 | `EMVideoMessageBody`，见 [发送视频消息](#发送视频消息)。 |
+| 位置 | `EMLocationMessageBody`，见 [发送位置消息](#发送位置消息)。 |
+| 自定义 | `EMCustomMessageBody`，见 [发送自定义类型消息](#发送自定义类型消息)。 |
+
+**操作消息体列表**
+
+| API | 行为 |
+| :--- | :--- |
+| `getBodies()` | 返回完整的有序消息体列表，列表结构只读；每个消息体保留自身类型。 |
+| `getBody()` | 返回首个消息体，与 `getBodies()` 的第一个元素指向同一对象；不会返回全部消息体。 |
+| `setBodies(List<EMMessageBody>)` | 按传入顺序替换全部消息体。列表为空或包含无效元素时不修改原消息。 |
+| `setBody(EMMessageBody)` | 用单个消息体替换全部消息体，原列表中的其他消息体不会保留。 |
+| `addBody(EMMessageBody)` / `appendBody(EMMessageBody)` | 在列表末尾追加消息体，不替换已有内容。 |
+| `getType()` / `getContentType()` | 多个消息体返回 `MULTIBODY`；一个消息体返回该消息体的类型；无消息体时返回 `TXT`。 |
+
+设置或追加的消息体为空、无效时，SDK 保留原有列表并输出警告日志。消息体列表的修改应在发送前完成。
+
+### 发送进度与结果处理
+
+通过 `EMMessage#setMessageStatusCallback(EMCallBack)` 监听整条消息的发送状态：
+
+- `onProgress(int progress, String status)`：附件上传进度。多个附件按各自原始文件大小加权，汇总为消息级 0–100 总进度，不分别回调每个消息体的上传进度。
+- `onSuccess()`：整条消息发送成功。
+- `onError(int code, String error)`：附件上传或消息发送失败，返回错误码和错误信息。
+
+附件上传完成不等于整条消息发送成功，应以 `onSuccess()` 或 `onError(...)` 判断最终发送结果。通用回调说明见 [发送过程回调](#发送过程回调)。
+
+### 逻辑说明
+
+- **创建与发送校验**：列表为空或包含无效消息体时，创建返回 `null`；数量上限和类型组合在发送时校验。超过 20 个消息体时发送失败，错误码为 `EMError.MESSAGE_INVALID`。创建消息成功不代表已通过全部发送校验。
+- **本地附件与重发**：先准备好全部消息体，再创建消息；发送完成前保持本地附件可读。重发同一条失败消息时使用原消息对象，处理方式见 [重新发送失败消息](#重新发送失败消息)。
+- **已有服务器附件**：如需复用已上传的附件，应保留相应消息体的服务端附件信息；具体方式见 [转发单条消息](message_forward.html#转发单条消息) 和 [上传消息附件至自有服务器](#上传消息附件至自有服务器)。
+
+## 重新发送失败消息
+
+消息发送失败后，可在排除失败原因后，再次调用 `EMChatManager#sendMessage(message)` 发送。重新发送同样执行发送前校验：消息体为空、包含无效消息体、类型组合不支持或数量超过 20 个时，返回 `EMError.MESSAGE_INVALID`；复合消息中需要由 SDK 上传的本地附件缺失或无效时，返回相应的附件错误。
+
+重发前请确认消息内容有效，附件文件和 URI 仍可读取。消息已包含可复用的有效服务器附件地址时，SDK 可复用该地址，无需重新上传对应附件。
+
 ## 发送过程回调
 
 #### 使用说明
 
-发送消息前，可调用 `EMMessage#setMessageStatusCallback` 设置回调，以获取消息发送成功、发送失败以及附件上传进度。对于附件消息，`onProgress` 中的 `progress` 表示上传进度百分比。
+发送消息前，可调用 `EMMessage#setMessageStatusCallback` 设置回调，以获取消息发送成功、发送失败以及附件上传进度。对于复合消息，`onProgress` 中的 `progress` 为消息级总进度：SDK 按各附件的原始文件大小加权，汇总为 0–100 的进度，不分别回调每个附件的进度。
 
 #### 示例代码
 
@@ -604,7 +726,7 @@ EMClient.getInstance().chatManager().sendMessage(message);
 | :--- | :--- |
 | `onSuccess()` | 消息发送成功时触发。 |
 | `onError(int, String)` | 消息发送失败时触发，返回错误码和错误信息。 |
-| `onProgress(int, String)` | 上传附件时触发；`progress` 表示上传进度百分比。文本等无附件消息通常不会产生有效的上传进度。 |
+| `onProgress(int, String)` | 上传附件时触发；`progress` 为 0–100 的消息级上传进度，复合消息按各附件原始文件大小加权。文本等无附件消息通常不触发。 |
 
 #### 逻辑说明
 
@@ -731,7 +853,7 @@ public void onAttributesUpdate(
 
 发送图片、语音、视频或文件等附件消息时，可以通过 `EMMessage#setMessageStatusCallback(EMCallBack)` 的 `onProgress` 回调获取附件上传进度。
 
-`progress` 的取值范围为 `0-100`，表示附件上传百分比。通过 `onSuccess` 和 `onError` 回调可以获取消息发送结果：
+`progress` 的取值范围为 `0-100`，表示消息级附件上传百分比。复合消息中的多个附件按各自原始文件大小加权汇总为一条总进度，不会分别回调每个附件的进度。通过 `onSuccess` 和 `onError` 回调可以获取整条消息的发送结果：
 
 - `onSuccess`：消息发送成功。
 - `onError`：消息发送失败，包含错误码和错误描述。
@@ -861,10 +983,12 @@ String webhookEnv = message.getWebhookEnv();
 | [`createLocationSendMessage`](#发送位置消息) | `EMMessage` | 创建位置消息。 |
 | [`createSendMessage`](#发送透传消息) | `EMMessage` | 创建指定类型的待发送消息。 |
 | [`createCombinedSendMessage`](#发送合并消息) | `EMMessage` | 创建合并消息。 |
+| [`createMultiBodySendMessage`](#发送复合消息) | `EMMessage` | 自 SDK 5.2.1 起，按有序消息体列表创建待发送消息。 |
+| [`getBodies`](#发送复合消息) | `EMMessage` | 获取完整有序消息体列表。 |
+| [`setBodies`](#发送复合消息) | `EMMessage` | 替换全部消息体。 |
+| [`appendBody`](#发送复合消息) | `EMMessage` | 在末尾追加消息体。 |
+| [`getContentType`](#发送复合消息) | `EMMessage` | 获取消息内容类型，复合消息返回 `MULTIBODY`。 |
 | [`deliverOnlineOnly`](#通用消息创建参数) | `EMMessage` | 设置消息是否仅投递给在线用户。 |
 | [`sendMessage`](#发送消息统一流程) | `EMChatManager` | 发送消息。 |
 | [`downloadAndParseCombineMessage`](#发送合并消息) | `EMChatManager` | 下载并解析合并消息附件。 |
 | [`setAutoTransferMessageAttachments`](#上传消息附件至自有服务器) | `EMOptions` | 设置 SDK 是否自动上传和下载消息附件。 |
-
-
-

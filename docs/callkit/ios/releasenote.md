@@ -1,5 +1,13 @@
 # iOS CallKit 更新日志
 
+## v4.26.0
+
+该版本在 2026 年 10 月 29 日发布。
+
+修复 iOS 27 下的导航界面适配问题。
+
+如需通过 Swift Package Manager（SPM）集成，请选用提供 `Package.swift` 的 `4.26.1` 等发布版本，详见 [SPM 集成指南](integration.html#推荐-方式一-通过-swift-package-manager-集成)。
+
 ## v4.16.0
 
 该版本在 2025 年 8 月 29 日发布。

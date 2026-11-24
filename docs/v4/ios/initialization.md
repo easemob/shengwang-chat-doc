@@ -24,11 +24,13 @@ EMClient.shared().initializeSDK(with: options)
 | :----------------- | :---------------- |
 | `appId`                                   | 应用的唯一标识。 |
 | `isAutoLogin`   | 是否自动登录。<br/> -（默认）`YES`：自动登录。**若使用默认设置，首次登录后，后续会自动登录。这种情况下，若再手动登录，则会提示用户已登录。**<br/> -  `NO`：不自动登录。 |
+| `disconnectNotifyThreshold` | 断线通知时间阈值，单位为秒，默认值为 `10`，自 SDK 4.26.0 起支持。在 iOS SDK 4.26.0 中，该属性不会延迟普通断线的 `connectionStateDidChange:` 回调，也不会因短暂断线后快速重连成功而取消该回调；不影响实际连接状态、自动重连或 APNs 的发送时间。详见 [配置断线通知宽限期](connection.html#配置断线通知宽限期)。 |
 | `pushKitCertName`   | PushKit 的证书名称。 |
-| `setPushConfig(EMPushConfig pushConfig)`                     | 设置推送相关配置。<br/>`pushConfig` 参数为推送相关配置。         |
+| `apnsCertName` | APNs 推送证书名称，需与声网控制台配置的证书名称一致。在 SDK 初始化时设置，具体步骤见 [将证书名称传递给 SDK](/docs/v4/ios/push/push_apns.html#步骤二-将证书名称传递给-sdk)。 |
 | `autoAcceptGroupInvitation`   可             | 是否自动接受加群邀请。<br/> -（默认）`YES`：自动接受加群申请。 <br/> -  `NO`: 不自动接受加群申请。 |
 | `autoAcceptFriendInvitation`   可     | 设置是否自动接受加好友邀请。 <br/> -（默认）`YES`：自动接受好友邀请。 <br/> -  `NO`：不自动接收好友邀请。 |
-| `deleteMessagesOnLeaveChatroom`            | 退出(主动和被动退出)聊天室时是否删除聊天消息。<br/> -（默认）`YES`：删除。 <br/> -  `NO`：保留。 |
+| `enableChatroomConversation`            | 设置获取本地会话列表时是否包含聊天室会话。该配置不控制聊天室会话的创建或存储，也不影响聊天室消息的正常收发。该功能自 SDK 4.25.0 起支持。<br/> - `YES`：本地会话列表中包含聊天室会话。<br/> -（默认）`NO`：本地会话列表中不包含聊天室会话。必须在初始化 SDK 前设置。<br/> 你可以通过 `EMOptions#enableChatroomConversation` 查询当前配置下获取本地会话列表时是否包含聊天室会话。 |
+| `deleteMessagesOnLeaveChatroom`            | 设置主动或被动退出聊天室时是否删除该聊天室的本地消息。该配置不决定获取本地会话列表时是否包含聊天室会话。<br/> -（默认）`YES`：删除本地消息。 <br/> - `NO`：保留本地消息。 |
 | `deleteMessagesOnLeaveGroup`               | 退出(主动和被动退出)群组时是否删除聊天消息。<br/> -（默认）`YES`: 退出群组时删除群组消息。 <br/> -  `NO`: 退出群组时不删除群组消息。 |
 | `canChatroomOwnerLeave`                   | 是否允许聊天室所有者离开并删除会话记录。<br/> - （默认） `YES`：允许。即使聊天室所有者离开，该所有者仍具有聊天室的所有权限，只不过不再接收任何消息。<br/> - `NO`：不允许。 |
 

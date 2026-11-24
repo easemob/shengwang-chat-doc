@@ -6,11 +6,112 @@ show_callback_route: false
 
 # Android IM SDK 更新日志
 
+## v5.2.1 Dev 2026-11-5
+
+### 新增特性
+
+- **[支持复合消息](message_send.html#发送复合消息)**：单条消息可按顺序携带多个消息体，最多支持 20 个，便于组合发送和展示多种内容。新增 `EMMessage#createMultiBodySendMessage(...)`、`getBodies()`、`setBodies(...)` 和 `appendBody(...)`，用于创建、读取和修改消息体列表；新增 `getContentType()` 和 `EMMessage.Type.MULTIBODY`，用于识别复合消息。`EMClient#isConnected()` 标记为废弃。
+- **[支持查询完整连接状态](connection.html#获取连接状态)**：可区分已断开、连接中和已连接三种状态，便于应用展示连接进度、判断当前连接状态。新增 `EMClient#getConnectionState()`，返回 `EMConnectionState` 中的 `DISCONNECTED`、`CONNECTING` 或 `CONNECTED`。
+- **[支持配置断开通知宽限时间](connection.html#配置断线通知宽限期)**：成功建立连接后，发生网络异常等可恢复断开时，SDK 可暂缓通知应用，减少短暂网络波动引起的断线提示。新增 `EMOptions#setDisconnectNotifyThreshold(int seconds)` 和 `getDisconnectNotifyThreshold()`，用于设置和查询宽限时间，默认为 10 秒。
+- **[支持配置后台消息接收策略](/docs/document/android/push/push_overview.html#配置后台消息接收策略)**：应用可选择在进入后台后断开 IM 长连接，通过有效的推送通道接收离线消息通知。新增 `EMOptions#setUsePushInBackground(boolean)` 和 `isUsePushInBackground()`，用于设置和查询后台推送开关。开启且推送通道有效时，SDK 会在应用切入后台约 10 秒后主动断开长连接。
+- **[支持查询推送通道是否有效](/docs/document/android/push/push_overview.html#确认推送通道有效)**：应用可判断当前是否已建立有效的厂商推送通道，辅助选择后台消息接收策略。新增 `EMPushHelper#isPushTokenBound()`，用于查询当前推送 Token 的绑定状态。
+
+### 优化
+
+- **[调整流式消息扩展字段的更新逻辑](/docs/document/android/message_stream_receive.html#扩展字段)**：此前，本地保留消息首次入库时的扩展字段，后续分片或完整消息更新不会同步更新这些字段。现改为使用最新处理的分片或完整消息更新中的扩展字段整体覆盖本地旧值；若新扩展字段为空，则清空本地原有扩展字段。
+- **[优化复合消息的附件传输进度和下载结果回调](message_receive.html#附件下载接口与回调)**：[附件上传](message_send.html#获取发送附件消息的进度)、原文件下载及大图下载的进度按文件大小加权，汇总为消息级 0–100 总进度；缩略图下载不提供进度回调。每次下载请求仅返回一次最终结果，任一适用附件下载失败时，终止剩余下载。
+
+### API 与行为变更
+
+- 复合消息的 [`getType()` 和 `getContentType()`](message_send.html#发送复合消息) 返回 `EMMessage.Type.MULTIBODY`；`getBody()` 返回首个消息体，完整消息体列表请通过 `getBodies()` 获取。`setBody()` 会替换整个消息体列表，`addBody()` 和 `appendBody()` 为追加操作。
+- `EMClient#isConnected()` 标记为废弃，现有调用仍可使用，建议改用 [`EMClient#getConnectionState()`](connection.html#获取连接状态)。
+- [可恢复断开的 `onDisconnected(int errorCode)` 回调](connection.html#配置断线通知宽限期)默认延迟 10 秒；宽限时间内重连成功则不触发断开回调，到期仍未恢复才触发。将宽限时间设置为小于或等于 0 时，立即回调。首次连接失败、Token 失效或被踢下线等情况仍立即通知。宽限时间仅影响回调时机，连接状态会即时变化。
+- [`usePushInBackground`](/docs/document/android/push/push_overview.html#配置后台消息接收策略) 默认为 `false`，SDK 不会因应用进入后台而主动断开长连接，连接能否持续保持仍受系统后台限制和应用保活策略影响。如需启用后台推送策略，请在调用 `EMClient#init(Context, EMOptions)` 前设置为 `true`。若连接成功时应用已处于后台，且开关已开启、推送通道有效，SDK 会直接断开连接，不再等待约 10 秒。
+- [下载复合消息附件](message_receive.html#附件下载接口与回调) 时，不适用的消息体会自动跳过；若没有适用的消息体，则回调成功，但不下载任何内容。语音消息体通过大图或缩略图下载接口下载时，均下载语音原文件。单消息体的其他下载行为保持与历史版本一致。
+
+### 修复
+
+- 修复自动重连在遍历完服务器地址列表后停止、可能导致登录状态异常的问题。现在会 [按退避策略继续尝试连接](connection.html#自动重连)，提升弱网及服务异常场景下的连接恢复能力。
+- 修复 [单消息体附件下载行为](message_receive.html#附件下载接口与回调) 与历史版本不一致的问题：单视频消息调用大图下载接口时，恢复为下载原始视频文件；对于不支持的资源或下载类型，返回下载失败。复合消息的适用性筛选规则保持不变。
+- 修复消息经 Parcel 反序列化后消息体缓存未同步的问题，避免消息体为空以及消息发送、附件下载异常。
+- 修复 [重发消息时缺少发送前校验](message_send.html#重新发送失败消息) 的问题。消息体为空、数量超限或复合消息附件缺失时，SDK 会拒绝发送，避免异常发送或崩溃。
+- 修复流式消息后续分片或完整消息更新时，[扩展字段未正确覆盖并持久化](message_stream_receive.html#扩展字段) 的问题。最新处理的更新中的扩展字段会整体替换本地旧值；若新扩展字段为空，则清空原值。
+- 修复退出聊天室后重新加入时，旧退出请求的重试可能导致聊天室加入状态异常的问题。
+- 修复多设备场景下，其他设备可能收不到群组或聊天室白名单添加、全员禁言及解除全员禁言事件的问题。
+- 修复群成员名片长度超限时返回的错误码不准确的问题，现返回 `EMError.INVALID_PARAM`。
+- 修复单独修改群组公开状态、入群审批或邀请权限时，请求连带提交其他群属性、可能导致配置被误改的问题。
+- 恢复 [`EMChatManager#downloadBigImage(...)` 的大图下载进度回调](message_receive.html#附件下载接口与回调)；缩略图下载仍不提供进度回调。
+
+## v5.1.0 Dev 2026-9-24
+
+#### 重大变更
+
+**1. 登录后默认自动同步会话**
+
+`EMOptions#setDataSyncType` 的默认值由 `NONE` 调整为 `CONVERSATIONS`，即登录后默认自动同步会话列表。
+
+详见 [登录后自动同步会话列表](conversation_list.html#登录后自动同步会话列表) 文档。
+
+**2. 本地会话列表默认不包含聊天室会话**
+
+默认情况下，获取本地会话列表时不包含聊天室会话。如需包含，需在 SDK 初始化前调用 `EMOptions#setEnableChatroomConversation(true)`。你可以通过 `EMOptions#isEnableChatroomConversation()` 查询当前配置下获取本地会话列表时是否包含聊天室会话。
+
+详见 [会话相关选项](conversation_list.html#会话相关选项) 文档。
+
+**3. 移除数据同步 WebSocket 配置属性**
+
+数据同步 WebSocket 地址改为根据 REST 服务器配置自动获取，不再需要单独配置。以下接口已移除：
+
+- `EMOptions#setSyncDataWebSocketServer(String)`
+- `EMOptions#getSyncDataWebSocketServer()`
+- `EMOptions#setSyncDataWebSocketPort(int)`
+- `EMOptions#getSyncDataWebSocketPort()`
+
+#### 新增特性
+
+- 支持 [分页获取本地会话列表](conversation_list.html#分页获取本地会话)。
+- 支持 [查询群组邀请确认配置](group_manage.html#邀请用户入群)：新增 `EMGroup#isInviteNeedConfirm()`，用于获取群组“邀请成员是否需要被邀请人确认”的配置。
+- 新增多设备登录场景下的 [群组信息更新事件](multi_device.html#监听多设备事件) `GROUP_UPDATE`（事件码 `34`）。
+
+#### 优化
+
+- **本地数据库性能优化**
+   - SQLCipher 数据库默认启用 WAL 模式，已移除开关，始终开启；
+   - 单读连接升级为有界读连接池（容量 3），无过滤条件的会话加载走读连接池，提升并发读性能；
+   - 好友备注（remark）缓存改为懒加载；
+   - 会话/群组同步时间戳读取适配 WAL，并优化 `performMigrationToVersion51` 迁移流程。
+
+- **网络超时调优**
+   - TCP/WebSocket 单次连接超时：5s 调整为 20s；
+   - 非附件类 HTTP 请求超时：10s 调整为 20s；
+   - 整体登录超时：30s 调整为 70s；
+   - `sendMessage` 内部重连等待与 DNS 列表获取超时统一为 20s。
+
+- **用户 Token 过期判断使用 NTP 校准时间**，避免设备本地时间不准导致用户 Token 过期误判。
+- **安全与合规**：
+   - `libcipherdb.so` 按 NDK 29 重新编译；
+   - DoH 分片上传启用证书校验。
+
+#### 修复
+
+1. 修复推送 Token 上传与登出并发时的 NPE 崩溃，以及过期上传任务污染本地 Token 状态的问题。
+2. 修复拉取漫游消息后未更新会话最后一条消息的问题。
+3. 修复收到空 `msgid` 消息导致的崩溃。
+4. 修复未登录状态下调用 `asyncDeleteAllMsgsAndConversations` 导致的崩溃。
+5. 修复附件远端路径非法时 `sendMessage` 无回调的问题。
+6. 消息内容为空时不再入库、不再回调上层；数据库读写路径拒绝空 body 消息，修复相关异常。
+7. 修复更新用户属性（`userinfo`）时的崩溃，以及 `userinfo` 回调中的 JNI 局部引用泄漏。
+8. 修复信号量/定时器生命周期问题导致的重连卡死与偶发死锁（`EMSemaphoreTracker`/`EMTimer`/连接等待被替换后的时序问题）。
+9. 修复自己退群/群被销毁时本地清理与回调线程的时序崩溃；修复 MUC/ROSTER 事件先于消息落盘分发导致的消息乱序。
+10. 修复第二次设置私有 REST 服务器地址不生效的问题。
+11. 修复 `resetLinkVector()` 崩溃；修复 [在线状态订阅](presence.html) 时间戳未初始化及 `pageSize` 未校验的问题。
+12. 修复附件上传 HTTP 超时单位换算错误（秒未换算为毫秒导致超时设置偏小）。
+
 ## v5.0.0 Dev 2026-8-12
 
 该版本于 2026 年 8 月 15 日发布。
 
-本文重点说明功能和行为变化，具体的接口删除、重命名及替代方式请参见 [IM Android SDK 4.x 到 5.x 迁移指南](migration_guide.html)。
+Android IM SDK 5.0.0 是一次重要的架构升级。本文重点说明功能和行为变化，具体的接口删除、重命名及替代方式请参见 [IM Android SDK 4.x 到 5.x 迁移指南](/docs/document/android/migration_guide.html)。
 
 #### 重要变更
 
@@ -46,7 +147,7 @@ SDK 新增统一的数据同步机制。应用可配置登录后需要自动同�
 
 2. 会话未读数管理
 
-- SDK 提供本地会话未读消息总数统计，该统计不包含聊天室会话，也不包含推送提醒类型不是 `EMPushRemindType.ALL` 的会话。
+- SDK 提供本地会话未读消息总数统计，该统计不包含聊天室会话，也不包含推送通知方式不是 `EMPushRemindType.ALL` 的会话。
 - 清除指定会话或全部会话的本地未读数后，清理结果会同步至当前账号的其他设备，但不会向消息发送方发送消息已读回执。
 - 当其他设备清除会话未读数时，本端会收到多设备会话事件，应用应据此重新读取本地会话并刷新界面。
 
@@ -92,6 +193,116 @@ SDK 补充会话展示信息、批量删除会话和群成员读取等能力：
 - 修复关闭附件 MD5 校验后，上传附件仍可能执行 MD5 预校验的问题。
 - 修复网络传输、任务队列和数据库缓存中的若干并发安全问题。
 
+## v4.26.1 Dev 2026-11-16（开发版）
+
+### 优化
+
+更新 AOSL 库版本为 1.3.5。
+
+### 修复
+
+- 修复遍历完服务器地址列表后自动重连停止、可能导致登录状态异常的问题。SDK 现会按退避策略持续尝试重连，提升弱网和服务异常场景下的连接恢复能力。
+- 修复本地缺少已加入聊天室的缓存时，调用 `EMChatRoomManager#leaveChatRoom(...)` 直接返回 `EMError.CHATROOM_NOT_JOINED`、无法向服务器发起退出请求的问题。SDK 现在会继续执行退出流程；若通过 `EMOptions#allowChatroomOwnerLeave(false)` 禁止聊天室所有者退出，仍会根据本地保存的所有者信息进行权限校验。
+- 修复本地聊天室缓存缺失时，退出聊天室后本地数据清理不完整的问题。退出成功后，SDK 会清理本地聊天室记录，并根据 `EMOptions#setDeleteMessagesAsExitChatRoom(boolean)` 的配置删除相关会话及消息。
+
+相关文档：[连接](/docs/v4/android/connection.html)、[退出聊天室](/docs/v4/android/room_members.html#退出聊天室)。
+
+## v4.26.0 Dev 2026-10-29（开发版）
+
+#### 新增特性
+
+- **[支持按时间点批量标记消息已读](/docs/v4/android/conversation_unread.html#按时间点批量标记消息已读)**：可将会话中指定时间点及以前的未读接收消息批量标记为已读，并按实际标记条数更新会话未读数。该操作仅作用于本地，不向服务器发送已读回执。新增 `EMConversation.markMessagesAsReadWithTimestamp(long timestamp)` 接口。
+- **[支持查询完整的连接状态](/docs/v4/android/connection.html#查询连接状态)**：可区分已断开、连接中和已连接三种状态，便于应用展示连接进度、判断当前连接状态。新增 `EMClient#getConnectionState()`，返回 `EMConnectionState` 中的 `DISCONNECTED`、`CONNECTING` 或 `CONNECTED`。
+- **[支持配置断线通知宽限期](/docs/v4/android/connection.html#配置断线通知宽限期)**：成功建立连接后，发生网络异常等可恢复断开时，SDK 可暂缓通知应用，减少短暂网络波动引起的断线提示。新增 `EMOptions#setDisconnectNotifyThreshold(int seconds)` 和 `getDisconnectNotifyThreshold()`，用于设置和查询宽限时间，默认为 10 秒。
+- **[支持配置后台消息接收策略](/docs/v4/android/push/push_overview.html#配置后台消息接收策略)**：应用可选择在进入后台后断开 IM 长连接，通过有效的推送通道接收离线消息通知。新增 `EMOptions#setUsePushInBackground(boolean)` 和 `isUsePushInBackground()`，用于设置和查询后台推送开关。开启且推送通道有效时，SDK 会在应用切入后台约 10 秒后主动断开长连接。
+- **[支持查询推送通道是否有效](/docs/v4/android/push/push_overview.html#确认推送通道有效)**：通过 `EMPushHelper.getInstance().isPushTokenBound()` 判断当前是否已建立有效的厂商推送通道，辅助选择后台消息接收策略。
+
+#### 优化
+
+- **[调整 FCM 后台连接策略](/docs/v4/android/push/push_overview.html#配置后台消息接收策略)**：不再默认于应用进入后台 3 分钟后主动断开长连接。后台断连行为统一由新增的后台推送开关 `usePushInBackground` 控制，通过 `EMOptions.setUsePushInBackground(boolean)` 设置；未开启时，SDK 不会因应用进入后台而主动断开长连接。
+- **[调整流式消息扩展字段的更新逻辑](/docs/v4/android/message_stream_receive.html#扩展字段)**：此前，本地保留消息首次入库时的扩展字段，后续分片或完整消息更新不会同步更新这些字段。现改为使用最新处理的分片或完整消息更新中的扩展字段整体覆盖本地旧值；若新扩展字段为空，则清空本地原有扩展字段。
+
+#### 修复
+
+- 修复其他设备修改会话免打扰设置后，本机虽收到通知但本地状态未同步的问题，同时支持正确处理取消免打扰的通知。
+- 修复退出聊天室失败后的重试请求与重新加入操作并发时，旧退出请求可能误清除重新加入后的聊天室状态的问题。
+
+## v4.25.1 Dev 2026-9-18（开发版）
+
+#### 重大变更
+
+**1. 本地会话列表默认不包含聊天室会话**
+
+默认情况下，获取本地会话列表时不包含聊天室会话。如需在本地会话列表中包含聊天室会话，需在 SDK 初始化前调用 `EMOptions#setEnableChatroomConversation(true)`。你可以通过 `EMOptions#isEnableChatroomConversation()` 查询当前配置下获取本地会话列表时是否包含聊天室会话。
+详见 [获取本地会话列表](/docs/v4/android/conversation_list.html#从本地获取会话列表) 文档。
+
+**2. 移除第二通道（数据同步 WebSocket）配置属性**
+
+数据同步 WebSocket 地址改为根据 REST 服务器配置自动获取，不再单独配置。移除以下接口：
+- `EMOptions#setSyncDataWebSocketServer(String)`
+- `EMOptions#getSyncDataWebSocketServer()`
+- `EMOptions#setSyncDataWebSocketPort(int)`
+- `EMOptions#getSyncDataWebSocketPort()`
+
+#### 新增功能
+
+- 支持 [分页获取本地会话列表](/docs/v4/android/conversation_list.html#分页获取本地会话) 功能。
+- 新增默认服务域名配置接口，用于设置和查询 SDK 是否使用 Agora Chat 默认域名：
+  - `EMOptions#setUseAgoraChatDomain(boolean)`：设置是否使用 Agora Chat 默认域名。
+  - `EMOptions#getUseAgoraChatDomain()`：查询当前设置。
+
+#### 优化
+
+- 优化本地数据库并发读取能力，启用 WAL 模式并使用有界只读连接池。WAL 或共享内存环境不可用时，SDK 会回退至单写连接模式，避免影响基础数据库访问。
+- 优化 Token 有效期计算，使用 NTP 校正后的时间判断 Token 即将过期和已经过期，避免设备系统时间偏差导致通知时机不准确。
+- 编译 SDK 时使用 NDK r28 或更高版本，并更新 `libcipherdb.so`，规避 Google Play 16 KB 页面大小兼容性警告。
+
+#### 修复
+
+- 修复连接计时器取消并重新启动后状态未正确重置，可能导致心跳回调连续触发的问题。
+- 修复并发或连续发起连接时，旧连接等待器影响当前连接结果，可能导致连接等待异常或死锁的问题。
+- 修复群组退出、群组解散或联系人移除事件与离线消息处理顺序异常时，导致已删除会话被重新创建的问题。
+- 修复发送附件消息时远程路径无效，可能无法收到发送失败回调的问题。
+- 修复未登录状态下调用删除全部消息和会话接口可能引发崩溃的问题。
+- 修复并发更新用户属性时可能引发崩溃的问题。
+- 修复刷新 DNS 链路列表时可能因并发访问引发崩溃的问题。
+- 修复多次设置私有化 REST 服务器地址时，后续设置可能不生效的问题。
+- 修复部分 JNI 对象转换和撤回消息回调中的局部引用未释放问题。
+- 修复从服务器拉取漫游消息后，会话内存缓存和最近一条消息未同步更新的问题。使用 `EMFetchMessageOption#setIsSave(true)` 保存历史消息时，SDK 会同时更新对应会话的消息缓存。
+- 修复推送 Token 上传偶现崩溃的问题。
+- 增强异常消息防护：接收到消息体为空的消息时，不再解析、写入数据库或向上层回调；读取会话及历史消息时跳过无效消息，避免产生空消息对象或引发崩溃。
+
+## v4.24.3 Dev 2026-9-23（开发版）
+
+#### 新增特性
+
+- 新增后台断连开关 `EMOptions#setUsePushInBackground(boolean)`。
+  - 该开关默认为 `false`，即应用进入后台后继续保持长连接。
+  - 开启该开关且推送 Token 已绑定时，应用进入后台约 10 秒后断开长连接，离线消息改由厂商推送通道下发。
+  - 该开关适用于所有厂商推送通道，不再仅限于 FCM。
+  - 需在调用 `EMClient#init` 初始化 SDK 前设置。
+  - 在 4.24.2 及之前版本中，FCM 场景下应用进入后台约 3 分钟后会自动断开长连接；从 4.24.3 起，该行为默认关闭。依赖原有行为的 FCM 集成需显式调用 `setUsePushInBackground(true)`，断连等待时间同时由 3 分钟缩短为约 10 秒。
+
+详见 [推送概述文档](/docs/v4/android/push/push_overview.html#配置后台消息接收策略)。
+
+## v4.24.2 Dev 2026-9-3（开发版）
+
+#### 优化
+
+- 网络超时调优：
+  - TCP/WebSocket 单次连接超时：5 秒调整为 20 秒；
+  - 非附件类 HTTP 请求超时：10 秒调整为 20 秒；
+  - 整体登录超时：30 秒调整为 70 秒；
+  - `sendMessage` 内部重连等待与 DNS 列表获取超时统一为 20 秒。
+  - 详见 [连接文档](/docs/v4/android/connection.html#网络超时)。
+- 优化 `EMPresenceManager#fetchSubscribedMembers` 的参数校验逻辑：当 `pageSize` 为 `0` 时直接回调 `EMError.INVALID_PARAM`，不再发起请求。详见 [用户状态订阅文档](/docs/v4/android/presence.html#查询被订阅用户列表)。
+
+#### 修复
+
+- 修复附件上传/下载超时单位换算错误（秒未换算为毫秒导致超时设置偏小）。
+- 修复多线程场景下 DNS 链路排序因并发访问导致崩溃的问题。
+- 修复 Presence 时间戳未初始化可能返回脏数据的问题。
+
 ## v4.24.1 Dev 2026-9-2（开发版）
 
 #### 优化
@@ -121,8 +332,8 @@ SDK 补充会话展示信息、批量删除会话和群成员读取等能力：
   消息搜索默认不支持扩展字段 `ext`，如需支持该字段搜索，请联系商务经理。
 </HideSection>
 
-- 新增异步接口，用于 [更新群组扩展字段](group_attributes.html#更新群扩展字段)。
-- 新增异步接口，用于 [获取服务器端推送配置](/document/android/push/push_display_attribute.html#获取推送通知的显示属性)。
+- 新增异步接口，用于 [更新群组扩展字段](/docs/v4/android/group_attributes.html#更新群扩展字段)。
+- 新增异步接口，用于 [获取服务器端推送配置](/docs/v4/android/push/push_display_attribute.html#获取推送通知的显示属性)。
 
 #### 优化
 
@@ -143,13 +354,13 @@ SDK 补充会话展示信息、批量删除会话和群成员读取等能力：
 
 ####  新增功能
 
-支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](message_send.html#发消息时设置回调路由)。目前，该功能仅面向国内 1 区和国内 2 区开放。
+支持 [为消息配置回调路由标识，使消息可按指定路由触发发送前回调和发送后回调](/docs/v4/android/message_send.html#发消息时设置回调路由)。目前，该功能仅面向国内 1 区和国内 2 区开放。
 
 </HideSection>
 
 #### 优化
 
-- 新增 [登录失败相关错误码](error.html)：
+- 新增 [登录失败相关错误码](/docs/v4/android/error.html)：
   - `350`：`EMError#CONNECTION_TIMEOUT`：连接服务器超时。
   - `351`：`EMError#CONNECTION_DNS_ERROR`：连接服务器时发生 DNS 错误。
   - `352`：`EMError#CONNECTION_IO_ERROR`：连接服务器时发生 IO 错误。
@@ -162,28 +373,28 @@ SDK 补充会话展示信息、批量删除会话和群成员读取等能力：
 - 修复合并转发消息偶现附件下载失败的问题。
 - 修复客户端无法解析 DoH 配置信息的问题。
 - 修复发送图片或视频消息时，因平台层图片拷贝失败导致消息发送失败后，消息状态未从 `inprogress` 更新为 `fail` 的问题。
-- 修复 [获取群成员列表接口](group_manage.html#获取群成员列表) `asyncFetchGroupMembersInfo` 获取不到昵称和图像的问题。
+- 修复 [获取群成员列表接口](/docs/v4/android/group_manage.html#获取群成员列表) `asyncFetchGroupMembersInfo` 获取不到昵称和图像的问题。
 
 ## v4.22.0 Dev 2026-6-5（开发版）
 
 #### 新增特性
 
 - 支持图片消息分层资源管理及相关处理逻辑优化：
-  - 新增 [“大图”资源类型](message_send.html#发送图片消息)，用于区分原图与压缩后的图片资源。
-  - 优化 [非原图发送场景下的图片处理逻辑](message_send.html#发送图片消息)。
-  - 优化 [图片](message_receive.html#接收图片消息) 和 [视频消息的缩略图及附件路径处理逻辑](message_receive.html#接收视频消息)。
+  - 新增 [“大图”资源类型](/docs/v4/android/message_send.html#发送图片消息)，用于区分原图与压缩后的图片资源。
+  - 优化 [非原图发送场景下的图片处理逻辑](/docs/v4/android/message_send.html#发送图片消息)。
+  - 优化 [图片](/docs/v4/android/message_receive.html#接收图片消息) 和 [视频消息的缩略图及附件路径处理逻辑](/docs/v4/android/message_receive.html#接收视频消息)。
 - 支持好友列表自动同步：
-  - 新增 [好友列表自动同步配置功能](user_relationship.html#开启自动同步)。
-  - 新增 [好友列表及好友信息同步状态回调](user_relationship.html#监听同步状态和好友信息变更)。
-  - 增强好友对象能力：从 [服务器](user_relationship.html#从服务器获取好友列表) 和 [本地获取好友列表](user_relationship.html#从本地获取好友列表) 支持获取好友的用户属性和好友添加时间。之前仅能获取好友用户 ID 和好友备注。
-- 支持 [非好友用户的属性变更订阅功能](userprofile.html#订阅非好友用户的属性变更)。
+  - 新增 [好友列表自动同步配置功能](/docs/v4/android/user_relationship.html#开启自动同步)。
+  - 新增 [好友列表及好友信息同步状态回调](/docs/v4/android/user_relationship.html#监听同步状态和好友信息变更)。
+  - 增强好友对象能力：从 [服务器](/docs/v4/android/user_relationship.html#从服务器获取好友列表) 和 [本地获取好友列表](/docs/v4/android/user_relationship.html#从本地获取好友列表) 支持获取好友的用户属性和好友添加时间。之前仅能获取好友用户 ID 和好友备注。
+- 支持 [非好友用户的属性变更订阅功能](/docs/v4/android/userprofile.html#订阅非好友用户的属性变更)，使用前需要联系声网商务开通。
 - 新增同步数据 WebSocket 服务地址和端口配置接口。
 
 #### 优化
 
 获取 DNS 失败时的错误码由 `305` 调整为 `304`。
-- 废弃原有的判断是否发送原图的方法 `EMImageMessageBody#isSendOriginalImage()`，使用 [EMImageMessageBody#isOriginalImage()](message_send.html#发送图片消息) 替代。
-- 废弃原有的下载消息附件方法 `EMChatManager#downloadAttachment(EMMessage msg)`，使用带回调的附件下载方法 [EMChatManager#downloadAttachment(EMMessage msg, EMCallBack callback)](message_receive.html#接收图片消息) 替代。
+- 废弃原有的判断是否发送原图的方法 `EMImageMessageBody#isSendOriginalImage()`，使用 [EMImageMessageBody#isOriginalImage()](/docs/v4/android/message_send.html#发送图片消息) 替代。
+- 废弃原有的下载消息附件方法 `EMChatManager#downloadAttachment(EMMessage msg)`，使用带回调的附件下载方法 [EMChatManager#downloadAttachment(EMMessage msg, EMCallBack callback)](/docs/v4/android/message_receive.html#接收图片消息) 替代。
 - 废弃原有的设置缩略图密钥方法 `EMImageMessageBody#setThumbnailSecret(String)`，使用 `EMFileMessageBody#setSecret(String)` 替代。
 - 废弃原有的获取缩略图密钥方法 `EMImageMessageBody#getThumbnailSecret()`，使用 `EMFileMessageBody#getSecret()` 替代。
 
@@ -214,9 +425,9 @@ SDK 补充会话展示信息、批量删除会话和群成员读取等能力：
 
 #### 新增特性
 
-1. 新增 [用户信息自动管理功能](userinfo_provider.html)。
+1. 新增 [用户信息自动管理功能](/docs/v4/android/userinfo_provider.html)。
 
-   用户信息指用于业务展示的用户相关信息，包括 [用户属性](userprofile.html)、[好友备注](user_relationship.html#设置好友备注) 和 [群成员名片](group_namecard.html)。
+   用户信息指用于业务展示的用户相关信息，包括 [用户属性](/docs/v4/android/userprofile.html)、[好友备注](/docs/v4/android/user_relationship.html#设置好友备注) 和 [群成员名片](/docs/v4/android/group_namecard.html)。
    
    开启 `EMOptions#setEnableUserInfo(true)` 后，SDK 支持自动同步、缓存和更新用户信息。主要功能如下：
    - 用户登录成功后自动同步当前登录用户信息。
@@ -228,13 +439,35 @@ SDK 补充会话展示信息、批量删除会话和群成员读取等能力：
    - `EMUserInfoManagerListener`：监听用户信息更新事件。
    - `EMUserInfoManager#getUserInfoWithUserIds`：从本地内存查询用户信息。
 
-2. 新增 [群成员名片管理功能](group_namecard.html)。
+2. 新增 [群成员名片管理功能](/docs/v4/android/group_namecard.html)。
    
    支持群成员名片的设置、本地查询、服务端获取（写入本地内存）、通过消息自动同步以及变更监听。新增如下接口或回调：
    - 新增 `EMGroupManager#asyncUpdateGroupNamecard`，支持更新当前用户在指定群组中的群名片。
    - 新增 `EMGroupManager#getGroupNamecard`，支持从本地内存获取群成员名片。
    - `EMGroupManager#asyncFetchGroupMembersInfo` 返回的 `EMGroupMemberInfo` 新增群成员名片 `namecard` 字段。
    - 新增 `EMGroupChangeListener#onUserGroupNamecardUpdated`，支持监听群名片变更。
+
+## v4.19.5 2026-11-9
+
+#### 修复
+
+- **优化 Token 过期提醒的准确性**：修复设备系统时间不准确、被修改或设备休眠导致 Token 过期倒计时出现偏差的问题。SDK 现在结合服务端时间与单调时钟计算倒计时，使 `EMConnectionListener#onTokenWillExpire()` 和 `onTokenExpired()` 的触发时机更准确；登录及调用 `EMClient#renewToken()` 更新 Token 后均生效。
+
+- **修复连接地址耗尽后停止重连的问题**：修复自动登录或已登录状态下，所有长连接地址均尝试失败后 SDK 停止重连并清除登录状态的问题。现在 SDK 会重新遍历连接地址，按需刷新 DNS 配置并进行退避重试。登录过程中无可用连接地址时，返回 `EMError#SERVER_NOT_REACHABLE`，不再直接退出登录。
+
+## v4.19.4 2026-9-22
+
+该版本进行了如下修复：
+
+- 修复频繁切换前后台等场景下，离线消息同步与连接断开回调之间可能发生死锁，导致连接断开后无法自动重连、消息发送持续失败的问题。
+- 修复多设备场景下，在其他设备设置或移除会话免打扰后，本端收到多设备回调但本地免打扰状态未同步更新的问题。
+- 修复会话列表排序过程中，会话状态被并发修改可能导致的崩溃。
+- 修复离线消息同步过程中并发访问会话跟踪数据可能导致的崩溃。
+- 修复 DNS 配置解析过程中的并发访问可能导致的崩溃。
+
+## v4.19.3 Dev 2026-5-27（开发版）
+
+修复发送图片或视频消息时，缩略图缺失或拷贝失败导致整条消息发送失败的问题。缩略图处理失败不再影响消息正常发送。
 
 ## v4.19.2 Dev 2026-4-15（开发版）
 
@@ -254,7 +487,7 @@ SDK 补充会话展示信息、批量删除会话和群成员读取等能力：
 
 #### 新增特性
 
-支持 [接收服务端发送的流式消息](message_stream_receive.html)。
+支持 [接收服务端发送的流式消息](/docs/v4/android/message_stream_receive.html)。
 
 目前，流式消息仅支持通过 [服务端 RESTful API](/document/server-side/message_stream_send_single.html) 下发，SDK 负责接收，但不提供发送能力。
 
@@ -335,6 +568,37 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 - 修复更新群组属性时影响群组头像问题。
 - 修复多线程场景下通过 `messagebody` 获取 `content` 时引起的崩溃问题。
 
+## v4.16.4 2026-08-14
+
+#### 优化
+
+- 调整 SDK 底层默认服务器域名配置。
+
+#### 修复
+
+- 修复私有部署场景下，第二次调用 `EMOptions#setRestServer` 设置 REST 服务器地址不生效的问题。
+
+## v4.16.3 2026-06-16
+
+#### 优化
+
+- `EMImageMessageBody#setSize(int, int)` 方法访问权限调整为 public，支持设置图片消息的图片宽高。
+- 更新 AOSL 库版本为 1.3.10。
+
+#### 修复
+
+- 修复多线程场景下对会话列表排序时，并发修改会话属性（如置顶状态、收发消息）可能导致的崩溃问题。
+- 修复离线消息同步过程中并发访问会话同步队列可能导致的崩溃问题。
+- 修复离线消息同步完成事件 `EMConnectionListener#onOfflineMessageSyncFinish` 回调中嵌套调用 SDK 接口可能导致的死锁问题。
+
+## v4.16.2 2026-01-28
+
+#### 修复
+
+- 修复查询当前用户是否在群组禁言名单（`EMGroupManager#asyncCheckIfInMuteList`）或群组白名单（`EMGroupManager#checkIfInGroupWhiteList`）时，本地无对应群组缓存可能导致的崩溃问题。
+- 修复查询当前用户是否在聊天室禁言名单或白名单（`EMChatRoomManager#checkIfInWhiteList`）时，本地无对应聊天室缓存可能导致的崩溃问题。
+
+
 ## v4.16.1 2025-11-12
 
 #### 新增特性
@@ -370,48 +634,48 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 新增特性 
 
-1. [根据关键字从本地数据库中获取会话的消息](message_retrieve.html#根据关键字获取本地会话中的消息)，SDK 返回会话 ID 及消息 ID 列表。
-2. [根据消息 ID 从本地数据库获取单个或多个消息](message_retrieve.html#根据消息-id-列表获取本地消息)。
+1. [根据关键字从本地数据库中获取会话的消息](/docs/v4/android/message_retrieve.html#根据关键字获取本地会话中的消息)，SDK 返回会话 ID 及消息 ID 列表。
+2. [根据消息 ID 从本地数据库获取单个或多个消息](/docs/v4/android/message_retrieve.html#根据消息-id-获取本地消息)。
 
 #### 修复
 
 1. 修复当修改文本和自定义消息之外的消息时，`EMMessageListener#onMessageContentChanged` 回调中不返回修改的信息的问题。
-2. 修复 [拉取漫游消息](message_retrieve.html#从服务器获取指定会话的消息) 时，设置为不保存消息时（`EMFetchMessageOption#setIsSave` 设置为 `false`）时，也会生成新的本地会话的问题。   
-3. 修复部分场景下 [发送 GIF 图片消息](message_send.html#发送-gif-图片消息) 失败的问题。
+2. 修复 [拉取漫游消息](/docs/v4/android/message_retrieve.html#从服务器获取指定会话的消息) 时，设置为不保存消息时（`EMFetchMessageOption#setIsSave` 设置为 `false`）时，也会生成新的本地会话的问题。
+3. 修复部分场景下 [发送 GIF 图片消息](/docs/v4/android/message_send.html#发送-gif-图片消息) 失败的问题。
 
 ## v4.15.0 Dev 2025-5-21（开发版）
 
 #### 新增特性
 
-- [撤回消息](message_recall.html)时，支持群主/聊天室所有者和管理员撤回其他用户发送的消息。
+- [撤回消息](/docs/v4/android/message_recall.html)时，支持群主/聊天室所有者和管理员撤回其他用户发送的消息。
 - 群组成员进出事件支持一次通知多个成员进出群组。调整前，SDK 会为每个加入/退出的成员单独回调一条事件。
-  - 新增群成员进出事件 [onMembersJoined](group_manage.html#监听群组事件) 和 [onMembersExited](group_manage.html#监听群组事件)。已废弃原事件 `onMemberJoined` 和 `onMemberExited`，请使用新事件代替。 
+  - 新增群成员进出事件 [onMembersJoined](/docs/v4/android/group_manage.html#监听群组事件) 和 [onMembersExited](/docs/v4/android/group_manage.html#监听群组事件)。已废弃原事件 `onMemberJoined` 和 `onMemberExited`，请使用新事件代替。
   
 #### 优化
 
-- 修改 Token 即将过期事件 [onTokenWillExpire](connection.html#监听连接状态) 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。
+- 修改 Token 即将过期事件 [onTokenWillExpire](/docs/v4/android/connection.html#监听连接状态) 的触发时机。SDK 会在 Token 有效期达到 80% 时（之前版本为 50% ）回调即将过期通知。
 - [IM Demo] 跑通即时通讯 IM Demo 时，无需部署 App Server。
 
 #### 修复
 
-- 修复 [EMChatThreadChangeListener#onChatThreadUserRemoved](thread.html#消息话题成员被移出消息话题) 事件回调出的 `EMChatThreadEvent` 的 `TYPE` 为 `null` 问题。
+- 修复 [EMChatThreadChangeListener#onChatThreadUserRemoved](/docs/v4/android/thread.html#消息话题成员被移出消息话题) 事件回调出的 `EMChatThreadEvent` 的 `TYPE` 为 `null` 问题。
 - 修复获取会话免打扰开始及结束时间时在部分机型上产生的 crash。
 
 ## v4.14.0 Dev 2025-4-21（开发版）
 
 #### 新增特性
 
-- 支持 [发送](message_send.html#发送-gif-图片消息) 和 [接收 GIF 图片消息](message_receive.html#接收-gif-图片消息)。
-- 支持 [群组头像功能](group_attributes.html#管理群组头像)。
-- 支持 [消息附件鉴权功能](message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
-- 支持拉取漫游消息时，只 [拉取指定的群成员发送的消息](message_retrieve.html#从服务器获取指定群成员发送的消息)。
-- 支持加载本地会话消息时，[只加载指定群成员发送的消息](message_retrieve.html#从本地获取指定群成员发送的消息)。
-- 支持 [获取群成员列表](group_manage.html#获取群成员列表) 时包括成员角色和入群时间。
+- 支持 [发送](/docs/v4/android/message_send.html#发送-gif-图片消息) 和 [接收 GIF 图片消息](/docs/v4/android/message_receive.html#接收-gif-图片消息)。
+- 支持 [群组头像功能](/docs/v4/android/group_attributes.html#管理群组头像)。
+- 支持 [消息附件鉴权功能](/docs/v4/android/message_receive.html#接收附件消息)。该功能需要联系商务开通，开通后必须调用 SDK 的 API 才能下载消息附件。
+- 支持拉取漫游消息时，只 [拉取指定的群成员发送的消息](/docs/v4/android/message_retrieve.html#从服务器获取指定群成员发送的消息)。
+- 支持加载本地会话消息时，[只加载指定群成员发送的消息](/docs/v4/android/message_retrieve.html#从本地获取指定群成员发送的消息)。
+- 支持 [获取群成员列表](/docs/v4/android/group_manage.html#获取群成员列表) 时包括成员角色和入群时间。
 
 #### 优化
 
 - 日志文件中增加设备时区偏移，方便排查问题。
-- 调用方法 [EMChatManager#asyncFetchHistoryMessages](message_retrieve.html#从服务器获取指定会话的消息) 拉取漫游消息，拉取到最后一页时，返回的 `EMCursorResult#cursor` 由 `undefined` 改为空字符串。
+- 调用方法 [EMChatManager#asyncFetchHistoryMessages](/docs/v4/android/message_retrieve.html#从服务器获取指定会话的消息) 拉取漫游消息，拉取到最后一页时，返回的 `EMCursorResult#cursor` 由 `undefined` 改为空字符串。
 - 去除从 `FileProvider` 获取文件绝对路径的反射实现。
 - 升级 SDK 使用的 BoringSSL 和 SQLCipher 库，避免安全风险。
 
@@ -423,7 +687,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 优化
 
-- [IM SDK] 发送后编辑消息接口 [EMChatManager#asyncModifyMessage](message_modify.html) 支持修改各类消息：
+- [IM SDK] 发送后编辑消息接口 [EMChatManager#asyncModifyMessage](/docs/v4/android/message_modify.html) 支持修改各类消息：
   - 文本/自定义消息：支持编辑消息内容（body）和扩展 `ext`。
   - 文件/视频/音频/图片/位置/合并转发消息：只支持编辑消息扩展 `ext`。
   - 透传消息：不支持修改。
@@ -432,7 +696,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 修复
 
-[IM SDK] 调用 [EMChatManager#asyncFetchConversationsFromServer](conversation_list.html#从服务器分页获取会话列表) 方法从服务端拉取的会话最后一条消息不包含翻译及消息回复 Reaction 的问题。
+[IM SDK] 调用 [EMChatManager#asyncFetchConversationsFromServer](/docs/v4/android/conversation_list.html#从服务器分页获取会话列表) 方法从服务端拉取的会话最后一条消息不包含翻译及消息回复 Reaction 的问题。
 
 ## v4.12.0 2025-1-10
 
@@ -459,7 +723,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 新增特性
 
-- [IM SDK] 新增[拉取服务器漫游消息](message_retrieve.html#从服务器获取指定会话的消息)时会读取服务端的消息已读和送达状态。该功能只适用于单聊消息，默认关闭，如果需要，请联系商务经理开通。 
+- [IM SDK] 新增[拉取服务器漫游消息](/docs/v4/android/message_retrieve.html#从服务器获取指定会话的消息)时会读取服务端的消息已读和送达状态。该功能只适用于单聊消息，默认关闭，如果需要，请联系商务经理开通。
 - [IM SDK] 聊天室成员禁言回调：
   - 新增聊天室禁言回调 `EMChatRoomChangeListener#onMuteListAdded(java.lang.String, java.util.Map<java.lang.String,java.lang.Long>)`，在回调中使用 `Map<String,Long> muteInfo` 参数表示被禁言的用户 ID 和禁言到期时间戳。
   - 废弃原来的回调 `EMChatRoomChangeListener#onMuteListAdded(java.lang.String, java.util.List<java.lang.String>, long)`。
@@ -471,13 +735,13 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 注意
 
-当同时集成 IM SDK 4.11.0 和声网 RTM SDK 2.2.0 或 RTC SDK 4.3.0 及以上版本时，由于同时包含 `libaosl.so` 库，编译时可能会出现错误，详见 [Android 快速开始中的集成问题说明](quickstart.html#_5-其他集成问题)。
+当同时集成 IM SDK 4.11.0 和声网 RTM SDK 2.2.0 或 RTC SDK 4.3.0 及以上版本时，由于同时包含 `libaosl.so` 库，编译时可能会出现错误，详见 [Android 快速开始中的集成问题说明](/docs/v4/android/quickstart.html#sdk-依赖的-crash-上报库冲突)。
 
 ## v4.10.3 2024-11-25
 
 #### 修复
 
-修复调用 [EMPushManager#getSilentModeForConversations](/document/android/push/push_notification_mode_dnd.html#获取多个会话的推送通知设置)方法获取会话的免打扰状态失败的问题。
+修复调用 [EMPushManager#getSilentModeForConversations](/docs/v4/android/push/push_notification_mode_dnd.html#获取多个会话的推送通知设置)方法获取会话的免打扰状态失败的问题。
 
 ## v4.10.2 2024-11-04
 
@@ -497,14 +761,14 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 #### 新增特性
 
 - [IM SDK] 新增 `EMChatManager#asyncGetMessageCount` 方法，用于获取数据库中的消息总数。 
-- [IM SDK] 新增[两个错误码](error.html)：
+- [IM SDK] 新增[两个错误码](/docs/v4/android/error.html)：
   - `EMError#GROUP_USER_IN_BLOCKLIST`（613）：该用户在群组黑名单中。群组黑名单中的用户进行某些操作时，例如，加入群组，会提示该错误。
   - `EMError#CHATROOM_USER_IN_BLOCKLIST`（707）：该用户在聊天室黑名单中。聊天室黑名单中的用户进行某些操作时，例如，加入聊天室，会提示该错误。
   
 #### 优化
  
-- [IM SDK] [发送前回调](/document/server-side/callback_presending.html)时修改的[消息扩展字段](/document/android/message_extension.html)，会同步到发送方。
-- [IM SDK] 调用[删除服务端会话 API](conversation_delete.html#单向删除服务端会话及本地会话)，成功后会删除本地会话。之前版本调用该接口可设置删除会话的本地消息，不能删除本地会话。
+- [IM SDK] [发送前回调](/document/server-side/callback_presending.html)时修改的[消息扩展字段](/docs/v4/android/message_extension.html)，会同步到发送方。
+- [IM SDK] 调用[删除服务端会话 API](/docs/v4/android/conversation_delete.html#单向删除服务端会话及本地会话)，成功后会删除本地会话。之前版本调用该接口可设置删除会话的本地消息，不能删除本地会话。
 - [IM SDK] 适配 Android 15 的 16K page size。
 - [IM SDK] 群组和聊天室操作的默认错误码提示由 `GROUP_MEMBERS_FULL`（604）和 `CHATROOM_MEMBERS_FULL`（704）调整为 `GROUP_PERMISSION_DENIED`（603）和 `CHATROOM_PERMISSION_DENIED`（703）。例如，群组普通成员设置群组管理员时，由于缺乏权限，会提示 603 错误。
 - [IM SDK] 底层长连接使用 poll 代替 select，解决文件描述符（fd）最大数量 1024 的限制问题。
@@ -533,10 +797,10 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 新增特性
 
-- [IM SDK] 新增[从服务器拉取离线消息的开始和结束的事件回调](/document/android/connection): `EMConnectionListener#onOfflineMessageSyncStart` 和 `EMConnectionListener#onOfflineMessageSyncFinish`。
+- [IM SDK] 新增[从服务器拉取离线消息的开始和结束的事件回调](/docs/v4/android/connection.html): `EMConnectionListener#onOfflineMessageSyncStart` 和 `EMConnectionListener#onOfflineMessageSyncFinish`。
 - [IM SDK] 新增 `EMGroupManager#asyncCheckIfInMuteList` 接口，可以查看当前用户是否在群组禁言名单中。
-- [IM SDK] 原消息置顶接口 `EMChatManager#asyncPinMessage` 和 `EMChatManager#asyncUnPinMessage` [增加对单聊会话中置顶消息的支持](message_pin.html)。接口无变化。
-- [IM SDK] 新增 `EMRecallMessageInfo#getConversationId` 接口，在撤回消息的 `EMMessageListener#onMessageRecalledWithExt` 事件中[返回被撤回的消息所属的会话 ID](message_recall.html#设置消息撤回监听)。
+- [IM SDK] 原消息置顶接口 `EMChatManager#asyncPinMessage` 和 `EMChatManager#asyncUnPinMessage` [增加对单聊会话中置顶消息的支持](/docs/v4/android/message_pin.html)。接口无变化。
+- [IM SDK] 新增 `EMRecallMessageInfo#getConversationId` 接口，在撤回消息的 `EMMessageListener#onMessageRecalledWithExt` 事件中[返回被撤回的消息所属的会话 ID](/docs/v4/android/message_recall.html#设置消息撤回监听)。
 
 #### 优化
 
@@ -582,18 +846,18 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 #### 新增特性
 
 - [IM SDK] 支持 AUT 协议，优化弱网环境下的服务连接成功率。
-- [IM SDK] 支持[加入聊天室时携带扩展信息、是否退出之前加入的全部聊天室](room_manage.html#加入聊天室)：
+- [IM SDK] 支持[加入聊天室时携带扩展信息、是否退出之前加入的全部聊天室](/docs/v4/android/room_manage.html#加入聊天室)：
   - 新增 `EMChatRoomManager#joinChatRoom(java.lang.String, boolean, java.lang.String, EMValueCallBack<EMChatRoom>)` 方法，支持设置加入聊天室时携带的扩展信息，并指定是否退出所有其他聊天室。
   - 新增 `EMChatRoomChangeListener#onMemberJoined(java.lang.String, java.lang.String, java.lang.String)` 回调，当用户加入聊天室携带了扩展信息时，聊天室内其他人可以在用户加入聊天室的回调中，获取到扩展信息。
-- [IM SDK] 支持[会话推送通知方式的本地存储](/document/android/push/push_notification_mode_dnd.html#从服务器获取所有会话的推送通知方式设置)。
+- [IM SDK] 支持[会话推送通知方式的本地存储](/docs/v4/android/push/push_notification_mode_dnd.html#从服务器获取所有会话的推送通知方式设置)。
   - 新增 `EMPushManager#syncSilentModeConversationsFromServer` 方法，支持从服务器获取所有会话的推送通知方式的设置。
   - 新增 `EMConversation#pushRemindType` 属性，用于本地存储会话的推送通知方式。
   - 若用户在一台设备上变更会话的推送通知方式，其他设备会收到 `EMMultiDeviceListener#onConversationEvent` 事件。
-- [IM SDK] 新增 `EMConversation#getAllMsgCount(long, long)` 方法，用于[获取 SDK 本地数据库中会话某个时间段内的全部消息数](message_retrieve.html#获取会话在一定时间内的消息数)。
+- [IM SDK] 新增 `EMConversation#getAllMsgCount(long, long)` 方法，用于[获取 SDK 本地数据库中会话某个时间段内的全部消息数](/docs/v4/android/message_retrieve.html#获取会话在一定时间内的消息数)。
 
 #### 优化
 
-- [IM SDK] 设置和获取用户属性的接口，包括 [设置当前用户的所有属性](userprofile.html#设置当前用户的所有属性)、[设置当前用户的单个属性](userprofile.html#设置当前用户的单个属性)、[获取用户的用户属性](userprofile.html#从服务端获取用户的所有属性)和[获取用户的指定用户属性](userprofile.html#从服务端获取用户的指定属性)，超过调用频率限制时，会上报错误码 4 `EXCEED_SERVICE_LIMIT`。
+- [IM SDK] 设置和获取用户属性的接口，包括 [设置当前用户的所有属性](/docs/v4/android/userprofile.html#设置当前用户的所有属性)、[设置当前用户的单个属性](/docs/v4/android/userprofile.html#设置当前用户的单个属性)、[获取用户的用户属性](/docs/v4/android/userprofile.html#从服务端获取用户的所有属性)和[获取用户的指定用户属性](/docs/v4/android/userprofile.html#从服务端获取用户的指定属性)，超过调用频率限制时，会上报错误码 4 `EXCEED_SERVICE_LIMIT`。
 
 #### 修复
 
@@ -611,14 +875,14 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 新增特性
 
-- [IM SDK] 新增[设备登录时允许携带自定义消息，并将其传递给被踢的设备](multi_device.html#设置登录设备的扩展信息)： 
+- [IM SDK] 新增[设备登录时允许携带自定义消息，并将其传递给被踢的设备](/docs/v4/android/multi_device.html#设置登录设备的扩展信息)：
   - `EMOptions#setLoginCustomExt`：设置设备的扩展信息；
   - `EMOptions#getLoginCustomExt`：获取设备的扩展信息。
   - `EMConnectionListener#onLogout(int, EMLoginExtensionInfo)`：多设备登录场景下，若当前设备被新登录设备踢下线，被踢设备收到的事件中会携带新设备的扩展信息。
 - [IM SDK] 新增根据多个消息类型搜索本地消息：
-  - `EMChatManager#searchMsgFromDB(java.util.Set<EMMessage.Type>, long, int, java.lang.String, EMConversation.EMSearchDirection)`：[根据单个或多个消息类型，搜索本地数据库中所有会话的消息](message_search_local.html#根据消息类型搜索所有会话中的消息)。
-  - `EMConversation#searchMsgFromDB(java.util.Set<EMMessage.Type>, long, int, java.lang.String, EMConversation.EMSearchDirection)`：[根据单个或多个消息类型，搜索本地数据库中单个会话的消息](message_search_local.html#根据消息类型搜索当前会话中的消息)。
-- [IM SDK] 支持[从服务端单向删除聊天室漫游消息](message_delete.html#单向删除服务端的历史消息)。
+  - `EMChatManager#searchMsgFromDB(java.util.Set<EMMessage.Type>, long, int, java.lang.String, EMConversation.EMSearchDirection)`：[根据单个或多个消息类型，搜索本地数据库中所有会话的消息](/docs/v4/android/message_search_local.html#根据消息类型搜索所有会话中的消息)。
+  - `EMConversation#searchMsgFromDB(java.util.Set<EMMessage.Type>, long, int, java.lang.String, EMConversation.EMSearchDirection)`：[根据单个或多个消息类型，搜索本地数据库中单个会话的消息](/docs/v4/android/message_search_local.html#根据消息类型搜索当前会话中的消息)。
+- [IM SDK] 支持[从服务端单向删除聊天室漫游消息](/docs/v4/android/message_delete.html#单向删除服务端的历史消息)。
 
 #### 优化
 
@@ -646,16 +910,16 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 新增特性
 
-- [IM SDK] 新增 `asyncFilterConversationsFromDB` 方法，支持[自定义筛选获取本地会话列表](conversation_list.html#获取本地所有或筛选的会话)。使用该 API 时，需要将 `EMOptions#setAutoLoadAllConversations` 方法设置为 `false`。
+- [IM SDK] 新增 `asyncFilterConversationsFromDB` 方法，支持[自定义筛选获取本地会话列表](/docs/v4/android/conversation_list.html#获取本地所有或筛选的会话)。使用该 API 时，需要将 `EMOptions#setAutoLoadAllConversations` 方法设置为 `false`。
   - 新增 `EMCustomConversationFilter` 接口，由开发者自己实现会话过滤器。
-- [IM SDK] 新增 `cleanConversationsMemoryCache` 方法，[清除本地内存中的所有会话](conversation_list.html#清除内存中的会话)释放内存。
-- [IM SDK] 新增 `EMOptions#setAutoLoadAllConversations` 方法，[设置是否在自动登录成功后将数据库中的所有会话自动加载到缓存](conversation_list.html#一次性获取本地所有会话)。
-- [IM SDK] 新增 `recallMessage(message,ext)` 方法，[支持消息撤回时携带自定义信息](message_recall.html#实现方法)，`ext` 参数为字符串类型。
-- [IM SDK] 新增[消息撤回事件](message_recall.html#设置消息撤回监听) `onMessageRecalledWithExt`，支持离线期间撤回的消息通知给接收方。
+- [IM SDK] 新增 `cleanConversationsMemoryCache` 方法，[清除本地内存中的所有会话](/docs/v4/android/conversation_list.html#清除内存中的会话)释放内存。
+- [IM SDK] 新增 `EMOptions#setAutoLoadAllConversations` 方法，[设置是否在自动登录成功后将数据库中的所有会话自动加载到缓存](/docs/v4/android/conversation_list.html#一次性获取本地所有会话)。
+- [IM SDK] 新增 `recallMessage(message,ext)` 方法，[支持消息撤回时携带自定义信息](/docs/v4/android/message_recall.html#实现方法)，`ext` 参数为字符串类型。
+- [IM SDK] 新增[消息撤回事件](/docs/v4/android/message_recall.html#设置消息撤回监听) `onMessageRecalledWithExt`，支持离线期间撤回的消息通知给接收方。
 
 #### 优化
 
-- [IM SDK] 添加绑定推送 token 成功的回调，详见 [FCM 推送集成](/document/android/push/push_fcm.html)步骤四中的在即时通讯 IM SDK 中启用 FCM 的描述。
+- [IM SDK] 添加绑定推送 token 成功的回调，详见 [FCM 推送集成](/docs/v4/android/push/push_fcm.html)步骤四中的在即时通讯 IM SDK 中启用 FCM 的描述。
 - [IM SDK] `onMessageRecalled` 已过时，请用 `onMessageRecalledWithExt` 代替。
 
 #### 修复
@@ -673,7 +937,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 新增特性
 
-- [IM SDK] 新增[置顶消息功能](message_pin.html)。
+- [IM SDK] 新增[置顶消息功能](/docs/v4/android/message_pin.html)。
   - 新增 `EMChatManager#asyncPinMessage` 方法，用于置顶消息。
   - 新增 `EMChatManager#asyncUnPinMessage` 方法，用于取消置顶消息。
   - 新增 `EMChatManager#asyncGetPinnedMessagesFromServer` 方法，从服务器获取指定会话的置顶消息。
@@ -682,14 +946,14 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
   - 新增 `EMChatMessage#pinnedInfo` 方法，展示消息的置顶详情。
   - 新增 `EMMessageListener#onMessagePinChanged` 事件。当用户在群组或聊天室会话进行置顶操作时，群组或聊天室中的其他成员会收到该回调。
 - [IM SDK] 消息编辑回调 `EMMessageListener#onMessageContentChanged` 中支持返回[通过 RESTful API 编辑的自定义消息](/document/server-side/message_modify.html)。
-- [IM SDK] 支持[获取聊天室漫游消息](message_retrieve.html#从服务器获取指定会话的消息)。
-- [IM SDK] 支持[动态加载 .so 库文件](quickstart.html#方法三-动态加载-so-库文件)。
+- [IM SDK] 支持[获取聊天室漫游消息](/docs/v4/android/message_retrieve.html#从服务器获取指定会话的消息)。
+- [IM SDK] 支持[动态加载 .so 库文件](/docs/v4/android/integration.html#方法三-动态加载-so-库文件)。
 
 #### 优化
 
-- [IM SDK] 支持使用消息 body 完成[单条转发](message_forward.html#转发单条消息)，附件消息无需重新上传附件。
+- [IM SDK] 支持使用消息 body 完成[单条转发](/docs/v4/android/message_forward.html#转发单条消息)，附件消息无需重新上传附件。
 - [IM SDK] 在部分场景下，降低接收到大量群成员事件通知时获取群组详情的次数。
-- [IM SDK] [在聊天室成员进出时更新聊天室成员人数](room_manage.html#实时更新聊天室成员人数)，使人数更新更及时准确。
+- [IM SDK] [在聊天室成员进出时更新聊天室成员人数](/docs/v4/android/room_manage.html#实时更新聊天室成员人数)，使人数更新更及时准确。
 - [IM SDK] 优化 token 登录时的错误提示信息，使错误提示更精细。
 - [IM SDK] 提升将所有会话置为已读的效率，缩短了调用将所有会话的未读消息数清零的 API `EMChatManager#markAllConversationsAsRead` 的时间。
 - [IM SDK] 优化 SDK 内部随机取服务器地址的逻辑，提升请求成功率。
@@ -706,10 +970,10 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 新增特性
 
-- [IM SDK] 新增 [EMChatManager#asyncDeleteAllMsgsAndConversations](message_delete.html#清空聊天记录)方法，用于清空当前用户的聊天记录，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
-- [IM SDK] 新增 [EMChatManager#searchMsgFromDB(java.lang.String, long, int, java.lang.String, EMConversation.EMSearchDirection, EMConversation.EMMessageSearchScope)](message_search_local.html#根据搜索范围搜索所有会话中的消息) 和 [EMConversation#searchMsgFromDB(java.lang.String, long, int, java.lang.String, EMConversation.EMSearchDirection, EMConversation.EMMessageSearchScope)](message_search_local.html#根据搜索范围搜索当前会话中的消息)，可以在根据关键字搜索消息时，选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
-- [IM SDK] 新增 [EMOptions#setIncludeSendMessageInMessageListener](message_receive.html#接收文本消息) 开关。开启后，在 `EMMessageListener#onMessageReceived` 回调里增加发送成功的消息。
-- [IM SDK] 新增 [EMOptions#setRegardImportedMsgAsRead](message_retrieve.html#从服务器获取指定会话的消息) 开关。开启后，[利用服务端接口](/document/server-side/message_import_single.html)导入的消息，客户端上通过[漫游拉取](message_retrieve.html#从服务器获取指定会话的消息)到后，这些消息为已读状态，会话中未读取的消息数量，即 `EMConversation#getUnreadMsgCount` 的返回值不发生变化。若该开关为关闭状态，`EMConversation#getUnreadMsgCount` 的返回值会增加。
+- [IM SDK] 新增 [EMChatManager#asyncDeleteAllMsgsAndConversations](/docs/v4/android/message_delete.html#清空聊天记录)方法，用于清空当前用户的聊天记录，包括消息和会话，同时可以选择是否清除服务端的聊天记录。
+- [IM SDK] 新增 [EMChatManager#searchMsgFromDB(java.lang.String, long, int, java.lang.String, EMConversation.EMSearchDirection, EMConversation.EMMessageSearchScope)](/docs/v4/android/message_search_local.html#根据搜索范围搜索所有会话中的消息) 和 [EMConversation#searchMsgFromDB(java.lang.String, long, int, java.lang.String, EMConversation.EMSearchDirection, EMConversation.EMMessageSearchScope)](/docs/v4/android/message_search_local.html#根据搜索范围搜索当前会话中的消息)，可以在根据关键字搜索消息时，选择搜索范围，如只搜索消息内容、只搜索消息扩展信息以及同时搜索消息内容以及扩展信息。
+- [IM SDK] 新增 [EMOptions#setIncludeSendMessageInMessageListener](/docs/v4/android/message_receive.html#接收文本消息) 开关。开启后，在 `EMMessageListener#onMessageReceived` 回调里增加发送成功的消息。
+- [IM SDK] 新增 [EMOptions#setRegardImportedMsgAsRead](/docs/v4/android/message_retrieve.html#从服务器获取指定会话的消息) 开关。开启后，[利用服务端接口](/document/server-side/message_import_single.html)导入的消息，客户端上通过[漫游拉取](/docs/v4/android/message_retrieve.html#从服务器获取指定会话的消息)到后，这些消息为已读状态，会话中未读取的消息数量，即 `EMConversation#getUnreadMsgCount` 的返回值不发生变化。若该开关为关闭状态，`EMConversation#getUnreadMsgCount` 的返回值会增加。
 
 #### 优化
 
@@ -726,12 +990,12 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 新增特性
 
-[IM SDK] 支持 [会话标记功能](conversation_mark.html)。
-- `EMChatManager#asyncAddConversationMark`：[标记会话](conversation_mark.html#标记会话)。
-- `EMChatManager#asyncRemoveConversationMark`：[取消标记会话](conversation_mark.html#取消标记会话)。
-- `EMChatManager#asyncGetConversationsFromServerWithCursor`：[根据会话标记从服务器分页查询会话列表](conversation_mark.html#根据会话标记从服务器分页查询会话列表)。
-- `EMConversation#marks`：[获取本地单个会话的所有标记](conversation_mark.html#获取本地单个会话的所有标记)。
-- `onConversationEvent#CONVERSATION_MARK_UPDATE`：[多设备场景下的会话标记事件](multi_device.html#获取其他设备上的操作)。当前用户在一台登录设备上更新了会话标记，包括添加和移除会话标记，其他登录设备会收到该事件。
+[IM SDK] 支持 [会话标记功能](/docs/v4/android/conversation_mark.html)。
+- `EMChatManager#asyncAddConversationMark`：[标记会话](/docs/v4/android/conversation_mark.html#标记会话)。
+- `EMChatManager#asyncRemoveConversationMark`：[取消标记会话](/docs/v4/android/conversation_mark.html#取消标记会话)。
+- `EMChatManager#asyncGetConversationsFromServerWithCursor`：[根据会话标记从服务器分页查询会话列表](/docs/v4/android/conversation_mark.html#根据会话标记从服务器分页查询会话列表)。
+- `EMConversation#marks`：[获取本地单个会话的所有标记](/docs/v4/android/conversation_mark.html#获取本地单个会话的所有标记)。
+- `onConversationEvent#CONVERSATION_MARK_UPDATE`：[多设备场景下的会话标记事件](/docs/v4/android/multi_device.html#获取其他设备上的操作)。当前用户在一台登录设备上更新了会话标记，包括添加和移除会话标记，其他登录设备会收到该事件。
 
 #### 优化
 
@@ -743,15 +1007,15 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 新增特性
 
-- [IM SDK] 新增[设置好友备注功能](user_relationship.html#设置好友备注)。
-- [IM SDK] 新增 `asyncFetchAllContactsFromServer` 方法[从服务器一次性或分页获取好友列表](user_relationship.html#从服务端获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。
-- [IM SDK] 新增 `fetchContactFromLocal` 方法[从本地获取单个好友的用户 ID 和好友备注](user_relationship.html#从本地获取好友列表)。
-- [IM SDK] 新增 `asyncFetchAllContactsFromLocal` 方法[从本地分页获取好友列表](user_relationship.html#从本地获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。
+- [IM SDK] 新增[设置好友备注功能](/docs/v4/android/user_relationship.html#设置好友备注)。
+- [IM SDK] 新增 `asyncFetchAllContactsFromServer` 方法[从服务器一次性或分页获取好友列表](/docs/v4/android/user_relationship.html#从服务器获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。
+- [IM SDK] 新增 `fetchContactFromLocal` 方法[从本地获取单个好友的用户 ID 和好友备注](/docs/v4/android/user_relationship.html#从本地获取好友列表)。
+- [IM SDK] 新增 `asyncFetchAllContactsFromLocal` 方法[从本地分页获取好友列表](/docs/v4/android/user_relationship.html#从本地获取好友列表)，每个好友对象包含好友的用户 ID 和好友备注。
 - [IM SDK] 新增 `EMMessage#isBroadcast` 属性用于判断通过该消息是否为聊天室全局广播消息。可通过[调用 REST API 发送聊天室全局广播消息](/document/server-side/broadcast_to_chatrooms.html)。
-- [IM SDK] 新增 `EMGroupManager#asyncGetJoinedGroupsCountFromServer` 方法用于[从服务器获取当前用户已加入的群组数量](group_manage.html#查询当前用户已加入的群组数量)。 
-- [IM SDK] 新增[错误码 706](error.html) `CHATROOM_OWNER_NOT_ALLOW_LEAVE`，表示聊天室所有者不允许离开聊天室。若初始化时，`EMOptions#allowChatroomOwnerLeave` 参数设置为 `false`，聊天室所有者调用 `leaveChatRoom` 方法离开聊天室时会提示该错误。
+- [IM SDK] 新增 `EMGroupManager#asyncGetJoinedGroupsCountFromServer` 方法用于[从服务器获取当前用户已加入的群组数量](/docs/v4/android/group_manage.html#查询当前用户已加入的群组数量)。
+- [IM SDK] 新增[错误码 706](/docs/v4/android/error.html) `CHATROOM_OWNER_NOT_ALLOW_LEAVE`，表示聊天室所有者不允许离开聊天室。若初始化时，`EMOptions#allowChatroomOwnerLeave` 参数设置为 `false`，聊天室所有者调用 `leaveChatRoom` 方法离开聊天室时会提示该错误。
 - [IM SDK] 新增 `EMOptions#setLoadEmptyConversations` 方法用于在初始化时配置获取会话列表时是否允许返回空会话。
-- [IM SDK] [申请入群被拒绝的回调](group_manage.html#监听群组事件) `EMGroupChangeListener#onRequestToJoinDeclined` 中新增 `decliner` 和 `applicant` 参数表示申请者和拒绝者的用户 ID。  
+- [IM SDK] [申请入群被拒绝的回调](/docs/v4/android/group_manage.html#监听群组事件) `EMGroupChangeListener#onRequestToJoinDeclined` 中新增 `decliner` 和 `applicant` 参数表示申请者和拒绝者的用户 ID。
 - [IM Demo] 好友详情页面可添加和修改好友备注。
 
 #### 优化
@@ -793,15 +1057,15 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 新增特性
 
-- [IM SDK] 新增 [发送](message_send.html#发送合并消息) 和 [接收合并转发消息](message_receive.html#接收合并消息) 功能：
+- [IM SDK] 新增 [发送](/docs/v4/android/message_send.html#发送合并消息) 和 [接收合并转发消息](/docs/v4/android/message_receive.html#接收合并消息) 功能：
     - 新增合并消息类型 `EMMessage#Type#COMBINE`；
     - 新增消息体类 `EMCombineMessageBody`；
     - 新增 `EMMessage#createCombinedSendMessage` 方法用于创建合并消息；
     - 新增 `EMChatManager#downloadAndParseCombineMessage` 方法用于下载并解析合并消息。
-- [IM SDK] 新增[消息编辑功能](message_modify.html)：
+- [IM SDK] 新增[消息编辑功能](/docs/v4/android/message_modify.html)：
     - 新增 `EMChatManager#asyncModifyMessage` 方法，用于编辑消息；
     - 新增 `EMMessageListener#onMessageContentChanged` 回调。消息编辑后，接收方会收到该回调。
-- [IM SDK] 新增[自定义设备的平台和名称功能](multi_device.html#设置登录设备的名称)：
+- [IM SDK] 新增[自定义设备的平台和名称功能](/docs/v4/android/multi_device.html#设置登录设备的名称)：
     - 新增 `EMOptions#setCustomOSPlatform` 方法，设置自定义平台代号；
     - 新增 `EMOptions#getCustomOSPlatform` 方法，获取当前设备的自定义设备平台；
     - 新增 `EMOptions#setCustomDeviceName` 方法，设置当前设备自定义设备名称；
@@ -831,13 +1095,13 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 新增特性
 
-- [IM SDK] 新增 `EMChatManager#asyncFetchConversationsFromServer` 方法实现[从服务器拉取会话](conversation_list.html#从服务器分页获取会话列表)，原接口标记为已废弃。
+- [IM SDK] 新增 `EMChatManager#asyncFetchConversationsFromServer` 方法实现[从服务器拉取会话](/docs/v4/android/conversation_list.html#从服务器分页获取会话列表)，原接口标记为已废弃。
 - [IM SDK] 新增置顶服务器会话的功能：
-    - 新增 `EMChatManager#asyncPinConversation` 方法，实现[置顶或取消置顶服务器会话](conversation_pin.html#置顶-取消置顶会话)：
-    - 新增 `EMChatManager#asyncFetchPinnedConversationsFromServer` 方法，实现[获取置顶的服务器会话](conversation_pin.html#获取服务端的置顶会话列表)。
-- [IM SDK] 新增 `EMChatManager#getAllConversationsBySort` 方法实现[从本地获取排序后的会话列表](conversation_list.html#获取本地会话)；
-- [IM SDK] 新增在群组或聊天室中[发送定向消息](message_target.html)的功能；
-- [IM SDK] 新增[荣耀推送](/document/android/push/push_honor.html)。
+    - 新增 `EMChatManager#asyncPinConversation` 方法，实现[置顶或取消置顶服务器会话](/docs/v4/android/conversation_pin.html#置顶-取消置顶会话)：
+    - 新增 `EMChatManager#asyncFetchPinnedConversationsFromServer` 方法，实现[获取置顶的服务器会话](/docs/v4/android/conversation_pin.html#获取服务端的置顶会话列表)。
+- [IM SDK] 新增 `EMChatManager#getAllConversationsBySort` 方法实现[从本地获取排序后的会话列表](/docs/v4/android/conversation_list.html#一次性获取本地所有会话)；
+- [IM SDK] 新增在群组或聊天室中[发送定向消息](/docs/v4/android/message_target.html)的功能；
+- [IM SDK] 新增[荣耀推送](/docs/v4/android/push/push_honor.html)。
 
 #### 优化
 
@@ -854,14 +1118,14 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 #### 新增特性
 
 - [IM SDK] 新增 Reaction 回调操作类型。
-- [IM SDK] 新增 `EMChatManager#asyncFetchHistoryMessages` 方法，实现[根据消息拉取参数配置类（`EMFetchMessageOption`）从服务器分页获取指定会话的历史消息](message_retrieve.html#从服务器获取指定会话的消息)。`EMFetchMessageOption` 类中包括起始时间戳、消息类型和消息发送方等参数。
+- [IM SDK] 新增 `EMChatManager#asyncFetchHistoryMessages` 方法，实现[根据消息拉取参数配置类（`EMFetchMessageOption`）从服务器分页获取指定会话的历史消息](/docs/v4/android/message_retrieve.html#从服务器获取指定会话的消息)。`EMFetchMessageOption` 类中包括起始时间戳、消息类型和消息发送方等参数。
 - [IM SDK] 新增 `EMConversation#removeMessages` 重载方法，实现从本地数据库中删除指定时间段内的消息。
-- [IM SDK] 新增[错误码 510 `MESSAGE_SIZE_LIMIT`](error.html)，发送消息时若消息体大小超过上限时提示错误。
-- [IM SDK] 新增[错误码 8 `APP_ACTIVE_NUMBER_REACH_LIMITATION`](error.html)，应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限时提示错误。
+- [IM SDK] 新增[错误码 510 `MESSAGE_SIZE_LIMIT`](/docs/v4/android/error.html)，发送消息时若消息体大小超过上限时提示错误。
+- [IM SDK] 新增[错误码 8 `APP_ACTIVE_NUMBER_REACH_LIMITATION`](/docs/v4/android/error.html)，应用程序的日活跃用户数量（DAU）或月活跃用户数量（MAU）达到上限时提示错误。
 
 #### 优化
 
-- [IM SDK] [聊天室详情更新回调 onSpecificationChanged](room_manage.html#监听聊天室事件) 返回更新的信息。
+- [IM SDK] [聊天室详情更新回调 onSpecificationChanged](/docs/v4/android/room_manage.html#监听聊天室事件) 返回更新的信息。
 - [IM SDK] 优化 `searchMsgFromDB` 方法实现按关键字全局搜索消息支持搜索自定义消息。
 - [IM SDK] 优化上传绑定推送证书的逻辑。
 - [IM SDK] 优化自动登录时数据库加载的时机。
@@ -870,7 +1134,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 修复
 
-- [IM SDK] 修复[获取群组详情](group_manage.html#获取群组详情)时，群组 ID 为空时发生崩溃的问题。
+- [IM SDK] 修复[获取群组详情](/docs/v4/android/group_manage.html#获取群组详情)时，群组 ID 为空时发生崩溃的问题。
 - [IM SDK] 修复某些场景下平台层缓存数据不更新的问题。
 - [IM SDK] 修复部分场景下用户调用下载消息附件接口时，附件未下载到私有目录的问题。
 - [IM SDK] 修复某些场景下消息已读状态不更新的问题。
@@ -879,7 +1143,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 新增特性
 
-- [IM SDK] 新增 [群成员自定义属性功能](group_members.html#管理群成员的自定义属性)并增加[自定义属性更新事件](group_manage.html#监听群组事件)实现群成员设置和获取在群组中的昵称和头像等属性。
+- [IM SDK] 新增 [群成员自定义属性功能](/docs/v4/android/group_members.html#管理群成员的自定义属性)并增加[自定义属性更新事件](/docs/v4/android/group_manage.html#监听群组事件)实现群成员设置和获取在群组中的昵称和头像等属性。
 - [IM SDK] 新增 `EMMessage#deliverOnlineOnly` 和 `EMMessage#isDeliverOnlineOnly` 方法实现发消息只投递给在线用户。若开启了该功能，用户离线时消息不投递。
 - [IM Demo] 新增群成员昵称修改与展示功能。
 
@@ -898,7 +1162,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 新增特性
 
-[IM SDK] [新增 `EMChatManager#asyncFetchConversationsFromServer(int, int, EMValueCallBack)` 方法实现从服务端分页获取会话列表](conversation_list.html#从服务器分页获取会话列表)。
+[IM SDK] [新增 `EMChatManager#asyncFetchConversationsFromServer(int, int, EMValueCallBack)` 方法实现从服务端分页获取会话列表](/docs/v4/android/conversation_list.html#从服务器分页获取会话列表)。
 
 #### 优化
 
@@ -916,7 +1180,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 新增特性
 
-[IM SDK] 新增[消息流量统计功能](message_traffic_statis.html#获取本地消息的流量统计信息)。
+[IM SDK] 新增[消息流量统计功能](/docs/v4/android/message_traffic_statis.html#获取本地消息的流量统计信息)。
 
 #### 修复
 
@@ -926,7 +1190,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 新增特性
 
-- [IM SDK] 新增[聊天室消息优先级](message_send.html#聊天室消息优先级与消息丢弃逻辑)。
+- [IM SDK] 新增[聊天室消息优先级](/docs/v4/android/message_send.html#聊天室消息优先级与消息丢弃逻辑)。
 - [IM SDK] 群组信息更新后的 `EMGroupChangeListener#onSpecificationChanged` 回调中添加更新后的群组信息。
 
 #### 优化
@@ -989,7 +1253,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 新增特性
 
-- [IM SDK] 新增[聊天室自定义属性功能](room_attributes.html)。
+- [IM SDK] 新增[聊天室自定义属性功能](/docs/v4/android/room_attributes.html)。
 - [IM SDK] 新增 `EMLogListener` 类，实现用户日志回调。
 
 #### 优化
@@ -1009,7 +1273,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 - [IM SDK] 新增群组详情中群组禁用状态：[EMGroup#isDisabled()](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1chat_1_1_e_m_group.html#acd072d7fc16e6ff89110173979ed318b) 属性，该属性需要开发者在服务端设置；
 - [IM SDK] 优化遇到连接问题时更新接入点的策略，增强可用性；
-- [IM SDK] [发送前回调](/document/server-side/callback_presending.html)：发送失败时返回给 app 用户的错误描述中增加你自定义的错误信息（即 [响应体参数](/document/server-side/callback_presending.html#响应-body) code 信息）。
+- [IM SDK] [发送前回调](/docs/document/server-side/callback_presending.html)：发送失败时返回给 app 用户的错误描述中增加你自定义的错误信息（即 [响应体参数](/docs/document/server-side/callback_presending.html#响应字段说明) code 信息）。
 - [IM SDK] 在 [EMError](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html) 中新增错误码 1101：[EMError#PRESENCE_CANNOT_SUBSCRIBE_YOURSELF](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html#abc9130b164d5cccb3559585ec38e8e99)，用来提示用户不能订阅自己的在线状态。
 
 #### 优化：
@@ -1048,18 +1312,18 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 新增特性:
 
-- [IM SDK] 新增 [消息消息话题（Message Thread）](thread_message.html)功能；
+- [IM SDK] 新增 [消息消息话题（Message Thread）](/docs/v4/android/thread_message.html)功能；
 
 #### 优化：
 
 - [IM SDK] 优化网络链路，提升网络访问性能；
-- [IM SDK] 优化[拉取漫游消息接口](message_retrieve.html)，增加指定拉取消息方向的参数。
+- [IM SDK] 优化[拉取漫游消息接口](/docs/v4/android/message_retrieve.html)，增加指定拉取消息方向的参数。
 
 ## v3.9.2.1 2022-5-17
 
 #### 新增特性:
 
-- [IM SDK] 新增 [消息 Reaction](reaction.html) 功能，可以对消息进行不同的响应
+- [IM SDK] 新增 [消息 Reaction](/docs/v4/android/reaction.html) 功能，可以对消息进行不同的响应
 
 #### 优化：
 
@@ -1090,7 +1354,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 新增特性
 
-- [IM SDK] 增加 [用户在线状态 (Presence) 订阅功能](presence.html)；
+- [IM SDK] 增加 [用户在线状态 (Presence) 订阅功能](/docs/v4/android/presence.html)；
 
 #### 优化
 
@@ -1214,7 +1478,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 - [IM SDK] 移除对 FCM 11.4.0 版本的依赖，将 FCM 的逻辑移到应用层。
 - [IM SDK] 如果设置了 EMOptions#setAutoTransferMessageAttachments(false)，SDK 发送消息时不再检查附件是否存在。
 - [EaseIMKit] 在 EaseChatFragment 中暴露消息发送成功的回调 onChatSuccess。
-- [EaseIM] 将 FCM 逻辑移到应用层，并升级 FCM Messaging 到 22.0.0 版本，[FCM 集成详见](https://docs-im.easemob.com/im/android/push/thirdpartypush#sdk_385_版本之后集成方式)。
+- [EaseIM] 将 FCM 逻辑移到应用层，并升级 FCM Messaging 到 22.0.0 版本，[FCM 集成详见](/docs/v4/android/push/push_fcm.html#步骤四-fcm-推送集成)。
 
 #### 修复
 
@@ -1284,7 +1548,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 #### 新功能：
 
-- [IM SDK] 新增设置、获取用户属性的接口，集成参见：[用户属性](userprofile.html)；
+- [IM SDK] 新增设置、获取用户属性的接口，集成参见：[用户属性](/docs/v4/android/userprofile.html)；
 - [EaseIM App] 新增用户资料（头像、昵称等）的存储、显示;
 - [EaseIM App] 新增用户名片消息的发送与展示（使用自定义消息实现）;
 
@@ -1306,7 +1570,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 **重大变动：**
 ```
 
-远程仓库统一由 JCenter 迁移到 `MavenCentral`，依赖库的域名由 “com.hyphenate” 修改为 `“io.hyphenate”`，详见 [Android SDK 介绍及导入](https://docs-im.easemob.com/im/android/sdk/import)。
+远程仓库统一由 JCenter 迁移到 `MavenCentral`，依赖库的域名由 “com.hyphenate” 修改为 `“io.hyphenate”`，详见 [Android SDK 介绍及导入](/docs/v4/android/integration.html)。
 
 ## v3.8.0 2021-02-27
 
@@ -1348,7 +1612,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 - [IM SDK] 修复个别场景下长时间在前台可能会离线的 bug；
 
-`**注意：**`此版本只能从 `MavenCentral` 拉取，依赖库的域名由 “com.hyphenate” 修改为`“io.hyphenate”`，详见 [Android SDK 介绍及导入](https://docs-im.easemob.com/im/android/sdk/import)。
+`**注意：**`此版本只能从 `MavenCentral` 拉取，依赖库的域名由 “com.hyphenate” 修改为`“io.hyphenate”`，详见 [Android SDK 介绍及导入](/docs/v4/android/integration.html)。
 
 ## v3.7.4 2021-02-04
 
@@ -1487,7 +1751,7 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 更新：
 
-- 适配 AndroidQ(支持上传附件通过 Uri，具体用法请参考[发送消息](https://docs-im.easemob.com/im/android/basics/message))；
+- 适配 AndroidQ(支持上传附件通过 Uri，具体用法请参考[发送消息](/docs/v4/android/message_send.html))；
 - 移除 apache jar 包；
 
 修复：
@@ -1658,11 +1922,11 @@ SDK 依赖的 crash 上报库 AOSL 替换为 `cn.shengwang.infra:aosl:1.3.0`。
 
 新功能：
 
-- 支持 Oppo、Vivo、魅族推送，详情请见[第三方推送集成](https://docs-im.easemob.com/im/android/push/thirdpartypush)文档；
+- 支持 Oppo、Vivo、魅族推送，详情请见[第三方推送集成](/docs/v4/android/push/push_overview.html)文档；
 
 优化：
 
-- 优化三方推送的集成使用接口，详情请见[第三方推送集成](https://docs-im.easemob.com/im/android/push/thirdpartypush)文档；
+- 优化三方推送的集成使用接口，详情请见[第三方推送集成](/docs/v4/android/push/push_overview.html)文档；
 - 优化一些错误码返回值，错误原因更加具体；
 
 修复：
@@ -1836,14 +2100,14 @@ EaseUI:
 
 新功能：
 
-1. 将华为推送的集成从 sdk 中转移到应用层，SDK 提供上传华为推送 token 的接口供用户调用，方便华为推送升级时用户自行升级 [3.4.0.1 华为推送修改文档](https://docs-im.easemob.com/im/android/push/thirdpartypush#华为hms推送集成)
+1. 将华为推送的集成从 sdk 中转移到应用层，SDK 提供上传华为推送 token 的接口供用户调用，方便华为推送升级时用户自行升级 [3.4.0.1 华为推送修改文档](/docs/v4/android/push/push_huawei.html#步骤三-集成华为推送-sdk)
 
 ## v3.4.0 2018-04-04
 
 新功能：
 
 1. 增加是否使用 FCM 推送的接口 通过`EMOptions`的`setUserFCM()`方法设置
-2. 添加语音会议功能 [多人音视频会议](https://docs-im.easemob.com/im/android/basics/multiuserconference)
+2. 添加语音会议功能 多人音视频会议（历史文档已下线）
 
 修复：
 
@@ -1880,11 +2144,11 @@ EaseUI:
 
 新功能：
 
-1. 新增 API 请查看[3.3.6 API 变化](https://docs-im.easemob.com/im/android/sdk/3.3.6apichange)
+1. 新增 API 请查看3.3.6 API 变化（历史文档已下线）
 2. 使用外接音频输入源进行音视频通话时，设置音频源
 3. 提供是否自己处理附件的上传和下载设置项
 4. 提供是否自动下载附件类消息附件设置项（缩略图，语音文件）
-5. 多人音视频会议功能，详细参考集成文档 [多人音视频会议](https://docs-im.easemob.com/im/android/basics/multiuserconference)
+5. 多人音视频会议功能，详细参考集成文档 多人音视频会议（历史文档已下线）
 
 优化：
 
@@ -1930,7 +2194,7 @@ EaseUI:
 
 新功能
 
-1. 新增加 API 请查看链接[3.3.4api 修改](https://docs-im.easemob.com/im/200androidclientintegration/3.3.4apichange)
+1. 新增加 API 请查看链接3.3.4api 修改（历史文档已下线）
 2. 增加接口支持获取历史消息(消息漫游)（`此功能需要联系商务开通`）;
 3. 新增 PC 与移动端互发消息和文件的功能；
 4. 增加消息撤回的接口和回调（`此功能需要联系商务开通`）;
@@ -1940,7 +2204,7 @@ EaseUI:
 
 新功能
 
-1. 新增加 API 请查看链接[3.3.3api 修改](https://docs-im.easemob.com/im/200androidclientintegration/3.3.3apichange)
+1. 新增加 API 请查看链接3.3.3api 修改（历史文档已下线）
 2. 支持在多个设备登录同一个账号，多个设备间可以同步消息，好友及群组的操作(多设备登录属于增值服务，需要联系商务开通)；
 3. 添加群共享文件的大小属性；
 4. 增加获取同一账号登录的设备列表的接口，并可以选择踢掉某个设备上的登录；
@@ -1988,7 +2252,7 @@ EaseUI:
 
 新功能：
 
-1. 群组和聊天室改造：增加管理员权限，新增禁言，增减管理员的功能，支持使用分批的方式获取成员，禁言，管理员列表，支持完善的聊天室功能。新增加 API 请查看链接[3.3.0api 修改](https://docs-im.easemob.com/im/200androidclientintegration/3.3.0apichange)
+1. 群组和聊天室改造：增加管理员权限，新增禁言，增减管理员的功能，支持使用分批的方式获取成员，禁言，管理员列表，支持完善的聊天室功能。新增加 API 请查看链接3.3.0api 修改（历史文档已下线）
 2. 优化 dns 劫持时的处理
 3. 增加 EMConversation.latestMessageFromOthers,表示收到对方的最后一条消息
 4. 增加 EMClient.compressLogs，压缩 log，Demo 中增加通过邮件发送 log 的示例
@@ -2008,9 +2272,9 @@ bug 修订:
 
 新功能/优化：
 
-1. sdk 提供 aar 及 gradle 方式集成，具体方法查看[gradle 方式导入 aar](https://docs-im.easemob.com/im/android/sdk/import#手动复制jar包及so导入)
+1. sdk 提供 aar 及 gradle 方式集成，具体方法查看[gradle 方式导入 aar](/docs/v4/android/integration.html#方法一-使用-mavencentral-自动集成)
 2. 增加离线推送设置的相关接口，具体方法可查看 EMPushManager API 文档
-3. 为了使 sdk 更简洁易用，修改一些 api，并将一些 api 标记为“已过时”，具体修改查看[3.2.3api 修改](https://docs-im.easemob.com/im/200androidclientintegration/3.2.3apichange)，另外，已过时的 api 后续 3-5 个版本会进行删除
+3. 为了使 sdk 更简洁易用，修改一些 api，并将一些 api 标记为“已过时”，具体修改查看3.2.3api 修改（历史文档已下线），另外，已过时的 api 后续 3-5 个版本会进行删除
 4. 优化 loadAllConversationsFromDB()方法，从联表查询改为从两个表分别查询，解决在个别乐视手机上执行很慢的问题
 5. 优化登录模块，减少登录失败的概率
 6. 鉴于市面上的手机基本都是 armeabi-v7a 及以上的架构，从这版本开始不再提供普通的 armeabi 架构的 so，减少打包时 app 的体积
@@ -2103,7 +2367,7 @@ Bug fix:
 
 ## v3.1.5 2016-8-26
 
-1. 修改一些 api 名称，主要针对一些拼写错误的 api,具体变动请查看[3.1.5api 修改](https://docs-im.easemob.com/im/200androidclientintegration/3.1.5apichange)
+1. 修改一些 api 名称，主要针对一些拼写错误的 api,具体变动请查看3.1.5api 修改（历史文档已下线）
 2. 优化读取好友的速度；
 3. 修复在 logout 方法的回调里立刻调用 login 方法不能登录的 bug；
 4. 修复 https 安全漏洞，提高安全性；

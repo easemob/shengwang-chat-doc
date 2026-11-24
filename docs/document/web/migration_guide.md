@@ -1,16 +1,23 @@
 ﻿# 即时通讯 IM Web SDK 4.x 到 5.1.1 迁移指南
 
-本文档介绍如何从 v4.x `easemob-websdk` 迁移到 v5.x Web SDK。v5.x SDK 以 `ChatClient` 为统一入口，并按功能拆分为多个 Manager。迁移时，建议先完成初始化、登录、消息、事件和返回值处理等核心改造，再按业务使用范围迁移用户关系、群组、聊天室、会话、推送等模块。
+本文档介绍如何将使用 `easemob-websdk` 的应用从 Web IM SDK 4.x 迁移至 5.1.1。
 
-## 迁移说明
+## 升级总览
 
-新版 SDK 保留了即时通讯的核心业务能力，但 API 入口、模块组织、消息创建方式、事件模型、返回值结构和类型校验方式均有调整。迁移过程中需要重点关注以下变化：
+Web IM SDK 5.1.1 是一次重要的架构升级，围绕客户端入口、模块组织、消息 API、事件模型及返回值与错误处理进行了调整。
 
+本次升级涉及部分接口的移除与替换，以及默认行为的调整。从 4.x 升级至 5.1.1 时，请按照本文的迁移指引，检查并更新相关接口调用、配置和事件处理逻辑，确保业务功能正常运行。
+
+主要变化如下：
+
+- 初始化入口从 `new SDK.connection` 调整为 `ChatClient.init`，业务所需的 Manager 需通过初始化参数 `managers` 或 `.use()` 注册。
 - API 不再集中挂载在 `conn` 实例上，而是按业务能力拆分到 `ChatManager`、`ContactManager`、`GroupManager`、`ChatRoomManager`、`PushManager` 等 Manager。
+- **登录与登出接口调整**：登录从 `conn.open({ user, accessToken })` 调整为 `client.login({ userId, token })`，登出从 `conn.close()` 调整为 `await client.logout()`。应用需通过业务服务器获取用户 Token，并处理 Token 续期。
 - 消息不再通过 `WebIM.message.create({ type, ... })` 统一创建，而是通过 `client.chatManager.createXxxMessage` 按消息类型创建。
 - 会话标识从 `to` 和 `chatType` 调整为 `conversationId` 和 `conversationType`。
 - 多数异步 API 直接返回业务对象，不再通过 `AsyncResult<T>` 包装。
 - 事件监听仍使用 `addEventHandler` / `removeEventHandler`，但部分事件名和事件分发方式发生变化。
+- 全局 `onError` 事件已移除，异步调用错误需通过 `try...catch` 捕获，并结合 SDK 错误类型处理。
 
 ## 迁移前准备
 
@@ -496,7 +503,7 @@ await client.chatManager.sendMessage(msg, {
 
 ### 变更说明
 
-用户属性相关 API 从 `conn.xxx` 迁移到 `client.userInfoManager.xxx`。新版 SDK 支持按用户 ID 或属性查询用户属性，也支持订阅用户属性变更。
+用户属性相关 API 从 `conn.xxx` 迁移到 `client.userInfoManager.xxx`。新版 SDK 支持按用户 ID 或属性查询用户属性，也支持订阅非好友用户的属性变更。使用该订阅功能前，你需要联系声网商务开通。详见 [订阅非好友用户的属性变更](userprofile.html#订阅非好友用户的属性变更)。
 
 ### API 对照
 
@@ -641,13 +648,15 @@ await client.chatManager.sendMessage(msg, {
 
 ### 变更说明
 
-推送相关 API 从 `conn.xxx` 迁移到 `client.pushManager.xxx`。新版 SDK 中推送通知方式、免打扰、会话级推送规则和推送语言均由 `PushManager` 管理。
+推送相关 API 从 `conn.xxx` 迁移到 `client.pushManager.xxx`。新版 SDK 中推送通知方式、免打扰、会话级推送规则和推送语言均由 `PushManager` 管理。自 SDK 5.1.2 起，`PushManager` 还支持通过 uni-app 原生推送插件自动管理设备 Push Token。
 
 ### API 对照
 
 | 旧 SDK | 新 SDK | 说明 |
 | :--- | :--- | :--- |
 | `conn.uploadPushToken(params)` | `pushManager.uploadPushToken(params)` | 上传推送 Token。 |
+| - | `pushManager.setNativePush(options)` | 配置 uni-app 原生推送插件，并在登录后自动绑定或更新设备 Push Token。自 SDK 5.1.2 起支持。 |
+| - | `pushManager.removePushToken()` | 停用并解绑当前设备的原生推送 Token；如需恢复，重新调用 `setNativePush()`。自 SDK 5.1.2 起支持。 |
 | `conn.setSilentModeForAll(params)` | `pushManager.setGlobalSilentMode(params)` | 设置全局推送接收规则或免打扰规则。 |
 | `conn.getSilentModeForAll()` | `pushManager.getGlobalSilentMode()` | 获取全局推送配置。 |
 | `conn.setSilentModeForConversation(params)` | `pushManager.setConversationSilentMode(params)` | 设置会话级推送接收规则或免打扰规则。 |

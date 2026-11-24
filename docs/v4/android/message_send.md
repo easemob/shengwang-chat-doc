@@ -58,6 +58,10 @@ message.setMessageStatusCallback(new EMCallBack() {
 EMClient.getInstance().chatManager().sendMessage(message);
 ```
 
+:::tip
+自 SDK 4.24.2 起，调用 `sendMessage` 时，SDK 内部等待重连的超时时间为 20 秒。在弱网或连接恢复过程中，消息发送结果可能会在重连等待结束后返回，请以 `EMCallBack` 的回调结果更新消息状态。其他网络超时时间详见 [网络超时](connection.html#网络超时)。
+:::
+
 ## 发送附件消息
 
 除文本消息外，SDK 还支持发送附件类型消息，包括语音、图片、视频和文件消息。
@@ -68,6 +72,8 @@ EMClient.getInstance().chatManager().sendMessage(message);
 2. SDK 将附件上传到IM 服务器。另外，你也可以 [上传消息附件至自有服务器](#上传消息附件至自有服务器)。
 
 消息附件大小和存储限制，详见 [消息附件限制说明](limitation.html#消息存储)。
+
+由 SDK 自动传输附件时，请确保本地文件或 URI 在通过 `EMMessage.setMessageStatusCallback` 设置的 `EMCallBack` 的 `onSuccess` 或 `onError` 回调返回前持续可读，不要提前删除源文件或撤销 URI 读取权限。对于相册、系统文件选择器或临时目录返回的资源，如无法保证读取权限和文件生命周期，建议先复制到应用私有目录，再使用复制后的本地文件发送。
 
 ### 发送语音消息
 
@@ -94,16 +100,17 @@ EMClient.getInstance().chatManager().sendMessage(message);
 
 发送图片消息的流程如下：
 
-1. 获取图片的本地 URI。
+1. 获取图片的本地文件路径或 URI。
+
 2. 调用 `EMMessage#createImageSendMessage` 创建图片消息。
-   
-   创建消息时，需要传入图片的本地 URI、是否发送原图的标志，以及接收方的用户 ID。若为群聊或聊天室消息，则分别传入群组 ID 或聊天室 ID。
+
+   创建消息时，需要传入图片的本地文件路径或 URI、是否发送原图的标志，以及接收方的用户 ID。若为群聊或聊天室消息，则分别传入群组 ID 或聊天室 ID。
 
    `sendOriginalImage` 参数用于控制实际上传的图片资源：`true` 表示 SDK 上传原图，`false` 表示上传大图。
 
-3. 调用 `EMChatManager#sendMessage` 发送消息。
-   
-   如果开启了 `EMOptions#setAutoTransferMessageAttachments(boolean)`，SDK 会自动上传图片附件。服务器自动生成缩略图。
+3. 调用 `EMChatManager#sendMessage` 发送图片消息。
+
+   如果开启了 `EMOptions#setAutoTransferMessageAttachments(boolean)`，SDK 会自动上传图片附件，服务器会自动生成缩略图。如果关闭了自动上传，需要业务自行上传图片，并设置图片远程 URL 后再发送消息。详见 [上传消息附件至自有服务器](#上传消息附件至自有服务器)。
 
 ```java
 // `imageUri` 为图片本地资源标识符，`false` 为发送大图，若需要发送原图传 `true`，即设置 `original` 参数为 `true`。

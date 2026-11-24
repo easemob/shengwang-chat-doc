@@ -17,7 +17,7 @@
 
 会话未读数清零的核心流程如下：
 
-![](/images/ios/conversation_unread_count_clear.png)
+![](/images/android/conversation_unread_count_clear.png)
 
 会话未读数清零的基本步骤如下：
 
@@ -27,7 +27,7 @@
 4. 清零操作不会通知会话对端，也不会触发对端的消息已读回执；多设备登录时，当前用户的其他设备可通过 `EMMultiDevicesDelegate` 提供的多设备会话事件感知该操作。
 5. 如需清零所有会话的未读数，可调用 `IEMChatManager#clearAllConversationUnreadMessageCount:`。该接口会清零本地数据库中所有会话的未读数，并将该操作同步至当前用户登录的其他设备。
 
-:::tip 
+:::tip
 清零会话未读数不会向会话对端发送通知，也不会自动发送消息已读回执。如需让消息发送方感知消息已读，请使用消息已读回执功能。 
 :::
 
@@ -164,7 +164,7 @@ extension ConversationListViewController: EMMultiDevicesDelegate {
 }
 ```
 
-:::tip 
+:::tip
 多设备回调用于通知应用数据已变化。建议在回调中重新读取 SDK 的本地会话数据，不要只修改界面上缓存的数字。 清空未读数的 API 不会自动更新应用界面或 iOS 应用角标，你需要在 completion 或多设备回调中根据最新未读数自行更新。
 :::
 

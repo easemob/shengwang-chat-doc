@@ -2,29 +2,33 @@
 
 ## 功能说明
 
-即时通讯 IM 提供用户信息自动管理功能。开启该功能后，SDK 可自动维护用户信息的同步与内存更新，帮助开发者减少手动拉取、存储和更新用户信息的工作量。
+即时通讯 IM 提供用户信息自动管理功能。开启该功能后，SDK 可自动维护用户信息的同步与缓存更新，帮助开发者减少手动拉取、存储和更新用户信息的工作量。
 
-该功能适用于会话列表、消息列表、群聊页面等需要展示用户昵称、头像、备注、群成员名片的场景。
+该功能适用于会话列表、消息列表、群聊页面等需要展示用户昵称、头像、好友备注、群成员名片的场景。
 
 **本文提及的用户信息指用于业务展示的用户相关信息，包括 [用户属性](userprofile.html)、[好友备注](user_relationship.html#设置好友备注) 和 [群成员名片](group_namecard.html)。**
 
 ## 技术原理
 
-用户信息自动管理功能由 `EMOptions#enableUserInfo` 控制。开启后，SDK 按以下流程处理用户信息同步与内存更新：
+用户信息自动管理功能由 `EMOptions` 的 `enableUserInfo` 属性控制，默认关闭。将其设置为 `YES` 后，SDK 会在登录成功时自动同步当前登录用户的用户属性，并在发送消息时附带发送方用户属性的更新时间。对于群聊消息，还会额外附带发送方在当前群中的群成员名片更新时间。
 
-1. 用户登录成功后，SDK 自动从服务端获取当前登录用户的信息，并写入本地内存。
+好友备注从接收方的本地好友数据中读取，不随消息发送，也不通过上述更新时间比较机制同步。详见[通过消息获取发送方信息](#通过消息获取发送方信息)。
+
+接收方收到消息后，SDK 会根据消息中携带的更新时间，按需同步用户属性和群成员名片、更新本地缓存，并通过代理回调通知业务层刷新 UI。具体处理流程如下：
+
+1. 用户登录成功后，SDK 自动从服务端获取当前登录用户的信息，并写入本地缓存。
 2. 当用户更新自身信息后，后续发送的消息会携带对应信息的更新时间。
 3. 接收方收到消息后，SDK 会解析消息中的发送方信息及更新时间。
-4. SDK 会将消息中的更新时间与本地内存中的时间戳进行比较。
-5. 如果消息中的更新时间晚于本地内存，SDK 会自动 [从服务端拉取最新用户属性](userprofile.html#从服务端获取用户的所有属性) 或 [群成员名片](group_namecard.html#从本地内存获取群成员名片)。
-6. 拉取成功后，SDK 会自动更新本地内存。
-7. 本地内存更新完成后，SDK 会通过事件通知上层应用，业务层可据此刷新 UI。
+4. SDK 会将消息中的更新时间与本地缓存中的时间戳进行比较。
+5. 如果消息携带有效的更新时间，且该时间晚于本地缓存中的对应时间戳，或本地缺少对应数据，SDK 会自动 [从服务端拉取最新用户属性](userprofile.html#从服务端获取用户的所有属性) 或 [群成员名片](group_namecard.html#从服务端获取群成员名片)。
+6. 拉取成功后，SDK 会自动更新本地缓存。
+7. 本地缓存更新完成后，SDK 会通过事件通知上层应用，业务层可据此刷新 UI。
 
-**该功能的核心是：SDK 自动完成用户信息获取、更新检测、本地内存更新和变更通知。**
+**该功能的核心是：SDK 自动完成用户信息获取、更新检测、本地缓存更新和变更通知。**
 
-内存更新流程如下：
+缓存更新流程如下：
 
-![img](/images/ios/memory_update_userinfo_mgmt.png)
+![img](/images/android/memory_update_userinfo_mgmt.png)
 
 ## 前提条件
 
@@ -48,16 +52,40 @@ EMClient.shared().initializeSDK(with: options)
 必须在调用 `initializeSDK` 初始化 SDK 之前设置 `EMOptions#enableUserInfo`，否则该功能不会生效。
 :::
 
+
+将 `EMOptions#enableUserInfo` 设置为 `true` 开启用户信息自动管理功能后，SDK 的相关行为如下：
+
+1. 发送消息时，会携带用户属性和群成员名片的更新时间，并根据本地缓存为消息生成 `EMMessageSenderInfo`。
+
+2. 接收消息时，SDK 会根据消息中携带的更新时间，按需自动同步发送方最新的用户属性和群成员名片，并更新本地缓存。
+
+3. 可通过 `EMChatMessage#senderInfo` 获取 SDK 组装的发送方信息，包括用户 ID，以及当前可用的昵称、头像、群成员名片和好友备注。具体内容取决于消息对象及本地缓存，不能保证所有字段均有值。好友备注从接收方的本地好友信息中读取，不随消息发送。
+
+4. 调用 `EMChatManager#asyncFetchGroupMessageReadUsersFromServer:groupId:readReceiptId:pageSize:completion:` 时，SDK 会为 `EMGroupReadReceipt#from` 返回的成员信息补充当前可用的昵称、头像和群成员名片（未获取到的字段可能为空）。关闭该功能时，SDK 不会自动补充这些信息。
+
+5. `EMGroupManager#fetchGroupMemberInfoListFromServerWithGroupId:cursor:limit:completion:` 返回的 `EMGroupMemberInfo` 中会补充当前可用的用户昵称（`nickname`）和头像（`avatarUrl`）；关闭时不补充。群成员名片（`namecard`）由服务端返回，不受该开关的影响。
+
+6. 登录成功后，SDK 会自动从服务器同步当前登录用户的属性。
+
+不受该开关影响的功能：
+
+1. 手动调用 `EMUserInfoManager#fetchUserInfoById:completion:` 和 `EMUserInfoManager#fetchUserInfoById:type:completion:` 时，仍会按更新时间将拉取结果写入本地缓存。该行为不受此开关影响。
+
+2. `EMUserInfoManager#getUserInfoByIds:` 可读取并返回本地已缓存的用户信息。该接口不会主动从服务器获取数据，能否获取到数据取决于本地是否存在缓存，不受该开关的影响。
 ## 监听用户属性更新
 
 SDK 提供 `EMUserInfoManagerDelegate`，用于监听用户属性更新事件，主要包括：
-- `onSelfUserInfoUpdate`：当前登录用户的属性同步或更新并写入本地内存后触发该事件。
-- `onUserInfoUpdate`：其他用户属性更新并写入本地内存后触发，包括以下场景：
-  - 收到其他用户的消息，消息中发送方的用户昵称、头像有变更。若实现这种场景下的用户属性更新事件，需要开启用户信息自动管理。
+- `onSelfUserInfoUpdate`：当前登录用户的属性同步或更新并写入本地缓存后触发该事件。
+- `onUserInfoUpdate`：其他用户属性更新并写入本地缓存后触发，包括以下场景：
+  - 开启用户信息自动管理后，收到其他用户的消息，且消息携带有效的发送方用户属性更新时间，该时间晚于本地缓存中的时间戳，或本地缺少对应数据，SDK 自动获取用户属性并更新本地缓存。
   - 主动 [从服务端获取用户属性](userprofile.html#从服务端获取用户的所有属性)。
   - 主动 [从服务端获取群成员信息](group_members.html#获取群成员列表)。
 
 **建议在业务初始化阶段完成监听注册，以便在登录后的初始同步、消息触发或主动拉取等场景中及时接收事件并刷新界面。** 关于其他场景下用户属性变更通知机制，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
+
+:::tip
+如需接收好友的用户属性变更通知，或订阅非好友用户的属性变更通知，你需要先联系声网商务开通相应功能。详见 [监听用户属性变更](userprofile.html#监听用户属性变更) 和 [订阅非好友用户的属性变更](userprofile.html#订阅非好友用户的属性变更)。
+:::
 
 - 添加监听：
 
@@ -85,6 +113,16 @@ extension YourViewController: EMUserInfoManagerDelegate {
 
 ## 通过消息获取发送方信息
 
+`senderInfo` 可能为 `nil`，其中的字符串属性均为可选值。
+
+| 属性 | 类型 | 说明 |
+| :--- | :--- | :--- |
+| `userId` | `NSString * _Nullable` | 消息发送方的用户 ID。 |
+| `nickname` | `NSString * _Nullable` | 发送方的昵称。 |
+| `avatarUrl` | `NSString * _Nullable` | 发送方的头像 URL。 |
+| `remark` | `NSString * _Nullable` | 当前用户为发送方设置的私有好友备注，不会随消息发送给对方。 |
+| `groupNameCard` | `NSString * _Nullable` | 发送方在当前群组中的群成员名片。 |
+
 开启用户信息自动管理后，发送消息时，SDK 会自动携带发送方用户属性的更新时间；发送群聊消息时，还会携带发送方在当前群中的群成员名片更新时间。应用无需手动将这些信息或完整用户属性添加到消息扩展中。当接收方收到该消息，且消息中携带的发送方用户属性更新时间晚于本地缓存时，SDK 会从服务端拉取该用户属性，并触发 `onUserInfoUpdate` 事件。
 
 你可以通过 `senderInfo` 获取当前可用的发送方信息，包括昵称、头像、备注和群成员名片。如果接收方已为该发送方设置好友备注，还可通过 `senderInfo.remark` 获取该备注。好友备注属于接收方的私有好友数据，由接收方 SDK 从本地好友信息中读取，不会由消息发送方随消息发送，也不会传递给对方。
@@ -104,12 +142,12 @@ func messagesDidReceive(_ aMessages: [EMChatMessage]) {
 ```
 
 :::tip
-`senderInfo` 返回的是当前本地可用的发送方信息。如果消息触发了用户信息更新，最新数据会在 SDK 完成本地内存更新后，通过相关事件通知业务层。
+`senderInfo` 返回的是当前本地可用的发送方信息。如果消息触发了用户信息更新，最新数据会在 SDK 完成本地缓存更新后，通过相关事件通知业务层。
 :::
 
-## 从本地内存读取用户属性
+## 从本地缓存读取用户属性
 
-如需直接从本地内存读取用户属性，可调用 `getUserInfoByIds`。该接口不会发起网络请求，适用于本地展示场景。
+如需直接从本地缓存读取用户属性，可调用 `getUserInfoByIds`。该接口不会发起网络请求，适用于本地展示场景。
 
 ```swift
 let result = EMClient.shared().userInfoManager?.getUserInfo(byIds: ["userId1", "userId2"])
@@ -121,16 +159,16 @@ if let userInfoMap = result {
 ```
 
 :::tip
-该接口仅返回本地内存的数据。如需主动从服务端获取最新用户属性，请调用 `fetchUserInfoById` 方法。详见 [管理用户属性](userprofile.html#从服务端获取用户的所有属性)。
+该接口仅返回本地缓存的数据。如需主动从服务端获取最新用户属性，请调用 `fetchUserInfoById` 方法。详见 [管理用户属性](userprofile.html#从服务端获取用户的所有属性)。
 :::
 
 ## 注意事项
 
 - `EMOptions#enableUserInfo` 必须在 SDK 初始化前设置。
-- 建议优先注册 `EMUserInfoManagerDelegate`，以便在本地内存更新后及时刷新业务界面。
+- 建议优先注册 `EMUserInfoManagerDelegate`，以便在本地缓存更新后及时刷新业务界面。
 - `senderInfo` 表示当前本地可用的发送方信息，不保证一定是刚收到消息时的最终最新值。
-- 当消息中的更新时间晚于本地内存时，SDK 会自动从服务端拉取最新数据并更新本地内存。
-- `getUserInfoByIds` 仅查询本地内存，不会主动从服务端拉取最新数据。
+- 当消息中的更新时间晚于本地缓存时，SDK 会自动从服务端拉取最新数据并更新本地缓存。
+- `getUserInfoByIds` 仅查询本地缓存，不会主动从服务端拉取最新数据。
 
 ## 常见问题
 
@@ -140,11 +178,11 @@ if let userInfoMap = result {
 
 #### 功能开启后，SDK 会自动执行哪些操作？
 
-开启用户信息自动管理 `EMOptions#enableUserInfo` 后，SDK 会在登录成功后自动同步当前登录用户信息；在发送消息时自动附带发送方信息及更新时间；在接收消息后自动比较消息中的更新时间与本地内存；在检测到数据更新时自动从服务端拉取最新信息并更新本地内存，同时通过事件通知业务层。
+开启用户信息自动管理 `EMOptions#enableUserInfo` 后，SDK 会在登录成功后自动同步当前登录用户信息；在发送消息时自动附带发送方信息及更新时间；在接收消息后自动比较消息中的更新时间与本地缓存；在检测到数据更新时自动从服务端拉取最新信息并更新本地缓存，同时通过事件通知业务层。
 
 #### EMChatMessage#senderInfo 一定最新？
 
-不一定。`senderInfo` 返回的是当前本地可用的发送方信息。如果消息触发了用户信息更新，SDK 会先从服务端拉取最新数据并更新本地内存，随后通过相关事件通知业务层刷新界面。
+不一定。`senderInfo` 返回的是当前本地可用的发送方信息。如果消息触发了用户信息更新，SDK 会先从服务端拉取最新数据并更新本地缓存，随后通过相关事件通知业务层刷新界面。
 
 #### 为何建议尽早注册监听？
 
@@ -152,11 +190,11 @@ if let userInfoMap = result {
 
 #### 本地读取和服务端获取有何区别？
 
-`getUserInfoByIds` 仅查询本地内存，不会发起网络请求，适用于本地展示场景。如果业务需要获取最新的用户属性，应调用对应的 [接口](userprofile.html#从服务端获取用户的所有属性) 主动获取。
+`getUserInfoByIds` 仅查询本地缓存，不会发起网络请求，适用于本地展示场景。如果业务需要获取最新的用户属性，应调用对应的 [接口](userprofile.html#从服务端获取用户的所有属性) 主动获取。
 
-#### 功能开启后需自己维护内存吗？
+#### 功能开启后需自己维护缓存吗？
 
-通常不需要。开启 `EMOptions#enableUserInfo` 后，SDK 会负责用户信息的自动同步、更新时间比较、本地内存更新和事件通知。业务层通常只需从本地内存读取数据，并在相关事件中刷新界面。
+通常不需要。开启 `EMOptions#enableUserInfo` 后，SDK 会负责用户信息的自动同步、更新时间比较、本地缓存更新和事件通知。业务层通常只需从本地缓存读取数据，并在相关事件中刷新界面。
 
 ## 相关功能
 
@@ -168,7 +206,7 @@ if let userInfoMap = result {
 
 - 用户信息：指用于业务展示的用户相关信息，包括用户的 [昵称、头像](userprofile.html)、[备注](user_relationship.html#设置好友备注) 和 [群成员名片](group_namecard.html)。
 - 用户属性：指用户可设置和管理的资料字段，例如，用户昵称、头像、邮箱、电话号码等。你可通过相关接口对这些字段进行设置、更新和查询。详见 [管理用户属性](userprofile.html)。例如，你可以通过 `updateOwnUserInfo` 设置当前登录用户的昵称、头像等资料。若用户信息自动管理功能开通（`EMOptions#enableUserInfo` 设置为 `true`），更新后的信息会在后续发送消息时自动参与同步。
-  
+
 ### 通过消息同步的发送方信息
 
 开启用户信息自动管理后，接收到的消息中会包含发送方相关信息，包括昵称、头像、备注和群成员名片。
@@ -179,7 +217,6 @@ if let userInfoMap = result {
 | :--- | :--- | :--- |
 | [`enableUserInfo`](#技术原理) | `EMOptions` | 开启用户信息服务 |
 | [`updateOwnUserInfo:completion:`](#用户属性与用户信息) | `IEMUserInfoManager` | 更新当前用户信息 |
-| [`fetchUserInfoById:completion:`](#从本地内存读取用户属性) | `IEMUserInfoManager` | 从服务端获取用户信息 |
-| [`getUserInfoByIds:`](#从本地内存读取用户属性) | `IEMUserInfoManager` | 获取本地用户信息 |
+| [`fetchUserInfoById:completion:`](#从本地缓存读取用户属性) | `IEMUserInfoManager` | 从服务端获取用户信息 |
+| [`getUserInfoByIds:`](#从本地缓存读取用户属性) | `IEMUserInfoManager` | 获取本地用户信息 |
 | [`senderInfo`](#通过消息获取发送方信息) | `EMChatMessage` | 获取消息发送方信息 |
-

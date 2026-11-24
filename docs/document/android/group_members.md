@@ -1,4 +1,4 @@
-﻿# 群组成员管理
+# 群组成员管理
 
 ## 功能说明
 
@@ -23,6 +23,8 @@
 ### 分页获取群成员信息
 
 调用 `EMGroupManager#asyncFetchGroupMembersInfo` 分页获取群成员信息，返回的成员信息包括群成员的用户 ID、角色、入群时间、群名片、昵称和头像。
+
+开启用户信息自动管理（`EMOptions#setEnableUserInfo(true)`）后，SDK 会优先使用本地缓存中的昵称和头像；本地没有对应缓存，或昵称和头像都为空时，会按需从服务端补拉用户属性。该接口不会主动刷新本地已有的昵称或头像。补拉时可能触发用户属性更新事件，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
 
 ```java
 // 异步方法。
@@ -237,9 +239,9 @@ EMClient.getInstance()
 
 ### 添加群管理员
 
-仅群主可以调用 `asyncAddGroupAdmin` 添加群管理员。添加成功后，新管理员及其他管理员会收到 `onAdminAdded` 回调。
+仅群主可以调用 `asyncAddGroupAdmin` 添加群管理员。添加成功后，新管理员、群主及其他管理员会收到 `onAdminAdded` 回调。
 
-管理员除了不能解散群组等少数权限外，拥有对群组的绝大部分权限。
+管理员除了不能解散群组等少数权限外，拥有对群组的绝大部分管理权限。
 
 ```java
 // 异步方法。
@@ -263,7 +265,7 @@ EMClient.getInstance()
 
 ### 移除群管理员
 
-仅群主可以调用 `asyncRemoveGroupAdmin` 移除群管理员。移除成功后，被移除的管理员及其他管理员会收到 `onAdminRemoved` 回调。
+仅群主可以调用 `asyncRemoveGroupAdmin` 移除群管理员。移除成功后，被移除的管理员、群主及其他管理员会收到 `onAdminRemoved` 回调。
 
 群管理员被移除群管理权限后将只拥有普通群成员的权限。
 

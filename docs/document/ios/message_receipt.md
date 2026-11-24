@@ -23,7 +23,7 @@
 
 单聊消息送达回执的实现流程如下：
 
-![img](/images/ios/message_delivery_receipt.png)
+![img](/images/android/message_delivery_receipt.png)
 
 实现该功能的基本步骤如下：
 
@@ -42,7 +42,7 @@ iOS SDK 使用 `sendMessageReadReceipts` 统一发送单聊和群聊消息的已
 
 消息已读回执的实现流程如下：
 
-![img](/images/ios/message_read_receipt.png)
+![img](/images/android/message_read_receipt.png)
 
 实现该功能的基本步骤如下：
 
@@ -112,7 +112,7 @@ options.enableDeliveryAck = YES;
 
 ## 单聊和群聊消息已读回执
 
-单聊消息和群聊消息均支持已读回执功能。单聊消息已读回执功能默认开启，消息的已读回执有效期与消息在服务端的存储时间一致，即在服务器存储消息期间均可发送已读回执。消息在服务端的存储时间与你订阅的套餐包有关，详见 [IM 套餐包功能详情](/product/product_package_feature.html)。
+单聊消息和群聊消息均支持已读回执功能。单聊消息已读回执功能默认开启，但发送方仍需在发送消息前设置 `message.isNeedReadReceipt = YES`。单聊消息的已读回执有效期与消息在服务端的存储时间一致，即在服务器存储消息期间均可发送已读回执。消息在服务端的存储时间与你订阅的套餐包有关，详见 [IM 套餐包功能详情](/docs/product/product_package_feature.html)。
 
 群消息已读回执功能使用前存在以下使用限制：
 
@@ -126,7 +126,7 @@ options.enableDeliveryAck = YES;
 
 #### 步骤 1：设置消息需要已读回执
 
-消息接收方在初始化 SDK 时需将 `isNeedReadReceipt` 设置为 `YES`；该属性默认值为 `NO`。该属性对单聊和群聊均有效。
+消息发送方在发送消息前需将消息的 `isNeedReadReceipt` 设置为 `YES`；该属性默认值为 `NO`。该属性对单聊和群聊均有效。
 
 单聊消息已读回执无需额外开通。群聊消息已读回执需先在声网控制台开通功能，再设置该属性。
 
@@ -210,7 +210,7 @@ NSArray<EMChatMessage *> *messages = @[message];
 
 ### 批量获取多条群消息的回执汇总
 
-调用 `getGroupMessageReadReceipts` 从服务器批量获取消息的已读回执详情。单次最多传入 20 条消息，且所有消息必须属于同一会话。
+调用 `getGroupMessageReadReceipts` 从服务器批量获取消息的已读回执详情。单次最多传入 20 条消息，且所有消息必须属于同一群聊会话。
 
 ```objectivec
 // messages 中最多包含 20 条、且属于同一群会话的消息。

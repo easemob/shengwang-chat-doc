@@ -2,7 +2,7 @@
 
 ## 功能说明
 
-会话标记用于为会话添加业务分类，例如标星、待处理或重要客户等。iOS SDK 支持为单聊、群聊和聊天室会话添加或移除标记。
+会话标记用于为会话添加业务分类，例如标星、待处理或重要客户等。iOS SDK 支持为单聊和群聊会话添加或移除标记；不支持聊天室会话。
 
 SDK 提供 `EMMarkType0` 至 `EMMarkType19` 共 20 个标记，单个会话最多可同时包含 20 个标记。各标记与业务含义之间的映射由应用自行定义和维护。在 Swift 中，对应枚举值为 `.markType0` 至 `.markType19`。
 
@@ -29,7 +29,7 @@ let markMapping: [EMMarkType: String] = [
 
 调用 `addConversationMark` 为一个或多个会话添加指定标记。该操作会同时更新服务端和本地的会话标记，单次最多传入 20 个会话 ID。
 
-添加会话标记后，SDK 会同时更新服务端和本地的标记数据。初始化 SDK 前，将 `EMOptions#dataSyncType` 配置为包含 `EMDataSyncTypeConversations`。登录后，当 `syncDataFinished` 通知会话数据同步成功时，可通过本地会话列表接口获取 `EMConversation` 对象，并通过 `EMConversation#marks` 获取该会话的全部标记。
+登录后，SDK 会自动同步会话列表及其标记并写入本地。添加会话标记后，标记数据会同时更新至服务端和本地。同步完成后，可通过本地会话列表接口获取 `EMConversation` 对象，再调用 `EMConversation#marks` 获取该会话的全部标记。
 
 若服务端会话列表达到数量限制（默认最多 100 个会话），服务端可能根据会话活跃度移除不活跃会话，对应标记也可能不再随服务端会话列表同步到本地。
 
@@ -55,7 +55,7 @@ EMClient.shared().chatManager?.addConversationMark(
 
 | 参数 | 类型 | 说明 |
 | :--- | :--- | :--- |
-| `conversationIds` | `[String]` | 会话 ID 数组，不能为空，单次最多传入 20 个。<br/> - 单聊：对端用户 ID。<br/> - 群聊：群组 ID。<br/> - 聊天室：聊天室 ID。 |
+| `conversationIds` | `[String]` | 会话 ID 数组，不能为空，单次最多传入 20 个。<br/> - 单聊：对端用户 ID。<br/> - 群聊：群组 ID。<br/> 不支持聊天室会话。 |
 | `mark` | `EMMarkType` | 要添加的标记，取值为 `.markType0` 至 `.markType19`。 |
 | `completion` | `(EMError?) -> Void` | 异步操作结果。`error == nil` 表示成功，否则可通过 `EMError#code` 和 `EMError#errorDescription` 处理失败。 |
 
@@ -89,7 +89,7 @@ EMClient.shared().chatManager?.removeConversationMark(
 
 ## 按标记筛选会话列表
 
-应用应在初始化 SDK 前将 `EMOptions#dataSyncType` 配置为包含 `.conversations`，登录后等待会话数据同步完成，再通过本地 `EMConversation#marks` 筛选会话。
+`EMOptions#dataSyncType` 默认包含 `.conversations`。应用登录后应等待会话数据同步完成，再通过本地 `EMConversation#marks` 筛选会话。如需显式指定同步范围，可以在初始化 SDK 前配置该属性。
 
 初始化 SDK 前配置会话同步：
 
@@ -216,7 +216,7 @@ EMClient.shared().removeMultiDevicesDelegate(multiDeviceListener)
 
 ## 注意事项
 
-- 会话标记支持单聊、群聊和聊天室会话。
+- 会话标记支持单聊和群聊会话；不支持聊天室会话。
 - Objective-C 标记值为 `EMMarkType0` 至 `EMMarkType19`，Swift 对应 `.markType0` 至 `.markType19`；具体业务含义由应用维护。
 - 单个会话最多可以同时包含 20 个标记。
 - `addConversationMark` 和 `removeConversationMark` 可同时操作多个会话，单次最多传入 20 个会话 ID。

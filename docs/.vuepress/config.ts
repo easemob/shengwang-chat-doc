@@ -31,7 +31,7 @@ const HOME_DESCRIPTION =
 const INNER_PAGE_TITLE_PREFIX = '即时通讯IM开发 '
 const INNER_PAGE_TITLE_SUFFIX = '｜即时通讯 IM 文档'
 const SEO_META_NAMES = new Set(['description', 'keywords'])
-const DOCS_PATH_PREFIXES = ['document', 'callkit', 'product', 'sdk', 'uikit', 'v4', 'value-added']
+const DOCS_PATH_PREFIXES = ['document', 'callkit', 'product', 'sdk', 'uikit', 'v4', 'value-added', 'breadcrumb']
 
 const sanitizeTitle = (title: string): string =>
   title
@@ -282,6 +282,12 @@ export default defineUserConfig({
     )
   },
   alias: {
+    '@theme-hope-original/components/BreadCrumb': path.resolve(
+      __dirname, '../../node_modules/vuepress-theme-hope/lib/client/components/BreadCrumb.js'
+    ),
+    '@theme-hope/components/BreadCrumb': path.resolve(__dirname, './components/BreadCrumb.vue'),
+    '@theme-hope/components/PageTitle': path.resolve(__dirname, './components/PageTitle.vue'),
+    '@theme-hope/modules/sidebar/components/SidebarLinks': path.resolve(__dirname, './components/SidebarLinks.ts'),
     '@theme-hope/components/HomePage': path.resolve(
       __dirname,
       './components/HomePage.vue'

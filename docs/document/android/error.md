@@ -2,7 +2,7 @@
 
 本文介绍即时通讯 Android SDK 中接口调用或回调返回的错误码。开发者可以根据错误码判断失败原因，并参考对应的解决方法进行处理。
 
-Android SDK 的错误码定义在 [`EMError`](https://sdkdocs.easemob.com/apidoc/android/chat3.0/classcom_1_1hyphenate_1_1_e_m_error.html) 类中。例如，注册用户时可通过 `EMError.USER_ALREADY_EXIST` 判断用户是否已存在。
+Android SDK 的错误码定义在 `EMError` 类中。例如，注册用户时可通过 `EMError.USER_ALREADY_EXIST` 判断用户是否已存在。
 
 示例：
 

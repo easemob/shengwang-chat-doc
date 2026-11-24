@@ -20,6 +20,10 @@ SDK 提供用户关系管理功能，包括好友管理和黑名单管理。
 
 为了接收好友添加、删除和好友申请状态的变更事件，你需要添加好友事件监听。
 
+:::tip
+如需通过 `onContactInfoUpdated` 接收好友的用户属性变更通知，你需要先联系声网商务开通该功能。关于用户属性变更通知机制，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
+:::
+
 ```typescript
 client.contactManager.addEventHandler('contact-listener', {
   // 对方接受了好友请求。用户 A 向用户 B 发送好友请求，用户 B 同意后，用户 A 收到该事件。
@@ -161,7 +165,7 @@ contacts.forEach(contact => {
 
 #### 从本地内存获取单个用户属性
 
-如果你需要读取当前内存中的单个好友的用户属性，可从 `client.contactManager.getContacts` 返回的好友列表中选择目标好友。关于该接口的说明，详见 [从本地内存读取用户属性](userinfo_provider.html#从本地内存读取用户属性)。
+如果你需要读取当前内存中的单个好友的用户属性，可从 `client.contactManager.getContacts` 返回的好友列表中选择目标好友。关于该接口的说明，详见 [从本地缓存读取用户属性](userinfo_provider.html#从本地缓存读取用户属性)。
 
 如果你需要获取最新的用户属性，应调用 [client.userInfoManager.getUserInfoByUserId](userprofile.html#从服务端获取用户的所有属性) 从服务端查询。
 
@@ -255,7 +259,7 @@ console.log(result.succeeded, result.failed);
 
 ### 将用户从黑名单移除
 
-你可以调用 `removeUserFromBlocklist` 将一个或多个用户从黑名单中移除。移除后，用户发送消息等行为将恢复。
+你可以调用 `removeUserFromBlocklist` 将一个或多个用户从黑名单中移除。移除后，该用户发送消息或好友申请等行为将恢复。
 
 ```typescript
 await client.contactManager.removeUserFromBlocklist({

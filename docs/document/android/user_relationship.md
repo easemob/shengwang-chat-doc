@@ -18,6 +18,10 @@ SDK 提供用户关系管理功能，包括好友管理和黑名单管理。
 
 通过 `EMContactListener` 监听好友申请、接受、拒绝、添加、删除及好友信息变更事件。
 
+:::tip
+如需通过 `onContactInfoUpdate` 接收好友的用户属性变更通知，你需要先联系声网商务开通该功能。关于用户属性变更通知机制，详见 [监听用户属性变更](userprofile.html#监听用户属性变更)。
+:::
+
 ```java
 EMContactListener contactListener = new EMContactListener() {
     // 对方接受了好友请求。用户 A 向用户 B 发送好友请求，用户 B 收到好友请求后，同意加好友，则用户 A 收到该事件。
@@ -309,7 +313,7 @@ try {
 
 #### 从本地内存获取单个用户属性
 
-如果需要直接从本地内存读取指定用户的属性，可以调用 `EMUserInfoManager#getUserInfoWithUserId(String)`。关于该接口的说明，详见 [从本地内存读取用户属性](userinfo_provider.html#从本地内存读取用户属性)。
+如果需要直接从本地内存读取指定用户的属性，可以调用 `EMUserInfoManager#getUserInfoWithUserId(String)`。关于该接口的说明，详见 [从本地内存读取用户属性](userinfo_provider.html#从本地缓存读取用户属性)。
 
 该接口返回的是单个用户的 `EMUserInfo`，不是 `EMContact`。它不会发起网络请求，可作为好友列表读取之外的补充资料读取方式。
 
@@ -357,7 +361,7 @@ EMClient.getInstance()
 
 ### 将用户从黑名单移除
 
-你可以调用 `removeUserFromBlackList` 将用户从黑名单中移除。移除后，用户发送消息等行为将恢复。
+你可以调用 `removeUserFromBlackList` 将用户从黑名单中移除。移除后，该用户发送消息或好友申请等行为将恢复。
 
 ```java
 // 异步方法。

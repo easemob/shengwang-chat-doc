@@ -31,7 +31,7 @@ const documentSidebar = [
     children: [
       { text: '用户关系', link: 'user_relationship.html' },
       { text: '用户属性', link: 'userprofile.html' },
-      { text: '用户信息自动管理', link: 'userinfo_provider.html', only: ['android', 'ios', 'harmonyos']},
+      { text: '用户信息自动管理', link: 'userinfo_provider.html', only: ['android', 'ios', 'harmonyos', 'flutter', 'react-native']},
       { text: '在线状态订阅', link: 'presence.html' },
     ],
     except: ['server-side', 'applet']
@@ -43,12 +43,13 @@ const documentSidebar = [
       { text: '消息概述', link: 'message_overview.html' },
       { text: '发送消息', link: 'message_send.html' },
       { text: '接收消息', link: 'message_receive.html' },
-      { text: '接收流式消息', link: 'message_stream_receive.html', only: ['android', 'web', 'ios', 'harmonyos', 'react-native'] },
+      { text: '接收流式消息', link: 'message_stream_receive.html', only: ['android', 'web', 'ios', 'harmonyos', 'react-native', 'flutter'] },
       { text: '获取历史消息', link: 'message_retrieve.html' },
       { text: '撤回消息', link: 'message_recall.html' },
       { text: '搜索本地消息', link: 'message_search_local.html', except: ['web']}, 
       { text: '消息回执', link: 'message_receipt.html'},
       { text: '编辑消息', link: 'message_modify.html'},
+      { text: '消息翻译', link: 'message_translation.html'},
       { text: '消息表情回复', link: 'reaction.html' },
       { text: '转发消息', link: 'message_forward.html', except: ['web']},
       { text: '导入和插入消息', link: 'message_import_insert.html', except: ['web']},
@@ -84,7 +85,7 @@ const documentSidebar = [
       { text: '群组概述', link: 'group_overview.html' },
       { text: '创建和管理群组', link: 'group_manage.html' },
       { text: '管理群组成员', link: 'group_members.html' },
-      { text: '管理群成员名片', link: 'group_namecard.html', only: ['android', 'ios', 'harmonyos'] },
+      { text: '管理群成员名片', link: 'group_namecard.html', only: ['android', 'ios', 'harmonyos', 'flutter', 'react-native'] },
       { text: '管理群组属性', link: 'group_attributes.html' },
       { text: '管理消息话题', link: 'thread.html', except: ['harmonyos'] },
       { text: '管理消息话题中的消息', link: 'thread_message.html', except: ['harmonyos'] }
@@ -161,6 +162,7 @@ const documentSidebar = [
       { text: '实现消息引用', link: 'message_quote.html', only: ['android', 'ios', 'web'] },
       { text: '实现输入指示器', link: 'typing_indication.html', only: ['android', 'ios', 'web', 'react-native', 'flutter', 'unity', 'windows'] },
       { text: '鸿蒙端消息扩展升级', link: 'message_extension_optimize.html', only: ['harmonyos'] },
+      { text: '其他问题', link: 'faq.html', only: ['harmonyos'] },
     ],
   },
   { text: '获取 SDK 日志', link: 'log.html', except: ['flutter', 'server-side', 'applet'] },
@@ -213,6 +215,7 @@ const documentSidebar = [
           { text: '消息回执', link: 'message_receipt.html' }, 
           { text: '消息表情回复', link: 'reaction.html' },
           { text: '编辑消息', link: 'message_modify.html' },
+          { text: '消息翻译', link: 'message_translation.html' },
           { text: '删除消息', link: 'message_delete.html' },
           { text: '定向消息', link: 'message_target.html' }, 
           { text: '消息扩展', link: 'message_extension.html' },    
@@ -994,4 +997,3 @@ function handleSidebarItem(platform, sidebar) {
 export const DOC_SIDEBAR = buildDocSidebar()
 
 // console.dir(buildDocSidebar(), {depth: null})
-
