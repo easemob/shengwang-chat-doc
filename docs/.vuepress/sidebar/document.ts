@@ -10,7 +10,6 @@ const platformList = getSubDirectories(DOC_PATH)
 const documentV5Sidebar = [
   { text: "入门指引", link: "beginner_guide.html" },
   { text: "迁移指南", link: "migration_guide.html", only: ['android', 'ios', 'web', 'harmonyos', 'flutter', 'react-native'] },
-  // { text: "使用 MCP 集成", link: "easemob_mcp_server.html", except: ['unity', 'windows', 'server-side', 'applet']},
   { text: '快速开始', link: 'quickstart.html', except: ['windows', 'react-native', 'flutter', 'unity', 'server-side', 'applet'] },
   { text: '快速开始', link: 'quickstart.html', only: ['windows', 'react-native', 'flutter', 'unity'] },
   { type: "separator", except: ['server-side', 'applet'] } as any,
